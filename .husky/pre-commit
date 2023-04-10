@@ -1,4 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$branch" = "main" ]; then
+  echo "Warn: You are on the main branch. Please create a new branch and commit your changes there."
+  exit 1
+fi
+
 yarn lint-staged
