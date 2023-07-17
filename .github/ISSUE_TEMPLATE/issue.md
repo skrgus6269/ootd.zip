@@ -4,15 +4,16 @@ about: Default issue template
 title: ''
 labels: ''
 assignees: ''
+
 ---
 
-## 🔢 이슈 번호
+## 🔢 관련 이슈 
 
 -
 
 <br/>
 
-## ⚙ 작업 사항
+## ✔ To do
 
 -
 
