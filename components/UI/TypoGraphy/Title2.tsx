@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Title = styled.div`
+const Title = styled.h4`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
   font-size: ${({ theme }) => theme.fontSize.base}; //14px
   line-height: ${({ theme }) => theme.lineHeight.md}; //18px

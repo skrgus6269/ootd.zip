@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Headline = styled.div`
+const Headline = styled.h2`
   font-weight: ${({ theme }) => theme.weight.semibold}; //600
   font-size: ${({ theme }) => theme.fontSize.lg}; //24px
   line-height: ${({ theme }) => theme.lineHeight.xl}; //38px

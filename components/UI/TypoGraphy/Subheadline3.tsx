@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Subheadline = styled.div`
+const Subheadline = styled.p`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
   font-size: ${({ theme }) => theme.fontSize.xs}; //10px
   line-height: ${({ theme }) => theme.lineHeight.sm}; //14px

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Title = styled.div`
+const Title = styled.h3`
   font-weight: ${({ theme }) => theme.weight.semibold}; //600
   font-size: ${({ theme }) => theme.fontSize.md}; //16px
   line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
