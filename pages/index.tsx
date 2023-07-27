@@ -8,7 +8,7 @@ export default function Home() {
   const [newUser] = useNewUser()
 
   useEffect(() => {
-    if (typeof window !== undefined && newUser) {
+    if (newUser) {
       router.replace('/onboarding')
     }
   })
