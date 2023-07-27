@@ -2,7 +2,6 @@ import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default function SignUpCallbackPage() {
-  const [count, setCount] = useState(3)
   const router = useRouter()
 
   useEffect(() => {
