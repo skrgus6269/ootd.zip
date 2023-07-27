@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Headline = styled.h2`
   font-weight: ${({ theme }) => theme.weight.semibold}; //600
@@ -8,6 +8,6 @@ const Headline = styled.h2`
     (${({ theme }) => theme.fontSize.lg}) *
       (${({ theme }) => theme.spacing.narrow})
   ); //-2%
-`
+`;
 
-export default Headline
+export default Headline;

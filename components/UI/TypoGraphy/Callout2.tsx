@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Callout = styled.q`
   font-weight: ${({ theme }) => theme.weight.semibold}; //600
@@ -8,6 +8,6 @@ const Callout = styled.q`
     (${({ theme }) => theme.fontSize.base}) *
       (${({ theme }) => theme.spacing.narrow})
   ); //-2%
-`
+`;
 
-export default Callout
+export default Callout;

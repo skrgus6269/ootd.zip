@@ -46,8 +46,8 @@ module.exports = {
         'style',
         'test',
         'security',
-        'setting'
+        'setting',
       ],
     ],
   },
-}
+};
