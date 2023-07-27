@@ -1,12 +1,12 @@
-import useNewbie from '@/hooks/useNewUser'
+import useNewUser from '@/hooks/useNewUser'
 import Link from 'next/link'
 import styled from 'styled-components'
 
 export default function OnboardingPage() {
-  const [_, setNewbie] = useNewbie()
+  const [_, setNewUser] = useNewUser()
 
   const handleOtherLinks = () => {
-    setNewbie(false)
+    setNewUser(false)
   }
   return (
     <PageLayout>
