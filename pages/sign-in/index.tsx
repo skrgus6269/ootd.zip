@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import styled from 'styled-components'
+import Image from 'next/image';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 // import AiOutlineClose from '@react-'
 
@@ -50,7 +50,7 @@ export default function SignInPage() {
         </ButtonGroup>
       </Section>
     </PageLayout>
-  )
+  );
 }
 
 // WILL_REMOVE
@@ -67,23 +67,23 @@ const Button = styled(Link)<{ variant: 'primary' | 'text' }>`
   box-sizing: border-box;
   background: ${({ variant }) => {
     if (variant === 'text') {
-      return '#eee'
+      return '#eee';
     } else if (variant === 'primary') {
-      return '#2c2c2c'
+      return '#2c2c2c';
     }
   }};
   color: ${({ variant }) => {
-    if (variant === 'text') return '#2c2c2c'
-    else if (variant === 'primary') return '#eee'
+    if (variant === 'text') return '#2c2c2c';
+    else if (variant === 'primary') return '#eee';
   }};
-`
+`;
 // WILL_REMOVE
 const ButtonGroup = styled.div`
   font-family: pretendard;
   display: flex;
   flex-direction: column;
   gap: 8px;
-`
+`;
 // WILL_REMOVE
 const PageLayout = styled.div`
   font-family: pretendard;
@@ -93,7 +93,7 @@ const PageLayout = styled.div`
   margin: 0 auto;
   height: 100dvh;
   box-sizing: border-box;
-`
+`;
 // WILL_REMOVE
 const Section = styled.div<{ gap: number; marginTop: number }>`
   margin-top: ${({ marginTop }) => `${marginTop}px`};
@@ -102,7 +102,7 @@ const Section = styled.div<{ gap: number; marginTop: number }>`
   flex-direction: column;
   gap: ${({ gap }) => `${gap}px`};
   box-sizing: border-box;
-`
+`;
 // WILL_REMOVE
 const Text = styled.p`
   color: #938d8d;
@@ -111,7 +111,7 @@ const Text = styled.p`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-`
+`;
 
 const StyledLink = styled(Link)`
   color: #f00;
@@ -121,7 +121,7 @@ const StyledLink = styled(Link)`
   font-weight: 400;
   text-decoration-line: underline;
   margin-left: 8px;
-`
+`;
 // WILL_REMOVE
 const Heading1 = styled.h1`
   font-family: pretendard;
@@ -134,7 +134,7 @@ const Heading1 = styled.h1`
   line-height: normal;
   padding: 0;
   margin: 0;
-`
+`;
 
 const Header = styled.header`
   font-family: pretendard;
@@ -142,7 +142,7 @@ const Header = styled.header`
   gap: 8px;
   flex-direction: column;
   justify-content: flex-start;
-`
+`;
 
 const SImage = styled(Image)`
   border-radius: 50%;
@@ -150,13 +150,13 @@ const SImage = styled(Image)`
   display: block;
   background: #eee;
   flex-shrink: 0;
-`
+`;
 
 const Box = styled.div<{ padding?: string; margin?: string }>`
   display: flex;
   padding: ${(props) => props.padding || 0};
   margin: ${({ margin }) => margin || 'auto'};
-`
+`;
 
 const CloseButton = styled.button`
   background: transparent;
@@ -164,4 +164,4 @@ const CloseButton = styled.button`
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-`
+`;

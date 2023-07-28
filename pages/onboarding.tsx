@@ -1,13 +1,13 @@
-import useNewUser from '@/hooks/useNewUser'
-import Link from 'next/link'
-import styled from 'styled-components'
+import useNewUser from '@/hooks/useNewUser';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 export default function OnboardingPage() {
-  const [_, setNewUser] = useNewUser()
+  const [_, setNewUser] = useNewUser();
 
   const handleOtherLinks = () => {
-    setNewUser(false)
-  }
+    setNewUser(false);
+  };
   return (
     <PageLayout>
       <Section>
@@ -28,7 +28,7 @@ export default function OnboardingPage() {
         </ButtonGroup>
       </Section>
     </PageLayout>
-  )
+  );
 }
 
 // WILL_REMOVE
@@ -45,23 +45,23 @@ const Button = styled(Link)<{ variant: 'primary' | 'text' }>`
   box-sizing: border-box;
   background: ${({ variant }) => {
     if (variant === 'text') {
-      return '#eee'
+      return '#eee';
     } else if (variant === 'primary') {
-      return '#2c2c2c'
+      return '#2c2c2c';
     }
   }};
   color: ${({ variant }) => {
-    if (variant === 'text') return '#2c2c2c'
-    else if (variant === 'primary') return '#eee'
+    if (variant === 'text') return '#2c2c2c';
+    else if (variant === 'primary') return '#eee';
   }};
-`
+`;
 // WILL_REMOVE
 const ButtonGroup = styled.div`
   font-family: pretendard;
   display: flex;
   flex-direction: column;
   gap: 2px;
-`
+`;
 // WILL_REMOVE
 const PageLayout = styled.div`
   font-family: pretendard;
@@ -72,7 +72,7 @@ const PageLayout = styled.div`
   margin: 0 auto;
   height: 100dvh;
   box-sizing: border-box;
-`
+`;
 // WILL_REMOVE
 const Section = styled.div`
   font-family: pretendard;
@@ -84,7 +84,7 @@ const Section = styled.div`
   height: 100dvh;
   padding-bottom: 20px;
   box-sizing: border-box;
-`
+`;
 // WILL_REMOVE
 const Text = styled.p`
   font-family: pretendard;
@@ -96,7 +96,7 @@ const Text = styled.p`
   line-height: normal;
   padding: 0;
   margin: 0;
-`
+`;
 // WILL_REMOVE
 const Heading1 = styled.h1`
   font-family: pretendard;
@@ -108,7 +108,7 @@ const Heading1 = styled.h1`
   line-height: normal;
   padding: 0;
   margin: 0;
-`
+`;
 
 const Header = styled.header`
   font-family: pretendard;
@@ -116,4 +116,4 @@ const Header = styled.header`
   gap: 8px;
   flex-direction: column;
   justify-content: flex-start;
-`
+`;
