@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Body = styled.div`
   font-weight: ${({ theme }) => theme.weight.light}; //300
@@ -8,6 +8,6 @@ const Body = styled.div`
     (${({ theme }) => theme.fontSize.sm}) *
       (${({ theme }) => theme.spacing.narrow})
   ); //-2%
-`
+`;
 
-export default Body
+export default Body;

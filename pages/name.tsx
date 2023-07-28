@@ -16,7 +16,7 @@ import {
   Body2,
   Label1,
   Label2,
-} from '@/components/UI'
+} from '@/components/UI';
 const Name = () => {
   return (
     <div>
@@ -38,7 +38,7 @@ const Name = () => {
       <Label1>Label1</Label1>
       <Label2>Label2</Label2>
     </div>
-  )
-}
+  );
+};
 
-export default Name
+export default Name;

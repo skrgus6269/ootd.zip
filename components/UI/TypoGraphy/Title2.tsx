@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Title = styled.h4`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
@@ -8,6 +8,6 @@ const Title = styled.h4`
     (${({ theme }) => theme.fontSize.base}) *
       (${({ theme }) => theme.spacing.narrow})
   ); //-2%
-`
+`;
 
-export default Title
+export default Title;

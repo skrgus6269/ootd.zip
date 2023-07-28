@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Subheadline = styled.p`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
@@ -8,6 +8,6 @@ const Subheadline = styled.p`
     (${({ theme }) => theme.fontSize.xs}) *
       (${({ theme }) => theme.spacing.narrow})
   ); //-2%
-`
+`;
 
-export default Subheadline
+export default Subheadline;

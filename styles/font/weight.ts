@@ -3,6 +3,6 @@ const weight = {
   regular: '400',
   medium: '500',
   semibold: '600',
-}
+};
 
-export default weight
+export default weight;
