@@ -4,7 +4,6 @@ about: Default issue template
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 ## ✔ To do

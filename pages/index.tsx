@@ -1,18 +1,18 @@
-import Head from 'next/head'
-import { useEffect } from 'react'
-import useNewUser from '@/hooks/useNewUser'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import Head from 'next/head';
+import { useEffect } from 'react';
+import useNewUser from '@/hooks/useNewUser';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Home() {
-  const router = useRouter()
-  const [newUser] = useNewUser()
+  const router = useRouter();
+  const [newUser] = useNewUser();
 
   useEffect(() => {
     if (newUser) {
-      router.replace('/onboarding')
+      router.replace('/onboarding');
     }
-  })
+  });
 
   return (
     <>
@@ -25,5 +25,5 @@ export default function Home() {
       <h2>메인 홈</h2>
       <Link href="sign-up">회원가입</Link>
     </>
-  )
+  );
 }
