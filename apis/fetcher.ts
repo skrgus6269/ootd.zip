@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { NEXT_PUBLIC_HOST } from '@/constants/develop.constants';
 import { getCookie } from '@/utils/Cookie';
 
@@ -7,7 +7,7 @@ const fetcher = axios.create({
   timeout: 2500,
 });
 
-fetcher.interceptors.request.use((config: any) => {
+fetcher.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const accessToken = getCookie('accessToken');
 
   // 로그인, 회원가입 단계 api에서는 accessToken이 없으니 바로 return
