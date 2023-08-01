@@ -10,4 +10,5 @@ const theme = {
   weight,
 };
 
+export type ThemeType = typeof theme;
 export default theme;
