@@ -6,6 +6,6 @@ const lineHeight = {
   lg: '20px',
   xl: '30px',
   vl: '38px',
-};
+} as const;
 
 export default lineHeight;

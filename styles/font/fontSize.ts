@@ -5,6 +5,6 @@ const fontSize = {
   md: '16px',
   lg: '24px',
   xl: '32px',
-};
+} as const;
 
 export default fontSize;
