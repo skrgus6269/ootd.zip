@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
-
+import useSNSLogin from '@/hooks/useSNSLogin';
 // import AiOutlineClose from '@react-'
 
 export default function SignInPage() {
+  const snsLogin = useSNSLogin;
+
+  const login = (platform: string) => {
+    snsLogin(platform);
+  };
   return (
     <PageLayout>
       <Box>
@@ -32,13 +37,13 @@ export default function SignInPage() {
           </Text>
         </Header>
         <ButtonGroup>
-          <Button href="/sign-in/callback" variant="text">
+          <Button onClick={() => login('kakao')} variant="text">
             카카오
           </Button>
-          <Button href="/sign-in/callback" variant="text">
+          <Button onClick={() => login('apple')} variant="text">
             애플
           </Button>
-          <Button href="/sign-in/callback" variant="text">
+          <Button onClick={() => login('google')} variant="text">
             구글
           </Button>
           <Text>
@@ -54,7 +59,7 @@ export default function SignInPage() {
 }
 
 // WILL_REMOVE
-const Button = styled(Link)<{ variant: 'primary' | 'text' }>`
+const Button = styled.button<{ variant: 'primary' | 'text' }>`
   display: block;
   width: 100%;
   border: none;

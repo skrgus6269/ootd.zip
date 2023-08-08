@@ -17,7 +17,17 @@ import {
   Label1,
   Label2,
 } from '@/components/UI';
+
+import { useLogin } from '@/hooks/useLogin';
+import useSNSLogin from '@/hooks/useSnsLogin';
+
 const Name = () => {
+  const snsLogin = useSNSLogin;
+
+  const login = (platform: string) => {
+    snsLogin(platform);
+  };
+
   return (
     <div>
       <Headline1>Headline1</Headline1>
@@ -37,6 +47,7 @@ const Name = () => {
       <Body2>Body2</Body2>
       <Label1>Label1</Label1>
       <Label2>Label2</Label2>
+      <button onClick={() => login('kakao')}>로그인</button>
     </div>
   );
 };
