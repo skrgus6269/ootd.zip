@@ -1,17 +1,14 @@
-import { useContext, useState } from 'react';
 import { FunnelContext } from './context';
 
-/**
- *
- * It return Funnel react context
- *
- * @returns {React.Context}
- */
-export const useFunnelContext = () => {
-  const context = useContext(FunnelContext);
-  if (!context)
-    throw new Error('use Funnel Context must be used within a Funnel');
-  return context;
+type FunnelProps = {
+  children: React.ReactNode;
+  currentStep: string;
 };
 
-export const Funnel = ({}) => {};
+export default function Funnel({ children, currentStep }: FunnelProps) {
+  return (
+    <FunnelContext.Provider value={{ currentStep }}>
+      {children}
+    </FunnelContext.Provider>
+  );
+}

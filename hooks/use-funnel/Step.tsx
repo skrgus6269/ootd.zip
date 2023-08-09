@@ -1,4 +1,4 @@
-import { useFunnelContext } from './Funnel';
+import { useFunnelContext } from './context';
 
 type StepProps<T> = {
   name: T;
