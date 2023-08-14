@@ -10,7 +10,7 @@ interface QueryParams {
 export default function SignUpCallbackPage() {
   const router = useRouter();
   const { code: kakaoCode, callback } = router.query as QueryParams;
-  const { state, login } = useLogin();
+  const [state, login] = useLogin();
 
   useEffect(() => {
     (async () => {
@@ -19,12 +19,10 @@ export default function SignUpCallbackPage() {
 
         //로그인 성공 여부에 따른 라우팅 분기처리
         switch (state) {
-          case '':
-            return;
-          case 'true':
+          case true:
             router.push('../onboarding');
             break;
-          case 'false':
+          case false:
             router.push('../sign-up');
         }
       }

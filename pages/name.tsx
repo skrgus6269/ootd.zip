@@ -19,13 +19,13 @@ import {
 } from '@/components/UI';
 
 import { useLogin } from '@/hooks/useLogin';
-import useSNSLogin from '@/hooks/useSnsLogin';
+import { useSNSLogin } from '@/hooks/useSNSLogin';
 
 const Name = () => {
-  const snsLogin = useSNSLogin;
+  const { routing } = useSNSLogin();
 
   const login = (platform: string) => {
-    snsLogin(platform);
+    routing(platform);
   };
 
   return (

@@ -9,7 +9,7 @@ interface LoginPayload {
 
 // callback 페이지에서 사용하는 훅
 export const useLogin = () => {
-  const [loginSucess, setLoginSucess] = useState('');
+  const [loginSucess, setLoginSucess] = useState(true);
 
   const login = async (payload: LoginPayload) => {
     // 액세스 토큰을 받아온다.
@@ -19,7 +19,7 @@ export const useLogin = () => {
     //위 api의 결과에 따른 상태 업데이트는 api가 완성이 되고 나면 업데이트 예정
 
     //로그인 성공시
-    setLoginSucess('true');
+    setLoginSucess(true);
 
     // 쿠키에 담아준다.
     setCookie('accessToken', data, {
@@ -28,9 +28,9 @@ export const useLogin = () => {
     });
 
     //로그인 실패시
-    setLoginSucess('false');
+    setLoginSucess(false);
     //----------------------------------------------------------------------
   };
 
-  return { state: loginSucess, login };
+  return [loginSucess, login] as const;
 };
