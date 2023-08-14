@@ -21,5 +21,5 @@ export const useSNSLogin = () => {
     }
   };
 
-  return { routing };
+  return routing;
 };
