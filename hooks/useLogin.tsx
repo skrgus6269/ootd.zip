@@ -1,16 +1,36 @@
 import { authService } from '@/service';
 import { setCookie } from '@/utils/Cookie';
+import { useState } from 'react';
 
+interface LoginPayload {
+  platform: string;
+  code: string;
+}
+
+// callback 페이지에서 사용하는 훅
 export const useLogin = () => {
-  const getAccessToken = async () => {
-    // 액세스 토큰을 받는다.
-    const accessToken = await authService.login();
+  const [loginSucess, setLoginSucess] = useState(true);
+
+  const login = async (payload: LoginPayload) => {
+    // 액세스 토큰을 받아온다.
+    const data = await authService.login(payload.platform, payload.code);
+
+    //----------------------------------------------------------------------
+    //위 api의 결과에 따른 상태 업데이트는 api가 완성이 되고 나면 업데이트 예정
+
+    //로그인 성공시
+    setLoginSucess(true);
 
     // 쿠키에 담아준다.
-    setCookie('accessToken', accessToken, {
+    setCookie('accessToken', data, {
       path: '/',
       // 보안 설정은 배포 직전에 설정해주기
     });
-    getAccessToken();
+
+    //로그인 실패시
+    setLoginSucess(false);
+    //----------------------------------------------------------------------
   };
+
+  return [loginSucess, login] as const;
 };
