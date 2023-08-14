@@ -47,7 +47,7 @@ const Name = () => {
       <Body2>Body2</Body2>
       <Label1>Label1</Label1>
       <Label2>Label2</Label2>
-      <button onClick={() => login('kakao')}>로그인</button>
+      <button onClick={() => login('google')}>로그인</button>
     </div>
   );
 };
