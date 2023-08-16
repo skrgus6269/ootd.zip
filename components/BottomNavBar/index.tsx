@@ -24,7 +24,7 @@ interface BottomNavBarProps {
 export default function BottomNavBar({ children }: BottomNavBarProps) {
   const router = useRouter();
 
-  const array = [
+  const BottomNavBarInformation = [
     { icon: <AiOutlineHome />, click: () => router.push('/') },
     { icon: <AiOutlineCrown />, click: () => router.push('/') },
     { icon: <AiFillPlusSquare />, click: () => router.push('/') },
@@ -36,7 +36,7 @@ export default function BottomNavBar({ children }: BottomNavBarProps) {
     <Layout>
       <MainComponent>{children}</MainComponent>
       <BottomComponent>
-        {array.map((item, index) => {
+        {BottomNavBarInformation.map((item, index) => {
           return (
             <BottomComponentItem key={index} onClick={item.click}>
               {item.icon}
