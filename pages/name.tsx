@@ -18,11 +18,19 @@ import {
   Label2,
 } from '@/components/UI';
 
-import { useLogin } from '@/hooks/useLogin';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
+import { FC, ReactNode } from 'react';
 
-const Name = () => {
-  const { routing } = useSNSLogin();
+interface ComponentWithLayout extends FC {
+  Layout?: FC<BottomNavBarProps>;
+}
+
+interface BottomNavBarProps {
+  children: ReactNode;
+}
+
+const Name: ComponentWithLayout = () => {
+  const routing = useSNSLogin();
 
   const login = (platform: string) => {
     routing(platform);
@@ -51,5 +59,11 @@ const Name = () => {
     </div>
   );
 };
+
+// Name.Layout = ({ children }: BottomNavBarProps) => {
+//   return <div>{children}</div>;
+// };
+
+// Name.Layout.displayName = 'NameLayout';
 
 export default Name;

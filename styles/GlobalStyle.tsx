@@ -21,6 +21,13 @@ const GlobalStyles = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    body, html {
+        height: 100vh;
+    }
+
+    div#__next{
+        height: 100%;
+    }
 `;
 
 export default GlobalStyles;
