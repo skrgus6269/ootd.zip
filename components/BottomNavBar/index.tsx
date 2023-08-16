@@ -1,11 +1,4 @@
-import React, { ReactNode } from 'react';
-
-import {
-  MainComponent,
-  BottomComponent,
-  Layout,
-  BottomComponentItem,
-} from './style';
+import { BottomComponent, BottomComponentItem } from './style';
 
 import {
   AiOutlineUser,
@@ -17,11 +10,7 @@ import {
 
 import { useRouter } from 'next/router';
 
-interface BottomNavBarProps {
-  children: ReactNode;
-}
-
-export default function BottomNavBar({ children }: BottomNavBarProps) {
+export default function BottomNavBar() {
   const router = useRouter();
 
   const BottomNavBarInformation = [
@@ -33,17 +22,14 @@ export default function BottomNavBar({ children }: BottomNavBarProps) {
   ];
 
   return (
-    <Layout>
-      <MainComponent>{children}</MainComponent>
-      <BottomComponent>
-        {BottomNavBarInformation.map((item, index) => {
-          return (
-            <BottomComponentItem key={index} onClick={item.click}>
-              {item.icon}
-            </BottomComponentItem>
-          );
-        })}
-      </BottomComponent>
-    </Layout>
+    <BottomComponent>
+      {BottomNavBarInformation.map((item, index) => {
+        return (
+          <BottomComponentItem key={index} onClick={item.click}>
+            {item.icon}
+          </BottomComponentItem>
+        );
+      })}
+    </BottomComponent>
   );
 }

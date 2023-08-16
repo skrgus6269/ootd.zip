@@ -19,14 +19,11 @@ import {
 } from '@/components/UI';
 
 import { useSNSLogin } from '@/hooks/useSNSLogin';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import { BottomNavBarProps } from './AppLayout';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<BottomNavBarProps>;
-}
-
-interface BottomNavBarProps {
-  children: ReactNode;
 }
 
 const Name: ComponentWithLayout = () => {
