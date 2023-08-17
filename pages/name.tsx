@@ -20,10 +20,10 @@ import {
 
 import { useSNSLogin } from '@/hooks/useSNSLogin';
 import { FC } from 'react';
-import { BottomNavBarProps } from './AppLayout';
+import { AppLayoutProps } from '../AppLayout';
 
 interface ComponentWithLayout extends FC {
-  Layout?: FC<BottomNavBarProps>;
+  Layout?: FC<AppLayoutProps>;
 }
 
 const Name: ComponentWithLayout = () => {

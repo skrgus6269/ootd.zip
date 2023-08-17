@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 export default function BottomNavBar() {
   const router = useRouter();
 
-  const BottomNavBarInformation = [
+  const bottomNavBarLinkers = [
     { icon: <AiOutlineHome />, click: () => router.push('/') },
     { icon: <AiOutlineCrown />, click: () => router.push('/') },
     { icon: <AiFillPlusSquare />, click: () => router.push('/') },
@@ -23,7 +23,7 @@ export default function BottomNavBar() {
 
   return (
     <BottomComponent>
-      {BottomNavBarInformation.map((item, index) => {
+      {bottomNavBarLinkers.map((item, index) => {
         return (
           <BottomComponentItem key={index} onClick={item.click}>
             {item.icon}

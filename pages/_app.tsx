@@ -4,7 +4,7 @@ import GlobalStyles from '@/styles/GlobalStyle';
 import themes from '@/styles/theme';
 import Script from 'next/script';
 import { NEXT_PUBLIC_KAKAO_JS_KEY } from '@/constants/develop.constants';
-import AppLayout from './AppLayout';
+import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
 
 declare global {
@@ -26,15 +26,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     window.Kakao.init(NEXT_PUBLIC_KAKAO_JS_KEY);
   }
 
-  const BottomLayout = Component.Layout || AppLayout;
+  const Layout = Component.Layout || AppLayout;
 
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={themes}>
-        <BottomLayout>
+        <Layout>
           <Component {...pageProps} />
-        </BottomLayout>
+        </Layout>
         <Script
           src="https://developers.kakao.com/sdk/js/kakao.js"
           onLoad={kakaoInit}

@@ -13,11 +13,11 @@ const MainComponent = styled.div`
   flex-grow: 1;
 `;
 
-interface BottomNavBarProps {
+interface AppLayoutProps {
   children: ReactNode;
 }
 
-const AppLayout = ({ children }: BottomNavBarProps) => {
+const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <Layout>
       <MainComponent>{children}</MainComponent>
@@ -26,5 +26,5 @@ const AppLayout = ({ children }: BottomNavBarProps) => {
   );
 };
 
-export type { BottomNavBarProps };
+export type { AppLayoutProps };
 export default AppLayout;
