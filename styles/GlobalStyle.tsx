@@ -21,6 +21,13 @@ const GlobalStyles = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    body, html {
+        height: 100vh; //dvh와 같은 상황도 고려해야한다.
+    }
+
+    div#__next{
+        height: 100%;
+    }
 `;
 
 export default GlobalStyles;
