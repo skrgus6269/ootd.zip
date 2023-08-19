@@ -1,17 +1,17 @@
-import { Layout, AppbarLeft, AppbarMiddle, AppbarRight } from './style';
+import { Layout, AppBarLeft, AppBarMiddle, AppBarRight } from './style';
 
-interface AppbarPoprs {
+interface AppBarPoprs {
   leftProps: React.ReactElement;
   middleProps: React.ReactElement;
   rightProps: React.ReactElement;
 }
 
-export default function Appbar(props: AppbarPoprs) {
+export default function AppBar(props: AppBarPoprs) {
   return (
     <Layout>
-      <AppbarLeft>{props.leftProps}</AppbarLeft>
-      <AppbarMiddle>{props.middleProps}</AppbarMiddle>
-      <AppbarRight>{props.rightProps}</AppbarRight>
+      <AppBarLeft>{props.leftProps}</AppBarLeft>
+      <AppBarMiddle>{props.middleProps}</AppBarMiddle>
+      <AppBarRight>{props.rightProps}</AppBarRight>
     </Layout>
   );
 }

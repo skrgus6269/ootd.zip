@@ -13,7 +13,7 @@ const Layout = styled.div`
 `;
 
 //앱바의 왼쪽 영역
-const AppbarLeft = styled.div`
+const AppBarLeft = styled.div`
   padding: 0 0 0 20px;
   /*아래 6속성: 정렬을 위함 */
   width: 40%;
@@ -31,7 +31,7 @@ const AppbarLeft = styled.div`
 `;
 
 //앱바의 가운데 영역
-const AppbarMiddle = styled.div`
+const AppBarMiddle = styled.div`
   //아래 3속성: 정렬을 위함
   height: 100%;
   display: flex;
@@ -45,10 +45,10 @@ const AppbarMiddle = styled.div`
 `;
 
 //앱바의 오른쪽 영역
-const AppbarRight = styled(AppbarLeft)`
+const AppBarRight = styled(AppBarLeft)`
   padding: 0 20px 0 0;
   //우측 정렬
   justify-content: right;
 `;
 
-export { Layout, AppbarLeft, AppbarMiddle, AppbarRight };
+export { Layout, AppBarLeft, AppBarMiddle, AppBarRight };
