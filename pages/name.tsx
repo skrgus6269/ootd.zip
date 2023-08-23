@@ -21,6 +21,8 @@ import {
 import { useSNSLogin } from '@/hooks/useSNSLogin';
 import { FC } from 'react';
 import { AppLayoutProps } from '../AppLayout';
+import MainTopClothCard from '@/components/Card/MainTopUserCard';
+import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -53,6 +55,23 @@ const Name: ComponentWithLayout = () => {
       <Label1>Label1</Label1>
       <Label2>Label2</Label2>
       <button onClick={() => login('google')}>로그인</button>
+      <MainTopClothCard
+        data={{
+          src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+          alt: '카드',
+          caption: 'Tag',
+        }}
+        headline={'Headline4'}
+        body={'Body2'}
+      />
+      <MainFavoriteCard
+        data={{
+          src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+          alt: '카드',
+          caption: 'Tag',
+        }}
+        callout={'2000/00/00'}
+      />
     </div>
   );
 };
