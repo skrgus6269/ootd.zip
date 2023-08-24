@@ -30,7 +30,7 @@ import {
   AiOutlineUpload,
   AiOutlineSetting,
   AiFillGithub,
-} from 'react-icons/ai
+} from 'react-icons/ai';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -86,6 +86,23 @@ const Name: ComponentWithLayout = () => {
         }}
         headline={'Headline4'}
         body={'Body2'}
+      />
+      <MainTopClothCard
+        data={{
+          src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+          alt: '카드',
+          caption: 'Tag',
+        }}
+        headline={'Headline4'}
+        body={'Body2'}
+      />
+      <MainFavoriteCard
+        data={{
+          src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+          alt: '카드',
+          caption: '',
+        }}
+        callout={'2000/00/00'}
       />
       <MainFavoriteCard
         data={{
