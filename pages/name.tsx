@@ -18,11 +18,19 @@ import {
   Label2,
 } from '@/components/UI';
 
+import Appbar from '@/components/Appbar';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
 import { FC } from 'react';
 import { AppLayoutProps } from '../AppLayout';
 import MainTopClothCard from '@/components/Card/MainTopUserCard';
 import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
+import {
+  AiOutlineArrowLeft,
+  AiOutlineCheck,
+  AiOutlineUpload,
+  AiOutlineSetting,
+  AiFillGithub,
+} from 'react-icons/ai
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -37,6 +45,21 @@ const Name: ComponentWithLayout = () => {
 
   return (
     <div>
+      <Appbar
+        leftProps={
+          <>
+            <AiOutlineArrowLeft />
+          </>
+        }
+        middleProps={<AiFillGithub />}
+        rightProps={
+          <>
+            <AiOutlineSetting />
+            <AiOutlineUpload />
+            <AiOutlineCheck />
+          </>
+        }
+      />
       <Headline1>Headline1</Headline1>
       <Headline2>Headline2</Headline2>
       <Subheadline1>Subheadline1</Subheadline1>
