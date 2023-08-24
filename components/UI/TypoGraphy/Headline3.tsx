@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Callout = styled.q`
-  font-weight: ${({ theme }) => theme.weight.medium}; //500
+const Headline = styled.h3`
+  font-weight: ${({ theme }) => theme.weight.semibold}; //600
   font-size: ${({ theme }) => theme.fontSize.md}; //16px
   line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
   letter-spacing: calc(
@@ -10,4 +10,4 @@ const Callout = styled.q`
   ); //-2%
 `;
 
-export default Callout;
+export default Headline;

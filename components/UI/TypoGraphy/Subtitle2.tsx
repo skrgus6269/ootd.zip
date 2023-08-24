@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
-const Title = styled.h4`
+const Subtitle = styled.h5`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
   font-size: ${({ theme }) => theme.fontSize.base}; //14px
   line-height: ${({ theme }) => theme.lineHeight.md}; //18px
-  letter-spacing: calc(
-    (${({ theme }) => theme.fontSize.base}) *
-      (${({ theme }) => theme.spacing.narrow})
-  ); //-2%
+  letter-spacing: ${({ theme }) => theme.spacing.default}; //0
 `;
 
-export default Title;
+export default Subtitle;

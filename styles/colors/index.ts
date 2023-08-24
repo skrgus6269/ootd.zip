@@ -1,0 +1,28 @@
+const color = {
+  grey_100: '#ffffff',
+  grey_95: '#f3f3f3',
+  grey_90: '#dbdbdb',
+  grey_80: '#cacaca',
+  grey_70: '#b1b1b1',
+  grey_60: '#a2a2a2',
+  grey_50: '#8b8b8b',
+  grey_40: '#7e7e7e',
+  grey_30: '#636363',
+  grey_20: '#4c4c4c',
+  grey_10: '#3a3a3a',
+  grey_00: '#030303',
+  error: '#ff0000',
+  correct: '#21ea00',
+  orange_50: '#fff2e6',
+  orange_100: '#ffd6b0',
+  orange_200: '#ffc28a',
+  orange_300: '#ffa654',
+  orange_400: '#ff9533',
+  orange_500: '#ff7a00',
+  orange_600: '#e86f00',
+  orange_700: '#b55700',
+  orange_800: '#8c4300',
+  orange_900: '#6b3300',
+};
+
+export default color;
