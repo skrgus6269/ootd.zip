@@ -7,8 +7,10 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   //아래 3속성: 상단 고정을 위함
-  position: absolute;
+  position: sticky;
   top: 0;
+  background-color: white;
+  z-index: 2;
   width: 100%;
 `;
 
