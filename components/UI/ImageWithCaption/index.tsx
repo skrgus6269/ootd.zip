@@ -6,7 +6,9 @@ export default function ImageWithCaption(props: ImageProps) {
   return (
     <ImageFigure size={props.size}>
       <Image src={props.src} alt={props.alt} fill />
-      <ImageCaption size={props.size}>{props.caption}</ImageCaption>
+      {props.caption !== '' && (
+        <ImageCaption size={props.size}>{props.caption}</ImageCaption>
+      )}
     </ImageFigure>
   );
 }
