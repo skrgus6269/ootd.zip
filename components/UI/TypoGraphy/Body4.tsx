@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const Label = styled.label`
+const Body = styled.p`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
-  font-size: ${({ theme }) => theme.fontSize.md}; //16px
-  line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
+  font-size: ${({ theme }) => theme.fontSize.sm}; //12px
+  line-height: ${({ theme }) => theme.lineHeight.base}; //16px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
 `;
 
-export default Label;
+export default Body;
