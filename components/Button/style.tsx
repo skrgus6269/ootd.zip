@@ -1,0 +1,31 @@
+import styled from 'styled-components';
+import { ButtonProps } from '.';
+
+interface ButtonData {
+  buttonData: ButtonProps;
+  show: Boolean;
+}
+
+const Buttons = styled.button<ButtonData>`
+  border: ${(props) => (props.buttonData.border ? '1px solid black' : 'none')};
+  //props.theme.color -> 색상 디자인 토큰을 사용하기 위한 코드
+  background-color: ${(props) =>
+    props.theme.color[props.buttonData.backgroundColor]};
+  color: ${(props) => props.theme.color[props.buttonData.color]};
+`;
+
+const LargeButton = styled(Buttons)`
+  display: ${(props) => (props.show ? 'block' : 'none')};
+  width: 350px;
+  height: 48px;
+  border-radius: 0;
+`;
+
+const SmallButton = styled(Buttons)`
+  display: ${(props) => (props.show ? 'inline' : 'none')};
+  width: 70px;
+  height: 30px;
+  border-radius: 122px;
+`;
+
+export { LargeButton, SmallButton };

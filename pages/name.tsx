@@ -11,6 +11,7 @@ import {
   AiOutlineSetting,
   AiFillGithub,
 } from 'react-icons/ai';
+import Button from '@/components/Button';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -24,7 +25,7 @@ const Name: ComponentWithLayout = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <Appbar
         leftProps={
           <>
@@ -40,7 +41,51 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
-      <button onClick={() => login('google')}>로그인</button>
+      <Button
+        backgroundColor="grey_00"
+        size="lg"
+        color="grey_100"
+        border={false}
+        onClick={() => console.log('a')}
+      >
+        Button3
+      </Button>
+      <Button
+        backgroundColor="grey_90"
+        size="lg"
+        color="grey_100"
+        border={false}
+        onClick={() => console.log('a')}
+      >
+        Button3
+      </Button>
+      <Button
+        backgroundColor="grey_100"
+        size="lg"
+        color="grey_00"
+        border={true}
+        onClick={() => console.log('a')}
+      >
+        Button3
+      </Button>
+      <Button
+        backgroundColor="grey_90"
+        size="sm"
+        color="grey_00"
+        border={false}
+        onClick={() => console.log('a')}
+      >
+        Button
+      </Button>
+      <Button
+        backgroundColor="grey_00"
+        size="sm"
+        color="grey_100"
+        border={false}
+        onClick={() => console.log('a')}
+      >
+        Button
+      </Button>
       <MainTopClothCard
         data={{
           src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
