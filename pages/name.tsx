@@ -12,6 +12,7 @@ import {
   AiFillGithub,
 } from 'react-icons/ai';
 import Button from '@/components/Button';
+import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -23,6 +24,9 @@ const Name: ComponentWithLayout = () => {
   const login = (platform: string) => {
     routing(platform);
   };
+
+  const [weightDropdown, weightDropdownvalue] = WeightDropdown();
+  const [sampleDropdown, sampleDropdownvalue] = SampleDropdown();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -41,6 +45,10 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
+      <div>
+        {weightDropdown} 현재 선택된 value = {weightDropdownvalue}
+      </div>
+      {sampleDropdown} 현재 선택된 value = {sampleDropdownvalue}
       <Button
         backgroundColor="grey_00"
         size="lg"
