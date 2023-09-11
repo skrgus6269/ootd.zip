@@ -1,6 +1,6 @@
 import Appbar from '@/components/Appbar';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { AppLayoutProps } from '../AppLayout';
 import MainTopClothCard from '@/components/Card/MainTopUserCard';
 import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
@@ -14,6 +14,8 @@ import {
 import Button from '@/components/Button';
 import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
 import SearchBar from '@/components/SearchBar';
+import SwitchToggle from '@/components/Toggle/SwitchToggle';
+import LikeToggle from '@/components/Toggle/LikeToggle';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -28,6 +30,7 @@ const Name: ComponentWithLayout = () => {
 
   const [weightDropdown, weightDropdownvalue] = WeightDropdown();
   const [sampleDropdown, sampleDropdownvalue] = SampleDropdown();
+  const [switchOn, setSwitchOn] = useState<Boolean>(false);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -46,6 +49,8 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
+      <LikeToggle />
+      <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
       <div>
         {weightDropdown} 현재 선택된 value = {weightDropdownvalue}
