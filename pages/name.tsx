@@ -13,6 +13,7 @@ import {
 } from 'react-icons/ai';
 import Button from '@/components/Button';
 import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
+import SearchBar from '@/components/SearchBar';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -45,6 +46,7 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
+      <SearchBar placeholder="Hinted Search Text" />
       <div>
         {weightDropdown} 현재 선택된 value = {weightDropdownvalue}
       </div>
