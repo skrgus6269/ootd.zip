@@ -1,7 +1,7 @@
 import Appbar from '@/components/Appbar';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
 import { FC, useState } from 'react';
-import { AppLayoutProps } from '../AppLayout';
+import { AppLayoutProps } from '../../AppLayout';
 import MainTopClothCard from '@/components/Card/MainTopUserCard';
 import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
 import {
@@ -16,6 +16,7 @@ import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
 import SearchBar from '@/components/SearchBar';
 import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
+import Tabs from '@/components/Tabs';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -49,6 +50,18 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
+      <Tabs tab={['ootd', 'closet', 'favorite']}>
+        <Tabs.TabBar tab={['ootd', 'closet', 'favorite']} />
+        <Tabs.Tab name="ootd">
+          <div>ootd</div>
+        </Tabs.Tab>
+        <Tabs.Tab name="closet">
+          <div>closet</div>
+        </Tabs.Tab>
+        <Tabs.Tab name="favorite">
+          <div>favorite</div>
+        </Tabs.Tab>
+      </Tabs>
       <LikeToggle />
       <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
