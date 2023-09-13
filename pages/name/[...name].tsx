@@ -17,7 +17,6 @@ import SearchBar from '@/components/SearchBar';
 import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import Tabs from '@/components/Tabs';
-import SwipeCarousel from '@/hooks/Carousel';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
