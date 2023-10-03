@@ -1,8 +1,7 @@
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import React, { useRef, useEffect } from 'react';
 import { useTabViewContext } from '@/hooks/use-tabview/context';
+import Carousel from '@/components/Carousel';
 
 interface TabsProps {
   children: React.ReactNode;
@@ -13,12 +12,6 @@ export default function Tabs({ children }: TabsProps) {
 
   const afterChangeHandler = (currentIndex: number) => {
     setIndex(currentIndex + 1);
-  };
-
-  const sliderSettings = {
-    speed: 400,
-    infinite: false, //무한 슬라이드 false
-    afterChange: afterChangeHandler, //변경 후 처리할 함수
   };
 
   //슬라이더의 ref
@@ -33,10 +26,13 @@ export default function Tabs({ children }: TabsProps) {
   }, [index]);
 
   return (
-    <div>
-      <Slider ref={ref} {...sliderSettings}>
-        {children}
-      </Slider>
-    </div>
+    <Carousel
+      slidesToShow={1}
+      infinite={false}
+      afterChange={afterChangeHandler}
+      ParentRef={ref}
+    >
+      {children}
+    </Carousel>
   );
 }
