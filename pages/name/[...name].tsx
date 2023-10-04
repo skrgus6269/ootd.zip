@@ -1,6 +1,6 @@
 import Appbar from '@/components/Appbar';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { AppLayoutProps } from '../../AppLayout';
 import MainTopClothCard from '@/components/Card/MainTopUserCard';
 import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
@@ -29,9 +29,19 @@ const Name: ComponentWithLayout = () => {
     routing(platform);
   };
 
-  const [weightDropdown, weightDropdownvalue] = WeightDropdown();
-  const [sampleDropdown, sampleDropdownvalue] = SampleDropdown();
   const [switchOn, setSwitchOn] = useState<Boolean>(false);
+
+  const options = [
+    'Option 1',
+    'Option 2',
+    'Option 3',
+    'Option 4',
+    'Option 5',
+    'Option 6',
+    'Option 7',
+  ];
+
+  const [nowOption, setNowOption] = useState('Option 1');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -65,10 +75,8 @@ const Name: ComponentWithLayout = () => {
       <LikeToggle />
       <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
-      <div>
-        {weightDropdown} 현재 선택된 value = {weightDropdownvalue}
-      </div>
-      {sampleDropdown} 현재 선택된 value = {sampleDropdownvalue}
+      {nowOption}
+      <SampleDropdown options={options} setNowOption={setNowOption} />
       <Button
         backgroundColor="grey_00"
         size="lg"
