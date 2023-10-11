@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { NEXT_PUBLIC_KAKAO_JS_KEY } from '@/constants/develop.constants';
 import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
+import { RecoilRoot } from 'recoil';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -29,17 +30,19 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.Layout || AppLayout;
 
   return (
-    <>
-      <GlobalStyles />
-      <ThemeProvider theme={themes}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <Script
-          src="https://developers.kakao.com/sdk/js/kakao.js"
-          onLoad={kakaoInit}
-        ></Script>
-      </ThemeProvider>
-    </>
+    <RecoilRoot>
+      <>
+        <GlobalStyles />
+        <ThemeProvider theme={themes}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <Script
+            src="https://developers.kakao.com/sdk/js/kakao.js"
+            onLoad={kakaoInit}
+          ></Script>
+        </ThemeProvider>
+      </>
+    </RecoilRoot>
   );
 }

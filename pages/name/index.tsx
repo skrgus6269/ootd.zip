@@ -17,6 +17,9 @@ import SearchBar from '@/components/SearchBar';
 import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import Tabs from '@/components/Tabs';
+import { MyProfile, OtherProfile } from '@/components/Profile';
+import useIsUser from '@/hooks/useIsUser';
+import nakhyeon from 'public/images/증명사진.jpg';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -32,6 +35,7 @@ const Name: ComponentWithLayout = () => {
   const [weightDropdown, weightDropdownvalue] = WeightDropdown();
   const [sampleDropdown, sampleDropdownvalue] = SampleDropdown();
   const [switchOn, setSwitchOn] = useState<Boolean>(false);
+  const [isUser, setIsUser] = useIsUser();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -49,6 +53,21 @@ const Name: ComponentWithLayout = () => {
             <AiOutlineCheck />
           </>
         }
+      />
+      <MyProfile isUser={false} />
+      <MyProfile
+        isUser={true}
+        userName="낙현"
+        follow="123"
+        myCloth="12"
+        userImage={nakhyeon}
+      />
+      <OtherProfile
+        isUser={true}
+        userName="바름"
+        follow="123"
+        myCloth="12"
+        userImage={nakhyeon}
       />
       <Tabs tab={['ootd', 'closet', 'favorite']}>
         <Tabs.TabBar tab={['ootd', 'closet', 'favorite']} />
