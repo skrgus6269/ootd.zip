@@ -18,6 +18,7 @@ import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import TabView from '@/components/TabView';
 import { Sample, Sample1, Sample2 } from '@/components/sample';
+import Carousel from '@/components/Carousel';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -65,6 +66,55 @@ const Name: ComponentWithLayout = () => {
           </TabView.Tab>
         </TabView.Tabs>
       </TabView>
+      <div style={{ width: '340px', margin: '0 auto' }}>
+        <Carousel slidesToShow={2.3} infinite={false}>
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+        </Carousel>
+      </div>
       <LikeToggle />
       <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
