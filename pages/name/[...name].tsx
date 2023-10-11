@@ -41,7 +41,7 @@ const Name: ComponentWithLayout = () => {
     'Option 7',
   ];
 
-  const [nowOption, setNowOption] = useState('Option 1');
+  const [nowOption, setNowOption] = useState('Option1');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
