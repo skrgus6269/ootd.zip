@@ -1,6 +1,6 @@
 import Appbar from '@/components/Appbar';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { AppLayoutProps } from '../../AppLayout';
 import MainTopClothCard from '@/components/Card/MainTopUserCard';
 import MainFavoriteCard from '@/components/Card/MainFavoriteCard';
@@ -16,9 +16,10 @@ import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
 import SearchBar from '@/components/SearchBar';
 import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
-import TabView from '@/components/TabView';
-import { Sample, Sample1, Sample2 } from '@/components/sample';
-import Carousel from '@/components/Carousel';
+import Tabs from '@/components/Tabs';
+import { MyProfile, OtherProfile } from '@/components/Profile';
+import useIsUser from '@/hooks/useIsUser';
+import nakhyeon from 'public/images/증명사진.jpg';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -31,19 +32,10 @@ const Name: ComponentWithLayout = () => {
     routing(platform);
   };
 
+  const [weightDropdown, weightDropdownvalue] = WeightDropdown();
+  const [sampleDropdown, sampleDropdownvalue] = SampleDropdown();
   const [switchOn, setSwitchOn] = useState<Boolean>(false);
-
-  const options = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
-    'Option 5',
-    'Option 6',
-    'Option 7',
-  ];
-
-  const [nowOption, setNowOption] = useState('Option1');
+  const [isUser, setIsUser] = useIsUser();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -62,74 +54,40 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
-      <TabView>
-        <TabView.TabBar tab={['ootd', 'closet', 'favorite']} />
-        <TabView.Tabs>
-          <TabView.Tab>
-            <Sample />
-          </TabView.Tab>
-          <TabView.Tab>
-            <Sample1 />
-          </TabView.Tab>
-          <TabView.Tab>
-            <Sample2 />
-          </TabView.Tab>
-        </TabView.Tabs>
-      </TabView>
-      <div style={{ width: '340px', margin: '0 auto' }}>
-        <Carousel slidesToShow={2.3} infinite={false}>
-          <MainTopClothCard
-            data={{
-              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-              alt: '카드',
-              caption: 'Tag',
-            }}
-            headline={'Headline4'}
-            body={'Body2'}
-          />
-          <MainTopClothCard
-            data={{
-              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-              alt: '카드',
-              caption: 'Tag',
-            }}
-            headline={'Headline4'}
-            body={'Body2'}
-          />
-          <MainTopClothCard
-            data={{
-              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-              alt: '카드',
-              caption: 'Tag',
-            }}
-            headline={'Headline4'}
-            body={'Body2'}
-          />
-          <MainTopClothCard
-            data={{
-              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-              alt: '카드',
-              caption: 'Tag',
-            }}
-            headline={'Headline4'}
-            body={'Body2'}
-          />
-          <MainTopClothCard
-            data={{
-              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-              alt: '카드',
-              caption: 'Tag',
-            }}
-            headline={'Headline4'}
-            body={'Body2'}
-          />
-        </Carousel>
-      </div>
+      <MyProfile isUser={false} />
+      <MyProfile
+        isUser={true}
+        userName="낙현"
+        follow="123"
+        myCloth="12"
+        userImage={nakhyeon}
+      />
+      <OtherProfile
+        isUser={true}
+        userName="바름"
+        follow="123"
+        myCloth="12"
+        userImage={nakhyeon}
+      />
+      <Tabs tab={['ootd', 'closet', 'favorite']}>
+        <Tabs.TabBar tab={['ootd', 'closet', 'favorite']} />
+        <Tabs.Tab name="ootd">
+          <div>ootd</div>
+        </Tabs.Tab>
+        <Tabs.Tab name="closet">
+          <div>closet</div>
+        </Tabs.Tab>
+        <Tabs.Tab name="favorite">
+          <div>favorite</div>
+        </Tabs.Tab>
+      </Tabs>
       <LikeToggle />
       <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
-      {nowOption}
-      <SampleDropdown options={options} setNowOption={setNowOption} />
+      <div>
+        {weightDropdown} 현재 선택된 value = {weightDropdownvalue}
+      </div>
+      {sampleDropdown} 현재 선택된 value = {sampleDropdownvalue}
       <Button
         backgroundColor="grey_00"
         size="lg"
