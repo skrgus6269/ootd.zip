@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import useDropdown from '@/hooks/useDropDown';
 import { Select, Options, DefaultOption, Option } from './style';
 
-export default function SampleDropdown() {
-  const options = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
-    'Option 5',
-    'Option 6',
-    'Option 7',
-  ];
+interface DropdownProps {
+  options: string[];
+  setNowOption: Dispatch<SetStateAction<string>>;
+}
 
+export default function SampleDropdown({
+  options,
+  setNowOption,
+}: DropdownProps) {
   const { value, state, onClickOption, onClickDefaultOption } = useDropdown(
     options[0]
   );
 
-  const dropdown = (
+  useEffect(() => {
+    setNowOption(value);
+  }, [setNowOption, value]);
+
+  return (
     <Select>
       <DefaultOption onClick={onClickDefaultOption}>{value}</DefaultOption>
       {state && (
@@ -31,6 +33,4 @@ export default function SampleDropdown() {
       )}
     </Select>
   );
-
-  return [dropdown, value];
 }
