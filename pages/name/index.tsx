@@ -16,7 +16,9 @@ import { WeightDropdown, SampleDropdown } from '@/components/Dropdown';
 import SearchBar from '@/components/SearchBar';
 import SwitchToggle from '@/components/Toggle/SwitchToggle';
 import LikeToggle from '@/components/Toggle/LikeToggle';
-import Tabs from '@/components/Tabs';
+import TabView from '@/components/TabView';
+import { Sample, Sample1, Sample2 } from '@/components/sample';
+import Carousel from '@/components/Carousel';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -60,18 +62,69 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
-      <Tabs tab={['ootd', 'closet', 'favorite']}>
-        <Tabs.TabBar tab={['ootd', 'closet', 'favorite']} />
-        <Tabs.Tab name="ootd">
-          <div>ootd</div>
-        </Tabs.Tab>
-        <Tabs.Tab name="closet">
-          <div>closet</div>
-        </Tabs.Tab>
-        <Tabs.Tab name="favorite">
-          <div>favorite</div>
-        </Tabs.Tab>
-      </Tabs>
+      <TabView>
+        <TabView.TabBar tab={['ootd', 'closet', 'favorite']} />
+        <TabView.Tabs>
+          <TabView.Tab>
+            <Sample />
+          </TabView.Tab>
+          <TabView.Tab>
+            <Sample1 />
+          </TabView.Tab>
+          <TabView.Tab>
+            <Sample2 />
+          </TabView.Tab>
+        </TabView.Tabs>
+      </TabView>
+      <div style={{ width: '340px', margin: '0 auto' }}>
+        <Carousel slidesToShow={2.3} infinite={false}>
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+          <MainTopClothCard
+            data={{
+              src: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+              alt: '카드',
+              caption: 'Tag',
+            }}
+            headline={'Headline4'}
+            body={'Body2'}
+          />
+        </Carousel>
+      </div>
       <LikeToggle />
       <SwitchToggle state={switchOn} setState={setSwitchOn} />
       <SearchBar placeholder="Hinted Search Text" />
