@@ -22,6 +22,10 @@ import useIsUser from '@/hooks/useIsUser';
 import nakhyeon from 'public/images/증명사진.jpg';
 import { Sample, Sample1, Sample2 } from '@/components/sample';
 import Input from '@/components/Input';
+import IdInput from '@/components/SignUp/IdInput';
+import BodyInput from '@/components/SignUp/BodyInput';
+import TrueFalse from '@/components/Input/TrueFalse';
+import WeightOpen from '@/components/SignUp/WeightOpen';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -48,6 +52,9 @@ const Name: ComponentWithLayout = () => {
   ];
 
   const [nowOption, setNowOption] = useState('Option1');
+  const [idInput, setIdInput] = useState<string>();
+  const [bodyInput, setBodyInput] = useState<string>();
+  const [open, setOpen] = useState<Boolean>(true);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -66,12 +73,9 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
-      <Input>
-        <Input.Label size="big">Label</Input.Label>
-        <Input.Text size="big" placeholder="placeholder" />
-        <Input.Text size="small" placeholder="placeholder" unit="cm" />
-        <Input.HelperText>HelperText</Input.HelperText>
-      </Input>
+      <IdInput setInput={setIdInput} />
+      <BodyInput setInput={setBodyInput} />
+      <WeightOpen state={open} setState={setOpen} />
       <MyProfile isUser={false} />
       <MyProfile
         isUser={true}

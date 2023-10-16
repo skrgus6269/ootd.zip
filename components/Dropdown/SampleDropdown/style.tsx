@@ -11,7 +11,7 @@ const Select = styled.div`
 `;
 
 const Options = styled.div`
-  position: absolute;
+  position: relative;
   background-color: ${(props) => props.theme.color.grey_100};
   z-index: 4;
   overflow-y: scroll;
