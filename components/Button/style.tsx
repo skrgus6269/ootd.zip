@@ -18,7 +18,7 @@ const LargeButton = styled(Buttons)`
   display: ${(props) => (props.show ? 'block' : 'none')};
   width: 350px;
   height: 48px;
-  border-radius: 0;
+  border-radius: 2px;
 `;
 
 const SmallButton = styled(Buttons)`
