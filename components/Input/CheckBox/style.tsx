@@ -6,7 +6,6 @@ const Layout = styled.div`
   gap: 16px;
   padding-top: 24px;
   padding-bottom: 16px;
-  overflow: hidden;
 `;
 
 const Box = styled.div`
