@@ -14,11 +14,19 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
   return (
     <>
-      <LargeButton show={props.size === 'lg'} buttonData={props}>
+      <LargeButton
+        onClick={props.onClick}
+        show={props.size === 'big'}
+        buttonData={props}
+      >
         <Button1>{props.children}</Button1>
       </LargeButton>
 
-      <SmallButton show={props.size === 'sm'} buttonData={props}>
+      <SmallButton
+        onClick={props.onClick}
+        show={props.size === 'small'}
+        buttonData={props}
+      >
         <Button1>{props.children}</Button1>
       </SmallButton>
     </>
