@@ -6,7 +6,7 @@ interface LayoutProps {
 
 const Layout = styled.div<LayoutProps>`
   display: inline-flex;
-  width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
+  width: ${(props) => (props.size === 'big' ? '100%' : '167px')};
   height: 42px;
   border-bottom: 2px solid ${(props) => props.theme.color.grey_80};
   &:hover {
@@ -51,6 +51,7 @@ const Input = styled.input`
 const CloseIcon = styled(FlexLayout)`
   align-items: center;
   display: flex;
+  width: 24px;
   svg {
     width: 12px;
     height: 12px;
