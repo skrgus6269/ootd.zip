@@ -18,7 +18,7 @@ const Layout = styled.div`
 const AppBarLeft = styled.div`
   /*아래 6속성: 정렬을 위함 */
   width: 40%;
-  height: 100%;
+  height: 48px;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -47,6 +47,7 @@ const AppBarMiddle = styled.div`
 
 //앱바의 오른쪽 영역
 const AppBarRight = styled(AppBarLeft)`
+  height: 100%;
   //우측 정렬
   justify-content: right;
 `;
