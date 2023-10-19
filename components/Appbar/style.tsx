@@ -16,7 +16,6 @@ const Layout = styled.div`
 
 //앱바의 왼쪽 영역
 const AppBarLeft = styled.div`
-  padding: 0 0 0 20px;
   /*아래 6속성: 정렬을 위함 */
   width: 40%;
   height: 100%;
@@ -27,8 +26,8 @@ const AppBarLeft = styled.div`
 
   //아이콘 크기
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -48,7 +47,6 @@ const AppBarMiddle = styled.div`
 
 //앱바의 오른쪽 영역
 const AppBarRight = styled(AppBarLeft)`
-  padding: 0 20px 0 0;
   //우측 정렬
   justify-content: right;
 `;
