@@ -3,7 +3,7 @@ import { LargeButton, SmallButton } from './style';
 import { Button1 } from '../UI';
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   size: string;
   backgroundColor: string;
   color: string;

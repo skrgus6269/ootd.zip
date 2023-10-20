@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: "Pretendard Variable";
     }
     button {
+        /* padding: 0; */
         border: 0;
         background: transparent;
         cursor: pointer;
