@@ -8,7 +8,8 @@ import S from './style';
 import Headline from '@/components/UI/TypoGraphy/Headline3';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
+import { useRouter } from 'next/router';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -90,10 +91,28 @@ const SignUp: ComponentWithLayout = () => {
       selectedStyle,
     });
   };
+
+  const router = useRouter();
+  const onClickAppbarButton = () => {
+    if (currentStep === '기본정보') {
+      router.push('/name');
+    } else if (currentStep === '체형정보') {
+      handleStep('기본정보');
+    } else {
+      handleStep('체형정보');
+    }
+  };
+
   return (
     <S.Layout>
       <AppBar
-        leftProps={<AiOutlineArrowLeft />}
+        leftProps={
+          currentStep === '기본정보' ? (
+            <AiOutlineClose onClick={onClickAppbarButton} />
+          ) : (
+            <AiOutlineArrowLeft onClick={onClickAppbarButton} />
+          )
+        }
         middleProps={<Headline>회원가입</Headline>}
         rightProps={<></>}
       />
