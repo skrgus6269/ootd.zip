@@ -13,7 +13,6 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
 }
-
 interface Style {
   value: Boolean;
   tag: string;
@@ -164,6 +163,8 @@ const SignUp: ComponentWithLayout = () => {
 };
 
 export default SignUp;
+
+export type { ComponentWithLayout, Style };
 
 SignUp.Layout = ({ children }: AppLayoutProps) => {
   return <>{children}</>;

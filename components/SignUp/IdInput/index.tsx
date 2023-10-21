@@ -6,6 +6,7 @@ import {
   hasSpecialCharacter,
   isMoreThan12Length,
   isMoreThan2Length,
+  badNickname,
 } from '@/hooks/regex';
 import {
   HELPER_TEXT_KOREAN_INITIAL,
@@ -15,6 +16,7 @@ import {
   HELPER_TEXT_NULL,
   NICKNAME_PLACEHODER,
   HELPER_TEXT_2_LENGTH,
+  HELPER_TEXT_BAD_NICKNAME,
 } from '@/constants/business.constants';
 
 interface InputProps {
@@ -46,6 +48,9 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
       setCanUseId(false);
     } else if (isMoreThan2Length(value)) {
       updateHelperText(HELPER_TEXT_2_LENGTH, 2);
+      setCanUseId(false);
+    } else if (badNickname(value)) {
+      updateHelperText(HELPER_TEXT_BAD_NICKNAME, 2);
       setCanUseId(false);
     } else {
       if (중복확인()) {
