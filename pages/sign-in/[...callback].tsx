@@ -9,13 +9,13 @@ interface QueryParams {
 
 export default function SignUpCallbackPage() {
   const router = useRouter();
-  const { code: kakaoCode, callback } = router.query as QueryParams;
+  const { code, callback } = router.query as QueryParams;
   const [state, login] = useLogin();
 
   useEffect(() => {
     (async () => {
-      if (callback !== undefined && kakaoCode !== undefined) {
-        await login!({ platform: callback[0], code: kakaoCode });
+      if (callback !== undefined && code !== undefined) {
+        await login!({ platform: callback[0], code: code });
 
         //로그인 성공 여부에 따른 라우팅 분기처리
         switch (state) {
@@ -27,7 +27,7 @@ export default function SignUpCallbackPage() {
         }
       }
     })();
-  }, [callback, kakaoCode, login, router, state]);
+  }, [callback, code, login, router, state]);
 
   return <div>loading</div>;
 }

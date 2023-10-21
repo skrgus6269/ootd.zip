@@ -73,8 +73,8 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
-      <IdInput setInput={setIdInput} />
-      <BodyInput setInput={setBodyInput} />
+      {/* <IdInput setInput={setIdInput} />
+      <BodyInput setInput={setBodyInput} /> */}
       <WeightOpen state={open} setState={setOpen} />
       <MyProfile isUser={false} />
       <MyProfile
