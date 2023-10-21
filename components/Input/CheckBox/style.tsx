@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const Layout = styled.div`
   display: flex;
   flex-wrap: wrap;
+  max-width: 350px;
+  width: 100%;
   gap: 16px;
   padding-top: 24px;
   padding-bottom: 16px;
