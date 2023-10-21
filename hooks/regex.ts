@@ -11,3 +11,15 @@ export const isMoreThan12Length = (value: string) => value.length > 12;
 
 // 글자수가 2자보다 많아야한다
 export const isMoreThan2Length = (value: string) => value.length < 2;
+
+//욕설을 포함하면 사용 불가
+const 욕설리스트 = ['바보', '멍청이', '이바름'];
+
+export const badNickname = (value: string) => {
+  let flag = true;
+
+  for (let i = 0; i < 욕설리스트.length; i++) {
+    if (value.includes(욕설리스트[i])) flag = false;
+  }
+  return !flag;
+};

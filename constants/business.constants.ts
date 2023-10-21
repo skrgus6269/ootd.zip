@@ -6,3 +6,4 @@ export const HELPER_TEXT_VALID = '사용가능합니다.';
 export const HELPER_TEXT_NULL = '입력해주세요';
 export const NICKNAME_PLACEHODER = '특수문자,초성 단독사용 불가/12자 이내';
 export const HELPER_TEXT_2_LENGTH = '2글자 이상 입력해주세요.';
+export const HELPER_TEXT_BAD_NICKNAME = '욕설을 사용하지 말아주세요.';
