@@ -5,9 +5,9 @@ import defaultUserProfile from 'public/images/defaultUserProfile.png';
 
 interface ProfileLayoutProps {
   children: React.ReactNode;
-  isUser: boolean;
+  isUser: Boolean;
   imgSrc: StaticImageData;
-  isMine: boolean;
+  isMine: Boolean;
 }
 
 export default function ProfileLayout({

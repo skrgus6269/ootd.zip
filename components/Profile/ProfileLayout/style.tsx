@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   display: flex;
-  width: 390px;
+  width: 100%;
+  max-width: 390px;
   height: 70px;
   align-items: center;
   justify-content: space-between;
@@ -15,6 +16,8 @@ const UserPhoto = styled.div`
     width: 44px;
     height: 44px;
     border-radius: 50%;
+    background-color: black;
+    object-fit: scale-down;
   }
 `;
 

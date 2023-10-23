@@ -6,7 +6,11 @@ const NeedLogin = styled.div`
   }
 `;
 
-const Layout = styled.div``;
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 
 const Name = styled.div``;
 
