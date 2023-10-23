@@ -1,11 +1,11 @@
 import { StaticImageData } from 'next/image';
 
 interface ProfileType {
-  isUser: boolean;
+  isUser: Boolean;
   userImage?: StaticImageData;
   userName?: string;
-  follow?: string;
-  myCloth?: string;
+  follow?: number;
+  myCloth?: number;
 }
 
 export type { ProfileType };
