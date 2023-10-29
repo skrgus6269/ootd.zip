@@ -3,6 +3,9 @@ import styled from 'styled-components';
 const Layout = styled.div`
   padding: 0 20px;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 124px;
 `;
 
 const S = { Layout };

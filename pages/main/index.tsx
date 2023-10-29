@@ -1,3 +1,6 @@
+import ClothInformation from '@/components/ClothInformation';
+import TagInformation from '@/components/ClothInformation/TagInformation';
+import { ClothInformationProps } from '@/components/ClothInformation/type';
 import UserCloset from '@/components/Main/MyCloset';
 import S from './style';
 import appleLogo from '@/public/images/appleLogo.png';
@@ -11,6 +14,87 @@ import OOTD3 from '@/public/images/권낙현3.jpg';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Headline3';
 import { AiOutlineSearch } from 'react-icons/ai';
+import TodayRecommend from '@/components/Main/TodayRecommend';
+
+const ClothInformationSampleData = [
+  {
+    size: 'big',
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    caption: 'Tag',
+    Headline: 'Headline4',
+    SubHeadline: 'Subtitle3',
+    BodyFirst: 'Body4',
+    BodySecond: 'Body4',
+    icon: 'like',
+  },
+  {
+    size: 'big',
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    caption: 'Tag',
+    Headline: 'Headline4',
+    SubHeadline: 'Subtitle3',
+    BodyFirst: 'Body4',
+    BodySecond: 'Body4',
+    icon: 'like',
+  },
+  {
+    size: 'small',
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    caption: 'Tag',
+    Headline: 'Headline4',
+    SubHeadline: 'Subtitle3',
+    BodyFirst: 'Body4',
+    BodySecond: 'Body4',
+    icon: 'like',
+  },
+  {
+    size: 'big',
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    caption: 'Tag',
+    Headline: 'Headline4',
+    SubHeadline: 'Subtitle3',
+    BodyFirst: 'Body4',
+    BodySecond: 'Body4',
+    icon: 'bell',
+  },
+] as [...ClothInformationProps[]];
+
+const TagClothInformationSampleData = [
+  {
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    Headline: 'Headline4',
+    BodyFirst: 'body3',
+    state: 'light',
+  },
+  {
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    Headline: 'Headline4',
+    BodyFirst: 'body3',
+    BodySecond: 'body3',
+    state: 'light',
+  },
+  {
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    Headline: 'Headline4',
+    BodyFirst: 'body3',
+    state: 'dark',
+  },
+  {
+    itemImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    Headline: 'Headline4',
+    BodyFirst: 'body3',
+    BodySecond: 'body3',
+    state: 'dark',
+  },
+] as [...ClothInformationProps[]];
 
 const MyClosetDataSample = {
   user: {
@@ -47,17 +131,71 @@ const MyClosetDataSample = {
   ],
 };
 
-const Main = () => {
+const TodayRecommendSampleData = [
+  {
+    ootdImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    item: [
+      {
+        itemImage:
+          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+        caption: '태그',
+        brand: 'Nike',
+        category: '반소매',
+        name: 'Nike half sleeve logo T-shirt',
+        size: 'Size L',
+      },
+      {
+        itemImage:
+          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+        caption: '비슷한',
+        brand: 'Ader error',
+        category: '반소매',
+        name: 'Graphic half sleeve T-shirt',
+        size: 'Size XL',
+      },
+    ],
+  },
+  {
+    ootdImage:
+      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    item: [
+      {
+        itemImage:
+          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+        caption: '태그',
+        brand: 'Nike',
+        category: 'Top',
+        name: '나이키 상의',
+        size: 'Body4',
+        icon: 'like',
+      },
+      {
+        itemImage:
+          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+        caption: '비슷한',
+        brand: 'Nike',
+        category: 'Top',
+        name: 'Body4',
+        size: 'Body4',
+        icon: 'like',
+      },
+    ],
+  },
+];
+
+export default function Main() {
   return (
-    <S.Layout>
+    <>
       <AppBar
         leftProps={<></>}
         middleProps={<Headline>logo</Headline>}
         rightProps={<AiOutlineSearch />}
       />
-      <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
-    </S.Layout>
+      <S.Layout>
+        <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
+        <TodayRecommend data={TodayRecommendSampleData} />
+      </S.Layout>
+    </>
   );
-};
-
-export default Main;
+}
