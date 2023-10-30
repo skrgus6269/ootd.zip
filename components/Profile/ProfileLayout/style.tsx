@@ -8,7 +8,6 @@ const Layout = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px;
 `;
 
 const UserPhoto = styled.div`
