@@ -9,7 +9,6 @@ const Layout = styled.div<LayoutProps>`
   width: 100%;
   max-width: ${(props) => (props.size === 'big' ? '350px' : '290px')};
   gap: 16px;
-  padding: 16px;
   align-items: center;
 `;
 
