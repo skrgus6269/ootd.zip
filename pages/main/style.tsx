@@ -5,7 +5,7 @@ const Layout = styled.div`
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 124px;
+  gap: 126px;
 `;
 
 const S = { Layout };

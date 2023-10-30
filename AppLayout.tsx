@@ -10,7 +10,7 @@ const Layout = styled.div`
 
 const MainComponent = styled.div`
   overflow-y: scroll;
-  flex-grow: 1;
+  height: calc(100vh - 56px);
 `;
 
 interface AppLayoutProps {

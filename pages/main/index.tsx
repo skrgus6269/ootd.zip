@@ -15,6 +15,7 @@ import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Headline3';
 import { AiOutlineSearch } from 'react-icons/ai';
 import TodayRecommend from '@/components/Main/TodayRecommend';
+import SameCloth from '@/components/Main/SameCloth';
 
 const ClothInformationSampleData = [
   {
@@ -184,6 +185,28 @@ const TodayRecommendSampleData = [
   },
 ];
 
+const SameClothDifferentFeeling = [
+  {
+    clothId: 2,
+    clothImage:
+      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+  },
+  {
+    clothId: 3,
+    clothImage:
+      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+  },
+  {
+    clothId: 4,
+    clothImage:
+      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+  },
+  {
+    clothId: 5,
+    clothImage:
+      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+  },
+];
 export default function Main() {
   return (
     <>
@@ -195,6 +218,7 @@ export default function Main() {
       <S.Layout>
         <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
         <TodayRecommend data={TodayRecommendSampleData} />
+        <SameCloth />
       </S.Layout>
     </>
   );

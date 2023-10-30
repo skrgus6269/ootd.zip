@@ -28,10 +28,9 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         background: transparent;
         cursor: pointer;
-    }
+    } 
     body, html {
-        height: 100vh; //dvh와 같은 상황도 고려해야한다.
-        overflow:hidden;
+        height: 100dvh; //dvh와 같은 상황도 고려해야한다.
     }
  
     div#__next{
