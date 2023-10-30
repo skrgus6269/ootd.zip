@@ -31,6 +31,12 @@ const AppBarLeft = styled.div`
   }
 `;
 
+const LeftTouch = styled.div`
+  width: 40px;
+  display: flex;
+  justify-content: center;
+`;
+
 //앱바의 가운데 영역
 const AppBarMiddle = styled.div`
   //아래 3속성: 정렬을 위함
@@ -48,8 +54,13 @@ const AppBarMiddle = styled.div`
 //앱바의 오른쪽 영역
 const AppBarRight = styled(AppBarLeft)`
   height: 100%;
-  //우측 정렬
+  display: flex;
   justify-content: right;
 `;
+const RightTouch = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 40px;
+`;
 
-export { Layout, AppBarLeft, AppBarMiddle, AppBarRight };
+export { Layout, AppBarLeft, AppBarMiddle, AppBarRight, LeftTouch, RightTouch };
