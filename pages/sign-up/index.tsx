@@ -104,7 +104,7 @@ const SignUp: ComponentWithLayout = () => {
   };
 
   return (
-    <S.Layout>
+    <>
       <AppBar
         leftProps={
           currentStep === '기본정보' ? (
@@ -116,68 +116,70 @@ const SignUp: ComponentWithLayout = () => {
         middleProps={<Headline>회원가입</Headline>}
         rightProps={<></>}
       />
-      <Funnel>
-        <S.ProgressBar>
-          {steps.map((stepName, index) =>
-            // 스타일 컴포넌트를 사용하여 스타일 적용
-            currentStep === stepName ? (
-              <S.ActiveStep key={stepName}>
-                {' '}
-                <S.Progress>
-                  <div className="number">
-                    <Headline>0{index + 1}.</Headline>
-                  </div>
-                  <Headline>{stepName}</Headline>
-                </S.Progress>
-              </S.ActiveStep>
-            ) : (
-              <S.Step key={stepName}>
-                <S.Progress>
-                  <div className="number">
-                    <Headline>0{index + 1}.</Headline>
-                  </div>
-                  <Headline>{stepName}</Headline>
-                </S.Progress>
-              </S.Step>
-            )
-          )}
-        </S.ProgressBar>
-        <S.Main>
-          <Funnel.Steps name="기본정보">
-            <BasicInfo
-              setId={setId}
-              setAge={setAge}
-              setCanUseId={setCanUseId}
-            />
-            <NextButton
-              state={basicState}
-              onClick={() => handleStep('체형정보')}
-            />
-          </Funnel.Steps>
-          <Funnel.Steps name="체형정보">
-            <BodyInfo
-              heightSetState={setHeight}
-              weightSetState={setWeight}
-              open={open}
-              setOpen={setOpen}
-            />
-            <NextButton
-              state={bodyState}
-              onClick={() => handleStep('취향정보')}
-            />
-          </Funnel.Steps>
-          <Funnel.Steps name="취향정보">
-            <StyleInfo
-              gender={gender}
-              setGender={setGender}
-              setStyleListState={setStyleListState}
-              styleListState={styleListState}
-            />
-            <NextButton state={styleState} onClick={onClickSubmitButton} />
-          </Funnel.Steps>
-        </S.Main>
-      </Funnel>
-    </S.Layout>
+      <S.Layout>
+        <Funnel>
+          <S.ProgressBar>
+            {steps.map((stepName, index) =>
+              // 스타일 컴포넌트를 사용하여 스타일 적용
+              currentStep === stepName ? (
+                <S.ActiveStep key={stepName}>
+                  {' '}
+                  <S.Progress>
+                    <div className="number">
+                      <Headline>0{index + 1}.</Headline>
+                    </div>
+                    <Headline>{stepName}</Headline>
+                  </S.Progress>
+                </S.ActiveStep>
+              ) : (
+                <S.Step key={stepName}>
+                  <S.Progress>
+                    <div className="number">
+                      <Headline>0{index + 1}.</Headline>
+                    </div>
+                    <Headline>{stepName}</Headline>
+                  </S.Progress>
+                </S.Step>
+              )
+            )}
+          </S.ProgressBar>
+          <S.Main>
+            <Funnel.Steps name="기본정보">
+              <BasicInfo
+                setId={setId}
+                setAge={setAge}
+                setCanUseId={setCanUseId}
+              />
+              <NextButton
+                state={basicState}
+                onClick={() => handleStep('체형정보')}
+              />
+            </Funnel.Steps>
+            <Funnel.Steps name="체형정보">
+              <BodyInfo
+                heightSetState={setHeight}
+                weightSetState={setWeight}
+                open={open}
+                setOpen={setOpen}
+              />
+              <NextButton
+                state={bodyState}
+                onClick={() => handleStep('취향정보')}
+              />
+            </Funnel.Steps>
+            <Funnel.Steps name="취향정보">
+              <StyleInfo
+                gender={gender}
+                setGender={setGender}
+                setStyleListState={setStyleListState}
+                styleListState={styleListState}
+              />
+              <NextButton state={styleState} onClick={onClickSubmitButton} />
+            </Funnel.Steps>
+          </S.Main>
+        </Funnel>
+      </S.Layout>
+    </>
   );
 };
 

@@ -1,4 +1,11 @@
-import { Layout, AppBarLeft, AppBarMiddle, AppBarRight } from './style';
+import {
+  Layout,
+  AppBarLeft,
+  AppBarMiddle,
+  AppBarRight,
+  RightTouch,
+  LeftTouch,
+} from './style';
 
 interface AppBarPoprs {
   leftProps: React.ReactElement;
@@ -9,9 +16,13 @@ interface AppBarPoprs {
 export default function AppBar(props: AppBarPoprs) {
   return (
     <Layout>
-      <AppBarLeft>{props.leftProps}</AppBarLeft>
+      <AppBarLeft>
+        <LeftTouch>{props.leftProps}</LeftTouch>
+      </AppBarLeft>
       <AppBarMiddle>{props.middleProps}</AppBarMiddle>
-      <AppBarRight>{props.rightProps}</AppBarRight>
+      <AppBarRight>
+        <RightTouch>{props.rightProps}</RightTouch>
+      </AppBarRight>
     </Layout>
   );
 }
