@@ -14,7 +14,7 @@ interface UserClosetProps {
       myCloth: number;
     };
     data: {
-      OOTDImage: StaticImageData;
+      OOTDImage: string;
       caption: string;
       headline: string;
       subHeadline: string;
