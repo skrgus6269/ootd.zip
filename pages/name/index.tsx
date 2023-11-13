@@ -19,7 +19,7 @@ import LikeToggle from '@/components/Toggle/LikeToggle';
 import TabView from '@/components/TabView';
 import { MyProfile, OtherProfile } from '@/components/Profile';
 import useIsUser from '@/hooks/useIsUser';
-import nakhyeon from 'public/images/증명사진.jpg';
+import nakhyeon from 'public/images/defaultUserProfile.png';
 import { Sample, Sample1, Sample2 } from '@/components/sample';
 import Input from '@/components/Input';
 import IdInput from '@/components/SignUp/IdInput';
@@ -55,6 +55,7 @@ const Name: ComponentWithLayout = () => {
   const [idInput, setIdInput] = useState<string>();
   const [bodyInput, setBodyInput] = useState<string>();
   const [open, setOpen] = useState<Boolean>(true);
+  const [input, setInput] = useState('');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -73,6 +74,9 @@ const Name: ComponentWithLayout = () => {
           </>
         }
       />
+      <Input>
+        <Input.TextArea input={input} setInput={setInput} />
+      </Input>
       <IdInput setInput={setIdInput} />
       <BodyInput setInput={setBodyInput} />
       <WeightOpen state={open} setState={setOpen} />
