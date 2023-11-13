@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 //이미지에 대한 정보 Props
 export interface ImageProps {
   src: string;
@@ -23,7 +25,7 @@ export interface CardComponentProps {
 
 //서버에서 받은 이미지에 대한 정보 Props
 export interface DataProps {
-  src: string;
+  src: StaticImageData;
   alt: string;
   caption: string;
 }

@@ -10,7 +10,9 @@ interface HelperTextType {
 export default function HelperText({ children, state }: HelperTextType) {
   return (
     <S.Layout state={state}>
-      <AiOutlineExclamationCircle />
+      <S.Icon>
+        <AiOutlineExclamationCircle />
+      </S.Icon>
       <Caption>{children}</Caption>
     </S.Layout>
   );

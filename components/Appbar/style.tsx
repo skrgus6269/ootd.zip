@@ -16,10 +16,9 @@ const Layout = styled.div`
 
 //앱바의 왼쪽 영역
 const AppBarLeft = styled.div`
-  padding: 0 0 0 20px;
   /*아래 6속성: 정렬을 위함 */
   width: 40%;
-  height: 100%;
+  height: 48px;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -27,9 +26,15 @@ const AppBarLeft = styled.div`
 
   //아이콘 크기
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
+`;
+
+const LeftTouch = styled.div`
+  width: 40px;
+  display: flex;
+  justify-content: center;
 `;
 
 //앱바의 가운데 영역
@@ -48,9 +53,14 @@ const AppBarMiddle = styled.div`
 
 //앱바의 오른쪽 영역
 const AppBarRight = styled(AppBarLeft)`
-  padding: 0 20px 0 0;
-  //우측 정렬
+  height: 100%;
+  display: flex;
   justify-content: right;
 `;
+const RightTouch = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 40px;
+`;
 
-export { Layout, AppBarLeft, AppBarMiddle, AppBarRight };
+export { Layout, AppBarLeft, AppBarMiddle, AppBarRight, LeftTouch, RightTouch };

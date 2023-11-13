@@ -5,28 +5,34 @@ import Button from '@/components/UI/TypoGraphy/Button1';
 interface TrueFalseProps {
   left: string;
   right: string;
-  state: Boolean;
-  setState: Dispatch<SetStateAction<Boolean>>;
+  state: string;
+  setState: Dispatch<SetStateAction<string>>;
 }
 
-export default function TrueFalse({
-  left,
-  right,
-  state,
-  setState,
-}: TrueFalseProps) {
-  const onClickButton = () => {
-    setState(!state);
+export default function TrueFalse({ left, right, setState }: TrueFalseProps) {
+  const [currentState, setCurrentState] = useState<Boolean>(true);
+
+  const onClickNextButton = (value: string) => {
+    setState(value);
+    setCurrentState(!currentState);
   };
 
   return (
     <S.Layout>
-      <S.LeftButton state={state} onClick={onClickButton}>
+      <S.LeftButton
+        state={currentState}
+        onClick={() => onClickNextButton(left)}
+      >
         <Button>{left}</Button>
       </S.LeftButton>
-      <S.RightButton state={state} onClick={onClickButton}>
+      <S.RightButton
+        state={currentState}
+        onClick={() => onClickNextButton(right)}
+      >
         <Button>{right}</Button>
       </S.RightButton>
     </S.Layout>
   );
 }
+
+export type { TrueFalseProps };

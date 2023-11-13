@@ -1,16 +1,45 @@
-import Input from '../../Input';
-import { InputProps } from '../IdInput';
+import Input from '@/components/Input';
+import { Dispatch, SetStateAction } from 'react';
+import S from './style';
 
-export default function BodyInput({ setInput }: InputProps) {
+interface BodyInputProps {
+  heightSetState: Dispatch<SetStateAction<string>>;
+  weightSetState: Dispatch<SetStateAction<string>>;
+}
+
+export default function BodyInput({
+  heightSetState,
+  weightSetState,
+}: BodyInputProps) {
   return (
-    <Input>
-      <Input.Label size="small">신장</Input.Label>
-      <Input.Text
-        size="small"
-        unit="cm"
-        placeholder="placeholder"
-        onChange={setInput}
-      />
-    </Input>
+    <S.Layout>
+      <Input>
+        <Input.Label size="big">체형</Input.Label>
+        <S.BodyLayout>
+          <S.Weight>
+            <Input.Label size="small">신장</Input.Label>
+            <Input.Text
+              size="small"
+              unit="cm"
+              placeholder="160"
+              onChange={heightSetState}
+              type="number"
+            />
+          </S.Weight>
+          <S.Height>
+            <Input.Label size="small">몸무게</Input.Label>
+            <Input.Text
+              size="small"
+              unit="kg"
+              placeholder="40"
+              onChange={weightSetState}
+              type="number"
+            />
+          </S.Height>
+        </S.BodyLayout>
+      </Input>
+    </S.Layout>
   );
 }
+
+export type { BodyInputProps };

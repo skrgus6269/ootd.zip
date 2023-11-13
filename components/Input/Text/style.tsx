@@ -6,7 +6,9 @@ interface LayoutProps {
 
 const Layout = styled.div<LayoutProps>`
   display: inline-flex;
-  width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
+  width: 100%;
+  max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
+
   height: 42px;
   border-bottom: 2px solid ${(props) => props.theme.color.grey_80};
   &:hover {
@@ -27,6 +29,7 @@ const SearchIcon = styled(FlexLayout)`
     height: 18.75px;
   }
 `;
+
 const SearchInput = styled(FlexLayout)`
   flex-grow: 1;
 `;
@@ -51,6 +54,7 @@ const Input = styled.input`
 const CloseIcon = styled(FlexLayout)`
   align-items: center;
   display: flex;
+  width: 24px;
   svg {
     width: 12px;
     height: 12px;

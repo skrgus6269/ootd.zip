@@ -32,7 +32,7 @@ const activeIcons = [
   <AiFillHome />,
 ];
 
-const routes = ['/name', '/ranking', '/plus', '/tag', '/mypage'];
+const routes = ['/main', '/ranking', '/plus', '/tag', '/mypage'];
 
 function getActiveIndex(path: string) {
   for (let i = 0; i < routes.length; i++) {

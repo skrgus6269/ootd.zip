@@ -3,7 +3,7 @@ import { LargeButton, SmallButton } from './style';
 import { Button1 } from '../UI';
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   size: string;
   backgroundColor: string;
   color: string;
@@ -14,11 +14,19 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
   return (
     <>
-      <LargeButton show={props.size === 'lg'} buttonData={props}>
+      <LargeButton
+        onClick={props.onClick}
+        show={props.size === 'big'}
+        buttonData={props}
+      >
         <Button1>{props.children}</Button1>
       </LargeButton>
 
-      <SmallButton show={props.size === 'sm'} buttonData={props}>
+      <SmallButton
+        onClick={props.onClick}
+        show={props.size === 'small'}
+        buttonData={props}
+      >
         <Button1>{props.children}</Button1>
       </SmallButton>
     </>

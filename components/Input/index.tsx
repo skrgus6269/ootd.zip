@@ -3,6 +3,7 @@ import HelperText from './HelperText';
 import Label from './Label';
 import Text from './Text';
 import TextArea from './TextArea';
+import CheckBox from './CheckBox';
 
 interface InputProps {
   children: React.ReactNode;
@@ -17,3 +18,4 @@ Input.Text = Text;
 Input.HelperText = HelperText;
 Input.TrueFalse = TrueFalse;
 Input.TextArea = TextArea;
+Input.CheckBox = CheckBox;

@@ -10,6 +10,7 @@ interface TextProps {
   unit?: string;
   validity?: (value: string) => void;
   onChange: (value: string) => void;
+  type?: string;
 }
 
 export default function Text({
@@ -18,6 +19,7 @@ export default function Text({
   unit,
   validity,
   onChange,
+  type,
 }: TextProps) {
   //input의 value
   const [letter, setLetter] = useState('');
@@ -28,7 +30,7 @@ export default function Text({
   };
 
   const search = () => {
-    if (validity) validity(letter);
+    if (validity) validity(letter.trimEnd());
     onChange(letter);
   };
 
@@ -46,11 +48,21 @@ export default function Text({
   return (
     <S.Layout size={size}>
       <S.SearchInput>
-        <S.Input
-          value={letter}
-          onChange={(e) => onChangeInput(e.target.value)}
-          placeholder={placeholder}
-        />
+        {type === 'number' ? (
+          <S.Input
+            value={letter}
+            onChange={(e) => onChangeInput(e.target.value)}
+            placeholder={placeholder}
+            type="number"
+            pattern="\d*"
+          />
+        ) : (
+          <S.Input
+            value={letter}
+            onChange={(e) => onChangeInput(e.target.value)}
+            placeholder={placeholder}
+          />
+        )}
       </S.SearchInput>
       {letter && (
         <S.CloseIcon>
