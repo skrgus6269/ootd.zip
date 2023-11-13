@@ -7,8 +7,10 @@ interface TabProps {
 const Layout = styled.div`
   display: flex;
   width: 100%;
-  height: 35px;
   justify-content: space-between;
+  h5 {
+    padding: 14px 0;
+  }
 `;
 const Tab = styled.span<TabProps>`
   width: 100%;
@@ -16,12 +18,20 @@ const Tab = styled.span<TabProps>`
   justify-content: center;
   align-items: center;
   display: flex;
-
+  padding-bottom: 1px;
+  color: ${(props) => props.theme.color.grey_50};
   ${(props) =>
     props.focus &&
-    `
+    `  
     border-bottom: 2px solid black;
-  `}
+    color: ${props.theme.color.grey_00}
+  `};
 `;
 
-export { Layout, Tab };
+const Hr = styled.hr`
+  width: 100%;
+  margin: 0;
+  border: 1px solid ${(props) => props.theme.color.grey_90};
+`;
+
+export { Layout, Tab, Hr };
