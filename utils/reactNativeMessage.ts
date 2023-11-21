@@ -1,20 +1,23 @@
+import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Dispatch, SetStateAction } from 'react';
 import { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
-import { isJsonString } from './isJsonString';
+
 interface Message {
   type: string;
   payload?: any;
 }
 
 export const getReactNativeMessage = (
-  setState: Dispatch<SetStateAction<string[]>>
+  setState: Dispatch<SetStateAction<ImageWithTag | undefined>>
 ) => {
   const listener = (event: WebViewMessageEvent) => {
     const parsedData = JSON.parse(event.data);
     if (parsedData?.type === 'galleryList') {
       const banana = parsedData?.payload;
-      alert(banana);
-      setState(banana);
+      const imageArray = banana.map((item: any) => {
+        return { ootdImage: item };
+      });
+      setState(imageArray);
     }
   };
 

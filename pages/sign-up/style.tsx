@@ -4,7 +4,7 @@ const Layout = styled.div`
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 48px);
 `;
 
 const ProgressBar = styled.div`

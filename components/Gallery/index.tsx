@@ -1,60 +1,47 @@
-import fetcher from '@/apis/fetcher';
+/* eslint-disable @next/next/no-img-element */
 import {
   getReactNativeMessage,
   sendReactNativeMessage,
 } from '@/utils/reactNativeMessage';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { ImageWithTag } from '../AddItem/TagModal';
+import Carousel from '../Carousel';
 
-const Gallery = () => {
-  const sampleDataInit = [
-    'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-  ];
-  const [sampleData, setSampleData] = useState<string[]>(sampleDataInit);
+interface GalleryProps {
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
+  imageAndTag: ImageWithTag;
+  handleStep: (next: string) => void;
+}
 
+const Gallery = ({ imageAndTag, setImageAndTag, handleStep }: GalleryProps) => {
   useEffect(() => {
     if (!window.ReactNativeWebView) {
       return;
     }
     sendReactNativeMessage({ type: 'galleryList' });
+  }, []);
 
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      getReactNativeMessage(setSampleData);
+      getReactNativeMessage(setImageAndTag);
     }
   }, []);
 
-  const click = async () => {
-    const { data } = await fetcher.post('api/v1/s3/image', sampleData._parts);
-    console.log(data);
-    return data;
-  };
-
-  const [image, setImage] = useState();
-
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
-
-  const chagne = async (e: any) => {
-    const { data } = await fetcher.post('api/v1/s3/image', e.target.value);
-    console.log(data);
-    return data;
-  };
-
   return (
-    <div>
-      <button onClick={click}>zzzzzzzzzzzz</button>
-      <input value={image} onChange={chagne} type="file" />
-      <>
-        <Image
-          onClick={click}
-          width={50}
-          height={50}
-          src={sampleData[0]}
-          alt="zz"
-        />
-      </>
-    </div>
+    <Carousel infinite={false} slidesToShow={1}>
+      {imageAndTag &&
+        imageAndTag.map((item, index) => {
+          return (
+            <img
+              onClick={() => handleStep('의류태그')}
+              style={{ width: '101px' }}
+              key={index}
+              src={item.ootdImage}
+              alt=""
+            />
+          );
+        })}
+    </Carousel>
   );
 };
 

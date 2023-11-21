@@ -39,6 +39,7 @@ const Layout = styled.div`
 const Image = styled.div`
   .sample {
     position: absolute;
+    z-index: 4;
     width: 146px;
     height: 48px;
     cursor: 'move';

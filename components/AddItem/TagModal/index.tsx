@@ -5,6 +5,7 @@ import { ClothInformationProps } from '@/components/ClothInformation/type';
 import { Dispatch, SetStateAction, useState } from 'react';
 import TabView from '@/components/TabView';
 import { Button1 } from '@/components/UI';
+import Modal from '@/components/Modal';
 
 const ClothInformationSampleData = [
   {
@@ -79,22 +80,18 @@ export type ImageWithTag = {
 interface AddTagProps {
   setAddTag: Dispatch<SetStateAction<Boolean>>;
   addTag: Boolean;
-  setSampleData: Dispatch<SetStateAction<ImageWithTag>>;
-  sampleData: ImageWithTag;
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
+  imageAndTag: ImageWithTag;
   slideIndex: number;
 }
 
 export default function AddTag({
   setAddTag,
   addTag,
-  setSampleData,
-  sampleData,
+  setImageAndTag,
+  imageAndTag,
   slideIndex,
 }: AddTagProps) {
-  const onClickBackground = () => {
-    setAddTag(false);
-  };
-
   const categoryList = ['외투', '상의', '하의', '한벌옷', '신발'];
 
   const [clicked, setClicked] = useState<number>(0);
@@ -105,7 +102,7 @@ export default function AddTag({
 
   //태그 추가
   const onClickClothInformation = (index: number) => {
-    const newTag = [...sampleData];
+    const newTag = [...imageAndTag];
     if (newTag[slideIndex].tag) {
       newTag[slideIndex].tag?.push({
         clothImage: ClothInformationSampleData[index].clothImage,
@@ -130,7 +127,7 @@ export default function AddTag({
       ];
     }
 
-    setSampleData(newTag);
+    setImageAndTag(newTag);
     setAddTag(false);
   };
 
@@ -182,8 +179,8 @@ export default function AddTag({
 
   return (
     <>
-      <S.Background onClick={onClickBackground} addTag={addTag} />
-      <S.Layout addTag={addTag}>
+      <S.Background onClick={() => setAddTag(false)} addTag={addTag} />
+      <Modal modalState={addTag}>
         <TabView>
           <TabView.TabBar tab={['내 옷장', '신규 등록']} />
           <TabView.Tabs>
@@ -195,7 +192,7 @@ export default function AddTag({
             </TabView.Tab>
           </TabView.Tabs>
         </TabView>
-      </S.Layout>
+      </Modal>
     </>
   );
 }

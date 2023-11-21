@@ -10,47 +10,6 @@ interface LayoutProps {
   addTag: Boolean;
 }
 
-const Layout = styled.div<LayoutProps>`
-  background-color: white;
-
-  position: fixed;
-  z-index: 999;
-  bottom: 0px;
-  width: 100%;
-  height: ${(props) => (props.addTag ? '90%' : '0')};
-  flex-direction: column;
-  border-radius: 8px 8px 0 0;
-  padding-top: ${(props) => (props.addTag ? '8px' : '0')};
-  overflow-y: scroll;
-  overflow-x: hidden; //가로가 흔들리는 버그 수정
-  display: flex;
-
-  .slick-slider {
-    margin: 0;
-  }
-
-  @keyframes fadeIn {
-    from {
-      height: 0;
-    }
-    to {
-      height: 90%;
-    }
-  }
-
-  @keyframes fadeOut {
-    from {
-      height: 90%;
-    }
-    to {
-      height: 0;
-    }
-  }
-
-  animation: ${(props) =>
-    props.addTag ? 'fadeIn 0.5s ease-in-out' : 'fadeOut 0.5s ease-in-out'};
-`;
-
 const Background = styled.div<LayoutProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.addTag ? 'block' : 'none')};
@@ -96,6 +55,6 @@ const List = styled.div`
   }
 `;
 
-const S = { Layout, Background, Category, List, MyCloset, CategorySpan };
+const S = { Background, Category, List, MyCloset, CategorySpan };
 
 export default S;

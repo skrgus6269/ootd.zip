@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import S from './style';
 import { Body3 } from '@/components/UI';
-import NextButton from '@/components/AddItem/NextButton';
+import NextButton from '@/components/NextButton';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import TagInformation from '@/components/ClothInformation/TagInformation';
@@ -12,11 +12,13 @@ import { ImageWithTag } from '@/components/AddItem/TagModal';
 interface ClothTagProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
   handleStep: (next: string) => void;
+  imageAndTag: ImageWithTag;
 }
 
 export default function ClothTag({
   setImageAndTag,
   handleStep,
+  imageAndTag,
 }: ClothTagProps) {
   const dragRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -39,31 +41,12 @@ export default function ClothTag({
   }, []);
 
   //이미지, 태그 정보
-  const [sampleData, setSampleData] = useState<ImageWithTag>([
-    {
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-    {
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-  ]);
-
   //다음 버튼 활성화 함수
   useEffect(() => {
-    const filterdSamplData = sampleData.filter((item) => item.tag);
+    const filterdSamplData = imageAndTag.filter((item) => item.tag);
     if (filterdSamplData.length) setNextButtonState(true);
     else setNextButtonState(false);
-  }, [sampleData]);
+  }, [imageAndTag]);
 
   //드래그 함수
   const onDrag = (
@@ -72,14 +55,14 @@ export default function ClothTag({
     e: DraggableEvent,
     data: DraggableData
   ) => {
-    const updatedElements = [...sampleData];
-    updatedElements[ootdIndex].tag[index] = {
-      ...updatedElements[ootdIndex].tag[index],
+    const updatedElements = [...imageAndTag!];
+    updatedElements[ootdIndex].tag![index] = {
+      ...updatedElements[ootdIndex].tag![index],
       xRate: String(data.lastX),
       yRate: String(data.lastY),
     };
-    console.log(updatedElements[ootdIndex].tag[index]);
-    setSampleData(updatedElements);
+    console.log(updatedElements[ootdIndex].tag![index]);
+    setImageAndTag(updatedElements);
     e.stopPropagation();
   };
 
@@ -89,10 +72,11 @@ export default function ClothTag({
     setInit(true);
   };
 
+  //다음 버튼 클릭
   const onClickNextButton = () => {
     if (nextButtonState) {
-      handleStep('게시글 작성');
-      setImageAndTag(sampleData);
+      handleStep('게시하기');
+      setImageAndTag(imageAndTag);
     }
   };
 
@@ -104,7 +88,7 @@ export default function ClothTag({
         infinite={false}
         beforeChange={(_current: number, next: number) => setSlideIndex(next)}
       >
-        {sampleData.map((item, ootdIndex) => {
+        {imageAndTag.map((item, ootdIndex) => {
           return (
             <>
               <S.Image ref={dragRef}>
@@ -161,14 +145,16 @@ export default function ClothTag({
         <Body3>원하는 곳을 터치해서 옷 정보를 태그해보세요.</Body3>
       </S.Tag>
       {/* 다음버튼 */}
-      <NextButton state={nextButtonState} onClick={onClickNextButton} />
+      <NextButton state={nextButtonState} onClick={onClickNextButton}>
+        다음단계
+      </NextButton>
       {/* 태그 모달창 */}
       {init && (
         <AddTag
           setAddTag={setAddTag}
           addTag={addTag}
-          setSampleData={setSampleData}
-          sampleData={sampleData}
+          setImageAndTag={setImageAndTag}
+          imageAndTag={imageAndTag}
           slideIndex={slideIndex}
         />
       )}

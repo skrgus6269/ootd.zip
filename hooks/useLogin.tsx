@@ -1,5 +1,6 @@
 import { authService } from '@/service';
 import { setCookie } from '@/utils/Cookie';
+import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import { useState } from 'react';
 
 interface LoginPayload {
@@ -25,6 +26,10 @@ export const useLogin = () => {
     setCookie('accessToken', data, {
       path: '/',
       // 보안 설정은 배포 직전에 설정해주기
+    });
+    sendReactNativeMessage({
+      type: 'accessToken',
+      payload: data,
     });
 
     //로그인 실패시

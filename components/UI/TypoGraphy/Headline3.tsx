@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Headline = styled.h3`
+  font-family: 'Pretendard-SemiBold';
   font-weight: ${({ theme }) => theme.weight.semibold}; //600
   font-size: ${({ theme }) => theme.fontSize.md}; //16px
   line-height: ${({ theme }) => theme.lineHeight.lg}; //20px

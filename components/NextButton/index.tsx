@@ -4,9 +4,14 @@ import S from './style';
 interface NextButtonProps {
   state: Boolean;
   onClick: () => void;
+  children: string;
 }
 
-export default function NextButton({ state, onClick }: NextButtonProps) {
+export default function NextButton({
+  state,
+  onClick,
+  children,
+}: NextButtonProps) {
   return (
     <S.Layout>
       {state === true && (
@@ -17,7 +22,7 @@ export default function NextButton({ state, onClick }: NextButtonProps) {
           border={false}
           onClick={onClick}
         >
-          다음단계
+          {children}
         </Button>
       )}
       {state === false && (
@@ -28,7 +33,7 @@ export default function NextButton({ state, onClick }: NextButtonProps) {
           border={false}
           onClick={() => {}}
         >
-          다음단계
+          {children}
         </Button>
       )}
     </S.Layout>
