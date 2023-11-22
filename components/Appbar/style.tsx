@@ -60,7 +60,7 @@ const AppBarRight = styled(AppBarLeft)`
 const RightTouch = styled.div`
   display: flex;
   justify-content: center;
-  width: 40px;
+  padding-right: 20px;
 `;
 
 export { Layout, AppBarLeft, AppBarMiddle, AppBarRight, LeftTouch, RightTouch };

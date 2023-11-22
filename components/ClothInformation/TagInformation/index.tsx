@@ -5,21 +5,22 @@ import { ClothInformationProps } from '../type';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 export default function TagInformation({
-  itemImage,
-  Headline,
-  BodyFirst,
-  BodySecond,
+  clothImage,
+  headline,
+  bodyFirst,
+  bodySecond,
   state,
+  className,
 }: ClothInformationProps) {
   return (
-    <S.Layout state={state!}>
+    <S.Layout className={className} state={state!}>
       <S.ItemImage>
-        <Image width={32} height={32} src={itemImage} alt="아이템" />
+        <Image width={32} height={32} src={clothImage} alt="아이템" />
       </S.ItemImage>
       <S.Information>
-        <Headline4>{Headline}</Headline4>
-        <Body4>{BodyFirst}</Body4>
-        {BodySecond && <Body4>{BodySecond}</Body4>}
+        <Headline4>{headline}</Headline4>
+        <Body4>{bodyFirst}</Body4>
+        {bodySecond && <Body4>{bodySecond}</Body4>}
       </S.Information>
       <S.Close state={state!}>
         <div>

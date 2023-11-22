@@ -25,7 +25,7 @@ export interface CardComponentProps {
 
 //서버에서 받은 이미지에 대한 정보 Props
 export interface DataProps {
-  src: StaticImageData;
+  src: string;
   alt: string;
   caption: string;
 }

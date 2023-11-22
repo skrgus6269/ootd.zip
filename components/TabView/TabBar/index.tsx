@@ -1,7 +1,7 @@
-import { Layout, Tab } from './style';
+import { Subtitle1 } from '@/components/UI';
+import { Layout, Tab, Hr } from './style';
 import { useTabViewContext } from '@/hooks/use-tabview/context';
 import { useEffect, useState } from 'react';
-
 interface TabBarProps {
   tab: string[];
 }
@@ -25,18 +25,21 @@ export default function TabBar({ tab }: TabBarProps) {
   }, [index, tab.length]);
 
   return (
-    <Layout>
-      {tab.map((item, index) => {
-        return (
-          <Tab
-            key={index}
-            focus={state[index]}
-            onClick={() => handleTabClick(index + 1)}
-          >
-            {item}
-          </Tab>
-        );
-      })}
-    </Layout>
+    <>
+      <Layout>
+        {tab.map((item, index) => {
+          return (
+            <Tab
+              key={index}
+              focus={state[index]}
+              onClick={() => handleTabClick(index + 1)}
+            >
+              <Subtitle1>{item}</Subtitle1>
+            </Tab>
+          );
+        })}
+      </Layout>
+      <Hr />
+    </>
   );
 }

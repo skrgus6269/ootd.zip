@@ -8,8 +8,10 @@ const Layout = styled.div<ThemeProps>`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: move;
   gap: 8px;
   padding: 8px;
+  height: 100%;
   width: 136px;
   background-color: ${(props) =>
     props.state === 'dark'
@@ -28,6 +30,10 @@ const Layout = styled.div<ThemeProps>`
 
 const ItemImage = styled.div`
   display: flex;
+  img {
+    width: 32px;
+    height: 32px;
+  }
   align-items: center;
 `;
 

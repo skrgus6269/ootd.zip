@@ -5,8 +5,8 @@ const Layout = styled.div`
   flex-wrap: wrap;
   max-width: 350px;
   width: 100%;
-  gap: 16px;
-  padding-top: 24px;
+  row-gap: 24px;
+  column-gap: 16px;
   padding-bottom: 16px;
 `;
 

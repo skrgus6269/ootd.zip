@@ -6,12 +6,12 @@ import LikeToggle from '../Toggle/LikeToggle';
 import { AiOutlineBell } from 'react-icons/ai';
 
 export default function ClothInformation({
-  itemImage,
+  clothImage,
   caption,
-  Headline,
-  SubHeadline,
-  BodyFirst,
-  BodySecond,
+  headline,
+  subHeadline,
+  bodyFirst,
+  bodySecond,
   size,
   icon,
 }: ClothInformationProps) {
@@ -21,21 +21,21 @@ export default function ClothInformation({
         <ImageWithCaption
           caption={caption}
           size="70px"
-          src={itemImage}
+          src={clothImage}
           alt="옷정보"
         />
       </S.ListImage>
       <S.Information>
         <S.Headline>
-          <Headline4>{Headline}</Headline4>
+          <Headline4>{headline}</Headline4>
           <S.Divider>|</S.Divider>
-          <Subtitle3>{SubHeadline}</Subtitle3>
+          <Subtitle3>{subHeadline}</Subtitle3>
         </S.Headline>
         <S.BodyFirst>
-          <Body4>{BodyFirst}</Body4>
+          <Body4>{bodyFirst}</Body4>
         </S.BodyFirst>
         <S.BodySecond>
-          <Body4>{BodySecond}</Body4>
+          <Body4>{bodySecond}</Body4>
         </S.BodySecond>
       </S.Information>
       <S.Icon>

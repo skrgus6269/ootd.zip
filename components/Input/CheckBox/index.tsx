@@ -3,6 +3,7 @@ import S from './style';
 import CheckBoxTrue from 'public/images/checkBoxTrue.png';
 import CheckBoxFalse from 'public/images/checkBoxFalse.png';
 import Body from '@/components/UI/TypoGraphy/Body2';
+import { useCallback } from 'react';
 
 interface BoxProps {
   value: Boolean;
@@ -14,7 +15,7 @@ interface CheckBoxProps {
   setState: React.Dispatch<React.SetStateAction<BoxProps[]>>;
 }
 
-export default function CheckBox({ state, setState }: CheckBoxProps) {
+const CheckBox = ({ state, setState }: CheckBoxProps) => {
   const onClickCheckBox = (index: number) => {
     const { value: currentValue, tag: currentTag } = state[index];
     const leftCheckBox = state.slice(0, index);
@@ -50,4 +51,6 @@ export default function CheckBox({ state, setState }: CheckBoxProps) {
         })}
     </S.Layout>
   );
-}
+};
+
+export default CheckBox;

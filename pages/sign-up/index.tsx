@@ -3,13 +3,14 @@ import { useFunnel } from '@/hooks/use-funnel';
 import BasicInfo from './BasicInfo';
 import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
-import NextButton from '@/components/SignUp/NextButton';
+import NextButton from '@/components/NextButton';
 import S from './style';
 import Headline from '@/components/UI/TypoGraphy/Headline3';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { styleList } from '@/constants/business.constants';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -33,28 +34,6 @@ const SignUp: ComponentWithLayout = () => {
   const [bodyState, setBodyState] = useState<Boolean>(false);
   const [styleState, setStyleState] = useState<Boolean>(false);
   const [selectedStyle, setSelectedStyle] = useState<string[]>();
-  const styleList = [
-    '미니멀',
-    '아메카지',
-    '시티보이',
-    '캐주얼',
-    '스트릿',
-    '비즈니스 캐주얼',
-    '하이틴',
-    '로맨틱',
-    '걸리시',
-    '스포티',
-    '비즈니스 캐주얼',
-    '하이틴',
-    '로맨틱',
-    '걸리시',
-    '스포티',
-    '비즈니스 캐주얼',
-    '하이틴',
-    '로맨틱',
-    '걸리시',
-    '스포티',
-  ];
 
   const styleListInitial = styleList.map((item) => {
     return { value: false, tag: item } as Style;
@@ -153,7 +132,9 @@ const SignUp: ComponentWithLayout = () => {
               <NextButton
                 state={basicState}
                 onClick={() => handleStep('체형정보')}
-              />
+              >
+                다음
+              </NextButton>
             </Funnel.Steps>
             <Funnel.Steps name="체형정보">
               <BodyInfo
@@ -165,7 +146,9 @@ const SignUp: ComponentWithLayout = () => {
               <NextButton
                 state={bodyState}
                 onClick={() => handleStep('취향정보')}
-              />
+              >
+                다음
+              </NextButton>
             </Funnel.Steps>
             <Funnel.Steps name="취향정보">
               <StyleInfo
@@ -174,7 +157,9 @@ const SignUp: ComponentWithLayout = () => {
                 setStyleListState={setStyleListState}
                 styleListState={styleListState}
               />
-              <NextButton state={styleState} onClick={onClickSubmitButton} />
+              <NextButton state={styleState} onClick={onClickSubmitButton}>
+                다음
+              </NextButton>
             </Funnel.Steps>
           </S.Main>
         </Funnel>

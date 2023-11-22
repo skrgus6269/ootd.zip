@@ -1,11 +1,12 @@
 export interface ClothInformationProps {
-  itemImage: string;
+  clothImage: string;
   caption: string;
   size?: 'big' | 'small';
-  Headline?: string;
-  SubHeadline?: string;
-  BodyFirst?: string;
-  BodySecond?: string;
+  headline: string;
+  subHeadline?: string;
+  bodyFirst: string;
+  bodySecond?: string;
   icon?: React.ReactNode;
   state?: 'dark' | 'light';
+  className?: string;
 }
