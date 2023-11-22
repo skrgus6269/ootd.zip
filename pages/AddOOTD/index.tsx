@@ -101,23 +101,10 @@ const AddOOTD: ComponentWithLayout = () => {
       />
       <Funnel>
         <Funnel.Steps name="미리보기">
-          {/* <Gallery
+          <Gallery
             setImageAndTag={setImageAndTag}
             imageAndTag={imageAndTag!}
             handleStep={handleStep}
-          /> */}
-          <WriteOOTD
-            imageAndTag={imageAndTag!}
-            gender={gender}
-            setGender={setGender}
-            string={string}
-            setString={setString}
-            style={style}
-            setStyle={setStyle}
-            open={open}
-            setOpen={setOpen}
-            selectedStyle={selectedStyle}
-            setSelectedStyle={setSelectedStyle}
           />
         </Funnel.Steps>
         <Funnel.Steps name="의류태그">
