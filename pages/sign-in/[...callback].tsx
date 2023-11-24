@@ -10,24 +10,30 @@ interface QueryParams {
 export default function SignUpCallbackPage() {
   const router = useRouter();
   const { code, callback } = router.query as QueryParams;
-  const [state, login] = useLogin();
+  const [login] = useLogin();
 
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       if (callback !== undefined && code !== undefined) {
-        await login!({ platform: callback[0], code: code });
+        // login 함수 호출 이후에 상태 확인
+        const loginSuccess = await login({ platform: callback[0], code: code });
 
-        //로그인 성공 여부에 따른 라우팅 분기처리
-        switch (state) {
+        // login 함수 호출 이후에 상태 확인 및 라우팅
+        switch (loginSuccess) {
           case true:
             router.push('../onboarding');
             break;
           case false:
             router.push('../sign-up');
+            break;
+          default:
+          // 상태가 정의되지 않은 경우에 대한 처리
         }
       }
-    })();
-  }, [callback, code, login, router, state]);
+    };
+
+    fetchData();
+  }, [code]);
 
   return <div>loading</div>;
 }

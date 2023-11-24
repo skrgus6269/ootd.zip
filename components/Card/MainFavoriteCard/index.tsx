@@ -1,4 +1,4 @@
-import { Headline4, Subtitle2 } from '@/components/UI';
+import { Subtitle2 } from '@/components/UI';
 import { CardComponentProps } from '../type';
 import Card from '../CardLayout';
 import { Layout } from './style';

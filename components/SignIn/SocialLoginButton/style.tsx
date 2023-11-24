@@ -11,24 +11,24 @@ const Button = styled.button`
 `;
 
 interface ButtonStringProps {
-  platform: 'kakao' | 'google' | 'apple';
+  platform: 'KAKAO' | 'GOOGLE' | 'APPLE';
 }
 const ButtonString = styled.div<ButtonStringProps>`
   padding: 15px 0;
   border-radius: 2px;
   border: 1px solid
     ${(props) =>
-      props.platform === 'google' ? props.theme.color.grey_90 : 'none'};
+      props.platform === 'GOOGLE' ? props.theme.color.grey_90 : 'none'};
   background-color: ${(props) =>
-    props.platform === 'kakao'
+    props.platform === 'KAKAO'
       ? '#FEE500'
-      : props.platform === 'apple'
+      : props.platform === 'APPLE'
       ? 'black'
       : 'white'};
   color: ${(props) =>
-    props.platform === 'kakao'
+    props.platform === 'KAKAO'
       ? 'black'
-      : props.platform === 'apple'
+      : props.platform === 'APPLE'
       ? 'white'
       : 'black'};
   width: 100%;

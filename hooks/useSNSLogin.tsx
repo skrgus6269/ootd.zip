@@ -11,13 +11,13 @@ export const useSNSLogin = () => {
   const routing = (platform: string) => {
     console.log(platform);
     switch (platform) {
-      case 'kakao': {
+      case 'KAKAO': {
         window.Kakao.Auth.authorize({
           redirectUri: NEXT_PUBLIC_KAKAO_URI,
         });
         break;
       }
-      case 'google': {
+      case 'GOOGLE': {
         router.push(NEXT_PUBLIC_GOOGLE_URI);
       }
     }
