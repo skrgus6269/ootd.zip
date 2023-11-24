@@ -35,12 +35,12 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
                   return (
                     <ClothInformation
                       key={index}
-                      itemImage={item.itemImage}
+                      clothImage={item.itemImage}
                       caption={item.caption}
-                      Headline={item.brand}
-                      SubHeadline={item.category}
-                      BodyFirst={item.name}
-                      BodySecond={item.size}
+                      headline={item.brand}
+                      subHeadline={item.category}
+                      bodyFirst={item.name}
+                      bodySecond={item.size}
                       icon="like"
                     />
                   );

@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 interface SocialLoginButtonProps {
   onClick: () => void;
-  platform: 'kakao' | 'google' | 'apple';
+  platform: 'KAKAO' | 'GOOGLE' | 'APPLE';
 }
 
 export default function SocialLoginButton({
@@ -15,9 +15,9 @@ export default function SocialLoginButton({
   platform,
 }: SocialLoginButtonProps) {
   const platformInfo = {
-    kakao: [kakaoLogo, '카카오로 로그인'],
-    apple: [appleLogo, '애플로 로그인'],
-    google: [googleLogo, 'Google 계정으로 로그인'],
+    KAKAO: [kakaoLogo, '카카오로 로그인'],
+    APPLE: [appleLogo, '애플로 로그인'],
+    GOOGLE: [googleLogo, 'Google 계정으로 로그인'],
   };
 
   return (

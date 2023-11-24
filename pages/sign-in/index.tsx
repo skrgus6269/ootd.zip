@@ -31,16 +31,16 @@ const SignIn: ComponentWithLayout = () => {
           </S.Text>
           <S.SocialLoginButton>
             <SocialLoginButton
-              platform="kakao"
-              onClick={() => routing('kakao')}
+              platform="KAKAO"
+              onClick={() => routing('KAKAO')}
             />
             <SocialLoginButton
-              platform="apple"
-              onClick={() => routing('apple')}
+              platform="APPLE"
+              onClick={() => routing('APPLE')}
             />
             <SocialLoginButton
-              platform="google"
-              onClick={() => routing('google')}
+              platform="GOOGLE"
+              onClick={() => routing('GOOGLE')}
             />
           </S.SocialLoginButton>
         </S.Main>
