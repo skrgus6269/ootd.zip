@@ -10,6 +10,10 @@ interface LayoutProps {
   addTag: Boolean;
 }
 
+const Layout = styled.div`
+  height: 80vh;
+`;
+
 const Background = styled.div<LayoutProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.addTag ? 'block' : 'none')};
@@ -55,6 +59,6 @@ const List = styled.div`
   }
 `;
 
-const S = { Background, Category, List, MyCloset, CategorySpan };
+const S = { Layout, Background, Category, List, MyCloset, CategorySpan };
 
 export default S;

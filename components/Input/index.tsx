@@ -4,13 +4,15 @@ import Label from './Label';
 import Text from './Text';
 import TextArea from './TextArea';
 import CheckBox from './CheckBox';
+import Modal from './Modal';
+import ReadOnly from './ReadOnly';
 
 interface InputProps {
   children: React.ReactNode;
 }
 
 export default function Input({ children }: InputProps) {
-  return <>{children}</>;
+  return <div>{children}</div>;
 }
 
 Input.Label = Label;
@@ -19,3 +21,5 @@ Input.HelperText = HelperText;
 Input.TrueFalse = TrueFalse;
 Input.TextArea = TextArea;
 Input.CheckBox = CheckBox;
+Input.Modal = Modal;
+Input.ReadOnly = ReadOnly;

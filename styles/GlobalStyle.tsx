@@ -1,23 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
-    @font-face {
-        font-family: "Pretendard Variable";
-        src: url('font/PretendardVariable.ttf');
-    }  
-
-    @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    }
-
-    @font-face {
-    font-family: 'Pretendard-SemiBold';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    }
+   
     a{
         text-decoration: none;
         color: inherit;
@@ -34,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         font-size: 10px;
         vertical-align: baseline; 
-        font-family: "Pretendard Variable";
+        font-family: "Pretendard Regular";
     }
     button {
         /* padding: 0; */

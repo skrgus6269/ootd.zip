@@ -1,12 +1,20 @@
 import S from './style';
 
 interface ModalProps {
-  modalState: Boolean;
+  isOpen: Boolean;
   children: React.ReactNode;
+  height: string;
 }
 
-const Modal = ({ modalState, children }: ModalProps) => {
-  return <S.Layout state={modalState}>{children}</S.Layout>;
+const Modal = ({ isOpen, children, height }: ModalProps) => {
+  return (
+    <S.Layout height={height} isOpen={isOpen}>
+      <S.DragBar>
+        <div />
+      </S.DragBar>
+      {children}
+    </S.Layout>
+  );
 };
 
 export default Modal;

@@ -7,6 +7,7 @@ import { NEXT_PUBLIC_KAKAO_JS_KEY } from '@/constants/develop.constants';
 import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
 import { RecoilRoot } from 'recoil';
+import '@/styles/font/font.css';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
