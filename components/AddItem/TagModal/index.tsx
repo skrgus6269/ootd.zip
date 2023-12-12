@@ -80,8 +80,8 @@ export type ImageWithTag = {
 interface AddTagProps {
   setAddTag: Dispatch<SetStateAction<Boolean>>;
   addTag: Boolean;
-  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
-  imageAndTag: ImageWithTag;
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;
+  imageAndTag: ImageWithTag | string;
   slideIndex: number;
 }
 
@@ -102,20 +102,10 @@ export default function AddTag({
 
   //태그 추가
   const onClickClothInformation = (index: number) => {
-    const newTag = [...imageAndTag];
-    if (newTag[slideIndex].tag) {
-      newTag[slideIndex].tag?.push({
-        clothImage: ClothInformationSampleData[index].clothImage,
-        headline: ClothInformationSampleData[index].headline,
-        bodyFirst: ClothInformationSampleData[index].bodyFirst,
-        xRate: '0',
-        yRate: '0',
-        caption: '',
-        state: 'light',
-      });
-    } else {
-      newTag[slideIndex].tag = [
-        {
+    if (typeof imageAndTag !== 'string') {
+      const newTag = [...imageAndTag];
+      if (newTag[slideIndex].tag) {
+        newTag[slideIndex].tag?.push({
           clothImage: ClothInformationSampleData[index].clothImage,
           headline: ClothInformationSampleData[index].headline,
           bodyFirst: ClothInformationSampleData[index].bodyFirst,
@@ -123,12 +113,24 @@ export default function AddTag({
           yRate: '0',
           caption: '',
           state: 'light',
-        },
-      ];
-    }
+        });
+      } else {
+        newTag[slideIndex].tag = [
+          {
+            clothImage: ClothInformationSampleData[index].clothImage,
+            headline: ClothInformationSampleData[index].headline,
+            bodyFirst: ClothInformationSampleData[index].bodyFirst,
+            xRate: '0',
+            yRate: '0',
+            caption: '',
+            state: 'light',
+          },
+        ];
+      }
 
-    setImageAndTag(newTag);
-    setAddTag(false);
+      setImageAndTag(newTag);
+      setAddTag(false);
+    }
   };
 
   const MyCloset = () => {
@@ -180,18 +182,20 @@ export default function AddTag({
   return (
     <>
       <S.Background onClick={() => setAddTag(false)} addTag={addTag} />
-      <Modal modalState={addTag}>
-        <TabView>
-          <TabView.TabBar tab={['내 옷장', '신규 등록']} />
-          <TabView.Tabs>
-            <TabView.Tab>
-              <MyCloset />
-            </TabView.Tab>
-            <TabView.Tab>
-              <AddNewCloth />
-            </TabView.Tab>
-          </TabView.Tabs>
-        </TabView>
+      <Modal height="80%" isOpen={addTag}>
+        <S.Layout>
+          <TabView>
+            <TabView.TabBar tab={['내 옷장', '신규 등록']} />
+            <TabView.Tabs>
+              <TabView.Tab>
+                <MyCloset />
+              </TabView.Tab>
+              <TabView.Tab>
+                <AddNewCloth />
+              </TabView.Tab>
+            </TabView.Tabs>
+          </TabView>
+        </S.Layout>
       </Modal>
     </>
   );

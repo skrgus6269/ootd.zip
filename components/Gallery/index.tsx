@@ -8,17 +8,25 @@ import { ImageWithTag } from '../AddItem/TagModal';
 import Carousel from '../Carousel';
 
 interface GalleryProps {
-  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
-  imageAndTag: ImageWithTag;
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;
+  imageAndTag: ImageWithTag | string;
+  nextStep: string;
   handleStep: (next: string) => void;
+  item: string;
 }
 
-const Gallery = ({ imageAndTag, setImageAndTag, handleStep }: GalleryProps) => {
+const Gallery = ({
+  imageAndTag,
+  setImageAndTag,
+  handleStep,
+  nextStep,
+  item,
+}: GalleryProps) => {
   useEffect(() => {
     if (!window.ReactNativeWebView) {
       return;
     }
-    sendReactNativeMessage({ type: 'galleryList' });
+    sendReactNativeMessage({ type: item });
   }, []);
 
   useEffect(() => {
@@ -27,20 +35,35 @@ const Gallery = ({ imageAndTag, setImageAndTag, handleStep }: GalleryProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (item === 'Cloth') {
+      handleStep(nextStep);
+    }
+  }, [imageAndTag]);
+
   return (
     <Carousel infinite={false} slidesToShow={1}>
-      {imageAndTag &&
+      {typeof imageAndTag !== 'string' ? (
+        imageAndTag &&
         imageAndTag.map((item, index) => {
           return (
             <img
-              onClick={() => handleStep('의류태그')}
+              onClick={() => handleStep(nextStep)}
               style={{ width: '101px' }}
               key={index}
               src={item.ootdImage}
               alt=""
             />
           );
-        })}
+        })
+      ) : (
+        <img
+          onClick={() => handleStep(nextStep)}
+          style={{ width: '101px' }}
+          src={imageAndTag}
+          alt=""
+        />
+      )}
     </Carousel>
   );
 };

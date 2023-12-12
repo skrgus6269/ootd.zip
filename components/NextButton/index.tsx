@@ -5,15 +5,17 @@ interface NextButtonProps {
   state: Boolean;
   onClick: () => void;
   children: string;
+  className?: string;
 }
 
 export default function NextButton({
   state,
   onClick,
   children,
+  className,
 }: NextButtonProps) {
   return (
-    <S.Layout>
+    <S.Layout className={className}>
       {state === true && (
         <Button
           size="big"

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import React, { MutableRefObject, useState } from 'react';
+import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import S from './style';
 import useDebounce from '@/hooks/useDebouce';
 import Body from '@/components/UI/TypoGraphy/Body3';
@@ -10,7 +10,12 @@ interface TextProps {
   unit?: string;
   validity?: (value: string) => void;
   onChange: (value: string) => void;
-  type?: string;
+  type?: 'number' | 'link';
+  border?: Boolean;
+  line: 'underline' | 'outline';
+  inputRef?: MutableRefObject<null>;
+  pressEnter?: () => void;
+  onClick?: () => void;
 }
 
 export default function Text({
@@ -20,6 +25,10 @@ export default function Text({
   validity,
   onChange,
   type,
+  line,
+  inputRef,
+  pressEnter,
+  onClick,
 }: TextProps) {
   //input의 value
   const [letter, setLetter] = useState('');
@@ -45,27 +54,45 @@ export default function Text({
     deps: [letter],
   });
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      pressEnter ? pressEnter() : '';
+    }
+  };
+
   return (
-    <S.Layout size={size}>
+    <S.Layout size={size} line={line} onClick={onClick}>
+      {type === 'link' && (
+        <S.LinkIcon state={letter.length > 0}>
+          <AiOutlineLink />
+        </S.LinkIcon>
+      )}
       <S.SearchInput>
-        {type === 'number' ? (
+        {type === 'number' && (
           <S.Input
+            ref={inputRef}
+            line={line}
             value={letter}
             onChange={(e) => onChangeInput(e.target.value)}
             placeholder={placeholder}
             type="number"
             pattern="\d*"
           />
-        ) : (
+        )}
+        {type !== 'number' && (
           <S.Input
+            ref={inputRef}
+            line={line}
             value={letter}
             onChange={(e) => onChangeInput(e.target.value)}
             placeholder={placeholder}
+            onKeyDown={onKeyDown}
+            type={type}
           />
         )}
       </S.SearchInput>
       {letter && (
-        <S.CloseIcon>
+        <S.CloseIcon line={line}>
           <AiFillCloseCircle onClick={onClickCloseIcon} />
         </S.CloseIcon>
       )}

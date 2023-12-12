@@ -4,6 +4,10 @@ interface LayoutProps {
   addTag: Boolean;
 }
 
+const Layout = styled.div`
+  padding: 0 20px;
+`;
+
 const Background = styled.div<LayoutProps>`
   position: absolute;
   background-color: ${(props) => props.theme.color.grey_00};
@@ -53,6 +57,6 @@ const DraggerBar = styled.div`
   );
 `;
 
-const S = { Label, CheckBox, Background, Dragger, DraggerBar };
+const S = { Layout, Label, CheckBox, Background, Dragger, DraggerBar };
 
 export default S;

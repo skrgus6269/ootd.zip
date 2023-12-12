@@ -8,16 +8,20 @@ interface Message {
 }
 
 export const getReactNativeMessage = (
-  setState: Dispatch<SetStateAction<ImageWithTag | undefined>>
+  setState: Dispatch<SetStateAction<ImageWithTag | undefined | string>>
 ) => {
   const listener = (event: WebViewMessageEvent) => {
     const parsedData = JSON.parse(event.data);
-    if (parsedData?.type === 'galleryList') {
+    if (parsedData?.type === 'OOTD') {
       const banana = parsedData?.payload;
       const imageArray = banana.map((item: any) => {
         return { ootdImage: item };
       });
       setState(imageArray);
+    }
+    if (parsedData!.type === 'Cloth') {
+      const banana = parsedData?.payload;
+      setState(banana[0]);
     }
   };
 
