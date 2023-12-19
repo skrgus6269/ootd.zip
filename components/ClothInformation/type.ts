@@ -1,4 +1,5 @@
 export interface ClothInformationProps {
+  clothId: number;
   clothImage: string;
   caption: string;
   size?: 'big' | 'small';

@@ -12,6 +12,7 @@ import { Button1, Headline3 } from '@/components/UI';
 import { useRouter } from 'next/router';
 import { styleList } from '@/constants/business.constants';
 import theme from '@/styles/theme';
+import { useOOTD } from '@/hooks/useOOTD';
 
 export interface Style {
   tag: string;
@@ -19,9 +20,16 @@ export interface Style {
 }
 
 const AddOOTD: ComponentWithLayout = () => {
-  const steps = ['미리보기', '의류태그', '게시하기'];
+  const steps = ['의류태그', '게시하기'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>([]); //이미지 + 태그
+  const [imageAndTag, setImageAndTag] = useState<
+    ImageWithTag | undefined | string
+  >([
+    {
+      ootdImage:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+  ]); //이미지 + 태그
   const [gender, setGender] = useState('남성'); //성별
   const [string, setString] = useState(''); //게시글
   const styleListInitial = styleList.map((item) => {
@@ -67,19 +75,45 @@ const AddOOTD: ComponentWithLayout = () => {
     }
   };
 
+  const [addOOTD] = useOOTD();
+
   //앱바 오른쪽 네비게이션 클릭
-  const onClickAppbarRightButton = () => {
+  const onClickAppbarRightButton = async () => {
     if (currentStep === '의류태그') {
       handleStep('게시하기');
     } else {
       //OOTD 게시
-      console.log({
-        imageAndTag,
-        gender,
-        string,
-        selectedStyle,
-        open,
-      });
+      if (typeof imageAndTag !== 'string') {
+        const payload = {
+          content: string,
+          isPrivate: true as Boolean,
+          styles: [1],
+          ootdImages: imageAndTag!.map((ootd) => {
+            return {
+              ootdImage: ootd.ootdImage,
+              clothesTags: ootd.tag
+                ? ootd.tag?.map((tag) => {
+                    return {
+                      clothesId: tag.clothId,
+                      deviceWidth: tag.deviceWidth,
+                      deviceHeight: tag.deviceHeight,
+                      xrate: tag.xRate,
+                      yrate: tag.yRate,
+                    };
+                  })
+                : [],
+            };
+          }),
+        };
+        const addOOTDSuccess = await addOOTD(payload);
+
+        //ootd 성공 여부에 따른 페이지 이동
+        if (addOOTDSuccess) {
+          alert('등록 성공!');
+        } else {
+          alert('등록 실패');
+        }
+      }
     }
   };
 
@@ -105,6 +139,8 @@ const AddOOTD: ComponentWithLayout = () => {
             setImageAndTag={setImageAndTag}
             imageAndTag={imageAndTag!}
             handleStep={handleStep}
+            nextStep="의류태그"
+            item="OOTD"
           />
         </Funnel.Steps>
         <Funnel.Steps name="의류태그">

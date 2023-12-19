@@ -8,11 +8,12 @@ import TagInformation from '@/components/ClothInformation/TagInformation';
 import AddTag from '@/components/AddItem/TagModal';
 import Carousel from '@/components/Carousel';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
+import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 
 interface ClothTagProps {
-  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;
   handleStep: (next: string) => void;
-  imageAndTag: ImageWithTag;
+  imageAndTag: ImageWithTag | string;
 }
 
 export default function ClothTag({
@@ -43,9 +44,11 @@ export default function ClothTag({
   //이미지, 태그 정보
   //다음 버튼 활성화 함수
   useEffect(() => {
-    const filterdSamplData = imageAndTag.filter((item) => item.tag);
-    if (filterdSamplData.length) setNextButtonState(true);
-    else setNextButtonState(false);
+    if (typeof imageAndTag !== 'string') {
+      const filterdSamplData = imageAndTag.filter((item) => item.tag);
+      if (filterdSamplData.length) setNextButtonState(true);
+      else setNextButtonState(false);
+    }
   }, [imageAndTag]);
 
   //드래그 함수
@@ -55,15 +58,19 @@ export default function ClothTag({
     e: DraggableEvent,
     data: DraggableData
   ) => {
-    const updatedElements = [...imageAndTag!];
-    updatedElements[ootdIndex].tag![index] = {
-      ...updatedElements[ootdIndex].tag![index],
-      xRate: String(data.lastX),
-      yRate: String(data.lastY),
-    };
-    console.log(updatedElements[ootdIndex].tag![index]);
-    setImageAndTag(updatedElements);
-    e.stopPropagation();
+    if (typeof imageAndTag !== 'string') {
+      const updatedElements = [...imageAndTag!];
+      updatedElements[ootdIndex].tag![index] = {
+        ...updatedElements[ootdIndex].tag![index],
+        xRate: String(data.lastX),
+        yRate: String(data.lastY),
+        deviceHeight: componentHeight,
+        deviceWidth: componentWidth,
+      };
+      console.log(updatedElements[ootdIndex].tag![index]);
+      setImageAndTag(updatedElements);
+      e.stopPropagation();
+    }
   };
 
   //옷추가 모달창 열기
@@ -88,50 +95,52 @@ export default function ClothTag({
         infinite={false}
         beforeChange={(_current: number, next: number) => setSlideIndex(next)}
       >
-        {imageAndTag.map((item, ootdIndex) => {
-          return (
-            <>
-              <S.Image ref={dragRef}>
-                {item.tag &&
-                  item.tag.map((element, index) => {
-                    if (componentWidth !== 0 && componentHeight !== 0) {
-                      return (
-                        <Draggable
-                          key={index}
-                          bounds=".image"
-                          onDrag={(e, data) =>
-                            onDrag(index, ootdIndex, e, data)
-                          }
-                          defaultPosition={{
-                            x: Number(element.xRate),
-                            y: Number(element.yRate),
-                          }}
-                        >
-                          <div className="sample">
-                            <TagInformation
-                              clothImage={element.clothImage}
-                              caption={element.caption}
-                              headline={element.headline}
-                              bodyFirst={element.bodyFirst}
-                              state={element.state as 'dark' | 'light'}
-                            />
-                          </div>
-                        </Draggable>
-                      );
-                    }
-                  })}
-                {/* 이미지 */}
-                <img
-                  onClick={onClickImage}
-                  className="image"
-                  ref={imageRef}
-                  src={item.ootdImage}
-                  alt=""
-                />
-              </S.Image>
-            </>
-          );
-        })}
+        {typeof imageAndTag !== 'string' &&
+          imageAndTag.map((item, ootdIndex) => {
+            return (
+              <>
+                <S.Image ref={dragRef}>
+                  {item.tag &&
+                    item.tag.map((element, index) => {
+                      if (componentWidth !== 0 && componentHeight !== 0) {
+                        return (
+                          <Draggable
+                            key={index}
+                            bounds=".image"
+                            onDrag={(e, data) =>
+                              onDrag(index, ootdIndex, e, data)
+                            }
+                            defaultPosition={{
+                              x: Number(element.xRate),
+                              y: Number(element.yRate),
+                            }}
+                          >
+                            <div className="sample">
+                              <TagInformation
+                                clothId={element.clothId}
+                                clothImage={element.clothImage}
+                                caption={element.caption}
+                                headline={element.headline}
+                                bodyFirst={element.bodyFirst}
+                                state={element.state as 'dark' | 'light'}
+                              />
+                            </div>
+                          </Draggable>
+                        );
+                      }
+                    })}
+                  {/* 이미지 */}
+                  <img
+                    onClick={onClickImage}
+                    className="image"
+                    ref={imageRef}
+                    src={item.ootdImage}
+                    alt=""
+                  />
+                </S.Image>
+              </>
+            );
+          })}
       </Carousel>
     );
   };
@@ -149,15 +158,13 @@ export default function ClothTag({
         다음단계
       </NextButton>
       {/* 태그 모달창 */}
-      {init && (
-        <AddTag
-          setAddTag={setAddTag}
-          addTag={addTag}
-          setImageAndTag={setImageAndTag}
-          imageAndTag={imageAndTag}
-          slideIndex={slideIndex}
-        />
-      )}
+      <AddTag
+        setAddTag={setAddTag}
+        addTag={addTag}
+        setImageAndTag={setImageAndTag}
+        imageAndTag={imageAndTag}
+        slideIndex={slideIndex}
+      />
     </S.Layout>
   );
 }

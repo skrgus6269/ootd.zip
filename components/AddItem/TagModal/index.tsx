@@ -9,6 +9,7 @@ import Modal from '@/components/Modal';
 
 const ClothInformationSampleData = [
   {
+    clothId: 1,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -18,6 +19,7 @@ const ClothInformationSampleData = [
     icon: 'like',
   },
   {
+    clothId: 2,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -27,6 +29,7 @@ const ClothInformationSampleData = [
     icon: 'like',
   },
   {
+    clothId: 3,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -36,6 +39,7 @@ const ClothInformationSampleData = [
     icon: 'like',
   },
   {
+    clothId: 4,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -45,6 +49,7 @@ const ClothInformationSampleData = [
     icon: 'like',
   },
   {
+    clothId: 5,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -54,6 +59,7 @@ const ClothInformationSampleData = [
     icon: 'like',
   },
   {
+    clothId: 6,
     size: 'big',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
@@ -67,6 +73,7 @@ const ClothInformationSampleData = [
 export type ImageWithTag = {
   ootdImage: string;
   tag?: {
+    clothId: number;
     clothImage: string;
     xRate: string;
     yRate: string;
@@ -74,6 +81,8 @@ export type ImageWithTag = {
     headline: string;
     bodyFirst: string;
     state: string;
+    deviceWidth?: number;
+    deviceHeight?: number;
   }[];
 }[];
 
@@ -106,6 +115,7 @@ export default function AddTag({
       const newTag = [...imageAndTag];
       if (newTag[slideIndex].tag) {
         newTag[slideIndex].tag?.push({
+          clothId: ClothInformationSampleData[index].clothId,
           clothImage: ClothInformationSampleData[index].clothImage,
           headline: ClothInformationSampleData[index].headline,
           bodyFirst: ClothInformationSampleData[index].bodyFirst,
@@ -117,6 +127,7 @@ export default function AddTag({
       } else {
         newTag[slideIndex].tag = [
           {
+            clothId: ClothInformationSampleData[index].clothId,
             clothImage: ClothInformationSampleData[index].clothImage,
             headline: ClothInformationSampleData[index].headline,
             bodyFirst: ClothInformationSampleData[index].bodyFirst,
@@ -156,6 +167,7 @@ export default function AddTag({
               <>
                 <div onClick={() => onClickClothInformation(index)} key={index}>
                   <ClothInformation
+                    clothId={item.clothId}
                     size={item.size}
                     clothImage={item.clothImage}
                     caption=""
