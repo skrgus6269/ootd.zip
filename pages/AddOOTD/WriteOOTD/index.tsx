@@ -10,7 +10,7 @@ import { Style } from '..';
 import { AiOutlineClose } from 'react-icons/ai';
 
 interface WriteOOTDProps {
-  imageAndTag: ImageWithTag;
+  imageAndTag: ImageWithTag | string;
   gender: string;
   setGender: Dispatch<SetStateAction<string>>;
   string: string;
@@ -56,9 +56,10 @@ export default function WriteOOTD({
       <S.Layout>
         <Subtitle3>{imageAndTag.length}장의 사진이 선택됨</Subtitle3>
         <S.OOTDImage>
-          {imageAndTag.map((item, index) => {
-            return <img src={item.ootdImage} key={index} alt="" />;
-          })}
+          {typeof imageAndTag !== 'string' &&
+            imageAndTag.map((item, index) => {
+              return <img src={item.ootdImage} key={index} alt="" />;
+            })}
         </S.OOTDImage>
         <S.ImageDivider />
         <S.Text>

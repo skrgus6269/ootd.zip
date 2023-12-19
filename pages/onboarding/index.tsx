@@ -24,7 +24,7 @@ const Onboarding: ComponentWithLayout = () => {
       </S.TypoGraphy>
       <S.ButtonGroup>
         <Button
-          onClick={() => router.push('/AddCloth')}
+          onClick={() => router.push('/AddOOTD')}
           size="big"
           backgroundColor="grey_00"
           color="grey_100"
