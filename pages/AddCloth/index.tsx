@@ -1,6 +1,6 @@
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
-import Gallery from '@/components/Gallery';
+import Gallery from '@/components/Gallery/';
 import { Headline3 } from '@/components/UI';
 import { useFunnel } from '@/hooks/use-funnel';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import BasicInfoFirst from './BasicInfoFirst';
 import { ComponentWithLayout } from '../sign-up';
 import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
+import AdditionalInfo from './AdditionalInfo';
 
 export type ClothColor = {
   name: string;
@@ -25,9 +26,7 @@ const AddCloth: ComponentWithLayout = () => {
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
   const [clothImage, setClothImage] = useState<
     string | ImageWithTag | undefined
-  >(
-    'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg'
-  );
+  >();
 
   const [clothCategory, setClothCategory] = useState<string>('');
   const [clothBrand, setClothBrand] = useState<string>('');
@@ -38,6 +37,27 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothColor, setClothColor] = useState<ClothColor>([]);
   const [clothSize, setClothSize] = useState<string>('');
   const [open, setOpen] = useState('공개');
+  const [clothByName, setClothByName] = useState('');
+  const [clothBuyDate, setClothBuyDate] = useState('');
+  const [clothMemo, setClothMemo] = useState('');
+  const [bigCategory, smallCategory] = clothCategory.split(',');
+
+  const onClickSubmitButton = () => {
+    //옷 등록 api
+    alert(
+      `${bigCategory}, 
+      ${smallCategory}, 
+      ${clothBrand}, 
+      ${clothColor}, 
+      ${clothImage}, 
+      ${clothWhereBuy}, 
+      ${open}
+      ${clothByName}
+      ${clothMemo}
+      ${clothBuyDate}
+      `
+    );
+  };
 
   return (
     <Funnel>
@@ -82,7 +102,18 @@ const AddCloth: ComponentWithLayout = () => {
           setOpen={setOpen}
         />
       </Funnel.Steps>
-      <Funnel.Steps name="추가정보"></Funnel.Steps>
+      <Funnel.Steps name="추가정보">
+        <AdditionalInfo
+          clothBrand={clothBrand}
+          clothCategory={clothCategory}
+          clothImage={clothImage}
+          clothByName={clothByName}
+          setClothByName={setClothByName}
+          setClothBuyDate={setClothBuyDate}
+          setClothMemo={setClothMemo}
+          onClickSubmitButton={onClickSubmitButton}
+        />
+      </Funnel.Steps>
     </Funnel>
   );
 };

@@ -10,7 +10,6 @@ import PlusButton from '@/components/PlusButton';
 import ColorModal from '@/components/AddCloth/ColorModal';
 import ColorSpan from '@/components/ColorSpan';
 import ClothSizeModal from '@/components/AddCloth/ClothSizeModal';
-import Alert from '@/components/Alert';
 import AddClothAlert from '@/components/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
@@ -99,7 +98,6 @@ export default function BasicInfoSecond({
         <S.BasicInfoFirst>
           <Category />
           <Headline1>{clothBrand}</Headline1>
-          <Body2 className="name">{clothWhereBuy.letter}</Body2>
           {typeof clothImage === 'string' && <img src={clothImage} alt="" />}
           <hr />
         </S.BasicInfoFirst>
@@ -164,14 +162,14 @@ export default function BasicInfoSecond({
           등록하기
         </NextButton>
       </S.Layout>
-      {init && (
+      {init > 0 && (
         <ColorModal
           setIsOpen={setColorModalOpen}
           setClothColor={setClothColor}
           isOpen={colorModalOpen}
         />
       )}
-      {inits && (
+      {inits > 0 && (
         <ClothSizeModal
           setIsOpen={setSizeModalOpen}
           setClothSize={setClothSize}

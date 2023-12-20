@@ -23,6 +23,9 @@ export const getReactNativeMessage = (
       const banana = parsedData?.payload;
       setState(banana[0]);
     }
+    if (parsedData!.type === 'cancel') {
+      setState('');
+    }
   };
 
   if (window.ReactNativeWebView) {

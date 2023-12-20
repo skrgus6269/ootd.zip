@@ -11,12 +11,14 @@ import {
   GetOOTDParams,
 } from '@/apis/type';
 
+//ootd 신규 등록
 export const addOOTD = async (payload: AddOOTDPayload) => {
   const data = await userApi.addOOTD(payload);
 
   return data;
 };
 
+//ootd 조회
 export const getOOTD = async (params: GetOOTDParams) => {
   const data = await userApi.getOOTD(params);
 

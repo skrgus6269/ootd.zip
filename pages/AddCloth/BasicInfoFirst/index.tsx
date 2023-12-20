@@ -31,11 +31,8 @@ export default function BasicInfoFirst({
   handleStep,
 }: BaiscInfoFirst) {
   const [categoryModalOpen, setCategoryModalOpen] = useState<Boolean>(false);
-
   const [bigCategory, smallCategory] = clothCategory.split(',');
-
   const [nextButtonState, setNextButtonState] = useState<Boolean>(false);
-
   const [init, setInit] = useState<number>(0);
   const [inits, setInits] = useState<number>(0);
 

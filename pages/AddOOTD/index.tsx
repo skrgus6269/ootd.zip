@@ -1,4 +1,4 @@
-import Gallery from '@/components/Gallery';
+import Gallery from '@/components/Gallery/Gallery';
 import { useFunnel } from '@/hooks/use-funnel';
 import ClothTag from './ClothTag';
 import WriteOOTD from './WriteOOTD';
@@ -20,16 +20,11 @@ export interface Style {
 }
 
 const AddOOTD: ComponentWithLayout = () => {
-  const steps = ['의류태그', '게시하기'];
+  const steps = ['미리보기', '의류태그', '게시하기'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
   const [imageAndTag, setImageAndTag] = useState<
     ImageWithTag | undefined | string
-  >([
-    {
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-  ]); //이미지 + 태그
+  >([]); //이미지 + 태그
   const [gender, setGender] = useState('남성'); //성별
   const [string, setString] = useState(''); //게시글
   const styleListInitial = styleList.map((item) => {

@@ -90,9 +90,7 @@ const ClothColorSpanList = styled.div`
   align-items: center;
 `;
 
-const Size = styled.div`
-  padding: 0 16px;
-`;
+const Size = styled.div``;
 
 const S = {
   Layout,
