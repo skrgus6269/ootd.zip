@@ -24,7 +24,7 @@ const Onboarding: ComponentWithLayout = () => {
       </S.TypoGraphy>
       <S.ButtonGroup>
         <Button
-          onClick={() => router.push('/AddOOTD')}
+          onClick={() => router.push('/AddCloth')}
           size="big"
           backgroundColor="grey_00"
           color="grey_100"
@@ -33,7 +33,7 @@ const Onboarding: ComponentWithLayout = () => {
           가입하기
         </Button>
         <Button
-          onClick={() => router.push('/main')}
+          onClick={() => router.push('/AddOOTD')}
           size="big"
           backgroundColor="grey_100"
           color="grey_00"

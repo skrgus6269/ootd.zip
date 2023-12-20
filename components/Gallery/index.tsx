@@ -6,6 +6,7 @@ import {
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { ImageWithTag } from '../AddItem/TagModal';
 import Carousel from '../Carousel';
+import { useRouter } from 'next/router';
 
 interface GalleryProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;
@@ -22,6 +23,8 @@ const Gallery = ({
   nextStep,
   item,
 }: GalleryProps) => {
+  const router = useRouter();
+
   useEffect(() => {
     if (!window.ReactNativeWebView) {
       return;
@@ -36,7 +39,11 @@ const Gallery = ({
   }, []);
 
   useEffect(() => {
-    if (item === 'Cloth') {
+    if (imageAndTag === '') {
+      router.push('main');
+      return;
+    }
+    if (item == 'Cloth') {
       handleStep(nextStep);
     }
   }, [imageAndTag]);

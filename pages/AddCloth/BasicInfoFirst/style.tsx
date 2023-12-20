@@ -18,7 +18,6 @@ const Category = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 16px;
   p {
     margin-bottom: 0 !important;
   }
