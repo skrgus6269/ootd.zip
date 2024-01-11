@@ -22,9 +22,9 @@ export default function DetailClothDiscription({
       <S.Container>
         <S.Category>
           <Body2>{bigCategory}</Body2>
-          {/* <S.StyleListSpan> */}
-          {/* <svg><AiOutlineRight /></svg> */}
-          {/* </S.StyleListSpan> */}
+          <S.IconSpan>
+            <AiOutlineRight />
+          </S.IconSpan>
           <Body2 style={{ fontWeight: '600' }}>{smallCategory}</Body2>
         </S.Category>
         <S.OpenTag state={isPublic}>
