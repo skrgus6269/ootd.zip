@@ -5,8 +5,15 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import DetailClothHeader from '@/components/DetailCloth/DetailClothHeader';
 import DetailClothDiscription from '@/components/DetailCloth/DetailClothDiscription';
 import DetailClothDetailInfo from '@/components/DetailCloth/DetailClothDetailInfo';
+import ClothOOTD from '@/components/DetailCloth/ClothOOTD';
 
 const DetailCloth = () => {
+  const colorSampleData = [
+    { color: '#BB193E', name: '버건디' },
+    { color: '#D50C0C', name: '레드' },
+    { color: '#F66800', name: '오렌지' },
+  ];
+
   return (
     <>
       <AppBar
@@ -36,10 +43,11 @@ const DetailCloth = () => {
         memo="안감 없고 얇아서 늦여름~초가을까지는 무난 낙엽 떨어지면 단독으로 입기 어려움"
       />
       <DetailClothDetailInfo
-        color={['레드', '베이지', '민트']}
+        color={colorSampleData}
         size="FREE"
         buyDate="22 F/W"
       />
+      <ClothOOTD count={5} />
     </>
   );
 };
