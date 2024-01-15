@@ -34,14 +34,18 @@ export default function DetailClothDetailInfo({
             color.map((item, index) => {
               return (
                 <>
-                  <ColorSpan
+                  {/* <ColorSpan
                     key={index}
                     path="detailCloth"
                     name={item.name}
                     index={index}
                     color={item.color}
                     state={false}
-                  />
+                  /> */}
+                  <S.ColorSpanLayout key={index}>
+                    <S.ColorSpan bgColor={item.color} />
+                    <Body3>{item.name}</Body3>
+                  </S.ColorSpanLayout>
                 </>
               );
             })}
