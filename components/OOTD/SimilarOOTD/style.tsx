@@ -6,19 +6,7 @@ const Layout = styled.div`
 const Title = styled.div`
   padding: 21px 0;
 `;
-const OOTD = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 4px;
-  flex-wrap: wrap;
-
-  img {
-    width: calc(50% - 2px);
-    height: 173px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-`;
+const OOTD = styled.div``;
 
 const S = { Layout, Title, OOTD };
 

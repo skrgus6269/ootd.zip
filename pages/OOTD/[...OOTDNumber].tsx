@@ -239,59 +239,56 @@ const OOTD: ComponentWithLayout = () => {
     ],
   };
 
-  const userOOTDSampleData = {
-    userName: '낙낙',
-    ootd: [
-      {
-        ootdId: 1,
-        image:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        ootdId: 1,
-        image:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        ootdId: 1,
-        image:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        ootdId: 1,
-        image:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-    ],
-  };
+  const userOOTDSampleData = [
+    {
+      imageId: 1,
+      image:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+    {
+      imageId: 1,
+      image:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+    {
+      imageId: 1,
+      image:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+    {
+      imageId: 1,
+      image:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+  ];
 
   const similarOOTDSampleData = [
     {
-      ootdId: 1,
+      imageId: 1,
       image:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      ootdId: 1,
+      imageId: 1,
       image:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      ootdId: 1,
+      imageId: 1,
       image:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      ootdId: 1,
+      imageId: 1,
       image:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      ootdId: 1,
+      imageId: 1,
       image:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',

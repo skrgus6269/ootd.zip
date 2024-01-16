@@ -2,36 +2,32 @@
 import { Headline3 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
+import ImageList from '@/components/ImageList';
 
 interface SimilarOOTDProps {
   data: {
-    ootdId: number;
+    imageId: number;
     image: string;
-    userName: string;
   }[];
 }
 
 export default function SimilarOOTD({ data }: SimilarOOTDProps) {
   const router = useRouter();
 
+  const onClickSimilarOOTDImage = (index: number) => {
+    router.push(`/OOTD/${index}`);
+  };
   return (
     <S.Layout>
       <S.Title>
         <Headline3>비슷한 OOTD</Headline3>
       </S.Title>
       <S.OOTD>
-        {data.map((item) => {
-          return (
-            <img
-              onClick={() =>
-                router.push(`/${item.userName}/OOTD/${item.ootdId}`)
-              }
-              key={item.ootdId}
-              src={item.image}
-              alt="비슷한 ootd"
-            />
-          );
-        })}
+        <ImageList
+          data={data}
+          onClick={onClickSimilarOOTDImage}
+          type="column"
+        />
       </S.OOTD>
     </S.Layout>
   );
