@@ -26,10 +26,10 @@ export default function Alert({
         {yes && no && (
           <S.AlertButton>
             <button onClick={onClickNoButton} className="no">
-              <Button1>안할래</Button1>
+              <Button1>{yes ? yes : '안할래'}</Button1>
             </button>
             <button onClick={onClickYesButton} className="yes">
-              <Button1>할래</Button1>
+              <Button1>{no ? no : '할래'}</Button1>
             </button>
           </S.AlertButton>
         )}
