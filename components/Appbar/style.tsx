@@ -56,6 +56,12 @@ const AppBarRight = styled(AppBarLeft)`
   height: 100%;
   display: flex;
   justify-content: right;
+
+  //아이콘 크기
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 const RightTouch = styled.div`
   display: flex;
