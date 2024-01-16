@@ -26,7 +26,13 @@ export default function DetailClothDiscription({
         <S.IconSpan>
           {isLink ? <AiOutlineLink /> : <AiOutlineShopping />}
         </S.IconSpan>
-        <Body3>{purchasing}</Body3>
+        {isLink ? (
+          <Body3 style={{ textDecorationLine: 'underline' }}>
+            {purchasing}
+          </Body3>
+        ) : (
+          <Body3>{purchasing}</Body3>
+        )}
       </S.Category>
 
       <S.Category>
