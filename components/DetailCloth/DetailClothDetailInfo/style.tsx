@@ -24,19 +24,18 @@ const InfoTitle = styled.div`
 `;
 
 const ColorList = styled.div`
-  display: flex;
+  overflow-x: scroll;
+  width: 375px;
   padding: 8px 8px 8px 4px;
-  align-items: center;
-  gap: 8px;
-  flex: 1 0 0;
 `;
 
 const ColorSpanLayout = styled.div`
-  display: flex;
-  gap: 8px;
-  flex-direction: 'row';
+  display: inline-flex;
+  gap: 4px;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  padding-left: 4px;
 `;
 
 interface ColorSpanProps {
