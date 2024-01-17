@@ -1,4 +1,4 @@
-import { Body3, Headline3, Subtitle2 } from '@/components/UI';
+import { Body3, Title1, Button3 } from '@/components/UI';
 import S from './style';
 import Modal from '@/components/Modal';
 import NextButton from '@/components/NextButton';
@@ -71,7 +71,7 @@ const ColorModal = ({ isOpen, setClothColor, setIsOpen }: ColorModalProps) => {
     <Modal isOpen={isOpen} height="65%">
       <S.Layout>
         <S.Title>
-          <Headline3>색상</Headline3>
+          <Title1>색상</Title1>
         </S.Title>
         <S.ColorList>
           {colorSampleData.map((item, index) => {
@@ -91,7 +91,7 @@ const ColorModal = ({ isOpen, setClothColor, setIsOpen }: ColorModalProps) => {
           {selectedColorList.map((item, index) => {
             return (
               <S.SelectedColor key={index}>
-                <Subtitle2>{item.name}</Subtitle2>
+                <Button3>{item.name}</Button3>
                 <AiOutlineClose onClick={() => onClickCloseButton(item.name)} />
               </S.SelectedColor>
             );

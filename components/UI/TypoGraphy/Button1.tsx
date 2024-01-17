@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const Button = styled.p`
-  font-weight: ${({ theme }) => theme.weight.medium}; //500
-  font-size: ${({ theme }) => theme.fontSize.base}; //14px
-  line-height: ${({ theme }) => theme.lineHeight.md}; //18px
+  font-weight: ${({ theme }) => theme.weight.semibold}; //600
+  font-size: ${({ theme }) => theme.fontSize.lg}; //18px
+  line-height: ${({ theme }) => theme.lineHeight.lg}; //24px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
 `;
 

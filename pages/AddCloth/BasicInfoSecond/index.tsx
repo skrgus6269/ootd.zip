@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Body2, Body3, Headline1, Headline3 } from '@/components/UI';
+import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import S from './style';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -103,7 +103,7 @@ export default function BasicInfoSecond({
         </S.BasicInfoFirst>
         <S.BasicInfoSecond>
           <S.Title>
-            <Headline3>기본 정보</Headline3>
+            <Title1>기본 정보</Title1>
           </S.Title>
           <S.Information>
             <Input>

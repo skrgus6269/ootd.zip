@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import Headline from '@/components/UI/TypoGraphy/Headline3';
+import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineClose } from 'react-icons/ai';
 import S from './style';
 import Body from '@/components/UI/TypoGraphy/Body2';

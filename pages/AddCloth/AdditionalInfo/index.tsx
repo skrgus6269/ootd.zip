@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import S from './style';
-import { Body3, Headline1, Headline3 } from '@/components/UI';
+import { Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import NextButton from '@/components/NextButton';
@@ -49,7 +49,7 @@ export default function AdditionalInfo({
       </S.BasicInfoFirst>
       <S.AdditionalInfo>
         <S.Title>
-          <Headline3>추가 정보</Headline3>
+          <Title1>추가 정보</Title1>
         </S.Title>
         <S.Information>
           <Input>

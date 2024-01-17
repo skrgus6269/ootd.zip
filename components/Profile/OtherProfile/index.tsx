@@ -1,6 +1,6 @@
 import ProfileLayout from '../ProfileLayout';
 import S from './style';
-import Headline from '@/components/UI/TypoGraphy/Headline3';
+import Title1 from '@/components/UI/TypoGraphy/Title1';
 import Body from '@/components/UI/TypoGraphy/Body4';
 import { ProfileType } from '../type';
 
@@ -15,7 +15,7 @@ export default function OtherProfile({
     <ProfileLayout isUser={isUser} imgSrc={userImage!} isMine={false}>
       <S.Layout>
         <S.Name>
-          <Headline>{userName}</Headline>
+          <Title1>{userName}</Title1>
         </S.Name>
         <S.Info>
           <Body>

@@ -1,8 +1,7 @@
 import ProfileLayout from '../ProfileLayout';
 import S from './style';
-import Headline from '@/components/UI/TypoGraphy/Headline3';
+import Title1 from '@/components/UI/TypoGraphy/Title1';
 import Body from '@/components/UI/TypoGraphy/Body4';
-import Subtitle from '@/components/UI/TypoGraphy/Subtitle1';
 import { ProfileType } from '../type';
 
 export default function MyProfile({
@@ -17,7 +16,7 @@ export default function MyProfile({
     return (
       <S.Layout>
         <S.Name>
-          <Headline>{userName}</Headline>
+          <Title1>{userName}</Title1>
         </S.Name>
         <S.Info>
           <Body>
@@ -28,19 +27,9 @@ export default function MyProfile({
     );
   };
 
-  //유저가 아닌경우
-  const Guest = () => {
-    return (
-      <S.NeedLogin>
-        <Subtitle>로그인이 필요한 서비스입니다.</Subtitle>
-      </S.NeedLogin>
-    );
-  };
-
   return (
     <ProfileLayout isUser={isUser} imgSrc={userImage!} isMine={true}>
       {isUser && <User />}
-      {!isUser && <Guest />}
     </ProfileLayout>
   );
 }
