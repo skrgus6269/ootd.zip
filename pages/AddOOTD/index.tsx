@@ -1,4 +1,4 @@
-import Gallery from '@/components/Gallery/Gallery';
+import Gallery from '@/components/Gallery';
 import { useFunnel } from '@/hooks/use-funnel';
 import ClothTag from './ClothTag';
 import WriteOOTD from './WriteOOTD';

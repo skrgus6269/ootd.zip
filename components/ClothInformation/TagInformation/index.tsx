@@ -11,6 +11,7 @@ export default function TagInformation({
   bodySecond,
   state,
   className,
+  type,
 }: ClothInformationProps) {
   return (
     <S.Layout className={className} state={state!}>
@@ -23,9 +24,11 @@ export default function TagInformation({
         {bodySecond && <Body4>{bodySecond}</Body4>}
       </S.Information>
       <S.Close state={state!}>
-        <div>
-          <AiFillCloseCircle />
-        </div>
+        {type !== 'view' && (
+          <div>
+            <AiFillCloseCircle />
+          </div>
+        )}
       </S.Close>
     </S.Layout>
   );
