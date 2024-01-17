@@ -1,6 +1,7 @@
 import S from './style';
 import { Body4, Caption1 } from '@/components/UI';
-import Header from '@/components/Header';
+import Image from 'next/image';
+import Rectangle from 'public/images/rectangle.png';
 
 interface SubHeadProps {
   count: number;
@@ -18,6 +19,7 @@ export default function SubHead({ count, clicked }: SubHeadProps) {
         <Caption1 style={{ color: clicked === 'old' ? '#030303' : '#8B8B8B' }}>
           오래된 순
         </Caption1>
+        <Image src={Rectangle} alt="Rectangle" />
         <Caption1 style={{ color: clicked === 'new' ? '#030303' : '#8B8B8B' }}>
           최신 순
         </Caption1>
