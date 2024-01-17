@@ -1,5 +1,5 @@
 import Alert from '@/components/Alert';
-import { Body3, Headline3 } from '@/components/UI';
+import { Body3, Title1 } from '@/components/UI';
 
 interface AddClothAlertProps {
   onClickYesButton: () => void;
@@ -14,7 +14,7 @@ export default function AddClothAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Headline3>추가정보...입력하지 않을래?</Headline3>}
+      headline={<Title1>추가정보...입력하지 않을래?</Title1>}
       body={
         <>
           <Body3>추가정보...입력하면 좋을텐데...</Body3>
