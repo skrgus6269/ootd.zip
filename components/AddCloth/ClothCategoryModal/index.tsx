@@ -2,7 +2,7 @@ import Modal from '@/components/Modal';
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useGetClothCategory from '@/hooks/useGetClothCategory';
-import { Body3, Headline3 } from '@/components/UI';
+import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 
 interface ClothCategoryModalProps {
@@ -108,7 +108,7 @@ export default function ClothCategoryModal({
   return (
     <Modal height="60%" isOpen={isOpen}>
       <S.Layout>
-        <Headline3>카테고리</Headline3>
+        <Title1>카테고리</Title1>
         <S.Category>
           <S.BigCategory>
             {clothCategories &&

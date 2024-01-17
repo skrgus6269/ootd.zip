@@ -1,4 +1,4 @@
-import Gallery from '@/components/Gallery/Gallery';
+import Gallery from '@/components/Gallery';
 import { useFunnel } from '@/hooks/use-funnel';
 import ClothTag from './ClothTag';
 import WriteOOTD from './WriteOOTD';
@@ -8,7 +8,7 @@ import { ComponentWithLayout } from '../sign-up';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
-import { Button1, Headline3 } from '@/components/UI';
+import { Button1, Title1 } from '@/components/UI';
 import { useRouter } from 'next/router';
 import { styleList } from '@/constants/business.constants';
 import theme from '@/styles/theme';
@@ -125,7 +125,7 @@ const AddOOTD: ComponentWithLayout = () => {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <AppBar
         leftProps={<LeftPropsContent />}
-        middleProps={<Headline3>{currentStep}</Headline3>}
+        middleProps={<Title1>{currentStep}</Title1>}
         rightProps={<RightPropsContent />}
       />
       <Funnel>

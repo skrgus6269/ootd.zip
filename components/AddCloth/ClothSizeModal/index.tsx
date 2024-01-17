@@ -1,7 +1,7 @@
 import Modal from '@/components/Modal';
 import S from './style';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Body2, Headline3 } from '@/components/UI';
+import { Body2, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 
 interface ClothSizeProps {
@@ -66,7 +66,7 @@ export default function ClothSizeModal({
     <Modal isOpen={isOpen} height="75%">
       <S.Layout>
         <S.Title>
-          <Headline3>사이즈</Headline3>
+          <Title1>사이즈</Title1>
         </S.Title>
         <S.SizeLayout>
           {ShoeSize.map((item, index) => {

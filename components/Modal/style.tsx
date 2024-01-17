@@ -44,29 +44,6 @@ const Layout = styled.div<ModalProps>`
     props.isOpen ? 'fadeIn 0.5s ease-in-out' : 'fadeOut 0.5s ease-in-out'};
 `;
 
-const DragBar = styled.div`
-  width: 100%;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    width: 36px;
-    height: 5.333px;
-    border-radius: 2.5px;
-    background: var(
-      --labels-vibrant-tertiary,
-      linear-gradient(
-        0deg,
-        rgba(61, 61, 61, 0.5) 0%,
-        rgba(61, 61, 61, 0.5) 100%
-      ),
-      rgba(127, 127, 127, 0.4)
-    );
-  }
-`;
-
-const S = { Layout, DragBar };
+const S = { Layout };
 
 export default S;

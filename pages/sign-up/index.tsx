@@ -5,7 +5,7 @@ import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
 import NextButton from '@/components/NextButton';
 import S from './style';
-import Headline from '@/components/UI/TypoGraphy/Headline3';
+import Title1 from '@/components/UI/TypoGraphy/Title1';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
@@ -92,7 +92,7 @@ const SignUp: ComponentWithLayout = () => {
             <AiOutlineArrowLeft onClick={onClickAppbarButton} />
           )
         }
-        middleProps={<Headline>회원가입</Headline>}
+        middleProps={<Title1>회원가입</Title1>}
         rightProps={<></>}
       />
       <S.Layout>
@@ -105,18 +105,18 @@ const SignUp: ComponentWithLayout = () => {
                   {' '}
                   <S.Progress>
                     <div className="number">
-                      <Headline>0{index + 1}.</Headline>
+                      <Title1>0{index + 1}.</Title1>
                     </div>
-                    <Headline>{stepName}</Headline>
+                    <Title1>{stepName}</Title1>
                   </S.Progress>
                 </S.ActiveStep>
               ) : (
                 <S.Step key={stepName}>
                   <S.Progress>
                     <div className="number">
-                      <Headline>0{index + 1}.</Headline>
+                      <Title1>0{index + 1}.</Title1>
                     </div>
-                    <Headline>{stepName}</Headline>
+                    <Title1>{stepName}</Title1>
                   </S.Progress>
                 </S.Step>
               )

@@ -14,9 +14,10 @@ export default function ClothInformation({
   bodySecond,
   size,
   icon,
+  onClick,
 }: ClothInformationProps) {
   return (
-    <S.Layout size={size!}>
+    <S.Layout size={size!} onClick={onClick}>
       <S.ListImage>
         <ImageWithCaption
           caption={caption}

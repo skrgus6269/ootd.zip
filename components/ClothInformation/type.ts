@@ -7,7 +7,9 @@ export interface ClothInformationProps {
   subHeadline?: string;
   bodyFirst: string;
   bodySecond?: string;
-  icon?: React.ReactNode;
+  icon?: string;
   state?: 'dark' | 'light';
+  type?: 'view';
   className?: string;
+  onClick?: () => void;
 }

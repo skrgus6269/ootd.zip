@@ -1,4 +1,4 @@
-import { Body3, Headline3 } from '@/components/UI';
+import { Body3, Title1 } from '@/components/UI';
 import S from './style';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
@@ -53,7 +53,7 @@ export default function WhereToBuyModal({
     <Modal height="80%" isOpen={isOpen}>
       <S.Layout>
         <S.Title>
-          <Headline3>구매처</Headline3>
+          <Title1>구매처</Title1>
         </S.Title>
         <S.Link>
           <Body3>링크로 입력하기</Body3>

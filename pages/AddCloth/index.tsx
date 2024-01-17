@@ -1,7 +1,7 @@
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import Gallery from '@/components/Gallery/';
-import { Headline3 } from '@/components/UI';
+import { Title1 } from '@/components/UI';
 import { useFunnel } from '@/hooks/use-funnel';
 import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -63,7 +63,7 @@ const AddCloth: ComponentWithLayout = () => {
     <Funnel>
       <AppBar
         leftProps={<AiOutlineArrowLeft />}
-        middleProps={<Headline3>의류등록</Headline3>}
+        middleProps={<Title1>의류등록</Title1>}
         rightProps={<></>}
       />
       <Funnel.Steps name="사진선택">

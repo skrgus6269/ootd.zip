@@ -3,7 +3,7 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
 import ClothCategoryModal from '@/components/AddCloth/ClothCategoryModal';
-import { Body3, Headline3 } from '@/components/UI';
+import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import WhereToBuyModal from '@/components/AddCloth/WhereToBuyModal';
@@ -93,7 +93,7 @@ export default function BasicInfoFirst({
         </S.ClothImage>
         <S.BasicInfo>
           <S.Title>
-            <Headline3>기본 정보</Headline3>
+            <Title1>기본 정보</Title1>
           </S.Title>
           <S.Information>
             <Input>

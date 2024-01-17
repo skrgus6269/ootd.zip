@@ -3,7 +3,7 @@ import Input from '@/components/Input';
 import S from './style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
-import { Button1, Headline3, Subtitle2, Subtitle3 } from '@/components/UI';
+import { Body4, Button1, Button3, Title1 } from '@/components/UI';
 import { AiOutlinePlus } from 'react-icons/ai';
 import StyleModal from '@/components/AddItem/StyleModal';
 import { Style } from '..';
@@ -54,7 +54,7 @@ export default function WriteOOTD({
   return (
     <>
       <S.Layout>
-        <Subtitle3>{imageAndTag.length}장의 사진이 선택됨</Subtitle3>
+        <Body4 state="emphasis">{imageAndTag.length}장의 사진이 선택됨</Body4>
         <S.OOTDImage>
           {typeof imageAndTag !== 'string' &&
             imageAndTag.map((item, index) => {
@@ -72,7 +72,7 @@ export default function WriteOOTD({
           </Input>
         </S.Text>
         <S.Gender>
-          <Headline3>성별</Headline3>
+          <Title1>성별</Title1>
           <S.GenderList>
             {genderArray.map((item, index) => {
               return (
@@ -88,7 +88,7 @@ export default function WriteOOTD({
           </S.GenderList>
         </S.Gender>
         <S.Style>
-          <Headline3>스타일태그</Headline3>
+          <Title1>스타일태그</Title1>
           <AiOutlinePlus onClick={onClickAddStyleTag} />
         </S.Style>
         <S.StyleList>
@@ -98,14 +98,14 @@ export default function WriteOOTD({
                 onClick={() => onClickStyleTag(index)}
                 key={index}
               >
-                <Subtitle2>{item}</Subtitle2>
+                <Button3>{item}</Button3>
                 <AiOutlineClose />
               </S.StyleListSpan>
             );
           })}
         </S.StyleList>
         <S.Open>
-          <Headline3>공개여부</Headline3>
+          <Title1>공개여부</Title1>
           <Input>
             <Input.TrueFalse
               left="공개"
