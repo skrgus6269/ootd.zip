@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const Body = styled.p`
+const Caption = styled.p`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
-  font-size: ${({ theme }) => theme.fontSize.xl}; //24px
-  line-height: ${({ theme }) => theme.lineHeight.xl}; //32px
+  font-size: ${({ theme }) => theme.fontSize.xs}; //10px
+  line-height: ${({ theme }) => theme.lineHeight.base}; //16px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
 `;
 
-export default Body;
+export default Caption;
