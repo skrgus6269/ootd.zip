@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   display: flex;
-  width: 390px;
+  width: 375px;
   padding: 0px 20px 16px 20px;
   justify-content: flex-end;
   align-items: center;
@@ -16,10 +16,9 @@ const Frame = styled.div`
 
 const Wrap = styled.div`
   display: flex;
-  padding: var(--Number, 0px);
   justify-content: flex-end;
   align-items: center;
-  gap: var(--Number, 0px);
+  gap: 8px;
 `;
 
 const S = {
