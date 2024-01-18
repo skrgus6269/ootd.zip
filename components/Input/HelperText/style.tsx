@@ -7,7 +7,6 @@ interface LayoutProps {
 const Layout = styled.div<LayoutProps>`
   display: flex;
   align-items: center;
-  margin-top: 16px;
   gap: 2px;
   color: ${(props) =>
     props.state == 1

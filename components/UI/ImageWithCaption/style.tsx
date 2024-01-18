@@ -18,17 +18,16 @@ const ImageFigure = styled.figure<Figure>`
 `;
 
 const ImageCaption = styled.figcaption<Figure>`
-  width: 33px;
-  height: 18px;
   background-color: #030303;
-  color: white;
-  //아래 3속성: 가운데 정렬
+  padding: 3px 8px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  //아래 2속성: 이미지 정렬
+  align-items: center;
+  text-align: center;
+  color: white;
   position: relative;
-  bottom: 18.5px;
+  bottom: 22px;
+  max-width: 40px;
 `;
 
 export { ImageFigure, ImageCaption };

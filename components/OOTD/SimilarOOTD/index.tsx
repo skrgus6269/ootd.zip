@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Headline3 } from '@/components/UI';
+import { Title1 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
 import ImageList from '@/components/ImageList';
@@ -20,7 +20,7 @@ export default function SimilarOOTD({ data }: SimilarOOTDProps) {
   return (
     <S.Layout>
       <S.Title>
-        <Headline3>비슷한 OOTD</Headline3>
+        <Title1>비슷한 OOTD</Title1>
       </S.Title>
       <S.OOTD>
         <ImageList

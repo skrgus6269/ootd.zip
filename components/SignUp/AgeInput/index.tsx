@@ -11,6 +11,7 @@ export default function AgeInput({ onChange }: InputComponentProps) {
       <S.Layout>
         <Input.Label size="big">나이</Input.Label>
         <Input.Text
+          line="underline"
           size="small"
           unit="세"
           onChange={onChange}

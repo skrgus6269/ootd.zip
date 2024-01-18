@@ -70,6 +70,7 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
       <Input>
         <Input.Label size="big">닉네임</Input.Label>
         <Input.Text
+          line="underline"
           size="big"
           placeholder={NICKNAME_PLACEHODER}
           validity={idInputValidity}

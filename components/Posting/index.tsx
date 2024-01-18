@@ -5,7 +5,7 @@ import {
   AiOutlineEllipsis,
   AiOutlineHeart,
 } from 'react-icons/ai';
-import { Body2, Body3, Body4, Button1 } from '../UI';
+import { Body2, Body3, Body4, Button3 } from '../UI';
 import S from './style';
 import bookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import bookmarkFilled from '@/public/images/BookmarkFilled.svg';
@@ -14,7 +14,6 @@ import messageOutlined from '@/public/images/MessageOutlined.svg';
 import Image from 'next/image';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { OOTDType } from '@/pages/OOTD/type';
-import ClothInformation from '../ClothInformation';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../OOTD/ReportModal';
@@ -139,11 +138,11 @@ export default function Posting({ data, commentRef }: PostingProps) {
           <img src={data.userImage} className="userImage" alt="유저 이미지" />
           <Body3 className="userName">{data.userName}</Body3>
           {!followState ? (
-            <Button1 onClick={onClickFollowButton} className="follow">
+            <Button3 onClick={onClickFollowButton} className="follow">
               팔로우
-            </Button1>
+            </Button3>
           ) : (
-            <Button1 onClick={onClickFollowButton}>팔로우</Button1>
+            <Button3 onClick={onClickFollowButton}>팔로우</Button3>
           )}
           <AiOutlineEllipsis onClick={() => setReportModalIsopen(true)} />
         </S.PostingTop>
@@ -230,7 +229,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           {data.styles.map((item, index) => {
             return (
               <S.PostingStyleTagSpan key={index}>
-                <Button1>{item.name}</Button1>
+                <Button3>{item.name}</Button3>
               </S.PostingStyleTagSpan>
             );
           })}
