@@ -103,7 +103,7 @@ export default function BasicInfoSecond({
         </S.BasicInfoFirst>
         <S.BasicInfoSecond>
           <S.Title>
-            <Title1>기본 정보</Title1>
+            <Title1 className="title">기본 정보</Title1>
           </S.Title>
           <S.Information>
             <Input>

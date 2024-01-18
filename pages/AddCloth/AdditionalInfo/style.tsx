@@ -49,7 +49,7 @@ const BasicInfoFirst = styled.div`
   }
 `;
 const AdditionalInfo = styled.div`
-  h3 {
+  .title {
     padding: 21px 0px;
   }
   padding-bottom: 60px;

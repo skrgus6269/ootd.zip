@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import S from './style';
+import { Button3 } from '../UI';
 
 interface NextButtonProps {
   state: Boolean;
@@ -24,7 +25,7 @@ export default function NextButton({
           border={false}
           onClick={onClick}
         >
-          {children}
+          <Button3>{children}</Button3>
         </Button>
       )}
       {state === false && (
@@ -35,7 +36,7 @@ export default function NextButton({
           border={false}
           onClick={() => {}}
         >
-          {children}
+          <Button3>{children}</Button3>
         </Button>
       )}
     </S.Layout>

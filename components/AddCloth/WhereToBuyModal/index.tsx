@@ -53,7 +53,7 @@ export default function WhereToBuyModal({
     <Modal height="80%" isOpen={isOpen}>
       <S.Layout>
         <S.Title>
-          <Title1>구매처</Title1>
+          <Title1 className="title">구매처</Title1>
         </S.Title>
         <S.Link>
           <Body3>링크로 입력하기</Body3>

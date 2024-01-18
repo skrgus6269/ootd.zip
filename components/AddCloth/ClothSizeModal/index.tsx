@@ -66,7 +66,7 @@ export default function ClothSizeModal({
     <Modal isOpen={isOpen} height="75%">
       <S.Layout>
         <S.Title>
-          <Title1>사이즈</Title1>
+          <Title1 className="title">사이즈</Title1>
         </S.Title>
         <S.SizeLayout>
           {ShoeSize.map((item, index) => {

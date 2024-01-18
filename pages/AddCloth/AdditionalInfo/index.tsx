@@ -49,7 +49,7 @@ export default function AdditionalInfo({
       </S.BasicInfoFirst>
       <S.AdditionalInfo>
         <S.Title>
-          <Title1>추가 정보</Title1>
+          <Title1 className="title">추가 정보</Title1>
         </S.Title>
         <S.Information>
           <Input>
