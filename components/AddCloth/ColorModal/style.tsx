@@ -60,7 +60,7 @@ const SelectedColor = styled.div`
   justify-content: space-between;
   position: relative;
   border-radius: 17px;
-  h5 {
+  .selectedColor {
     padding: 8px 35px 8px 16px;
     color: ${(props) => props.theme.color.grey_100};
   }

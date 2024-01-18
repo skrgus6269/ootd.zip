@@ -2,7 +2,7 @@ import Modal from '@/components/Modal';
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useGetClothCategory from '@/hooks/useGetClothCategory';
-import { Body3, Title1 } from '@/components/UI';
+import { Body3, Button3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import Header from '@/components/Header';
 
@@ -146,7 +146,7 @@ export default function ClothCategoryModal({
           state={typeof smallCategoryClickedIndex === 'number'}
           onClick={selectCategoryDone}
         >
-          선택 완료
+          <Button3>선택 완료</Button3>
         </NextButton>
       </S.Layout>
     </Modal>

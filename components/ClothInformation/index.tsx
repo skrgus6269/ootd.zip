@@ -1,6 +1,6 @@
 import { ClothInformationProps } from './type';
 import S from './style';
-import { Body4, Headline4, Subtitle3 } from '../UI';
+import { Body4, Title2 } from '../UI';
 import ImageWithCaption from '../UI/ImageWithCaption';
 import LikeToggle from '../Toggle/LikeToggle';
 import { AiOutlineBell } from 'react-icons/ai';
@@ -28,9 +28,9 @@ export default function ClothInformation({
       </S.ListImage>
       <S.Information>
         <S.Headline>
-          <Headline4>{headline}</Headline4>
+          <Title2>{headline}</Title2>
           <S.Divider>|</S.Divider>
-          <Subtitle3>{subHeadline}</Subtitle3>
+          <Title2>{subHeadline}</Title2>
         </S.Headline>
         <S.BodyFirst>
           <Body4>{bodyFirst}</Body4>

@@ -69,6 +69,7 @@ const SignUp: ComponentWithLayout = () => {
       gender,
       selectedStyle,
     });
+    router.push('/main');
   };
 
   const router = useRouter();

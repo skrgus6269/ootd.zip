@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import S from './style';
-import Button from '@/components/UI/TypoGraphy/Button1';
+import { Button3 } from '@/components/UI';
 
 interface TrueFalseProps {
   left: string;
@@ -23,13 +23,13 @@ export default function TrueFalse({ left, right, setState }: TrueFalseProps) {
         state={currentState}
         onClick={() => onClickNextButton(left)}
       >
-        <Button>{left}</Button>
+        <Button3>{left}</Button3>
       </S.LeftButton>
       <S.RightButton
         state={currentState}
         onClick={() => onClickNextButton(right)}
       >
-        <Button>{right}</Button>
+        <Button3>{right}</Button3>
       </S.RightButton>
     </S.Layout>
   );

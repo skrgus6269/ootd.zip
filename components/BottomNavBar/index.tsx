@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
 import { BottomComponent, BottomComponentItem } from './style';
 
@@ -11,28 +12,34 @@ import {
   AiFillCrown,
   AiOutlineHome,
   AiFillHome,
+  AiOutlineSearch,
 } from 'react-icons/ai';
-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
+import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
+import UserFilled from '@/public/images/UserFilled.svg';
+import SearchFilled from '@/public/images/SearchFilled.svg';
+import { useRecoilState } from 'recoil';
+import { BottomNavbarPlusButtonState } from '@/utils/recoil/atom';
 
 const icons = [
   <AiOutlineHome />,
-  <AiOutlineCrown />,
+  <AiOutlineSearch />,
   <AiOutlinePlusSquare />,
-  <AiOutlineTag />,
+  <BookmarkOutlined />,
   <AiOutlineUser />,
 ];
 
 const activeIcons = [
   <AiFillHome />,
-  <AiFillCrown />,
+  <SearchFilled />,
   <AiFillPlusSquare />,
-  <AiFillTag />,
-  <AiFillHome />,
+  <BookmarkFilled />,
+  <UserFilled />,
 ];
 
-const routes = ['/main', '/ranking', '/plus', '/tag', '/mypage'];
+const routes = ['/main', '/search', '/plus', '/bookmark', '/mypage'];
 
 function getActiveIndex(path: string) {
   for (let i = 0; i < routes.length; i++) {
@@ -62,10 +69,22 @@ export default function BottomNavBar() {
     setBottomNavBarLinkers(newLinkers);
   }, [router, activeIndex]);
 
+  const [addModalState, setAddModalState] = useRecoilState(
+    BottomNavbarPlusButtonState
+  );
+
+  const onClickPlusButton = () => {
+    setAddModalState(true);
+  };
+
   return (
     <BottomComponent>
       {bottomNavBarLinkers.map((item, index) => {
-        return (
+        return index === 2 ? (
+          <BottomComponentItem key={index} onClick={onClickPlusButton}>
+            {addModalState ? <AiFillPlusSquare /> : item.icon}
+          </BottomComponentItem>
+        ) : (
           <BottomComponentItem key={index} onClick={item.click}>
             {item.icon}
           </BottomComponentItem>

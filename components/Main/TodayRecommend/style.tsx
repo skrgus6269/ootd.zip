@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Layout = styled.div``;
 
 const Weather = styled.div`
-  h5 {
+  p {
     margin: 8px 0 16px 0;
     color: ${(props) => props.theme.color.grey_50};
   }
@@ -15,6 +15,7 @@ const CarouselLayout = styled.div`
     max-height: 350px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 

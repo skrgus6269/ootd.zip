@@ -64,7 +64,7 @@ const BasicInfoFirst = styled.div`
 const BasicInfoSecond = styled.div`
   height: 43%;
   flex-grow: 1;
-  h3 {
+  .title {
     padding: 21px 0px;
   }
 `;

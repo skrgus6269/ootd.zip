@@ -1,4 +1,4 @@
-import { Subtitle2 } from '@/components/UI';
+import { Body3 } from '@/components/UI';
 import S from './style';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { Dispatch, SetStateAction } from 'react';
@@ -40,7 +40,7 @@ export default function StyleModal({
             <S.DraggerBar />
           </S.Dragger>
           <S.Label>
-            <Subtitle2>스타일 태그</Subtitle2>
+            <Body3>스타일 태그</Body3>
             <AiOutlineArrowDown onClick={() => setAddTag(false)} />
           </S.Label>
           <S.CheckBox>

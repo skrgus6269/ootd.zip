@@ -1,5 +1,5 @@
 import S from './style';
-import { Button1 } from '../UI';
+import { Button1, Button2, Button3 } from '../UI';
 
 interface AlertProps {
   onClickYesButton: () => void;
@@ -26,10 +26,10 @@ export default function Alert({
         {yes && no && (
           <S.AlertButton>
             <button onClick={onClickNoButton} className="no">
-              <Button1>{yes ? yes : '안할래'}</Button1>
+              <Button2>안할래</Button2>
             </button>
             <button onClick={onClickYesButton} className="yes">
-              <Button1>{no ? no : '할래'}</Button1>
+              <Button3>할래</Button3>
             </button>
           </S.AlertButton>
         )}

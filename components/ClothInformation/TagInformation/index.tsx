@@ -1,4 +1,4 @@
-import { Body4, Headline4 } from '@/components/UI';
+import { Body4, Title2 } from '@/components/UI';
 import S from './style';
 import Image from 'next/image';
 import { ClothInformationProps } from '../type';
@@ -19,7 +19,7 @@ export default function TagInformation({
         <Image width={32} height={32} src={clothImage} alt="아이템" />
       </S.ItemImage>
       <S.Information>
-        <Headline4>{headline}</Headline4>
+        <Title2>{headline}</Title2>
         <Body4>{bodyFirst}</Body4>
         {bodySecond && <Body4>{bodySecond}</Body4>}
       </S.Information>

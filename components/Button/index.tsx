@@ -19,7 +19,7 @@ export default function Button(props: ButtonProps) {
         show={props.size === 'big'}
         buttonData={props}
       >
-        <Button1>{props.children}</Button1>
+        {props.children}
       </LargeButton>
 
       <SmallButton
@@ -27,7 +27,7 @@ export default function Button(props: ButtonProps) {
         show={props.size === 'small'}
         buttonData={props}
       >
-        <Button1>{props.children}</Button1>
+        {props.children}
       </SmallButton>
     </>
   );

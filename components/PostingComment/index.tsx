@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import S from './style';
 import Comment, { CommentProps } from '../Comment';
-import { Body4, Caption1, Headline3 } from '../UI';
+import { Body4, Caption1, Title1 } from '../UI';
 import { CommentStateType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userNames } from '@/utils/recoil/atom';
@@ -135,7 +135,7 @@ export default function PostingComment({
   if (commentNone) {
     return (
       <S.CommentNone>
-        <Headline3 className="title">아직 작성된 댓글이 없습니다.</Headline3>
+        <Title1 className="title">아직 작성된 댓글이 없습니다.</Title1>
         <Caption1 className="body">첫 번째 댓글을 남겨보세요.</Caption1>
       </S.CommentNone>
     );

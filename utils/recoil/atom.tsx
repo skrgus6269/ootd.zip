@@ -9,3 +9,8 @@ export const userNames = atom<string>({
   key: 'userNames',
   default: '',
 });
+
+export const BottomNavbarPlusButtonState = atom<Boolean>({
+  key: 'bottomNavbarPlusButtonState',
+  default: false,
+});

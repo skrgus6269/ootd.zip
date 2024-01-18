@@ -1,5 +1,5 @@
 import S from './style';
-import { Button1 } from '@/components/UI';
+import { Button3 } from '@/components/UI';
 import kakaoLogo from '@/public/images/kakaoLogo.png';
 import appleLogo from '@/public/images/appleLogo.png';
 import googleLogo from '@/public/images/googleLogo.png';
@@ -25,9 +25,9 @@ export default function SocialLoginButton({
       <S.Button onClick={onClick}>
         <S.ButtonString platform={platform}>
           <Image src={platformInfo[platform][0]} alt={`${platform}logo`} />
-          <Button1>
+          <Button3>
             <>{platformInfo[platform][1]}</>
-          </Button1>
+          </Button3>
         </S.ButtonString>
       </S.Button>
     </S.Layout>
