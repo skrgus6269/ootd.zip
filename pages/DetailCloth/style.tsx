@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+interface BackgroundProps {
+  isOpen: Boolean;
+}
+
+const Background = styled.div<BackgroundProps>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
+  width: 100vw;
+  height: calc(100vh - 48px);
+  position: absolute;
+`;
+
 const Layout = styled.div`
   padding: 0 20px;
   display: flex;
@@ -27,6 +41,6 @@ const ButtonGroup = styled.div`
   gap: 2px;
 `;
 
-const S = { Layout, TypoGraphy, ButtonGroup };
+const S = { Layout, TypoGraphy, ButtonGroup, Background };
 
 export default S;
