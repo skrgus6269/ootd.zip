@@ -7,6 +7,7 @@ import NextButton from '@/components/NextButton';
 import Header from '@/components/Header';
 
 interface ClothCategoryModalProps {
+  storedClothCategory?: string;
   isOpen: Boolean;
   setClothCategory: Dispatch<SetStateAction<string>>;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
@@ -18,11 +19,15 @@ type ClothCategoryProps = {
 }[];
 
 export default function ClothCategoryModal({
+  storedClothCategory,
   isOpen,
   setIsOpen,
   setClothCategory,
 }: ClothCategoryModalProps) {
   const [getClothCategory] = useGetClothCategory();
+  const [storedBigCategory, storedSmallCategory] = (
+    storedClothCategory || ''
+  ).split(',');
 
   const [clothCategories, setClothCategories] = useState<ClothCategoryProps>();
   const [bigCategoryClickedIndex, setbigCategoryClickedIndex] = useState(0);
@@ -90,6 +95,25 @@ export default function ClothCategoryModal({
         },
       ];
       setClothCategories(clothCategory);
+
+      // DB에 기존 저장된 category 명으로 인덱스 추출
+      const storedBigCategoryIndex = clothCategory.findIndex(
+        (category) => category.bigCategory === storedBigCategory
+      );
+      setbigCategoryClickedIndex(
+        storedBigCategoryIndex >= 0 ? storedBigCategoryIndex : 0
+      );
+
+      const smallCategoryIndex =
+        storedBigCategoryIndex >= 0
+          ? clothCategory[storedBigCategoryIndex].smallCategory.findIndex(
+              (smallCategory) =>
+                smallCategory == storedSmallCategory.substring(1)
+            )
+          : -1;
+      setsmallCategoryClickedIndex(
+        smallCategoryIndex >= 0 ? smallCategoryIndex : undefined
+      );
     };
     fetchCategory();
   }, []);
