@@ -4,7 +4,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 72px;
+  gap: 68px;
   .styleInput {
     margin-bottom: 42px;
   }

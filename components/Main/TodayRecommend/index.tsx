@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Headline2, Subtitle2 } from '@/components/UI';
+import { Body3, Headline2 } from '@/components/UI';
 import S from './style';
 import Carousel from '@/components/Carousel';
 import ClothInformation from '@/components/ClothInformation';
@@ -8,6 +8,7 @@ interface TodayRecommendSampleData {
   data: {
     ootdImage: string;
     item: {
+      clothId: number;
       itemImage: string;
       caption: string;
       brand: string;
@@ -23,7 +24,7 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
     <S.Layout>
       <S.Weather>
         <Headline2>오늘 입기 좋은 옷</Headline2>
-        <Subtitle2>최고온도 00.0℃ 최저온도 00.0℃ </Subtitle2>
+        <Body3>최고온도 00.0℃ 최저온도 00.0℃ </Body3>
       </S.Weather>
       <S.CarouselLayout>
         <Carousel slidesToShow={1.05} infinite={false}>
@@ -42,6 +43,7 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
                       bodyFirst={item.name}
                       bodySecond={item.size}
                       icon="like"
+                      clothId={item.clothId}
                     />
                   );
                 })}

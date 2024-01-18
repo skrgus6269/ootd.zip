@@ -7,7 +7,7 @@ const Layout = styled.div`
   }
 `;
 const Title = styled.div`
-  h3 {
+  .title {
     padding: 21px 0;
   }
 `;

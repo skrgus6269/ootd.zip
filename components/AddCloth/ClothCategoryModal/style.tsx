@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Layout = styled.div`
   height: 100%;
 
-  h3 {
+  .title {
     padding: 23px 20px;
   }
   overflow-y: hidden;

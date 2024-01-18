@@ -91,7 +91,7 @@ const ColorModal = ({ isOpen, setClothColor, setIsOpen }: ColorModalProps) => {
           {selectedColorList.map((item, index) => {
             return (
               <S.SelectedColor key={index}>
-                <Button3>{item.name}</Button3>
+                <Button3 className="selectedColor">{item.name}</Button3>
                 <AiOutlineClose onClick={() => onClickCloseButton(item.name)} />
               </S.SelectedColor>
             );

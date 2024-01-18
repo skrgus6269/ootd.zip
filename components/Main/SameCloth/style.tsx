@@ -7,7 +7,7 @@ interface FilterProps {
 const Layout = styled.div``;
 
 const Label = styled.div`
-  h5 {
+  .body {
     color: ${(props) => props.theme.color.grey_50};
     padding: 7px 0 28px 0;
   }

@@ -19,6 +19,7 @@ export default function BodyInput({
           <S.Weight>
             <Input.Label size="small">신장</Input.Label>
             <Input.Text
+              line="underline"
               size="small"
               unit="cm"
               placeholder="160"
@@ -29,6 +30,7 @@ export default function BodyInput({
           <S.Height>
             <Input.Label size="small">몸무게</Input.Label>
             <Input.Text
+              line="underline"
               size="small"
               unit="kg"
               placeholder="40"

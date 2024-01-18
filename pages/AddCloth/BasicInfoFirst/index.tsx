@@ -93,7 +93,7 @@ export default function BasicInfoFirst({
         </S.ClothImage>
         <S.BasicInfo>
           <S.Title>
-            <Title1>기본 정보</Title1>
+            <Title1 className="title">기본 정보</Title1>
           </S.Title>
           <S.Information>
             <Input>

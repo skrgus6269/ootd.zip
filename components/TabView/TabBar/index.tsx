@@ -1,4 +1,4 @@
-import { Subtitle1 } from '@/components/UI';
+import { Body2 } from '@/components/UI';
 import { Layout, Tab, Hr } from './style';
 import { useTabViewContext } from '@/hooks/use-tabview/context';
 import { useEffect, useState } from 'react';
@@ -34,7 +34,7 @@ export default function TabBar({ tab }: TabBarProps) {
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}
             >
-              <Subtitle1>{item}</Subtitle1>
+              <Body2>{item}</Body2>
             </Tab>
           );
         })}

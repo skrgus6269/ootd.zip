@@ -133,6 +133,7 @@ const TodayRecommendSampleData = [
       'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     item: [
       {
+        clothId: 0,
         itemImage:
           'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
         caption: '태그',
@@ -142,6 +143,7 @@ const TodayRecommendSampleData = [
         size: 'Size L',
       },
       {
+        clothId: 1,
         itemImage:
           'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
         caption: '비슷한',
@@ -157,6 +159,7 @@ const TodayRecommendSampleData = [
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     item: [
       {
+        clothId: 1,
         itemImage:
           'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
         caption: '태그',
@@ -167,6 +170,7 @@ const TodayRecommendSampleData = [
         icon: 'like',
       },
       {
+        clothId: 1,
         itemImage:
           'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
         caption: '비슷한',
@@ -182,24 +186,60 @@ const TodayRecommendSampleData = [
 
 const SameClothDifferentFeeling = [
   {
-    clothId: 2,
-    clothImage:
+    clothid: 0,
+    image:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    category: '카테고리',
+    name: '제품명',
   },
   {
-    clothId: 3,
-    clothImage:
+    clothid: 0,
+    image:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    category: '카테고리',
+    name: '제품명',
   },
   {
-    clothId: 4,
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    clothid: 0,
+    image:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    category: '카테고리',
+    name: '제품명',
   },
   {
-    clothId: 5,
-    clothImage:
+    clothid: 0,
+    image:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    category: '카테고리',
+    name: '제품명',
+  },
+  {
+    clothid: 0,
+    image:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    category: '카테고리',
+    name: '제품명',
+  },
+  {
+    clothid: 0,
+    image:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    category: '카테고리',
+    name: '제품명',
+  },
+  {
+    clothid: 0,
+    image:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    category: '카테고리',
+    name: '제품명',
+  },
+  {
+    clothid: 0,
+    image:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    category: '카테고리',
+    name: '제품명',
   },
 ];
 
@@ -214,7 +254,7 @@ export default function Main() {
       <S.Layout>
         <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
         <TodayRecommend data={TodayRecommendSampleData} />
-        <SameCloth />
+        <SameCloth data={SameClothDifferentFeeling} />
         {/* <button onClick={onClickButton}>클릭해봐</button> */}
       </S.Layout>
     </>

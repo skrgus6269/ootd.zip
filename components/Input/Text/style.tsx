@@ -25,7 +25,6 @@ const Layout = styled.div<LayoutProps>`
   &:hover {
     border-bottom: 2px solid ${props.theme.color.grey_00};
   }
-  background-color: yellow;
   `}
 
   ${(props) =>

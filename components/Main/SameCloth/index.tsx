@@ -1,62 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import { Body3, Headline2, Subtitle2 } from '@/components/UI';
+import { Body3, Button3, Headline2, Title2 } from '@/components/UI';
 import S from './style';
 import Image from 'next/image';
 import { useState } from 'react';
 import Button from '@/components/Button';
 
-const data = [
-  {
-    image:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-  {
-    image:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    category: '카테고리',
-    name: '제품명',
-  },
-];
+interface SameClothProps {
+  data: {
+    clothid: number;
+    image: string;
+    category: string;
+    name: string;
+  }[];
+}
 
-export default function SameCloth() {
+export default function SameCloth({ data }: SameClothProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const onClickImage = (index: number) => {
@@ -67,7 +25,9 @@ export default function SameCloth() {
     <S.Layout>
       <S.Label>
         <Headline2>같은 옷, 다른 느낌</Headline2>
-        <Subtitle2>다른 사용자들은 어떻게 활용하고 있을까요?</Subtitle2>
+        <Body3 className="body">
+          다른 사용자들은 어떻게 활용하고 있을까요?
+        </Body3>
       </S.Label>
       <S.Filter>
         {data.map((item, index) => {
@@ -81,7 +41,7 @@ export default function SameCloth() {
                 alt="같은옷"
               />
               <div className="filterItemTrue">
-                <Subtitle2>{item.category}</Subtitle2>
+                <Title2>{item.category}</Title2>
                 <Body3>{item.name}</Body3>
               </div>
             </S.FilterItem>
@@ -123,7 +83,7 @@ export default function SameCloth() {
         onClick={() => console.log('더보기')}
         border={true}
       >
-        더보기
+        <Button3>더보기</Button3>
       </Button>
     </S.Layout>
   );

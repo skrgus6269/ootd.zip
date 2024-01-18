@@ -15,17 +15,19 @@ export default function StyleInput({
   setStyleListState,
 }: StyleInputProps) {
   return (
-    <S.Layout>
-      <Input>
+    <Input>
+      <S.Layout>
         <Input.Label size="big">선호 스타일</Input.Label>
-        <Input.CheckBox
-          state={styleListState}
-          setState={setStyleListState}
-        ></Input.CheckBox>
-        <Input.HelperText state={2}>
-          최소 3개 이상 선택해주세요.
-        </Input.HelperText>
-      </Input>
-    </S.Layout>
+        <div>
+          <Input.CheckBox
+            state={styleListState}
+            setState={setStyleListState}
+          ></Input.CheckBox>
+          <Input.HelperText state={2}>
+            최소 3개 이상 선택해주세요.
+          </Input.HelperText>
+        </div>
+      </S.Layout>
+    </Input>
   );
 }

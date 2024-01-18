@@ -44,7 +44,7 @@ const ClothImage = styled.div`
 
 const BasicInfo = styled.div`
   padding: 0 20px;
-  h3 {
+  .title {
     padding: 21px 0px;
   }
 `;
