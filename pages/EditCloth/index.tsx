@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 export type ClothColor = {
   name: string;
   color: string;
+  state: Boolean;
 }[];
 
 export interface ClothWhereBuy {
@@ -24,7 +25,7 @@ export interface ClothWhereBuy {
 
 const AddCloth: ComponentWithLayout = () => {
   const router = useRouter();
-  const steps = ['사진선택', '기본정보1', '기본정보2', '추가정보'];
+  const steps = ['사진선택', '기본정보', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
   const [clothImage, setClothImage] = useState<
     string | ImageWithTag | undefined
@@ -92,8 +93,6 @@ const AddCloth: ComponentWithLayout = () => {
           setClothWhereBuy={setClothWhereBuy}
           handleStep={handleStep}
         />
-      </Funnel.Steps>
-      <Funnel.Steps name="기본정보2">
         <BasicInfoSecond
           clothImage={clothImage}
           clothCategory={clothCategory}
@@ -110,10 +109,10 @@ const AddCloth: ComponentWithLayout = () => {
       </Funnel.Steps>
       <Funnel.Steps name="추가정보">
         <AdditionalInfo
-          clothBrand={clothBrand}
-          clothCategory={clothCategory}
-          clothImage={clothImage}
           clothByName={clothByName}
+          clothBuyDate={clothBuyDate}
+          clothMemo={clothMemo}
+          clothImage={clothImage}
           setClothByName={setClothByName}
           setClothBuyDate={setClothBuyDate}
           setClothMemo={setClothMemo}
