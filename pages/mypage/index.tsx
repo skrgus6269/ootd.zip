@@ -1,9 +1,29 @@
+import AppBar from '@/components/Appbar';
 import S from './style';
-import { Headline2 } from '@/components/UI';
-export default function mypage() {
+import { AiOutlineArrowLeft, AiOutlineSetting } from 'react-icons/ai';
+import Profile from '@/components/MyPage/Profile';
+import Closet from '@/components/MyPage/Closet';
+import { useRouter } from 'next/router';
+
+export default function MyPage() {
+  const router = useRouter();
+
   return (
-    <S.Layout>
-      <Headline2>아직 없습니다! </Headline2>
-    </S.Layout>
+    <>
+      <S.Layout>
+        <AppBar
+          leftProps={
+            <AiOutlineArrowLeft
+              onClick={() => router.back()}
+              className="arrowleft"
+            />
+          }
+          middleProps={<></>}
+          rightProps={<AiOutlineSetting className="setting" />}
+        />
+        <Profile />
+        <Closet />
+      </S.Layout>
+    </>
   );
 }

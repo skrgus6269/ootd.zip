@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Layout, SearchIcon, SearchInput, Input, CloseIcon } from './style';
 import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
 import useDebounce from '@/hooks/useDebouce';
 
 interface SearchProps {
   placeholder: string;
+  letter: string;
+  setLetter: Dispatch<SetStateAction<string>>;
+  onChange?: any;
 }
 
-export default function SearchBar(props: SearchProps) {
+export default function SearchBar({
+  placeholder,
+  letter,
+  setLetter,
+  onChange,
+}: SearchProps) {
   //input의 value
-  const [letter, setLetter] = useState('');
 
   //input 입력 시 letter를 업데이트 하는 함수
   const onChangeInput = (value: string) => {
@@ -18,7 +25,8 @@ export default function SearchBar(props: SearchProps) {
 
   //console.log 자리에 검색 api가 올 예정
   const search = () => {
-    console.log(letter);
+    console.log('출력', letter);
+    onChange!();
   };
 
   //delete 아이콘 클릭 시 실행되는 함수
@@ -35,7 +43,7 @@ export default function SearchBar(props: SearchProps) {
 
   return (
     <>
-      <Layout>
+      <Layout state={letter.length > 0}>
         <SearchIcon>
           <AiOutlineSearch />
         </SearchIcon>
@@ -43,7 +51,7 @@ export default function SearchBar(props: SearchProps) {
           <Input
             value={letter}
             onChange={(e) => onChangeInput(e.target.value)}
-            placeholder={props.placeholder}
+            placeholder={placeholder}
           />
         </SearchInput>
         {letter && (
@@ -52,7 +60,6 @@ export default function SearchBar(props: SearchProps) {
           </CloseIcon>
         )}
       </Layout>
-      {letter}
     </>
   );
 }

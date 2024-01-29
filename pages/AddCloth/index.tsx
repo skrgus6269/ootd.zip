@@ -21,6 +21,11 @@ export interface ClothWhereBuy {
   type: 'link' | 'write';
 }
 
+export interface ClothCategoryType {
+  bigCategory: string;
+  smallCategory: string;
+}
+
 const AddCloth: ComponentWithLayout = () => {
   const steps = ['사진선택', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
@@ -28,7 +33,9 @@ const AddCloth: ComponentWithLayout = () => {
     string | ImageWithTag | undefined
   >();
 
-  const [clothCategory, setClothCategory] = useState<string>('');
+  const [clothCategory, setClothCategory] = useState<
+    ClothCategoryType | undefined
+  >();
   const [clothBrand, setClothBrand] = useState<string>('');
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
@@ -40,13 +47,11 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothByName, setClothByName] = useState('');
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
-  const [bigCategory, smallCategory] = clothCategory.split(',');
 
   const onClickSubmitButton = () => {
     //옷 등록 api
     alert(
-      `${bigCategory}, 
-      ${smallCategory}, 
+      `${clothCategory},  
       ${clothBrand}, 
       ${clothColor}, 
       ${clothImage}, 

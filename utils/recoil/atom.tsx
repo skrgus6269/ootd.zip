@@ -1,3 +1,5 @@
+import { BrandType } from '@/components/Brand';
+import { ColorData } from '@/components/ColorList';
 import { atom } from 'recoil';
 
 export const loginStates = atom<boolean>({
@@ -13,4 +15,14 @@ export const userNames = atom<string>({
 export const BottomNavbarPlusButtonState = atom<Boolean>({
   key: 'bottomNavbarPlusButtonState',
   default: false,
+});
+
+export const ClothColorList = atom<ColorData[]>({
+  key: 'clothColorList',
+  default: [],
+});
+
+export const myBrandList = atom<BrandType[]>({
+  key: 'myBrandList',
+  default: [],
 });

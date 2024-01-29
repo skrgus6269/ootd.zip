@@ -34,7 +34,7 @@ export default function TabBar({ tab }: TabBarProps) {
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}
             >
-              <Body2>{item}</Body2>
+              <Body2 state="emphasis">{item}</Body2>
             </Tab>
           );
         })}

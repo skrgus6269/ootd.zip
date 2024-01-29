@@ -12,6 +12,13 @@ import {
 } from '@/apis/type';
 
 export const useOOTD = () => {
+  //ootd 조회
+  const getOOTD = async (params: GetOOTDParams) => {
+    const data = await userService.getOOTD(params);
+
+    return data;
+  };
+
   //ootd 게시
   const addOOTD = async (payload: AddOOTDPayload) => {
     const data = await userService.addOOTD(payload);
@@ -21,13 +28,6 @@ export const useOOTD = () => {
     } else {
       return false;
     }
-  };
-
-  //ootd 조회
-  const getOOTD = async (params: GetOOTDParams) => {
-    const data = await userService.getOOTD(params);
-
-    return data;
   };
 
   //ootd 전체 수정

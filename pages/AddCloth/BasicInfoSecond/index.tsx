@@ -5,7 +5,7 @@ import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { ClothColor, ClothWhereBuy } from '..';
+import { ClothCategoryType, ClothColor, ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
 import ColorModal from '@/components/AddCloth/ColorModal';
 import ColorSpan from '@/components/ColorSpan';
@@ -14,7 +14,7 @@ import AddClothAlert from '@/components/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: string;
+  clothCategory: ClothCategoryType | undefined;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
   handleStep: (next: string) => void;
@@ -43,15 +43,16 @@ export default function BasicInfoSecond({
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
   const [init, setInit] = useState<number>(0);
   const [inits, setInits] = useState<number>(0);
-  const [bigCategory, smallCategory] = clothCategory.split(',');
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{bigCategory}</Body3>
+        <Body3>{clothCategory!.bigCategory}</Body3>
         <Body3>&gt;</Body3>
-        <Body3 style={{ fontWeight: '700' }}>{smallCategory}</Body3>
+        <Body3 style={{ fontWeight: '700' }}>
+          {clothCategory!.smallCategory}
+        </Body3>
       </S.Category>
     );
   };
@@ -83,9 +84,6 @@ export default function BasicInfoSecond({
 
   const onClickNoButton = () => {
     //옷 등록 api
-    alert(
-      `${bigCategory}, ${smallCategory}, ${clothBrand}, ${clothColor}, ${clothImage}, ${clothWhereBuy}, ${open}`
-    );
   };
 
   return (
@@ -174,7 +172,7 @@ export default function BasicInfoSecond({
           setIsOpen={setSizeModalOpen}
           setClothSize={setClothSize}
           isOpen={sizeModalOpen}
-          bigCategory={bigCategory}
+          bigCategory={clothCategory!.bigCategory}
         />
       )}
       {alertOpen && (

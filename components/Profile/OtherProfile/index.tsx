@@ -10,16 +10,22 @@ export default function OtherProfile({
   userName,
   follow,
   myCloth,
+  className,
 }: ProfileType) {
   return (
-    <ProfileLayout isUser={isUser} imgSrc={userImage!} isMine={false}>
+    <ProfileLayout
+      isUser={isUser}
+      imgSrc={userImage!}
+      isMine={false}
+      className={className}
+    >
       <S.Layout>
         <S.Name>
           <Title1>{userName}</Title1>
         </S.Name>
         <S.Info>
           <Body>
-            팔로우 {follow}명 • 옷장 {myCloth}벌 {'>'}
+            팔로우 {follow}명 • 팔로잉 {myCloth}명
           </Body>
         </S.Info>
       </S.Layout>

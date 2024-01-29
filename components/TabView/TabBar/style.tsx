@@ -7,9 +7,10 @@ interface TabProps {
 const Layout = styled.div`
   display: flex;
   width: 100%;
+  padding-top: 16px;
   justify-content: space-between;
-  h5 {
-    padding: 14px 0;
+  p {
+    padding: 13px 0;
   }
 `;
 const Tab = styled.span<TabProps>`
@@ -18,12 +19,15 @@ const Tab = styled.span<TabProps>`
   justify-content: center;
   align-items: center;
   display: flex;
-  padding-bottom: 1px;
   color: ${(props) => props.theme.color.grey_50};
   ${(props) =>
     props.focus &&
     `  
-    border-bottom: 2px solid black;
+    p{
+
+      border-bottom: 2px solid black;
+      margin: 0;
+    }
     color: ${props.theme.color.grey_00}
   `};
 `;

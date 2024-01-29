@@ -4,7 +4,6 @@ const Layout = styled.div`
   display: flex;
   width: 100%;
   max-width: 390px;
-  height: 70px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -16,7 +15,7 @@ const UserPhoto = styled.div`
     height: 44px;
     border-radius: 50%;
     background-color: black;
-    object-fit: scale-down;
+    object-fit: cover;
   }
 `;
 

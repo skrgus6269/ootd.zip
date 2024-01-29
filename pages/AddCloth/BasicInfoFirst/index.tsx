@@ -7,14 +7,14 @@ import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import WhereToBuyModal from '@/components/AddCloth/WhereToBuyModal';
-import { ClothWhereBuy } from '..';
+import { ClothCategoryType, ClothWhereBuy } from '..';
 
 interface BaiscInfoFirst {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: string;
+  clothCategory: ClothCategoryType | undefined;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
-  setClothCategory: Dispatch<SetStateAction<string>>;
+  setClothCategory: Dispatch<SetStateAction<ClothCategoryType | undefined>>;
   setClothBrand: Dispatch<SetStateAction<string>>;
   setClothWhereBuy: Dispatch<SetStateAction<ClothWhereBuy>>;
   handleStep: (next: string) => void;
@@ -31,7 +31,6 @@ export default function BasicInfoFirst({
   handleStep,
 }: BaiscInfoFirst) {
   const [categoryModalOpen, setCategoryModalOpen] = useState<Boolean>(false);
-  const [bigCategory, smallCategory] = clothCategory.split(',');
   const [nextButtonState, setNextButtonState] = useState<Boolean>(false);
   const [init, setInit] = useState<number>(0);
   const [inits, setInits] = useState<number>(0);
@@ -45,7 +44,7 @@ export default function BasicInfoFirst({
 
   useEffect(() => {
     if (
-      clothCategory.length > 1 &&
+      clothCategory !== undefined &&
       clothBrand.length > 0 &&
       clothWhereBuy.letter.length > 0
     ) {
@@ -55,11 +54,11 @@ export default function BasicInfoFirst({
     setNextButtonState(false);
   }, [clothCategory, clothBrand, clothWhereBuy]);
 
-  const Category = bigCategory && (
+  const Category = clothCategory && (
     <S.Category>
-      <Body3>{bigCategory}</Body3>
+      <Body3>{clothCategory.bigCategory}</Body3>
       <Body3>&gt;</Body3>
-      <Body3 style={{ fontWeight: '700' }}>{smallCategory}</Body3>
+      <Body3 style={{ fontWeight: '700' }}>{clothCategory.smallCategory}</Body3>
     </S.Category>
   );
 
@@ -99,7 +98,7 @@ export default function BasicInfoFirst({
             <Input>
               <Input.Label size="small">카테고리</Input.Label>
               <Input.Modal
-                state={clothCategory.length > 0}
+                state={clothCategory !== undefined}
                 result={Category}
                 setModalOpen={setCategoryModalOpen}
                 setInit={setInit}
