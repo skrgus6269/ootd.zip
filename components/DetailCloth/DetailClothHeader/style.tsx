@@ -10,7 +10,6 @@ const Layout = styled.div`
 
 const Container = styled.div`
   display: flex;
-  padding: 5px;
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
@@ -28,11 +27,12 @@ const IconSpan = styled.span`
   align-items: center;
   width: 24px;
   height: 24px;
+  justify-content: center;
 
   //아이콘 크기
   svg {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
   }
 `;
 
@@ -46,6 +46,7 @@ const OpenTag = styled.div<OpenTagProps>`
   justify-content: center;
   align-items: center;
   gap: 8px;
+  border-radius: 2px;
   background-color: ${(props) =>
     props.state ? props.theme.color.orange_100 : props.theme.color.orange_500};
 `;

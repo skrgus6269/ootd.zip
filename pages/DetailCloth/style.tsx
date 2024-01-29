@@ -41,6 +41,13 @@ const ButtonGroup = styled.div`
   gap: 2px;
 `;
 
-const S = { Layout, TypoGraphy, ButtonGroup, Background };
+const Img = styled.div`
+  img {
+    width: 100vw;
+    object-fit: cover;
+  }
+`;
+
+const S = { Layout, TypoGraphy, ButtonGroup, Background, Img };
 
 export default S;

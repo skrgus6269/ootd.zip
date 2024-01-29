@@ -7,21 +7,33 @@ import NextButton from '@/components/NextButton';
 import { ClothWhereBuy } from '@/pages/AddCloth';
 
 interface WhereToBuyModal {
+  storedClothWhereBuy?: ClothWhereBuy;
   isOpen: Boolean;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
   setWhereToBuy: Dispatch<SetStateAction<ClothWhereBuy>>;
 }
 
 export default function WhereToBuyModal({
+  storedClothWhereBuy,
   isOpen,
   setIsOpen,
   setWhereToBuy,
 }: WhereToBuyModal) {
-  const [linkLetter, setLinkLetter] = useState<string>('');
-  const [writeLetter, setWriteLetter] = useState<string>('');
+  const [linkLetter, setLinkLetter] = useState<string>(
+    storedClothWhereBuy && storedClothWhereBuy.type === 'link'
+      ? storedClothWhereBuy.letter
+      : ''
+  );
+  const [writeLetter, setWriteLetter] = useState<string>(
+    storedClothWhereBuy && storedClothWhereBuy.type === 'write'
+      ? storedClothWhereBuy.letter
+      : ''
+  );
 
   //true === 링크입력 , false === 직접입력
-  const [selectedLetter, setSelectedLetter] = useState<number>(0);
+  const [selectedLetter, setSelectedLetter] = useState<number>(
+    storedClothWhereBuy && storedClothWhereBuy.type === 'link' ? 1 : 2
+  );
 
   const linkRef = useRef<any>(null);
   const writeRef = useRef<any>(null);
@@ -60,6 +72,7 @@ export default function WhereToBuyModal({
           <Input>
             {selectedLetter === 0 || selectedLetter === 1 ? (
               <Input.Text
+                defaultValue={linkLetter}
                 inputRef={linkRef}
                 size="big"
                 placeholder="링크를 붙여넣으세요."
@@ -83,6 +96,7 @@ export default function WhereToBuyModal({
           <Input>
             {selectedLetter === 0 || selectedLetter === 2 ? (
               <Input.Text
+                defaultValue={writeLetter}
                 inputRef={writeRef}
                 size="big"
                 placeholder="선물 받았어요, 래플 당첨 등"

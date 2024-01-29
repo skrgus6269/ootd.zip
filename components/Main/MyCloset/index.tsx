@@ -1,6 +1,5 @@
 import { MyProfile } from '@/components/Profile';
 import S from './style';
-import { StaticImageData } from 'next/image';
 import Carousel from '@/components/Carousel';
 import { MainTopClothCard } from '@/components/Card';
 
@@ -8,7 +7,7 @@ interface UserClosetProps {
   isUser: Boolean;
   userOOTD: {
     user: {
-      userImage: StaticImageData;
+      userImage: string;
       userName: string;
       follow: number;
       myCloth: number;

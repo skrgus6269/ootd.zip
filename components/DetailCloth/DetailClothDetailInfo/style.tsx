@@ -6,11 +6,19 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
 `;
 
 const Category = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+const CategoryStart = styled.div`
+  display: flex;
+  align-items: flex-start;
   gap: 8px;
   align-self: stretch;
 `;
@@ -24,7 +32,9 @@ const InfoTitle = styled.div`
 `;
 
 const ColorList = styled.div`
-  overflow-x: scroll;
+  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
   width: 375px;
   padding: 8px 8px 8px 4px;
 `;
@@ -32,7 +42,7 @@ const ColorList = styled.div`
 const ColorSpanLayout = styled.div`
   display: inline-flex;
   gap: 4px;
-  flex-direction: row;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   padding-left: 4px;
@@ -54,6 +64,7 @@ const ColorName = styled.div``;
 const S = {
   Layout,
   Category,
+  CategoryStart,
   InfoTitle,
   ColorList,
   ColorSpanLayout,

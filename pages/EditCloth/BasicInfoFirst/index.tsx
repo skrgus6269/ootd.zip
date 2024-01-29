@@ -8,6 +8,7 @@ import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import WhereToBuyModal from '@/components/AddCloth/WhereToBuyModal';
 import { ClothWhereBuy } from '..';
+import Header from '@/components/Header';
 
 interface BaiscInfoFirst {
   clothImage: string | ImageWithTag | undefined;
@@ -101,10 +102,8 @@ export default function BasicInfoFirst({
         <S.ClothImage>
           {typeof clothImage === 'string' && <img src={clothImage} alt="" />}
         </S.ClothImage>
+        <Header text="기본 정보" />
         <S.BasicInfo>
-          <S.Title>
-            <Title1>기본 정보</Title1>
-          </S.Title>
           <S.Information>
             <Input>
               <Input.Label size="small">카테고리</Input.Label>
@@ -150,7 +149,7 @@ export default function BasicInfoFirst({
           </S.Information>
         </S.BasicInfo>
       </S.Layout>
-      {init && (
+      {init > 0 && (
         <ClothCategoryModal
           storedClothCategory={clothCategory}
           isOpen={categoryModalOpen}
@@ -158,7 +157,7 @@ export default function BasicInfoFirst({
           setClothCategory={setClothCategory}
         />
       )}
-      {inits && (
+      {inits > 0 && (
         <WhereToBuyModal
           storedClothWhereBuy={clothWhereBuy}
           isOpen={whereToBuyModalOpen}

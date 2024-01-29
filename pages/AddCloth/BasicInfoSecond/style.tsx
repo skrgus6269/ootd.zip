@@ -88,6 +88,7 @@ const ClothColorSpanList = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Size = styled.div``;

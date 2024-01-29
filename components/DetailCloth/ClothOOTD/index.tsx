@@ -5,8 +5,8 @@ import SubHead from '../SubHead';
 import ImageList from '@/components/ImageList';
 
 interface OOTDDataProps {
-  imageId: number;
-  image: string;
+  clothId: number;
+  clothImage: string;
 }
 
 interface ClothOOTDProps {

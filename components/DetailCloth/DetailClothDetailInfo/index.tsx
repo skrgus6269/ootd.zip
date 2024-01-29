@@ -25,7 +25,7 @@ export default function DetailClothDetailInfo({
 }: ClothDiscriptionProps) {
   return (
     <S.Layout>
-      <S.Category>
+      <S.CategoryStart>
         <S.InfoTitle>
           <Body3 style={{ fontWeight: '600' }}>색상</Body3>
         </S.InfoTitle>
@@ -50,7 +50,7 @@ export default function DetailClothDetailInfo({
               );
             })}
         </S.ColorList>
-      </S.Category>
+      </S.CategoryStart>
 
       <S.Category>
         <S.InfoTitle>

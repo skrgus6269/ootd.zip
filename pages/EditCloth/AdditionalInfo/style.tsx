@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Layout = styled.div`
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 48px);
@@ -49,6 +48,7 @@ const BasicInfoFirst = styled.div`
   }
 `;
 const AdditionalInfo = styled.div`
+  padding: 0 20px;
   h3 {
     padding: 21px 0px;
   }

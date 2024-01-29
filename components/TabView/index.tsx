@@ -10,7 +10,7 @@ interface TabViewProps {
 export default function TabView({ children }: TabViewProps) {
   return (
     <TabViewProvider>
-      <div>{children}</div>
+      <>{children}</>
     </TabViewProvider>
   );
 }

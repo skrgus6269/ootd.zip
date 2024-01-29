@@ -7,10 +7,10 @@ import {
 } from 'react-icons/ai';
 import { Body2, Body3, Body4, Button3 } from '../UI';
 import S from './style';
-import bookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
-import bookmarkFilled from '@/public/images/BookmarkFilled.svg';
-import shareOutlined from '@/public/images/shareOutlined.svg';
-import messageOutlined from '@/public/images/MessageOutlined.svg';
+import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
+import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
+import ShareOutlined from '@/public/images/shareOutlined.svg';
+import MessageOutlined from '@/public/images/MessageOutlined.svg';
 import Image from 'next/image';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { OOTDType } from '@/pages/OOTD/type';
@@ -201,24 +201,29 @@ export default function Posting({ data, commentRef }: PostingProps) {
               className="unLikedHeart"
             />
           )}
-          <Image
+          <MessageOutlined
             className="comment"
             onClick={onClickCommentButton}
-            src={messageOutlined}
             alt="댓글"
           />
-          <Image
+          <ShareOutlined
             className="share"
             onClick={onClickShareButton}
-            src={shareOutlined}
             alt="공유하기"
           />
-          <Image
-            className="bookmark"
-            onClick={onClickBookmarkButton}
-            src={bookMarkState ? bookmarkFilled : bookmarkOutlined}
-            alt="북마크"
-          />
+          {bookMarkState ? (
+            <BookmarkFilled
+              className="bookmark"
+              onClick={onClickBookmarkButton}
+              alt="북마크"
+            />
+          ) : (
+            <BookmarkOutlined
+              className="bookmark"
+              onClick={onClickBookmarkButton}
+              alt="북마크"
+            />
+          )}
         </S.PostingCommunication>
         <S.PostingExplanation>
           <Body2 className="description">{data.contents}</Body2>

@@ -5,16 +5,17 @@ import { Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import NextButton from '@/components/NextButton';
+import { ClothCategoryType } from '..';
 
 interface AdditionalInfo {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: string;
+  clothCategory: ClothCategoryType | undefined;
   clothBrand: string;
   clothByName: string;
   setClothByName: Dispatch<SetStateAction<string>>;
   setClothMemo: Dispatch<SetStateAction<string>>;
-  onClickSubmitButton: () => void;
   setClothBuyDate: Dispatch<SetStateAction<string>>;
+  onClickSubmitButton: () => void;
 }
 
 export default function AdditionalInfo({
@@ -27,14 +28,14 @@ export default function AdditionalInfo({
   onClickSubmitButton,
   setClothBuyDate,
 }: AdditionalInfo) {
-  const [bigCategory, smallCategory] = clothCategory.split(',');
-
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{bigCategory}</Body3>
+        <Body3>{clothCategory!.bigCategory}</Body3>
         <Body3>&gt;</Body3>
-        <Body3 style={{ fontWeight: '700' }}>{smallCategory}</Body3>
+        <Body3 style={{ fontWeight: '700' }}>
+          {clothCategory!.smallCategory}
+        </Body3>
       </S.Category>
     );
   };

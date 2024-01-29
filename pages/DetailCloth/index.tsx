@@ -70,28 +70,28 @@ const DetailCloth = () => {
 
   const OOTDData = [
     {
-      imageId: 1,
-      image:
+      clothId: 1,
+      clothImage:
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
     {
-      imageId: 1,
-      image:
+      clothId: 1,
+      clothImage:
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
     {
-      imageId: 1,
-      image:
+      clothId: 1,
+      clothImage:
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
     {
-      imageId: 1,
-      image:
+      clothId: 1,
+      clothImage:
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
     {
-      imageId: 1,
-      image:
+      clothId: 1,
+      clothImage:
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
   ];
@@ -114,15 +114,12 @@ const DetailCloth = () => {
         brand="NIKE"
         clothByName="이름"
       />
-      <Image
-        src="https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg"
-        alt="logo"
-        width={375}
-        height={375}
-      />
+      <S.Img>
+        <img src="https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg" />
+      </S.Img>
       <DetailClothDiscription
-        isLink={false}
-        purchasing="신세계 백화점"
+        isLink={true}
+        purchasing="www.musinsa.com"
         uploadDate="23.12.22"
         memo="안감 없고 얇아서 늦여름~초가을까지는 무난 낙엽 떨어지면 단독으로 입기 어려움"
       />

@@ -9,6 +9,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: 24px;
   button {
     margin: 0 20px;
   }

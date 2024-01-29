@@ -9,6 +9,7 @@ interface ButtonProps {
   color: string;
   border: Boolean;
   onClick: MouseEventHandler;
+  className?: string;
 }
 
 export default function Button(props: ButtonProps) {
@@ -18,6 +19,7 @@ export default function Button(props: ButtonProps) {
         onClick={props.onClick}
         show={props.size === 'big'}
         buttonData={props}
+        className={props.className}
       >
         {props.children}
       </LargeButton>
@@ -26,6 +28,7 @@ export default function Button(props: ButtonProps) {
         onClick={props.onClick}
         show={props.size === 'small'}
         buttonData={props}
+        className={props.className}
       >
         {props.children}
       </SmallButton>

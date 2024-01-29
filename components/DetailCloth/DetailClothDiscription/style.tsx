@@ -6,6 +6,7 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
 `;
 
 const Category = styled.div`
@@ -14,6 +15,10 @@ const Category = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+
+  .isLink {
+    color: ${(props) => props.theme.color.grey_70};
+  }
 `;
 
 const IconSpan = styled.span`
@@ -29,10 +34,18 @@ const IconSpan = styled.span`
   }
 `;
 
+const CategoryStart = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
 const S = {
   Layout,
   Category,
   IconSpan,
+  CategoryStart,
 };
 
 export default S;

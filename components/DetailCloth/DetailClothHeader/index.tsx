@@ -35,7 +35,7 @@ export default function DetailClothDiscription({
       </S.Container>
 
       <Headline1>{brand}</Headline1>
-      <Body2>{clothByName}</Body2>
+      <Body2 style={{ color: '#BBBBBB' }}>{clothByName}</Body2>
     </S.Layout>
   );
 }

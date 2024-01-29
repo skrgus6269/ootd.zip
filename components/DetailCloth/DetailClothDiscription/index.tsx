@@ -24,10 +24,14 @@ export default function DetailClothDiscription({
     <S.Layout>
       <S.Category>
         <S.IconSpan>
-          {isLink ? <AiOutlineLink /> : <AiOutlineShopping />}
+          {isLink ? (
+            <AiOutlineLink className="isLink" />
+          ) : (
+            <AiOutlineShopping />
+          )}
         </S.IconSpan>
         {isLink ? (
-          <Body3 style={{ textDecorationLine: 'underline' }}>
+          <Body3 state="underline" className="isLink">
             {purchasing}
           </Body3>
         ) : (
@@ -39,15 +43,15 @@ export default function DetailClothDiscription({
         <S.IconSpan>
           <AiOutlineCalendar />
         </S.IconSpan>
-        <Body3>{uploadDate}</Body3>
+        <Body3 style={{ color: '#B1B1B1' }}>{uploadDate}</Body3>
       </S.Category>
 
-      <S.Category>
+      <S.CategoryStart>
         <S.IconSpan>
           <AiOutlineContainer />
         </S.IconSpan>
-        <Body3>{memo}</Body3>
-      </S.Category>
+        <Body3 style={{ color: '#B1B1B1' }}>{memo}</Body3>
+      </S.CategoryStart>
     </S.Layout>
   );
 }
