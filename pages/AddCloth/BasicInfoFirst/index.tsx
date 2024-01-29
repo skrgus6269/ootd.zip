@@ -2,19 +2,21 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
-import ClothCategoryModal from '@/components/AddCloth/ClothCategoryModal';
+import ClothCategoryModal, {
+  CategoryListType,
+} from '@/components/AddCloth/ClothCategoryModal';
 import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
 import WhereToBuyModal from '@/components/AddCloth/WhereToBuyModal';
-import { ClothCategoryType, ClothWhereBuy } from '..';
+import { ClothWhereBuy } from '..';
 
 interface BaiscInfoFirst {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: ClothCategoryType | undefined;
+  clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
-  setClothCategory: Dispatch<SetStateAction<ClothCategoryType | undefined>>;
+  setClothCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
   setClothBrand: Dispatch<SetStateAction<string>>;
   setClothWhereBuy: Dispatch<SetStateAction<ClothWhereBuy>>;
   handleStep: (next: string) => void;
@@ -39,10 +41,6 @@ export default function BasicInfoFirst({
     useState<Boolean>(false);
 
   useEffect(() => {
-    console.log(clothWhereBuy);
-  }, [clothWhereBuy]);
-
-  useEffect(() => {
     if (
       clothCategory !== undefined &&
       clothBrand.length > 0 &&
@@ -56,9 +54,11 @@ export default function BasicInfoFirst({
 
   const Category = clothCategory && (
     <S.Category>
-      <Body3>{clothCategory.bigCategory}</Body3>
+      <Body3>{clothCategory[0].bigCategory}</Body3>
       <Body3>&gt;</Body3>
-      <Body3 style={{ fontWeight: '700' }}>{clothCategory.smallCategory}</Body3>
+      <Body3 style={{ fontWeight: '700' }}>
+        {clothCategory[0].smallCategory}
+      </Body3>
     </S.Category>
   );
 

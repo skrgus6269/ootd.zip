@@ -2,8 +2,10 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useGetClothCategory from '@/hooks/useGetClothCategory';
 import { Body3 } from '@/components/UI';
-import { SelectedCategoryType } from '../AddCloth/ClothCategoryModal';
-import { CategoryListType } from '../MyPage/Closet/FilterModal';
+import {
+  CategoryListType,
+  SelectedCategoryType,
+} from '../AddCloth/ClothCategoryModal';
 
 interface ClothCategoryModalProps {
   setSelectedCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;
@@ -33,49 +35,49 @@ export default function ClothCategory({
       const clothCategory = [
         {
           categoryId: 1,
-          name: '외투',
+          bigCategory: '외투',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 2,
-          name: '상의',
+          bigCategory: '상의',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 3,
-          name: '니트웨어',
+          bigCategory: '니트웨어',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 4,
-          name: '하의',
+          bigCategory: '하의',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 5,
-          name: '원피스',
+          bigCategory: '원피스',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 7,
-          name: '신발',
+          bigCategory: '신발',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 8,
-          name: '가방',
+          bigCategory: '가방',
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 9,
-          name: 'ACC',
+          bigCategory: 'ACC',
           type: 'LargeCategory',
           state: false,
         },
@@ -97,67 +99,78 @@ export default function ClothCategory({
     setSmallCategoryList([
       {
         categoryId: 10,
-        name: '재킷',
+        bigCategory: '아우터',
+        smallCategory: '재킷',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 11,
-        name: '겨울코트',
+        bigCategory: '아우터',
+        smallCategory: '겨울코트',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 12,
-        name: '트렌치코트',
+        bigCategory: '아우터',
+        smallCategory: '트렌치코트',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 13,
-        name: '점퍼',
+        bigCategory: '아우터',
+        smallCategory: '점퍼',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 14,
-        name: '후드집업',
+        bigCategory: '아우터',
+        smallCategory: '후드집업',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 15,
-        name: '패딩',
+        bigCategory: '아우터',
+        smallCategory: '패딩',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 16,
-        name: '가죽',
+        bigCategory: '아우터',
+        smallCategory: '가죽',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 17,
-        name: '퍼',
+        bigCategory: '아우터',
+        smallCategory: '퍼',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 18,
-        name: '플리스',
+        bigCategory: '아우터',
+        smallCategory: '플리스',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 19,
-        name: '베스트',
+        bigCategory: '아우터',
+        smallCategory: '베스트',
         type: 'DetailCategory',
         state: false,
       },
       {
         categoryId: 20,
-        name: '바람막이/나일론',
+        bigCategory: '아우터',
+        smallCategory: '바람막이/나일론',
         type: 'DetailCategory',
         state: false,
       },
@@ -178,7 +191,11 @@ export default function ClothCategory({
     const selectedSmallCategoryList = newSmallCategoryList
       .filter((item) => item.state)
       .map((item) => {
-        return { categoryId: item.categoryId, name: item.name };
+        return {
+          categoryId: item.categoryId,
+          bigCategory: item.bigCategory,
+          smallCategory: item.smallCategory,
+        };
       });
 
     setSelectedCategory(selectedSmallCategoryList);
@@ -190,7 +207,11 @@ export default function ClothCategory({
     const selectedBigCategoryList = newBigCategoryList
       .filter((item) => item.state)
       .map((item) => {
-        return { categoryId: item.categoryId, name: item.name };
+        return {
+          categoryId: item.categoryId,
+          bigCategory: item.bigCategory,
+          smallCategory: null,
+        };
       });
 
     setSelectedCategory(selectedBigCategoryList);
@@ -207,7 +228,7 @@ export default function ClothCategory({
                 state={index === bigCategoryClickedIndex}
                 key={index}
               >
-                <Body3>{item.name}</Body3>
+                <Body3>{item.bigCategory}</Body3>
               </S.BigCategorySpan>
             );
           })}
@@ -220,7 +241,7 @@ export default function ClothCategory({
                 onClick={() => onClickSmallCategorySpan(index)}
                 key={index}
               >
-                <Body3>{item.name}</Body3>
+                <Body3>{item.smallCategory}</Body3>
               </S.SmallCategorySpan>
             );
           })}

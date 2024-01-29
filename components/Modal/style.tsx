@@ -11,7 +11,8 @@ const Layout = styled.div<ModalProps>`
   z-index: 999;
   bottom: 0px;
   width: 100%;
-  height: ${(props) => (props.isOpen ? `${props.height}` : '0')};
+  height: ${(props) =>
+    props.isOpen ? `calc(${props.height} / 85 * 667px)` : '0'};
   flex-direction: column;
   border-radius: 8px 8px 0 0;
   overflow-y: scroll;

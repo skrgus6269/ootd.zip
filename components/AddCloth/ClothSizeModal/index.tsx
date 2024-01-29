@@ -63,7 +63,7 @@ export default function ClothSizeModal({
     setIsOpen(false);
   };
   return (
-    <Modal isOpen={isOpen} height="75%">
+    <Modal isOpen={isOpen} height="60">
       <S.Layout>
         <S.Title>
           <Title1 className="title">사이즈</Title1>

@@ -194,7 +194,7 @@ export default function AddTag({
   return (
     <>
       <S.Background onClick={() => setAddTag(false)} addTag={addTag} />
-      <Modal height="80%" isOpen={addTag}>
+      <Modal height="80" isOpen={addTag}>
         <S.Layout>
           <TabView>
             <TabView.TabBar tab={['내 옷장', '신규 등록']} />
