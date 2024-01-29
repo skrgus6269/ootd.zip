@@ -2,14 +2,14 @@ import { useOOTD } from '@/hooks/useOOTD';
 import S from './style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';
-import UserCloth from '@/components/OOTD/UserCloth';
-import UserOOTD from '@/components/OOTD/UserOOTD';
-import SimilarOOTD from '@/components/OOTD/SimilarOOTD';
 import PostingCommentWrite from '@/components/PostingComment/PostingCommentWrite';
 import { useRef, useState } from 'react';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { OOTDType } from './type';
+import UserCloth from '@/components/Domain/OOTD/UserCloth';
+import UserOOTD from '@/components/Domain/OOTD/UserOOTD';
+import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
 
 export interface CommentStateType {
   ootdId: number;

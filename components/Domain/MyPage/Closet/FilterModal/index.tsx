@@ -3,10 +3,6 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import ClothCategory from '@/components/ClothCategory';
-import {
-  CategoryListType,
-  SelectedCategoryType,
-} from '@/components/AddCloth/ClothCategoryModal';
 import ColorList, { ColorListType } from '@/components/ColorList';
 import { Body4, Button3 } from '@/components/UI';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -14,6 +10,10 @@ import Button from '@/components/Button';
 import { BrandType } from '@/components/BrandList/Brand';
 import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
+import {
+  CategoryListType,
+  SelectedCategoryType,
+} from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface FilterModalProps {
   isOpen: Boolean;

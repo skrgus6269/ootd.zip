@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import S from './style';
 import { Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import NextButton from '@/components/NextButton';
-import { ClothCategoryType } from '..';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface AdditionalInfo {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: ClothCategoryType | undefined;
+  clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothByName: string;
   setClothByName: Dispatch<SetStateAction<string>>;
@@ -31,10 +31,10 @@ export default function AdditionalInfo({
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory!.bigCategory}</Body3>
+        <Body3>{clothCategory![0].bigCategory}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory!.smallCategory}
+          {clothCategory![0].smallCategory}
         </Body3>
       </S.Category>
     );

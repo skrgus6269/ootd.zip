@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import Input from '../../Input';
 import S from './style';
 import {
   hasKoreanInitial,
@@ -18,6 +17,7 @@ import {
   HELPER_TEXT_2_LENGTH,
   HELPER_TEXT_BAD_NICKNAME,
 } from '@/constants/business.constants';
+import Input from '@/components/Input';
 
 interface InputProps {
   setInput: Dispatch<SetStateAction<string>>;

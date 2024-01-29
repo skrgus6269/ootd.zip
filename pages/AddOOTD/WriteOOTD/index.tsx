@@ -2,12 +2,12 @@
 import Input from '@/components/Input';
 import S from './style';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Body4, Button1, Button3, Title1 } from '@/components/UI';
 import { AiOutlinePlus } from 'react-icons/ai';
-import StyleModal from '@/components/AddItem/StyleModal';
 import { Style } from '..';
 import { AiOutlineClose } from 'react-icons/ai';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | string;

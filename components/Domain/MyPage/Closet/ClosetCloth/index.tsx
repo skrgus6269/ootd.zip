@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
-import { SelectedCategoryType } from '@/components/AddCloth/ClothCategoryModal';
+import { SelectedCategoryType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface ClosetClothProps {
   myPageClothList?: myPageClothType[];

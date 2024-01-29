@@ -1,5 +1,5 @@
 import S from './style';
-import { Button1, Button2, Button3 } from '../UI';
+import { Button2, Button3 } from '../UI';
 
 interface AlertProps {
   onClickYesButton: () => void;

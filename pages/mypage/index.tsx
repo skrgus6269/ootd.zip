@@ -1,9 +1,9 @@
 import AppBar from '@/components/Appbar';
 import S from './style';
 import { AiOutlineArrowLeft, AiOutlineSetting } from 'react-icons/ai';
-import Profile from '@/components/MyPage/Profile';
-import Closet from '@/components/MyPage/Closet';
 import { useRouter } from 'next/router';
+import Profile from '@/components/Domain/MyPage/Profile';
+import Closet from '@/components/Domain/MyPage/Closet';
 
 export default function MyPage() {
   const router = useRouter();

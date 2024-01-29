@@ -1,18 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import S from './style';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { ClothColor, ClothWhereBuy } from '..';
+import { ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
-import ColorModal from '@/components/AddCloth/ColorModal';
-import ColorSpan from '@/components/ColorList/ColorSpan';
-import ClothSizeModal from '@/components/AddCloth/ClothSizeModal';
-import AddClothAlert from '@/components/AddCloth/AddClothAlert';
 import { ColorListType } from '@/components/ColorList';
-import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import ColorSpan from '@/components/ColorList/ColorSpan';
+import ColorModal from '@/components/Domain/AddCloth/ColorModal';
+import ClothSizeModal from '@/components/Domain/AddCloth/ClothSizeModal';
+import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
   clothImage: string | ImageWithTag | undefined;

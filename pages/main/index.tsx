@@ -1,12 +1,11 @@
 import { ClothInformationProps } from '@/components/ClothInformation/type';
-import UserCloset from '@/components/Main/MyCloset';
 import S from './style';
-import appleLogo from '@/public/images/appleLogo.png';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineSearch } from 'react-icons/ai';
-import TodayRecommend from '@/components/Main/TodayRecommend';
-import SameCloth from '@/components/Main/SameCloth';
+import UserCloset from '@/components/Domain/Main/MyCloset';
+import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
+import SameCloth from '@/components/Domain/Main/SameCloth';
 
 const ClothInformationSampleData = [
   {

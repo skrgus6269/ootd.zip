@@ -2,14 +2,14 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
-import ClothCategoryModal, {
-  CategoryListType,
-} from '@/components/AddCloth/ClothCategoryModal';
 import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
-import WhereToBuyModal from '@/components/AddCloth/WhereToBuyModal';
 import { ClothWhereBuy } from '..';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import ClothCategoryModal, {
+  CategoryListType,
+} from '@/components/Domain/AddCloth/ClothCategoryModal';
+import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
 
 interface BaiscInfoFirst {
   clothImage: string | ImageWithTag | undefined;

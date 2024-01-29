@@ -5,7 +5,7 @@ import { Body3 } from '@/components/UI';
 import {
   CategoryListType,
   SelectedCategoryType,
-} from '../AddCloth/ClothCategoryModal';
+} from '../Domain/AddCloth/ClothCategoryModal';
 
 interface ClothCategoryModalProps {
   setSelectedCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;

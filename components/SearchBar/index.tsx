@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Layout, SearchIcon, SearchInput, Input, CloseIcon } from './style';
 import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
 import useDebounce from '@/hooks/useDebouce';
