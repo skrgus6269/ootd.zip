@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import Brand, { BrandType } from '../Brand';
+import Brand, { BrandType } from './Brand';
 import S from './style';
 
 interface BrandListProps {

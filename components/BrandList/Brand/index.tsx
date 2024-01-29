@@ -1,5 +1,5 @@
 import { AiFillCheckSquare } from 'react-icons/ai';
-import { Body2, Body4 } from '../UI';
+import { Body2, Body4 } from '../../UI';
 import S from './style';
 
 interface BrandProps {

@@ -1,4 +1,4 @@
-import { Body3 } from '../UI';
+import { Body3 } from '../../UI';
 import S from './style';
 
 interface ColorSpan {

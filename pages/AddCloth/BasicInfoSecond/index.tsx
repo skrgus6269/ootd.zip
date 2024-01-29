@@ -8,7 +8,7 @@ import NextButton from '@/components/NextButton';
 import { ClothColor, ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
 import ColorModal from '@/components/AddCloth/ColorModal';
-import ColorSpan from '@/components/ColorSpan';
+import ColorSpan from '@/components/ColorList/ColorSpan';
 import ClothSizeModal from '@/components/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/AddCloth/AddClothAlert';
 import { ColorListType } from '@/components/ColorList';
