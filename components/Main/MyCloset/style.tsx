@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const Layout = styled.div``;
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 const CarouselLayout = styled.div``;
 

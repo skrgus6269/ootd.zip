@@ -9,7 +9,6 @@ const Layout = styled.div<LayoutType>`
   width: 100%;
   gap: 4px;
   flex-wrap: wrap;
-
   img {
     width: calc(50% - 2px);
     height: 173px;

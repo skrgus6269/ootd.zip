@@ -90,7 +90,8 @@ const TagClothInformationSampleData = [
 
 const MyClosetDataSample = {
   user: {
-    userImage: appleLogo,
+    userImage:
+      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     userName: 'username',
     follow: 999,
     myCloth: 999,
