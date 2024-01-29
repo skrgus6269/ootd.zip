@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useLayoutEffect } from 'react';
 import S from './style';
-import ColorSpan from '../ColorSpan';
+import ColorSpan from './ColorSpan';
 
 export type ColorListType = {
   colorId: number;

@@ -1,4 +1,3 @@
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import Gallery from '@/components/Gallery/';
 import { Title1 } from '@/components/UI';
@@ -10,12 +9,9 @@ import { ComponentWithLayout } from '../sign-up';
 import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
 import AdditionalInfo from './AdditionalInfo';
-import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
-
-export type ClothColor = {
-  name: string;
-  color: string;
-}[];
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { ColorListType } from '@/components/ColorList';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -37,7 +33,7 @@ const AddCloth: ComponentWithLayout = () => {
     letter: '',
     type: 'write',
   });
-  const [clothColor, setClothColor] = useState<ClothColor>([]);
+  const [clothColor, setClothColor] = useState<ColorListType | null>([]);
   const [clothSize, setClothSize] = useState<string>('');
   const [open, setOpen] = useState('공개');
   const [clothByName, setClothByName] = useState('');

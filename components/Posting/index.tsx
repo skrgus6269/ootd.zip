@@ -11,12 +11,11 @@ import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import ShareOutlined from '@/public/images/shareOutlined.svg';
 import MessageOutlined from '@/public/images/MessageOutlined.svg';
-import Image from 'next/image';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { OOTDType } from '@/pages/OOTD/type';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
-import ReportModal from '../OOTD/ReportModal';
+import ReportModal from '../Domain/OOTD/ReportModal';
 
 interface ClothTag {
   xRate: string;

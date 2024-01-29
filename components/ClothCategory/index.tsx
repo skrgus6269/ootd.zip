@@ -1,11 +1,11 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import useGetClothCategory from '@/hooks/useGetClothCategory';
+import useGetClothCategory from '@/apis/domain/System/SystemApi';
 import { Body3 } from '@/components/UI';
 import {
   CategoryListType,
   SelectedCategoryType,
-} from '../AddCloth/ClothCategoryModal';
+} from '../Domain/AddCloth/ClothCategoryModal';
 
 interface ClothCategoryModalProps {
   setSelectedCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;

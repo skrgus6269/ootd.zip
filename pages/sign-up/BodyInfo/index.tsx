@@ -1,7 +1,7 @@
-import BodyInput from '@/components/SignUp/BodyInput';
-import WeightOpen from '@/components/SignUp/WeightOpen';
 import { Dispatch, SetStateAction } from 'react';
 import S from './style';
+import BodyInput from '@/components/Domain/SignUp/BodyInput';
+import WeightOpen from '@/components/Domain/SignUp/WeightOpen';
 
 interface BodyInfoProps {
   open: string;

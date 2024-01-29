@@ -5,10 +5,9 @@ import NextButton from '@/components/NextButton';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import TagInformation from '@/components/ClothInformation/TagInformation';
-import AddTag from '@/components/AddItem/TagModal';
 import Carousel from '@/components/Carousel';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
+import AddTag, { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 
 interface ClothTagProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;

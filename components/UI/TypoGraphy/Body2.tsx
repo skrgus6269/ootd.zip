@@ -4,7 +4,7 @@ interface Body2State {
   state?: 'emphasis';
 }
 
-const Body = styled.p<Body2State>`
+const Body2 = styled.p<Body2State>`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
   font-size: ${({ theme }) => theme.fontSize.md}; //16px
   line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
@@ -16,4 +16,4 @@ const Body = styled.p<Body2State>`
   `}
 `;
 
-export default Body;
+export default Body2;
