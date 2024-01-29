@@ -50,7 +50,7 @@ export default function WhereToBuyModal({
   };
 
   return (
-    <Modal height="80%" isOpen={isOpen}>
+    <Modal height="70" isOpen={isOpen}>
       <S.Layout>
         <S.Title>
           <Title1 className="title">구매처</Title1>

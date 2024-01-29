@@ -2,8 +2,10 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useGetClothCategory from '@/hooks/useGetClothCategory';
 import { Body3 } from '@/components/UI';
-import { SelectedCategoryType } from '../AddCloth/ClothCategoryModal';
-import { CategoryListType } from '../MyPage/Closet/FilterModal';
+import {
+  CategoryListType,
+  SelectedCategoryType,
+} from '../AddCloth/ClothCategoryModal';
 
 interface ClothCategoryModalProps {
   setSelectedCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;
@@ -32,50 +34,50 @@ export default function ClothCategory({
       // const clothCategory = await getClothCategory();
       const clothCategory = [
         {
-          id: 1,
-          name: '외투',
+          categoryId: 1,
+          bigCategory: '외투',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 2,
-          name: '상의',
+          categoryId: 2,
+          bigCategory: '상의',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 3,
-          name: '니트웨어',
+          categoryId: 3,
+          bigCategory: '니트웨어',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 4,
-          name: '하의',
+          categoryId: 4,
+          bigCategory: '하의',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 5,
-          name: '원피스',
+          categoryId: 5,
+          bigCategory: '원피스',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 7,
-          name: '신발',
+          categoryId: 7,
+          bigCategory: '신발',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 8,
-          name: '가방',
+          categoryId: 8,
+          bigCategory: '가방',
           type: 'LargeCategory',
           state: false,
         },
         {
-          id: 9,
-          name: 'ACC',
+          categoryId: 9,
+          bigCategory: 'ACC',
           type: 'LargeCategory',
           state: false,
         },
@@ -96,68 +98,79 @@ export default function ClothCategory({
 
     setSmallCategoryList([
       {
-        id: 10,
-        name: '재킷',
+        categoryId: 10,
+        bigCategory: '아우터',
+        smallCategory: '재킷',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 11,
-        name: '겨울코트',
+        categoryId: 11,
+        bigCategory: '아우터',
+        smallCategory: '겨울코트',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 12,
-        name: '트렌치코트',
+        categoryId: 12,
+        bigCategory: '아우터',
+        smallCategory: '트렌치코트',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 13,
-        name: '점퍼',
+        categoryId: 13,
+        bigCategory: '아우터',
+        smallCategory: '점퍼',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 14,
-        name: '후드집업',
+        categoryId: 14,
+        bigCategory: '아우터',
+        smallCategory: '후드집업',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 15,
-        name: '패딩',
+        categoryId: 15,
+        bigCategory: '아우터',
+        smallCategory: '패딩',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 16,
-        name: '가죽',
+        categoryId: 16,
+        bigCategory: '아우터',
+        smallCategory: '가죽',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 17,
-        name: '퍼',
+        categoryId: 17,
+        bigCategory: '아우터',
+        smallCategory: '퍼',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 18,
-        name: '플리스',
+        categoryId: 18,
+        bigCategory: '아우터',
+        smallCategory: '플리스',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 19,
-        name: '베스트',
+        categoryId: 19,
+        bigCategory: '아우터',
+        smallCategory: '베스트',
         type: 'DetailCategory',
         state: false,
       },
       {
-        id: 20,
-        name: '바람막이/나일론',
+        categoryId: 20,
+        bigCategory: '아우터',
+        smallCategory: '바람막이/나일론',
         type: 'DetailCategory',
         state: false,
       },
@@ -178,7 +191,11 @@ export default function ClothCategory({
     const selectedSmallCategoryList = newSmallCategoryList
       .filter((item) => item.state)
       .map((item) => {
-        return { categoryId: item.id, name: item.name };
+        return {
+          categoryId: item.categoryId,
+          bigCategory: item.bigCategory,
+          smallCategory: item.smallCategory,
+        };
       });
 
     setSelectedCategory(selectedSmallCategoryList);
@@ -190,7 +207,11 @@ export default function ClothCategory({
     const selectedBigCategoryList = newBigCategoryList
       .filter((item) => item.state)
       .map((item) => {
-        return { categoryId: item.id, name: item.name };
+        return {
+          categoryId: item.categoryId,
+          bigCategory: item.bigCategory,
+          smallCategory: null,
+        };
       });
 
     setSelectedCategory(selectedBigCategoryList);
@@ -203,11 +224,11 @@ export default function ClothCategory({
           {bigCategoryList.map((item, index) => {
             return (
               <S.BigCategorySpan
-                onClick={() => onClickBigCategory(item.id, index)}
+                onClick={() => onClickBigCategory(item.categoryId, index)}
                 state={index === bigCategoryClickedIndex}
                 key={index}
               >
-                <Body3>{item.name}</Body3>
+                <Body3>{item.bigCategory}</Body3>
               </S.BigCategorySpan>
             );
           })}
@@ -216,11 +237,11 @@ export default function ClothCategory({
           {smallCategoryList.map((item, index) => {
             return (
               <S.SmallCategorySpan
-                state={item.state}
+                state={item.state === true}
                 onClick={() => onClickSmallCategorySpan(index)}
                 key={index}
               >
-                <Body3>{item.name}</Body3>
+                <Body3>{item.smallCategory}</Body3>
               </S.SmallCategorySpan>
             );
           })}

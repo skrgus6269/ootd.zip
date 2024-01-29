@@ -10,6 +10,7 @@ import { ComponentWithLayout } from '../sign-up';
 import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
 import AdditionalInfo from './AdditionalInfo';
+import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
 
 export type ClothColor = {
   name: string;
@@ -21,11 +22,6 @@ export interface ClothWhereBuy {
   type: 'link' | 'write';
 }
 
-export interface ClothCategoryType {
-  bigCategory: string;
-  smallCategory: string;
-}
-
 const AddCloth: ComponentWithLayout = () => {
   const steps = ['사진선택', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
@@ -33,9 +29,9 @@ const AddCloth: ComponentWithLayout = () => {
     string | ImageWithTag | undefined
   >();
 
-  const [clothCategory, setClothCategory] = useState<
-    ClothCategoryType | undefined
-  >();
+  const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
+    null
+  );
   const [clothBrand, setClothBrand] = useState<string>('');
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',

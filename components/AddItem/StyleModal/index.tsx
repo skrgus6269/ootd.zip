@@ -34,7 +34,7 @@ export default function StyleModal({
     <>
       <S.Background addTag={addTag} onClick={() => setAddTag(false)} />
 
-      <Modal height="80%" isOpen={addTag}>
+      <Modal height="80" isOpen={addTag}>
         <S.Layout>
           <S.Dragger>
             <S.DraggerBar />
