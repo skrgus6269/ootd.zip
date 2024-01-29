@@ -3,8 +3,11 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import ClothCategory from '@/components/ClothCategory';
-import { SelectedCategoryType } from '@/components/AddCloth/ClothCategoryModal';
-import ColorList, { ColorData, ColorListType } from '@/components/ColorList';
+import {
+  CategoryListType,
+  SelectedCategoryType,
+} from '@/components/AddCloth/ClothCategoryModal';
+import ColorList, { ColorListType } from '@/components/ColorList';
 import { Body4, Button3 } from '@/components/UI';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/Button';
@@ -14,32 +17,22 @@ import BrandList from '@/components/BrandList';
 
 interface FilterModalProps {
   isOpen: Boolean;
-  brand?: BrandType[];
   setFilterModalIsOpen: Dispatch<SetStateAction<Boolean>>;
   categoryInitital: CategoryListType[] | null;
-  colorInitital: ColorData[] | null;
+  colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
   setFilter: Dispatch<SetStateAction<FilterData>>;
-}
-
-export interface CategoryListType {
-  categoryId: number;
-  name: string;
-  type?: string;
-  state?: Boolean;
 }
 
 export default function FilterModal({
   isOpen,
   setFilterModalIsOpen,
-  brand,
   setFilter,
   colorInitital,
   brandInitial,
 }: FilterModalProps) {
-  const [selectedColorList, setSelectedColorList] = useState<
-    ColorData[] | null
-  >(null);
+  const [selectedColorList, setSelectedColorList] =
+    useState<ColorListType | null>(null);
 
   const [selectedCategory, setSelectedCategory] = useState<
     SelectedCategoryType[] | null
@@ -136,7 +129,7 @@ export default function FilterModal({
   }, [selectedCategory]);
 
   return (
-    <Modal isOpen={isOpen} height="60%">
+    <Modal isOpen={isOpen} height="60">
       <S.Layout>
         <TabView>
           <TabView.TabBar tab={['카테고리', '색상', '브랜드']} />
@@ -181,7 +174,11 @@ export default function FilterModal({
           {selectedCategory?.map((item, index) => {
             return (
               <S.SelectedFilterSpan key={index}>
-                <Button3>{item.name}</Button3>
+                {item.smallCategory ? (
+                  <Button3>{item.smallCategory}</Button3>
+                ) : (
+                  <Button3>{item.bigCategory}</Button3>
+                )}
                 <AiOutlineClose
                   onClick={() => onClickCloseCategoryButton(item.categoryId)}
                   className="close"

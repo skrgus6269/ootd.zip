@@ -5,19 +5,21 @@ import ImageList from '@/components/ImageList';
 import { useRouter } from 'next/router';
 import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
+import { ColorListType } from '@/components/ColorList';
+import { SelectedCategoryType } from '@/components/AddCloth/ClothCategoryModal';
+
+interface ClosetClothProps {
+  myPageClothList?: myPageClothType[];
+}
 
 export type myPageClothType = {
   clothId: number;
   clothImage: string;
 };
 
-interface ClosetClothProps {
-  myPageClothList?: myPageClothType[];
-}
-
 export interface FilterData {
-  category: { categoryId: number; name: string }[] | null;
-  color: { colorId: number; name: string }[] | null;
+  category: SelectedCategoryType[] | null;
+  color: ColorListType | null;
   brand: { brandId: number; korean: string; english: string }[] | null;
   isOpen: Boolean | null;
 }

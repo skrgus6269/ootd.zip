@@ -5,21 +5,23 @@ import { ImageWithTag } from '@/components/AddItem/TagModal';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { ClothCategoryType, ClothColor, ClothWhereBuy } from '..';
+import { ClothColor, ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
 import ColorModal from '@/components/AddCloth/ColorModal';
 import ColorSpan from '@/components/ColorSpan';
 import ClothSizeModal from '@/components/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/AddCloth/AddClothAlert';
+import { ColorListType } from '@/components/ColorList';
+import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
 
 interface BasicInfoSecondProps {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: ClothCategoryType | undefined;
+  clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
   handleStep: (next: string) => void;
-  clothColor: ClothColor;
-  setClothColor: Dispatch<SetStateAction<ClothColor>>;
+  clothColor: ColorListType | null;
+  setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: string;
   setClothSize: Dispatch<SetStateAction<string>>;
   open: string;
@@ -48,10 +50,10 @@ export default function BasicInfoSecond({
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory!.bigCategory}</Body3>
+        <Body3>{clothCategory![0].bigCategory}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory!.smallCategory}
+          {clothCategory![0].smallCategory}
         </Body3>
       </S.Category>
     );
@@ -109,7 +111,7 @@ export default function BasicInfoSecond({
                 색상
               </Input.Label>
               <S.ClothColorSpanList>
-                {clothColor.length > 0 &&
+                {clothColor &&
                   clothColor.map((item, index) => {
                     return (
                       <ColorSpan
@@ -153,7 +155,9 @@ export default function BasicInfoSecond({
           </S.Information>
         </S.BasicInfoSecond>
         <NextButton
-          state={clothColor.length > 0 && clothSize.length > 0}
+          state={
+            clothColor !== null && clothColor.length > 0 && clothSize.length > 0
+          }
           onClick={onClickNextButton}
           className="nextButton"
         >
@@ -162,6 +166,7 @@ export default function BasicInfoSecond({
       </S.Layout>
       {init > 0 && (
         <ColorModal
+          colorInitial={clothColor}
           setIsOpen={setColorModalOpen}
           setClothColor={setClothColor}
           isOpen={colorModalOpen}
@@ -172,7 +177,7 @@ export default function BasicInfoSecond({
           setIsOpen={setSizeModalOpen}
           setClothSize={setClothSize}
           isOpen={sizeModalOpen}
-          bigCategory={clothCategory!.bigCategory}
+          bigCategory={clothCategory![0].bigCategory}
         />
       )}
       {alertOpen && (

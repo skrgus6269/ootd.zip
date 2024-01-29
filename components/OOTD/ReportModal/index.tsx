@@ -17,7 +17,7 @@ export default function ReportModal({
   };
 
   return (
-    <Modal isOpen={reportModalIsopen} height="10%">
+    <Modal isOpen={reportModalIsopen} height="10">
       <S.Layout onClick={onClickReportButton}>
         <Button1 className="report">신고</Button1>
       </S.Layout>

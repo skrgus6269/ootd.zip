@@ -2,11 +2,6 @@ import { Dispatch, SetStateAction, useEffect, useLayoutEffect } from 'react';
 import S from './style';
 import ColorSpan from '../ColorSpan';
 
-export type ColorData = {
-  name: string;
-  colorId: number;
-};
-
 export type ColorListType = {
   colorId: number;
   color: string;
@@ -17,9 +12,9 @@ export type ColorListType = {
 interface ColorListProps {
   colorList: ColorListType;
   setColorList: Dispatch<SetStateAction<ColorListType>>;
-  selectedColorList: ColorData[] | null;
-  setSelectedColorList: Dispatch<SetStateAction<ColorData[] | null>>;
-  colorInitital: ColorData[] | null;
+  selectedColorList: ColorListType | null;
+  setSelectedColorList: Dispatch<SetStateAction<ColorListType | null>>;
+  colorInitital: ColorListType | null;
   className?: string;
 }
 
@@ -47,11 +42,7 @@ export default function ColorList({
   }, []);
 
   useLayoutEffect(() => {
-    const selectedColor = colorList
-      .filter((item) => item.state)
-      .map((item) => {
-        return { colorId: item.colorId, name: item.name };
-      });
+    const selectedColor = colorList.filter((item) => item.state);
 
     setSelectedColorList(selectedColor);
   }, [colorList]);
