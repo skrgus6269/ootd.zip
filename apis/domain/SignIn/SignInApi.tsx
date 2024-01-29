@@ -1,17 +1,24 @@
-import { authService } from '@/service';
+import { authService } from '@/apis/_service';
 import { setCookie } from '@/utils/Cookie';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import { useRecoilState } from 'recoil';
 import { loginStates } from '@/utils/recoil/atom';
+import {
+  NEXT_PUBLIC_KAKAO_URI,
+  NEXT_PUBLIC_GOOGLE_URI,
+} from '@/constants/develop.constants';
+import { useRouter } from 'next/router';
 
 interface LoginPayload {
   platform: string;
   code: string;
 }
 
-// callback 페이지에서 사용하는 훅
-export const useLogin = () => {
+export const SignInApi = () => {
   const [loginState, setLogin] = useRecoilState(loginStates);
+  const router = useRouter();
+
+  // callback 페이지에서 사용하는  API
   const login = async (payload: LoginPayload) => {
     // 액세스 토큰을 받아온다.
     const data = await authService.login(payload.platform, payload.code);
@@ -38,5 +45,19 @@ export const useLogin = () => {
     }
   };
 
-  return [login] as const;
+  // 로그인 하는 플랫폼에 따라 redirect 해주는 API
+  const snsLogin = (platform: string) => {
+    switch (platform) {
+      case 'KAKAO': {
+        window.Kakao.Auth.authorize({
+          redirectUri: NEXT_PUBLIC_KAKAO_URI,
+        });
+        break;
+      }
+      case 'GOOGLE': {
+        router.push(NEXT_PUBLIC_GOOGLE_URI);
+      }
+    }
+  };
+  return [login, snsLogin] as const;
 };

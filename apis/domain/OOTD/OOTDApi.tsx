@@ -1,4 +1,4 @@
-import { userService } from '@/service';
+import { userService } from '@/apis/_service';
 import {
   AddOOTDBookmarkPayload,
   AddOOTDLikePayload,
@@ -9,9 +9,9 @@ import {
   FixOOTDContentsOrIsPrivatePayload,
   FixOOTDPayload,
   GetOOTDParams,
-} from '@/apis/type';
+} from '@/apis/_api/type';
 
-export const useOOTD = () => {
+export const OOTDApi = () => {
   //ootd 조회
   const getOOTD = async (params: GetOOTDParams) => {
     const data = await userService.getOOTD(params);

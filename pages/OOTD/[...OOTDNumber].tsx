@@ -1,4 +1,4 @@
-import { useOOTD } from '@/hooks/useOOTD';
+import { useOOTD } from '@/apis/domain/OOTD/OOTDApi';
 import S from './style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';

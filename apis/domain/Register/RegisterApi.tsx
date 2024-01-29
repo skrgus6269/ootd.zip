@@ -1,5 +1,5 @@
 import { useState } from 'react';
 
-export const useSignUp = () => {
+export const RegisterApi = () => {
   const [signUpSuccess, setSignUpSuccess] = useState('');
 };

@@ -1,4 +1,4 @@
-import { systemApi } from '@/apis';
+import { systemApi } from '@/apis/_api';
 
 const sampleClothCategory = [
   {

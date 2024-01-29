@@ -1,6 +1,6 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import useGetClothCategory from '@/hooks/useGetClothCategory';
+import useGetClothCategory from '@/apis/domain/System/SystemApi';
 import { Body3 } from '@/components/UI';
 import {
   CategoryListType,

@@ -1,4 +1,4 @@
-import { userApi } from '@/apis';
+import { userApi } from '@/apis/_api';
 import {
   AddOOTDBookmarkPayload,
   AddOOTDLikePayload,
@@ -9,7 +9,7 @@ import {
   FixOOTDContentsOrIsPrivatePayload,
   FixOOTDPayload,
   GetOOTDParams,
-} from '@/apis/type';
+} from '@/apis/_api/type';
 
 //ootd 신규 등록
 export const addOOTD = async (payload: AddOOTDPayload) => {

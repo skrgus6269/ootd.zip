@@ -1,4 +1,4 @@
-import fetcher from './fetcher';
+import fetcher from '../fetcher';
 import { NEXT_PUBLIC_DOMAIN_HOST } from '@/constants/develop.constants';
 
 export const login = async (platform: string, code: string) => {

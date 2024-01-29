@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useLogin } from '@/hooks/useLogin';
+import { useLogin } from '@/apis/domain/SignIn/SignInApi';
 
 interface QueryParams {
   code?: string;

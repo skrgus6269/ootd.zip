@@ -1,6 +1,6 @@
-import { systemService } from '@/service';
+import { systemService } from '@/apis/_service';
 
-const useGetClothCategory = () => {
+const SystemApi = () => {
   const getClothCategory = async () => {
     const clothCategory = await systemService.getClothCategory();
 
@@ -10,4 +10,4 @@ const useGetClothCategory = () => {
   return [getClothCategory];
 };
 
-export default useGetClothCategory;
+export default SystemApi;
