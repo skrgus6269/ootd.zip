@@ -1,4 +1,4 @@
-export interface AddOOTDPayload {
+export interface postOOTDPayload {
   content: string;
   isPrivate: Boolean;
   styles: number[];
@@ -14,32 +14,32 @@ export interface AddOOTDPayload {
   }[];
 }
 
-export interface GetOOTDParams {
+export interface getOOTDParams {
   id: number;
 }
-export interface FixOOTDPayload extends AddOOTDPayload {}
+export interface putOOTDPayload extends postOOTDPayload {}
 
-export interface DeleteOOTDPayload {
+export interface deleteOOTDPayload {
   id: number;
 }
 
-export interface FixOOTDContentsOrIsPrivatePayload {
+export interface patchOOTDContentsOrIsPrivatePayload {
   content: string;
   isPrivate: Boolean;
 }
 
-export interface AddOOTDBookmarkPayload {
+export interface postOOTDBookmarkPayload {
   id: number;
 }
 
-export interface DeleteOOTDBookmarkPayload {
+export interface deleteOOTDBookmarkPayload {
   id: number;
 }
 
-export interface AddOOTDLikePayload {
+export interface postOOTDLikePayload {
   id: number;
 }
 
-export interface DeleteOOTDLikePayload {
+export interface deleteOOTDLikePayload {
   id: number;
 }

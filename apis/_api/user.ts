@@ -1,47 +1,47 @@
 import fetcher from '../fetcher';
 import {
-  AddOOTDBookmarkPayload,
-  AddOOTDLikePayload,
-  AddOOTDPayload,
-  DeleteOOTDBookmarkPayload,
-  DeleteOOTDLikePayload,
-  DeleteOOTDParams,
-  FixOOTDContentsOrIsPrivatePayload,
-  FixOOTDPayload,
-  GetOOTDParams,
+  deleteOOTDBookmarkPayload,
+  deleteOOTDLikePayload,
+  deleteOOTDPayload,
+  getOOTDParams,
+  patchOOTDContentsOrIsPrivatePayload,
+  postOOTDBookmarkPayload,
+  postOOTDLikePayload,
+  postOOTDPayload,
+  putOOTDPayload,
 } from './type';
 
 //ootd 작성
-export const addOOTD = async (payload: AddOOTDPayload) => {
+export const postOOTD = async (payload: postOOTDPayload) => {
   const { data } = await fetcher.post('api/v1/ootd/', payload);
 
   return data;
 };
 
 //ootd 조회
-export const getOOTD = async (params: GetOOTDParams) => {
+export const getOOTD = async (params: getOOTDParams) => {
   const { data } = await fetcher.get(`api/v1/ootd/${params.id}`);
 
   return data;
 };
 
 //ootd 전체 수정
-export const fixOOTD = async (payload: FixOOTDPayload) => {
+export const putOOTD = async (payload: putOOTDPayload) => {
   const { data } = await fetcher.put(`api/v1/ootd/`, payload);
 
   return data;
 };
 
 //ootd 삭제
-export const deleteOOTD = async (payload: DeleteOOTDParams) => {
+export const deleteOOTD = async (payload: deleteOOTDPayload) => {
   const { data } = await fetcher.delete(`api/v1/ootd/`, { data: payload });
 
   return data;
 };
 
 //ootd 내용, 공개/비공개 여부 수정
-export const fixOOTDContentsOrIsPrivate = async (
-  payload: FixOOTDContentsOrIsPrivatePayload
+export const patchOOTDContentsOrIsPrivate = async (
+  payload: patchOOTDContentsOrIsPrivatePayload
 ) => {
   const { data } = await fetcher.patch(`api/v1/ootd/`, payload);
 
@@ -49,7 +49,7 @@ export const fixOOTDContentsOrIsPrivate = async (
 };
 
 //ootd 북마크 추가
-export const addOOTDBookmark = async (payload: AddOOTDBookmarkPayload) => {
+export const postOOTDBookmark = async (payload: postOOTDBookmarkPayload) => {
   const { data } = await fetcher.post(`api/v1/ootd/bookmark/`, payload);
 
   return data;
@@ -57,7 +57,7 @@ export const addOOTDBookmark = async (payload: AddOOTDBookmarkPayload) => {
 
 //ootd 북마크 제거
 export const deleteOOTDBookmark = async (
-  payload: DeleteOOTDBookmarkPayload
+  payload: deleteOOTDBookmarkPayload
 ) => {
   const { data } = await fetcher.delete(`api/v1/ootd/bookmark`, {
     data: payload,
@@ -67,14 +67,14 @@ export const deleteOOTDBookmark = async (
 };
 
 //ootd 좋아요 추가
-export const addOOTDLike = async (payload: AddOOTDLikePayload) => {
+export const postOOTDLike = async (payload: postOOTDLikePayload) => {
   const { data } = await fetcher.post(`api/v1/ootd/like/`, payload);
 
   return data;
 };
 
 //ootd 좋아요 제거
-export const deleteOOTDLike = async (payload: DeleteOOTDLikePayload) => {
+export const deleteOOTDLike = async (payload: deleteOOTDLikePayload) => {
   const { data } = await fetcher.delete(`api/v1/ootd/like/`, { data: payload });
 
   return data;

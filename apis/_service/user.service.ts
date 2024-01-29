@@ -1,19 +1,19 @@
 import { userApi } from '@/apis/_api';
 import {
-  AddOOTDBookmarkPayload,
-  AddOOTDLikePayload,
-  AddOOTDPayload,
+  postOOTDBookmarkPayload,
+  postOOTDLikePayload,
+  postOOTDPayload,
   DeleteOOTDBookmarkPayload,
   DeleteOOTDLikePayload,
   DeleteOOTDPayload,
-  FixOOTDContentsOrIsPrivatePayload,
-  FixOOTDPayload,
+  putOOTDContentsOrIsPrivatePayload,
+  putOOTDPayload,
   GetOOTDParams,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
-export const addOOTD = async (payload: AddOOTDPayload) => {
-  const data = await userApi.addOOTD(payload);
+export const postOOTD = async (payload: postOOTDPayload) => {
+  const data = await userApi.postOOTD(payload);
 
   return data;
 };
@@ -26,8 +26,8 @@ export const getOOTD = async (params: GetOOTDParams) => {
 };
 
 //ootd 전체 수정
-export const fixOOTD = async (params: FixOOTDPayload) => {
-  const data = await userApi.fixOOTD(params);
+export const putOOTD = async (params: putOOTDPayload) => {
+  const data = await userApi.putOOTD(params);
 
   return data;
 };
@@ -40,17 +40,17 @@ export const deleteOOTD = async (params: DeleteOOTDPayload) => {
 };
 
 //ootd 내용, 공개/비공개 여부 수정
-export const fixOOTDContentsOrIsPrivate = async (
-  payload: FixOOTDContentsOrIsPrivatePayload
+export const putOOTDContentsOrIsPrivate = async (
+  payload: putOOTDContentsOrIsPrivatePayload
 ) => {
-  const data = await userApi.fixOOTDContentsOrIsPrivate(payload);
+  const data = await userApi.putOOTDContentsOrIsPrivate(payload);
 
   return data;
 };
 
 //ootd 북마크 추가
-export const addOOTDBookmark = async (params: AddOOTDBookmarkPayload) => {
-  const data = await userApi.addOOTDBookmark(params);
+export const postOOTDBookmark = async (params: postOOTDBookmarkPayload) => {
+  const data = await userApi.postOOTDBookmark(params);
 
   return data;
 };
@@ -63,8 +63,8 @@ export const deleteOOTDBookmark = async (params: DeleteOOTDBookmarkPayload) => {
 };
 
 //ootd 좋아요 추가
-export const addOOTDLike = async (params: AddOOTDLikePayload) => {
-  const data = await userApi.addOOTDLike(params);
+export const postOOTDLike = async (params: postOOTDLikePayload) => {
+  const data = await userApi.postOOTDLike(params);
 
   return data;
 };

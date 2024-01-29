@@ -1,27 +1,27 @@
 import { userService } from '@/apis/_service';
 import {
-  AddOOTDBookmarkPayload,
-  AddOOTDLikePayload,
-  AddOOTDPayload,
-  DeleteOOTDBookmarkPayload,
-  DeleteOOTDLikePayload,
-  DeleteOOTDPayload,
-  FixOOTDContentsOrIsPrivatePayload,
-  FixOOTDPayload,
-  GetOOTDParams,
+  postOOTDBookmarkPayload,
+  postOOTDLikePayload,
+  postOOTDPayload,
+  deleteOOTDBookmarkPayload,
+  deleteOOTDLikePayload,
+  deleteOOTDPayload,
+  patchOOTDContentsOrIsPrivatePayload,
+  putOOTDPayload,
+  getOOTDParams,
 } from '@/apis/_api/type';
 
 export const OOTDApi = () => {
   //ootd 조회
-  const getOOTD = async (params: GetOOTDParams) => {
+  const getOOTD = async (params: getOOTDParams) => {
     const data = await userService.getOOTD(params);
 
     return data;
   };
 
   //ootd 게시
-  const addOOTD = async (payload: AddOOTDPayload) => {
-    const data = await userService.addOOTD(payload);
+  const postOOTD = async (payload: postOOTDPayload) => {
+    const data = await userService.postOOTD(payload);
 
     if (data.statusCode === 200) {
       return true;
@@ -31,45 +31,45 @@ export const OOTDApi = () => {
   };
 
   //ootd 전체 수정
-  const fixOOTD = async (params: FixOOTDPayload) => {
-    const data = await userService.fixOOTD(params);
+  const putOOTD = async (params: putOOTDPayload) => {
+    const data = await userService.putOOTD(params);
     return data;
   };
 
   //ootd 삭제
-  const deleteOOTD = async (params: DeleteOOTDPayload) => {
+  const deleteOOTD = async (params: deleteOOTDPayload) => {
     const data = await userService.deleteOOTD(params);
     return data;
   };
 
   //ootd 내용, 공개/비공개 여부 수정
-  const fixOOTDContentsOrIsPrivate = async (
-    payload: FixOOTDContentsOrIsPrivatePayload
+  const patchOOTDContentsOrIsPrivate = async (
+    payload: patchOOTDContentsOrIsPrivatePayload
   ) => {
-    const data = await userService.fixOOTDContentsOrIsPrivate(payload);
+    const data = await userService.putOOTDContentsOrIsPrivate(payload);
     return data;
   };
 
   //ootd 북마크 추가
-  const addOOTDBookmark = async (params: AddOOTDBookmarkPayload) => {
-    const data = await userService.addOOTDBookmark(params);
+  const postOOTDBookmark = async (params: postOOTDBookmarkPayload) => {
+    const data = await userService.postOOTDBookmark(params);
     return data;
   };
 
   //ootd 북마크 제거
-  const deleteOOTDBookmark = async (params: DeleteOOTDBookmarkPayload) => {
+  const deleteOOTDBookmark = async (params: deleteOOTDBookmarkPayload) => {
     const data = await userService.deleteOOTDBookmark(params);
     return data;
   };
 
   //ootd 좋아요 추가
-  const addOOTDLike = async (params: AddOOTDLikePayload) => {
-    const data = await userService.addOOTDLike(params);
+  const postOOTDLike = async (params: postOOTDLikePayload) => {
+    const data = await userService.postOOTDLike(params);
     return data;
   };
 
   //ootd 좋아요 제거
-  const deleteOOTDLike = async (params: DeleteOOTDLikePayload) => {
+  const deleteOOTDLike = async (params: deleteOOTDLikePayload) => {
     const data = await userService.deleteOOTDLike(params);
     return data;
   };
@@ -81,14 +81,14 @@ export const OOTDApi = () => {
   };
 
   return [
-    addOOTD,
+    postOOTD,
     getOOTD,
-    fixOOTD,
+    putOOTD,
     deleteOOTD,
-    fixOOTDContentsOrIsPrivate,
-    addOOTDBookmark,
+    patchOOTDContentsOrIsPrivate,
+    postOOTDBookmark,
     deleteOOTDBookmark,
-    addOOTDLike,
+    postOOTDLike,
     deleteOOTDLike,
     lookUpOOTDAll,
   ] as const;
