@@ -4,7 +4,7 @@ interface Body3State {
   state?: 'emphasis' | 'underline';
 }
 
-const Body = styled.p<Body3State>`
+const Body3 = styled.p<Body3State>`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
   font-size: ${({ theme }) => theme.fontSize.base}; //14px
   line-height: ${({ theme }) => theme.lineHeight.md}; //18px
@@ -22,4 +22,4 @@ const Body = styled.p<Body3State>`
   `}
 `;
 
-export default Body;
+export default Body3;

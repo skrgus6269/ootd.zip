@@ -5,14 +5,14 @@ import WriteOOTD from './WriteOOTD';
 import { useEffect, useState } from 'react';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { Button1, Title1 } from '@/components/UI';
 import { useRouter } from 'next/router';
 import { styleList } from '@/constants/business.constants';
 import theme from '@/styles/theme';
-import { useOOTD } from '@/hooks/useOOTD';
+import { useOOTD } from '@/apis/domain/OOTD/OOTDApi';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 
 export interface Style {
   tag: string;

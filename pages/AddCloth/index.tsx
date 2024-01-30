@@ -1,4 +1,3 @@
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import Gallery from '@/components/Gallery/';
 import { Title1 } from '@/components/UI';
@@ -10,13 +9,9 @@ import { ComponentWithLayout } from '../sign-up';
 import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
 import AdditionalInfo from './AdditionalInfo';
-import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { ColorListType } from '@/components/ColorList';
-
-export type ClothColor = {
-  name: string;
-  color: string;
-}[];
 
 export interface ClothWhereBuy {
   letter: string;

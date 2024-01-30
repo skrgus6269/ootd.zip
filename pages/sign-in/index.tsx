@@ -7,7 +7,7 @@ import { Headline1 } from '@/components/UI';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { useSNSLogin } from '@/hooks/useSNSLogin';
-import SocialLoginButton from '@/components/SignIn/SocialLoginButton';
+import SocialLoginButton from '@/components/Comment/SignIn/SocialLoginButton';
 
 const SignIn: ComponentWithLayout = () => {
   const [routing] = useSNSLogin();

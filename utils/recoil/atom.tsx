@@ -1,4 +1,4 @@
-import { BrandType } from '@/components/Brand';
+import { BrandType } from '@/components/BrandList/Brand';
 import { ColorData } from '@/components/ColorList';
 import { atom } from 'recoil';
 

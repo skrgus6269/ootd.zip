@@ -1,6 +1,5 @@
 import { MouseEventHandler } from 'react';
 import { LargeButton, SmallButton } from './style';
-import { Button1 } from '../UI';
 
 interface ButtonProps {
   children: React.ReactNode;

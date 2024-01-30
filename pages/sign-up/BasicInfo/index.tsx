@@ -1,7 +1,7 @@
-import AgeInput from '@/components/SignUp/AgeInput';
+import IdInput from '@/components/Domain/SignUp/IdInput';
 import S from './style';
-import IdInput from '@/components/SignUp/IdInput';
 import { Dispatch, SetStateAction } from 'react';
+import AgeInput from '@/components/Domain/SignUp/AgeInput';
 
 interface BasicInfoProps {
   setId: Dispatch<SetStateAction<string>>;

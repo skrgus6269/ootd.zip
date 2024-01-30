@@ -4,7 +4,7 @@ interface Button3State {
   state?: 'emphasis';
 }
 
-const Button = styled.p<Button3State>`
+const Button3 = styled.p<Button3State>`
   font-weight: ${({ theme }) => theme.weight.medium}; //500
   font-size: ${({ theme }) => theme.fontSize.base}; //14px
   line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
@@ -16,4 +16,4 @@ const Button = styled.p<Button3State>`
   `}
 `;
 
-export default Button;
+export default Button3;
