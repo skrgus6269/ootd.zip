@@ -2,7 +2,9 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
-import ClothCategoryModal from '@/components/AddCloth/ClothCategoryModal';
+import ClothCategoryModal, {
+  CategoryListType,
+} from '@/components/AddCloth/ClothCategoryModal';
 import { Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/AddItem/TagModal';
@@ -15,7 +17,7 @@ interface BaiscInfoFirst {
   clothCategory: string;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
-  setClothCategory: Dispatch<SetStateAction<string>>;
+  setClothCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
   setClothBrand: Dispatch<SetStateAction<string>>;
   setClothWhereBuy: Dispatch<SetStateAction<ClothWhereBuy>>;
   handleStep: (next: string) => void;
@@ -42,7 +44,7 @@ export default function BasicInfoFirst({
 
   useEffect(() => {
     // mock 데이터
-    setClothCategory('상의, 후디');
+    // setClothCategory('상의, 후디');
     setClothBrand('브랜드');
     setClothWhereBuy({
       letter: '구매하는 곳',

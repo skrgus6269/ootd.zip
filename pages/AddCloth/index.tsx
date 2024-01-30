@@ -11,6 +11,7 @@ import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
 import AdditionalInfo from './AdditionalInfo';
 import { CategoryListType } from '@/components/AddCloth/ClothCategoryModal';
+import { ColorListType } from '@/components/ColorList';
 
 export type ClothColor = {
   name: string;
@@ -37,7 +38,7 @@ const AddCloth: ComponentWithLayout = () => {
     letter: '',
     type: 'write',
   });
-  const [clothColor, setClothColor] = useState<ClothColor>([]);
+  const [clothColor, setClothColor] = useState<ColorListType | null>([]);
   const [clothSize, setClothSize] = useState<string>('');
   const [open, setOpen] = useState('공개');
   const [clothByName, setClothByName] = useState('');
