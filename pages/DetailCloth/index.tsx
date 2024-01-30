@@ -29,11 +29,13 @@ const DetailCloth = () => {
   ];
 
   const modifyButton = () => {
+    console.log('게시글 수정');
     // router.push('/')
     // 게시글 수정 버튼
   };
 
   const shareButton = () => {
+    console.log('공유');
     // 공유 버튼
   };
 

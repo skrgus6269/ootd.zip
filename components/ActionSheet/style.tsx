@@ -10,22 +10,18 @@ const Layout = styled.div`
   background-color: white;
   z-index: 3;
   padding-top: 10px;
-
-  /* display: inline-flex;
-
-flex-direction: column;
-justify-content: flex-end;
-align-items: flex-start; */
 `;
 
 const ButtonWrap = styled.div`
   display: flex;
   padding: 20px 0px;
+  margin-left: 16px;
+  margin-right: 16px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   flex: 1 0 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
 `;
 
 const S = {

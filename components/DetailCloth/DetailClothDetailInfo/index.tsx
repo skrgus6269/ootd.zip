@@ -5,7 +5,6 @@ import {
   AiOutlineCalendar,
   AiOutlineContainer,
 } from 'react-icons/ai';
-import ColorSpan from '@/components/ColorSpan';
 
 interface colorProps {
   color: string;
