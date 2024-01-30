@@ -7,7 +7,7 @@ const Layout = styled.div`
   height: 42px;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
   margin-bottom: 24px;
 `;
 
@@ -15,7 +15,7 @@ const LeftButton = styled.button`
   background-color: white;
   border-radius: 2px 0 0 2px;
   color: black;
-  width: 30%;
+  width: 96px;
   border: 1px solid black;
   transition: 0.3s;
   height: 42px;
@@ -23,7 +23,7 @@ const LeftButton = styled.button`
 const RightButton = styled.button`
   background-color: black;
   color: white;
-  width: 50%;
+  width: 246px;
   transition: 0.3s;
   border-radius: 0 2px 2px 0;
   border: 1px solid black;

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageWithTag } from '@/components/AddItem/TagModal';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import S from './style';
 import { Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
@@ -38,18 +38,6 @@ export default function AdditionalInfo({
     setClothBuyDate('2023년 2월');
     setClothMemo('메모메모메메모메메모메메메메모메메메모모메메모');
   }, []);
-
-  // const [bigCategory, smallCategory] = clothCategory.split(',');
-
-  // const Category = () => {
-  //   return (
-  //     <S.Category>
-  //       <Body3>{bigCategory}</Body3>
-  //       <Body3>&gt;</Body3>
-  //       <Body3 style={{ fontWeight: '700' }}>{smallCategory}</Body3>
-  //     </S.Category>
-  //   );
-  // };
 
   return (
     <S.Layout>
@@ -99,15 +87,15 @@ export default function AdditionalInfo({
             />
           </Input>
         </S.Information>
+        <Input>
+          <Input.PrevNext
+            left="이전"
+            right="완료"
+            leftButtonOnClick={onClickPrevButton}
+            rightButtonOnClick={onClickCompleteButton}
+          />
+        </Input>
       </S.AdditionalInfo>
-      <Input>
-        <Input.PrevNext
-          left="이전"
-          right="완료"
-          leftButtonOnClick={onClickPrevButton}
-          rightButtonOnClick={onClickCompleteButton}
-        />
-      </Input>
     </S.Layout>
   );
 }

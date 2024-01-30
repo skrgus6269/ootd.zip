@@ -45,9 +45,11 @@ export default function BasicInfoFirst({
     // mock 데이터
     setClothCategory([
       {
-        categoryId: 1,
-        bigCategory: '상의',
-        smallCategory: '후디',
+        categoryId: 10,
+        bigCategory: '외투',
+        smallCategory: '재킷',
+        type: 'DetailCategory',
+        state: true,
       },
     ]);
     setClothBrand('브랜드');
@@ -56,10 +58,6 @@ export default function BasicInfoFirst({
       type: 'write',
     });
   }, []);
-
-  useEffect(() => {
-    console.log(clothWhereBuy);
-  }, [clothWhereBuy]);
 
   useEffect(() => {
     if (
@@ -160,6 +158,7 @@ export default function BasicInfoFirst({
       </S.Layout>
       {init > 0 && (
         <ClothCategoryModal
+          clothCategory={clothCategory}
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}

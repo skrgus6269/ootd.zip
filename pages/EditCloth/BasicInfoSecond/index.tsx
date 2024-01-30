@@ -132,7 +132,7 @@ export default function BasicInfoSecond({
                 state="공개"
                 setState={setOpen}
               />
-              <Input.HelperText state={1}>
+              <Input.HelperText state={1} className="publicText">
                 공개로 설정하면 다른사람과 아이템을 공유할 수 있어요.
               </Input.HelperText>
             </Input>
