@@ -1,22 +1,17 @@
-import { ImageWithTag } from '@/components/AddItem/TagModal';
 import AppBar from '@/components/Appbar';
 import Gallery from '@/components/Gallery/';
 import { Button3, Title1 } from '@/components/UI';
 import { useFunnel } from '@/hooks/use-funnel';
 import { useState } from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 import BasicInfoFirst from './BasicInfoFirst';
-import { ComponentWithLayout } from '../sign-up';
-import { AppLayoutProps } from '@/AppLayout';
 import BasicInfoSecond from './BasicInfoSecond';
 import AdditionalInfo from './AdditionalInfo';
+import { ComponentWithLayout } from '../sign-up';
+import { AppLayoutProps } from '@/AppLayout';
 import { useRouter } from 'next/router';
-
-export type ClothColor = {
-  name: string;
-  color: string;
-  state: Boolean;
-}[];
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { ColorListType } from '@/components/ColorList';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -31,25 +26,25 @@ const AddCloth: ComponentWithLayout = () => {
     string | ImageWithTag | undefined
   >();
 
-  const [clothCategory, setClothCategory] = useState<string>('');
+  const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
+    null
+  );
   const [clothBrand, setClothBrand] = useState<string>('');
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
     type: 'write',
   });
-  const [clothColor, setClothColor] = useState<ClothColor>([]);
+  const [clothColor, setClothColor] = useState<ColorListType | null>([]);
   const [clothSize, setClothSize] = useState<string>('');
   const [open, setOpen] = useState('공개');
   const [clothByName, setClothByName] = useState('');
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
-  const [bigCategory, smallCategory] = clothCategory.split(',');
 
   const onClickSubmitButton = () => {
     //옷 등록 api
     alert(
-      `${bigCategory}, 
-      ${smallCategory}, 
+      `${clothCategory},  
       ${clothBrand}, 
       ${clothColor}, 
       ${clothImage}, 
