@@ -1,25 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import S from './style';
-import { ImageWithTag } from '@/components/AddItem/TagModal';
+import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { ClothColor, ClothWhereBuy } from '..';
+import { ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
-import ColorModal from '@/components/AddCloth/ColorModal';
-import ColorSpan from '@/components/ColorSpan';
-import ClothSizeModal from '@/components/AddCloth/ClothSizeModal';
-import AddClothAlert from '@/components/AddCloth/AddClothAlert';
+import { ColorListType } from '@/components/ColorList';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import ColorSpan from '@/components/ColorList/ColorSpan';
+import ColorModal from '@/components/Domain/AddCloth/ColorModal';
+import ClothSizeModal from '@/components/Domain/AddCloth/ClothSizeModal';
+import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
   clothImage: string | ImageWithTag | undefined;
-  clothCategory: string;
+  clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothWhereBuy: ClothWhereBuy;
   handleStep: (next: string) => void;
-  clothColor: ClothColor;
-  setClothColor: Dispatch<SetStateAction<ClothColor>>;
+  clothColor: ColorListType | null;
+  setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: string;
   setClothSize: Dispatch<SetStateAction<string>>;
   open: string;
@@ -43,7 +45,6 @@ export default function BasicInfoSecond({
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
   const [init, setInit] = useState<number>(0);
   const [inits, setInits] = useState<number>(0);
-  const [bigCategory, smallCategory] = clothCategory.split(',');
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
   const onClickNextButton = () => {
@@ -51,16 +52,6 @@ export default function BasicInfoSecond({
   };
 
   const onClickCompleteButton = () => {};
-
-  const Category = () => {
-    return (
-      <S.Category>
-        <Body3>{bigCategory}</Body3>
-        <Body3>&gt;</Body3>
-        <Body3 style={{ fontWeight: '700' }}>{smallCategory}</Body3>
-      </S.Category>
-    );
-  };
 
   const Size = (
     <S.Size>
@@ -80,15 +71,12 @@ export default function BasicInfoSecond({
 
   const onClickNoButton = () => {
     //옷 등록 api
-    alert(
-      `${bigCategory}, ${smallCategory}, ${clothBrand}, ${clothColor}, ${clothImage}, ${clothWhereBuy}, ${open}`
-    );
   };
 
   useEffect(() => {
     setClothColor([
-      { color: '#D50C0C', name: '레드', state: true },
-      { color: '#F66800', name: '오렌지', state: true },
+      { colorId: 1, color: '#D50C0C', name: '레드', state: true },
+      { colorId: 2, color: '#F66800', name: '오렌지', state: false },
     ]);
     setClothSize('FREE');
   }, []);
@@ -107,7 +95,7 @@ export default function BasicInfoSecond({
                 색상
               </Input.Label>
               <S.ClothColorSpanList>
-                {clothColor.length > 0 &&
+                {clothColor &&
                   clothColor.map((item, index) => {
                     return (
                       <ColorSpan
@@ -161,7 +149,7 @@ export default function BasicInfoSecond({
       </S.Layout>
       {init > 0 && (
         <ColorModal
-          storedClothColor={clothColor}
+          colorInitial={clothColor}
           setIsOpen={setColorModalOpen}
           setClothColor={setClothColor}
           isOpen={colorModalOpen}
@@ -172,7 +160,7 @@ export default function BasicInfoSecond({
           setIsOpen={setSizeModalOpen}
           setClothSize={setClothSize}
           isOpen={sizeModalOpen}
-          bigCategory={bigCategory}
+          bigCategory={clothCategory![0].bigCategory}
         />
       )}
     </>

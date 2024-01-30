@@ -7,7 +7,6 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import React from 'react';
 import ColorList, { ColorListType } from '@/components/ColorList';
 interface ColorModalProps {
-  storedClothColor?: ClothColor;
   isOpen: Boolean;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
   setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
@@ -39,7 +38,7 @@ const ColorModal = ({
   ]);
 
   const onClickNextButton = () => {
-    // setClothColor(selectedColorList);
+    setClothColor(selectedColorList);
     setIsOpen(false);
   };
 
