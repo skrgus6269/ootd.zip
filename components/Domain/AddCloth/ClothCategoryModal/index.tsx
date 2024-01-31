@@ -1,12 +1,11 @@
 import Modal from '@/components/Modal';
 import S from './style';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import ClothCategory from '@/components/ClothCategory';
 
 interface ClothCategoryModalProps {
-  clothCategory?: CategoryListType[] | null;
   isOpen: Boolean;
   setClothCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
@@ -27,7 +26,6 @@ export interface CategoryListType {
 }
 
 export default function ClothCategoryModal({
-  clothCategory,
   isOpen,
   setIsOpen,
   setClothCategory,
@@ -36,35 +34,13 @@ export default function ClothCategoryModal({
     SelectedCategoryType[] | null
   >(null);
 
-  const [selectedBig, setSelecteBig] = useState<CategoryListType[] | null>(
-    null
-  );
-  const [selectedSmall, setSelectedSmall] = useState<CategoryListType[] | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (clothCategory !== undefined && clothCategory !== null) {
-      console.log(clothCategory[0]);
-      setSelectedCategory([
-        {
-          categoryId: clothCategory[0].categoryId,
-          bigCategory: clothCategory[0].bigCategory,
-          smallCategory:
-            clothCategory[0].smallCategory !== null
-              ? clothCategory[0].smallCategory
-              : null,
-        },
-      ]);
-    }
-  }, [clothCategory]);
-
   const [bigCategoryList, setBigCategoryList] = useState<CategoryListType[]>(
     []
   );
   const [smallCategoryList, setSmallCategoryList] = useState<
     CategoryListType[]
   >([]);
+
   const onClickNextButton = () => {
     setClothCategory(selectedCategory);
     setIsOpen(false);
@@ -75,6 +51,7 @@ export default function ClothCategoryModal({
       <S.Layout>
         <Title1 className="title">카테고리</Title1>
         <ClothCategory
+          type="one"
           setSelectedCategory={setSelectedCategory}
           smallCategoryList={smallCategoryList}
           setSmallCategoryList={setSmallCategoryList}

@@ -137,6 +137,7 @@ export default function FilterModal({
             <TabView.Tabs>
               <TabView.Tab>
                 <ClothCategory
+                  type="many"
                   smallCategoryList={smallCategoryList}
                   bigCategoryList={bigCategoryList}
                   setBigCategoryList={setBigCategoryList}
