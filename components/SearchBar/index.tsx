@@ -26,7 +26,7 @@ export default function SearchBar({
   //console.log 자리에 검색 api가 올 예정
   const search = () => {
     console.log('출력', letter);
-    onChange!();
+    // onChange!();
   };
 
   //delete 아이콘 클릭 시 실행되는 함수
