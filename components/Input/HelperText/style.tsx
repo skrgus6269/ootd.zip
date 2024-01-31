@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface LayoutProps {
   state: number;
+  className?: string;
 }
 
 const Layout = styled.div<LayoutProps>`
@@ -18,6 +19,8 @@ const Layout = styled.div<LayoutProps>`
     width: 12px;
     height: 12px;
   }
+
+  margin-top: ${(props) => (props.className == 'publicText' ? '8px' : '')};
 `;
 
 const Icon = styled.div`

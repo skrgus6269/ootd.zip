@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useLayoutEffect,
+} from 'react';
 import S from './style';
 import { Caption1 } from '@/components/UI';
 import { MAX_TEXTAREA_LENGTH } from '@/constants/business.constants';
@@ -24,7 +30,8 @@ export default function TextArea({
         onChange={onChangeTextArea}
         maxLength={2000}
         placeholder={placeholder}
-      />
+        value={input.length > 0 ? input : ''}
+      ></S.TextArea>
       <S.TextAreaLength>
         <Caption1>
           {input.length}/{MAX_TEXTAREA_LENGTH}

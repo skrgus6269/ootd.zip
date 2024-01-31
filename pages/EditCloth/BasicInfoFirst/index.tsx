@@ -10,6 +10,7 @@ import ClothCategoryModal, {
   CategoryListType,
 } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
+import Header from '@/components/Header';
 
 interface BaiscInfoFirst {
   clothImage: string | ImageWithTag | undefined;
@@ -39,6 +40,24 @@ export default function BasicInfoFirst({
 
   const [whereToBuyModalOpen, setWhereToBuyModalOpen] =
     useState<Boolean>(false);
+
+  useEffect(() => {
+    // mock 데이터
+    setClothCategory([
+      {
+        categoryId: 10,
+        bigCategory: '외투',
+        smallCategory: '재킷',
+        type: 'DetailCategory',
+        state: true,
+      },
+    ]);
+    setClothBrand('브랜드');
+    setClothWhereBuy({
+      letter: '구매하는 곳',
+      type: 'write',
+    });
+  }, []);
 
   useEffect(() => {
     if (
@@ -90,10 +109,8 @@ export default function BasicInfoFirst({
         <S.ClothImage>
           {typeof clothImage === 'string' && <img src={clothImage} alt="" />}
         </S.ClothImage>
+        <Header text="기본 정보" />
         <S.BasicInfo>
-          <S.Title>
-            <Title1 className="title">기본 정보</Title1>
-          </S.Title>
           <S.Information>
             <Input>
               <Input.Label size="small">카테고리</Input.Label>
@@ -107,6 +124,7 @@ export default function BasicInfoFirst({
             <Input>
               <Input.Label size="small">브랜드</Input.Label>
               <Input.Text
+                defaultValue={clothBrand}
                 inputRef={brandRef}
                 size="big"
                 placeholder=""
@@ -137,19 +155,18 @@ export default function BasicInfoFirst({
             </Input>
           </S.Information>
         </S.BasicInfo>
-        <NextButton state={nextButtonState} onClick={onClickNextButton}>
-          다음
-        </NextButton>
       </S.Layout>
-      {init && (
+      {init > 0 && (
         <ClothCategoryModal
+          clothCategory={clothCategory}
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}
         />
       )}
-      {inits && (
+      {inits > 0 && (
         <WhereToBuyModal
+          storedClothWhereBuy={clothWhereBuy}
           isOpen={whereToBuyModalOpen}
           setIsOpen={setWhereToBuyModalOpen}
           setWhereToBuy={setClothWhereBuy}

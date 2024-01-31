@@ -6,6 +6,7 @@ import NextButton from '@/components/NextButton';
 import ClothCategory from '@/components/ClothCategory';
 
 interface ClothCategoryModalProps {
+  clothCategory?: CategoryListType[] | null;
   isOpen: Boolean;
   setClothCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
@@ -26,6 +27,7 @@ export interface CategoryListType {
 }
 
 export default function ClothCategoryModal({
+  clothCategory,
   isOpen,
   setIsOpen,
   setClothCategory,
@@ -33,6 +35,29 @@ export default function ClothCategoryModal({
   const [selectedCategory, setSelectedCategory] = useState<
     SelectedCategoryType[] | null
   >(null);
+
+  const [selectedBig, setSelecteBig] = useState<CategoryListType[] | null>(
+    null
+  );
+  const [selectedSmall, setSelectedSmall] = useState<CategoryListType[] | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (clothCategory !== undefined && clothCategory !== null) {
+      console.log(clothCategory[0]);
+      setSelectedCategory([
+        {
+          categoryId: clothCategory[0].categoryId,
+          bigCategory: clothCategory[0].bigCategory,
+          smallCategory:
+            clothCategory[0].smallCategory !== null
+              ? clothCategory[0].smallCategory
+              : null,
+        },
+      ]);
+    }
+  }, [clothCategory]);
 
   const [bigCategoryList, setBigCategoryList] = useState<CategoryListType[]>(
     []
