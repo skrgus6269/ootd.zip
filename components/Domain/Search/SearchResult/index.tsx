@@ -3,6 +3,7 @@ import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
 import Follow from './Follow';
+import EmptySearch from '@/components/EmptySearch';
 
 export default function Closet() {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
@@ -104,10 +105,18 @@ export default function Closet() {
         <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            <ClosetCloth myPageClothList={myPageClothList} />
+            {myPageClothList.length > 0 ? (
+              <ClosetCloth myPageClothList={myPageClothList} />
+            ) : (
+              <EmptySearch />
+            )}
           </Funnel.Steps>
           <Funnel.Steps name="Profile">
-            <Follow profileList={profileList} />
+            {profileList.length > 0 ? (
+              <Follow profileList={profileList} />
+            ) : (
+              <EmptySearch />
+            )}
           </Funnel.Steps>
         </Funnel>
       </S.Layout>

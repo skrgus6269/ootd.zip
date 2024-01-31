@@ -17,7 +17,7 @@ export default function ClosetTabbar({
         {currentStep === 'OOTD' && <S.Hr />}
       </S.OOTD>
       <S.Closet onClick={() => handleStep('Profile')}>
-        <Caption1>옷</Caption1>
+        <Caption1>프로필</Caption1>
         {currentStep === 'Profile' && <S.Hr />}
       </S.Closet>
     </S.Layout>

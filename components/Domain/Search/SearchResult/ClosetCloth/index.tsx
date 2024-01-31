@@ -7,6 +7,7 @@ import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
 import { SelectedCategoryType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import SubHead from '@/components/DetailCloth/SubHead';
 
 interface ClosetClothProps {
   myPageClothList?: myPageClothType[];
@@ -114,6 +115,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
             )}
           </S.FilterSpan>
         </S.SearchFilter>
+        <SubHead count={myPageClothList?.length || 0} clicked="new" />
         <S.ClothList>
           <ImageList
             onClick={onClickImageList}
