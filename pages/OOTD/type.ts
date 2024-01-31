@@ -38,13 +38,13 @@ export interface OOTDType {
     userName: string;
     userImage: string;
     content: string;
-    timeStamp: string;
+    createAt: string;
     childComment?: {
       id: number;
       userName: string;
       userImage: string;
       content: string;
-      timeStamp: string;
+      createAt: string;
       taggedUserName: string;
     }[];
   }[];

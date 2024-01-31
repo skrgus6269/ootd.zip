@@ -7,7 +7,6 @@ const Layout = styled.div`
   width: 100%;
   row-gap: 24px;
   column-gap: 16px;
-  padding-bottom: 16px;
 `;
 
 const Box = styled.div`

@@ -20,7 +20,7 @@ export default function GenderInput({ gender, setGender }: GenderInputProps) {
             setState={setGender}
           />
         </div>
-        <Input.HelperText state={1}>
+        <Input.HelperText className="helperText" state={1}>
           입력하신 정보는 스타일 추천 목적으로 활용됩니다.
         </Input.HelperText>
       </Input>

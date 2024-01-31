@@ -6,11 +6,11 @@ import Body from '@/components/UI/TypoGraphy/Body2';
 import { Headline1 } from '@/components/UI';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
-import { useSNSLogin } from '@/hooks/useSNSLogin';
+import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
 import SocialLoginButton from '@/components/Comment/SignIn/SocialLoginButton';
 
 const SignIn: ComponentWithLayout = () => {
-  const [routing] = useSNSLogin();
+  const [, routing] = SignInApi();
 
   return (
     <>

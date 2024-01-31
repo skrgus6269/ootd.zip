@@ -30,11 +30,11 @@ export default function TextArea({
         onChange={onChangeTextArea}
         maxLength={2000}
         placeholder={placeholder}
-        value={input.length > 0 ? input : ''}
-      ></S.TextArea>
+        value={input}
+      />
       <S.TextAreaLength>
         <Caption1>
-          {input.length}/{MAX_TEXTAREA_LENGTH}
+          {input?.length}/{MAX_TEXTAREA_LENGTH}
         </Caption1>
       </S.TextAreaLength>
     </S.Layout>

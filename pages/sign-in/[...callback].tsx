@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useLogin } from '@/apis/domain/SignIn/SignInApi';
+import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
 
 interface QueryParams {
   code?: string;
@@ -10,7 +10,7 @@ interface QueryParams {
 export default function SignUpCallbackPage() {
   const router = useRouter();
   const { code, callback } = router.query as QueryParams;
-  const [login] = useLogin();
+  const [login] = SignInApi();
 
   useEffect(() => {
     const fetchData = async () => {

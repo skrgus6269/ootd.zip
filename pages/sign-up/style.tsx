@@ -29,6 +29,9 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  .nextButton {
+    padding-bottom: 26px;
+  }
 `;
 
 const Step = styled.div`

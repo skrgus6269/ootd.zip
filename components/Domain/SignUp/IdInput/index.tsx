@@ -34,7 +34,7 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
   };
 
   const idInputValidity = (value: string) => {
-    if (value.length === 0) {
+    if (value !== undefined && value.length === 0) {
       updateHelperText(HELPER_TEXT_NULL, 1);
       setCanUseId(false);
     } else if (hasKoreanInitial(value)) {
@@ -76,7 +76,9 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
           validity={idInputValidity}
           onChange={setInput}
         />
-        <Input.HelperText state={state}>{helperText}</Input.HelperText>
+        <Input.HelperText className="helperText" state={state}>
+          {helperText}
+        </Input.HelperText>
       </Input>
     </S.Layout>
   );
