@@ -1,6 +1,6 @@
 import Modal from '@/components/Modal';
 import S from './style';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import ClothCategory from '@/components/ClothCategory';
@@ -40,6 +40,7 @@ export default function ClothCategoryModal({
   const [smallCategoryList, setSmallCategoryList] = useState<
     CategoryListType[]
   >([]);
+
   const onClickNextButton = () => {
     setClothCategory(selectedCategory);
     setIsOpen(false);
@@ -50,6 +51,7 @@ export default function ClothCategoryModal({
       <S.Layout>
         <Title1 className="title">카테고리</Title1>
         <ClothCategory
+          type="one"
           setSelectedCategory={setSelectedCategory}
           smallCategoryList={smallCategoryList}
           setSmallCategoryList={setSmallCategoryList}

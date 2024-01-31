@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
+import { Body3, Headline1, Title1 } from '@/components/UI';
 import S from './style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
@@ -148,7 +148,7 @@ export default function BasicInfoSecond({
                 state="공개"
                 setState={setOpen}
               />
-              <Input.HelperText state={1}>
+              <Input.HelperText className="helpertext" state={1}>
                 공개로 설정하면 다른사람과 아이템을 공유할 수 있어요.
               </Input.HelperText>
             </Input>
@@ -156,7 +156,8 @@ export default function BasicInfoSecond({
         </S.BasicInfoSecond>
         <NextButton
           state={
-            clothColor !== null && clothColor.length > 0 && clothSize.length > 0
+            clothColor !== null && clothColor.length > 0
+            //  && clothSize.length > 0
           }
           onClick={onClickNextButton}
           className="nextButton"

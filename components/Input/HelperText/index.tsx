@@ -5,11 +5,16 @@ import Caption from '@/components/UI/TypoGraphy/Caption1';
 interface HelperTextType {
   children: React.ReactNode;
   state: number;
+  className?: string;
 }
 
-export default function HelperText({ children, state }: HelperTextType) {
+export default function HelperText({
+  children,
+  state,
+  className,
+}: HelperTextType) {
   return (
-    <S.Layout state={state}>
+    <S.Layout className={className} state={state}>
       <S.Icon>
         <AiOutlineExclamationCircle />
       </S.Icon>

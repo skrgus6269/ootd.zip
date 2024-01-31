@@ -6,8 +6,8 @@ import ImageList from '@/components/ImageList';
 
 interface SimilarOOTDProps {
   data: {
-    imageId: number;
-    image: string;
+    ootdId: number;
+    ootdImage: string;
   }[];
 }
 

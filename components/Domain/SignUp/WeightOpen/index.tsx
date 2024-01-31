@@ -17,7 +17,7 @@ export default function WeightOpen({ state, setState }: WeightOpenProps) {
         state={state}
         setState={setState}
       />
-      <Input.HelperText state={1}>
+      <Input.HelperText className="helperText" state={1}>
         비공개로 설정하면 나만 볼 수 있어요.
       </Input.HelperText>
     </S.Layout>

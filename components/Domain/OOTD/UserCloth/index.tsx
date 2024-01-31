@@ -1,4 +1,4 @@
-import { Button1, Title1 } from '@/components/UI';
+import { Button3, Title1 } from '@/components/UI';
 import S from './style';
 import Carousel from '@/components/Carousel';
 import ClothInformation from '@/components/ClothInformation';
@@ -23,7 +23,7 @@ export default function UserCloth({ data }: UserClothProps) {
     <S.Layout>
       <S.Title>
         <Title1>{data.userName}님의 옷장</Title1>
-        <Button1 onClick={() => router.push(`/Closet`)}>더보기</Button1>
+        <Button3 onClick={() => router.push(`/Closet`)}>더보기</Button3>
       </S.Title>
       <S.Cloth>
         <Carousel slidesToShow={1.1} infinite={false}>

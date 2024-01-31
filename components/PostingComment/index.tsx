@@ -17,7 +17,7 @@ interface PostingCommentData extends CommentProps {
     userName: string;
     userImage: string;
     content: string;
-    timeStamp: string;
+    createAt: string;
     taggedUserName: string;
   }[];
 }
@@ -75,7 +75,7 @@ export default function PostingComment({
               userName={item.userName}
               content={item.content}
               view="preview"
-              timeStamp={item.timeStamp}
+              createAt={item.createAt}
             />
           </>
         ))}
@@ -101,7 +101,7 @@ export default function PostingComment({
               onClickReplyButton={() =>
                 onClickReplyButton(data![index].userName, 'parent')
               }
-              timeStamp={item.timeStamp}
+              createAt={item.createAt}
               myComment={localUserName === item.userName}
             />
             {item &&
@@ -120,7 +120,7 @@ export default function PostingComment({
                   }
                   type="child"
                   taggedUserName={items.taggedUserName}
-                  timeStamp={items.timeStamp}
+                  createAt={items.createAt}
                   myComment={localUserName === item.userName}
                 />
               ))}

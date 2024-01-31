@@ -32,9 +32,10 @@ const AppBarLeft = styled.div`
 `;
 
 const LeftTouch = styled.div`
-  width: 40px;
+  /* width: 40px; */
   display: flex;
   justify-content: center;
+  padding-left: 20px;
 `;
 
 //앱바의 가운데 영역
@@ -56,6 +57,12 @@ const AppBarRight = styled(AppBarLeft)`
   height: 100%;
   display: flex;
   justify-content: right;
+
+  //아이콘 크기
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 const RightTouch = styled.div`
   display: flex;

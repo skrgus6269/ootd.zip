@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Body3, Button1 } from '@/components/UI';
+import { Body3, Button3 } from '@/components/UI';
 import S from './style';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { CommentStateType } from '@/pages/OOTD/[...OOTDNumber]';
@@ -59,7 +59,7 @@ export default function PostingCommentWrite({
             />
           </S.Text>
           <S.Upload>
-            <Button1 onClick={registerComment}>등록</Button1>
+            <Button3 onClick={registerComment}>등록</Button3>
           </S.Upload>
         </S.Comment>
       </S.CommentWrite>

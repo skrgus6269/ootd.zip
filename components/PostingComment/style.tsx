@@ -9,10 +9,11 @@ const Layout = styled.div`
     color: ${(props) => props.theme.color.grey_30};
     padding: 0 20px;
   }
+  border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
 `;
 
 const CommentOpenButton = styled.div`
-  padding: 16px 0;
+  padding: 16px 0 40px 0;
   text-align: center;
   p {
     color: ${(props) => props.theme.color.grey_50};

@@ -1,7 +1,7 @@
-import GenderInput from '@/components/SignUp/GenderInput';
-import StyleInput from '@/components/SignUp/StyleInput';
 import { Dispatch, SetStateAction } from 'react';
 import S from './style';
+import GenderInput from '@/components/Domain/SignUp/GenderInput';
+import StyleInput from '@/components/Domain/SignUp/StyleInput';
 
 interface BoxProps {
   value: Boolean;

@@ -1,4 +1,3 @@
-import { useOOTD } from '@/apis/domain/OOTD/OOTDApi';
 import S from './style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';
@@ -10,6 +9,7 @@ import { OOTDType } from './type';
 import UserCloth from '@/components/Domain/OOTD/UserCloth';
 import UserOOTD from '@/components/Domain/OOTD/UserOOTD';
 import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 export interface CommentStateType {
   ootdId: number;
@@ -19,46 +19,7 @@ export interface CommentStateType {
 }
 
 const OOTD: ComponentWithLayout = () => {
-  const [getOOtd] = useOOTD();
-
-  const [sample, setSample] = useState([
-    {
-      id: 0,
-      userName: '권낙현',
-      content: '좋반~!',
-      userImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      createAt: '5분전',
-      childComment: [
-        {
-          id: 1,
-          userName: '권낙현',
-          content: '좋반~!',
-          userImage:
-            'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-          taggedUserName: 'knh6269',
-          createAt: '1분전',
-        },
-        {
-          id: 2,
-          userName: '권낙현',
-          content: '좋반~!',
-          userImage:
-            'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-          taggedUserName: 'knh6269',
-          createAt: '지금',
-        },
-      ],
-    },
-    {
-      id: 0,
-      userName: '삼다수',
-      content: '맞팔요 ^^',
-      userImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      createAt: '0시간 전',
-    },
-  ]);
+  const [, getOOtd] = OOTDApi();
 
   const [sampleData, setSampleData] = useState<OOTDType>({
     id: 0,
@@ -177,11 +138,39 @@ const OOTD: ComponentWithLayout = () => {
     comment: [
       {
         id: 0,
-        userName: '낙낙',
+        userName: '권낙현',
+        content: '좋반~!',
         userImage:
           'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-        content: '안녕하세요',
-        timeStamp: '5분전',
+        createAt: '5분전',
+        childComment: [
+          {
+            id: 1,
+            userName: '권낙현',
+            content: '좋반~!',
+            userImage:
+              'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+            taggedUserName: 'knh6269',
+            createAt: '1분전',
+          },
+          {
+            id: 2,
+            userName: '권낙현',
+            content: '좋반~!',
+            userImage:
+              'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+            taggedUserName: 'knh6269',
+            createAt: '지금',
+          },
+        ],
+      },
+      {
+        id: 0,
+        userName: '삼다수',
+        content: '맞팔요 ^^',
+        userImage:
+          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+        createAt: '0시간 전',
       },
     ],
     bookmark: true,
@@ -241,55 +230,55 @@ const OOTD: ComponentWithLayout = () => {
 
   const userOOTDSampleData = [
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     },
   ];
 
   const similarOOTDSampleData = [
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },
     {
-      imageId: 1,
-      image:
+      ootdId: 1,
+      ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
       userName: '낙낙',
     },

@@ -8,7 +8,7 @@ export interface CommentProps {
   userImage: string;
   userName: string;
   content: string;
-  timeStamp: string;
+  createAt: string;
   type?: 'child';
   view?: 'preview';
   onClickReplyButton?: () => void;
@@ -27,7 +27,7 @@ function Comment(data: CommentProps) {
       <S.CommentRight>
         <S.UserName>
           <Body3>{data.userName}</Body3>
-          <Caption1 className="createAt">{data.timeStamp}</Caption1>
+          <Caption1 className="createAt">{data.createAt}</Caption1>
         </S.UserName>
         <S.UserComment>
           <Body3 className="taggedUser">

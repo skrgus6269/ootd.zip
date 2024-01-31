@@ -1,10 +1,11 @@
-import React, { MutableRefObject, useState } from 'react';
+import React, { MutableRefObject, useState, useEffect } from 'react';
 import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import S from './style';
 import useDebounce from '@/hooks/useDebouce';
 import Body from '@/components/UI/TypoGraphy/Body3';
 
 interface TextProps {
+  defaultValue?: string;
   size: 'big' | 'small';
   placeholder: string;
   unit?: string;
@@ -19,6 +20,7 @@ interface TextProps {
 }
 
 export default function Text({
+  defaultValue,
   size,
   placeholder,
   unit,
@@ -31,7 +33,12 @@ export default function Text({
   onClick,
 }: TextProps) {
   //input의 value
-  const [letter, setLetter] = useState('');
+
+  useEffect(() => {
+    setLetter(defaultValue!);
+  }, [defaultValue]);
+
+  const [letter, setLetter] = useState<string>('');
 
   //input 입력 시 letter를 업데이트 하는 함수
   const onChangeInput = (value: string) => {
@@ -39,7 +46,7 @@ export default function Text({
   };
 
   const search = () => {
-    if (validity) validity(letter.trimEnd());
+    if (validity) validity(letter && letter.trimEnd());
     onChange(letter);
   };
 
