@@ -7,6 +7,9 @@ const Layout = styled.div`
   .truefalse {
     padding-top: 4px;
   }
+  .helperText {
+    margin-top: 8px;
+  }
 `;
 
 const S = { Layout };

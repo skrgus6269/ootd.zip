@@ -23,7 +23,7 @@ export default function StyleInput({
             state={styleListState}
             setState={setStyleListState}
           ></Input.CheckBox>
-          <Input.HelperText state={2}>
+          <Input.HelperText className="helperText" state={2}>
             최소 3개 이상 선택해주세요.
           </Input.HelperText>
         </div>

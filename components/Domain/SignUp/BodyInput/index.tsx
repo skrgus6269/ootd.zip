@@ -12,8 +12,8 @@ export default function BodyInput({
   weightSetState,
 }: BodyInputProps) {
   return (
-    <S.Layout>
-      <Input>
+    <Input>
+      <S.Layout>
         <Input.Label size="big">체형</Input.Label>
         <S.BodyLayout>
           <S.Weight>
@@ -39,8 +39,8 @@ export default function BodyInput({
             />
           </S.Height>
         </S.BodyLayout>
-      </Input>
-    </S.Layout>
+      </S.Layout>
+    </Input>
   );
 }
 

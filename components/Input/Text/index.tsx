@@ -38,7 +38,7 @@ export default function Text({
     setLetter(defaultValue!);
   }, [defaultValue]);
 
-  const [letter, setLetter] = useState('');
+  const [letter, setLetter] = useState<string>('');
 
   //input 입력 시 letter를 업데이트 하는 함수
   const onChangeInput = (value: string) => {
@@ -46,7 +46,7 @@ export default function Text({
   };
 
   const search = () => {
-    if (validity) validity(letter.trimEnd());
+    if (validity) validity(letter && letter.trimEnd());
     onChange(letter);
   };
 

@@ -105,6 +105,7 @@ const AddCloth: ComponentWithLayout = () => {
           clothCategory={clothCategory}
           clothImage={clothImage}
           clothByName={clothByName}
+          clothMemo={clothMemo}
           setClothByName={setClothByName}
           setClothBuyDate={setClothBuyDate}
           setClothMemo={setClothMemo}

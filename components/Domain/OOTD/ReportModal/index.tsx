@@ -17,10 +17,12 @@ export default function ReportModal({
   };
 
   return (
-    <Modal isOpen={reportModalIsopen} height="10">
-      <S.Layout onClick={onClickReportButton}>
-        <Button1 className="report">신고</Button1>
-      </S.Layout>
-    </Modal>
+    <S.Layout onClick={onClickReportButton}>
+      <Modal className="modal" isOpen={reportModalIsopen} height="10">
+        <S.Report>
+          <Button1 className="report">신고</Button1>
+        </S.Report>
+      </Modal>
+    </S.Layout>
   );
 }

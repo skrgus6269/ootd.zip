@@ -43,15 +43,15 @@ const SignUp: ComponentWithLayout = () => {
     useState<Style[]>(styleListInitial);
 
   useEffect(() => {
-    const canAdvanceBasicState = canUseId && age.length > 0;
+    const canAdvanceBasicState = canUseId && age?.length > 0;
 
-    const canAdvanceBodyState = weight.length > 0 && height.length > 0;
+    const canAdvanceBodyState = weight?.length > 0 && height?.length > 0;
 
     const selectedStyles = styleListState
       .filter((item) => item.value === true)
       .map((item) => item.tag);
 
-    const canAdvanceStyleState = selectedStyles.length >= 3;
+    const canAdvanceStyleState = selectedStyles?.length >= 3;
 
     setBasicState(canAdvanceBasicState);
     setBodyState(canAdvanceBodyState);
@@ -131,6 +131,7 @@ const SignUp: ComponentWithLayout = () => {
                 setCanUseId={setCanUseId}
               />
               <NextButton
+                className="nextButton"
                 state={basicState}
                 onClick={() => handleStep('체형정보')}
               >
@@ -145,6 +146,7 @@ const SignUp: ComponentWithLayout = () => {
                 setOpen={setOpen}
               />
               <NextButton
+                className="nextButton"
                 state={bodyState}
                 onClick={() => handleStep('취향정보')}
               >
@@ -158,7 +160,11 @@ const SignUp: ComponentWithLayout = () => {
                 setStyleListState={setStyleListState}
                 styleListState={styleListState}
               />
-              <NextButton state={styleState} onClick={onClickSubmitButton}>
+              <NextButton
+                className="nextButton"
+                state={styleState}
+                onClick={onClickSubmitButton}
+              >
                 다음
               </NextButton>
             </Funnel.Steps>

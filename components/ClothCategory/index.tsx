@@ -13,6 +13,7 @@ interface ClothCategoryModalProps {
   setBigCategoryList: Dispatch<SetStateAction<CategoryListType[]>>;
   smallCategoryList: CategoryListType[];
   setSmallCategoryList: Dispatch<SetStateAction<CategoryListType[]>>;
+  type: 'one' | 'many';
 }
 
 export default function ClothCategory({
@@ -21,6 +22,7 @@ export default function ClothCategory({
   setSmallCategoryList,
   bigCategoryList,
   setBigCategoryList,
+  type,
 }: ClothCategoryModalProps) {
   const [getClothBigCategory, getClothSmallCategory] = useGetClothCategory();
 
@@ -36,48 +38,56 @@ export default function ClothCategory({
         {
           categoryId: 1,
           bigCategory: '외투',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 2,
           bigCategory: '상의',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 3,
           bigCategory: '니트웨어',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 4,
           bigCategory: '하의',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 5,
           bigCategory: '원피스',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 7,
           bigCategory: '신발',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 8,
           bigCategory: '가방',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
         {
           categoryId: 9,
           bigCategory: 'ACC',
+          smallCategory: null,
           type: 'LargeCategory',
           state: false,
         },
@@ -237,7 +247,11 @@ export default function ClothCategory({
           {smallCategoryList.map((item, index) => {
             return (
               <S.SmallCategorySpan
-                state={item.state === true}
+                state={
+                  type === 'one'
+                    ? smallCategoryClickedIndex === index
+                    : item.state === true
+                }
                 onClick={() => onClickSmallCategorySpan(index)}
                 key={index}
               >

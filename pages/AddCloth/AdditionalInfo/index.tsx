@@ -12,6 +12,7 @@ interface AdditionalInfo {
   clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothByName: string;
+  clothMemo: string;
   setClothByName: Dispatch<SetStateAction<string>>;
   setClothMemo: Dispatch<SetStateAction<string>>;
   setClothBuyDate: Dispatch<SetStateAction<string>>;
@@ -23,6 +24,7 @@ export default function AdditionalInfo({
   clothCategory,
   clothBrand,
   clothByName,
+  clothMemo,
   setClothByName,
   setClothMemo,
   onClickSubmitButton,
@@ -82,7 +84,7 @@ export default function AdditionalInfo({
               메모
             </Input.Label>
             <Input.TextArea
-              input={clothByName}
+              input={clothMemo}
               setInput={setClothMemo}
               placeholder="메모를 입력해주세요"
             />

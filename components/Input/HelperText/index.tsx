@@ -14,7 +14,7 @@ export default function HelperText({
   className,
 }: HelperTextType) {
   return (
-    <S.Layout state={state} className={className}>
+    <S.Layout className={className} state={state}>
       <S.Icon>
         <AiOutlineExclamationCircle />
       </S.Icon>

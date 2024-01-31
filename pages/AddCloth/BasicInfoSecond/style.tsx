@@ -82,6 +82,9 @@ const Information = styled.div`
   .label {
     margin-bottom: 16px;
   }
+  .helpertext {
+    margin-top: 8px;
+  }
 `;
 
 const ClothColorSpanList = styled.div`
