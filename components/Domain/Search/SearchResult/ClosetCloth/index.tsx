@@ -115,7 +115,11 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
             )}
           </S.FilterSpan>
         </S.SearchFilter>
-        <SubHead count={myPageClothList?.length || 0} clicked="new" />
+        <SubHead
+          count={myPageClothList?.length || 0}
+          clicked="new"
+          className="mypage"
+        />
         <S.ClothList>
           <ImageList
             onClick={onClickImageList}
