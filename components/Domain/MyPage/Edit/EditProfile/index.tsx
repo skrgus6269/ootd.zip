@@ -1,12 +1,36 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import S from './style';
 import { Caption1 } from '@/components/UI';
+import ActionSheet from '@/components/ActionSheet';
 
-export default function EditProfile() {
+interface EditProfileProps {
+  imageURL: string;
+  setImageURL: Dispatch<SetStateAction<string>>;
+  onClickImage: () => void;
+}
+
+export default function EditProfile({
+  imageURL,
+  setImageURL,
+  onClickImage,
+}: EditProfileProps) {
+  const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
+
+  const onClickPicutre = () => {
+    onClickImage();
+  };
+
+  const onClickBackground = () => {
+    if (openActionSheet) setOpenActionSheet(false);
+  };
+
   return (
     <>
       <S.Layout>
-        <img src={'/images/권낙현.jpg'} alt="유저 이미지" />
-        <Caption1 style={{ color: '#8B8B8B' }}>사진 입력</Caption1>
+        <img src={imageURL} alt="유저 이미지" />
+        <Caption1 style={{ color: '#8B8B8B' }} onClick={onClickPicutre}>
+          사진 입력
+        </Caption1>
       </S.Layout>
     </>
   );
