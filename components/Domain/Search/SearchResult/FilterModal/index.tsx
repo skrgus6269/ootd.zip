@@ -76,7 +76,7 @@ export default function FilterModal({
       category: selectedCategory,
       color: selectedColorList,
       brand: selectedBrand,
-      isOpen: null,
+      isMan: null,
     });
     setFilterModalIsOpen(false);
   };
@@ -86,7 +86,7 @@ export default function FilterModal({
       category: null,
       color: null,
       brand: null,
-      isOpen: null,
+      isMan: null,
     });
     setFilterModalIsOpen(false);
   };

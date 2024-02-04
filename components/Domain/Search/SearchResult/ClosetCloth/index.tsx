@@ -118,7 +118,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
         <SubHead
           count={myPageClothList?.length || 0}
           clicked="new"
-          className="mypage"
+          state="noPadding"
         />
         <S.ClothList>
           <ImageList
