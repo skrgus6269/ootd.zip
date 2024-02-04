@@ -9,14 +9,17 @@ import { useRouter } from 'next/router';
 import { ImageWithTag } from '../Domain/AddOOTD/TagModal';
 import S from './style';
 import NextButton from '../NextButton';
-import { Body3, Body4 } from '../UI';
+import { Body3, Body4, Caption1, Headline1, Headline2, Title1 } from '../UI';
+import { useRecoilState } from 'recoil';
+import { storedImageKey } from '@/utils/recoil/atom';
+import Alert from '../Alert';
 
 interface GalleryProps {
-  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined | string>>;
-  imageAndTag: ImageWithTag | string;
+  imageAndTag: ImageWithTag | undefined | string;
+  setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
   nextStep: string;
   handleStep: (next: string) => void;
-  item: string;
+  item: 'Cloth' | 'OOTD';
 }
 
 const Gallery = ({
@@ -28,31 +31,44 @@ const Gallery = ({
 }: GalleryProps) => {
   const router = useRouter();
 
-  const [images, setImages] = useState<ImageWithTag | undefined | string>([]);
   const [realTouch, setRealTouch] = useState<number>(100);
+  const [storedImage, setStoredImage] = useRecoilState(storedImageKey);
+  const [isOpenStoredImageAlert, setIsOpenStoredImageAlert] =
+    useState<Boolean>(false);
+
+  //임시 저장된 데이터 사용 o
+  const getStoredImage = () => {
+    setImageAndTag(storedImage);
+    if (typeof storedImage !== 'string' && storedImage!.length > 0) {
+      setSelectedImage(storedImage!);
+      setRealTouch(storedImage![storedImage!.length - 1].ootdId);
+      setIsOpenStoredImageAlert(false);
+      handleStep(nextStep);
+    }
+  };
+
+  //임시 저장된 데이터 사용x
+  const dontGetStoredImage = () => {
+    sendReactNativeMessage({ type: item });
+    setImageAndTag([]);
+    setSelectedImage([]);
+    setStoredImage(undefined);
+    setIsOpenStoredImageAlert(false);
+  };
 
   useEffect(() => {
-    if (!window.ReactNativeWebView) {
-      return;
+    if (storedImage !== undefined && item === 'OOTD') {
+      setIsOpenStoredImageAlert(true);
+    } else {
+      sendReactNativeMessage({ type: item });
     }
-    sendReactNativeMessage({ type: item });
   }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      getReactNativeMessage(setImages);
+      getReactNativeMessage(setImageAndTag);
     }
   }, []);
-
-  useEffect(() => {
-    if (imageAndTag === '') {
-      router.push('main');
-      return;
-    }
-    if (item == 'Cloth') {
-      handleStep(nextStep);
-    }
-  }, [imageAndTag]);
 
   const [selectedImage, setSelectedImage] = useState<ImageWithTag>([]);
 
@@ -74,11 +90,12 @@ const Gallery = ({
       return;
     }
 
-    const newSelectedImage = selectedImage.filter((item, index) => {
+    const newSelectedImage = selectedImage.filter((item) => {
       if (item.ootdId !== ootdId) {
         return item;
       }
     });
+
     if (selectedImage.length === 1) {
       setRealTouch(100);
     } else {
@@ -88,7 +105,14 @@ const Gallery = ({
     setSelectedImage(newSelectedImage);
   };
 
-  const onClickNextButton = () => {};
+  const onClickNextButton = () => {
+    setImageAndTag(selectedImage);
+    handleStep(nextStep);
+  };
+
+  useEffect(() => {
+    console.log(storedImage);
+  }, [storedImage]);
 
   return (
     <S.Layout>
@@ -101,7 +125,7 @@ const Gallery = ({
           />
         )}
       </S.Image>
-      {typeof images !== 'string' ? (
+      {typeof imageAndTag !== 'string' ? (
         selectedImage &&
         selectedImage.map((item, index) => {
           if (item.ootdId === realTouch)
@@ -112,44 +136,55 @@ const Gallery = ({
             );
         })
       ) : (
-        <img onClick={() => handleStep(nextStep)} src={images} alt="" />
+        <img onClick={() => handleStep(nextStep)} src={imageAndTag} alt="" />
       )}
-      <S.ImageList imageListlength={images!.length}>
-        <Body4 className="selected" state="emphasis">
-          {selectedImage.length}장의 사진이 선택됨
-        </Body4>
-        <Carousel
-          infinite={false}
-          slidesToShow={images!.length <= 3 ? images!.length : 3.2}
-        >
-          {typeof images !== 'string' ? (
-            images &&
-            images.map((item, index) => {
-              return (
-                <S.Image key={index} state={item.ootdId === realTouch}>
-                  <img
-                    className="smallImage"
-                    onClick={() => onClickImage(item.ootdId, item.ootdImage)}
-                    src={item.ootdImage}
-                    alt=""
-                  />
-                  {selectedImage.map((items, indexs) => {
-                    return (
-                      item.ootdId === items.ootdId && (
-                        <S.ImageNumber state={true} key={indexs}>
-                          {indexs + 1}
-                        </S.ImageNumber>
-                      )
-                    );
-                  })}
-                </S.Image>
-              );
-            })
-          ) : (
-            <img onClick={() => handleStep(nextStep)} src={images} alt="" />
-          )}
-        </Carousel>
-      </S.ImageList>
+      {imageAndTag && (
+        <S.ImageList imageListlength={imageAndTag?.length}>
+          <Body4 className="selected" state="emphasis">
+            {selectedImage.length}장의 사진이 선택됨
+          </Body4>
+          <Carousel
+            infinite={false}
+            slidesToShow={imageAndTag.length <= 3 ? imageAndTag!.length : 3.2}
+          >
+            {typeof imageAndTag !== 'string' ? (
+              imageAndTag &&
+              imageAndTag.map((item, index) => {
+                let flag = 1;
+                return (
+                  <S.Image key={index} state={item.ootdId === realTouch}>
+                    <img
+                      className="smallImage"
+                      onClick={() => onClickImage(item.ootdId, item.ootdImage)}
+                      src={item.ootdImage}
+                      alt=""
+                    />
+                    {selectedImage.map((items, indexs) => {
+                      if (item.ootdId === items.ootdId) flag = 0;
+                      return (
+                        item.ootdId === items.ootdId && (
+                          <S.ImageNumber state={true} key={indexs}>
+                            <Caption1>{indexs + 1}</Caption1>
+                          </S.ImageNumber>
+                        )
+                      );
+                    })}
+                    {flag === 1 && (
+                      <S.ImageNumber state={false}>{''}</S.ImageNumber>
+                    )}
+                  </S.Image>
+                );
+              })
+            ) : (
+              <img
+                onClick={() => handleStep(nextStep)}
+                src={imageAndTag}
+                alt=""
+              />
+            )}
+          </Carousel>
+        </S.ImageList>
+      )}
       <Body3 className="helperText">사진을 눌러 순서를 변경해보세요.</Body3>
       <NextButton
         className="nextButton"
@@ -158,6 +193,25 @@ const Gallery = ({
       >
         다음
       </NextButton>
+      {isOpenStoredImageAlert && (
+        <Alert
+          headline={<Title1>작성 중이던 게시글이 있습니다.</Title1>}
+          body={
+            <>
+              <Body3>
+                이어서 작성하시겠습니까?
+                <br />
+                아니오를 누를 경우 임시저장본은 삭제되며 새<br />
+                로운 게시글을 작성할 수 있습니다.
+              </Body3>
+            </>
+          }
+          onClickYesButton={getStoredImage}
+          onClickNoButton={dontGetStoredImage}
+          yes="네"
+          no="아니오"
+        />
+      )}
     </S.Layout>
   );
 };
