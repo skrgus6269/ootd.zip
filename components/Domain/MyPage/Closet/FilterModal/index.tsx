@@ -10,10 +10,7 @@ import Button from '@/components/Button';
 import { BrandType } from '@/components/BrandList/Brand';
 import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
-import {
-  CategoryListType,
-  SelectedCategoryType,
-} from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -28,24 +25,22 @@ export default function FilterModal({
   isOpen,
   setFilterModalIsOpen,
   setFilter,
+  categoryInitital,
   colorInitital,
   brandInitial,
 }: FilterModalProps) {
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
 
-  const [selectedCategory, setSelectedCategory] = useState<
-    SelectedCategoryType[] | null
-  >(null);
-
   const [selectedBrand, setSelectedBrand] = useState<BrandType[] | null>(null);
 
-  const [bigCategoryList, setBigCategoryList] = useState<CategoryListType[]>(
-    []
+  const [selectedCategory, setSelectedCategory] = useState<
+    CategoryListType[] | null
+  >(null);
+
+  const [categoryList, setCategoryList] = useState<CategoryListType[] | null>(
+    null
   );
-  const [smallCategoryList, setSmallCategoryList] = useState<
-    CategoryListType[]
-  >([]);
 
   const [colorList, setColorList] = useState<ColorListType>([
     { colorId: 0, color: '#BB193E', name: '버건디', state: false },
@@ -91,15 +86,30 @@ export default function FilterModal({
     setFilterModalIsOpen(false);
   };
 
-  const onClickCloseCategoryButton = (categoryId: number) => {
-    const newSmallCategoryList = smallCategoryList.map((item) => {
-      if (item.categoryId === categoryId) {
-        return { ...item, state: false };
-      }
-      return item;
-    });
-    console.log(newSmallCategoryList);
-    setSmallCategoryList(newSmallCategoryList);
+  const onClickCloseCategoryButton = (
+    categoryId: number,
+    type: 'big' | 'small'
+  ) => {
+    let newCategoryList = [] as CategoryListType[] | undefined;
+    if (type === 'big') {
+      newCategoryList = categoryList?.map((item) => {
+        if (item.id === categoryId) {
+          return { ...item, state: false };
+        }
+        return item;
+      });
+    } else {
+      newCategoryList = categoryList?.map((item) => {
+        return {
+          ...item,
+          detailCategory: item.detailCategory!.map((items) => {
+            if (items.id === categoryId) return { ...items, state: false };
+            return items;
+          }),
+        };
+      });
+    }
+    setCategoryList(newCategoryList ? newCategoryList : null);
   };
 
   const onClickCloseColorButton = (colorId: number) => {
@@ -124,10 +134,6 @@ export default function FilterModal({
     setBrandList(newBrandList);
   };
 
-  useEffect(() => {
-    console.log(selectedCategory);
-  }, [selectedCategory]);
-
   return (
     <Modal isOpen={isOpen} height="60">
       <S.Layout>
@@ -138,11 +144,10 @@ export default function FilterModal({
               <TabView.Tab>
                 <ClothCategory
                   type="many"
-                  smallCategoryList={smallCategoryList}
-                  bigCategoryList={bigCategoryList}
-                  setBigCategoryList={setBigCategoryList}
-                  setSmallCategoryList={setSmallCategoryList}
+                  categoryList={categoryList}
+                  setCategoryList={setCategoryList}
                   setSelectedCategory={setSelectedCategory}
+                  categoryInitital={categoryInitital}
                 />
               </TabView.Tab>
               <TabView.Tab>
@@ -175,13 +180,18 @@ export default function FilterModal({
           {selectedCategory?.map((item, index) => {
             return (
               <S.SelectedFilterSpan key={index}>
-                {item.smallCategory ? (
-                  <Button3>{item.smallCategory}</Button3>
+                {!item.state ? (
+                  <Button3>{item.detailCategory![0].name}</Button3>
                 ) : (
-                  <Button3>{item.bigCategory}</Button3>
+                  <Button3>{item.name}</Button3>
                 )}
                 <AiOutlineClose
-                  onClick={() => onClickCloseCategoryButton(item.categoryId)}
+                  onClick={() =>
+                    onClickCloseCategoryButton(
+                      item.state ? item.id : item.detailCategory![0].id,
+                      item.state ? 'big' : 'small'
+                    )
+                  }
                   className="close"
                 />
               </S.SelectedFilterSpan>

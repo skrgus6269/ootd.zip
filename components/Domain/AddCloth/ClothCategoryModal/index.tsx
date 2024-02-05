@@ -7,23 +7,22 @@ import ClothCategory from '@/components/ClothCategory';
 
 interface ClothCategoryModalProps {
   isOpen: Boolean;
-  setClothCategory: Dispatch<SetStateAction<SelectedCategoryType[] | null>>;
+  setClothCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
-export type SelectedCategoryType = {
-  categoryId: number;
-  bigCategory: string;
-  smallCategory: string | null;
+export type CategoryType = {
+  id: number;
+  name: string;
+  state?: Boolean;
 };
 
-export interface CategoryListType {
-  categoryId: number;
-  type?: string;
+export type CategoryListType = {
+  id: number;
+  name: string;
   state?: Boolean;
-  bigCategory: string;
-  smallCategory: string | null;
-}
+  detailCategory?: CategoryType[];
+};
 
 export default function ClothCategoryModal({
   isOpen,
@@ -31,15 +30,12 @@ export default function ClothCategoryModal({
   setClothCategory,
 }: ClothCategoryModalProps) {
   const [selectedCategory, setSelectedCategory] = useState<
-    SelectedCategoryType[] | null
+    CategoryListType[] | null
   >(null);
 
-  const [bigCategoryList, setBigCategoryList] = useState<CategoryListType[]>(
-    []
+  const [categoryList, setCategoryList] = useState<CategoryListType[] | null>(
+    null
   );
-  const [smallCategoryList, setSmallCategoryList] = useState<
-    CategoryListType[]
-  >([]);
 
   const onClickNextButton = () => {
     setClothCategory(selectedCategory);
@@ -51,12 +47,10 @@ export default function ClothCategoryModal({
       <S.Layout>
         <Title1 className="title">카테고리</Title1>
         <ClothCategory
-          type="one"
+          categoryList={categoryList}
+          setCategoryList={setCategoryList}
           setSelectedCategory={setSelectedCategory}
-          smallCategoryList={smallCategoryList}
-          setSmallCategoryList={setSmallCategoryList}
-          bigCategoryList={bigCategoryList}
-          setBigCategoryList={setBigCategoryList}
+          type="one"
         />
         <NextButton state={true} onClick={onClickNextButton}>
           선택 완료

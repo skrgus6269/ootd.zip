@@ -54,10 +54,10 @@ export default function BasicInfoFirst({
 
   const Category = clothCategory && (
     <S.Category>
-      <Body3>{clothCategory[0].bigCategory}</Body3>
+      <Body3>{clothCategory[0].name}</Body3>
       <Body3>&gt;</Body3>
       <Body3 style={{ fontWeight: '700' }}>
-        {clothCategory[0].smallCategory}
+        {clothCategory[0]!.detailCategory![0].name}
       </Body3>
     </S.Category>
   );
