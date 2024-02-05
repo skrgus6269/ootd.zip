@@ -7,7 +7,7 @@ import Body from '@/components/UI/TypoGraphy/Body3';
 interface TextProps {
   defaultValue?: string;
   size: 'big' | 'small';
-  placeholder: string;
+  placeholder?: string;
   unit?: string;
   validity?: (value: string) => void;
   onChange: (value: string) => void;

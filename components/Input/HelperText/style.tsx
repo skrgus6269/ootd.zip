@@ -14,6 +14,8 @@ const Layout = styled.div<LayoutProps>`
       ? 'black'
       : props.state == 2
       ? 'red'
+      : props.state == 3
+      ? props.theme.color.grey_50
       : props.theme.color.correct};
   svg {
     width: 12px;
