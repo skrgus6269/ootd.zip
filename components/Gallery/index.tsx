@@ -9,13 +9,13 @@ import { useRouter } from 'next/router';
 import { ImageWithTag } from '../Domain/AddOOTD/TagModal';
 import S from './style';
 import NextButton from '../NextButton';
-import { Body3, Body4, Caption1, Headline1, Headline2, Title1 } from '../UI';
+import { Body3, Body4, Caption1, Title1 } from '../UI';
 import { useRecoilState } from 'recoil';
 import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
 
 interface GalleryProps {
-  imageAndTag: ImageWithTag | undefined | string;
+  imageAndTag: ImageWithTag | undefined;
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
   nextStep: string;
   handleStep: (next: string) => void;
@@ -39,7 +39,7 @@ const Gallery = ({
   //임시 저장된 데이터 사용 o
   const getStoredImage = () => {
     setImageAndTag(storedImage);
-    if (typeof storedImage !== 'string' && storedImage!.length > 0) {
+    if (storedImage!.length > 0) {
       setSelectedImage(storedImage!);
       setRealTouch(storedImage![storedImage!.length - 1].ootdId);
       setIsOpenStoredImageAlert(false);
@@ -125,8 +125,7 @@ const Gallery = ({
           />
         )}
       </S.Image>
-      {typeof imageAndTag !== 'string' ? (
-        selectedImage &&
+      {selectedImage &&
         selectedImage.map((item, index) => {
           if (item.ootdId === realTouch)
             return (
@@ -134,10 +133,7 @@ const Gallery = ({
                 <img className="bigImage" src={item.ootdImage} alt="" />
               </S.Image>
             );
-        })
-      ) : (
-        <img onClick={() => handleStep(nextStep)} src={imageAndTag} alt="" />
-      )}
+        })}
       {imageAndTag && (
         <S.ImageList imageListlength={imageAndTag?.length}>
           <Body4 className="selected" state="emphasis">
@@ -147,8 +143,7 @@ const Gallery = ({
             infinite={false}
             slidesToShow={imageAndTag.length <= 3 ? imageAndTag!.length : 3.2}
           >
-            {typeof imageAndTag !== 'string' ? (
-              imageAndTag &&
+            {imageAndTag &&
               imageAndTag.map((item, index) => {
                 let flag = 1;
                 return (
@@ -174,14 +169,7 @@ const Gallery = ({
                     )}
                   </S.Image>
                 );
-              })
-            ) : (
-              <img
-                onClick={() => handleStep(nextStep)}
-                src={imageAndTag}
-                alt=""
-              />
-            )}
+              })}
           </Carousel>
         </S.ImageList>
       )}
