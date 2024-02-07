@@ -31,7 +31,7 @@ export default function WhereToBuyModal({
   );
 
   //true === 링크입력 , false === 직접입력
-  const [selectedLetter, setSelectedLetter] = useState<number>(
+  const [selectedLetter, setSelectedLetter] = useState<number | null>(
     storedClothWhereBuy && storedClothWhereBuy.type === 'link' ? 1 : 2
   );
 

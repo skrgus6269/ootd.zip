@@ -70,6 +70,13 @@ const Gallery = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (imageAndTag && item === 'Cloth') {
+      setSelectedImage(imageAndTag);
+      setRealTouch(0);
+    }
+  }, [imageAndTag]);
+
   const [selectedImage, setSelectedImage] = useState<ImageWithTag>([]);
 
   const onClickImage = (ootdId: number, ootdImage: string) => {
@@ -109,10 +116,6 @@ const Gallery = ({
     setImageAndTag(selectedImage);
     handleStep(nextStep);
   };
-
-  useEffect(() => {
-    console.log(storedImage);
-  }, [storedImage]);
 
   return (
     <S.Layout>

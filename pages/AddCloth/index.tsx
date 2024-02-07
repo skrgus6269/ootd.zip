@@ -13,6 +13,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { ColorListType } from '@/components/ColorList';
 import { useRouter } from 'next/router';
+import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -30,10 +31,10 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothBrand, setClothBrand] = useState<string>('');
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
-    type: 'write',
+    type: 'link',
   });
-  const [clothColor, setClothColor] = useState<ColorListType | null>([]);
-  const [clothSize, setClothSize] = useState<string>('');
+  const [clothColor, setClothColor] = useState<ColorListType | null>(null);
+  const [clothSize, setClothSize] = useState<SizeItem | null>(null);
   const [open, setOpen] = useState('공개');
   const [clothByName, setClothByName] = useState('');
   const [clothBuyDate, setClothBuyDate] = useState('');

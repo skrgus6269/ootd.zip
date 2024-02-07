@@ -9,6 +9,7 @@ interface ClothCategoryModalProps {
   isOpen: Boolean;
   setClothCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
   setIsOpen: Dispatch<SetStateAction<Boolean>>;
+  categoryInitial?: CategoryListType[] | null;
 }
 
 export type CategoryType = {
@@ -28,6 +29,7 @@ export default function ClothCategoryModal({
   isOpen,
   setIsOpen,
   setClothCategory,
+  categoryInitial,
 }: ClothCategoryModalProps) {
   const [selectedCategory, setSelectedCategory] = useState<
     CategoryListType[] | null
@@ -51,6 +53,7 @@ export default function ClothCategoryModal({
           setCategoryList={setCategoryList}
           setSelectedCategory={setSelectedCategory}
           type="one"
+          categoryInitital={categoryInitial}
         />
         <NextButton state={true} onClick={onClickNextButton}>
           선택 완료

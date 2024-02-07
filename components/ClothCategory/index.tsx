@@ -3,12 +3,13 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useGetClothCategory from '@/apis/domain/System/SystemApi';
 import { Body3 } from '@/components/UI';
 import { CategoryListType } from '../Domain/AddCloth/ClothCategoryModal';
+import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 
 interface ClothCategoryModalProps {
   setCategoryList: Dispatch<SetStateAction<CategoryListType[] | null>>;
   setSelectedCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
   categoryList: CategoryListType[] | null;
-  categoryInitital: CategoryListType[] | null;
+  categoryInitital?: CategoryListType[] | null;
   type: 'one' | 'many';
 }
 
@@ -23,8 +24,9 @@ export default function ClothCategory({
 
   const [bigCategoryClickedIndex, setbigCategoryClickedIndex] =
     useState<number>(0);
-  const [smallCategoryClickedIndex, setsmallCategoryClickedIndex] =
-    useState<number>(0);
+  const [smallCategoryClickedIndex, setsmallCategoryClickedIndex] = useState<
+    number | null
+  >(null);
 
   const [init, setInit] = useState<number>(0);
 
@@ -76,6 +78,7 @@ export default function ClothCategory({
   }, []);
 
   useEffect(() => {
+    sendReactNativeMessage({ type: 'console', payload: categoryInitital });
     if (categoryInitital && categoryList) {
       let newCategory = JSON.parse(
         JSON.stringify(categoryList)
