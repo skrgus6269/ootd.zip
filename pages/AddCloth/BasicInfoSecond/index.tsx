@@ -53,17 +53,11 @@ export default function BasicInfoSecond({
         <Body3>{clothCategory![0].name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0]!.detailCategory![0].name}
+          {clothCategory![0]!.detailCategories![0].name}
         </Body3>
       </S.Category>
     );
   };
-
-  const Size = (
-    <S.Size>
-      <Body3>{clothSize?.name}</Body3>
-    </S.Size>
-  );
 
   const onClickBackground = () => {
     if (colorModalOpen) setColorModalOpen(false);
@@ -131,7 +125,7 @@ export default function BasicInfoSecond({
                 사이즈
               </Input.Label>
               <Input.Modal
-                result={Size}
+                result={<Body3>{clothSize?.name}</Body3>}
                 setModalOpen={setSizeModalOpen}
                 state={clothSize !== null}
               />
@@ -179,7 +173,7 @@ export default function BasicInfoSecond({
           categoryId={
             clothCategory![0].state
               ? clothCategory![0].id
-              : clothCategory![0].detailCategory![0].id
+              : clothCategory![0].detailCategories![0].id
           }
           clothSizeInitial={clothSize}
         />

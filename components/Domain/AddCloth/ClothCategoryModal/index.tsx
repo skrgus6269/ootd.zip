@@ -22,7 +22,7 @@ export type CategoryListType = {
   id: number;
   name: string;
   state?: Boolean;
-  detailCategory?: CategoryType[];
+  detailCategories?: CategoryType[];
 };
 
 export default function ClothCategoryModal({

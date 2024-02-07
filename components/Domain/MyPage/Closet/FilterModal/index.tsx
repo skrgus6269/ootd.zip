@@ -102,7 +102,7 @@ export default function FilterModal({
       newCategoryList = categoryList?.map((item) => {
         return {
           ...item,
-          detailCategory: item.detailCategory!.map((items) => {
+          detailCategories: item.detailCategories!.map((items) => {
             if (items.id === categoryId) return { ...items, state: false };
             return items;
           }),
@@ -181,14 +181,14 @@ export default function FilterModal({
             return (
               <S.SelectedFilterSpan key={index}>
                 {!item.state ? (
-                  <Button3>{item.detailCategory![0].name}</Button3>
+                  <Button3>{item.detailCategories![0].name}</Button3>
                 ) : (
                   <Button3>{item.name}</Button3>
                 )}
                 <AiOutlineClose
                   onClick={() =>
                     onClickCloseCategoryButton(
-                      item.state ? item.id : item.detailCategory![0].id,
+                      item.state ? item.id : item.detailCategories![0].id,
                       item.state ? 'big' : 'small'
                     )
                   }

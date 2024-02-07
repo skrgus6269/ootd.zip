@@ -48,7 +48,7 @@ export default function BasicInfoFirst({
         categoryId: 10,
         bigCategory: '외투',
         smallCategory: '재킷',
-        type: 'DetailCategory',
+        type: 'detailCategories',
         state: true,
       },
     ]);
