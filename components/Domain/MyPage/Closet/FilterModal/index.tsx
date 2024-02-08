@@ -11,6 +11,7 @@ import { BrandType } from '@/components/BrandList/Brand';
 import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -42,20 +43,22 @@ export default function FilterModal({
     null
   );
 
-  const [colorList, setColorList] = useState<ColorListType>([
-    { colorId: 0, color: '#BB193E', name: '버건디', state: false },
-    { colorId: 1, color: '#D50C0C', name: '레드', state: false },
-    { colorId: 2, color: '#F66800', name: '오렌지', state: false },
-    { colorId: 3, color: '#F3E219', name: '옐로우', state: false },
-    { colorId: 4, color: '#764006', name: '브라운', state: false },
-    { colorId: 5, color: '#C47C26', name: '카멜', state: false },
-    { colorId: 6, color: '#EBBD87', name: '탄', state: false },
-    { colorId: 7, color: '#F5ECC3', name: '베이지', state: false },
-    { colorId: 8, color: '#F5ECC3', name: '아이보리', state: false },
-    { colorId: 9, color: '#5AD99F', name: '민트', state: false },
-    { colorId: 10, color: '#21BA21', name: '그린', state: false },
-    { colorId: 11, color: '#71842F', name: '카키', state: false },
-  ]);
+  const { getColor } = ClothApi();
+
+  useEffect(() => {
+    const fetchColor = async () => {
+      const color = (await getColor()) as ColorListType;
+
+      const newColor = color.map((item) => {
+        return { ...item, state: false };
+      });
+
+      setColorList(newColor);
+    };
+    fetchColor();
+  }, []);
+
+  const [colorList, setColorList] = useState<ColorListType>([]);
 
   const [brandList, setBrandList] = useState<BrandType[] | null>([
     { brandId: 0, korean: '나이키', english: 'Nike', state: false },
@@ -155,7 +158,6 @@ export default function FilterModal({
                   colorInitital={colorInitital}
                   setSelectedColorList={setSelectedColorList}
                   className="colorList"
-                  selectedColorList={selectedColorList}
                   colorList={colorList}
                   setColorList={setColorList}
                 />

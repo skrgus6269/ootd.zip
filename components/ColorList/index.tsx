@@ -4,15 +4,14 @@ import ColorSpan from './ColorSpan';
 
 export type ColorListType = {
   colorId: number;
-  color: string;
   name: string;
+  colorCode: string;
   state: Boolean;
 }[];
 
 interface ColorListProps {
   colorList: ColorListType;
   setColorList: Dispatch<SetStateAction<ColorListType>>;
-  selectedColorList: ColorListType | null;
   setSelectedColorList: Dispatch<SetStateAction<ColorListType | null>>;
   colorInitital: ColorListType | null;
   className?: string;
@@ -22,12 +21,9 @@ export default function ColorList({
   setSelectedColorList,
   colorInitital,
   className,
-  selectedColorList,
   colorList,
   setColorList,
 }: ColorListProps) {
-  //const [getColor] = useSystem();
-
   useEffect(() => {
     const newColorList = [...colorList];
     if (colorInitital)
@@ -61,7 +57,7 @@ export default function ColorList({
         {colorList.map((item, index) => {
           return (
             <ColorSpan
-              color={item.color}
+              color={item.colorCode}
               name={item.name}
               state={item.state}
               key={index}

@@ -14,6 +14,7 @@ import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModa
 import { ColorListType } from '@/components/ColorList';
 import { useRouter } from 'next/router';
 import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -42,20 +43,23 @@ const AddCloth: ComponentWithLayout = () => {
 
   const router = useRouter();
 
+  const { postCloth } = ClothApi();
+
   const onClickSubmitButton = () => {
     //옷 등록 api
-    alert(
-      `${clothCategory},  
-      ${clothBrand}, 
-      ${clothColor}, 
-      ${clothImage}, 
-      ${clothWhereBuy}, 
-      ${open}
-      ${clothByName}
-      ${clothMemo}
-      ${clothBuyDate}
-      `
-    );
+    const payload = {
+      purchaseStore: clothWhereBuy.letter,
+      brandId: 1,
+      categoryId: clothCategory![0].detailCategories![0].id,
+      colorIds: [...clothColor!].map((item) => item.colorId),
+      isOpen: true as Boolean,
+      sizeId: clothSize!.id,
+      clothesImageUrl: clothImage![0].ootdImage,
+      name: '나이키 윈드브레이커',
+      material: '스웻',
+      purchaseDate: clothBuyDate,
+    };
+    postCloth(payload);
   };
 
   const onClickAppbarLeftButton = () => {

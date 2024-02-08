@@ -5,3 +5,9 @@ export const getClothCategory = async () => {
 
   return data;
 };
+
+export const getClothColor = async () => {
+  const data = await systemApi.getColor();
+
+  return data;
+};
