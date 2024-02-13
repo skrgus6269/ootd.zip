@@ -4,30 +4,50 @@ import { systemService, userService } from '@/apis/_service';
 export default function ClothApi() {
   //cloth 작성
   const postCloth = async (payload: postClothPayload) => {
-    const data = await userService.postCloth(payload);
+    try {
+      const { result } = await userService.postCloth(payload);
 
-    return data;
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
   };
 
   //유저의 cloth 리스트 조회
   const getUserClothList = async (id: number) => {
-    const data = await userService.getUserClothList(id);
+    try {
+      const { result } = await userService.getUserClothList(id);
 
-    return data;
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
   };
 
   //cloth 상세 정보 조회
   const getClothDetail = async (id: number) => {
-    const data = await userService.getClothDetail(id);
+    try {
+      const { result } = await userService.getClothDetail(id);
 
-    return data;
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
   };
 
   //cloth 삭제
-  const deleteClothDetail = async (id: number) => {
-    const data = await userService.deleteClothDetail(id);
+  const deleteCloth = async (id: number) => {
+    try {
+      const { result } = await userService.deleteCloth(id);
 
-    return data;
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
   };
 
   //카테고리 가져오기
@@ -48,7 +68,7 @@ export default function ClothApi() {
     postCloth,
     getUserClothList,
     getClothDetail,
-    deleteClothDetail,
+    deleteCloth,
     getClothCategory,
     getColor,
   };

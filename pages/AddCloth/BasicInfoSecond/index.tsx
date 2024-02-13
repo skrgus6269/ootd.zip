@@ -110,7 +110,7 @@ export default function BasicInfoSecond({
                       <ColorSpan
                         key={index}
                         index={index}
-                        color={item.color}
+                        color={item.colorCode}
                         name={item.name}
                         state={false}
                       />

@@ -3,7 +3,7 @@ import S from './style';
 import ColorSpan from './ColorSpan';
 
 export type ColorListType = {
-  colorId: number;
+  id: number;
   name: string;
   colorCode: string;
   state: Boolean;
@@ -29,7 +29,7 @@ export default function ColorList({
     if (colorInitital)
       for (let i = 0; i < colorInitital?.length; i++) {
         for (let j = 0; j < newColorList.length; j++) {
-          if (colorInitital[i].colorId === newColorList[j].colorId) {
+          if (colorInitital[i].id === newColorList[j].id) {
             newColorList[j].state = true;
           }
         }

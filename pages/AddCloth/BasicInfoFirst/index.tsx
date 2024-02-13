@@ -41,7 +41,7 @@ export default function BasicInfoFirst({
   useEffect(() => {
     if (
       clothCategory !== null &&
-      // clothBrand.length > 0 &&
+      clothBrand?.length > 0 &&
       clothWhereBuy.letter.length > 0
     ) {
       setNextButtonState(true);

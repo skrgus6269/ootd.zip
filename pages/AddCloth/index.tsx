@@ -45,13 +45,13 @@ const AddCloth: ComponentWithLayout = () => {
 
   const { postCloth } = ClothApi();
 
-  const onClickSubmitButton = () => {
+  const onClickSubmitButton = async () => {
     //옷 등록 api
     const payload = {
       purchaseStore: clothWhereBuy.letter,
-      brandId: 1,
+      brandId: 2,
       categoryId: clothCategory![0].detailCategories![0].id,
-      colorIds: [...clothColor!].map((item) => item.colorId),
+      colorIds: [...clothColor!].map((item) => item.id),
       isOpen: true as Boolean,
       sizeId: clothSize!.id,
       clothesImageUrl: clothImage![0].ootdImage,
@@ -59,7 +59,8 @@ const AddCloth: ComponentWithLayout = () => {
       material: '스웻',
       purchaseDate: clothBuyDate,
     };
-    postCloth(payload);
+
+    await postCloth(payload);
   };
 
   const onClickAppbarLeftButton = () => {
