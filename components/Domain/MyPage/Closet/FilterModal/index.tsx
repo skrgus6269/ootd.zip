@@ -117,7 +117,7 @@ export default function FilterModal({
 
   const onClickCloseColorButton = (colorId: number) => {
     const newColorList = colorList.map((item) => {
-      if (item.colorId === colorId) {
+      if (item.id === colorId) {
         return { ...item, state: false };
       }
       return item;
@@ -204,7 +204,7 @@ export default function FilterModal({
               <S.SelectedFilterSpan key={index}>
                 <Button3>{item.name}</Button3>
                 <AiOutlineClose
-                  onClick={() => onClickCloseColorButton(item.colorId)}
+                  onClick={() => onClickCloseColorButton(item.id)}
                   className="close"
                 />
               </S.SelectedFilterSpan>
