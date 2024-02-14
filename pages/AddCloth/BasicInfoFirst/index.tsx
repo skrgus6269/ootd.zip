@@ -2,7 +2,7 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
-import { Body3, Title1 } from '@/components/UI';
+import { Body2, Body3, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { ClothWhereBuy } from '..';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
@@ -12,6 +12,7 @@ import ClothCategoryModal, {
 import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
 
 interface BaiscInfoFirst {
+  clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
   clothBrand: string;
@@ -23,6 +24,7 @@ interface BaiscInfoFirst {
 }
 
 export default function BasicInfoFirst({
+  clothName,
   clothImage,
   clothCategory,
   clothBrand,
@@ -89,6 +91,9 @@ export default function BasicInfoFirst({
         onClick={onClickBackground}
       />
       <S.Layout>
+        <S.ClothName>
+          <Body2>{clothName}</Body2>
+        </S.ClothName>
         <S.ClothImage>
           <img src={clothImage![0].ootdImage} alt="" />
         </S.ClothImage>
@@ -136,18 +141,22 @@ export default function BasicInfoFirst({
             </Input>
           </S.Information>
         </S.BasicInfo>
-        <NextButton state={nextButtonState} onClick={onClickNextButton}>
+        <NextButton
+          className="nextButton"
+          state={nextButtonState}
+          onClick={onClickNextButton}
+        >
           다음
         </NextButton>
-      </S.Layout>
-      {categoryModalOpen && (
+      </S.Layout> 
+      {categoryModalOpen && ( 
         <ClothCategoryModal
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}
         />
-      )}
-      {whereToBuyModalOpen && (
+      )}  
+      {whereToBuyModalOpen && ( 
         <WhereToBuyModal
           isOpen={whereToBuyModalOpen}
           setIsOpen={setWhereToBuyModalOpen}

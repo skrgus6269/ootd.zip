@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import S from './style';
-import { Body3, Headline1, Title1 } from '@/components/UI';
+import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import NextButton from '@/components/NextButton';
@@ -8,7 +8,8 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface AdditionalInfo {
-  clothImage: string | ImageWithTag | undefined;
+  clothName: string;
+  clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
   clothBrand: string;
   clothByName: string;
@@ -20,6 +21,7 @@ interface AdditionalInfo {
 }
 
 export default function AdditionalInfo({
+  clothName,
   clothImage,
   clothCategory,
   clothBrand,
@@ -47,7 +49,8 @@ export default function AdditionalInfo({
       <S.BasicInfoFirst>
         <Category />
         <Headline1>{clothBrand}</Headline1>
-        {typeof clothImage === 'string' && <img src={clothImage} alt="" />}
+        <Body2 className="name">{clothName}</Body2>
+        <img src={clothImage![0].ootdImage} alt="" />
         <hr />
       </S.BasicInfoFirst>
       <S.AdditionalInfo>
@@ -55,18 +58,6 @@ export default function AdditionalInfo({
           <Title1 className="title">추가 정보</Title1>
         </S.Title>
         <S.Information>
-          <Input>
-            <Input.Label size="small" className="label">
-              별칭
-            </Input.Label>
-            <Input.Text
-              size="big"
-              placeholder=""
-              border={true}
-              onChange={setClothByName}
-              line="outline"
-            />
-          </Input>
           <Input>
             <Input.Label size="small" className="label">
               구매시기

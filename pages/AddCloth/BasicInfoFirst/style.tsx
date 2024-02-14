@@ -5,13 +5,21 @@ interface BackgroundProps {
 }
 
 const Layout = styled.div`
-  height: calc(100% - 48px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  button {
+  .nextButton {
     margin: 0 20px;
+    width: calc(100% - 40px);
+    position: fixed;
+    bottom: 25px;
   }
+`;
+
+const ClothName = styled.div`
+  color: ${(props) => props.theme.color.grey_50};
+  padding: 24px 20px 0 20px;
 `;
 
 const Category = styled.div`
@@ -35,7 +43,7 @@ const Background = styled.div<BackgroundProps>`
 
 const ClothImage = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
-  padding: 24px 20px 48px 20px;
+  padding: 16px 20px 48px 20px;
   img {
     width: 106px;
     height: 106px;
@@ -65,6 +73,7 @@ const Information = styled.div`
 
 const S = {
   Layout,
+  ClothName,
   Category,
   ClothImage,
   BasicInfo,

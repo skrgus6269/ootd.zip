@@ -29,10 +29,12 @@ const Layout = styled.div`
   flex-direction: column;
   height: calc(100vh - 48px);
   .nextButton {
-    padding-bottom: 30px;
+    position: fixed;
+    width: calc(100% - 40px);
     background-color: white;
-    bottom: 0;
+    bottom: 25px;
     flex-grow: 0;
+    z-index: 999;
   }
 `;
 
@@ -76,7 +78,7 @@ const Title = styled.div`
 
 const Information = styled.div`
   overflow-y: scroll;
-  height: 70%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   gap: 24px;
