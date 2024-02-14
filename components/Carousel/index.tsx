@@ -28,6 +28,7 @@ export default function Carousel({
     beforeChange,
     arrows: false,
     dots: true,
+    slickGoTo: 4,
   };
 
   return (

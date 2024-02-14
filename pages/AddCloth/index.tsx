@@ -12,8 +12,10 @@ import AdditionalInfo from './AdditionalInfo';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { ColorListType } from '@/components/ColorList';
-import { useRouter } from 'next/router';
-import ClothName from './ClothName';
+import { useRouter } from 'next/router'; 
+import ClothName from './ClothName'; 
+import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
+import ClothApi from '@/apis/domain/Cloth/ClothApi'; 
 
 export interface ClothWhereBuy {
   letter: string;
@@ -37,29 +39,34 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothBrand, setClothBrand] = useState<string>('');
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
-    type: 'write',
+    type: 'link',
   });
-  const [clothColor, setClothColor] = useState<ColorListType | null>([]);
-  const [clothSize, setClothSize] = useState<string>('');
+  const [clothColor, setClothColor] = useState<ColorListType | null>(null);
+  const [clothSize, setClothSize] = useState<SizeItem | null>(null);
   const [open, setOpen] = useState('공개');
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
 
   const router = useRouter();
 
-  const onClickSubmitButton = () => {
-    //옷 등록 api
-    alert(
-      `${clothCategory},  
-      ${clothBrand}, 
-      ${clothColor}, 
-      ${clothImage}, 
-      ${clothWhereBuy}, 
-      ${open} 
-      ${clothMemo}
-      ${clothBuyDate}
-      `
-    );
+  const { postCloth } = ClothApi();
+
+  const onClickSubmitButton = async () => {
+    //옷 등록 api 
+    const payload = {
+      purchaseStore: clothWhereBuy.letter,
+      brandId: 2,
+      categoryId: clothCategory![0].detailCategories![0].id,
+      colorIds: [...clothColor!].map((item) => item.id),
+      isOpen: true as Boolean,
+      sizeId: clothSize!.id,
+      clothesImageUrl: clothImage![0].ootdImage,
+      name: '나이키 윈드브레이커',
+      material: '스웻',
+      purchaseDate: clothBuyDate,
+    };
+
+    await postCloth(payload); 
   };
 
   const onClickAppbarLeftButton = () => {

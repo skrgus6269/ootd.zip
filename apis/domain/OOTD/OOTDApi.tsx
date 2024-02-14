@@ -46,7 +46,7 @@ export const OOTDApi = () => {
   const patchOOTDContentsOrIsPrivate = async (
     payload: patchOOTDContentsOrIsPrivatePayload
   ) => {
-    const data = await userService.putOOTDContentsOrIsPrivate(payload);
+    const data = await userService.patchOOTDContentsOrIsPrivate(payload);
     return data;
   };
 

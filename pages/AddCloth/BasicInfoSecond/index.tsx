@@ -10,7 +10,9 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import ColorSpan from '@/components/ColorList/ColorSpan';
 import ColorModal from '@/components/Domain/AddCloth/ColorModal';
-import ClothSizeModal from '@/components/Domain/AddCloth/ClothSizeModal';
+import ClothSizeModal, {
+  SizeItem,
+} from '@/components/Domain/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
@@ -20,9 +22,10 @@ interface BasicInfoSecondProps {
   clothBrand: string;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
-  setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
-  clothSize: string;
-  setClothSize: Dispatch<SetStateAction<string>>;
+  setClothColor: Dispatch<SetStateAction<ColorListType | null>>; 
+  clothSize: SizeItem | null;
+  setClothSize: Dispatch<SetStateAction<SizeItem | null>>;
+  open: string; 
   setOpen: Dispatch<SetStateAction<string>>;
 }
 
@@ -40,27 +43,19 @@ export default function BasicInfoSecond({
 }: BasicInfoSecondProps) {
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
-  const [init, setInit] = useState<number>(0);
-  const [inits, setInits] = useState<number>(0);
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory![0].bigCategory}</Body3>
+        <Body3>{clothCategory![0].name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0].smallCategory}
+          {clothCategory![0]!.detailCategories![0].name}
         </Body3>
       </S.Category>
     );
   };
-
-  const Size = (
-    <S.Size>
-      <Body3>{clothSize}</Body3>
-    </S.Size>
-  );
 
   const onClickBackground = () => {
     if (colorModalOpen) setColorModalOpen(false);
@@ -74,7 +69,6 @@ export default function BasicInfoSecond({
 
   const onClickColorPlusButton = () => {
     setColorModalOpen(true);
-    setInit(1);
   };
 
   const onClickYesButton = () => {
@@ -115,7 +109,7 @@ export default function BasicInfoSecond({
                       <ColorSpan
                         key={index}
                         index={index}
-                        color={item.color}
+                        color={item.colorCode}
                         name={item.name}
                         state={false}
                       />
@@ -130,10 +124,9 @@ export default function BasicInfoSecond({
                 사이즈
               </Input.Label>
               <Input.Modal
-                result={Size}
+                result={<Body3>{clothSize?.name}</Body3>}
                 setModalOpen={setSizeModalOpen}
-                state={clothSize.length > 0}
-                setInit={setInits}
+                state={clothSize !== null}
               />
             </Input>
             <Input>
@@ -163,7 +156,7 @@ export default function BasicInfoSecond({
           등록하기
         </NextButton>
       </S.Layout>
-      {init > 0 && (
+      {colorModalOpen && (
         <ColorModal
           colorInitial={clothColor}
           setIsOpen={setColorModalOpen}
@@ -171,12 +164,17 @@ export default function BasicInfoSecond({
           isOpen={colorModalOpen}
         />
       )}
-      {inits > 0 && (
+      {sizeModalOpen && (
         <ClothSizeModal
           setIsOpen={setSizeModalOpen}
           setClothSize={setClothSize}
           isOpen={sizeModalOpen}
-          bigCategory={clothCategory![0].bigCategory}
+          categoryId={
+            clothCategory![0].state
+              ? clothCategory![0].id
+              : clothCategory![0].detailCategories![0].id
+          }
+          clothSizeInitial={clothSize}
         />
       )}
       {alertOpen && (

@@ -35,10 +35,10 @@ export default function AdditionalInfo({
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory![0].bigCategory}</Body3>
+        <Body3>{clothCategory![0].name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0].smallCategory}
+          {clothCategory![0]!.detailCategories![0].name}
         </Body3>
       </S.Category>
     );

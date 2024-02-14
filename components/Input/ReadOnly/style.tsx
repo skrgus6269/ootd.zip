@@ -27,9 +27,8 @@ const Layout = styled.div<LayoutProps>`
 
   p {
     margin-bottom: 0 !important;
-    text-decoration: ${(props) =>
-      props.type === 'link' ? '1px solid underline' : ''};
   }
+
   svg {
     color: ${(props) => (props.state ? '' : props.theme.color.grey_80)};
     width: 8px;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
-import { SelectedCategoryType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
 interface ClosetClothProps {
   myPageClothList?: myPageClothType[];
@@ -18,7 +18,7 @@ export type myPageClothType = {
 };
 
 export interface FilterData {
-  category: SelectedCategoryType[] | null;
+  category: CategoryListType[] | null;
   color: ColorListType | null;
   brand: { brandId: number; korean: string; english: string }[] | null;
   isOpen: Boolean | null;

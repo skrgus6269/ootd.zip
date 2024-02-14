@@ -28,7 +28,9 @@ const GlobalStyles = createGlobalStyle`
     body, html {
         height: 100dvh; //dvh와 같은 상황도 고려해야한다.
     }
-    
+    input {
+        font-family: "Pretendard Regular";
+    }
     div#__next{
         height: 100%;
     }
