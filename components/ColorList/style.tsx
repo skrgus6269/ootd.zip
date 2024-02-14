@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  .nextButton {
-  }
+  height: 270px;
+  overflow-y: scroll;
 `;
 const Title = styled.div`
   padding: 21px 0;

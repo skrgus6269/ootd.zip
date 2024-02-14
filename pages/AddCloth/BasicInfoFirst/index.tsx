@@ -34,8 +34,6 @@ export default function BasicInfoFirst({
 }: BaiscInfoFirst) {
   const [categoryModalOpen, setCategoryModalOpen] = useState<Boolean>(false);
   const [nextButtonState, setNextButtonState] = useState<Boolean>(false);
-  const [init, setInit] = useState<number>(0);
-  const [inits, setInits] = useState<number>(0);
 
   const [whereToBuyModalOpen, setWhereToBuyModalOpen] =
     useState<Boolean>(false);
@@ -43,7 +41,7 @@ export default function BasicInfoFirst({
   useEffect(() => {
     if (
       clothCategory !== null &&
-      // clothBrand.length > 0 &&
+      clothBrand?.length > 0 &&
       clothWhereBuy.letter.length > 0
     ) {
       setNextButtonState(true);
@@ -54,15 +52,19 @@ export default function BasicInfoFirst({
 
   const Category = clothCategory && (
     <S.Category>
-      <Body3>{clothCategory[0].bigCategory}</Body3>
+      <Body3>{clothCategory[0].name}</Body3>
       <Body3>&gt;</Body3>
       <Body3 style={{ fontWeight: '700' }}>
-        {clothCategory[0].smallCategory}
+        {clothCategory[0]!.detailCategories![0].name}
       </Body3>
     </S.Category>
   );
 
-  const WhereToBuy = <Body3>{clothWhereBuy.letter}</Body3>;
+  const WhereToBuy = (
+    <Body3 style={{ WebkitTextDecorationLine: 'underline' }}>
+      {clothWhereBuy.letter}
+    </Body3>
+  );
 
   const onClickNextButton = () => {
     handleStep('기본정보2');
@@ -101,7 +103,6 @@ export default function BasicInfoFirst({
                 state={clothCategory !== undefined}
                 result={Category}
                 setModalOpen={setCategoryModalOpen}
-                setInit={setInit}
               />
             </Input>
             <Input>
@@ -123,7 +124,6 @@ export default function BasicInfoFirst({
                   result={WhereToBuy}
                   setModalOpen={setWhereToBuyModalOpen}
                   state={clothWhereBuy.letter.length > 0}
-                  setInit={setInits}
                   type={clothWhereBuy.type}
                 />
               ) : (
@@ -131,7 +131,6 @@ export default function BasicInfoFirst({
                   result={WhereToBuy}
                   setModalOpen={setWhereToBuyModalOpen}
                   state={true}
-                  setInit={setInits}
                 />
               )}
             </Input>
@@ -141,18 +140,19 @@ export default function BasicInfoFirst({
           다음
         </NextButton>
       </S.Layout>
-      {init && (
+      {categoryModalOpen && (
         <ClothCategoryModal
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}
         />
       )}
-      {inits && (
+      {whereToBuyModalOpen && (
         <WhereToBuyModal
           isOpen={whereToBuyModalOpen}
           setIsOpen={setWhereToBuyModalOpen}
           setWhereToBuy={setClothWhereBuy}
+          storedClothWhereBuy={clothWhereBuy}
         />
       )}
     </>

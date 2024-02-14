@@ -15,11 +15,6 @@ const Layout = styled.div`
 const Title = styled.div`
   padding: 21px 0;
 `;
-const ColorList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 4px;
-`;
 const Color = styled.div`
   height: 86px;
   display: flex;
@@ -76,7 +71,6 @@ const SelectedColor = styled.div`
 const S = {
   Layout,
   Title,
-  ColorList,
   SelectedColorList,
   Color,
   ColorSpan,

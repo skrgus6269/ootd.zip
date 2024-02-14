@@ -55,6 +55,9 @@ const SearchInput = styled(FlexLayout)`
 `;
 
 const Input = styled.input<InputProps>`
+  font-family: 'Pretendard Regular';
+  text-decoration: ${(props) =>
+    props.type === 'link' ? '1px solid underline' : ''};
   ${(props) =>
     props.line === 'underline' &&
     `
@@ -70,7 +73,7 @@ const Input = styled.input<InputProps>`
 
     &::placeholder {
       font-size: 16px;
-      font-family: 'Pretendard';
+      font-family: 'Pretendard Variable';
     }
   `}
 
@@ -79,8 +82,7 @@ const Input = styled.input<InputProps>`
     `
     padding: ${props.type === 'link' ? '0 16px 0 42px' : '0 16px'};
     width: 100%;
-    border: none;
-    font-family: Pretendard;
+    border: none; 
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -90,11 +92,10 @@ const Input = styled.input<InputProps>`
     }
     &::placeholder {
       font-size: 16px;
-      font-family: 'Pretendard';
+      font-family: 'Pretendard Variable';
       font-weight: 400;
       line-height: 22px;
     }
-    text-decoration: ${props.type === 'link' ? '1px solid underline' : ''};
   `}
 `;
 

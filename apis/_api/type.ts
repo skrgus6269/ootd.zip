@@ -43,3 +43,16 @@ export interface postOOTDLikePayload {
 export interface deleteOOTDLikePayload {
   id: number;
 }
+
+export interface postClothPayload {
+  purchaseStore: string;
+  brandId: number;
+  categoryId: number;
+  colorIds: number[];
+  isOpen: Boolean;
+  sizeId: number;
+  clothesImageUrl: string;
+  name: string;
+  material: string;
+  purchaseDate: string;
+}
