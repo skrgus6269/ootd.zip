@@ -2,7 +2,7 @@ import AppBar from '@/components/Appbar';
 import Gallery from '@/components/Gallery/';
 import { Title1 } from '@/components/UI';
 import { useFunnel } from '@/hooks/use-funnel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import BasicInfoFirst from './BasicInfoFirst';
 import { ComponentWithLayout } from '../sign-up';
@@ -13,6 +13,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { ColorListType } from '@/components/ColorList';
 import { useRouter } from 'next/router';
+import ClothName from './ClothName';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -20,10 +21,16 @@ export interface ClothWhereBuy {
 }
 
 const AddCloth: ComponentWithLayout = () => {
-  const steps = ['편집', '기본정보1', '기본정보2', '추가정보'];
+  const steps = ['편집', '제품명', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>();
-
+  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([
+    {
+      ootdId: 0,
+      ootdImage:
+        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
+    },
+  ]);
+  const [clothName, setClothName] = useState<string>('');
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null
   );
@@ -35,7 +42,6 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothColor, setClothColor] = useState<ColorListType | null>([]);
   const [clothSize, setClothSize] = useState<string>('');
   const [open, setOpen] = useState('공개');
-  const [clothByName, setClothByName] = useState('');
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
 
@@ -49,8 +55,7 @@ const AddCloth: ComponentWithLayout = () => {
       ${clothColor}, 
       ${clothImage}, 
       ${clothWhereBuy}, 
-      ${open}
-      ${clothByName}
+      ${open} 
       ${clothMemo}
       ${clothBuyDate}
       `
@@ -58,8 +63,10 @@ const AddCloth: ComponentWithLayout = () => {
   };
 
   const onClickAppbarLeftButton = () => {
-    if (currentStep === '기본정보1') {
+    if (currentStep === '제품명') {
       handleStep('편집');
+    } else if (currentStep === '기본정보1') {
+      handleStep('제품명');
     } else if (currentStep === '기본정보2') {
       handleStep('기본정보1');
     } else {
@@ -73,6 +80,7 @@ const AddCloth: ComponentWithLayout = () => {
       return <AiOutlineArrowLeft onClick={onClickAppbarLeftButton} />;
     }
   };
+
   return (
     <Funnel>
       <AppBar
@@ -85,12 +93,21 @@ const AddCloth: ComponentWithLayout = () => {
           setImageAndTag={setClothImage}
           imageAndTag={clothImage!}
           handleStep={handleStep}
-          nextStep="기본정보1"
+          nextStep="제품명"
           item="Cloth"
+        />
+      </Funnel.Steps>
+      <Funnel.Steps name="제품명">
+        <ClothName
+          setClothName={setClothName}
+          clothName={clothName}
+          clothImage={clothImage!}
+          handleStep={handleStep}
         />
       </Funnel.Steps>
       <Funnel.Steps name="기본정보1">
         <BasicInfoFirst
+          clothName={clothName}
           clothImage={clothImage}
           clothCategory={clothCategory}
           clothBrand={clothBrand}
@@ -103,27 +120,25 @@ const AddCloth: ComponentWithLayout = () => {
       </Funnel.Steps>
       <Funnel.Steps name="기본정보2">
         <BasicInfoSecond
+          clothName={clothName}
           clothImage={clothImage}
           clothCategory={clothCategory}
           clothBrand={clothBrand}
-          clothWhereBuy={clothWhereBuy!}
           handleStep={handleStep}
           clothColor={clothColor}
           setClothColor={setClothColor}
           clothSize={clothSize}
           setClothSize={setClothSize}
-          open={open}
           setOpen={setOpen}
         />
       </Funnel.Steps>
       <Funnel.Steps name="추가정보">
         <AdditionalInfo
+          clothName={clothName}
           clothBrand={clothBrand}
           clothCategory={clothCategory}
           clothImage={clothImage}
-          clothByName={clothByName}
           clothMemo={clothMemo}
-          setClothByName={setClothByName}
           setClothBuyDate={setClothBuyDate}
           setClothMemo={setClothMemo}
           onClickSubmitButton={onClickSubmitButton}

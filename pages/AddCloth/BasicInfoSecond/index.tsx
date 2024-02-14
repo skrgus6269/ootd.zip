@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Body3, Headline1, Title1 } from '@/components/UI';
+import { Body2, Body3, Headline1, Headline2, Title1 } from '@/components/UI';
 import S from './style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { ClothWhereBuy } from '..';
 import PlusButton from '@/components/PlusButton';
 import { ColorListType } from '@/components/ColorList';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
@@ -15,29 +14,27 @@ import ClothSizeModal from '@/components/Domain/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
 
 interface BasicInfoSecondProps {
+  clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
   clothBrand: string;
-  clothWhereBuy: ClothWhereBuy;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
   setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: string;
   setClothSize: Dispatch<SetStateAction<string>>;
-  open: string;
   setOpen: Dispatch<SetStateAction<string>>;
 }
 
 export default function BasicInfoSecond({
+  clothName,
   clothCategory,
   clothBrand,
-  clothWhereBuy,
   clothImage,
   clothColor,
   setClothColor,
   clothSize,
   setClothSize,
-  open,
   setOpen,
   handleStep,
 }: BasicInfoSecondProps) {
@@ -98,6 +95,7 @@ export default function BasicInfoSecond({
         <S.BasicInfoFirst>
           <Category />
           <Headline1>{clothBrand}</Headline1>
+          <Body2 className="name">{clothName}</Body2>
           <img src={clothImage![0].ootdImage} alt="" />
           <hr />
         </S.BasicInfoFirst>

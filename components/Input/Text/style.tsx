@@ -14,7 +14,7 @@ const Layout = styled.div<LayoutProps>`
   display: inline-flex;
   width: 100%;
   max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
-  height: 42px;
+  height: 44px;
   gap: 2px;
   position: relative;
 
@@ -62,7 +62,7 @@ const Input = styled.input<InputProps>`
     border: none;
     font-weight: 400;
     font-size: 24px;
-    line-height: 30px;
+    line-height: 30px; 
 
     :focus {
       outline: none;
