@@ -7,6 +7,7 @@ import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { BrandType } from '@/components/BrandList/Brand';
 
 interface ClosetClothProps {
   myPageClothList?: myPageClothType[];
@@ -20,7 +21,7 @@ export type myPageClothType = {
 export interface FilterData {
   category: CategoryListType[] | null;
   color: ColorListType | null;
-  brand: { brandId: number; korean: string; english: string }[] | null;
+  brand: BrandType[] | null;
   isOpen: Boolean | null;
 }
 

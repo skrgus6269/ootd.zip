@@ -10,15 +10,17 @@ import ClothCategoryModal, {
   CategoryListType,
 } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
+import { BrandType } from '@/components/BrandList/Brand';
+import BrandModal from '@/components/Domain/AddCloth/BrandModal';
 
 interface BaiscInfoFirst {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
-  clothBrand: string;
+  clothBrand: BrandType[] | null;
   clothWhereBuy: ClothWhereBuy;
   setClothCategory: Dispatch<SetStateAction<CategoryListType[] | null>>;
-  setClothBrand: Dispatch<SetStateAction<string>>;
+  setClothBrand: Dispatch<SetStateAction<BrandType[] | null>>;
   setClothWhereBuy: Dispatch<SetStateAction<ClothWhereBuy>>;
   handleStep: (next: string) => void;
 }
@@ -40,10 +42,12 @@ export default function BasicInfoFirst({
   const [whereToBuyModalOpen, setWhereToBuyModalOpen] =
     useState<Boolean>(false);
 
+  const [brandModalOpen, setBrandModalOpen] = useState<Boolean>(false);
+
   useEffect(() => {
     if (
       clothCategory !== null &&
-      clothBrand?.length > 0 &&
+      clothBrand !== null &&
       clothWhereBuy.letter.length > 0
     ) {
       setNextButtonState(true);
@@ -62,6 +66,8 @@ export default function BasicInfoFirst({
     </S.Category>
   );
 
+  const Brand = <Body3>{clothBrand && clothBrand![0].name}</Body3>;
+
   const WhereToBuy = (
     <Body3 style={{ WebkitTextDecorationLine: 'underline' }}>
       {clothWhereBuy.letter}
@@ -70,24 +76,18 @@ export default function BasicInfoFirst({
 
   const onClickNextButton = () => {
     handleStep('기본정보2');
-    console.log(clothCategory, clothImage, clothWhereBuy, clothBrand);
   };
-
-  useEffect(() => {
-    if (clothCategory) brandRef.current.focus();
-  }, [clothCategory]);
-
-  const brandRef = useRef<any>(null);
-  const nameRef = useRef<any>(null);
 
   const onClickBackground = () => {
     if (categoryModalOpen) setCategoryModalOpen(false);
     if (whereToBuyModalOpen) setWhereToBuyModalOpen(false);
+    if (brandModalOpen) setBrandModalOpen(false);
   };
+
   return (
     <>
       <S.Background
-        isOpen={categoryModalOpen || whereToBuyModalOpen}
+        isOpen={categoryModalOpen || whereToBuyModalOpen || brandModalOpen}
         onClick={onClickBackground}
       />
       <S.Layout>
@@ -105,21 +105,17 @@ export default function BasicInfoFirst({
             <Input>
               <Input.Label size="small">카테고리</Input.Label>
               <Input.Modal
-                state={clothCategory !== undefined}
+                state={clothCategory !== null}
                 result={Category}
                 setModalOpen={setCategoryModalOpen}
               />
             </Input>
             <Input>
               <Input.Label size="small">브랜드</Input.Label>
-              <Input.Text
-                inputRef={brandRef}
-                size="big"
-                placeholder=""
-                border={true}
-                onChange={setClothBrand}
-                line="outline"
-                pressEnter={() => nameRef.current.focus()}
+              <Input.Modal
+                result={Brand}
+                state={clothBrand !== null}
+                setModalOpen={setBrandModalOpen}
               />
             </Input>
             <Input>
@@ -148,15 +144,22 @@ export default function BasicInfoFirst({
         >
           다음
         </NextButton>
-      </S.Layout> 
-      {categoryModalOpen && ( 
+      </S.Layout>
+      {categoryModalOpen && (
         <ClothCategoryModal
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}
         />
-      )}  
-      {whereToBuyModalOpen && ( 
+      )}
+      {brandModalOpen && (
+        <BrandModal
+          brandModalIsOpen={brandModalOpen}
+          setClothBrand={setClothBrand}
+          setBrandModalIsOpen={setBrandModalOpen}
+        />
+      )}
+      {whereToBuyModalOpen && (
         <WhereToBuyModal
           isOpen={whereToBuyModalOpen}
           setIsOpen={setWhereToBuyModalOpen}
