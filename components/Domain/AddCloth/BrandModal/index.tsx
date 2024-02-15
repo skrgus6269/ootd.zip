@@ -7,6 +7,7 @@ import { BrandType } from '@/components/BrandList/Brand';
 import SearchBar from '@/components/SearchBar';
 import { AiOutlineClose } from 'react-icons/ai';
 import NextButton from '@/components/NextButton';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 interface BrandModalProps {
   brandModalIsOpen: Boolean;
@@ -25,6 +26,8 @@ export default function BrandModal({
     BrandType[] | null
   >(null);
 
+  const { getBrand } = ClothApi();
+
   const onClickCloseBrandButton = (id: number) => {
     const newBrandList = brandList!.map((item) => {
       if (item.id === id) {
@@ -40,6 +43,15 @@ export default function BrandModal({
     setClothBrand(selectedBrandList);
     setBrandModalIsOpen(false);
   };
+
+  useEffect(() => {
+    const fetchBrand = async () => {
+      const result = await getBrand(searchKeyword);
+      setBrandList(result);
+    };
+    if (searchKeyword === '') setBrandList(null);
+    if (searchKeyword.length > 0) fetchBrand();
+  }, [searchKeyword]);
 
   return (
     <Modal isOpen={brandModalIsOpen} height="90">
@@ -81,7 +93,7 @@ export default function BrandModal({
         </S.SelectedBrand>
         <NextButton
           className="nextButton"
-          state={selectedBrandList !== null}
+          state={selectedBrandList !== null && selectedBrandList.length > 0}
           onClick={onClickNextButton}
         >
           완료

@@ -12,7 +12,7 @@ const Layout = styled.div<ModalProps>`
   bottom: 0px;
   width: 100%;
   height: ${(props) =>
-    props.isOpen ? `calc(${props.height} / 85 * 667px)` : '0'};
+    props.isOpen ? `calc(${props.height} / 100 * 100vh)` : '0'};
   flex-direction: column;
   border-radius: 8px 8px 0 0;
   overflow-y: scroll;
