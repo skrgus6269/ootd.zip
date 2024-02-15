@@ -4,6 +4,9 @@ const Layout = styled.div`
   padding: 0 20px;
   .nextButton {
     padding: 16px 0 0 0;
+    position: absolute;
+    bottom: 25px;
+    width: calc(100% - 40px);
   }
 `;
 const Title = styled.div`

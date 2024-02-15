@@ -17,3 +17,9 @@ export const getBrand = async (keyword: string) => {
 
   return data;
 };
+
+export const getSize = async (id: number) => {
+  const data = await systemApi.getSize(id);
+
+  return data;
+};

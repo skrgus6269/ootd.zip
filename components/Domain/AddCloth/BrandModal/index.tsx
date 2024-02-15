@@ -93,7 +93,7 @@ export default function BrandModal({
         </S.SelectedBrand>
         <NextButton
           className="nextButton"
-          state={selectedBrandList !== null}
+          state={selectedBrandList !== null && selectedBrandList.length > 0}
           onClick={onClickNextButton}
         >
           완료

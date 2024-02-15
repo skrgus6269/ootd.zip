@@ -68,6 +68,7 @@ const AddCloth: ComponentWithLayout = () => {
     };
 
     await postCloth(payload);
+    router.push('/mypage');
   };
 
   const onClickAppbarLeftButton = () => {
