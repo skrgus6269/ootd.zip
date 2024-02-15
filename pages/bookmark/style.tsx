@@ -1,13 +1,37 @@
 import styled from 'styled-components';
 
-const Layout = styled.div`
+interface BackgroundProps {
+  isOpen: Boolean;
+}
+
+const Background = styled.div<BackgroundProps>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: calc(100vh - 48px);
+  position: absolute;
 `;
 
-const S = { Layout };
+const Layout = styled.div``;
+
+const ClothList = styled.div`
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 0px 20px;
+`;
+
+const TopButton = styled.div`
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background-color: 'blue';
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+`;
+
+const S = { Background, Layout, ClothList, TopButton };
 
 export default S;
