@@ -18,6 +18,10 @@ const CheckBoxLayout = styled.div`
     object-fit: cover;
   }
 
+  .clothImage.checked {
+    opacity: 0.5;
+  }
+
   .checkBoxImage {
     position: absolute;
     z-index: 100;

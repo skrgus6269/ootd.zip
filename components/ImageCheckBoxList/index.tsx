@@ -1,6 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import CheckBox from '../Input/CheckBox';
 import S from './style';
 import CheckBoxTrue from 'public/images/checkBoxTrue.png';
 import CheckBoxFalse from 'public/images/checkBoxFalse.png';
@@ -36,7 +34,11 @@ export default function ImageCheckBoxList({
 
           return (
             <S.CheckBoxLayout key={index}>
-              <img src={item.clothImage} alt="" className="clothImage" />
+              <img
+                src={item.clothImage}
+                alt=""
+                className={`clothImage ${isChecked ? 'checked' : ''}`}
+              />
               {checkBox && (
                 <Image
                   src={isChecked ? CheckBoxTrue : CheckBoxFalse}
