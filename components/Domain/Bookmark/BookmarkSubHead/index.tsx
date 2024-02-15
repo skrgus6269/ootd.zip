@@ -8,11 +8,13 @@ import Rectangle from 'public/images/rectangle.png';
 interface BookmarkSubHeadProps {
   editing: Boolean;
   setEditing: Dispatch<SetStateAction<Boolean>>;
+  setAlertOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function BookmarSubHead({
   editing,
   setEditing,
+  setAlertOpen,
 }: BookmarkSubHeadProps) {
   return (
     <>
@@ -28,7 +30,7 @@ export default function BookmarSubHead({
         <S.Wrap>
           {editing ? (
             <>
-              <button onClick={() => setEditing(true)}>
+              <button onClick={() => setAlertOpen(true)}>
                 <Button3 style={{ color: '#EC0000' }} state="emphasis">
                   삭제
                 </Button3>
