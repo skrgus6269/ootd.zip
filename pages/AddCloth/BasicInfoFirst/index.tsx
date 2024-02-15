@@ -66,7 +66,7 @@ export default function BasicInfoFirst({
     </S.Category>
   );
 
-  const Brand = <Body3>{clothBrand && clothBrand![0].name}</Body3>;
+  const Brand = <Body3>{clothBrand && clothBrand[0].name}</Body3>;
 
   const WhereToBuy = (
     <Body3 style={{ WebkitTextDecorationLine: 'underline' }}>

@@ -12,7 +12,7 @@ interface AdditionalInfo {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
-  clothBrand: BrandType | null;
+  clothBrand: BrandType[] | null;
   clothMemo: string;
   setClothMemo: Dispatch<SetStateAction<string>>;
   setClothBuyDate: Dispatch<SetStateAction<string>>;
@@ -45,7 +45,7 @@ export default function AdditionalInfo({
     <S.Layout>
       <S.BasicInfoFirst>
         <Category />
-        <Headline1>{clothBrand?.name}</Headline1>
+        <Headline1>{clothBrand![0].name}</Headline1>
         <Body2 className="name">{clothName}</Body2>
         <img src={clothImage![0].ootdImage} alt="" />
         <hr />
