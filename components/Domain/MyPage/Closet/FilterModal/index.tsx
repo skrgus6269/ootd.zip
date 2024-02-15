@@ -167,6 +167,7 @@ export default function FilterModal({
                     : `총 0개의 브랜드`}
                 </Body4>
                 <BrandList
+                  many="many"
                   brandList={brandList}
                   setBrandList={setBrandList}
                   brandInitial={brandInitial}

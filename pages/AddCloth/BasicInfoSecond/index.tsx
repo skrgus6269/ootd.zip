@@ -15,12 +15,16 @@ import ClothSizeModal, {
 } from '@/components/Domain/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
 import { BrandType } from '@/components/BrandList/Brand';
+import { ClothWhereBuy } from '..';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { useRouter } from 'next/router';
 
 interface BasicInfoSecondProps {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
   clothBrand: BrandType[] | null;
+  clothWhereBuy: ClothWhereBuy;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
   setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
@@ -35,6 +39,7 @@ export default function BasicInfoSecond({
   clothBrand,
   clothImage,
   clothColor,
+  clothWhereBuy,
   setClothColor,
   clothSize,
   setClothSize,
@@ -44,6 +49,9 @@ export default function BasicInfoSecond({
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+
+  const { postCloth } = ClothApi();
+  const router = useRouter();
 
   const Category = () => {
     return (
@@ -75,8 +83,21 @@ export default function BasicInfoSecond({
     handleStep('추가정보');
   };
 
-  const onClickNoButton = () => {
+  const onClickNoButton = async () => {
     //옷 등록 api
+
+    const payload = {
+      purchaseStore: clothWhereBuy.letter,
+      brandId: clothBrand![0].id,
+      categoryId: clothCategory![0].detailCategories![0].id,
+      colorIds: [...clothColor!].map((item) => item.id),
+      isOpen: true as Boolean,
+      sizeId: clothSize!.id,
+      clothesImageUrl: clothImage![0].ootdImage,
+      name: clothName,
+    };
+    await postCloth(payload);
+    router.push(`/mypage`);
   };
 
   return (

@@ -19,8 +19,9 @@ const Background = styled.div<BackgroundProps>`
   opacity: 0.3;
   z-index: 2;
   width: 100vw;
-  height: calc(100vh - 48px);
+  height: 100vh;
   position: absolute;
+  top: 0;
 `;
 
 const Layout = styled.div`

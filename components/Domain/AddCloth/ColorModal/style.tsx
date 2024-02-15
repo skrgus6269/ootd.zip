@@ -10,6 +10,9 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   .nextButton {
+    position: absolute;
+    bottom: 25px;
+    width: calc(100% - 40px);
   }
 `;
 const Title = styled.div`
@@ -42,6 +45,8 @@ const SelectedColorList = styled.div`
   display: flex;
   gap: 8px;
   overflow-x: scroll;
+  flex-grow: 1;
+  margin-bottom: 80px;
 `;
 
 const SelectedColor = styled.div`

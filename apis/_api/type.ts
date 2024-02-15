@@ -53,6 +53,6 @@ export interface postClothPayload {
   sizeId: number;
   clothesImageUrl: string;
   name: string;
-  material: string;
-  purchaseDate: string;
+  memo?: string;
+  purchaseDate?: string;
 }
