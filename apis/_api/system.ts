@@ -11,3 +11,9 @@ export const getColor = async () => {
 
   return data;
 };
+
+export const getBrand = async (keyword: string) => {
+  const { data } = await fetcher.get(`/api/v1/brand?brandName=${keyword}`);
+
+  return data;
+};

@@ -33,6 +33,8 @@ const Search = styled.div`
 `;
 const BrandList = styled.div`
   flex-grow: 1;
+  overflow-y: scroll;
+  height: 50%;
 `;
 
 const SelectedBrand = styled.div`

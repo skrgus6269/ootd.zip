@@ -64,6 +64,12 @@ export default function ClothApi() {
     return result;
   };
 
+  //브랜드 가져오기
+  const getBrand = async (keyword: string) => {
+    const { result } = await systemService.getBrand(keyword);
+
+    return result;
+  };
   return {
     postCloth,
     getUserClothList,
@@ -71,5 +77,6 @@ export default function ClothApi() {
     deleteCloth,
     getClothCategory,
     getColor,
+    getBrand,
   };
 }

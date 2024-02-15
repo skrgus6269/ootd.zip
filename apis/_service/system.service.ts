@@ -11,3 +11,9 @@ export const getClothColor = async () => {
 
   return data;
 };
+
+export const getBrand = async (keyword: string) => {
+  const data = await systemApi.getBrand(keyword);
+
+  return data;
+};
