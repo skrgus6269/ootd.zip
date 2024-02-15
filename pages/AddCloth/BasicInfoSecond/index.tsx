@@ -14,18 +14,18 @@ import ClothSizeModal, {
   SizeItem,
 } from '@/components/Domain/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
+import { BrandType } from '@/components/BrandList/Brand';
 
 interface BasicInfoSecondProps {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
-  clothBrand: string;
+  clothBrand: BrandType[] | null;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
-  setClothColor: Dispatch<SetStateAction<ColorListType | null>>; 
+  setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: SizeItem | null;
   setClothSize: Dispatch<SetStateAction<SizeItem | null>>;
-  open: string; 
   setOpen: Dispatch<SetStateAction<string>>;
 }
 
@@ -88,7 +88,7 @@ export default function BasicInfoSecond({
       <S.Layout>
         <S.BasicInfoFirst>
           <Category />
-          <Headline1>{clothBrand}</Headline1>
+          <Headline1>{clothBrand![0].name}</Headline1>
           <Body2 className="name">{clothName}</Body2>
           <img src={clothImage![0].ootdImage} alt="" />
           <hr />

@@ -11,9 +11,10 @@ const Layout = styled.div<LayoutProps>`
   height: 42px;
   border: 1px solid
     ${(props) =>
-      props.state ? props.theme.color.grey_50 : props.theme.color.grey_90};
+      props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
   padding: 8px;
   gap: 8px;
+  border-radius: 2px;
 
   svg {
     width: 24px;

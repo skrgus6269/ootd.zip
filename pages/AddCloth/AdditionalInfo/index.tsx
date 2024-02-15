@@ -6,15 +6,14 @@ import { Dispatch, SetStateAction } from 'react';
 import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import { BrandType } from '@/components/BrandList/Brand';
 
 interface AdditionalInfo {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
-  clothBrand: string;
-  clothByName: string;
+  clothBrand: BrandType[] | null;
   clothMemo: string;
-  setClothByName: Dispatch<SetStateAction<string>>;
   setClothMemo: Dispatch<SetStateAction<string>>;
   setClothBuyDate: Dispatch<SetStateAction<string>>;
   onClickSubmitButton: () => void;
@@ -25,9 +24,7 @@ export default function AdditionalInfo({
   clothImage,
   clothCategory,
   clothBrand,
-  clothByName,
   clothMemo,
-  setClothByName,
   setClothMemo,
   onClickSubmitButton,
   setClothBuyDate,
@@ -38,7 +35,7 @@ export default function AdditionalInfo({
         <Body3>{clothCategory![0].name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0]!.detailCategories![0].name}
+          {clothCategory![0].detailCategories![0].name}
         </Body3>
       </S.Category>
     );
@@ -48,7 +45,7 @@ export default function AdditionalInfo({
     <S.Layout>
       <S.BasicInfoFirst>
         <Category />
-        <Headline1>{clothBrand}</Headline1>
+        <Headline1>{clothBrand![0].name}</Headline1>
         <Body2 className="name">{clothName}</Body2>
         <img src={clothImage![0].ootdImage} alt="" />
         <hr />

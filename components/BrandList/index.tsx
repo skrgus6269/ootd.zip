@@ -1,19 +1,23 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import Brand, { BrandType } from './Brand';
 import S from './style';
 
 interface BrandListProps {
+  keyword?: string;
   brandInitial: BrandType[] | null;
   setSelectedBrand: Dispatch<SetStateAction<BrandType[] | null>>;
   brandList: BrandType[] | null;
   setBrandList: Dispatch<SetStateAction<BrandType[] | null>>;
+  many: 'one' | 'many';
 }
 
 export default function BrandList({
+  keyword,
   brandList,
   setBrandList,
   setSelectedBrand,
   brandInitial,
+  many,
 }: BrandListProps) {
   // const [getUserBrand] = useCloth();
 
@@ -24,7 +28,7 @@ export default function BrandList({
       if (brandInitial)
         for (let i = 0; i < brandInitial?.length; i++) {
           for (let j = 0; j < newBrandList.length; j++) {
-            if (brandInitial[i].brandId === newBrandList[j].brandId) {
+            if (brandInitial[i].id === newBrandList[j].id) {
               newBrandList[j].state = true;
             }
           }
@@ -34,8 +38,13 @@ export default function BrandList({
   }, []);
 
   const onClickBrandList = (index: number) => {
-    const newBrandList = [...brandList!];
+    let newBrandList = [...brandList!];
 
+    if (many === 'one') {
+      newBrandList = newBrandList.map((item) => {
+        return { ...item, state: false };
+      });
+    }
     newBrandList[index] = {
       ...newBrandList![index],
       state: !newBrandList![index].state,
@@ -49,9 +58,8 @@ export default function BrandList({
         .filter((item) => item.state)
         .map((item) => {
           return {
-            brandId: item.brandId,
-            korean: item.korean,
-            english: item.english,
+            id: item.id,
+            name: item.name,
           };
         });
       setSelectedBrand(newBrandList);
@@ -63,9 +71,9 @@ export default function BrandList({
       {brandList?.map((item, index) => {
         return (
           <Brand
+            keyword={keyword}
             key={index}
-            korean={item.korean}
-            english={item.english}
+            name={item.name}
             onClickBrandList={onClickBrandList}
             onClickIndex={index}
             state={item.state}

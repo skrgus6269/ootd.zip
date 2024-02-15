@@ -1,41 +1,38 @@
 import { AiFillCheckSquare } from 'react-icons/ai';
-import { Body2, Body4 } from '../../UI';
+import { Body2 } from '../../UI';
 import S from './style';
 
 interface BrandProps {
   keyword?: string;
-  korean: string;
-  english: string;
+  name: string;
   onClickBrandList: (index: number) => void;
   onClickIndex: number;
   state?: Boolean;
 }
 
 export interface BrandType {
-  brandId: number;
-  korean: string;
-  english: string;
+  id: number;
+  name: string;
   state?: Boolean;
 }
 
 export default function Brand({
   keyword,
-  korean,
-  english,
+  name,
   onClickBrandList,
   onClickIndex,
   state,
 }: BrandProps) {
   const SearchBrand = () => {
-    const [koreanLeft, koreanRight] = korean!.split(keyword!);
-
-    return (
-      <div className="containKeyword">
-        <Body2>{koreanLeft}</Body2>
-        {korean.includes(keyword!) && <Body2 state="emphasis">{keyword}</Body2>}
-        <Body2>{koreanRight}</Body2>
-      </div>
-    );
+    if (name.includes(keyword!)) {
+      return (
+        <>
+          <Body2 state="emphasis">{keyword}</Body2>
+          <Body2>{name.substring(keyword!.length)}</Body2>
+        </>
+      );
+    }
+    return <Body2>{name}</Body2>;
   };
 
   const onClickBrand = () => {
@@ -44,14 +41,9 @@ export default function Brand({
 
   return (
     <S.Layout onClick={onClickBrand}>
-      <div>
-        <S.Korean>
-          {keyword !== undefined ? SearchBrand() : <Body2>{korean}</Body2>}
-        </S.Korean>
-        <S.English>
-          <Body4>{english}</Body4>
-        </S.English>
-      </div>
+      <S.Korean>
+        {keyword !== undefined ? SearchBrand() : <Body2>{name}</Body2>}
+      </S.Korean>
       {state && <AiFillCheckSquare className="selected" />}
     </S.Layout>
   );
