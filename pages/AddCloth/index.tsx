@@ -129,6 +129,7 @@ const AddCloth: ComponentWithLayout = () => {
       </Funnel.Steps>
       <Funnel.Steps name="기본정보2">
         <BasicInfoSecond
+          clothWhereBuy={clothWhereBuy}
           clothName={clothName}
           clothImage={clothImage}
           clothCategory={clothCategory}

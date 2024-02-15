@@ -45,8 +45,19 @@ const ColorModal = ({
     setIsOpen(false);
   };
 
+  const onClickCloseColorButton = (colorId: number) => {
+    const newColorList = colorList.map((item) => {
+      if (item.id === colorId) {
+        return { ...item, state: false };
+      }
+      return item;
+    });
+
+    setColorList(newColorList!);
+  };
+
   return (
-    <Modal isOpen={isOpen} height="60">
+    <Modal isOpen={isOpen} height="57">
       <S.Layout>
         <S.Title>
           <Title1>색상</Title1>
@@ -63,7 +74,9 @@ const ColorModal = ({
               return (
                 <S.SelectedColor key={index}>
                   <Button3 className="selectedColor">{item.name}</Button3>
-                  <AiOutlineClose onClick={() => ''} />
+                  <AiOutlineClose
+                    onClick={() => onClickCloseColorButton(item.id)}
+                  />
                 </S.SelectedColor>
               );
             })}
