@@ -8,6 +8,13 @@ import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
 import { RecoilRoot } from 'recoil';
 import '@/styles/font/font.css';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -28,21 +35,25 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     window.Kakao.init(NEXT_PUBLIC_KAKAO_JS_KEY);
   }
 
+  const queryClient = new QueryClient();
+
   const Layout = Component.Layout || AppLayout;
 
   return (
     <RecoilRoot>
       <>
-        <GlobalStyles />
-        <ThemeProvider theme={themes}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-          <Script
-            src="https://developers.kakao.com/sdk/js/kakao.js"
-            onLoad={kakaoInit}
-          ></Script>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyles />
+          <ThemeProvider theme={themes}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+            <Script
+              src="https://developers.kakao.com/sdk/js/kakao.js"
+              onLoad={kakaoInit}
+            ></Script>
+          </ThemeProvider>
+        </QueryClientProvider>
       </>
     </RecoilRoot>
   );
