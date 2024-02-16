@@ -25,12 +25,13 @@ interface BasicInfoSecondProps {
   clothCategory: CategoryListType[] | null;
   clothBrand: BrandType[] | null;
   clothWhereBuy: ClothWhereBuy;
+  open: Boolean;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
   setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: SizeItem | null;
   setClothSize: Dispatch<SetStateAction<SizeItem | null>>;
-  setOpen: Dispatch<SetStateAction<string>>;
+  setOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function BasicInfoSecond({
@@ -44,6 +45,7 @@ export default function BasicInfoSecond({
   clothSize,
   setClothSize,
   setOpen,
+  open,
   handleStep,
 }: BasicInfoSecondProps) {
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
@@ -157,7 +159,7 @@ export default function BasicInfoSecond({
               <Input.TrueFalse
                 left="공개"
                 right="비공개"
-                state="공개"
+                state={open}
                 setState={setOpen}
               />
               <Input.HelperText className="helpertext" state={1}>

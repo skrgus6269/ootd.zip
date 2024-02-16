@@ -17,8 +17,8 @@ interface WriteOOTDProps {
   setString: Dispatch<SetStateAction<string>>;
   style: Style[];
   setStyle: Dispatch<SetStateAction<Style[]>>;
-  open: string;
-  setOpen: Dispatch<SetStateAction<string>>;
+  open: Boolean;
+  setOpen: Dispatch<SetStateAction<Boolean>>;
   selectedStyle: string[];
   setSelectedStyle: Dispatch<SetStateAction<string[]>>;
   complete: Boolean;
