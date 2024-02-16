@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface ColorSpanProps {
   color: string;
-  state: Boolean;
+  name: string;
 }
 
 const Layout = styled.div`
@@ -18,14 +18,30 @@ const ColorSpan = styled.div<ColorSpanProps>`
   height: 44px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
-  ${(props) =>
-    props.state &&
-    `
-    border: 2px solid black; 
-  `}
+  border: ${(props) =>
+    props.name === '화이트' && `2px solid ${props.theme.color.grey_90}`};
+`;
+const BigColorSpan = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+interface SmallColorSpanProps {
+  color: string;
+}
+const SmallColorSpan = styled.div<SmallColorSpanProps>`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: ${(props) => props.color};
 `;
 
 const ColorName = styled.div``;
-const S = { Layout, ColorSpan, ColorName };
+const S = { Layout, ColorSpan, ColorName, BigColorSpan, SmallColorSpan };
 
 export default S;

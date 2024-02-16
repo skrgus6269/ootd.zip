@@ -57,7 +57,7 @@ const ColorModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} height="57">
+    <Modal isOpen={isOpen} height="65">
       <S.Layout>
         <S.Title>
           <Title1>색상</Title1>
@@ -68,9 +68,9 @@ const ColorModal = ({
           setColorList={setColorList}
           colorInitital={colorInitial}
         />
-        <S.SelectedColorList>
-          {selectedColorList !== null &&
-            selectedColorList.map((item, index) => {
+        {selectedColorList !== null && selectedColorList.length > 0 && (
+          <S.SelectedColorList>
+            {selectedColorList.map((item, index) => {
               return (
                 <S.SelectedColor key={index}>
                   <Button3 className="selectedColor">{item.name}</Button3>
@@ -80,7 +80,8 @@ const ColorModal = ({
                 </S.SelectedColor>
               );
             })}
-        </S.SelectedColorList>
+          </S.SelectedColorList>
+        )}
         <NextButton
           onClick={onClickNextButton}
           state={true}
