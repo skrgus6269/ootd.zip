@@ -175,6 +175,7 @@ export default function BasicInfo({
                   setModalOpen={setWhereToBuyModalOpen}
                   state={clothWhereBuy.letter.length > 0}
                   type={clothWhereBuy.type}
+                  action="write"
                 />
               ) : (
                 <Input.Modal
