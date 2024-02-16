@@ -38,7 +38,7 @@ export default function ClothName({
       <NextButton
         className="nextButton"
         onClick={() => handleStep('기본정보1')}
-        state={clothName.length > 0}
+        state={clothName?.length > 0}
       >
         다음
       </NextButton>

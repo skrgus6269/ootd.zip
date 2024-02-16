@@ -58,7 +58,10 @@ export default function BrandModal({
       <S.Layout>
         <S.Title>
           <Title1 className="title">브랜드</Title1>
-          <AiOutlineClose className="close" />
+          <AiOutlineClose
+            onClick={() => setBrandModalIsOpen(false)}
+            className="close"
+          />
         </S.Title>
         <S.Search>
           <SearchBar

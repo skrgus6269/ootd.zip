@@ -3,7 +3,6 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Body2, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
-import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 interface ClothSizeProps {
@@ -60,6 +59,11 @@ export default function ClothSizeModal({
       }
       setSizeList(newSizeList);
     };
+    if (categoryId === 0) {
+      alert('카테고리를 선택해주세요');
+      setIsOpen(false);
+      return;
+    }
     fetchData();
   }, []);
 
