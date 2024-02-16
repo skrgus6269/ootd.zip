@@ -3,8 +3,8 @@ import S from './style';
 import { Dispatch, SetStateAction } from 'react';
 
 interface WeightOpenProps {
-  state: string;
-  setState: Dispatch<SetStateAction<string>>;
+  state: Boolean;
+  setState: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function WeightOpen({ state, setState }: WeightOpenProps) {

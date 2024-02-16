@@ -27,7 +27,7 @@ const SignUp: ComponentWithLayout = () => {
   const [age, setAge] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
-  const [open, setOpen] = useState<string>('공개');
+  const [open, setOpen] = useState<Boolean>(true);
   const [gender, setGender] = useState<string>('남자');
   const [canUseId, setCanUseId] = useState<Boolean>(false);
   const [basicState, setBasicState] = useState<Boolean>(false);

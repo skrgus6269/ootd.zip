@@ -1,5 +1,5 @@
 import S from './style';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlineSearch } from 'react-icons/ai';
 import { Dispatch, SetStateAction } from 'react';
 import ReadOnly from '../ReadOnly';
 
@@ -8,6 +8,7 @@ interface ModalProps {
   setModalOpen: Dispatch<SetStateAction<Boolean>>;
   state: Boolean;
   type?: 'link' | 'write';
+  action?: 'write';
 }
 
 export default function Modal({
@@ -15,6 +16,7 @@ export default function Modal({
   setModalOpen,
   state,
   type,
+  action,
 }: ModalProps) {
   const onClickSearchIcon = () => {
     setModalOpen(true);
@@ -24,7 +26,7 @@ export default function Modal({
     <S.Layout>
       <ReadOnly state={state} result={result} type={type}></ReadOnly>
       <S.SearchIcon onClick={onClickSearchIcon}>
-        <AiOutlineSearch />
+        {action === 'write' ? <AiOutlineEdit /> : <AiOutlineSearch />}
       </S.SearchIcon>
     </S.Layout>
   );

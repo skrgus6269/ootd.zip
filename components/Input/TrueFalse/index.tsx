@@ -5,30 +5,30 @@ import { Button3 } from '@/components/UI';
 interface TrueFalseProps {
   left: string;
   right: string;
-  state: string;
-  setState: Dispatch<SetStateAction<string>>;
+  state: Boolean;
+  setState: Dispatch<SetStateAction<Boolean>>;
 }
 
-export default function TrueFalse({ left, right, setState }: TrueFalseProps) {
-  const [currentState, setCurrentState] = useState<Boolean>(true);
+export default function TrueFalse({
+  left,
+  right,
+  state,
+  setState,
+}: TrueFalseProps) {
+  const onClickTrueButton = () => {
+    setState(true);
+  };
 
-  const onClickNextButton = (value: string) => {
-    setState(value);
-    setCurrentState(!currentState);
+  const onClickFalseButton = () => {
+    setState(false);
   };
 
   return (
     <S.Layout>
-      <S.LeftButton
-        state={currentState}
-        onClick={() => onClickNextButton(left)}
-      >
+      <S.LeftButton state={state} onClick={() => onClickTrueButton()}>
         <Button3>{left}</Button3>
       </S.LeftButton>
-      <S.RightButton
-        state={currentState}
-        onClick={() => onClickNextButton(right)}
-      >
+      <S.RightButton state={state} onClick={() => onClickFalseButton()}>
         <Button3>{right}</Button3>
       </S.RightButton>
     </S.Layout>

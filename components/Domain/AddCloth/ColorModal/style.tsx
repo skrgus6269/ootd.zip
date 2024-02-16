@@ -47,6 +47,10 @@ const SelectedColorList = styled.div`
   overflow-x: scroll;
   flex-grow: 1;
   margin-bottom: 80px;
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  bottom: 0;
 `;
 
 const SelectedColor = styled.div`

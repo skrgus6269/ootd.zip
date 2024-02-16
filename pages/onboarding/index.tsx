@@ -33,7 +33,7 @@ const Onboarding: ComponentWithLayout = () => {
           가입하기
         </Button>
         <Button
-          onClick={() => router.push('/AddOOTD')}
+          onClick={() => router.push('/EditCloth')}
           size="big"
           backgroundColor="grey_100"
           color="grey_00"

@@ -44,7 +44,7 @@ const AddCloth: ComponentWithLayout = () => {
   });
   const [clothColor, setClothColor] = useState<ColorListType | null>(null);
   const [clothSize, setClothSize] = useState<SizeItem | null>(null);
-  const [open, setOpen] = useState('공개');
+  const [open, setOpen] = useState<Boolean>(true);
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
 
@@ -139,6 +139,7 @@ const AddCloth: ComponentWithLayout = () => {
           setClothColor={setClothColor}
           clothSize={clothSize}
           setClothSize={setClothSize}
+          open={open}
           setOpen={setOpen}
         />
       </Funnel.Steps>

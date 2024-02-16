@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 import S from './style';
 
 interface GenderInputProps {
-  gender: string;
-  setGender: Dispatch<SetStateAction<string>>;
+  gender: Boolean;
+  setGender: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function GenderInput({ gender, setGender }: GenderInputProps) {

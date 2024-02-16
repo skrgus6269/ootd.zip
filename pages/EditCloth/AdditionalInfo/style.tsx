@@ -3,14 +3,12 @@ import styled from 'styled-components';
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 48px);
-  .nextButton {
-    padding-bottom: 30px;
+  width: 100%;
+  .prevNextButton {
+    width: 100%;
     background-color: white;
     bottom: 0;
-    flex-grow: 0;
     position: fixed;
-    width: calc(100% - 40px);
   }
 `;
 
@@ -23,28 +21,20 @@ const Category = styled.div`
   }
 `;
 
-const BasicInfoFirst = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 24px 0 56px 0;
-  .name {
-    color: ${(props) => props.theme.color.grey_50};
-  }
+const ClothImage = styled.div`
+  border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
+  padding: 24px 20px 56px 20px;
   img {
     width: 106px;
     height: 106px;
-    margin-top: 20px;
+    object-fit: cover;
   }
-  hr {
-    position: absolute;
-    width: 100vw;
-    left: -20px;
-    color: red;
-    border: 4px solid ${(props) => props.theme.color.grey_95};
-    bottom: 0;
-    margin: 0;
+  .writeIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    right: 24px;
+    bottom: 4px;
   }
 `;
 const AdditionalInfo = styled.div`
@@ -69,7 +59,7 @@ const Information = styled.div`
 const S = {
   Layout,
   Category,
-  BasicInfoFirst,
+  ClothImage,
   AdditionalInfo,
   Title,
   Information,

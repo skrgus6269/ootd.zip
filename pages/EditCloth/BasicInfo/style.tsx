@@ -5,14 +5,10 @@ interface BackgroundProps {
 }
 
 const Layout = styled.div`
-  /* height: calc(100% - 48px); */
+  height: calc(100vh - 136px);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  padding-bottom: 24px;
-  button {
-    margin: 0 20px;
-  }
+  overflow-y: scroll;
 `;
 
 const Category = styled.div`
@@ -31,21 +27,31 @@ const Background = styled.div<BackgroundProps>`
   z-index: 2;
   width: 100vw;
   height: calc(100vh - 48px);
-  position: absolute;
+  position: fixed;
+  top: 0;
 `;
 
 const ClothImage = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
-  padding: 24px 20px 48px 20px;
+  padding: 24px 20px 56px 20px;
+
   img {
     width: 106px;
     height: 106px;
+    object-fit: cover;
+  }
+  .writeIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    right: 24px;
+    bottom: 4px;
   }
 `;
 
 const BasicInfo = styled.div`
   padding: 0 20px;
-  h3 {
+  .title {
     padding: 21px 0px;
   }
 `;
@@ -55,8 +61,11 @@ const Title = styled.div`
 `;
 
 const Information = styled.div`
-  p {
+  .subtitle {
     margin-bottom: 16px;
+  }
+  .helpertext {
+    margin-top: 8px;
   }
   display: flex;
   flex-direction: column;
@@ -67,6 +76,7 @@ const ClothColorSpanList = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const S = {
