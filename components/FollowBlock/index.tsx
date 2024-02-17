@@ -11,10 +11,14 @@ interface FollowBlockProps {
     followCheck: boolean;
   };
   onClick: () => void;
-  // onClick?: (index: number) => void;
+  state?: string;
 }
 
-export default function FollowBlock({ data, onClick }: FollowBlockProps) {
+export default function FollowBlock({
+  data,
+  onClick,
+  state,
+}: FollowBlockProps) {
   return (
     <S.Layout>
       <img src={data.profileImage} alt="" />
@@ -30,7 +34,7 @@ export default function FollowBlock({ data, onClick }: FollowBlockProps) {
           className="followButton"
           onClick={onClick}
         >
-          <Body3>팔로잉</Body3>
+          <Body3>{state === 'blcok' ? '해제' : '팔로잉'}</Body3>
         </Button>
       ) : (
         <Button
