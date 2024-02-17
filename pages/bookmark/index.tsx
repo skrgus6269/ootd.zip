@@ -74,13 +74,6 @@ export default function Bookmark() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
 
   const scrollToTop = () => {
-    // window.scrollTo({
-    //   top: 0,
-    // });\
-    if (myRef.current) {
-      console.log(111);
-      myRef.current.focus();
-    }
     window.scrollTo({
       top: 0,
     });
@@ -135,7 +128,7 @@ export default function Bookmark() {
             <ImageCheckBoxList checkBox={editing} data={clothList} />
           </S.ClothList>
         </div>
-        {isVisible && <S.TopButton onTouchEnd={scrollToTop}>버튼</S.TopButton>}
+        {isVisible && <S.TopButton onClick={scrollToTop}>버튼</S.TopButton>}
         {alertOpen && (
           <BookmarkAlert
             onClickYesButton={onClickYesButton}
