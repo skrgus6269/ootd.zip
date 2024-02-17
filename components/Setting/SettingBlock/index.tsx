@@ -15,9 +15,13 @@ const SettingBlock = ({ text, buttonClick }: SettingBlockProps) => {
   return (
     <S.Layout onClick={buttonClick}>
       <Body3 style={{ flex: '1 0 0' }}>{text}</Body3>
-      <S.IconSpan>
-        <AiOutlineRight />
-      </S.IconSpan>
+      {buttonClick ? (
+        <S.IconSpan>
+          <AiOutlineRight />
+        </S.IconSpan>
+      ) : (
+        <Body3 style={{ color: '#B1B1B1' }}>ootdzip@gmail.com</Body3>
+      )}
     </S.Layout>
   );
 };
