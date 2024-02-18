@@ -27,7 +27,7 @@ const AddOOTD: ComponentWithLayout = () => {
   });
   const [style, setStyle] = useState<Style[]>(styleListInitial); //스타일
   const [selectedStyle, setSelectedStyle] = useState<string[]>([]);
-  const [open, setOpen] = useState('공개'); //공개여부
+  const [open, setOpen] = useState<Boolean>(true); //공개여부
   const [complete, setComplete] = useState<Boolean>(false); //게시 완료 여부
   const router = useRouter();
 

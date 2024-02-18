@@ -12,10 +12,11 @@ import AdditionalInfo from './AdditionalInfo';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { ColorListType } from '@/components/ColorList';
-import { useRouter } from 'next/router'; 
-import ClothName from './ClothName'; 
+import { useRouter } from 'next/router';
+import ClothName from './ClothName';
 import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
-import ClothApi from '@/apis/domain/Cloth/ClothApi'; 
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { BrandType } from '@/components/BrandList/Brand';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -36,14 +37,14 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null
   );
-  const [clothBrand, setClothBrand] = useState<string>('');
+  const [clothBrand, setClothBrand] = useState<BrandType[] | null>(null);
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
     type: 'link',
   });
   const [clothColor, setClothColor] = useState<ColorListType | null>(null);
   const [clothSize, setClothSize] = useState<SizeItem | null>(null);
-  const [open, setOpen] = useState('공개');
+  const [open, setOpen] = useState<Boolean>(true);
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
 
@@ -52,7 +53,7 @@ const AddCloth: ComponentWithLayout = () => {
   const { postCloth } = ClothApi();
 
   const onClickSubmitButton = async () => {
-    //옷 등록 api 
+    //옷 등록 api
     const payload = {
       purchaseStore: clothWhereBuy.letter,
       brandId: 2,
@@ -66,7 +67,8 @@ const AddCloth: ComponentWithLayout = () => {
       purchaseDate: clothBuyDate,
     };
 
-    await postCloth(payload); 
+    await postCloth(payload);
+    router.push('/mypage');
   };
 
   const onClickAppbarLeftButton = () => {
@@ -127,6 +129,7 @@ const AddCloth: ComponentWithLayout = () => {
       </Funnel.Steps>
       <Funnel.Steps name="기본정보2">
         <BasicInfoSecond
+          clothWhereBuy={clothWhereBuy}
           clothName={clothName}
           clothImage={clothImage}
           clothCategory={clothCategory}
@@ -136,6 +139,7 @@ const AddCloth: ComponentWithLayout = () => {
           setClothColor={setClothColor}
           clothSize={clothSize}
           setClothSize={setClothSize}
+          open={open}
           setOpen={setOpen}
         />
       </Funnel.Steps>

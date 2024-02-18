@@ -14,19 +14,24 @@ import ClothSizeModal, {
   SizeItem,
 } from '@/components/Domain/AddCloth/ClothSizeModal';
 import AddClothAlert from '@/components/Domain/AddCloth/AddClothAlert';
+import { BrandType } from '@/components/BrandList/Brand';
+import { ClothWhereBuy } from '..';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { useRouter } from 'next/router';
 
 interface BasicInfoSecondProps {
   clothName: string;
   clothImage: ImageWithTag | undefined;
   clothCategory: CategoryListType[] | null;
-  clothBrand: string;
+  clothBrand: BrandType[] | null;
+  clothWhereBuy: ClothWhereBuy;
+  open: Boolean;
   handleStep: (next: string) => void;
   clothColor: ColorListType | null;
-  setClothColor: Dispatch<SetStateAction<ColorListType | null>>; 
+  setClothColor: Dispatch<SetStateAction<ColorListType | null>>;
   clothSize: SizeItem | null;
   setClothSize: Dispatch<SetStateAction<SizeItem | null>>;
-  open: string; 
-  setOpen: Dispatch<SetStateAction<string>>;
+  setOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function BasicInfoSecond({
@@ -35,15 +40,20 @@ export default function BasicInfoSecond({
   clothBrand,
   clothImage,
   clothColor,
+  clothWhereBuy,
   setClothColor,
   clothSize,
   setClothSize,
   setOpen,
+  open,
   handleStep,
 }: BasicInfoSecondProps) {
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+
+  const { postCloth } = ClothApi();
+  const router = useRouter();
 
   const Category = () => {
     return (
@@ -75,8 +85,21 @@ export default function BasicInfoSecond({
     handleStep('추가정보');
   };
 
-  const onClickNoButton = () => {
+  const onClickNoButton = async () => {
     //옷 등록 api
+
+    const payload = {
+      purchaseStore: clothWhereBuy.letter,
+      brandId: clothBrand![0].id,
+      categoryId: clothCategory![0].detailCategories![0].id,
+      colorIds: [...clothColor!].map((item) => item.id),
+      isOpen: true as Boolean,
+      sizeId: clothSize!.id,
+      clothesImageUrl: clothImage![0].ootdImage,
+      name: clothName,
+    };
+    await postCloth(payload);
+    router.push(`/mypage`);
   };
 
   return (
@@ -88,7 +111,7 @@ export default function BasicInfoSecond({
       <S.Layout>
         <S.BasicInfoFirst>
           <Category />
-          <Headline1>{clothBrand}</Headline1>
+          <Headline1>{clothBrand![0].name}</Headline1>
           <Body2 className="name">{clothName}</Body2>
           <img src={clothImage![0].ootdImage} alt="" />
           <hr />
@@ -136,7 +159,7 @@ export default function BasicInfoSecond({
               <Input.TrueFalse
                 left="공개"
                 right="비공개"
-                state="공개"
+                state={open}
                 setState={setOpen}
               />
               <Input.HelperText className="helpertext" state={1}>

@@ -1,101 +1,93 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import S from './style';
-import { Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Header from '@/components/Header';
+import PrevNextButton from '@/components/PrevNextButton';
+import WriteIcon from '@/public/images/WriteIcon.svg';
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
 
 interface AdditionalInfo {
-  clothImage: string | ImageWithTag | undefined;
-  clothByName: string;
+  clothImage: ImageWithTag | undefined;
   clothBuyDate: string;
   clothMemo: string;
-  setClothByName: Dispatch<SetStateAction<string>>;
   setClothMemo: Dispatch<SetStateAction<string>>;
-  onClickSubmitButton: () => void;
   setClothBuyDate: Dispatch<SetStateAction<string>>;
+  setClothImage: Dispatch<SetStateAction<ImageWithTag | undefined>>;
+  handleStep: (next: string) => void;
+  onClickSubmitButton: () => void;
 }
 
 export default function AdditionalInfo({
   clothImage,
-  clothByName,
   clothBuyDate,
   clothMemo,
-  setClothByName,
   setClothMemo,
-  onClickSubmitButton,
   setClothBuyDate,
+  setClothImage,
+  handleStep,
+  onClickSubmitButton,
 }: AdditionalInfo) {
-  const onClickPrevButton = () => {
-    // handleStep('추가정보');
-  };
-
-  const onClickCompleteButton = () => {};
-
   useEffect(() => {
-    setClothByName('23년 유니폼');
-    setClothBuyDate('2023년 2월');
-    setClothMemo('메모메모메메모메메모메메메메모메메메모모메메모');
+    if (typeof window !== 'undefined') {
+      getReactNativeMessage(setClothImage);
+    }
   }, []);
 
+  const onClickPrevButton = () => {
+    handleStep('기본정보');
+  };
+
+  const onClickImage = () => {
+    sendReactNativeMessage({ type: 'Cloth' });
+  };
   return (
-    <S.Layout>
-      <S.BasicInfoFirst>
-        {/* <Category /> */}
-        {/* <Headline1>{clothBrand}</Headline1> */}
-        {typeof clothImage === 'string' && <img src={clothImage} alt="" />}
-        <hr />
-      </S.BasicInfoFirst>
-      <Header text="추가 정보" />
-      <S.AdditionalInfo>
-        <S.Information>
-          <Input>
-            <Input.Label size="small" className="label">
-              별칭
-            </Input.Label>
-            <Input.Text
-              defaultValue={clothByName}
-              size="big"
-              placeholder=""
-              border={true}
-              onChange={setClothByName}
-              line="outline"
-            />
-          </Input>
-          <Input>
-            <Input.Label size="small" className="label">
-              구매시기
-            </Input.Label>
-            <Input.Text
-              defaultValue={clothBuyDate}
-              size="big"
-              placeholder=""
-              border={true}
-              onChange={setClothBuyDate}
-              line="outline"
-            />
-          </Input>
-          <Input>
-            <Input.Label size="small" className="label">
-              메모
-            </Input.Label>
-            <Input.TextArea
-              input={clothMemo}
-              setInput={setClothMemo}
-              placeholder="메모를 입력해주세요"
-            />
-          </Input>
-        </S.Information>
-        <Input>
-          <Input.PrevNext
-            left="이전"
-            right="완료"
-            leftButtonOnClick={onClickPrevButton}
-            rightButtonOnClick={onClickCompleteButton}
-          />
-        </Input>
-      </S.AdditionalInfo>
-    </S.Layout>
+    <>
+      <S.Layout>
+        <S.ClothImage>
+          <img onClick={onClickImage} src={clothImage![0].ootdImage} alt="" />
+          <WriteIcon className="writeIcon" />
+        </S.ClothImage>
+        <Header text="추가 정보" />
+        <S.AdditionalInfo>
+          <S.Information>
+            <Input>
+              <Input.Label size="small" className="label">
+                구매시기
+              </Input.Label>
+              <Input.Text
+                defaultValue={clothBuyDate}
+                size="big"
+                placeholder=""
+                border={true}
+                onChange={setClothBuyDate}
+                line="outline"
+              />
+            </Input>
+            <Input>
+              <Input.Label size="small" className="label">
+                메모
+              </Input.Label>
+              <Input.TextArea
+                input={clothMemo}
+                setInput={setClothMemo}
+                placeholder="메모를 입력해주세요"
+              />
+            </Input>
+          </S.Information>
+        </S.AdditionalInfo>
+        <PrevNextButton
+          className="prevNextButton"
+          onClickNextButton={onClickSubmitButton}
+          onClickPrevButton={onClickPrevButton}
+          next="완료"
+          prev="이전"
+        />
+      </S.Layout>
+    </>
   );
 }

@@ -17,11 +17,21 @@ export default function ColorSpan({
 }: ColorSpan) {
   return (
     <S.Layout>
-      <S.ColorSpan
-        onClick={() => (onClick ? onClick(index) : '')}
-        state={state}
-        color={color}
-      />
+      {!state && (
+        <S.ColorSpan
+          onClick={() => (onClick ? onClick(index) : '')}
+          color={color}
+          name={name}
+        />
+      )}
+      {state && (
+        <S.BigColorSpan>
+          <S.SmallColorSpan
+            onClick={() => (onClick ? onClick(index) : '')}
+            color={color}
+          />
+        </S.BigColorSpan>
+      )}
       <S.ColorName>
         <Body3>{name}</Body3>
       </S.ColorName>

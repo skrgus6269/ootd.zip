@@ -4,8 +4,8 @@ import BodyInput from '@/components/Domain/SignUp/BodyInput';
 import WeightOpen from '@/components/Domain/SignUp/WeightOpen';
 
 interface BodyInfoProps {
-  open: string;
-  setOpen: Dispatch<SetStateAction<string>>;
+  open: Boolean;
+  setOpen: Dispatch<SetStateAction<Boolean>>;
   heightSetState: Dispatch<SetStateAction<string>>;
   weightSetState: Dispatch<SetStateAction<string>>;
 }

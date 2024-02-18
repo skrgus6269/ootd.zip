@@ -64,6 +64,18 @@ export default function ClothApi() {
     return result;
   };
 
+  //브랜드 가져오기
+  const getBrand = async (keyword: string) => {
+    const { result } = await systemService.getBrand(keyword);
+
+    return result;
+  };
+
+  //사이즈 가져오기
+  const getSize = async (id: number) => {
+    const result = await systemService.getSize(id);
+    return result;
+  };
   return {
     postCloth,
     getUserClothList,
@@ -71,5 +83,7 @@ export default function ClothApi() {
     deleteCloth,
     getClothCategory,
     getColor,
+    getBrand,
+    getSize,
   };
 }

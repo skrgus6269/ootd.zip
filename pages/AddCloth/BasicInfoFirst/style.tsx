@@ -38,7 +38,8 @@ const Background = styled.div<BackgroundProps>`
   z-index: 2;
   width: 100vw;
   height: calc(100vh - 48px);
-  position: absolute;
+  position: fixed;
+  top: 0;
 `;
 
 const ClothImage = styled.div`

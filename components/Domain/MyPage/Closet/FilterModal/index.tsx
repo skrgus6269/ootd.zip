@@ -61,16 +61,14 @@ export default function FilterModal({
   const [colorList, setColorList] = useState<ColorListType>([]);
 
   const [brandList, setBrandList] = useState<BrandType[] | null>([
-    { brandId: 0, korean: '나이키', english: 'Nike', state: false },
-    { brandId: 1, korean: '아디다스', english: 'Adidas', state: false },
-    { brandId: 2, korean: '퓨마', english: 'Puma', state: false },
-    { brandId: 3, korean: '조던', english: 'Jordan', state: false },
+    { id: 0, name: '나이키', state: false },
+    { id: 1, name: '아디다스', state: false },
+    { id: 2, name: '퓨마', state: false },
+    { id: 3, name: '조던', state: false },
   ]);
 
   const onClickSubmitButton = () => {
     setFilter({
-      // category: selectedCategory,
-      // color: selectedColorList,
       category: selectedCategory,
       color: selectedColorList,
       brand: selectedBrand,
@@ -128,7 +126,7 @@ export default function FilterModal({
 
   const onClickCloseBrandButton = (brandId: number) => {
     const newBrandList = brandList!.map((item) => {
-      if (item.brandId === brandId) {
+      if (item.id === brandId) {
         return { ...item, state: false };
       }
       return item;
@@ -169,6 +167,7 @@ export default function FilterModal({
                     : `총 0개의 브랜드`}
                 </Body4>
                 <BrandList
+                  many="many"
                   brandList={brandList}
                   setBrandList={setBrandList}
                   brandInitial={brandInitial}
@@ -213,9 +212,9 @@ export default function FilterModal({
           {selectedBrand?.map((item, index) => {
             return (
               <S.SelectedFilterSpan key={index}>
-                <Button3>{item.korean}</Button3>
+                <Button3>{item.name}</Button3>
                 <AiOutlineClose
-                  onClick={() => onClickCloseBrandButton(item.brandId)}
+                  onClick={() => onClickCloseBrandButton(item.id)}
                   className="close"
                 />
               </S.SelectedFilterSpan>

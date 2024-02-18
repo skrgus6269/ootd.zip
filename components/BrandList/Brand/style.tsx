@@ -5,7 +5,6 @@ const Layout = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
   .containKeyword {
     display: flex;
   }
@@ -16,7 +15,9 @@ const Layout = styled.div`
     height: 24px;
   }
 `;
-const Korean = styled.div``;
+const Korean = styled.div`
+  display: flex;
+`;
 const English = styled.div`
   color: ${(props) => props.theme.color.grey_50};
 `;
