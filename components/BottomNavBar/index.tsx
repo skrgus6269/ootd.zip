@@ -39,7 +39,7 @@ const activeIcons = [
   <UserFilled />,
 ];
 
-const routes = ['/main', '/search', '/plus', '/bookmark', '/mypage'];
+const routes = ['/main', '/search', '/plus', '/Bookmark', '/mypage'];
 
 function getActiveIndex(path: string) {
   for (let i = 0; i < routes.length; i++) {
