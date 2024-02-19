@@ -17,6 +17,7 @@ import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclaration';
 
 interface ClothTag {
   xRate: string;
@@ -39,6 +40,8 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsopen, setReportModalIsopen] = useState<Boolean>(false);
   const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
 
@@ -136,12 +139,15 @@ export default function Posting({ data, commentRef }: PostingProps) {
     if (declaration) {
       setDeclaration(false);
     }
+    if (receivedDeclaration) {
+      setReceivedDeclaration(false);
+    }
   };
   return (
     <>
       <S.Background
         onClick={onClickBackground}
-        isOpen={reportModalIsopen || declaration}
+        isOpen={reportModalIsopen || declaration || receivedDeclaration}
       />
       <S.Layout>
         <S.PostingTop>
@@ -258,6 +264,13 @@ export default function Posting({ data, commentRef }: PostingProps) {
           <DeclarationModal
             declaration={declaration}
             setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+          />
+        )}
+        {receivedDeclaration && (
+          <ReceivedDeclarationModal
+            receivedDeclaration={receivedDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
           />
         )}
       </S.Layout>
