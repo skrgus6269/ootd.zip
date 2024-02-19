@@ -1,5 +1,5 @@
 import { Headline2 } from '@/components/UI';
-import S from './style';
+import S from '@/style/bookmark/style';
 
 export default function bookmark() {
   return (

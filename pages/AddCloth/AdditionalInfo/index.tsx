@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import S from './style';
+import S from '@/style/AddCloth/AdditionalInfo/style';
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
@@ -32,10 +32,13 @@ export default function AdditionalInfo({
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory![0].name}</Body3>
+        <Body3>{clothCategory && clothCategory[0]?.name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0].detailCategories![0].name}
+          {clothCategory &&
+            clothCategory[0]?.detailCategories &&
+            clothCategory[0]?.detailCategories[0].name}
+          ;
         </Body3>
       </S.Category>
     );
@@ -45,9 +48,9 @@ export default function AdditionalInfo({
     <S.Layout>
       <S.BasicInfoFirst>
         <Category />
-        <Headline1>{clothBrand![0].name}</Headline1>
+        <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
         <Body2 className="name">{clothName}</Body2>
-        <img src={clothImage![0].ootdImage} alt="" />
+        <img src={clothImage && clothImage![0].ootdImage} alt="" />
         <hr />
       </S.BasicInfoFirst>
       <S.AdditionalInfo>
