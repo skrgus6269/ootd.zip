@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import S from './style';
+import S from '@/style/sign-up/StyleInfo/style';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
 
@@ -9,8 +9,8 @@ interface BoxProps {
 }
 
 interface StyleInfoProps {
-  gender: string;
-  setGender: Dispatch<SetStateAction<string>>;
+  gender: Boolean;
+  setGender: Dispatch<SetStateAction<Boolean>>;
   styleListState: BoxProps[];
   setStyleListState: React.Dispatch<React.SetStateAction<BoxProps[]>>;
 }

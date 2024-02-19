@@ -1,4 +1,4 @@
-import { useFunnelContext } from '@/hooks/use-funnel/Funnel';
+import { useFunnelContext } from '../use-funnel/context';
 
 /**
  * useCurrentStep can use in `<Funnl.Steps>` Components

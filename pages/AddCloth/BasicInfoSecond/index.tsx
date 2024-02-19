@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Headline2, Title1 } from '@/components/UI';
-import S from './style';
+import S from '@/style/AddCloth/BasicInfoSecond/style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
@@ -58,10 +58,13 @@ export default function BasicInfoSecond({
   const Category = () => {
     return (
       <S.Category>
-        <Body3>{clothCategory![0].name}</Body3>
+        <Body3>{clothCategory && clothCategory[0]?.name}</Body3>
         <Body3>&gt;</Body3>
         <Body3 style={{ fontWeight: '700' }}>
-          {clothCategory![0]!.detailCategories![0].name}
+          {clothCategory &&
+            clothCategory[0]?.detailCategories &&
+            clothCategory[0]?.detailCategories[0].name}
+          ;
         </Body3>
       </S.Category>
     );
@@ -111,9 +114,9 @@ export default function BasicInfoSecond({
       <S.Layout>
         <S.BasicInfoFirst>
           <Category />
-          <Headline1>{clothBrand![0].name}</Headline1>
+          <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
           <Body2 className="name">{clothName}</Body2>
-          <img src={clothImage![0].ootdImage} alt="" />
+          <img src={clothImage && clothImage[0].ootdImage} alt="" />
           <hr />
         </S.BasicInfoFirst>
         <S.BasicInfoSecond>
@@ -170,8 +173,7 @@ export default function BasicInfoSecond({
         </S.BasicInfoSecond>
         <NextButton
           state={
-            clothColor !== null && clothColor.length > 0
-            //  && clothSize.length > 0
+            clothColor !== null && clothColor?.length > 0 && clothSize !== null
           }
           onClick={onClickNextButton}
           className="nextButton"

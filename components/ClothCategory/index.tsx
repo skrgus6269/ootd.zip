@@ -1,9 +1,7 @@
 import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import useGetClothCategory from '@/apis/domain/System/SystemApi';
 import { Body3 } from '@/components/UI';
 import { CategoryListType } from '../Domain/AddCloth/ClothCategoryModal';
-import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 interface ClothCategoryModalProps {
