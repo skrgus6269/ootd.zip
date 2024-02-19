@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from 'public/images/checkBoxTrue.png';
-import CheckBoxFalse from 'public/images/checkBoxFalse.png';
+import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
+import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
 import Body2 from '@/components/UI/TypoGraphy/Body2';
 
 interface BoxProps {
