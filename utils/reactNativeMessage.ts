@@ -1,6 +1,6 @@
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { Dispatch, SetStateAction } from 'react';
-import { WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
+import { WebViewMessageEvent } from 'react-native-webview';
 
 interface Message {
   type: string;

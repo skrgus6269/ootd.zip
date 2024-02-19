@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Headline2 } from '@/components/UI';
-import S from './style';
+import S from '@/style/AddCloth/ClothName/style';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
@@ -23,7 +23,7 @@ export default function ClothName({
     <S.Layout>
       <Headline2 className="title">이 옷을</Headline2>
       <Headline2>어떻게 부를까요?</Headline2>
-      <img src={clothImage[0].ootdImage} alt="선택된 옷" />
+      <img src={clothImage && clothImage[0].ootdImage} alt="선택된 옷" />
       <Input>
         <Input.Text
           placeholder="제품명을 입력해주세요."

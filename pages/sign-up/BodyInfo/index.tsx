@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import S from './style';
+import S from '@/style/sign-up/BodyInfo/style';
 import BodyInput from '@/components/Domain/SignUp/BodyInput';
 import WeightOpen from '@/components/Domain/SignUp/WeightOpen';
 

@@ -12,12 +12,12 @@ import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import ShareOutlined from '@/public/images/shareOutlined.svg';
 import MessageOutlined from '@/public/images/MessageOutlined.svg';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { OOTDType } from '@/pages/OOTD/type';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclaration';
+import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 
 interface ClothTag {
   xRate: string;

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import S from './style';
+import S from '@/style/EditCloth/BasicInfo/style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
 import { Body3, Title1 } from '@/components/UI';
@@ -73,12 +73,15 @@ export default function BasicInfo({
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
 
-  const Category = clothCategory && (
+  const Category = clothCategory !== null && (
     <S.Category>
-      <Body3>{clothCategory[0].name}</Body3>
+      <Body3>{clothCategory && clothCategory[0]?.name}</Body3>
       <Body3>&gt;</Body3>
       <Body3 style={{ fontWeight: '700' }}>
-        {clothCategory[0]!.detailCategories![0].name}
+        {clothCategory &&
+          clothCategory[0]?.detailCategories &&
+          clothCategory[0]?.detailCategories[0].name}
+        ;
       </Body3>
     </S.Category>
   );
@@ -87,7 +90,7 @@ export default function BasicInfo({
 
   const WhereToBuy = (
     <Body3 style={{ WebkitTextDecorationLine: 'underline' }}>
-      {clothWhereBuy.letter}
+      {clothWhereBuy?.letter}
     </Body3>
   );
 
@@ -126,7 +129,11 @@ export default function BasicInfo({
       />
       <S.Layout>
         <S.ClothImage>
-          <img onClick={onClickImage} src={clothImage![0].ootdImage} alt="" />
+          <img
+            onClick={onClickImage}
+            src={clothImage !== undefined ? clothImage[0].ootdImage : ''}
+            alt=""
+          />
           <WriteIcon className="writeIcon" />
         </S.ClothImage>
         <S.BasicInfo>
@@ -173,8 +180,8 @@ export default function BasicInfo({
                 <Input.Modal
                   result={WhereToBuy}
                   setModalOpen={setWhereToBuyModalOpen}
-                  state={clothWhereBuy.letter.length > 0}
-                  type={clothWhereBuy.type}
+                  state={clothWhereBuy?.letter.length > 0}
+                  type={clothWhereBuy?.type}
                   action="write"
                 />
               ) : (

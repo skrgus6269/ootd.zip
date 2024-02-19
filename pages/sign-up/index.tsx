@@ -4,7 +4,7 @@ import BasicInfo from './BasicInfo';
 import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
 import NextButton from '@/components/NextButton';
-import S from './style';
+import S from '@/style/sign-up/style';
 import Title1 from '@/components/UI/TypoGraphy/Title1';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
@@ -28,7 +28,7 @@ const SignUp: ComponentWithLayout = () => {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [open, setOpen] = useState<Boolean>(true);
-  const [gender, setGender] = useState<string>('남자');
+  const [gender, setGender] = useState<Boolean>(true);
   const [canUseId, setCanUseId] = useState<Boolean>(false);
   const [basicState, setBasicState] = useState<Boolean>(false);
   const [bodyState, setBodyState] = useState<Boolean>(false);
