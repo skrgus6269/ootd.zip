@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from './style';
+import S from '@/style/LikeInfo/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
@@ -18,7 +18,7 @@ export default function LikeInfo() {
 
   const router = useRouter();
 
-  const [gender, setGender] = useState<string>('남자');
+  const [gender, setGender] = useState<Boolean>(true);
   const styleListInitial = styleList.map((item) => {
     return { value: false, tag: item } as Style;
   });
