@@ -16,6 +16,7 @@ import { OOTDType } from '@/pages/OOTD/type';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
+import DeclarationModal from '../DeclarationModal';
 
 interface ClothTag {
   xRate: string;
@@ -37,6 +38,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsopen, setReportModalIsopen] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
 
@@ -126,11 +128,20 @@ export default function Posting({ data, commentRef }: PostingProps) {
       setFollowState(true);
     }
   };
+
+  const onClickBackground = () => {
+    if (reportModalIsopen) {
+      setReportModalIsopen(false);
+    }
+    if (declaration) {
+      setDeclaration(false);
+    }
+  };
   return (
     <>
       <S.Background
-        onClick={() => setReportModalIsopen(false)}
-        isOpen={reportModalIsopen}
+        onClick={onClickBackground}
+        isOpen={reportModalIsopen || declaration}
       />
       <S.Layout>
         <S.PostingTop>
@@ -241,7 +252,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
         <ReportModal
           reportModalIsopen={reportModalIsopen}
           setReportModalIsopen={setReportModalIsopen}
+          setDeclaration={setDeclaration}
         />
+        {declaration && (
+          <DeclarationModal
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+          />
+        )}
       </S.Layout>
     </>
   );
