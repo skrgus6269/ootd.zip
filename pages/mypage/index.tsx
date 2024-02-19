@@ -19,7 +19,12 @@ export default function MyPage() {
             />
           }
           middleProps={<></>}
-          rightProps={<AiOutlineSetting className="setting" />}
+          rightProps={
+            <AiOutlineSetting
+              className="setting"
+              onClick={() => router.push('/Setting')}
+            />
+          }
         />
         <Profile />
         <Closet />
