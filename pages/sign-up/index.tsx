@@ -147,7 +147,6 @@ const SignUp: ComponentWithLayout = () => {
                 gender={gender}
                 setGender={setGender}
                 setStyleListState={setStyleListState}
-                styleListState={styleListState}
               />
               <NextButton
                 className="nextButton"
