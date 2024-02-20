@@ -18,6 +18,10 @@ import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import FixModal from '../Domain/OOTD/FixModal';
 
 interface ClothTag {
   xRate: string;
@@ -42,8 +46,10 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [declaration, setDeclaration] = useState<Boolean>(false);
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
-
+  const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
   const imgRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const myId = useRecoilValue(userId);
 
   //컴포넌트 크기 계산
   useEffect(() => {
@@ -143,6 +149,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
       setReceivedDeclaration(false);
     }
   };
+  const onClickKebabButton = () => {
+    if (myId === data.id) {
+      setFixModalIsOpen(true);
+      return;
+    }
+    setReportModalIsopen(true);
+  };
+
   return (
     <>
       <S.Background
@@ -160,7 +174,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           ) : (
             <Button3 onClick={onClickFollowButton}>팔로우</Button3>
           )}
-          <AiOutlineEllipsis onClick={() => setReportModalIsopen(true)} />
+          <AiOutlineEllipsis onClick={onClickKebabButton} />
         </S.PostingTop>
         <S.PostingImage ref={imgRef}>
           <AiFillTag onClick={onClickTagOpenButton} className="tag" />
@@ -259,6 +273,10 @@ export default function Posting({ data, commentRef }: PostingProps) {
           reportModalIsopen={reportModalIsopen}
           setReportModalIsopen={setReportModalIsopen}
           setDeclaration={setDeclaration}
+        />
+        <FixModal
+          reportModalIsopen={fixModalIsOpen}
+          setReportModalIsopen={setFixModalIsOpen}
         />
         {declaration && (
           <DeclarationModal

@@ -6,6 +6,11 @@ interface LayoutProps {
 
 const Layout = styled.div`
   padding: 0 20px;
+  .nextButton {
+    position: fixed;
+    bottom: 25px;
+    width: calc(100% - 40px);
+  }
 `;
 
 const Background = styled.div<LayoutProps>`
@@ -39,7 +44,7 @@ const Label = styled.div`
 
 const CheckBox = styled.div`
   .helperText {
-    margin: 40px 0 16px 0;
+    margin: 16px 0;
   }
 `;
 
