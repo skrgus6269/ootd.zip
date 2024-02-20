@@ -15,12 +15,10 @@ interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
   string: string;
   setString: Dispatch<SetStateAction<string>>;
-  style: Style[];
-  setStyle: Dispatch<SetStateAction<Style[]>>;
   open: Boolean;
   setOpen: Dispatch<SetStateAction<Boolean>>;
-  selectedStyle: string[];
-  setSelectedStyle: Dispatch<SetStateAction<string[]>>;
+  selectedStyle: Style[];
+  setSelectedStyle: Dispatch<SetStateAction<Style[]>>;
   complete: Boolean;
 }
 
@@ -28,8 +26,6 @@ export default function WriteOOTD({
   imageAndTag,
   string,
   setString,
-  style,
-  setStyle,
   open,
   setOpen,
   selectedStyle,
@@ -38,12 +34,10 @@ export default function WriteOOTD({
 }: WriteOOTDProps) {
   const [postOOTD] = OOTDApi();
 
-  const [addTag, setAddTag] = useState<Boolean>(false);
-  const [init, setInit] = useState<Boolean>(false); // 초기 addTag 렌더링 방지
+  const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
 
   const onClickAddStyleTag = () => {
-    setAddTag(true);
-    setInit(true);
+    setStyleModalIsOpen(true);
   };
 
   const onClickStyleTag = (index: number) => {
@@ -119,7 +113,7 @@ export default function WriteOOTD({
                   onClick={() => onClickStyleTag(index)}
                   key={index}
                 >
-                  <Button3 className="selectedStyleList">{item}</Button3>
+                  <Button3 className="selectedStyleList">{item.name}</Button3>
                   <AiOutlineClose />
                 </S.StyleListSpan>
               );
@@ -140,14 +134,11 @@ export default function WriteOOTD({
           다음
         </NextButton>
       </S.Layout>
-
-      {init && (
+      {styleModalIsOpen && (
         <StyleModal
-          setAddTag={setAddTag}
-          addTag={addTag}
-          style={style}
-          setStyle={setStyle}
+          setStyleModalIsOpen={setStyleModalIsOpen}
           setSelectedStyle={setSelectedStyle}
+          styleModalIsOpen={styleModalIsOpen}
         />
       )}
     </>
