@@ -16,30 +16,32 @@ export default function DeclarationModal({
   setDeclaration,
   setReceivedDeclaration,
 }: DeclarationModalProps) {
-  const [check1, setCheck1] = useState<Boolean>(false);
-  const [check2, setCheck2] = useState<Boolean>(false);
-  const [check3, setCheck3] = useState<Boolean>(false);
-  const [check4, setCheck4] = useState<Boolean>(false);
-  const [check5, setCheck5] = useState<Boolean>(false);
-  const [check6, setCheck6] = useState<Boolean>(false);
-  const [check7, setCheck7] = useState<Boolean>(false);
-  const [check8, setCheck8] = useState<Boolean>(false);
-
-  const [possible, setPossible] = useState<Boolean>(false);
+  const [checks, setChecks] = useState<Array<boolean>>([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [possible, setPossible] = useState<boolean>(false);
 
   useEffect(() => {
-    const isAnyTrue =
-      check1 ||
-      check2 ||
-      check3 ||
-      check4 ||
-      check5 ||
-      check6 ||
-      check7 ||
-      check8;
+    setPossible(checks.some((check) => check));
+  }, [checks]);
 
-    setPossible(isAnyTrue);
-  }, [check1, check2, check3, check4, check5, check6, check7, check8]);
+  const withdrawBlockTitles: string[] = [
+    '판매 또는 직거래 유도',
+    '비방, 명예훼손 또는 수치심 유발',
+    '혐오적, 외설적, 범죄적 행위 등 공공질서 및 미풍양속 위반',
+    '서비스에 대한 허위 및 오해의 소지가 있는 행동',
+    '저작권 위반, 개인정보 노출 등 권리침해 우려',
+    '정치적, 종교적 분쟁 야기',
+    '스팸 또는 지나치게 상업적인 내용',
+    '개인정보 도용, 사칭 또는 타인의 정보를 무단 위변조',
+  ];
 
   return (
     <Modal isOpen={declaration} height="90">
@@ -58,46 +60,18 @@ export default function DeclarationModal({
             처리됩니다.
           </Caption1>
         </S.Frame>
-        <WithdrawBlock
-          title="판매 또는 직거래 유도"
-          checked={check1}
-          setChecked={setCheck1}
-        />
-        <WithdrawBlock
-          title="비방, 명예훼손 또는 수치심 유발"
-          checked={check2}
-          setChecked={setCheck2}
-        />
-        <WithdrawBlock
-          title="혐오적, 외설적, 범죄적 행위 등 공공질서 및 미풍양속 위반"
-          checked={check3}
-          setChecked={setCheck3}
-        />
-        <WithdrawBlock
-          title="서비스에 대한 허위 및 오해의 소지가 있는 행동"
-          checked={check4}
-          setChecked={setCheck4}
-        />
-        <WithdrawBlock
-          title="저작권 위반, 개인정보 노출 등 권리침해 우려"
-          checked={check5}
-          setChecked={setCheck5}
-        />
-        <WithdrawBlock
-          title="정치적, 종교적 분쟁 야기"
-          checked={check6}
-          setChecked={setCheck6}
-        />
-        <WithdrawBlock
-          title="스팸 또는 지나치게 상업적인 내용"
-          checked={check7}
-          setChecked={setCheck7}
-        />
-        <WithdrawBlock
-          title="개인정보 도용, 사칭 또는 타인의 정보를 무단 위변조"
-          checked={check8}
-          setChecked={setCheck8}
-        />
+        {withdrawBlockTitles.map((item, index) => (
+          <WithdrawBlock
+            key={index}
+            title={withdrawBlockTitles[index]}
+            checked={checks[index]}
+            setChecked={() => {
+              const newChecks = [...checks];
+              newChecks[index] = !newChecks[index];
+              setChecks(newChecks);
+            }}
+          />
+        ))}
         <S.Button
           state={possible}
           onClick={() => {
