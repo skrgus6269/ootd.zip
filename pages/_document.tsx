@@ -7,7 +7,7 @@ export default function Document() {
 
       <meta
         name="viewport"
-        content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width upgrade-insecure-requests"
+        content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
         http-equiv="Content-Security-Policy"
       />
       <body>

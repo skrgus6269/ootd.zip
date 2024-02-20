@@ -15,7 +15,13 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
+import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import FixModal from '../Domain/OOTD/FixModal';
 
 interface ClothTag {
   xRate: string;
@@ -36,9 +42,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [componentWidth, setComponentWidth] = useState(0); //컴포넌트 길이
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
-  const [reportModalIsopen, setReportModalIsopen] = useState<Boolean>(false);
-
+  const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false);
+  const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
   const imgRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const myId = useRecoilValue(userId);
 
   //컴포넌트 크기 계산
   useEffect(() => {
@@ -126,11 +137,31 @@ export default function Posting({ data, commentRef }: PostingProps) {
       setFollowState(true);
     }
   };
+
+  const onClickBackground = () => {
+    if (reportModalIsOpen) {
+      setReportModalIsOpen(false);
+    }
+    if (declaration) {
+      setDeclaration(false);
+    }
+    if (receivedDeclaration) {
+      setReceivedDeclaration(false);
+    }
+  };
+  const onClickKebabButton = () => {
+    if (myId === data.id) {
+      setFixModalIsOpen(true);
+      return;
+    }
+    setReportModalIsOpen(true);
+  };
+
   return (
     <>
       <S.Background
-        onClick={() => setReportModalIsopen(false)}
-        isOpen={reportModalIsopen}
+        onClick={onClickBackground}
+        isOpen={reportModalIsOpen || declaration || receivedDeclaration}
       />
       <S.Layout>
         <S.PostingTop>
@@ -143,7 +174,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           ) : (
             <Button3 onClick={onClickFollowButton}>팔로우</Button3>
           )}
-          <AiOutlineEllipsis onClick={() => setReportModalIsopen(true)} />
+          <AiOutlineEllipsis onClick={onClickKebabButton} />
         </S.PostingTop>
         <S.PostingImage ref={imgRef}>
           <AiFillTag onClick={onClickTagOpenButton} className="tag" />
@@ -239,9 +270,27 @@ export default function Posting({ data, commentRef }: PostingProps) {
           })}
         </S.PostingStyleTag>
         <ReportModal
-          reportModalIsopen={reportModalIsopen}
-          setReportModalIsopen={setReportModalIsopen}
+          reportModalIsOpen={reportModalIsOpen}
+          setReportModalIsOpen={setReportModalIsOpen}
+          setDeclaration={setDeclaration}
         />
+        <FixModal
+          reportModalIsOpen={fixModalIsOpen}
+          setReportModalIsOpen={setFixModalIsOpen}
+        />
+        {declaration && (
+          <DeclarationModal
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+          />
+        )}
+        {receivedDeclaration && (
+          <ReceivedDeclarationModal
+            receivedDeclaration={receivedDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+          />
+        )}
       </S.Layout>
     </>
   );

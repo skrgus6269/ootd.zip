@@ -5,8 +5,9 @@ import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
 import Body2 from '@/components/UI/TypoGraphy/Body2';
 
 interface BoxProps {
-  value: Boolean;
-  tag: string;
+  id: number;
+  state: Boolean;
+  name: string;
 }
 
 interface CheckBoxProps {
@@ -16,12 +17,16 @@ interface CheckBoxProps {
 
 const CheckBox = ({ state, setState }: CheckBoxProps) => {
   const onClickCheckBox = (index: number) => {
-    const { value: currentValue, tag: currentTag } = state[index];
+    const {
+      state: currentValue,
+      name: currentTag,
+      id: currentId,
+    } = state[index];
     const leftCheckBox = state.slice(0, index);
     const rightCheckBox = state.slice(index + 1);
     setState([
       ...leftCheckBox,
-      { value: !currentValue, tag: currentTag },
+      { state: !currentValue, name: currentTag, id: currentId },
       ...rightCheckBox,
     ]);
   };
@@ -34,15 +39,15 @@ const CheckBox = ({ state, setState }: CheckBoxProps) => {
             <S.Box onClick={() => onClickCheckBox(index)} key={index}>
               <>
                 <S.Image>
-                  {item.value && (
+                  {item.state && (
                     <Image src={CheckBoxTrue} alt="CheckBoxTrue" />
                   )}
-                  {!item.value && (
+                  {!item.state && (
                     <Image src={CheckBoxFalse} alt="CheckBoxFalse" />
                   )}
                 </S.Image>
                 <S.Tag>
-                  <Body2>{item.tag}</Body2>
+                  <Body2>{item.name}</Body2>
                 </S.Tag>
               </>
             </S.Box>
