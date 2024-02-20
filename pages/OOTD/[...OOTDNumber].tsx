@@ -75,7 +75,7 @@ const OOTD: ComponentWithLayout = () => {
   const [, getOOtd] = OOTDApi();
 
   const [sampleData, setSampleData] = useState<OOTDType>({
-    id: 0,
+    id: 1,
     contents:
       'Lorem ipsum dolor sit amet consectetur. Egestas diam ac fringilla diam morbi amet praesent nullam.',
     viewCount: 0,

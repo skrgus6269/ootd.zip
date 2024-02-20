@@ -14,8 +14,12 @@ import MessageOutlined from '@/public/images/MessageOutlined.svg';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
-import ReportModal from '../Domain/OOTD/ReportModal';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import ReportModal from '../Domain/OOTD/ReportModal';
+import FixModal from '../Domain/OOTD/FixModal';
 
 interface ClothTag {
   xRate: string;
@@ -36,9 +40,12 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [componentWidth, setComponentWidth] = useState(0); //컴포넌트 길이
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
-  const [reportModalIsopen, setReportModalIsopen] = useState<Boolean>(false);
+  const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
+  const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const myId = useRecoilValue(userId);
 
   //컴포넌트 크기 계산
   useEffect(() => {
@@ -126,11 +133,25 @@ export default function Posting({ data, commentRef }: PostingProps) {
       setFollowState(true);
     }
   };
+
+  const onClickKebabButton = () => {
+    if (myId === data.id) {
+      setFixModalIsOpen(true);
+      return;
+    }
+    setReportModalIsOpen(true);
+  };
+
+  const onClickBackground = () => {
+    if (fixModalIsOpen) setFixModalIsOpen(false);
+    if (reportModalIsOpen) setReportModalIsOpen(false);
+  };
+
   return (
     <>
       <S.Background
-        onClick={() => setReportModalIsopen(false)}
-        isOpen={reportModalIsopen}
+        onClick={onClickBackground}
+        isOpen={reportModalIsOpen || fixModalIsOpen}
       />
       <S.Layout>
         <S.PostingTop>
@@ -143,7 +164,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           ) : (
             <Button3 onClick={onClickFollowButton}>팔로우</Button3>
           )}
-          <AiOutlineEllipsis onClick={() => setReportModalIsopen(true)} />
+          <AiOutlineEllipsis onClick={onClickKebabButton} />
         </S.PostingTop>
         <S.PostingImage ref={imgRef}>
           <AiFillTag onClick={onClickTagOpenButton} className="tag" />
@@ -239,8 +260,12 @@ export default function Posting({ data, commentRef }: PostingProps) {
           })}
         </S.PostingStyleTag>
         <ReportModal
-          reportModalIsopen={reportModalIsopen}
-          setReportModalIsopen={setReportModalIsopen}
+          reportModalIsopen={reportModalIsOpen}
+          setReportModalIsopen={setReportModalIsOpen}
+        />
+        <FixModal
+          reportModalIsopen={fixModalIsOpen}
+          setReportModalIsopen={setFixModalIsOpen}
         />
       </S.Layout>
     </>

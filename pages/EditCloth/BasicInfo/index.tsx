@@ -77,7 +77,7 @@ export default function BasicInfo({
     <S.Category>
       <Body3>{clothCategory && clothCategory[0]?.name}</Body3>
       <Body3>&gt;</Body3>
-      <Body3 style={{ fontWeight: '700' }}>
+      <Body3 syle={{ fontWeight: '700' }}>
         {clothCategory &&
           clothCategory[0]?.detailCategories &&
           clothCategory[0]?.detailCategories[0].name}
