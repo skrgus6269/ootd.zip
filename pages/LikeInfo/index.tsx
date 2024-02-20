@@ -3,27 +3,18 @@ import S from '@/style/LikeInfo/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
-import Header from '@/components/Header';
-import SettingBlock from '@/components/Setting/SettingBlock';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
 import { styleList } from '@/constants/business.constants';
+import { Style } from '../AddOOTD';
 
 export default function LikeInfo() {
-  interface Style {
-    value: Boolean;
-    tag: string;
-  }
-
   const router = useRouter();
 
   const [gender, setGender] = useState<Boolean>(true);
-  const styleListInitial = styleList.map((item) => {
-    return { value: false, tag: item } as Style;
-  });
-  const [styleListState, setStyleListState] =
-    useState<Style[]>(styleListInitial);
+
+  const [styleListState, setStyleListState] = useState<Style[]>([]);
 
   const [possible, setPossible] = useState<Boolean>(false);
 

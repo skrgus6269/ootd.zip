@@ -4,7 +4,7 @@ import { Style } from '@/pages/AddOOTD';
 
 interface StyleInputProps {
   styleListState: Style[];
-  setStyleListState: React.Dispatch<React.SetStateAction<Style[] | null>>;
+  setStyleListState: React.Dispatch<React.SetStateAction<Style[]>>;
 }
 export default function StyleInput({
   styleListState,

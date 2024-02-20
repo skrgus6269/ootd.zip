@@ -12,7 +12,7 @@ interface BoxProps {
 
 interface CheckBoxProps {
   state: BoxProps[];
-  setState: React.Dispatch<React.SetStateAction<BoxProps[] | null>>;
+  setState: React.Dispatch<React.SetStateAction<BoxProps[]>>;
 }
 
 const CheckBox = ({ state, setState }: CheckBoxProps) => {

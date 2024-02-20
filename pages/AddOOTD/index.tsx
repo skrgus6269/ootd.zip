@@ -23,7 +23,7 @@ const AddOOTD: ComponentWithLayout = () => {
   const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>([]); //이미지 + 태그
   const [string, setString] = useState(''); //게시글
   const [style, setStyle] = useState<Style[] | null>(null); //스타일
-  const [selectedStyle, setSelectedStyle] = useState<string[]>([]);
+  const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
   const [open, setOpen] = useState<Boolean>(true); //공개여부
   const [complete, setComplete] = useState<Boolean>(false); //게시 완료 여부
   const router = useRouter();

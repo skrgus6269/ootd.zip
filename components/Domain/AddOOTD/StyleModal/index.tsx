@@ -20,7 +20,7 @@ export default function StyleModal({
   setSelectedStyle,
   styleInitial,
 }: StyleModalProps) {
-  const [style, setStyle] = useState<Style[] | null>(null);
+  const [style, setStyle] = useState<Style[]>([]);
 
   useEffect(() => {
     let result = [
@@ -111,7 +111,7 @@ export default function StyleModal({
           </S.Label>
           <S.CheckBox>
             <Input>
-              <Input.CheckBox state={style!} setState={setStyle!} />
+              <Input.CheckBox state={style!} setState={setStyle} />
               <Input.HelperText className="helperText" state={1}>
                 최소 1개 이상 선택해주세요
               </Input.HelperText>
