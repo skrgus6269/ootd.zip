@@ -6,6 +6,11 @@ import DetailClothDiscription from '@/components/DetailCloth/DetailClothDiscript
 import DetailClothDetailInfo from '@/components/DetailCloth/DetailClothDetailInfo';
 import ClothOOTD from '@/components/DetailCloth/ClothOOTD';
 
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
+
 import { useState } from 'react';
 import ActionSheet from '@/components/ActionSheet';
 import { useRouter } from 'next/router';
@@ -35,6 +40,8 @@ const DetailCloth = () => {
   const shareButton = () => {
     console.log('공유');
     // 공유 버튼
+    const currentURL = window.location.href;
+    sendReactNativeMessage({ type: 'shareURL' });
   };
 
   const deleteButton = () => {
