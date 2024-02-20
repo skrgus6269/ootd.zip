@@ -6,7 +6,6 @@ import { Button3, Title1 } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
-import { styleList } from '@/constants/business.constants';
 import { Style } from '../AddOOTD';
 
 export default function LikeInfo() {
@@ -14,7 +13,7 @@ export default function LikeInfo() {
 
   const [gender, setGender] = useState<Boolean>(true);
 
-  const [styleListState, setStyleListState] = useState<Style[]>([]);
+  const [style, setStyle] = useState<Style[]>([]);
 
   const [possible, setPossible] = useState<Boolean>(false);
 
@@ -56,10 +55,7 @@ export default function LikeInfo() {
         </S.SexContent>
 
         <S.StyleContent>
-          <StyleInput
-            setStyleListState={setStyleListState}
-            styleListState={styleListState}
-          />
+          <StyleInput setStyleListState={setStyle} />
         </S.StyleContent>
 
         <S.Button state={possible}>
