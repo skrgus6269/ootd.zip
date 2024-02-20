@@ -14,11 +14,13 @@ import MessageOutlined from '@/public/images/MessageOutlined.svg';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
+import ReportModal from '../Domain/OOTD/ReportModal';
+import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import ReportModal from '../Domain/OOTD/ReportModal';
 import FixModal from '../Domain/OOTD/FixModal';
 
 interface ClothTag {
@@ -41,8 +43,10 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false);
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
-
   const imgRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const myId = useRecoilValue(userId);
@@ -134,6 +138,17 @@ export default function Posting({ data, commentRef }: PostingProps) {
     }
   };
 
+  const onClickBackground = () => {
+    if (reportModalIsOpen) {
+      setReportModalIsOpen(false);
+    }
+    if (declaration) {
+      setDeclaration(false);
+    }
+    if (receivedDeclaration) {
+      setReceivedDeclaration(false);
+    }
+  };
   const onClickKebabButton = () => {
     if (myId === data.id) {
       setFixModalIsOpen(true);
@@ -142,16 +157,11 @@ export default function Posting({ data, commentRef }: PostingProps) {
     setReportModalIsOpen(true);
   };
 
-  const onClickBackground = () => {
-    if (fixModalIsOpen) setFixModalIsOpen(false);
-    if (reportModalIsOpen) setReportModalIsOpen(false);
-  };
-
   return (
     <>
       <S.Background
         onClick={onClickBackground}
-        isOpen={reportModalIsOpen || fixModalIsOpen}
+        isOpen={reportModalIsOpen || declaration || receivedDeclaration}
       />
       <S.Layout>
         <S.PostingTop>
@@ -260,13 +270,27 @@ export default function Posting({ data, commentRef }: PostingProps) {
           })}
         </S.PostingStyleTag>
         <ReportModal
-          reportModalIsopen={reportModalIsOpen}
-          setReportModalIsopen={setReportModalIsOpen}
+          reportModalIsOpen={reportModalIsOpen}
+          setReportModalIsOpen={setReportModalIsOpen}
+          setDeclaration={setDeclaration}
         />
         <FixModal
-          reportModalIsopen={fixModalIsOpen}
-          setReportModalIsopen={setFixModalIsOpen}
+          reportModalIsOpen={fixModalIsOpen}
+          setReportModalIsOpen={setFixModalIsOpen}
         />
+        {declaration && (
+          <DeclarationModal
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+          />
+        )}
+        {receivedDeclaration && (
+          <ReceivedDeclarationModal
+            receivedDeclaration={receivedDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+          />
+        )}
       </S.Layout>
     </>
   );

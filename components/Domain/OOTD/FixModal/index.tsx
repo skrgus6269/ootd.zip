@@ -8,16 +8,16 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 
 interface ReportModalProps {
-  reportModalIsopen: Boolean;
-  setReportModalIsopen: Dispatch<SetStateAction<Boolean>>;
+  reportModalIsOpen: Boolean;
+  setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function FixModal({
-  reportModalIsopen,
-  setReportModalIsopen,
+  reportModalIsOpen,
+  setReportModalIsOpen,
 }: ReportModalProps) {
   const onClickReportButton = () => {
-    setReportModalIsopen(false);
+    setReportModalIsOpen(false);
   };
 
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function FixModal({
     <>
       <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
-        <Modal className="modal" isOpen={reportModalIsopen} height="30">
+        <Modal className="modal" isOpen={reportModalIsOpen} height="30">
           <S.Span>
             <Button1 className="report">공개로 설정</Button1>
           </S.Span>
