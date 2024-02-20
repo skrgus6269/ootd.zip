@@ -1,14 +1,10 @@
 import Input from '@/components/Input';
 import S from './style';
-
-interface BoxProps {
-  value: Boolean;
-  tag: string;
-}
+import { Style } from '@/pages/AddOOTD';
 
 interface StyleInputProps {
-  styleListState: BoxProps[];
-  setStyleListState: React.Dispatch<React.SetStateAction<BoxProps[]>>;
+  styleListState: Style[];
+  setStyleListState: React.Dispatch<React.SetStateAction<Style[] | null>>;
 }
 export default function StyleInput({
   styleListState,
