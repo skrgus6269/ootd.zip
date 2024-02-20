@@ -25,15 +25,17 @@ export default function ReceivedDeclarationModal({
         <S.Frame>
           <AiOutlineExclamationCircle />
           <Headline2>신고가 접수되었습니다.</Headline2>
-          <Body3 style={{ color: '#636363' }}>
-            추가 조치로 해당 사용자를 차단할 수 있습니다.
-            <br />
-            차단하시겠습니까?
-            <br />
-            ‘설정 {'>'} 내 계정 {'>'} 차단한 계정’에서 해제할 수 있습니다.
-            <br />
-            오른쪽 위 닫기를 누르면 해당 페이지에서 벗어나게 됩니다.
-          </Body3>
+          <S.ColorSpan>
+            <Body3>
+              추가 조치로 해당 사용자를 차단할 수 있습니다.
+              <br />
+              차단하시겠습니까?
+              <br />
+              ‘설정 {'>'} 내 계정 {'>'} 차단한 계정’에서 해제할 수 있습니다.
+              <br />
+              오른쪽 위 닫기를 누르면 해당 페이지에서 벗어나게 됩니다.
+            </Body3>
+          </S.ColorSpan>
         </S.Frame>
         <S.Button>
           <Button3>사용자 차단하기</Button3>

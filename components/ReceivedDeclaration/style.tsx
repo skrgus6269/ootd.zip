@@ -28,13 +28,17 @@ const Button = styled.div`
   width: calc(100% - 40px);
   position: relative;
   top: 24px;
-  background-color: #ec0000;
+  background-color: ${(props) => props.theme.color.error};
   padding: 14px 0px;
   color: #fff;
   text-align: center;
   margin-bottom: 24px;
 `;
 
-const S = { Layout, Header, Frame, Button };
+const ColorSpan = styled.div`
+  color: ${(props) => props.theme.color.grey_30};
+`;
+
+const S = { Layout, Header, Frame, Button, ColorSpan };
 
 export default S;
