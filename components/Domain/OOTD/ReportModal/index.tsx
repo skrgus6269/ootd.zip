@@ -2,27 +2,26 @@ import Modal from '@/components/Modal';
 import S from './style';
 import { Button1 } from '@/components/UI';
 import { Dispatch, SetStateAction, useState } from 'react';
-import DeclarationModal from '../../../DeclarationModal';
 
 interface ReportModalProps {
-  reportModalIsopen: Boolean;
-  setReportModalIsopen: Dispatch<SetStateAction<Boolean>>;
+  reportModalIsOpen: Boolean;
+  setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function ReportModal({
-  reportModalIsopen,
-  setReportModalIsopen,
+  reportModalIsOpen,
+  setReportModalIsOpen,
   setDeclaration,
 }: ReportModalProps) {
   const onClickReportButton = () => {
-    setReportModalIsopen(false);
+    setReportModalIsOpen(false);
   };
 
   return (
     <>
       <S.Layout onClick={onClickReportButton}>
-        <Modal className="modal" isOpen={reportModalIsopen} height="10">
+        <Modal className="modal" isOpen={reportModalIsOpen} height="10">
           <S.Report>
             <Button1 className="report" onClick={() => setDeclaration(true)}>
               신고

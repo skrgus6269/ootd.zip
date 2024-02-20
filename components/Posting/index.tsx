@@ -42,7 +42,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [componentWidth, setComponentWidth] = useState(0); //컴포넌트 길이
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
-  const [reportModalIsopen, setReportModalIsopen] = useState<Boolean>(false);
+  const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
   const [declaration, setDeclaration] = useState<Boolean>(false);
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
@@ -139,8 +139,8 @@ export default function Posting({ data, commentRef }: PostingProps) {
   };
 
   const onClickBackground = () => {
-    if (reportModalIsopen) {
-      setReportModalIsopen(false);
+    if (reportModalIsOpen) {
+      setReportModalIsOpen(false);
     }
     if (declaration) {
       setDeclaration(false);
@@ -154,14 +154,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
       setFixModalIsOpen(true);
       return;
     }
-    setReportModalIsopen(true);
+    setReportModalIsOpen(true);
   };
 
   return (
     <>
       <S.Background
         onClick={onClickBackground}
-        isOpen={reportModalIsopen || declaration || receivedDeclaration}
+        isOpen={reportModalIsOpen || declaration || receivedDeclaration}
       />
       <S.Layout>
         <S.PostingTop>
@@ -270,13 +270,13 @@ export default function Posting({ data, commentRef }: PostingProps) {
           })}
         </S.PostingStyleTag>
         <ReportModal
-          reportModalIsopen={reportModalIsopen}
-          setReportModalIsopen={setReportModalIsopen}
+          reportModalIsOpen={reportModalIsOpen}
+          setReportModalIsOpen={setReportModalIsOpen}
           setDeclaration={setDeclaration}
         />
         <FixModal
-          reportModalIsopen={fixModalIsOpen}
-          setReportModalIsopen={setFixModalIsOpen}
+          reportModalIsOpen={fixModalIsOpen}
+          setReportModalIsOpen={setFixModalIsOpen}
         />
         {declaration && (
           <DeclarationModal
