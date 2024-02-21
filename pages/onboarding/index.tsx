@@ -2,46 +2,43 @@
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import S from '@/style/onboarding/style';
-import { Body2, Headline1 } from '@/components/UI';
+import { Body3, Body4, Button3, Headline1 } from '@/components/UI';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Onboarding: ComponentWithLayout = () => {
   const router = useRouter();
 
   return (
     <S.Layout>
-      <img
-        src="https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg"
-        alt=""
-      />
       <S.TypoGraphy>
-        <Headline1>내 손안의 옷장</Headline1>
-        <Body2>
-          Lorem ipsum dolor sit amet consectetur. Iaculis lorem viverra
-          pellentesque etiam
-        </Body2>
+        <Headline1 className="headline">
+          오늘도 옷장 앞에서 <br /> 고민하는 당신을 위해
+        </Headline1>
+        <Body3 className="body">
+          내가 따라입고 싶은 옷도 좋지만
+          <br />내 옷장에서 바로 꺼내입을 수 있는 ootd를 알려드릴게요.
+        </Body3>
       </S.TypoGraphy>
-      <S.ButtonGroup>
-        <Button
-          onClick={() => router.push('/main')}
-          size="big"
-          backgroundColor="grey_00"
-          color="grey_100"
-          border={true}
-        >
-          가입하기
-        </Button>
-        <Button
-          onClick={() => router.push('/EditCloth')}
-          size="big"
-          backgroundColor="grey_100"
-          color="grey_00"
-          border={true}
-        >
-          둘러보기
-        </Button>
-      </S.ButtonGroup>
+      <Button
+        onClick={() => router.push('/main')}
+        size="big"
+        backgroundColor="correct"
+        color="grey_00"
+        border={false}
+        className="button"
+      >
+        <Button3>시작하기</Button3>
+      </Button>
+      <S.Login>
+        <Body4 className="isuser">이미 계정이 있다면?</Body4>
+        <Link href="/sign-in">
+          <Body4 className=" login" state="emphasis">
+            로그인
+          </Body4>
+        </Link>
+      </S.Login>
     </S.Layout>
   );
 };

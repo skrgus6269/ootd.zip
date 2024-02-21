@@ -12,7 +12,7 @@ const color = {
   grey_10: '#3a3a3a',
   grey_00: '#030303',
   error: '#ff0000',
-  correct: '#21ea00',
+  correct: '#58efff',
   orange_50: '#fff2e6',
   orange_100: '#ffd6b0',
   orange_200: '#ffc28a',
