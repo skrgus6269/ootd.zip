@@ -1,11 +1,10 @@
-import S from './style';
+import S from '@/style/OOTD/style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';
 import PostingCommentWrite from '@/components/PostingComment/PostingCommentWrite';
 import { useRef, useState } from 'react';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
-import { OOTDType } from './type';
 import UserCloth from '@/components/Domain/OOTD/UserCloth';
 import UserOOTD from '@/components/Domain/OOTD/UserOOTD';
 import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
@@ -18,11 +17,65 @@ export interface CommentStateType {
   content: string;
 }
 
+export interface OOTDType {
+  id: number;
+  contents: string; //본문
+  viewCount: number; //조회수
+  reportCount: number; //신고 횟수
+  likeCount: number; //좋아요 개수
+  userName: string; //유저명
+  userImage: string; //유저 프로필 이미지
+  createAt: string; //작성일
+  ootdImages: {
+    url: string; //ootd 이미지
+    ootdClothesList?: {
+      id: number;
+      url: string;
+      brand: string; //옷 브랜드
+      category: {
+        id: number;
+        smallCategory: string;
+        bigCategory: string;
+      };
+      size: string;
+      name: string; //옷 별칭
+      coordinate: {
+        xrate: string;
+        yrate: string;
+      };
+      deviceSize: {
+        deviceWidth: number;
+        deviceHeight: number;
+      };
+    }[];
+  }[];
+  styles: {
+    name: string;
+  }[];
+  comment?: {
+    id: number;
+    userName: string;
+    userImage: string;
+    content: string;
+    createAt: string;
+    childComment?: {
+      id: number;
+      userName: string;
+      userImage: string;
+      content: string;
+      createAt: string;
+      taggedUserName: string;
+    }[];
+  }[];
+  bookmark: Boolean;
+  like: Boolean;
+}
+
 const OOTD: ComponentWithLayout = () => {
   const [, getOOtd] = OOTDApi();
 
   const [sampleData, setSampleData] = useState<OOTDType>({
-    id: 0,
+    id: 1,
     contents:
       'Lorem ipsum dolor sit amet consectetur. Egestas diam ac fringilla diam morbi amet praesent nullam.',
     viewCount: 0,

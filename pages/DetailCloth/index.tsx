@@ -1,4 +1,4 @@
-import S from './style';
+import S from '@/style/DetailCloth/style';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineEllipsis } from 'react-icons/ai';
 import DetailClothHeader from '@/components/DetailCloth/DetailClothHeader';
@@ -6,12 +6,10 @@ import DetailClothDiscription from '@/components/DetailCloth/DetailClothDiscript
 import DetailClothDetailInfo from '@/components/DetailCloth/DetailClothDetailInfo';
 import ClothOOTD from '@/components/DetailCloth/ClothOOTD';
 
-import Alert from '@/components/Alert';
 import { useState } from 'react';
 import ActionSheet from '@/components/ActionSheet';
 import { useRouter } from 'next/router';
 import DeleteAlert from '@/components/DetailCloth/DeleteAlert';
-import Image from 'next/image';
 
 const DetailCloth = () => {
   const router = useRouter();

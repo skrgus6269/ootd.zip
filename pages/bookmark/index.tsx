@@ -1,5 +1,5 @@
 import { Body4, Button3, Caption1, Headline2, Title1 } from '@/components/UI';
-import S from './style';
+import S from '@/style/bookmark/style';
 import AppBar from '@/components/Appbar';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';

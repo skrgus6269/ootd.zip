@@ -4,20 +4,16 @@ import BasicInfo from './BasicInfo';
 import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
 import NextButton from '@/components/NextButton';
-import S from './style';
+import S from '@/style/sign-up/style';
 import Title1 from '@/components/UI/TypoGraphy/Title1';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { styleList } from '@/constants/business.constants';
+import { Style } from '../AddOOTD';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
-}
-interface Style {
-  value: Boolean;
-  tag: string;
 }
 
 const SignUp: ComponentWithLayout = () => {
@@ -28,28 +24,21 @@ const SignUp: ComponentWithLayout = () => {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [open, setOpen] = useState<Boolean>(true);
-  const [gender, setGender] = useState<string>('남자');
+  const [gender, setGender] = useState<Boolean>(true);
   const [canUseId, setCanUseId] = useState<Boolean>(false);
   const [basicState, setBasicState] = useState<Boolean>(false);
   const [bodyState, setBodyState] = useState<Boolean>(false);
   const [styleState, setStyleState] = useState<Boolean>(false);
-  const [selectedStyle, setSelectedStyle] = useState<string[]>();
+  const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
-  const styleListInitial = styleList.map((item) => {
-    return { value: false, tag: item } as Style;
-  });
-
-  const [styleListState, setStyleListState] =
-    useState<Style[]>(styleListInitial);
+  const [styleListState, setStyleListState] = useState<Style[]>([]);
 
   useEffect(() => {
     const canAdvanceBasicState = canUseId && age?.length > 0;
 
     const canAdvanceBodyState = weight?.length > 0 && height?.length > 0;
 
-    const selectedStyles = styleListState
-      .filter((item) => item.value === true)
-      .map((item) => item.tag);
+    const selectedStyles = styleListState.filter((item) => item.state === true);
 
     const canAdvanceStyleState = selectedStyles?.length >= 3;
 
@@ -158,7 +147,6 @@ const SignUp: ComponentWithLayout = () => {
                 gender={gender}
                 setGender={setGender}
                 setStyleListState={setStyleListState}
-                styleListState={styleListState}
               />
               <NextButton
                 className="nextButton"

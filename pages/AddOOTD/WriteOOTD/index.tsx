@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Input from '@/components/Input';
-import S from './style';
+import S from '@/style/AddOOTD/WriteOOTD/style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Body4, Button3, Title1 } from '@/components/UI';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -12,15 +12,13 @@ import NextButton from '@/components/NextButton';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 interface WriteOOTDProps {
-  imageAndTag: ImageWithTag | string;
+  imageAndTag: ImageWithTag | undefined;
   string: string;
   setString: Dispatch<SetStateAction<string>>;
-  style: Style[];
-  setStyle: Dispatch<SetStateAction<Style[]>>;
   open: Boolean;
   setOpen: Dispatch<SetStateAction<Boolean>>;
-  selectedStyle: string[];
-  setSelectedStyle: Dispatch<SetStateAction<string[]>>;
+  selectedStyle: Style[];
+  setSelectedStyle: Dispatch<SetStateAction<Style[]>>;
   complete: Boolean;
 }
 
@@ -28,8 +26,6 @@ export default function WriteOOTD({
   imageAndTag,
   string,
   setString,
-  style,
-  setStyle,
   open,
   setOpen,
   selectedStyle,
@@ -38,12 +34,10 @@ export default function WriteOOTD({
 }: WriteOOTDProps) {
   const [postOOTD] = OOTDApi();
 
-  const [addTag, setAddTag] = useState<Boolean>(false);
-  const [init, setInit] = useState<Boolean>(false); // 초기 addTag 렌더링 방지
+  const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
 
   const onClickAddStyleTag = () => {
-    setAddTag(true);
-    setInit(true);
+    setStyleModalIsOpen(true);
   };
 
   const onClickStyleTag = (index: number) => {
@@ -53,16 +47,16 @@ export default function WriteOOTD({
   };
 
   const onClickSubmitButton = async () => {
-    if (typeof imageAndTag !== 'string') {
+    if (imageAndTag !== undefined) {
       const payload = {
         content: string,
         isPrivate: true as Boolean,
         styles: [1],
-        ootdImages: imageAndTag!.map((ootd) => {
+        ootdImages: imageAndTag.map((ootd) => {
           return {
             ootdImage: ootd.ootdImage,
             clothesTags: ootd.tag
-              ? ootd.tag?.map((tag) => {
+              ? ootd.tag.map((tag) => {
                   return {
                     clothesId: tag.clothId,
                     deviceWidth: tag.deviceWidth,
@@ -89,10 +83,10 @@ export default function WriteOOTD({
     <>
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">
-          {imageAndTag.length}장의 사진이 선택됨
+          {imageAndTag !== undefined && imageAndTag!.length}장의 사진이 선택됨
         </Body4>
         <S.OOTDImage>
-          {typeof imageAndTag !== 'string' &&
+          {imageAndTag &&
             imageAndTag.map((item, index) => {
               return <img src={item.ootdImage} key={index} alt="" />;
             })}
@@ -112,17 +106,18 @@ export default function WriteOOTD({
           <AiOutlinePlus onClick={onClickAddStyleTag} />
         </S.Style>
         <S.StyleList>
-          {selectedStyle.map((item, index) => {
-            return (
-              <S.StyleListSpan
-                onClick={() => onClickStyleTag(index)}
-                key={index}
-              >
-                <Button3 className="selectedStyleList">{item}</Button3>
-                <AiOutlineClose />
-              </S.StyleListSpan>
-            );
-          })}
+          {selectedStyle?.length > 0 &&
+            selectedStyle?.map((item, index) => {
+              return (
+                <S.StyleListSpan
+                  onClick={() => onClickStyleTag(index)}
+                  key={index}
+                >
+                  <Button3 className="selectedStyleList">{item.name}</Button3>
+                  <AiOutlineClose />
+                </S.StyleListSpan>
+              );
+            })}
         </S.StyleList>
         <S.Open>
           <Title1>공개여부</Title1>
@@ -139,14 +134,11 @@ export default function WriteOOTD({
           다음
         </NextButton>
       </S.Layout>
-
-      {init && (
+      {styleModalIsOpen && (
         <StyleModal
-          setAddTag={setAddTag}
-          addTag={addTag}
-          style={style}
-          setStyle={setStyle}
+          setStyleModalIsOpen={setStyleModalIsOpen}
           setSelectedStyle={setSelectedStyle}
+          styleModalIsOpen={styleModalIsOpen}
         />
       )}
     </>

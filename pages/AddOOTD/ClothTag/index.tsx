@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import S from './style';
+import S from '@/style/AddOOTD/ClothTag/style';
 import { Body3 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
@@ -90,12 +90,12 @@ export default function ClothTag({
         infinite={false}
         beforeChange={(_current: number, next: number) => setSlideIndex(next)}
       >
-        {imageAndTag!.map((item, ootdIndex) => {
+        {imageAndTag?.map((item, ootdIndex) => {
           return (
             <>
               <S.Image ref={dragRef}>
                 {item.tag &&
-                  item.tag.map((element, index) => {
+                  item.tag?.map((element, index) => {
                     return (
                       <Draggable
                         key={index}

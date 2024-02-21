@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from './style';
+import S from '@/style/mypage/style';
 import { AiOutlineArrowLeft, AiOutlineSetting } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import Profile from '@/components/Domain/MyPage/Profile';
@@ -19,7 +19,12 @@ export default function MyPage() {
             />
           }
           middleProps={<></>}
-          rightProps={<AiOutlineSetting className="setting" />}
+          rightProps={
+            <AiOutlineSetting
+              className="setting"
+              onClick={() => router.push('/Setting')}
+            />
+          }
         />
         <Profile />
         <Closet />

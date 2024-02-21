@@ -1,5 +1,5 @@
 import { ClothInformationProps } from '@/components/ClothInformation/type';
-import S from './style';
+import S from '@/style/main/style';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineSearch } from 'react-icons/ai';
