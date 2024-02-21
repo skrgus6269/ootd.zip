@@ -38,6 +38,8 @@ const DetailCloth = () => {
     // 게시글 수정 버튼
   };
 
+  const [URLState, setURLState] = useState<any>(true);
+
   const shareButton = () => {
     console.log('공유');
     // 공유 버튼

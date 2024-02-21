@@ -34,6 +34,14 @@ export const getReactNativeMessage = (
         setState(false);
       }
     }
+    if (parsedData!.type === 'copyEmail') {
+      const shareURLState = parsedData?.payload;
+      if (shareURLState === 'success') {
+        setState(true);
+      } else {
+        setState(false);
+      }
+    }
   };
 
   if (window.ReactNativeWebView) {
