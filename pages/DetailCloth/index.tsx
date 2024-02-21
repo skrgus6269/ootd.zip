@@ -38,8 +38,6 @@ const DetailCloth = () => {
     // 게시글 수정 버튼
   };
 
-  const [URLState, setURLState] = useState<any>(false);
-
   const shareButton = () => {
     console.log('공유');
     // 공유 버튼
@@ -154,9 +152,7 @@ const DetailCloth = () => {
           onClickNoButton={onClickNoButton}
         />
       )}
-      {URLState && (
-        <Toast state={URLState} text="URL이 클립보드에 복사되었습니다." />
-      )}
+      {URLState && <Toast text="URL이 클립보드에 복사되었습니다." />}
     </>
   );
 };

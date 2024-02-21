@@ -10,11 +10,13 @@ import { userId } from '@/utils/recoil/atom';
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
   setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>;
+  setPublicSetting: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function FixModal({
   reportModalIsOpen,
   setReportModalIsOpen,
+  setPublicSetting,
 }: ReportModalProps) {
   const onClickReportButton = () => {
     setReportModalIsOpen(false);
@@ -34,7 +36,7 @@ export default function FixModal({
       <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
         <Modal className="modal" isOpen={reportModalIsOpen} height="30">
-          <S.Span>
+          <S.Span onClick={() => setPublicSetting(true)}>
             <Button1 className="report">공개로 설정</Button1>
           </S.Span>
           <S.Span onClick={() => router.push(`/EditOOTD/${myId}`)}>
