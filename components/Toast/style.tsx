@@ -9,7 +9,7 @@ const Layout = styled.div<LayoutProps>`
   display: flex;
   width: calc(100% - 16px);
   text-align: center;
-  position: absolute;
+  position: fixed;
   bottom: 71px;
   margin: 0px 8px;
   padding: 10px 16px;
