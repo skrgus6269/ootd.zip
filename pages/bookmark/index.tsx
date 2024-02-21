@@ -17,6 +17,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
+import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
+
 export default function Bookmark() {
   const router = useRouter();
 
@@ -99,11 +101,19 @@ export default function Bookmark() {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const myRef = useRef<HTMLInputElement>(null);
-
   const onClickBackground = () => {
     if (alertOpen) setAlertOpen(false);
   };
+
+  const { getUserBookmarkList } = BookmarkApi();
+
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: [1, 10, 'string', 'ASC'],
+    queryFn: getUserBookmarkList,
+  });
+  console.log(query);
 
   return (
     <>
