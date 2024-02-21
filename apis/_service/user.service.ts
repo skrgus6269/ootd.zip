@@ -1,4 +1,4 @@
-import { clothApi, ootdApi } from '@/apis/_api';
+import { bookmarkApi, clothApi, ootdApi } from '@/apis/_api';
 import {
   postOOTDBookmarkPayload,
   postOOTDLikePayload,
@@ -10,6 +10,7 @@ import {
   patchOOTDContentsOrIsPrivatePayload,
   getOOTDParams,
   postClothPayload,
+  getUserBookmarkListPayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -108,6 +109,14 @@ export const getClothDetail = async (id: number) => {
 //cloth 삭제
 export const deleteCloth = async (id: number) => {
   const data = await clothApi.deleteCloth(id);
+
+  return data;
+};
+
+export const getUserBookmarkList = async (
+  params: getUserBookmarkListPayload
+) => {
+  const data = await bookmarkApi.getUserBookmarkList(params);
 
   return data;
 };

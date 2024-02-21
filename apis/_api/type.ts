@@ -56,3 +56,10 @@ export interface postClothPayload {
   memo?: string;
   purchaseDate?: string;
 }
+
+export interface getUserBookmarkListPayload {
+  page: number;
+  size: number;
+  sortCriteria: string;
+  sortDirection: string;
+}
