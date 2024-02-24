@@ -9,6 +9,7 @@ import UserCloth from '@/components/Domain/OOTD/UserCloth';
 import UserOOTD from '@/components/Domain/OOTD/UserOOTD';
 import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import Toast from '@/components/Toast';
 
 export interface CommentStateType {
   ootdId: number;
@@ -344,6 +345,7 @@ const OOTD: ComponentWithLayout = () => {
     content: '',
   });
   const [commentWriting, setCommentWriting] = useState<Boolean>(false);
+  const [commentFinish, setCommentFinish] = useState<Boolean>(false);
   const commentRef = useRef<any>();
 
   const registerComment = () => {
@@ -352,6 +354,7 @@ const OOTD: ComponentWithLayout = () => {
       content: '',
     });
     setCommentWriting(false);
+    setCommentFinish(true);
     //댓글 등록 api 연동
   };
 
@@ -387,7 +390,9 @@ const OOTD: ComponentWithLayout = () => {
         commentWriting={commentWriting}
         setCommentWriting={setCommentWriting}
         registerComment={registerComment}
+        setCommentFinish={setCommentFinish}
       />
+      {commentFinish && <Toast text="댓글이 등록되었습니다." />}
     </S.Layout>
   );
 };

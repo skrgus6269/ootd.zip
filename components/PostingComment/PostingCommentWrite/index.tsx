@@ -13,6 +13,7 @@ interface PostingCommentWriteProps {
   commentWriting: Boolean;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
   registerComment: () => void;
+  setCommentFinish: Dispatch<SetStateAction<Boolean>>;
 }
 export default function PostingCommentWrite({
   comment,
@@ -22,6 +23,7 @@ export default function PostingCommentWrite({
   commentWriting,
   setCommentWriting,
   registerComment,
+  setCommentFinish,
 }: PostingCommentWriteProps) {
   return (
     <S.Layout>
@@ -51,9 +53,10 @@ export default function PostingCommentWrite({
             <S.Input
               line={Math.floor(comment.content.length / 21) + 2}
               ref={commentRef}
-              onChange={(e) =>
-                setComment({ ...comment, content: e.target.value })
-              }
+              onChange={(e) => {
+                setComment({ ...comment, content: e.target.value });
+                setCommentFinish(false);
+              }}
               placeholder="댓글을 남겨보세요."
               value={comment.content}
             />

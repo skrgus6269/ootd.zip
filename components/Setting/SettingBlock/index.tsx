@@ -7,9 +7,14 @@ import { useRouter } from 'next/router';
 interface SettingBlockProps {
   text: string;
   buttonClick?: () => void;
+  shareButton?: () => void;
 }
 
-const SettingBlock = ({ text, buttonClick }: SettingBlockProps) => {
+const SettingBlock = ({
+  text,
+  buttonClick,
+  shareButton,
+}: SettingBlockProps) => {
   const router = useRouter();
 
   return (
@@ -20,7 +25,9 @@ const SettingBlock = ({ text, buttonClick }: SettingBlockProps) => {
           <AiOutlineRight />
         </S.IconSpan>
       ) : (
-        <Body3 style={{ color: '#B1B1B1' }}>ootdzip@gmail.com</Body3>
+        <Body3 onClick={shareButton} style={{ color: '#B1B1B1' }}>
+          ootdzip@gmail.com
+        </Body3>
       )}
     </S.Layout>
   );

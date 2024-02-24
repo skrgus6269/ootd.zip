@@ -5,9 +5,29 @@ import { useRouter } from 'next/router';
 import { Title1 } from '@/components/UI';
 import Header from '@/components/Header';
 import SettingBlock from '@/components/Setting/SettingBlock';
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
+import Toast from '@/components/Toast';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function Setting() {
   const router = useRouter();
+
+  const [URLState, setURLState] = useState<any>(true);
+
+  const shareButton = () => {
+    console.log('이메일 복사');
+    setURLState(false); // 재공유 toast 노출 초기화
+    sendReactNativeMessage({ type: 'copyEmail' }); // native로 클립보드 복사 처리
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      getReactNativeMessage(setURLState);
+    }
+  }, []);
 
   return (
     <>
@@ -41,7 +61,7 @@ export default function Setting() {
 
         <S.ServiceInfo>
           <Header text="서비스 정보" />
-          <SettingBlock text="문의하기" />
+          <SettingBlock text="문의하기" shareButton={shareButton} />
           <SettingBlock
             text="이용 정책"
             buttonClick={() => router.push('/UsagePolicy')}
@@ -63,6 +83,7 @@ export default function Setting() {
             buttonClick={() => router.push('/License')}
           />
         </S.ServiceInfo>
+        {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
       </S.Layout>
     </>
   );
