@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import FixModal from '../Domain/OOTD/FixModal';
+import Toast from '@/components/Toast';
 
 interface ClothTag {
   xRate: string;
@@ -151,11 +152,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
   };
   const onClickKebabButton = () => {
     if (myId === data.id) {
+      setPublicSetting(false);
       setFixModalIsOpen(true);
       return;
     }
     setReportModalIsOpen(true);
   };
+
+  const [publicSetting, setPublicSetting] = useState<Boolean>(false); // 공개 여부
 
   return (
     <>
@@ -275,6 +279,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           setDeclaration={setDeclaration}
         />
         <FixModal
+          setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
         />
@@ -290,6 +295,9 @@ export default function Posting({ data, commentRef }: PostingProps) {
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />
+        )}
+        {publicSetting && (
+          <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
         )}
       </S.Layout>
     </>
