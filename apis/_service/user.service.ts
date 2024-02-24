@@ -1,4 +1,4 @@
-import { bookmarkApi, clothApi, ootdApi } from '@/apis/_api';
+import { clothApi, ootdApi } from '@/apis/_api';
 import {
   postOOTDBookmarkPayload,
   postOOTDLikePayload,
@@ -116,7 +116,7 @@ export const deleteCloth = async (id: number) => {
 export const getUserBookmarkList = async (
   params: getUserBookmarkListPayload
 ) => {
-  const data = await bookmarkApi.getUserBookmarkList(params);
+  const data = await ootdApi.getUserBookmarkList(params);
 
   return data;
 };
