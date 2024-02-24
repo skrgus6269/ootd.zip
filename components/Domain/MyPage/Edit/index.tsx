@@ -25,14 +25,15 @@ export default function Closet() {
   };
 
   const deleteImage = () => {
-    console.log('현재 사진 삭제');
-    setImageURL('');
+    console.log('기본 이미지로 변경');
+    setImageURL('/images/basicProfile.svg');
+    setOpenActionSheet(false); // 액션 시트 자동 종료
   };
 
   const buttons = [
     { name: '사진 촬영', buttonClick: takePicture },
     { name: '앨범에서 선택', buttonClick: choosePicture },
-    { name: '현재 사진 삭제', buttonClick: deleteImage },
+    { name: '기본 이미지로 변경', buttonClick: deleteImage },
   ];
 
   return (
