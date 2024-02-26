@@ -7,11 +7,12 @@ import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import UserCloth from '@/components/Domain/OOTD/UserCloth';
 import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
-import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi'; 
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD';
+import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD'; 
+import Toast from '@/components/Toast'; 
 
 export interface CommentStateType {
   ootdId: number;
@@ -119,6 +120,7 @@ const OOTD: ComponentWithLayout = () => {
     content: '',
   });
   const [commentWriting, setCommentWriting] = useState<Boolean>(false);
+  const [commentFinish, setCommentFinish] = useState<Boolean>(false);
   const commentRef = useRef<any>();
 
   const registerComment = async () => {
@@ -129,7 +131,9 @@ const OOTD: ComponentWithLayout = () => {
       ...comment,
       content: '',
     });
-    setCommentWriting(false);
+    setCommentWriting(false); 
+    setCommentFinish(true);
+    //댓글 등록 api 연동 
   };
 
   const myId = useRecoilValue(userId);
@@ -168,7 +172,9 @@ const OOTD: ComponentWithLayout = () => {
         commentWriting={commentWriting}
         setCommentWriting={setCommentWriting}
         registerComment={registerComment}
+        setCommentFinish={setCommentFinish}
       />
+      {commentFinish && <Toast text="댓글이 등록되었습니다." />}
     </S.Layout>
   );
 };

@@ -8,7 +8,7 @@ interface Message {
 }
 
 export const getReactNativeMessage = (
-  setState: Dispatch<SetStateAction<ImageWithTag | undefined>>
+  setState: Dispatch<SetStateAction<any>>
 ) => {
   const listener = (event: WebViewMessageEvent) => {
     const parsedData = JSON.parse(event.data);
@@ -25,6 +25,22 @@ export const getReactNativeMessage = (
     }
     if (parsedData!.type === 'cancel') {
       setState(undefined);
+    }
+    if (parsedData!.type === 'shareURL') {
+      const shareURLState = parsedData?.payload;
+      if (shareURLState === 'success') {
+        setState(true);
+      } else {
+        setState(false);
+      }
+    }
+    if (parsedData!.type === 'copyEmail') {
+      const shareURLState = parsedData?.payload;
+      if (shareURLState === 'success') {
+        setState(true);
+      } else {
+        setState(false);
+      }
     }
   };
 

@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import { useEffect, useState } from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
+import Toast from '@/components/Toast';
 
 export default function LikeInfo() {
   const router = useRouter();
@@ -54,8 +55,12 @@ export default function LikeInfo() {
     setAlertOpen(true);
   };
 
+  const [follow, setFollow] = useState<Boolean>(false);
+
   const onClickYesButton = () => {
     console.log('팔로우');
+    setAlertOpen(false);
+    setFollow(true);
   };
 
   const onClickNoButton = () => {
@@ -94,6 +99,7 @@ export default function LikeInfo() {
           onClickNoButton={onClickNoButton}
         />
       )}
+      {follow && <Toast text="@@@님을 팔로우합니다." />}
     </>
   );
 }

@@ -27,11 +27,19 @@ import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import FixModal from '../Domain/OOTD/FixModal';
+import FixModal from '../Domain/OOTD/FixModal'; 
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
-import Avatar from '@/public/images/Avatar.svg';
+import Avatar from '@/public/images/Avatar.svg'; 
+import Toast from '@/components/Toast';
+
+interface ClothTag {
+  xRate: string;
+  yRate: string;
+  deviceWidth: number;
+  deviceHeight: number;
+} 
 
 interface PostingProps {
   data: OOTDType;
@@ -155,13 +163,16 @@ export default function Posting({
     }
   };
 
-  const onClickKebabButton = () => {
-    if (myId === data.userId) {
+  const onClickKebabButton = () => { 
+    if (myId === data.userId) { 
+      setPublicSetting(false); 
       setFixModalIsOpen(true);
       return;
     }
     setReportModalIsOpen(true);
   };
+
+  const [publicSetting, setPublicSetting] = useState<Boolean>(false); // 공개 여부
 
   return (
     <>
@@ -300,6 +311,7 @@ export default function Posting({
           setDeclaration={setDeclaration}
         />
         <FixModal
+          setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
           isPrivate={data.private}
@@ -318,6 +330,9 @@ export default function Posting({
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />
+        )}
+        {publicSetting && (
+          <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
         )}
       </S.Layout>
     </>

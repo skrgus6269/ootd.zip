@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import S from '@/style/DetailCloth/style';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineEllipsis } from 'react-icons/ai';
@@ -6,10 +7,15 @@ import DetailClothDiscription from '@/components/DetailCloth/DetailClothDiscript
 import DetailClothDetailInfo from '@/components/DetailCloth/DetailClothDetailInfo';
 import ClothOOTD from '@/components/DetailCloth/ClothOOTD';
 
-import { useState } from 'react';
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
+
 import ActionSheet from '@/components/ActionSheet';
 import { useRouter } from 'next/router';
 import DeleteAlert from '@/components/DetailCloth/DeleteAlert';
+import Toast from '@/components/Toast';
 
 const DetailCloth = () => {
   const router = useRouter();
@@ -32,10 +38,21 @@ const DetailCloth = () => {
     // 게시글 수정 버튼
   };
 
+  const [URLState, setURLState] = useState<any>(true);
+
   const shareButton = () => {
     console.log('공유');
     // 공유 버튼
+    setURLState(false); // 재공유 toast 노출 초기화
+    sendReactNativeMessage({ type: 'shareURL' }); // native로 클립보드 복사 처리
+    setClickedRight(false); // ActionSheet 숨기기
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      getReactNativeMessage(setURLState);
+    }
+  }, []);
 
   const deleteButton = () => {
     // 삭제 버튼
@@ -114,6 +131,7 @@ const DetailCloth = () => {
         brand="NIKE"
         clothByName="이름"
       />
+
       <S.Img>
         <img src="https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg" />
       </S.Img>
@@ -136,6 +154,7 @@ const DetailCloth = () => {
           onClickNoButton={onClickNoButton}
         />
       )}
+      {URLState && <Toast text="URL이 클립보드에 복사되었습니다." />}
     </>
   );
 };
