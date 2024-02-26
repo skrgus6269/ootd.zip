@@ -3,6 +3,7 @@ import S from './style';
 import Button from '@/components/Button';
 import { Body3, Body4, Button3 } from '@/components/UI';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 interface UserProfileDataType {
   userImage: string;
@@ -19,6 +20,7 @@ interface UserProfileDataType {
 
 export default function Profile() {
   const onClickFollowButton = () => {};
+  const router = useRouter();
 
   // const [getMypageProfileData] = useCloset();
 
@@ -62,7 +64,7 @@ export default function Profile() {
         border={false}
         onClick={onClickFollowButton}
       >
-        <Button3>팔로우</Button3>
+        <Button3 onClick={() => router.push(`/EditMypage`)}>팔로우</Button3>
       </Button>
     </S.Layout>
   );

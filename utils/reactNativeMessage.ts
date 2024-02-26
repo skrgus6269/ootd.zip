@@ -23,6 +23,10 @@ export const getReactNativeMessage = (
       const banana = parsedData?.payload;
       setState([{ ootdImage: banana[0], ootdId: 0 }]);
     }
+    if (parsedData!.type === 'Profile') {
+      const banana = parsedData?.payload;
+      setState(banana[0]);
+    }
     if (parsedData!.type === 'cancel') {
       setState(undefined);
     }

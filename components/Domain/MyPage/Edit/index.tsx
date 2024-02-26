@@ -1,13 +1,17 @@
-import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import EditProfile from './EditProfile';
 import EditMyInfo from './EditMyInfo';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import ActionSheet from '@/components/ActionSheet';
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
 
 export default function Closet() {
-  const [ImageURL, setImageURL] = useState<string>('/images/권낙현.jpg');
-
+  const [profileImage, setProfileImage] = useState<string>(
+    '/images/basicProfile.svg'
+  );
   const [nickName, setNickName] = useState<string>('닉네임');
   const [introduction, setIntroduction] = useState<string>('소개');
   const [height, setHeight] = useState<string>('160');
@@ -18,17 +22,26 @@ export default function Closet() {
 
   const takePicture = () => {
     console.log('사진 촬영');
+    setOpenActionSheet(false); // 액션 시트 자동 종료
   };
 
   const choosePicture = () => {
     console.log('앨범에서 선택');
+    sendReactNativeMessage({ type: 'Profile' });
+    setOpenActionSheet(false); // 액션 시트 자동 종료
   };
 
   const deleteImage = () => {
     console.log('기본 이미지로 변경');
-    setImageURL('/images/basicProfile.svg');
+    setProfileImage('/images/basicProfile.svg');
     setOpenActionSheet(false); // 액션 시트 자동 종료
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      getReactNativeMessage(setProfileImage);
+    }
+  }, []);
 
   const buttons = [
     { name: '사진 촬영', buttonClick: takePicture },
@@ -44,8 +57,8 @@ export default function Closet() {
       />
       <S.Layout>
         <EditProfile
-          imageURL={ImageURL}
-          setImageURL={setImageURL}
+          imageURL={profileImage}
+          setImageURL={setProfileImage}
           onClickImage={() => setOpenActionSheet(!openActionSheet)}
         />
         <EditMyInfo
