@@ -10,7 +10,9 @@ export const postCloth = async (payload: postClothPayload) => {
 
 //유저의 cloth 리스트 조회
 export const getUserClothList = async (id: number) => {
-  const { data } = await fetcher.get(`/api/v1/clothes?userId=${id}`);
+  const { data } = await fetcher.get(
+    `/api/v1/clothes?page=1&size=20&userId=${id}`
+  );
 
   return data;
 };

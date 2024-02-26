@@ -42,7 +42,9 @@ export default function ClothTag({
   //이미지, 태그 정보
   //다음 버튼 활성화 함수
   useEffect(() => {
-    const filterdSamplData = imageAndTag!.filter((item) => item.tag);
+    const filterdSamplData = imageAndTag!.filter(
+      (item) => item.ootdImageClothesList
+    );
     if (filterdSamplData.length) setNextButtonState(true);
     else setNextButtonState(false);
   }, [imageAndTag]);
@@ -56,14 +58,14 @@ export default function ClothTag({
   ) => {
     const updatedElements = JSON.parse(JSON.stringify(imageAndTag));
 
-    updatedElements[ootdIndex].tag![index] = {
-      ...updatedElements[ootdIndex].tag![index],
+    updatedElements[ootdIndex].ootdImageClothesList![index] = {
+      ...updatedElements[ootdIndex].ootdImageClothesList![index],
       xRate: String(data.lastX),
       yRate: String(data.lastY),
       deviceHeight: componentHeight,
       deviceWidth: componentWidth,
     };
-    console.log(updatedElements[ootdIndex].tag![index]);
+    console.log(updatedElements[ootdIndex].ootdImageClothesList![index]);
     setImageAndTag(updatedElements);
     e.stopPropagation();
   };
@@ -94,25 +96,25 @@ export default function ClothTag({
           return (
             <>
               <S.Image ref={dragRef}>
-                {item.tag &&
-                  item.tag?.map((element, index) => {
+                {item.ootdImageClothesList &&
+                  item.ootdImageClothesList?.map((element, index) => {
                     return (
                       <Draggable
                         key={index}
                         bounds=".image"
                         onDrag={(e, data) => onDrag(index, ootdIndex, e, data)}
                         defaultPosition={{
-                          x: Number(element.xRate),
-                          y: Number(element.yRate),
+                          x: Number(element.coordinate.xRate),
+                          y: Number(element.coordinate.yRate),
                         }}
                       >
                         <div className="sample">
                           <TagInformation
-                            clothId={element.clothId}
-                            clothImage={element.clothImage}
+                            clothId={element.clothesId}
+                            clothImage={element.clothesImage}
                             caption={element.caption}
-                            headline={element.headline}
-                            bodyFirst={element.bodyFirst}
+                            headline={element.caption}
+                            bodyFirst={element.caption}
                             state={element.state as 'dark' | 'light'}
                           />
                         </div>
