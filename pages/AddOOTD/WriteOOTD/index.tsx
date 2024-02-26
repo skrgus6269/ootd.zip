@@ -10,6 +10,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 import NextButton from '@/components/NextButton';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRouter } from 'next/router';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
@@ -32,7 +33,9 @@ export default function WriteOOTD({
   setSelectedStyle,
   complete,
 }: WriteOOTDProps) {
-  const [postOOTD] = OOTDApi();
+  const { postOOTD } = OOTDApi();
+
+  const router = useRouter();
 
   const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
 
@@ -50,19 +53,19 @@ export default function WriteOOTD({
     if (imageAndTag !== undefined) {
       const payload = {
         content: string,
-        isPrivate: true as Boolean,
-        styles: [1],
+        isPrivate: !open as Boolean,
+        styles: selectedStyle.map((item) => item.id),
         ootdImages: imageAndTag.map((ootd) => {
           return {
             ootdImage: ootd.ootdImage,
-            clothesTags: ootd.tag
-              ? ootd.tag.map((tag) => {
+            clothesTags: ootd.ootdImageClothesList
+              ? ootd.ootdImageClothesList?.map((tag) => {
                   return {
-                    clothesId: tag.clothId,
-                    deviceWidth: tag.deviceWidth,
-                    deviceHeight: tag.deviceHeight,
-                    xrate: tag.xRate,
-                    yrate: tag.yRate,
+                    clothesId: tag.clothesId,
+                    deviceWidth: tag.deviceSize.deviceWidth,
+                    deviceHeight: tag.deviceSize.deviceHeight,
+                    xrate: tag.coordinate.xRate,
+                    yrate: tag.coordinate.yRate,
                   };
                 })
               : [],
@@ -73,7 +76,7 @@ export default function WriteOOTD({
 
       //ootd 성공 여부에 따른 페이지 이동
       if (addOOTDSuccess) {
-        alert('등록 성공!');
+        router.push('/mypage');
       } else {
         alert('등록 실패');
       }
@@ -130,7 +133,11 @@ export default function WriteOOTD({
             />
           </Input>
         </S.Open>
-        <NextButton className="nextButon" state={complete} onClick={() => ''}>
+        <NextButton
+          className="nextButon"
+          state={complete}
+          onClick={onClickSubmitButton}
+        >
           다음
         </NextButton>
       </S.Layout>

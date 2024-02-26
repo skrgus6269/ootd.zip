@@ -7,7 +7,7 @@ interface LayoutProps {
 const Layout = styled.div<LayoutProps>`
   display: flex;
   width: 100%;
-  max-width: ${(props) => (props.size === 'big' ? '350px' : '290px')};
+  /* max-width: ${(props) => (props.size === 'big' ? '350px' : '290px')}; */
   gap: 16px;
   align-items: center;
 `;

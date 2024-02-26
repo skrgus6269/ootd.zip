@@ -12,7 +12,6 @@ const Layout = styled.div<ThemeProps>`
   gap: 8px;
   padding: 8px;
   height: 100%;
-  width: 136px;
   background-color: ${(props) =>
     props.state === 'dark'
       ? 'rgba(3, 3, 3, 0.7)'

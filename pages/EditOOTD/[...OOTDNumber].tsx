@@ -16,42 +16,31 @@ import { Style } from '../AddOOTD';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { useRouter } from 'next/router';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 const EditOOTD: ComponentWithLayout = () => {
-  const [imageAndTag, setImageAndTag] = useState<ImageWithTag | null>(null);
+  const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>(
+    undefined
+  );
   const [contents, setContents] = useState<string>('');
   const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const router = useRouter();
 
+  const { getOOTD, putOOTD } = OOTDApi();
+
   useEffect(() => {
-    setImageAndTag([
-      {
-        ootdId: 0,
-        ootdImage:
-          'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      },
-      {
-        ootdId: 1,
-        ootdImage:
-          'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      },
-      {
-        ootdId: 2,
-        ootdImage:
-          'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      },
-      {
-        ootdId: 3,
-        ootdImage:
-          'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      },
-    ]);
-    setContents('Lorem ipsum dolorsds');
-    setSelectedStyle([{ id: 1, name: '미니멀', state: true }]);
-    setIsOpen(true);
-  }, []);
+    const fetchData = async () => {
+      if (!router.isReady) return;
+      const result = await getOOTD(Number(router.query.OOTDNumber![0]));
+      setImageAndTag(result.ootdImages);
+      setContents(result.contents);
+      setSelectedStyle(result.styles);
+      setIsOpen(!result.private);
+    };
+    fetchData();
+  }, [router.isReady]);
 
   const onClickAddStyleTag = () => {
     setStyleModalIsOpen(true);
@@ -73,13 +62,39 @@ const EditOOTD: ComponentWithLayout = () => {
     }
   };
 
-  const onClickSubmitButton = () => {
-    console.log({
-      id: router.query!.OOTDNumber![0],
-      content: contents,
-      styles: selectedStyle,
-      ootdImages: imageAndTag,
-    });
+  const onClickSubmitButton = async () => {
+    console.log(imageAndTag);
+
+    if (imageAndTag !== undefined) {
+      const payload = {
+        id: Number(router.query!.OOTDNumber![0]),
+        content: contents,
+        styles: selectedStyle.map((item) => item.id),
+        ootdImages: imageAndTag.map((item) => {
+          return {
+            ootdImage: item.ootdImage,
+            clothesTags: item.ootdImageClothesList?.map((items) => {
+              return {
+                clothesId: items.clothesId,
+                deviceWidth: items.deviceSize.deviceWidth,
+                deviceHeight: items.deviceSize.deviceHeight,
+                xrate: items.coordinate.xRate,
+                yrate: items.coordinate.yRate,
+              };
+            }),
+          };
+        }),
+        isPrivate: !isOpen,
+      };
+      const editOOTDSuccess = await putOOTD(payload);
+
+      //edit ootd 성공 여부에 따른 페이지 이동
+      if (editOOTDSuccess) {
+        router.push(`/OOTD/${Number(router.query.OOTDNumber![0])}`);
+      } else {
+        alert('등록 실패');
+      }
+    }
   };
 
   return (

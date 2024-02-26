@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   MutableRefObject,
   SetStateAction,
+  useEffect,
   useState,
 } from 'react';
 import S from './style';
@@ -9,7 +10,9 @@ import Comment, { CommentProps } from '../Comment';
 import { Body4, Caption1, Title1 } from '../UI';
 import { CommentStateType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
-import { userNames } from '@/utils/recoil/atom';
+import { userId } from '@/utils/recoil/atom';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRouter } from 'next/router';
 
 interface PostingCommentData extends CommentProps {
   childComment?: {
@@ -17,47 +20,83 @@ interface PostingCommentData extends CommentProps {
     userName: string;
     userImage: string;
     content: string;
-    createAt: string;
-    taggedUserName: string;
+    timeStamp: string;
+    parentId?: number;
+    taggedUserName?: string;
+    depth?: number;
   }[];
 }
 
 interface PostingCommentProps {
-  data?: PostingCommentData[];
+  reRender: number;
+  setReRender: Dispatch<SetStateAction<number>>;
   setComment: Dispatch<SetStateAction<CommentStateType>>;
   commentRef: MutableRefObject<any>;
   comment: CommentStateType;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
-  commentNone: Boolean;
 }
 
 export default function PostingComment({
-  data,
+  reRender,
+  setReRender,
   setComment,
   commentRef,
   comment,
   setCommentWriting,
-  commentNone,
 }: PostingCommentProps) {
   const [commentType, setCommentType] = useState<'preview' | 'all'>('preview');
-  const localUserName = useRecoilValue(userNames);
+  const localUserId = useRecoilValue(userId);
+  const router = useRouter();
 
   const onClickCommentButton = () => {
     if (commentType === 'preview') setCommentType('all');
     if (commentType === 'all') setCommentType('preview');
   };
+  const [data, setData] = useState<PostingCommentData[]>([]);
+  const { getOOTDComment } = OOTDApi();
 
-  const onClickReplyButton = (userName: string, type: string) => {
-    let parentDepth = 0;
-    console.log(data);
-    //뎁스가 1인 부모를 선택했다면
-    if (type === 'child') {
-      parentDepth = 1;
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!router.isReady) return;
+      try {
+        const { result } = await getOOTDComment(
+          Number(router.query.OOTDNumber![0])
+        );
+        const map = new Map<number, PostingCommentData>();
+        const resultData: PostingCommentData[] = [];
+
+        result.content.forEach((comment: PostingCommentData) => {
+          if (comment.depth === 1) map.set(comment.id, comment);
+        });
+
+        result.content.forEach((comment: PostingCommentData) => {
+          if (comment.parentId !== null) {
+            const parentComment = map.get(comment.parentId!);
+            if (parentComment) {
+              if (!parentComment.childComment) {
+                parentComment.childComment = [];
+              }
+              parentComment.childComment.push(comment);
+            }
+          } else {
+            resultData.push(comment);
+          }
+        });
+        setData(resultData);
+      } catch (err) {
+        alert('없는 페이지입니다');
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [router.isReady, reRender]);
+
+  const onClickReplyButton = (userName: string, commentId: number) => {
     setComment({
       ...comment,
       taggedUserName: userName,
-      parentDepth,
+      parentDepth: 1,
+      commentParentId: commentId,
     });
     setCommentWriting(true);
     commentRef.current.focus();
@@ -69,13 +108,16 @@ export default function PostingComment({
         {data!.slice(0, 2).map((item) => (
           <>
             <Comment
+              userId={item.userId}
               key={item.id}
               userImage={item.userImage}
               id={item.id}
               userName={item.userName}
               content={item.content}
               view="preview"
-              createAt={item.createAt}
+              timeStamp={item.timeStamp}
+              reRender={reRender}
+              setReRender={setReRender}
             />
           </>
         ))}
@@ -94,20 +136,24 @@ export default function PostingComment({
           <>
             <Comment
               key={item.id}
+              userId={item.userId}
               userImage={item.userImage}
               id={item.id}
               userName={item.userName}
               content={item.content}
               onClickReplyButton={() =>
-                onClickReplyButton(data![index].userName, 'parent')
+                onClickReplyButton(data![index].userName, item.id)
               }
-              createAt={item.createAt}
-              myComment={localUserName === item.userName}
+              timeStamp={item.timeStamp}
+              myComment={localUserId === item.userId}
+              reRender={reRender}
+              setReRender={setReRender}
             />
             {item &&
               item.childComment?.map((items, indexs) => (
                 <Comment
                   key={items.id}
+                  userId={item.userId}
                   userImage={items.userImage}
                   id={items.id}
                   userName={items.userName}
@@ -115,13 +161,15 @@ export default function PostingComment({
                   onClickReplyButton={() =>
                     onClickReplyButton(
                       item.childComment![indexs].userName,
-                      'child'
+                      item.id
                     )
                   }
                   type="child"
                   taggedUserName={items.taggedUserName}
-                  createAt={items.createAt}
-                  myComment={localUserName === item.userName}
+                  timeStamp={items.timeStamp}
+                  myComment={localUserId === item.userId}
+                  reRender={reRender}
+                  setReRender={setReRender}
                 />
               ))}
           </>
@@ -132,7 +180,7 @@ export default function PostingComment({
       </S.Layout>
     );
   };
-  if (commentNone) {
+  if (data.length === 0) {
     return (
       <S.CommentNone>
         <Title1 className="title">아직 작성된 댓글이 없습니다.</Title1>
