@@ -22,6 +22,7 @@ export default function Closet() {
 
   const takePicture = () => {
     console.log('사진 촬영');
+    sendReactNativeMessage({ type: 'TakeProfile' });
     setOpenActionSheet(false); // 액션 시트 자동 종료
   };
 
