@@ -3,64 +3,85 @@ import S from './style';
 import Carousel from '@/components/Carousel';
 import ClothInformation from '@/components/ClothInformation';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+
+interface UserClothDataType {
+  id: number;
+  name: string;
+  userName: string;
+  brand: { id: string; name: string };
+  category: { id: number; categoryName: string; parentCategoryName: string };
+  size: { id: number; name: string; lineNo: string };
+  memo: string;
+  imageUrl: string;
+}
 
 interface UserClothProps {
-  data: {
-    userName: string;
-    cloth: {
-      clothId: number;
-      bigCategory: string;
-      smallCategory: string;
-      brand: string;
-      size: string;
-      clothImage: string;
-    }[];
-  };
+  userName: string | undefined;
+  userId: number | undefined;
 }
-export default function UserCloth({ data }: UserClothProps) {
+export default function UserCloth({ userName, userId }: UserClothProps) {
   const router = useRouter();
+  const { getUserClothList } = ClothApi();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!router.isReady || userId === undefined) return;
+      try {
+        const result = await getUserClothList(userId);
+        setData(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [router.isReady, userId]);
+
+  const [data, setData] = useState<UserClothDataType[] | null>(null);
   return (
     <S.Layout>
       <S.Title>
-        <Title1>{data.userName}님의 옷장</Title1>
+        <Title1>{userName}님의 옷장</Title1>
         <Button3 onClick={() => router.push(`/Closet`)}>더보기</Button3>
       </S.Title>
       <S.Cloth>
         <Carousel slidesToShow={1.1} infinite={false}>
-          {data.cloth.map((item, index) => {
-            if (index % 2 === 0) {
-              return (
-                <S.CarouselItem key={item.clothId}>
-                  <ClothInformation
-                    onClick={() => router.push(`/Cloth/${item.clothId}`)}
-                    clothId={item.clothId}
-                    clothImage={item.clothImage}
-                    caption={'옷장'}
-                    headline={item.bigCategory}
-                    subHeadline={item.smallCategory}
-                    bodyFirst={item.brand}
-                    bodySecond={`사이즈 ${item.size}`}
-                    icon="like"
-                  />
-                  {data.cloth[index + 1] && (
+          {data &&
+            data.map((item, index) => {
+              if (index % 2 === 0) {
+                return (
+                  <S.CarouselItem key={item.id}>
                     <ClothInformation
-                      onClick={() =>
-                        router.push(`Cloth/${data.cloth[index + 1].clothId}`)
-                      }
-                      clothId={data.cloth[index + 1].clothId}
-                      clothImage={data.cloth[index + 1].clothImage}
+                      onClick={() => router.push(`/Cloth/${item.id}`)}
+                      clothId={item.id}
+                      clothImage={item.imageUrl}
                       caption={'옷장'}
-                      headline={data.cloth[index + 1].bigCategory}
-                      subHeadline={data.cloth[index + 1].smallCategory}
-                      bodyFirst={data.cloth[index + 1].brand}
-                      bodySecond={`사이즈  ${data.cloth[index + 1].size}`}
+                      headline={item.category.parentCategoryName}
+                      subHeadline={item.category.categoryName}
+                      bodyFirst={item.brand.name}
+                      bodySecond={`사이즈 ${item.size.name}`}
                       icon="like"
                     />
-                  )}
-                </S.CarouselItem>
-              );
-            }
-          })}
+                    {data[index + 1] && (
+                      <ClothInformation
+                        onClick={() =>
+                          router.push(`Cloth/${data[index + 1].id}`)
+                        }
+                        clothId={data[index + 1].id}
+                        clothImage={data[index + 1].imageUrl}
+                        caption={'옷장'}
+                        headline={data[index + 1].category.parentCategoryName}
+                        subHeadline={data[index + 1].category.categoryName}
+                        bodyFirst={data[index + 1].brand.name}
+                        bodySecond={`사이즈  ${data[index + 1].size.name}`}
+                        icon="like"
+                      />
+                    )}
+                  </S.CarouselItem>
+                );
+              }
+            })}
         </Carousel>
       </S.Cloth>
     </S.Layout>

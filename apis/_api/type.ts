@@ -14,33 +14,8 @@ export interface postOOTDPayload {
   }[];
 }
 
-export interface getOOTDParams {
-  id: number;
-}
-export interface putOOTDPayload extends postOOTDPayload {}
-
-export interface deleteOOTDPayload {
-  id: number;
-}
-
-export interface patchOOTDContentsOrIsPrivatePayload {
-  content: string;
+export interface patchOOTDIsPrivatePayload {
   isPrivate: Boolean;
-}
-
-export interface postOOTDBookmarkPayload {
-  id: number;
-}
-
-export interface deleteOOTDBookmarkPayload {
-  id: number;
-}
-
-export interface postOOTDLikePayload {
-  id: number;
-}
-
-export interface deleteOOTDLikePayload {
   id: number;
 }
 
@@ -55,4 +30,12 @@ export interface postClothPayload {
   name: string;
   memo?: string;
   purchaseDate?: string;
+}
+
+export interface postOOTDComentPayload {
+  ootdId: number;
+  parentDepth: number;
+  content: string;
+  taggedUserName?: string;
+  commentParentId?: number;
 }

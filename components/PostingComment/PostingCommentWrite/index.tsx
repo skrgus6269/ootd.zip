@@ -4,10 +4,11 @@ import S from './style';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { CommentStateType } from '@/pages/OOTD/[...OOTDNumber]';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import Avatar from '@/public/images/Avatar.svg';
 
 interface PostingCommentWriteProps {
   comment: CommentStateType;
-  userImage: string;
+  userImage: string | null;
   setComment: Dispatch<SetStateAction<CommentStateType>>;
   commentRef: MutableRefObject<null>;
   commentWriting: Boolean;
@@ -44,7 +45,11 @@ export default function PostingCommentWrite({
 
       <S.CommentWrite>
         <S.UserImage>
-          <img src={userImage} alt="유저 프로필 이미지" />
+          {userImage === null ? (
+            <Avatar className="avatar" />
+          ) : (
+            <img src={userImage} alt="유저 프로필 이미지" />
+          )}
         </S.UserImage>
         <S.Comment>
           <S.Text>

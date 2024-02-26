@@ -4,40 +4,60 @@ import { Body3, Button1, Title1 } from '@/components/UI';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Alert from '@/components/Alert';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { userId } from '@/utils/recoil/atom';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
   setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>;
+  isPrivate: Boolean;
+  setGetPostReRender: Dispatch<SetStateAction<number>>;
+  getPostReRender: number;
 }
 
 export default function FixModal({
   reportModalIsOpen,
   setReportModalIsOpen,
+  getPostReRender,
+  setGetPostReRender,
+  isPrivate,
 }: ReportModalProps) {
   const onClickReportButton = () => {
     setReportModalIsOpen(false);
   };
 
   const router = useRouter();
-  const myId = useRecoilValue(userId);
+  const { deleteOOTD, patchOOTDIsPrivate } = OOTDApi();
 
   const [deleteAlertIsOpen, setDeleteAlertIsOpen] = useState<Boolean>(false);
 
-  const onClickYesButton = () => {
+  const onClickYesButton = async () => {
+    await deleteOOTD(Number(router.query!.OOTDNumber![0]));
     setDeleteAlertIsOpen(false);
   };
 
+  const onClickIsPrivateButton = async () => {
+    await patchOOTDIsPrivate({
+      id: Number(router.query!.OOTDNumber![0]),
+      isPrivate: !isPrivate,
+    });
+    setGetPostReRender(getPostReRender + 1);
+    setDeleteAlertIsOpen(false);
+  };
   return (
     <>
       <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
         <Modal className="modal" isOpen={reportModalIsOpen} height="30">
-          <S.Span>
-            <Button1 className="report">공개로 설정</Button1>
+          <S.Span onClick={onClickIsPrivateButton}>
+            <Button1 className="report">
+              {!isPrivate && <>비</>}공개로 설정
+            </Button1>
           </S.Span>
-          <S.Span onClick={() => router.push(`/EditOOTD/${myId}`)}>
+          <S.Span
+            onClick={() =>
+              router.push(`/EditOOTD/${Number(router.query!.OOTDNumber![0])}`)
+            }
+          >
             <Button1 className="report">ootd 수정</Button1>
           </S.Span>
           <S.Span onClick={() => setDeleteAlertIsOpen(true)}>

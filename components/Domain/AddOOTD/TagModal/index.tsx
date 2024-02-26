@@ -2,7 +2,7 @@ import SearchBar from '@/components/SearchBar';
 import S from './style';
 import ClothInformation from '@/components/ClothInformation';
 import { ClothInformationProps } from '@/components/ClothInformation/type';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import { Body4 } from '@/components/UI';
 import Modal from '@/components/Modal';
@@ -74,17 +74,14 @@ const ClothInformationSampleData = [
 export type ImageWithTag = {
   ootdId: number;
   ootdImage: string;
-  tag?: {
-    clothId: number;
-    clothImage: string;
-    xRate: string;
-    yRate: string;
+  ootdImageClothesList?: {
+    clothesId: number;
+    clothesImage: string;
+    coordinate: { xRate: string; yRate: string };
+    deviceSize: { deviceWidth: number; deviceHeight: number };
     caption: string;
-    headline: string;
-    bodyFirst: string;
-    state: string;
-    deviceWidth?: number;
-    deviceHeight?: number;
+    size?: string;
+    state?: string;
   }[];
 }[];
 
@@ -103,12 +100,12 @@ export default function AddTag({
   imageAndTag,
   slideIndex,
 }: AddTagProps) {
+  const [searchResult, setSearchResult] = useState();
   const categoryList = ['외투', '상의', '하의', '한벌옷', '신발'];
   const [letter, setLetter] = useState<string>('');
   const [clicked, setClicked] = useState<number | null>();
 
   const onClickCategory = (index: number) => {
-    console.log(clicked, index);
     if (clicked === index) {
       setClicked(null);
       return;
@@ -121,8 +118,8 @@ export default function AddTag({
     if (imageAndTag) {
       const newTag = JSON.parse(JSON.stringify(imageAndTag));
 
-      if (newTag[slideIndex].tag) {
-        newTag[slideIndex].tag?.push({
+      if (newTag[slideIndex].ootdImageClothesList) {
+        newTag[slideIndex].ootdImageClothesList?.push({
           clothId: ClothInformationSampleData[index].clothId,
           clothImage: ClothInformationSampleData[index].clothImage,
           headline: ClothInformationSampleData[index].headline,
@@ -133,7 +130,7 @@ export default function AddTag({
           state: 'light',
         });
       } else {
-        newTag[slideIndex].tag = [
+        newTag[slideIndex].ootdImageClothesList = [
           {
             clothId: ClothInformationSampleData[index].clothId,
             clothImage: ClothInformationSampleData[index].clothImage,
