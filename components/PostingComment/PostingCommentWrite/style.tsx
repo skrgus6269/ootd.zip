@@ -43,6 +43,11 @@ const UserImage = styled.div`
     object-fit: cover;
     border-radius: 50%;
   }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
 `;
 const Comment = styled.div`
   flex-grow: 2;

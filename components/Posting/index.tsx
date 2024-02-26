@@ -11,17 +11,27 @@ import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import ShareOutlined from '@/public/images/shareOutlined.svg';
 import MessageOutlined from '@/public/images/MessageOutlined.svg';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
-import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import FixModal from '../Domain/OOTD/FixModal';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRouter } from 'next/router';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import Avatar from '@/public/images/Avatar.svg';
 import Toast from '@/components/Toast';
 
 interface ClothTag {
@@ -34,9 +44,18 @@ interface ClothTag {
 interface PostingProps {
   data: OOTDType;
   commentRef: MutableRefObject<any>;
+  myPost: Boolean;
+  setGetPostReRender: Dispatch<SetStateAction<number>>;
+  getPostReRender: number;
 }
 
-export default function Posting({ data, commentRef }: PostingProps) {
+export default function Posting({
+  data,
+  commentRef,
+  myPost,
+  getPostReRender,
+  setGetPostReRender,
+}: PostingProps) {
   const [followState, setFollowState] = useState<Boolean>(false);
   const [heartState, setHeartState] = useState<Boolean>(false);
   const [bookMarkState, setBookMarkState] = useState<Boolean>(false);
@@ -48,9 +67,18 @@ export default function Posting({ data, commentRef }: PostingProps) {
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
+
   const imgRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
   const myId = useRecoilValue(userId);
+  const { postOOTDLike, deleteOOTDLike, postOOTDBookmark, deleteOOTDBookmark } =
+    OOTDApi();
+  const { follow, unFollow } = PublicApi();
+  const router = useRouter();
+
+  useEffect(() => {
+    setHeartState(data.like);
+    setBookMarkState(data.bookmark);
+  }, [data]);
 
   //컴포넌트 크기 계산
   useEffect(() => {
@@ -58,26 +86,17 @@ export default function Posting({ data, commentRef }: PostingProps) {
       const w = imgRef.current.offsetWidth;
       const h = imgRef.current.offsetHeight;
 
-      setComponentWidth(w);
       setComponentHeight(h);
+      setComponentWidth(w);
     }
-  }, []);
+  }, [data]);
 
-  const onClickHeartButton = () => {
+  const onClickHeartButton = async () => {
+    if (!heartState) await postOOTDLike(Number(router.query.OOTDNumber![0]));
+    if (heartState) await deleteOOTDLike(Number(router.query.OOTDNumber![0]));
     setHeartState(!heartState);
   };
 
-  useEffect(() => {
-    if (heartState) {
-      //좋아요 api 작성
-    } else {
-      //좋아요 취소 api 작성
-    }
-  }, [heartState]);
-
-  const onClickCommentButton = () => {
-    commentRef.current.focus();
-  };
   const onClickShareButton = () => {
     //웹에서는 정상 작동하나 웹뷰에서는 작동하지 않음
     //xcode를 활용해서 해결해야할 것 같아 이후에 처리 예정
@@ -112,31 +131,18 @@ export default function Posting({ data, commentRef }: PostingProps) {
     // }
   };
 
-  const onClickBookmarkButton = () => {
+  const onClickBookmarkButton = async () => {
+    if (!bookMarkState)
+      await postOOTDBookmark(Number(router.query.OOTDNumber![0]));
+    if (bookMarkState)
+      await deleteOOTDBookmark(Number(router.query.OOTDNumber![0]));
     setBookMarkState(!bookMarkState);
   };
 
-  useEffect(() => {
-    if (bookMarkState) {
-      //북마크 등록 api 연동
-    } else {
-      //북마크 등록 해제 api 연동
-    }
-  }, [bookMarkState]);
-
-  const onClickTagOpenButton = () => {
-    console.log('클릭');
-    setClothTagOpen(!clothTagOpen);
-  };
-
-  const onClickFollowButton = () => {
-    if (followState) {
-      //언팔로우 api 연동
-      setFollowState(false);
-    } else {
-      //팔로우 api 연동
-      setFollowState(true);
-    }
+  const onClickFollowButton = async () => {
+    setFollowState(!followState);
+    if (!followState) await follow(data.userId);
+    if (followState) await unFollow(data.userId);
   };
 
   const onClickBackground = () => {
@@ -149,9 +155,16 @@ export default function Posting({ data, commentRef }: PostingProps) {
     if (receivedDeclaration) {
       setReceivedDeclaration(false);
     }
+    if (reportModalIsOpen) {
+      setReportModalIsOpen(false);
+    }
+    if (fixModalIsOpen) {
+      setFixModalIsOpen(false);
+    }
   };
+
   const onClickKebabButton = () => {
-    if (myId === data.id) {
+    if (myId === data.userId) {
       setPublicSetting(false);
       setFixModalIsOpen(true);
       return;
@@ -165,62 +178,80 @@ export default function Posting({ data, commentRef }: PostingProps) {
     <>
       <S.Background
         onClick={onClickBackground}
-        isOpen={reportModalIsOpen || declaration || receivedDeclaration}
+        isOpen={
+          reportModalIsOpen ||
+          declaration ||
+          receivedDeclaration ||
+          reportModalIsOpen ||
+          fixModalIsOpen
+        }
       />
       <S.Layout>
         <S.PostingTop>
-          <img src={data.userImage} className="userImage" alt="유저 이미지" />
+          {data.userName === 'string' ? (
+            <img src={data.userImage} className="userImage" alt="유저 이미지" />
+          ) : (
+            <Avatar className="avatar" />
+          )}
+
           <Body3 className="userName">{data.userName}</Body3>
-          {!followState ? (
-            <Button3 onClick={onClickFollowButton} className="follow">
+          {!myPost && !followState && (
+            <Button3 onClick={onClickFollowButton} className="unfollow">
               팔로우
             </Button3>
-          ) : (
-            <Button3 onClick={onClickFollowButton}>팔로우</Button3>
+          )}
+          {!myPost && followState && (
+            <Button3 className="following" onClick={onClickFollowButton}>
+              팔로잉
+            </Button3>
           )}
           <AiOutlineEllipsis onClick={onClickKebabButton} />
         </S.PostingTop>
         <S.PostingImage ref={imgRef}>
-          <AiFillTag onClick={onClickTagOpenButton} className="tag" />
+          <AiFillTag
+            onClick={() => setClothTagOpen(!clothTagOpen)}
+            className="tag"
+          />
           <Carousel infinite={false} slidesToShow={1}>
-            {data.ootdImages.map((item, index) => {
+            {data.ootdImages?.map((item, index) => {
               return (
                 <S.ImageWithTag key={index}>
                   <img
-                    src={item.url}
+                    src={item.ootdImage}
                     className="postingImage"
                     alt="포스팅 이미지"
                   />
-                  {item.ootdClothesList?.map((items, index) => {
-                    return (
-                      <S.PostingClothTag
-                        key={index}
-                        clothTagOpen={clothTagOpen}
-                        xrate={String(
-                          Number(items.coordinate.xrate) -
-                            Number(
-                              items.deviceSize.deviceWidth - componentWidth
-                            )
-                        )}
-                        yrate={String(
-                          Number(items.coordinate.yrate) -
-                            Number(
-                              items.deviceSize.deviceHeight - componentHeight
-                            )
-                        )}
-                      >
-                        <TagInformation
-                          clothId={items.id}
-                          clothImage={items.url}
-                          caption={'tag'}
-                          headline={items.brand}
-                          bodyFirst={items.name}
-                          size="small"
-                          type="view"
-                        />
-                      </S.PostingClothTag>
-                    );
-                  })}
+                  {item.ootdImageClothesList &&
+                    item.ootdImageClothesList.map((items, index) => {
+                      return (
+                        <S.PostingClothTag
+                          key={index}
+                          clothTagOpen={clothTagOpen}
+                          xrate={String(
+                            Number(items.coordinate?.xrate) -
+                              Number(
+                                items.deviceSize?.deviceWidth - componentWidth
+                              )
+                          )}
+                          yrate={String(
+                            Number(items.coordinate?.yrate) -
+                              Number(
+                                items.deviceSize?.deviceHeight - componentHeight
+                              )
+                          )}
+                        >
+                          <TagInformation
+                            clothId={items.clothesId}
+                            clothImage={items.clothesImage}
+                            caption={'tag'}
+                            headline={items.brand.name}
+                            bodyFirst={items.clothesName}
+                            size="small"
+                            type="view"
+                          />
+                        </S.PostingClothTag>
+                      );
+                    })}
                 </S.ImageWithTag>
               );
             })}
@@ -237,7 +268,7 @@ export default function Posting({ data, commentRef }: PostingProps) {
           )}
           <MessageOutlined
             className="comment"
-            onClick={onClickCommentButton}
+            onClick={() => commentRef.current.focus()}
             alt="댓글"
           />
           <ShareOutlined
@@ -265,13 +296,14 @@ export default function Posting({ data, commentRef }: PostingProps) {
         </S.PostingExplanation>
         <S.PostingStyleTag>
           <Body3 className="styletag">스타일태그</Body3>
-          {data.styles.map((item, index) => {
-            return (
-              <S.PostingStyleTagSpan key={index}>
-                <Button3>{item.name}</Button3>
-              </S.PostingStyleTagSpan>
-            );
-          })}
+          {data.styles &&
+            data.styles.map((item, index) => {
+              return (
+                <S.PostingStyleTagSpan key={index}>
+                  <Button3>{item.name}</Button3>
+                </S.PostingStyleTagSpan>
+              );
+            })}
         </S.PostingStyleTag>
         <ReportModal
           reportModalIsOpen={reportModalIsOpen}
@@ -282,6 +314,9 @@ export default function Posting({ data, commentRef }: PostingProps) {
           setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
+          isPrivate={data.private}
+          setGetPostReRender={setGetPostReRender}
+          getPostReRender={getPostReRender}
         />
         {declaration && (
           <DeclarationModal

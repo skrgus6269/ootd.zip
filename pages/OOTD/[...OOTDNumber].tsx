@@ -2,20 +2,24 @@ import S from '@/style/OOTD/style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';
 import PostingCommentWrite from '@/components/PostingComment/PostingCommentWrite';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import UserCloth from '@/components/Domain/OOTD/UserCloth';
-import UserOOTD from '@/components/Domain/OOTD/UserOOTD';
 import SimilarOOTD from '@/components/Domain/OOTD/SimilarOOTD';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD';
 import Toast from '@/components/Toast';
 
 export interface CommentStateType {
   ootdId: number;
-  taggedUserName: string;
   parentDepth: number;
   content: string;
+  taggedUserName?: string;
+  commentParentId?: number;
 }
 
 export interface OOTDType {
@@ -26,20 +30,24 @@ export interface OOTDType {
   likeCount: number; //좋아요 개수
   userName: string; //유저명
   userImage: string; //유저 프로필 이미지
+  userId: number;
   createAt: string; //작성일
+  bookmark: Boolean;
+  like: Boolean;
+  private: Boolean;
   ootdImages: {
-    url: string; //ootd 이미지
-    ootdClothesList?: {
-      id: number;
-      url: string;
-      brand: string; //옷 브랜드
+    ootdImage: string; //ootd 이미지
+    ootdImageClothesList?: {
+      clothesId: number;
+      clothesImage: string;
+      brand: { id: number; name: string }; //옷 브랜드
       category: {
         id: number;
         smallCategory: string;
         bigCategory: string;
       };
       size: string;
-      name: string; //옷 별칭
+      clothesName: string; //옷 별칭
       coordinate: {
         xrate: string;
         yrate: string;
@@ -51,6 +59,7 @@ export interface OOTDType {
     }[];
   }[];
   styles: {
+    styleId: number;
     name: string;
   }[];
   comment?: {
@@ -58,7 +67,7 @@ export interface OOTDType {
     userName: string;
     userImage: string;
     content: string;
-    createAt: string;
+    timeStamp: string;
     childComment?: {
       id: number;
       userName: string;
@@ -68,279 +77,45 @@ export interface OOTDType {
       taggedUserName: string;
     }[];
   }[];
-  bookmark: Boolean;
-  like: Boolean;
 }
 
 const OOTD: ComponentWithLayout = () => {
-  const [, getOOtd] = OOTDApi();
+  const { getOOTD, postOOTDComment } = OOTDApi();
 
-  const [sampleData, setSampleData] = useState<OOTDType>({
-    id: 1,
-    contents:
-      'Lorem ipsum dolor sit amet consectetur. Egestas diam ac fringilla diam morbi amet praesent nullam.',
-    viewCount: 0,
-    reportCount: 0,
-    likeCount: 0,
-    userName: '낙낙',
-    userImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    createAt: '2024.01.03',
-    ootdImages: [
-      {
-        url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-        ootdClothesList: [
-          {
-            id: 0,
-            url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            brand: 'Adidas',
-            name: '스트릿 저지',
-            category: {
-              id: 0,
-              smallCategory: '저지',
-              bigCategory: '아우터',
-            },
-            size: 'Free',
-            coordinate: {
-              xrate: '20',
-              yrate: '20',
-            },
-            deviceSize: {
-              deviceWidth: 390,
-              deviceHeight: 390,
-            },
-          },
-          {
-            id: 0,
-            url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            brand: 'Nike',
-            name: '에어포스',
-            category: {
-              id: 0,
-              smallCategory: 'string',
-              bigCategory: 'string',
-            },
-            size: 'string',
-            coordinate: {
-              xrate: '244',
-              yrate: '342',
-            },
-            deviceSize: {
-              deviceWidth: 390,
-              deviceHeight: 390,
-            },
-          },
-        ],
-      },
-      {
-        url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-        ootdClothesList: [
-          {
-            id: 0,
-            url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            brand: 'string',
-            name: 'string',
-            category: {
-              id: 0,
-              smallCategory: 'string',
-              bigCategory: 'string',
-            },
-            size: 'string',
-            coordinate: {
-              xrate: '20',
-              yrate: '20',
-            },
-            deviceSize: {
-              deviceWidth: 390,
-              deviceHeight: 390,
-            },
-          },
-          {
-            id: 0,
-            url: 'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            brand: 'string',
-            name: 'string',
-            category: {
-              id: 0,
-              smallCategory: 'string',
-              bigCategory: 'string',
-            },
-            size: 'string',
-            coordinate: {
-              xrate: '244',
-              yrate: '342',
-            },
-            deviceSize: {
-              deviceWidth: 390,
-              deviceHeight: 390,
-            },
-          },
-        ],
-      },
-    ],
-    styles: [
-      {
-        name: '데일리',
-      },
-      {
-        name: '데일리',
-      },
-      {
-        name: '데일리',
-      },
-    ],
-    comment: [
-      {
-        id: 0,
-        userName: '권낙현',
-        content: '좋반~!',
-        userImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-        createAt: '5분전',
-        childComment: [
-          {
-            id: 1,
-            userName: '권낙현',
-            content: '좋반~!',
-            userImage:
-              'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            taggedUserName: 'knh6269',
-            createAt: '1분전',
-          },
-          {
-            id: 2,
-            userName: '권낙현',
-            content: '좋반~!',
-            userImage:
-              'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-            taggedUserName: 'knh6269',
-            createAt: '지금',
-          },
-        ],
-      },
-      {
-        id: 0,
-        userName: '삼다수',
-        content: '맞팔요 ^^',
-        userImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-        createAt: '0시간 전',
-      },
-    ],
-    bookmark: true,
-    like: true,
-  });
+  const router = useRouter();
 
-  const userClothSampleData = {
-    userName: '낙낙',
-    cloth: [
-      {
-        clothId: 1,
-        bigCategory: '아우터',
-        smallCategory: '패딩',
-        brand: '나이키',
-        size: 'Free',
-        clothImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        clothId: 1,
-        bigCategory: '아우터',
-        smallCategory: '패딩',
-        brand: '나이키',
-        size: 'Free',
-        clothImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        clothId: 1,
-        bigCategory: '아우터',
-        smallCategory: '패딩',
-        brand: '나이키',
-        size: 'Free',
-        clothImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        clothId: 1,
-        bigCategory: '아우터',
-        smallCategory: '패딩',
-        brand: '나이키',
-        size: 'Free',
-        clothImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-      {
-        clothId: 1,
-        bigCategory: '아우터',
-        smallCategory: '패딩',
-        brand: '나이키',
-        size: 'Free',
-        clothImage:
-          'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      },
-    ],
-  };
+  const [reRender, setReRender] = useState(0);
+  const [getPostReRender, setGetPostReRender] = useState(0);
 
-  const userOOTDSampleData = [
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!router.isReady) return;
+      try {
+        const result = (await getOOTD(
+          Number(router.query.OOTDNumber![0])
+        )) as OOTDType;
 
-  const similarOOTDSampleData = [
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      userName: '낙낙',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      userName: '낙낙',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      userName: '낙낙',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      userName: '낙낙',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      userName: '낙낙',
-    },
-  ];
+        setData({
+          ...result,
+          createAt: new Date(result.createAt).toLocaleDateString(),
+        });
+        setComment({
+          ootdId: Number(router.query.OOTDNumber![0]),
+          parentDepth: 0,
+          content: '',
+        });
+      } catch (err) {
+        alert('없는 페이지입니다');
+        router.push('/main');
+      }
+    };
+    fetchData();
+  }, [router.isReady, getPostReRender]);
+
+  const [data, setData] = useState<OOTDType | null>(null);
 
   const [comment, setComment] = useState<CommentStateType>({
     ootdId: 0,
-    taggedUserName: '',
     parentDepth: 0,
     content: '',
   });
@@ -348,7 +123,10 @@ const OOTD: ComponentWithLayout = () => {
   const [commentFinish, setCommentFinish] = useState<Boolean>(false);
   const commentRef = useRef<any>();
 
-  const registerComment = () => {
+  const registerComment = async () => {
+    if (comment.content === '') return;
+    await postOOTDComment(comment);
+    setReRender(reRender + 1);
     setComment({
       ...comment,
       content: '',
@@ -358,32 +136,36 @@ const OOTD: ComponentWithLayout = () => {
     //댓글 등록 api 연동
   };
 
+  const myId = useRecoilValue(userId);
+
+  useEffect(() => {
+    if (!commentWriting) setComment({ ...comment, parentDepth: 0 });
+  }, [commentWriting]);
+
   return (
     <S.Layout>
-      <Posting data={sampleData} commentRef={commentRef} />
-      {sampleData.comment ? (
-        <PostingComment
-          data={sampleData.comment}
-          comment={comment}
-          setComment={setComment}
+      {data && (
+        <Posting
+          data={data}
           commentRef={commentRef}
-          setCommentWriting={setCommentWriting}
-          commentNone={false}
-        />
-      ) : (
-        <PostingComment
-          comment={comment}
-          setComment={setComment}
-          commentRef={commentRef}
-          setCommentWriting={setCommentWriting}
-          commentNone={true}
+          myPost={data.userId === Number(myId)}
+          setGetPostReRender={setGetPostReRender}
+          getPostReRender={getPostReRender}
         />
       )}
-      <UserCloth data={userClothSampleData} />
-      <UserOOTD data={userOOTDSampleData} />
-      <SimilarOOTD data={similarOOTDSampleData} />
+      <PostingComment
+        comment={comment}
+        setComment={setComment}
+        commentRef={commentRef}
+        setCommentWriting={setCommentWriting}
+        reRender={reRender}
+        setReRender={setReRender}
+      />
+      <UserCloth userName={data?.userName} userId={data?.userId} />
+      <UserOtherOOTD userName={data?.userName} userId={data?.userId} />
+      <SimilarOOTD />
       <PostingCommentWrite
-        userImage="https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg"
+        userImage={data && data.userImage}
         setComment={setComment}
         commentRef={commentRef}
         comment={comment}
