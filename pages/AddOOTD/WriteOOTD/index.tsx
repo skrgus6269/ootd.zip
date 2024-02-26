@@ -51,7 +51,7 @@ export default function WriteOOTD({
       const payload = {
         content: string,
         isPrivate: true as Boolean,
-        styles: [1],
+        styles: selectedStyle.map((item) => item.id),
         ootdImages: imageAndTag.map((ootd) => {
           return {
             ootdImage: ootd.ootdImage,

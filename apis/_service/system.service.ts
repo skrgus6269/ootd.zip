@@ -23,3 +23,9 @@ export const getSize = async (id: number) => {
 
   return data;
 };
+
+export const getStyle = async () => {
+  const data = await systemApi.getStyle();
+
+  return data;
+};

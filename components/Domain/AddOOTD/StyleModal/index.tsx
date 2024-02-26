@@ -6,6 +6,7 @@ import Input from '@/components/Input';
 import { Style } from '@/pages/AddOOTD';
 import NextButton from '@/components/NextButton';
 import Modal from '@/components/Modal';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 interface StyleModalProps {
   setStyleModalIsOpen: Dispatch<SetStateAction<Boolean>>;
@@ -21,75 +22,25 @@ export default function StyleModal({
   styleInitial,
 }: StyleModalProps) {
   const [style, setStyle] = useState<Style[]>([]);
-
+  const { getStyle } = OOTDApi();
   useEffect(() => {
-    let result = [
-      {
-        id: 1,
-        name: '미니멀',
-        state: false,
-      },
-      {
-        id: 2,
-        name: '아메카지',
-        state: false,
-      },
-      {
-        id: 3,
-        name: '시티보이',
-        state: false,
-      },
-      {
-        id: 4,
-        name: '캐주얼',
-        state: false,
-      },
-      {
-        id: 5,
-        name: '스트릿',
-        state: false,
-      },
-      {
-        id: 6,
-        name: '비즈니스 캐주얼',
-        state: false,
-      },
-      {
-        id: 7,
-        name: '하이틴',
-        state: false,
-      },
-      {
-        id: 8,
-        name: '로맨틱',
-        state: false,
-      },
-      {
-        id: 9,
-        name: '걸리시',
-        state: false,
-      },
-      {
-        id: 10,
-        name: '스포티',
-        state: false,
-      },
-      {
-        id: 11,
-        name: '고프코어',
-        state: false,
-      },
-    ];
+    const ferchData = async () => {
+      let result = (await getStyle()).map((item: Style) => {
+        return { ...item, state: false };
+      }) as Style[];
 
-    if (styleInitial) {
-      styleInitial.forEach((style) => {
-        const styleIndex = result.findIndex((item) => item.id === style.id);
-        if (styleIndex !== -1) {
-          result[styleIndex].state = true;
-        }
-      });
-    }
-    setStyle(result);
+      if (styleInitial) {
+        styleInitial.forEach((style) => {
+          const styleIndex = result.findIndex((item) => item.id === style.id);
+          if (styleIndex !== -1) {
+            result[styleIndex].state = true;
+          }
+        });
+      }
+      setStyle(result);
+    };
+
+    ferchData();
   }, []);
 
   //스타일 선택 완료 버튼
@@ -103,7 +54,7 @@ export default function StyleModal({
 
   return (
     <>
-      <Modal height="80" isOpen={styleModalIsOpen}>
+      <Modal height="60" isOpen={styleModalIsOpen}>
         <S.Layout>
           <S.Label>
             <Title1>스타일 태그</Title1>
