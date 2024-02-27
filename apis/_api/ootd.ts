@@ -85,6 +85,8 @@ export const getUserBookmarkList = async (
   const { data } = await fetcher.get(
     `/api/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
   );
+
+  return data;
 };
 
 //ootd 작성자의 다른 ootd 조회

@@ -15,6 +15,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -43,6 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <RecoilRoot>
       <>
         <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools />
           <GlobalStyles />
           <ThemeProvider theme={themes}>
             <Layout>

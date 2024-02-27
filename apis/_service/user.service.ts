@@ -146,6 +146,8 @@ export const getUserBookmarkList = async (
   params: getUserBookmarkListPayload
 ) => {
   const data = await ootdApi.getUserBookmarkList(params);
+
+  return data;
 };
 
 //팔로잉
