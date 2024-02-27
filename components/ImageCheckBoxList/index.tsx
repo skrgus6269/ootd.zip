@@ -6,8 +6,9 @@ import { useState } from 'react';
 
 interface ImageCheckBoxListProps {
   data: {
-    clothId: number;
-    clothImage: string;
+    ootdId: number;
+    ootdBookmarkId: number;
+    ootdImage: string;
   }[];
   checkBox: Boolean;
 }
@@ -28,29 +29,30 @@ export default function ImageCheckBoxList({
 
   return (
     <S.Layout>
-      {data.map((item, index) => {
-        if (item.clothId !== undefined) {
-          const isChecked = checkedItems.includes(item.clothId);
+      {data &&
+        data.map((item, index) => {
+          if (item.ootdId !== undefined) {
+            const isChecked = checkedItems.includes(item.ootdId);
 
-          return (
-            <S.CheckBoxLayout key={index}>
-              <img
-                src={item.clothImage}
-                alt=""
-                className={`clothImage ${isChecked ? 'checked' : ''}`}
-              />
-              {checkBox && (
-                <Image
-                  src={isChecked ? CheckBoxTrue : CheckBoxFalse}
-                  alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
-                  className="checkBoxImage"
-                  onClick={() => toggleChecked(item.clothId)}
+            return (
+              <S.CheckBoxLayout key={index}>
+                <img
+                  src={item.ootdImage}
+                  alt=""
+                  className={`clothImage ${isChecked ? 'checked' : ''}`}
                 />
-              )}
-            </S.CheckBoxLayout>
-          );
-        }
-      })}
+                {checkBox && (
+                  <Image
+                    src={isChecked ? CheckBoxTrue : CheckBoxFalse}
+                    alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
+                    className="checkBoxImage"
+                    onClick={() => toggleChecked(item.ootdId)}
+                  />
+                )}
+              </S.CheckBoxLayout>
+            );
+          }
+        })}
     </S.Layout>
   );
 }

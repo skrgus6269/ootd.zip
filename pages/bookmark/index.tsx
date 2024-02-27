@@ -15,63 +15,29 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
+  useInfiniteQuery,
 } from '@tanstack/react-query';
 
 import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
+
+export interface BookmarkStandardType {
+  page: number;
+  size: number;
+  sortCriteria: string;
+  sortDirection: string;
+}
+
+export interface BookmarkListType {
+  ootdId: number;
+  ootdBookmarkId: number;
+  ootdImage: string;
+}
 
 export default function Bookmark() {
   const router = useRouter();
 
   const [editing, setEditing] = useState<Boolean>(false);
   const [showButton, setShowButton] = useState<Boolean>(false);
-
-  // const query = useQuery({
-  //     queryKey: ['musics'],
-  //     queryFn: async () => {
-  //       const res = await fetch(`musics.json`);
-  //       return res.json();
-  //     },
-  //     staleTime: 1000,
-  //   });
-  // console.log(query.data);
-
-  const clothList = [
-    {
-      clothId: 0,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 2,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 3,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 4,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
 
   const [isVisible, setIsVisible] = useState<Boolean>(false);
 
@@ -106,14 +72,43 @@ export default function Bookmark() {
   };
 
   const { getUserBookmarkList } = BookmarkApi();
+  const [standard, setStandard] = useState<BookmarkStandardType>({
+    page: 0,
+    size: 50,
+    sortCriteria: 'createdAt',
+    sortDirection: 'DESC',
+  });
+
+  const [data, setData] = useState();
+
+  const fetchData = async () => {
+    if (!router.isReady) return;
+    try {
+      const result = await getUserBookmarkList(standard);
+      setData(result.content);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  fetchData();
+
+  useEffect(() => {
+    fetchData();
+  }, [router.isReady]);
+
+  // 데이터 패칭
+  // const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery(
+  //     [pageParam],
+  //     ({ pageParam = 0 }) => getUserBookmarkList({ page: pageParam,
+  //                   size: 10,
+  //                   sortCriteria: "createdAt",
+  //                   sortDirection: "ASC"
+  //                 }),
+  // );
 
   const queryClient = useQueryClient();
 
-  const query = useQuery({
-    queryKey: [1, 10, 'string', 'ASC'],
-    queryFn: getUserBookmarkList,
-  });
-  console.log(query);
+  console.log(data);
 
   return (
     <>
@@ -135,7 +130,7 @@ export default function Bookmark() {
             onTouchStart={toggleVisibility}
             onTouchEnd={() => setIsVisible(true)}
           >
-            <ImageCheckBoxList checkBox={editing} data={clothList} />
+            <ImageCheckBoxList checkBox={editing} data={data} />
           </S.ClothList>
         </div>
         {isVisible && <S.TopButton onClick={scrollToTop}>버튼</S.TopButton>}
