@@ -51,9 +51,8 @@ const PostingTop = styled.div`
   }
 
   .unfollow {
-    background-color: ${(props) => props.theme.color.grey_00};
+    background-color: ${(props) => props.theme.color.subdued};
     border-radius: 2px;
-    color: white;
   }
   .following {
     background-color: ${(props) => props.theme.color.grey_90};
