@@ -89,7 +89,7 @@ export default function PostingComment({
       }
     };
     fetchData();
-  }, [router.isReady, reRender]);
+  }, [router.isReady, reRender, router.query.OOTDNumber]);
 
   const onClickReplyButton = (userName: string, commentId: number) => {
     setComment({

@@ -2,18 +2,15 @@ import { ClothInformationProps } from './type';
 import S from './style';
 import { Body4, Title2 } from '../UI';
 import ImageWithCaption from '../UI/ImageWithCaption';
-import LikeToggle from '../Toggle/LikeToggle';
-import { AiOutlineBell } from 'react-icons/ai';
 
 export default function ClothInformation({
   clothImage,
   caption,
-  headline,
-  subHeadline,
-  bodyFirst,
-  bodySecond,
+  brand,
+  category,
+  name,
+  clothSize,
   size,
-  icon,
   onClick,
 }: ClothInformationProps) {
   return (
@@ -28,21 +25,17 @@ export default function ClothInformation({
       </S.ListImage>
       <S.Information>
         <S.Headline>
-          <Title2>{headline}</Title2>
+          <Title2>{brand}</Title2>
           <S.Divider>|</S.Divider>
-          <Title2>{subHeadline}</Title2>
+          <Body4 className="category">{category}</Body4>
         </S.Headline>
         <S.BodyFirst>
-          <Body4>{bodyFirst}</Body4>
+          <Body4>{name}</Body4>
         </S.BodyFirst>
         <S.BodySecond>
-          <Body4>{bodySecond}</Body4>
+          <Body4>사이즈 {clothSize}</Body4>
         </S.BodySecond>
       </S.Information>
-      <S.Icon>
-        {icon === 'like' && <LikeToggle />}
-        {icon === 'bell' && <AiOutlineBell />}
-      </S.Icon>
     </S.Layout>
   );
 }

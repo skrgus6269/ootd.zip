@@ -8,20 +8,20 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
-  setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>; 
+  setReportModalIsOpen: Dispatch<SetStateAction<Boolean>>;
   isPrivate: Boolean;
   setGetPostReRender: Dispatch<SetStateAction<number>>;
-  getPostReRender: number; 
-  setPublicSetting: Dispatch<SetStateAction<Boolean>>; 
+  getPostReRender: number;
+  setPublicSetting: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function FixModal({
   reportModalIsOpen,
-  setReportModalIsOpen, 
+  setReportModalIsOpen,
   getPostReRender,
   setGetPostReRender,
-  isPrivate, 
-  setPublicSetting, 
+  isPrivate,
+  setPublicSetting,
 }: ReportModalProps) {
   const onClickReportButton = () => {
     setReportModalIsOpen(false);
@@ -42,7 +42,7 @@ export default function FixModal({
       id: Number(router.query!.OOTDNumber![0]),
       isPrivate: !isPrivate,
     });
-    setPublicSetting(true)
+    setPublicSetting(true);
     setGetPostReRender(getPostReRender + 1);
     setDeleteAlertIsOpen(false);
   };
@@ -50,11 +50,11 @@ export default function FixModal({
     <>
       <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
-        <Modal className="modal" isOpen={reportModalIsOpen} height="30"> 
+        <Modal className="modal" isOpen={reportModalIsOpen} height="30">
           <S.Span onClick={onClickIsPrivateButton}>
             <Button1 className="report">
               {!isPrivate && <>비</>}공개로 설정
-            </Button1> 
+            </Button1>
           </S.Span>
           <S.Span
             onClick={() =>

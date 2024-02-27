@@ -11,63 +11,69 @@ import NewRegister from './NewRegister';
 const ClothInformationSampleData = [
   {
     clothId: 1,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 2,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 3,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 4,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 5,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 6,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
 ] as [...ClothInformationProps[]];
 
@@ -82,6 +88,9 @@ export type ImageWithTag = {
     caption: string;
     size?: string;
     state?: string;
+    name?: string;
+    brand?: string;
+    category?: string;
   }[];
 }[];
 
@@ -120,24 +129,28 @@ export default function AddTag({
 
       if (newTag[slideIndex].ootdImageClothesList) {
         newTag[slideIndex].ootdImageClothesList?.push({
-          clothId: ClothInformationSampleData[index].clothId,
-          clothImage: ClothInformationSampleData[index].clothImage,
-          headline: ClothInformationSampleData[index].headline,
-          bodyFirst: ClothInformationSampleData[index].bodyFirst,
-          xRate: '0',
-          yRate: '0',
+          clothesId: ClothInformationSampleData[index].clothId,
+          clothesImage: ClothInformationSampleData[index].clothImage,
+          brand: ClothInformationSampleData[index].brand,
+          name: ClothInformationSampleData[index].name,
+          coordinate: {
+            xRate: '0',
+            yRate: '0',
+          },
           caption: '',
           state: 'light',
         });
       } else {
         newTag[slideIndex].ootdImageClothesList = [
           {
-            clothId: ClothInformationSampleData[index].clothId,
-            clothImage: ClothInformationSampleData[index].clothImage,
-            headline: ClothInformationSampleData[index].headline,
-            bodyFirst: ClothInformationSampleData[index].bodyFirst,
-            xRate: '0',
-            yRate: '0',
+            clothesId: ClothInformationSampleData[index].clothId,
+            clothesImage: ClothInformationSampleData[index].clothImage,
+            brand: ClothInformationSampleData[index].brand,
+            name: ClothInformationSampleData[index].name,
+            coordinate: {
+              xRate: '0',
+              yRate: '0',
+            },
             caption: '',
             state: 'light',
           },
@@ -197,14 +210,13 @@ export default function AddTag({
                           >
                             <ClothInformation
                               clothId={item.clothId}
-                              size={item.size}
+                              size="small"
                               clothImage={item.clothImage}
-                              caption=""
-                              headline={item.headline}
-                              subHeadline={item.subHeadline}
-                              bodyFirst={item.bodyFirst}
-                              bodySecond={item.bodySecond}
-                              icon={item.icon}
+                              caption="옷"
+                              brand={item.brand}
+                              category={item.category}
+                              name={item.name}
+                              clothSize={item.size}
                             />
                           </div>
                           <hr />
