@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 interface BackgroundProps {
   isOpen: Boolean;
@@ -11,6 +13,7 @@ const Background = styled.div<BackgroundProps>`
   width: 100vw;
   height: calc(100vh - 48px);
   position: fixed;
+  top: 0;
 `;
 
 const Layout = styled.div`
@@ -20,6 +23,9 @@ const Layout = styled.div`
     height: 24px;
   }
   border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
+  .slick-dots {
+    bottom: -35px;
+  }
 `;
 
 const PostingTop = styled.div`

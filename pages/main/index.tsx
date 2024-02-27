@@ -1,4 +1,3 @@
-import { ClothInformationProps } from '@/components/ClothInformation/type';
 import S from '@/style/main/style';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
@@ -6,86 +5,6 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import UserCloset from '@/components/Domain/Main/MyCloset';
 import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
-
-const ClothInformationSampleData = [
-  {
-    size: 'big',
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    caption: 'Tag',
-    headline: 'Headline4',
-    subHeadline: 'Subtitle3',
-    bodyFirst: 'Body4',
-    bodySecond: 'Body4',
-    icon: 'like',
-  },
-  {
-    size: 'big',
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    caption: 'Tag',
-    headline: 'Headline4',
-    subHeadline: 'Subtitle3',
-    bodyFirst: 'Body4',
-    bodySecond: 'Body4',
-    icon: 'like',
-  },
-  {
-    size: 'big',
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    caption: 'Tag',
-    headline: 'Headline4',
-    subHeadline: 'Subtitle3',
-    bodyFirst: 'Body4',
-    bodySecond: 'Body4',
-    icon: 'like',
-  },
-  {
-    size: 'big',
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    caption: 'Tag',
-    headline: 'Headline4',
-    subHeadline: 'Subtitle3',
-    bodyFirst: 'Body4',
-    bodySecond: 'Body4',
-    icon: 'like',
-  },
-] as [...ClothInformationProps[]];
-
-const TagClothInformationSampleData = [
-  {
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    headline: 'Headline4',
-    bodyFirst: 'body3',
-    bodySecond: 'body3',
-    state: 'dark',
-  },
-  {
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    headline: 'Headline4',
-    bodyFirst: 'body3',
-    bodySecond: 'body3',
-    state: 'dark',
-  },
-  {
-    itemImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    headline: 'Headline4',
-    bodyFirst: 'body3',
-  },
-  {
-    clothImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    headline: 'Headline4',
-    bodyFirst: 'body3',
-    bodySecond: 'body3',
-    state: 'dark',
-  },
-] as [...ClothInformationProps[]];
 
 const MyClosetDataSample = {
   user: {
