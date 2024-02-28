@@ -25,10 +25,10 @@ export default function SimilarOOTD() {
       setData(result.content);
     };
     fetchData();
-  }, [router.isReady]);
+  }, [router.isReady, router.query.OOTDNumber]);
 
-  const onClickSimilarOOTDImage = (index: number) => {
-    router.push(`/OOTD/${index}`);
+  const onClickSimilarOOTDImage = (ootdId: number) => {
+    router.push(`/OOTD/${ootdId}`);
   };
 
   return (

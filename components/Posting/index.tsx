@@ -32,14 +32,7 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
-import Toast from '@/components/Toast';
-
-interface ClothTag {
-  xRate: string;
-  yRate: string;
-  deviceWidth: number;
-  deviceHeight: number;
-}
+import Toast from '../Toast';
 
 interface PostingProps {
   data: OOTDType;
@@ -67,6 +60,7 @@ export default function Posting({
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
+  const [publicSetting, setPublicSetting] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
   const myId = useRecoilValue(userId);
@@ -78,6 +72,7 @@ export default function Posting({
   useEffect(() => {
     setHeartState(data.like);
     setBookMarkState(data.bookmark);
+    setFollowState(data.following);
   }, [data]);
 
   //컴포넌트 크기 계산
@@ -165,14 +160,11 @@ export default function Posting({
 
   const onClickKebabButton = () => {
     if (myId === data.userId) {
-      setPublicSetting(false);
       setFixModalIsOpen(true);
       return;
     }
     setReportModalIsOpen(true);
   };
-
-  const [publicSetting, setPublicSetting] = useState<Boolean>(false); // 공개 여부
 
   return (
     <>
@@ -244,8 +236,8 @@ export default function Posting({
                             clothId={items.clothesId}
                             clothImage={items.clothesImage}
                             caption={'tag'}
-                            headline={items.brand.name}
-                            bodyFirst={items.clothesName}
+                            brand={items.brand.name}
+                            name={items.clothesName}
                             size="small"
                             type="view"
                           />

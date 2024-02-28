@@ -40,7 +40,7 @@ const UserName = styled.div`
 `;
 const UserComment = styled.div`
   .taggedUser {
-    color: #0085ff;
+    color: ${(prpos) => prpos.theme.color.correct};
   }
   display: flex;
   color: ${(props) => props.theme.color.grey_30};

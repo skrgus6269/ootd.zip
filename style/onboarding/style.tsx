@@ -12,7 +12,7 @@ const Layout = styled.div`
     color: ${(props) => props.theme.color.grey_95};
   }
   .login {
-    color: ${(props) => props.theme.color.correct};
+    color: ${(props) => props.theme.color.accent};
   }
   .button {
     margin: 24px 0;

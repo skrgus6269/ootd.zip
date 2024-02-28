@@ -13,6 +13,8 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD';
 import Toast from '@/components/Toast';
+import AppBar from '@/components/Appbar';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 export interface CommentStateType {
   ootdId: number;
@@ -35,6 +37,7 @@ export interface OOTDType {
   bookmark: Boolean;
   like: Boolean;
   private: Boolean;
+  following: Boolean;
   ootdImages: {
     ootdImage: string; //ootd 이미지
     ootdImageClothesList?: {
@@ -110,7 +113,7 @@ const OOTD: ComponentWithLayout = () => {
       }
     };
     fetchData();
-  }, [router.isReady, getPostReRender]);
+  }, [router.isReady, getPostReRender, router.query.OOTDNumber]);
 
   const [data, setData] = useState<OOTDType | null>(null);
 
@@ -144,6 +147,11 @@ const OOTD: ComponentWithLayout = () => {
 
   return (
     <S.Layout>
+      <AppBar
+        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+        middleProps={<></>}
+        rightProps={<></>}
+      />
       {data && (
         <Posting
           data={data}

@@ -6,9 +6,10 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 
 export default function TagInformation({
   clothImage,
-  headline,
-  bodyFirst,
-  bodySecond,
+  brand,
+  category,
+  clothSize,
+  name,
   state,
   className,
   type,
@@ -19,9 +20,9 @@ export default function TagInformation({
         <Image width={32} height={32} src={clothImage} alt="아이템" />
       </S.ItemImage>
       <S.Information>
-        <Title2>{headline}</Title2>
-        <Body4>{bodyFirst}</Body4>
-        {bodySecond && <Body4>{bodySecond}</Body4>}
+        <Title2>{brand}</Title2>
+        <Body4>{name}</Body4>
+        {clothSize && <Body4>{clothSize}</Body4>}
       </S.Information>
       <S.Close state={state!}>
         {type !== 'view' && (

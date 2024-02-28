@@ -24,7 +24,7 @@ const Onboarding: ComponentWithLayout = () => {
       <Button
         onClick={() => router.push('/main')}
         size="big"
-        backgroundColor="correct"
+        backgroundColor="accent"
         color="grey_00"
         border={false}
         className="button"
