@@ -17,21 +17,23 @@ import {
   QueryClientProvider,
   useInfiniteQuery,
 } from '@tanstack/react-query';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
 
-export interface BookmarkStandardType {
+export type OOTDdataType = {
+  ootdId: number;
+  ootdBookmarkId: number;
+  ootdImage: string;
+};
+
+export type BookmarkListType = {
+  content: OOTDdataType[];
   page: number;
   size: number;
   sortCriteria: string;
   sortDirection: string;
-}
-
-export interface BookmarkListType {
-  ootdId: number;
-  ootdBookmarkId: number;
-  ootdImage: string;
-}
+};
 
 export default function Bookmark() {
   const router = useRouter();
@@ -48,7 +50,8 @@ export default function Bookmark() {
   };
 
   const toggleVisibility = () => {
-    setIsVisible(true);
+    console.log(111);
+    // setIsVisible(!isVisible);
   };
 
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
@@ -61,54 +64,54 @@ export default function Bookmark() {
     //옷 등록 api
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
   const onClickBackground = () => {
     if (alertOpen) setAlertOpen(false);
   };
 
   const { getUserBookmarkList } = BookmarkApi();
-  const [standard, setStandard] = useState<BookmarkStandardType>({
-    page: 0,
-    size: 50,
-    sortCriteria: 'createdAt',
-    sortDirection: 'DESC',
-  });
 
-  const [data, setData] = useState();
-
-  const fetchData = async () => {
-    if (!router.isReady) return;
+  const getData = async ({
+    content,
+    page,
+    size,
+    sortCriteria,
+    sortDirection,
+  }: BookmarkListType) => {
     try {
-      const result = await getUserBookmarkList(standard);
-      setData(result.content);
-    } catch (err) {
-      console.log(err);
+      const result = await getUserBookmarkList({
+        page: page,
+        size: size,
+        sortCriteria: sortCriteria,
+        sortDirection: sortDirection,
+      });
+      return result;
+    } catch (error) {
+      console.error('Error in getFeedPost:', error);
+      throw error;
     }
   };
-  fetchData();
 
-  useEffect(() => {
-    fetchData();
-  }, [router.isReady]);
-
-  // 데이터 패칭
-  // const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery(
-  //     [pageParam],
-  //     ({ pageParam = 0 }) => getUserBookmarkList({ page: pageParam,
-  //                   size: 10,
-  //                   sortCriteria: "createdAt",
-  //                   sortDirection: "ASC"
-  //                 }),
-  // );
-
-  const queryClient = useQueryClient();
-
-  console.log(data);
+  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+    useInfiniteQuery(
+      ['datas'],
+      ({ pageParam = 0 }) =>
+        getData({
+          content: [],
+          page: pageParam,
+          size: 10,
+          sortCriteria: 'createdAt',
+          sortDirection: 'DESC',
+        }),
+      {
+        getNextPageParam: (lastPage, allPages) => {
+          if (lastPage.last) {
+            return;
+          } else {
+            return lastPage.page + 1;
+          }
+        },
+      }
+    );
 
   return (
     <>
@@ -125,14 +128,11 @@ export default function Bookmark() {
           setEditing={setEditing}
           setAlertOpen={setAlertOpen}
         />
-        <div>
-          <S.ClothList
-            onTouchStart={toggleVisibility}
-            onTouchEnd={() => setIsVisible(true)}
-          >
+        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
+          <S.ClothList>
             <ImageCheckBoxList checkBox={editing} data={data} />
           </S.ClothList>
-        </div>
+        </InfiniteScroll>
         {isVisible && <S.TopButton onClick={scrollToTop}>버튼</S.TopButton>}
         {alertOpen && (
           <BookmarkAlert

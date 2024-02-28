@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <RecoilRoot>
       <>
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools />
+          {/* <ReactQueryDevtools /> */}
           <GlobalStyles />
           <ThemeProvider theme={themes}>
             <Layout>

@@ -26,8 +26,9 @@ const TopButton = styled.div`
   position: fixed;
   bottom: 100px;
   right: 20px;
-  background-color: 'blue';
-  color: white;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
   padding: 10px;
   border-radius: 50%;
 `;

@@ -3,13 +3,15 @@ import S from './style';
 import CheckBoxTrue from 'public/images/checkBoxTrue.png';
 import CheckBoxFalse from 'public/images/checkBoxFalse.png';
 import { useState } from 'react';
+import { BookmarkListType } from '@/pages/Bookmark';
+
+export type dataType = {
+  pages: BookmarkListType[];
+  pageParams: any;
+};
 
 interface ImageCheckBoxListProps {
-  data: {
-    ootdId: number;
-    ootdBookmarkId: number;
-    ootdImage: string;
-  }[];
+  data: dataType | undefined;
   checkBox: Boolean;
 }
 
@@ -27,15 +29,17 @@ export default function ImageCheckBoxList({
     }
   };
 
+  console.log(data);
+
   return (
     <S.Layout>
       {data &&
-        data.map((item, index) => {
-          if (item.ootdId !== undefined) {
+        data.pages.map((onePage) => {
+          return onePage.content.map((item) => {
             const isChecked = checkedItems.includes(item.ootdId);
 
             return (
-              <S.CheckBoxLayout key={index}>
+              <S.CheckBoxLayout key={item.ootdId}>
                 <img
                   src={item.ootdImage}
                   alt=""
@@ -51,7 +55,7 @@ export default function ImageCheckBoxList({
                 )}
               </S.CheckBoxLayout>
             );
-          }
+          });
         })}
     </S.Layout>
   );
