@@ -66,6 +66,8 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
     });
   };
 
+  const [clicked, setClicked] = useState<string>('오래된 순');
+
   return (
     <>
       <S.Background
@@ -132,9 +134,10 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
           </S.FilterSpan>
         </S.SearchFilter>
         <SubHead
+          setState={setClicked}
+          state={clicked}
           count={searchClothList?.length || 0}
-          clicked="new"
-          state="noPadding"
+          style="noPadding"
         />
         <S.ClothList>
           <ImageList
