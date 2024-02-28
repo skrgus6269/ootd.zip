@@ -12,7 +12,7 @@ export default function Search() {
       <S.SearchField>
         <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
       </S.SearchField>
-      <SearchResult />
+      {keyword !== '' && <SearchResult />}
     </S.Layout>
   );
 }

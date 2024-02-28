@@ -8,7 +8,7 @@ import EmptySearch from '@/components/EmptySearch';
 export default function Closet() {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
 
-  const myPageClothList = [
+  const searchClothList = [
     {
       clothId: 0,
       clothImage:
@@ -105,8 +105,8 @@ export default function Closet() {
         <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            {myPageClothList.length > 0 ? (
-              <ClosetCloth myPageClothList={myPageClothList} />
+            {searchClothList.length > 0 ? (
+              <ClosetCloth searchClothList={searchClothList} />
             ) : (
               <EmptySearch />
             )}
