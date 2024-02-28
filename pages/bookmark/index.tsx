@@ -49,10 +49,22 @@ export default function Bookmark() {
     });
   };
 
-  const toggleVisibility = () => {
-    console.log(111);
-    // setIsVisible(!isVisible);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      console.log(scrollTop);
+
+      setIsVisible(scrollTop > 10);
+    };
+
+    // 스크롤 이벤트 리스너 등록
+    window.addEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시에 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 

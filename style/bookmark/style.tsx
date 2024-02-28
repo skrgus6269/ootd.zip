@@ -31,6 +31,8 @@ const TopButton = styled.div`
   flex-shrink: 0;
   padding: 10px;
   border-radius: 50%;
+  background-color: blue;
+  z-index: 9999;
 `;
 
 const S = { Background, Layout, ClothList, TopButton };
