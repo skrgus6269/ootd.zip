@@ -4,7 +4,7 @@ import S from './style';
 interface ReadOnlyProps {
   state: Boolean;
   result: React.ReactNode;
-  type?: 'link' | 'write';
+  type?: 'Link' | 'Write';
   onClick?: any;
 }
 
@@ -16,7 +16,7 @@ export default function ReadOnly({
 }: ReadOnlyProps) {
   return (
     <S.Layout state={state} type={type} onClick={onClick}>
-      {type === 'link' && (
+      {type === 'Link' && (
         <S.LinkIcon state={state}>
           <AiOutlineLink />
         </S.LinkIcon>

@@ -4,6 +4,7 @@ import {
   patchOOTDIsPrivatePayload,
   postClothPayload,
   postOOTDComentPayload,
+  patchClothIsPrivateType,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -137,6 +138,23 @@ export const getClothDetail = async (id: number) => {
 //cloth 삭제
 export const deleteCloth = async (id: number) => {
   const data = await clothApi.deleteCloth(id);
+
+  return data;
+};
+
+//cloth 수정
+export const putCloth = async (id: number, payload: postClothPayload) => {
+  const data = await clothApi.putCloth(id, payload);
+
+  return data;
+};
+
+//cloth 공개여부 수정
+export const patchClothIsPrivate = async (
+  id: number,
+  payload: patchClothIsPrivateType
+) => {
+  const data = await clothApi.patchClothIsPrivate(id, payload);
 
   return data;
 };

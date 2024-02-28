@@ -21,6 +21,7 @@ export interface patchOOTDIsPrivatePayload {
 
 export interface postClothPayload {
   purchaseStore: string;
+  purchaseStoreType: string;
   brandId: number;
   categoryId: number;
   colorIds: number[];
@@ -38,4 +39,8 @@ export interface postOOTDComentPayload {
   content: string;
   taggedUserName?: string;
   commentParentId?: number;
+}
+
+export interface patchClothIsPrivateType {
+  isOpen: Boolean;
 }

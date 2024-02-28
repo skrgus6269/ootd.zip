@@ -1,13 +1,17 @@
-import { postClothPayload } from '@/apis/_api/type';
+import { patchClothIsPrivateType, postClothPayload } from '@/apis/_api/type';
 import { systemService, userService } from '@/apis/_service';
 
 export default function ClothApi() {
   //cloth 작성
   const postCloth = async (payload: postClothPayload) => {
     try {
-      const { result } = await userService.postCloth(payload);
+      const { statusCode } = await userService.postCloth(payload);
 
-      return result;
+      if (statusCode === 200) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명:', err);
@@ -41,7 +45,35 @@ export default function ClothApi() {
   //cloth 삭제
   const deleteCloth = async (id: number) => {
     try {
-      const { result } = await userService.deleteCloth(id);
+      const { statusCode } = await userService.deleteCloth(id);
+
+      if (statusCode === 200) return true;
+      return false;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+
+  //cloth 수정
+  const putCloth = async (id: number, payload: postClothPayload) => {
+    try {
+      const { result } = await userService.putCloth(id, payload);
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+
+  //cloth 공개여부 수정
+  const patchClothIsPrivate = async (
+    id: number,
+    payload: patchClothIsPrivateType
+  ) => {
+    try {
+      const { result } = await userService.patchClothIsPrivate(id, payload);
 
       return result;
     } catch (err) {
@@ -81,6 +113,8 @@ export default function ClothApi() {
     getUserClothList,
     getClothDetail,
     deleteCloth,
+    putCloth,
+    patchClothIsPrivate,
     getClothCategory,
     getColor,
     getBrand,

@@ -93,6 +93,7 @@ export default function BasicInfoSecond({
 
     const payload = {
       purchaseStore: clothWhereBuy.letter,
+      purchaseStoreType: clothWhereBuy.type,
       brandId: clothBrand![0].id,
       categoryId: clothCategory![0].detailCategories![0].id,
       colorIds: [...clothColor!].map((item) => item.id),

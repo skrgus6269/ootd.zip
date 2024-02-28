@@ -20,19 +20,13 @@ import { BrandType } from '@/components/BrandList/Brand';
 
 export interface ClothWhereBuy {
   letter: string;
-  type: 'link' | 'write';
+  type: 'Link' | 'Write';
 }
 
 const AddCloth: ComponentWithLayout = () => {
   const steps = ['편집', '제품명', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([
-    {
-      ootdId: 0,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ]);
+  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([]);
   const [clothName, setClothName] = useState<string>('');
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null
@@ -40,7 +34,7 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothBrand, setClothBrand] = useState<BrandType[] | null>(null);
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
-    type: 'link',
+    type: 'Link',
   });
   const [clothColor, setClothColor] = useState<ColorListType | null>(null);
   const [clothSize, setClothSize] = useState<SizeItem | null>(null);
@@ -56,19 +50,19 @@ const AddCloth: ComponentWithLayout = () => {
     //옷 등록 api
     const payload = {
       purchaseStore: clothWhereBuy.letter,
+      purchaseStoreType: clothWhereBuy.type,
       brandId: 2,
       categoryId: clothCategory![0].detailCategories![0].id,
       colorIds: [...clothColor!].map((item) => item.id),
       isOpen: true as Boolean,
       sizeId: clothSize!.id,
       clothesImageUrl: clothImage![0].ootdImage,
-      name: '나이키 윈드브레이커',
-      material: '스웻',
+      name: clothName,
       purchaseDate: clothBuyDate,
     };
 
-    await postCloth(payload);
-    router.push('/mypage');
+    const result = await postCloth(payload);
+    if (result) router.push('/mypage');
   };
 
   const onClickAppbarLeftButton = () => {
