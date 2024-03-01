@@ -51,14 +51,16 @@ const AddCloth: ComponentWithLayout = () => {
     const payload = {
       purchaseStore: clothWhereBuy.letter,
       purchaseStoreType: clothWhereBuy.type,
-      brandId: 2,
+      brandId: clothBrand![0].id,
       categoryId: clothCategory![0].detailCategories![0].id,
       colorIds: [...clothColor!].map((item) => item.id),
-      isOpen: true as Boolean,
+      isPrivate: !open,
       sizeId: clothSize!.id,
       clothesImageUrl: clothImage![0].ootdImage,
       name: clothName,
       purchaseDate: clothBuyDate,
+      clothMemo,
+      clothBuyDate,
     };
 
     const result = await postCloth(payload);
@@ -135,6 +137,7 @@ const AddCloth: ComponentWithLayout = () => {
           setClothSize={setClothSize}
           open={open}
           setOpen={setOpen}
+          onClickSubmitButton={onClickSubmitButton}
         />
       </Funnel.Steps>
       <Funnel.Steps name="추가정보">

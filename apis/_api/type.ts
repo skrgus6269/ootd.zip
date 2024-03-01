@@ -25,7 +25,7 @@ export interface postClothPayload {
   brandId: number;
   categoryId: number;
   colorIds: number[];
-  isOpen: Boolean;
+  isPrivate: Boolean;
   sizeId: number;
   clothesImageUrl: string;
   name: string;
@@ -42,5 +42,5 @@ export interface postOOTDComentPayload {
 }
 
 export interface patchClothIsPrivateType {
-  isOpen: Boolean;
+  isPrivate: Boolean;
 }

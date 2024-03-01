@@ -32,6 +32,7 @@ interface BasicInfoSecondProps {
   clothSize: SizeItem | null;
   setClothSize: Dispatch<SetStateAction<SizeItem | null>>;
   setOpen: Dispatch<SetStateAction<Boolean>>;
+  onClickSubmitButton: () => void;
 }
 
 export default function BasicInfoSecond({
@@ -47,6 +48,7 @@ export default function BasicInfoSecond({
   setOpen,
   open,
   handleStep,
+  onClickSubmitButton,
 }: BasicInfoSecondProps) {
   const [colorModalOpen, setColorModalOpen] = useState<Boolean>(false);
   const [sizeModalOpen, setSizeModalOpen] = useState<Boolean>(false);
@@ -89,21 +91,20 @@ export default function BasicInfoSecond({
   };
 
   const onClickNoButton = async () => {
-    //옷 등록 api
-
     const payload = {
       purchaseStore: clothWhereBuy.letter,
       purchaseStoreType: clothWhereBuy.type,
       brandId: clothBrand![0].id,
       categoryId: clothCategory![0].detailCategories![0].id,
       colorIds: [...clothColor!].map((item) => item.id),
-      isOpen: true as Boolean,
+      isPrivate: !open,
       sizeId: clothSize!.id,
       clothesImageUrl: clothImage![0].ootdImage,
       name: clothName,
     };
-    await postCloth(payload);
-    router.push(`/mypage`);
+
+    const result = await postCloth(payload);
+    if (result) router.push('/mypage');
   };
 
   return (

@@ -39,6 +39,7 @@ const EditCloth: ComponentWithLayout = () => {
   const [clothOpen, setClothOpen] = useState<Boolean>(true);
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
+  const [sizeRerender, setSizeRerender] = useState(0);
 
   const { getClothDetail, putCloth } = ClothApi();
 
@@ -48,25 +49,63 @@ const EditCloth: ComponentWithLayout = () => {
       const result = await getClothDetail(Number(router.query.ClothNumber![0]));
       setClothName(result.name);
       setClothBrand([result.brand]);
-      setClothSize(result.size);
       setClothWhereBuy({
         type: result.purchaseStoreType,
         letter: result.purchaseStore,
       });
       setClothColor(result.colors);
-      setClothOpen(result.isOpen);
+      setClothOpen(!result.isPrivate);
       setClothImage([{ ootdId: 1, ootdImage: result.imageUrl }]);
+      setClothCategory([
+        {
+          id: result.category.parentCategoryId,
+          name: result.category.parentCategoryName,
+          detailCategories: [
+            {
+              id: result.category.id,
+              name: result.category.categoryName,
+            },
+          ],
+        },
+      ]);
+      setClothSize(result.size);
+      setSizeRerender(sizeRerender + 1);
     };
     fetchData();
   }, [router.isReady]);
 
   useEffect(() => {
-    setClothCategory([
-      { id: 1, name: '외투', detailCategories: [{ id: 10, name: '재킷' }] },
-    ]);
-  }, []);
+    setSizeRerender(sizeRerender + 1);
+  }, [clothCategory]);
+
+  useEffect(() => {
+    if (sizeRerender >= 4) {
+      setClothSize(null);
+    }
+  }, [sizeRerender]);
 
   const onClickSubmitButton = async () => {
+    if (clothName.length === 0) {
+      alert('이름을 입력해주세요');
+      return;
+    }
+    if (!clothCategory) {
+      alert('카테고리를 선택해주세요');
+      return;
+    }
+    if (!clothBrand) {
+      alert('브랜드를 선택해주세요');
+      return;
+    }
+    if (!clothColor || clothColor.length === 0) {
+      alert('색상을 선택해주세요');
+      return;
+    }
+    if (!clothSize) {
+      alert('사이즈를 선택해주세요');
+      return;
+    }
+
     //옷 등록 api
     const payload = {
       purchaseStore: clothWhereBuy.letter,
@@ -74,27 +113,26 @@ const EditCloth: ComponentWithLayout = () => {
       brandId: clothBrand![0].id,
       categoryId: clothCategory![0].detailCategories![0].id,
       colorIds: [...clothColor!].map((item) => item.id),
-      isOpen: clothOpen,
+      isPrivate: !clothOpen,
       sizeId: clothSize!.id,
       clothesImageUrl: clothImage![0].ootdImage,
       name: clothName,
       purchaseDate: clothBuyDate,
+      memo: clothMemo,
     };
     const result = await putCloth(
       Number(router.query.ClothNumber![0]),
       payload
     );
-    console.log(result);
-  };
-
-  const onClickCancle = () => {
-    router.push(`/DetailCloth`);
+    if (result) router.push(`/Cloth/${Number(router.query.ClothNumber![0])}`);
   };
 
   return (
     <Funnel>
       <AppBar
-        leftProps={<Button3 onClick={onClickCancle}>취소</Button3>}
+        leftProps={
+          <Button3 onClick={() => router.push(`/DetailCloth`)}>취소</Button3>
+        }
         middleProps={<Title1>수정하기</Title1>}
         rightProps={<></>}
       />

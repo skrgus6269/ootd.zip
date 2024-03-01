@@ -25,8 +25,8 @@ interface ClothDataType {
   brand: { id: number; name: string };
   category: { id: number; categoryName: string; parentCategoryName: string };
   size: { id: number; name: string; lineNo: string };
-  colors: { id: number; name: string }[];
-  isOpen: Boolean;
+  colors: { id: number; name: string; colorCode: string }[];
+  isPrivate: Boolean;
   memo: string;
   purchaseStore: string;
   purchaseStoreType: string;
@@ -85,7 +85,7 @@ const Cloth = () => {
   };
 
   const isOpenButton = async () => {
-    const payload = { isOpen: !data!.isOpen };
+    const payload = { isPrivate: !data!.isPrivate };
     const result = await patchClothIsPrivate(
       Number(router.query.ClothNumber![0]),
       payload
@@ -96,7 +96,7 @@ const Cloth = () => {
 
   const buttons = [
     {
-      name: data?.isOpen ? '비공개로 변경' : '공개로 변경',
+      name: !data?.isPrivate ? '비공개로 변경' : '공개로 변경',
       buttonClick: isOpenButton,
     },
     { name: '게시글 수정', buttonClick: modifyButton },
@@ -157,7 +157,7 @@ const Cloth = () => {
       />
       {data && (
         <DetailClothHeader
-          isPublic={data?.isOpen}
+          isPublic={!data?.isPrivate}
           bigCategory={data?.category.parentCategoryName!}
           smallCategory={data?.category.categoryName!}
           brand={data?.brand.name!}
@@ -173,7 +173,7 @@ const Cloth = () => {
       />
       <DetailClothDetailInfo
         color={data?.colors!.map((item) => {
-          return { ...item, color: '#58efff' };
+          return { ...item, color: item.colorCode };
         })}
         size={data?.size.name}
         buyDate={data?.purchaseDate}

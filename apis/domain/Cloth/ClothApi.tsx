@@ -6,7 +6,6 @@ export default function ClothApi() {
   const postCloth = async (payload: postClothPayload) => {
     try {
       const { statusCode } = await userService.postCloth(payload);
-
       if (statusCode === 200) {
         return true;
       } else {
@@ -58,9 +57,12 @@ export default function ClothApi() {
   //cloth 수정
   const putCloth = async (id: number, payload: postClothPayload) => {
     try {
-      const { result } = await userService.putCloth(id, payload);
+      const { statusCode } = await userService.putCloth(id, payload);
 
-      return result;
+      if (statusCode === 200) {
+        return true;
+      }
+      return false;
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명:', err);
