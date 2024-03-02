@@ -17,10 +17,6 @@ const Cloth = styled.div`
   padding: 16px 0 48px 0;
   .slick-track {
     margin: 0;
-    width: 100% !important;
-  }
-  .slick-slide {
-    width: 100% !important;
   }
 `;
 const CarouselItem = styled.div`
