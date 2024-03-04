@@ -7,6 +7,7 @@ interface ColorSpanProps {
 
 const Layout = styled.div`
   padding: 0 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   .nextButton {
@@ -38,6 +39,11 @@ const ColorSpan = styled.div<ColorSpanProps>`
   `}
 `;
 const ColorName = styled.div``;
+
+const ColorList = styled.div`
+  overflow-y: scroll;
+  height: 70%;
+`;
 
 const SelectedColorList = styled.div`
   width: 100%;
@@ -85,6 +91,7 @@ const S = {
   ColorSpan,
   ColorName,
   SelectedColor,
+  ColorList,
 };
 
 export default S;
