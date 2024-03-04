@@ -38,8 +38,7 @@ export default function FixModal({
   };
 
   const onClickIsPrivateButton = async () => {
-    await patchOOTDIsPrivate({
-      id: Number(router.query!.OOTDNumber![0]),
+    await patchOOTDIsPrivate(Number(router.query!.OOTDNumber![0]), {
       isPrivate: !isPrivate,
     });
     setPublicSetting(true);

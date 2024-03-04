@@ -21,9 +21,16 @@ export const getOOTD = async (id: number) => {
   return data;
 };
 
+//ootd 상세정보 조회
+export const getOOTDDetail = async (id: number) => {
+  const data = await ootdApi.getOOTDDetail(id);
+
+  return data;
+};
+
 //ootd 전체 수정
-export const putOOTD = async (params: postOOTDPayload) => {
-  const data = await ootdApi.putOOTD(params);
+export const putOOTD = async (ootdId: number, params: postOOTDPayload) => {
+  const data = await ootdApi.putOOTD(ootdId, params);
 
   return data;
 };
@@ -58,9 +65,10 @@ export const DeleteOOTDComent = async (id: number) => {
 
 //ootd 내용, 공개/비공개 여부 수정
 export const patchOOTDIsPrivate = async (
+  ootdId: number,
   payload: patchOOTDIsPrivatePayload
 ) => {
-  const data = await ootdApi.patchOOTDIsPrivate(payload);
+  const data = await ootdApi.patchOOTDIsPrivate(ootdId, payload);
 
   return data;
 };
