@@ -5,8 +5,8 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <meta
-        name="viewport"
-        content="upgrade-insecure-requests,initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width,upgrade-insecure-requests"
+        name="viewport" 
+        content="upgrade-insecure-requests,initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width,upgrade-insecure-requests" 
         http-equiv="Content-Security-Policy"
       />
       <body>

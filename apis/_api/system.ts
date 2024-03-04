@@ -23,3 +23,9 @@ export const getSize = async (id: number) => {
 
   return data;
 };
+
+export const getStyle = async () => {
+  const { data } = await fetcher.get('/api/v1/style/');
+
+  return data;
+};

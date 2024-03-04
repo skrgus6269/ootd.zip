@@ -38,10 +38,10 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
                       key={index}
                       clothImage={item.itemImage}
                       caption={item.caption}
-                      headline={item.brand}
-                      subHeadline={item.category}
-                      bodyFirst={item.name}
-                      bodySecond={item.size}
+                      brand={item.brand}
+                      category={item.category}
+                      name={item.name}
+                      clothSize={item.size}
                       icon="like"
                       clothId={item.clothId}
                     />

@@ -22,7 +22,14 @@ const UserImage = styled.div`
     border-radius: 50%;
   }
 `;
-const CommentLeft = styled.div``;
+const CommentLeft = styled.div`
+  .avatar {
+    margin-top: 6px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+`;
 const CommentRight = styled.div``;
 const UserName = styled.div`
   display: flex;
@@ -33,7 +40,7 @@ const UserName = styled.div`
 `;
 const UserComment = styled.div`
   .taggedUser {
-    color: #0085ff;
+    color: ${(prpos) => prpos.theme.color.correct};
   }
   display: flex;
   color: ${(props) => props.theme.color.grey_30};

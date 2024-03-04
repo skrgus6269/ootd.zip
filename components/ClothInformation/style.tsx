@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 interface LayoutProps {
-  size: 'big' | 'small';
+  size: string;
 }
 
 const Layout = styled.div<LayoutProps>`
   display: flex;
   width: 100%;
-  max-width: ${(props) => (props.size === 'big' ? '350px' : '290px')};
+  /* max-width: ${(props) => (props.size === 'big' ? '350px' : '290px')}; */
   gap: 16px;
   align-items: center;
 `;
@@ -33,7 +33,7 @@ const Headline = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  h5 {
+  .category {
     color: ${(props) => props.theme.color.grey_50};
   }
 `;

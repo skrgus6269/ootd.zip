@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Layout = styled.div`
   padding: 0 20px;
@@ -13,6 +15,9 @@ const Title = styled.div`
 `;
 const Cloth = styled.div`
   padding: 16px 0 48px 0;
+  .slick-track {
+    margin: 0;
+  }
 `;
 const CarouselItem = styled.div`
   display: flex !important;

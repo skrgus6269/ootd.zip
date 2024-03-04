@@ -3,31 +3,52 @@ import { Title1 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
 import ImageList from '@/components/ImageList';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useEffect, useState } from 'react';
 
-interface SimilarOOTDProps {
-  data: {
-    ootdId: number;
-    ootdImage: string;
-  }[];
+interface OOTDListType {
+  id: number;
+  image: string;
 }
 
-export default function SimilarOOTD({ data }: SimilarOOTDProps) {
+export default function SimilarOOTD() {
   const router = useRouter();
 
-  const onClickSimilarOOTDImage = (index: number) => {
-    router.push(`/OOTD/${index}`);
+  const { getSimilarOOTD } = OOTDApi();
+
+  const [data, setData] = useState<OOTDListType[] | null>(null);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const fetchData = async () => {
+      const result = await getSimilarOOTD(Number(router.query.OOTDNumber![0]));
+      setData(result?.content);
+    };
+    fetchData();
+  }, [router.isReady, router.query.OOTDNumber]);
+
+  const onClickSimilarOOTDImage = (ootdId: number) => {
+    router.push(`/OOTD/${ootdId}`);
   };
+
   return (
     <S.Layout>
-      <S.Title>
-        <Title1>비슷한 OOTD</Title1>
-      </S.Title>
+      {data && data.length > 0 && (
+        <S.Title>
+          <Title1>비슷한 OOTD</Title1>
+        </S.Title>
+      )}
+
       <S.OOTD>
-        <ImageList
-          data={data}
-          onClick={onClickSimilarOOTDImage}
-          type="column"
-        />
+        {data && (
+          <ImageList
+            onClick={onClickSimilarOOTDImage}
+            type="row"
+            data={data.map((item) => {
+              return { ootdId: item.id, ootdImage: item.image };
+            })}
+          />
+        )}
       </S.OOTD>
     </S.Layout>
   );

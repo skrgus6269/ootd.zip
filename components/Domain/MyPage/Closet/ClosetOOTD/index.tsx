@@ -19,10 +19,6 @@ export default function ClosetOOTD({ myPageOOTDList }: ClosetOOTDProps) {
     '오래된 순'
   );
 
-  const [myPageOOTD, setMyPageOOTD] = useState<MyPageOOTDType[] | undefined>(
-    myPageOOTDList
-  );
-
   const router = useRouter();
 
   const onClickImageList = (index: number) => {
@@ -45,13 +41,13 @@ export default function ClosetOOTD({ myPageOOTDList }: ClosetOOTDProps) {
         </Caption1>
       </S.OOTDSort>
       <S.OOTDList>
-        {myPageOOTD && (
+        {
           <ImageList
             type="column"
-            data={myPageOOTD}
+            data={myPageOOTDList!}
             onClick={onClickImageList}
           />
-        )}
+        }
       </S.OOTDList>
     </S.Layout>
   );

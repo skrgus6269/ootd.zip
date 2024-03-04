@@ -1,15 +1,15 @@
 export interface ClothInformationProps {
   clothId: number;
   clothImage: string;
-  caption: string;
-  size?: 'big' | 'small';
-  headline: string;
-  subHeadline?: string;
-  bodyFirst: string;
-  bodySecond?: string;
+  clothSize?: string;
+  name?: string;
+  brand?: string;
+  size?: string;
+  category?: string;
   icon?: string;
   state?: 'dark' | 'light';
   type?: 'view';
+  caption?: string;
   className?: string;
   onClick?: () => void;
 }

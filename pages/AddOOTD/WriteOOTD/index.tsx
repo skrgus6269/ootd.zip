@@ -10,17 +10,16 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 import NextButton from '@/components/NextButton';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRouter } from 'next/router';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
   string: string;
   setString: Dispatch<SetStateAction<string>>;
-  style: Style[];
-  setStyle: Dispatch<SetStateAction<Style[]>>;
   open: Boolean;
   setOpen: Dispatch<SetStateAction<Boolean>>;
-  selectedStyle: string[];
-  setSelectedStyle: Dispatch<SetStateAction<string[]>>;
+  selectedStyle: Style[];
+  setSelectedStyle: Dispatch<SetStateAction<Style[]>>;
   complete: Boolean;
 }
 
@@ -28,22 +27,20 @@ export default function WriteOOTD({
   imageAndTag,
   string,
   setString,
-  style,
-  setStyle,
   open,
   setOpen,
   selectedStyle,
   setSelectedStyle,
   complete,
 }: WriteOOTDProps) {
-  const [postOOTD] = OOTDApi();
+  const { postOOTD } = OOTDApi();
 
-  const [addTag, setAddTag] = useState<Boolean>(false);
-  const [init, setInit] = useState<Boolean>(false); // 초기 addTag 렌더링 방지
+  const router = useRouter();
+
+  const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
 
   const onClickAddStyleTag = () => {
-    setAddTag(true);
-    setInit(true);
+    setStyleModalIsOpen(true);
   };
 
   const onClickStyleTag = (index: number) => {
@@ -56,19 +53,19 @@ export default function WriteOOTD({
     if (imageAndTag !== undefined) {
       const payload = {
         content: string,
-        isPrivate: true as Boolean,
-        styles: [1],
+        isPrivate: !open as Boolean,
+        styles: selectedStyle.map((item) => item.id),
         ootdImages: imageAndTag.map((ootd) => {
           return {
             ootdImage: ootd.ootdImage,
-            clothesTags: ootd.tag
-              ? ootd.tag.map((tag) => {
+            clothesTags: ootd.ootdImageClothesList
+              ? ootd.ootdImageClothesList?.map((tag) => {
                   return {
-                    clothesId: tag.clothId,
-                    deviceWidth: tag.deviceWidth,
-                    deviceHeight: tag.deviceHeight,
-                    xrate: tag.xRate,
-                    yrate: tag.yRate,
+                    clothesId: tag.clothesId,
+                    deviceWidth: tag.deviceSize.deviceWidth,
+                    deviceHeight: tag.deviceSize.deviceHeight,
+                    xrate: tag.coordinate.xrate,
+                    yrate: tag.coordinate.yrate,
                   };
                 })
               : [],
@@ -79,7 +76,7 @@ export default function WriteOOTD({
 
       //ootd 성공 여부에 따른 페이지 이동
       if (addOOTDSuccess) {
-        alert('등록 성공!');
+        router.push('/mypage');
       } else {
         alert('등록 실패');
       }
@@ -119,7 +116,7 @@ export default function WriteOOTD({
                   onClick={() => onClickStyleTag(index)}
                   key={index}
                 >
-                  <Button3 className="selectedStyleList">{item}</Button3>
+                  <Button3 className="selectedStyleList">{item.name}</Button3>
                   <AiOutlineClose />
                 </S.StyleListSpan>
               );
@@ -136,18 +133,19 @@ export default function WriteOOTD({
             />
           </Input>
         </S.Open>
-        <NextButton className="nextButon" state={complete} onClick={() => ''}>
+        <NextButton
+          className="nextButon"
+          state={complete}
+          onClick={onClickSubmitButton}
+        >
           다음
         </NextButton>
       </S.Layout>
-
-      {init && (
+      {styleModalIsOpen && (
         <StyleModal
-          setAddTag={setAddTag}
-          addTag={addTag}
-          style={style}
-          setStyle={setStyle}
+          setStyleModalIsOpen={setStyleModalIsOpen}
           setSelectedStyle={setSelectedStyle}
+          styleModalIsOpen={styleModalIsOpen}
         />
       )}
     </>
