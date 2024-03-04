@@ -78,13 +78,9 @@ export default function FilterModal({
   };
 
   const onClickInitButton = () => {
-    setFilter({
-      category: null,
-      color: null,
-      brand: null,
-      isOpen: null,
-    });
-    setFilterModalIsOpen(false);
+    setSelectedBrand(null);
+    setSelectedCategory(null);
+    setSelectedColorList(null);
   };
 
   const onClickCloseCategoryButton = (
