@@ -21,8 +21,8 @@ export default function DeleteAlert({
           <Body3>복구할 수 없습니다.</Body3>
         </>
       }
-      yes={'안 할래'}
-      no={'할래'}
+      yes={'할래'}
+      no={'안할래'}
     />
   );
 }

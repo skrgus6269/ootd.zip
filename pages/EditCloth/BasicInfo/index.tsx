@@ -3,7 +3,7 @@ import S from '@/style/EditCloth/BasicInfo/style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
 import { Body3, Title1 } from '@/components/UI';
-import { ClothWhereBuy } from '..';
+import { ClothWhereBuy } from '../[...ClothNumber]';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import ClothCategoryModal, {
   CategoryListType,
@@ -86,7 +86,7 @@ export default function BasicInfo({
     </S.Category>
   );
 
-  const Brand = <Body3>{clothBrand && clothBrand[0].name}</Body3>;
+  const Brand = <Body3>{clothBrand && clothBrand[0]?.name}</Body3>;
 
   const WhereToBuy = (
     <Body3 style={{ WebkitTextDecorationLine: 'underline' }}>

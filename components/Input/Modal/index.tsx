@@ -7,7 +7,7 @@ interface ModalProps {
   result: React.ReactNode;
   setModalOpen: Dispatch<SetStateAction<Boolean>>;
   state: Boolean;
-  type?: 'link' | 'write';
+  type?: 'Link' | 'Write';
   action?: 'write';
 }
 
