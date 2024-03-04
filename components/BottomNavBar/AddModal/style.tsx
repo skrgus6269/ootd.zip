@@ -29,6 +29,7 @@ const OOTD = styled.div`
   svg {
     width: 24px;
     height: 24px;
+    color: ${(props) => props.theme.color.accent};
   }
 `;
 const Closet = styled(OOTD)`

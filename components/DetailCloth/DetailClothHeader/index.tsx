@@ -28,7 +28,7 @@ export default function DetailClothDiscription({
           <Body2 style={{ fontWeight: '600' }}>{smallCategory}</Body2>
         </S.Category>
         <S.OpenTag state={isPublic}>
-          <Body3 style={{ color: isPublic ? '#ff7a00' : '#ff7a00' }}>
+          <Body3 state="emphasis" className="isPublic">
             {isPublic ? '공개' : '비공개'}
           </Body3>
         </S.OpenTag>

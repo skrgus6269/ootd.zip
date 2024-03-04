@@ -11,7 +11,7 @@ interface TextProps {
   unit?: string;
   validity?: (value: string) => void;
   onChange: (value: string) => void;
-  type?: 'number' | 'link';
+  type?: 'number' | 'Link';
   border?: Boolean;
   line: 'underline' | 'outline';
   inputRef?: MutableRefObject<null>;
@@ -69,7 +69,7 @@ export default function Text({
 
   return (
     <S.Layout size={size} line={line} onClick={onClick}>
-      {type === 'link' && (
+      {type === 'Link' && (
         <S.LinkIcon state={letter.length > 0}>
           <AiOutlineLink />
         </S.LinkIcon>

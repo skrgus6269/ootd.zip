@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface LayoutProps {
   state: Boolean;
-  type?: 'link' | 'write';
+  type?: 'Link' | 'Write';
 }
 
 const Layout = styled.div<LayoutProps>`
@@ -20,7 +20,7 @@ const Layout = styled.div<LayoutProps>`
 
   padding: 0 16px;
   ${(props) =>
-    props.type === 'link' &&
+    props.type === 'Link' &&
     `
     padding: 0 16px 0 42px;
   `}

@@ -28,12 +28,12 @@ const EditOOTD: ComponentWithLayout = () => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const router = useRouter();
 
-  const { getOOTD, putOOTD } = OOTDApi();
+  const { getOOTDDetail, putOOTD } = OOTDApi();
 
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
-      const result = await getOOTD(Number(router.query.OOTDNumber![0]));
+      const result = await getOOTDDetail(Number(router.query.OOTDNumber![0]));
       setImageAndTag(result.ootdImages);
       setContents(result.contents);
       setSelectedStyle(result.styles);
@@ -76,17 +76,20 @@ const EditOOTD: ComponentWithLayout = () => {
             clothesTags: item.ootdImageClothesList?.map((items) => {
               return {
                 clothesId: items.clothesId,
-                deviceWidth: items.deviceSize.deviceWidth,
-                deviceHeight: items.deviceSize.deviceHeight,
-                xrate: items.coordinate.xRate,
-                yrate: items.coordinate.yRate,
+                deviceWidth: items.deviceSize?.deviceWidth,
+                deviceHeight: items.deviceSize?.deviceHeight,
+                xrate: items.coordinate?.xrate,
+                yrate: items.coordinate?.yrate,
               };
             }),
           };
         }),
         isPrivate: !isOpen,
       };
-      const editOOTDSuccess = await putOOTD(payload);
+      const editOOTDSuccess = await putOOTD(
+        Number(router.query.OOTDNumber![0]),
+        payload
+      );
 
       //edit ootd 성공 여부에 따른 페이지 이동
       if (editOOTDSuccess) {

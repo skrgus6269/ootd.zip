@@ -36,14 +36,14 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
       }
     };
     fetchData();
-  }, [router.isReady, userId]);
+  }, [router.isReady, userId, router.query.OOTDNumber]);
 
   const [data, setData] = useState<UserClothDataType[] | null>(null);
   return (
     <S.Layout>
       <S.Title>
         <Title1>{userName}님의 옷장</Title1>
-        <Button3 onClick={() => router.push(`/Closet`)}>더보기</Button3>
+        <Button3 onClick={() => router.push(`/mypage`)}>더보기</Button3>
       </S.Title>
       <S.Cloth>
         <Carousel slidesToShow={1.1} infinite={false}>
@@ -57,11 +57,10 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                       clothId={item.id}
                       clothImage={item.imageUrl}
                       caption={'옷장'}
-                      headline={item.category.parentCategoryName}
-                      subHeadline={item.category.categoryName}
-                      bodyFirst={item.brand.name}
-                      bodySecond={`사이즈 ${item.size.name}`}
-                      icon="like"
+                      brand={item.brand.name}
+                      category={item.category.categoryName}
+                      name={item.name}
+                      clothSize={`${item.size.name}`}
                     />
                     {data[index + 1] && (
                       <ClothInformation
@@ -71,11 +70,10 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                         clothId={data[index + 1].id}
                         clothImage={data[index + 1].imageUrl}
                         caption={'옷장'}
-                        headline={data[index + 1].category.parentCategoryName}
-                        subHeadline={data[index + 1].category.categoryName}
-                        bodyFirst={data[index + 1].brand.name}
-                        bodySecond={`사이즈  ${data[index + 1].size.name}`}
-                        icon="like"
+                        brand={data[index + 1].brand.name}
+                        category={data[index + 1].category.categoryName}
+                        name={data[index + 1].name}
+                        clothSize={`${data[index + 1].size.name}`}
                       />
                     )}
                   </S.CarouselItem>

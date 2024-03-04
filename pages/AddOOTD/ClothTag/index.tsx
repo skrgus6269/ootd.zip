@@ -60,10 +60,14 @@ export default function ClothTag({
 
     updatedElements[ootdIndex].ootdImageClothesList![index] = {
       ...updatedElements[ootdIndex].ootdImageClothesList![index],
-      xRate: String(data.lastX),
-      yRate: String(data.lastY),
-      deviceHeight: componentHeight,
-      deviceWidth: componentWidth,
+      coordinate: {
+        xrate: String(data.lastX),
+        yrate: String(data.lastY),
+      },
+      deviceSize: {
+        deviceHeight: componentHeight,
+        deviceWidth: componentWidth,
+      },
     };
     console.log(updatedElements[ootdIndex].ootdImageClothesList![index]);
     setImageAndTag(updatedElements);
@@ -104,8 +108,8 @@ export default function ClothTag({
                         bounds=".image"
                         onDrag={(e, data) => onDrag(index, ootdIndex, e, data)}
                         defaultPosition={{
-                          x: Number(element.coordinate.xRate),
-                          y: Number(element.coordinate.yRate),
+                          x: Number(element.coordinate.xrate),
+                          y: Number(element.coordinate.yrate),
                         }}
                       >
                         <div className="sample">
@@ -113,8 +117,10 @@ export default function ClothTag({
                             clothId={element.clothesId}
                             clothImage={element.clothesImage}
                             caption={element.caption}
-                            headline={element.caption}
-                            bodyFirst={element.caption}
+                            brand={element.brand}
+                            clothSize={element.size}
+                            category={element.category}
+                            name={element.name}
                             state={element.state as 'dark' | 'light'}
                           />
                         </div>

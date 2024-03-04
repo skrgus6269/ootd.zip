@@ -54,7 +54,7 @@ export default function StyleModal({
 
   return (
     <>
-      <Modal height="60" isOpen={styleModalIsOpen}>
+      <Modal height="70" isOpen={styleModalIsOpen}>
         <S.Layout>
           <S.Label>
             <Title1>스타일 태그</Title1>

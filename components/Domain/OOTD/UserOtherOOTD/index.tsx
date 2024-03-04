@@ -35,7 +35,7 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
       }
     };
     fetchData();
-  }, [router.isReady, userId]);
+  }, [router.isReady, userId, router.query.OOTDNumber]);
 
   const [data, setData] = useState<OOTDListType[] | null>(null);
 
@@ -51,6 +51,7 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
       <S.OOTD>
         {data && (
           <ImageList
+            onClick={(ootdId: number) => router.push(`/OOTD/${ootdId}`)}
             type="row"
             data={data.map((item) => {
               return { ootdId: item.id, ootdImage: item.image };

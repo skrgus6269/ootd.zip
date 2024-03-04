@@ -27,19 +27,12 @@ import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import FixModal from '../Domain/OOTD/FixModal'; 
+import FixModal from '../Domain/OOTD/FixModal';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
-import Avatar from '@/public/images/Avatar.svg'; 
-import Toast from '@/components/Toast';
-
-interface ClothTag {
-  xRate: string;
-  yRate: string;
-  deviceWidth: number;
-  deviceHeight: number;
-} 
+import Avatar from '@/public/images/Avatar.svg';
+import Toast from '../Toast';
 
 interface PostingProps {
   data: OOTDType;
@@ -67,6 +60,7 @@ export default function Posting({
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
+  const [publicSetting, setPublicSetting] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
   const myId = useRecoilValue(userId);
@@ -76,8 +70,9 @@ export default function Posting({
   const router = useRouter();
 
   useEffect(() => {
-    setHeartState(data.like);
-    setBookMarkState(data.bookmark);
+    setHeartState(data.isLike);
+    setBookMarkState(data.isBookmark);
+    setFollowState(data.isFollowing);
   }, [data]);
 
   //컴포넌트 크기 계산
@@ -163,16 +158,13 @@ export default function Posting({
     }
   };
 
-  const onClickKebabButton = () => { 
-    if (myId === data.userId) { 
-      setPublicSetting(false); 
+  const onClickKebabButton = () => {
+    if (myId === data.userId) {
       setFixModalIsOpen(true);
       return;
     }
     setReportModalIsOpen(true);
   };
-
-  const [publicSetting, setPublicSetting] = useState<Boolean>(false); // 공개 여부
 
   return (
     <>
@@ -244,8 +236,8 @@ export default function Posting({
                             clothId={items.clothesId}
                             clothImage={items.clothesImage}
                             caption={'tag'}
-                            headline={items.brand.name}
-                            bodyFirst={items.clothesName}
+                            brand={items.brand.name}
+                            name={items.clothesName}
                             size="small"
                             type="view"
                           />
@@ -314,7 +306,7 @@ export default function Posting({
           setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
-          isPrivate={data.private}
+          isPrivate={data.isPrivate}
           setGetPostReRender={setGetPostReRender}
           getPostReRender={getPostReRender}
         />
