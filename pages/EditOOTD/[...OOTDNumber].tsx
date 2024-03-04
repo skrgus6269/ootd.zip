@@ -76,10 +76,10 @@ const EditOOTD: ComponentWithLayout = () => {
             clothesTags: item.ootdImageClothesList?.map((items) => {
               return {
                 clothesId: items.clothesId,
-                deviceWidth: items.deviceSize.deviceWidth,
-                deviceHeight: items.deviceSize.deviceHeight,
-                xrate: items.coordinate.xRate,
-                yrate: items.coordinate.yRate,
+                deviceWidth: items.deviceSize?.deviceWidth,
+                deviceHeight: items.deviceSize?.deviceHeight,
+                xrate: items.coordinate?.xrate,
+                yrate: items.coordinate?.yrate,
               };
             }),
           };
