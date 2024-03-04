@@ -166,7 +166,7 @@ const Cloth = () => {
       )}
       <S.Img>{data && <img src={data.imageUrl} />}</S.Img>
       <DetailClothDiscription
-        isLink={true}
+        isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
         uploadDate={new Date(data?.createdAt!).toLocaleDateString()}
         memo={data?.memo}
