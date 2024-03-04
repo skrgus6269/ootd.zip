@@ -86,7 +86,10 @@ const EditOOTD: ComponentWithLayout = () => {
         }),
         isPrivate: !isOpen,
       };
-      const editOOTDSuccess = await putOOTD(payload);
+      const editOOTDSuccess = await putOOTD(
+        Number(router.query.OOTDNumber![0]),
+        payload
+      );
 
       //edit ootd 성공 여부에 따른 페이지 이동
       if (editOOTDSuccess) {

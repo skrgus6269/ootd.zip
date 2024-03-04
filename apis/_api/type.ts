@@ -16,7 +16,6 @@ export interface postOOTDPayload {
 
 export interface patchOOTDIsPrivatePayload {
   isPrivate: Boolean;
-  id: number;
 }
 
 export interface postClothPayload {

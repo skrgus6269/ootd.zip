@@ -27,8 +27,8 @@ export const getOOTDDetail = async (id: number) => {
 };
 
 //ootd 전체 수정
-export const putOOTD = async (payload: postOOTDPayload) => {
-  const { data } = await fetcher.put(`api/v1/ootd`, payload);
+export const putOOTD = async (ootdId: number, payload: postOOTDPayload) => {
+  const { data } = await fetcher.put(`api/v1/ootd/${ootdId}`, payload);
 
   return data;
 };
@@ -42,9 +42,10 @@ export const deleteOOTD = async (id: number) => {
 
 //ootd 내용, 공개/비공개 여부 수정
 export const patchOOTDIsPrivate = async (
+  ootdId: number,
   payload: patchOOTDIsPrivatePayload
 ) => {
-  const { data } = await fetcher.patch(`api/v1/ootd`, payload);
+  const { data } = await fetcher.patch(`api/v1/ootd/${ootdId}`, payload);
 
   return data;
 };
