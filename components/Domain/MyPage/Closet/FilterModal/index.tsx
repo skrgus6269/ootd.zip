@@ -144,7 +144,7 @@ export default function FilterModal({
               <TabView.Tab>
                 <Body4 className="top" state="emphasis">
                   {brandList
-                    ? `총${brandList!.length}개의 브랜드`
+                    ? `총 ${brandList!.length}개의 브랜드`
                     : `총 0개의 브랜드`}
                 </Body4>
                 <BrandList
