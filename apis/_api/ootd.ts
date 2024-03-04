@@ -14,6 +14,13 @@ export const postOOTD = async (payload: postOOTDPayload) => {
 
 //ootd 조회
 export const getOOTD = async (id: number) => {
+  const { data } = await fetcher.get(`api/v1/ootd?page=0&size=10&userId=${id}`);
+
+  return data;
+};
+
+//ootd 상세정보 조회
+export const getOOTDDetail = async (id: number) => {
   const { data } = await fetcher.get(`api/v1/ootd/${id}`);
 
   return data;

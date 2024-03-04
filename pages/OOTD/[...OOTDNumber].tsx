@@ -83,7 +83,7 @@ export interface OOTDType {
 }
 
 const OOTD: ComponentWithLayout = () => {
-  const { getOOTD, postOOTDComment } = OOTDApi();
+  const { getOOTDDetail, postOOTDComment } = OOTDApi();
 
   const router = useRouter();
 
@@ -94,7 +94,7 @@ const OOTD: ComponentWithLayout = () => {
     const fetchData = async () => {
       if (!router.isReady) return;
       try {
-        const result = (await getOOTD(
+        const result = (await getOOTDDetail(
           Number(router.query.OOTDNumber![0])
         )) as OOTDType;
 

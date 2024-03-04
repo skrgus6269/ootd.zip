@@ -28,12 +28,12 @@ const EditOOTD: ComponentWithLayout = () => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const router = useRouter();
 
-  const { getOOTD, putOOTD } = OOTDApi();
+  const { getOOTDDetail, putOOTD } = OOTDApi();
 
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
-      const result = await getOOTD(Number(router.query.OOTDNumber![0]));
+      const result = await getOOTDDetail(Number(router.query.OOTDNumber![0]));
       setImageAndTag(result.ootdImages);
       setContents(result.contents);
       setSelectedStyle(result.styles);

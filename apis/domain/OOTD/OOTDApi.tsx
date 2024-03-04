@@ -18,6 +18,17 @@ export const OOTDApi = () => {
     }
   };
 
+  //ootd 상세정보 조회
+  const getOOTDDetail = async (id: number) => {
+    try {
+      const { result } = await userService.getOOTDDetail(id);
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
   //ootd 게시
   const postOOTD = async (payload: postOOTDPayload) => {
     try {
@@ -185,6 +196,7 @@ export const OOTDApi = () => {
   return {
     postOOTD,
     getOOTD,
+    getOOTDDetail,
     putOOTD,
     deleteOOTD,
     getOOTDComment,

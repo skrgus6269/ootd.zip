@@ -20,6 +20,13 @@ export const getOOTD = async (id: number) => {
   return data;
 };
 
+//ootd 상세정보 조회
+export const getOOTDDetail = async (id: number) => {
+  const data = await ootdApi.getOOTDDetail(id);
+
+  return data;
+};
+
 //ootd 전체 수정
 export const putOOTD = async (params: postOOTDPayload) => {
   const data = await ootdApi.putOOTD(params);
