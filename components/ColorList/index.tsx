@@ -54,7 +54,6 @@ export default function ColorList({
 
   useEffect(() => {
     const selectedColor = colorList.filter((item) => item.state);
-    console.log('selectedColor', selectedColor);
     setSelectedColorList(selectedColor);
   }, [colorList]);
 
