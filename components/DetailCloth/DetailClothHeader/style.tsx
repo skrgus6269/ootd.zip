@@ -49,6 +49,13 @@ const OpenTag = styled.div<OpenTagProps>`
   border-radius: 2px;
   background-color: ${(props) =>
     props.state ? props.theme.color.orange_100 : props.theme.color.orange_500};
+  .isPublic {
+    padding: 2px 8px;
+    border-radius: 2px;
+    background-color: ${(props) =>
+      props.state ? props.theme.color.accent : props.theme.color.subdued};
+    border: ${(props) => (!props.state ? '1px solid black' : 'none')};
+  }
 `;
 
 const S = {

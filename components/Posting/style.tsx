@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 interface BackgroundProps {
   isOpen: Boolean;
@@ -11,6 +13,7 @@ const Background = styled.div<BackgroundProps>`
   width: 100vw;
   height: calc(100vh - 48px);
   position: fixed;
+  top: 0;
 `;
 
 const Layout = styled.div`
@@ -20,6 +23,9 @@ const Layout = styled.div`
     height: 24px;
   }
   border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
+  .slick-dots {
+    bottom: -35px;
+  }
 `;
 
 const PostingTop = styled.div`
@@ -27,6 +33,12 @@ const PostingTop = styled.div`
   gap: 8px;
   align-items: center;
   padding: 10px 20px;
+
+  .avatar {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+  }
 
   .userImage {
     width: 32px;
@@ -38,10 +50,13 @@ const PostingTop = styled.div`
     flex-grow: 1;
   }
 
-  .follow {
-    background-color: ${(props) => props.theme.color.grey_00};
+  .unfollow {
+    background-color: ${(props) => props.theme.color.subdued};
     border-radius: 2px;
-    color: white;
+  }
+  .following {
+    background-color: ${(props) => props.theme.color.grey_90};
+    border-radius: 2px;
   }
   p {
     padding: 2px 6px;
@@ -51,6 +66,7 @@ const PostingTop = styled.div`
 const PostingImage = styled.div`
   position: relative;
   width: 100%;
+  height: 100vw;
   .tag {
     position: absolute;
     z-index: 999;
@@ -64,6 +80,7 @@ const PostingImage = styled.div`
 
   .postingImage {
     width: 100%;
+    height: 100vw;
     max-height: 390px;
     object-fit: cover;
   }
@@ -79,8 +96,8 @@ interface ClothTagProps {
 }
 const PostingClothTag = styled.div<ClothTagProps>`
   position: absolute;
-  left: ${(props) => props.xrate}px;
   top: ${(props) => props.yrate}px;
+  left: ${(props) => props.xrate}px;
   display: ${(props) => (props.clothTagOpen ? 'block' : 'none')};
   @keyframes fadeIns {
     from {

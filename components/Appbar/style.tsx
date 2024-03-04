@@ -26,8 +26,8 @@ const AppBarLeft = styled.div`
 
   //아이콘 크기
   svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 `;
 

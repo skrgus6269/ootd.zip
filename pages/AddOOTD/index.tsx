@@ -9,24 +9,26 @@ import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { Title1 } from '@/components/UI';
 import { useRouter } from 'next/router';
-import { styleList } from '@/constants/business.constants';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 
 export interface Style {
-  tag: string;
-  value: Boolean;
+  id: number;
+  name: string;
+  state: Boolean;
 }
 
 const AddOOTD: ComponentWithLayout = () => {
   const steps = ['편집', '태그', '게시하기'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>([]); //이미지 + 태그
+  const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>([
+    {
+      ootdId: 0,
+      ootdImage:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
+  ]); //이미지 + 태그
   const [string, setString] = useState(''); //게시글
-  const styleListInitial = styleList.map((item) => {
-    return { value: false, tag: item } as Style;
-  });
-  const [style, setStyle] = useState<Style[]>(styleListInitial); //스타일
-  const [selectedStyle, setSelectedStyle] = useState<string[]>([]);
+  const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
   const [open, setOpen] = useState<Boolean>(true); //공개여부
   const [complete, setComplete] = useState<Boolean>(false); //게시 완료 여부
   const router = useRouter();
@@ -89,8 +91,6 @@ const AddOOTD: ComponentWithLayout = () => {
             imageAndTag={imageAndTag!}
             string={string}
             setString={setString}
-            style={style}
-            setStyle={setStyle}
             open={open}
             setOpen={setOpen}
             selectedStyle={selectedStyle}

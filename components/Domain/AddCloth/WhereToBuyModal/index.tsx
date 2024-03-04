@@ -20,19 +20,19 @@ export default function WhereToBuyModal({
   setWhereToBuy,
 }: WhereToBuyModal) {
   const [linkLetter, setLinkLetter] = useState<string>(
-    storedClothWhereBuy && storedClothWhereBuy.type === 'link'
+    storedClothWhereBuy && storedClothWhereBuy.type === 'Link'
       ? storedClothWhereBuy.letter
       : ''
   );
   const [writeLetter, setWriteLetter] = useState<string>(
-    storedClothWhereBuy && storedClothWhereBuy.type === 'write'
+    storedClothWhereBuy && storedClothWhereBuy.type === 'Write'
       ? storedClothWhereBuy.letter
       : ''
   );
 
   //true === 링크입력 , false === 직접입력
   const [selectedLetter, setSelectedLetter] = useState<number | null>(
-    storedClothWhereBuy && storedClothWhereBuy.type === 'link' ? 1 : 2
+    storedClothWhereBuy && storedClothWhereBuy.type === 'Link' ? 1 : 2
   );
 
   const linkRef = useRef<any>(null);
@@ -56,9 +56,9 @@ export default function WhereToBuyModal({
   const onClickNextButton = () => {
     setIsOpen(false);
     if (linkLetter.length > 0)
-      setWhereToBuy({ letter: linkLetter, type: 'link' });
+      setWhereToBuy({ letter: linkLetter, type: 'Link' });
     if (writeLetter.length > 0)
-      setWhereToBuy({ letter: writeLetter, type: 'write' });
+      setWhereToBuy({ letter: writeLetter, type: 'Write' });
   };
 
   return (
@@ -77,7 +77,7 @@ export default function WhereToBuyModal({
                 size="big"
                 placeholder="링크를 붙여넣으세요."
                 line="outline"
-                type="link"
+                type="Link"
                 onChange={setLinkLetter}
                 onClick={onClickLinkLetter}
               />
@@ -85,7 +85,7 @@ export default function WhereToBuyModal({
               <Input.ReadOnly
                 state={false}
                 result={<Body3>{linkLetter}</Body3>}
-                type="link"
+                type="Link"
                 onClick={onClickLinkLetter}
               />
             )}

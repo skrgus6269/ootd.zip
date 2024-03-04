@@ -1,54 +1,76 @@
 import { Title1 } from '@/components/UI';
 import S from './style';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
 import { Style } from '@/pages/AddOOTD';
 import NextButton from '@/components/NextButton';
 import Modal from '@/components/Modal';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 interface StyleModalProps {
-  setAddTag: Dispatch<SetStateAction<Boolean>>;
-  addTag: Boolean;
-  style: Style[];
-  setStyle: Dispatch<SetStateAction<Style[]>>;
-  setSelectedStyle: Dispatch<SetStateAction<string[]>>;
+  setStyleModalIsOpen: Dispatch<SetStateAction<Boolean>>;
+  styleModalIsOpen: Boolean;
+  setSelectedStyle: Dispatch<SetStateAction<Style[]>>;
+  styleInitial?: Style[];
 }
 
 export default function StyleModal({
-  setAddTag,
-  addTag,
-  style,
-  setStyle,
+  setStyleModalIsOpen,
+  styleModalIsOpen,
   setSelectedStyle,
+  styleInitial,
 }: StyleModalProps) {
+  const [style, setStyle] = useState<Style[]>([]);
+  const { getStyle } = OOTDApi();
+  useEffect(() => {
+    const ferchData = async () => {
+      let result = (await getStyle()).map((item: Style) => {
+        return { ...item, state: false };
+      }) as Style[];
+
+      if (styleInitial) {
+        styleInitial.forEach((style) => {
+          const styleIndex = result.findIndex((item) => item.id === style.id);
+          if (styleIndex !== -1) {
+            result[styleIndex].state = true;
+          }
+        });
+      }
+      setStyle(result);
+    };
+
+    ferchData();
+  }, []);
+
   //스타일 선택 완료 버튼
   const onClickStyleCompleteButton = () => {
-    const selectedStyle = style
-      .filter((item) => item.value)
-      .map((item) => item.tag);
-    setSelectedStyle(selectedStyle);
-    setAddTag(false);
+    if (style) {
+      const selectedStyle = style.filter((item) => item.state);
+      setSelectedStyle(selectedStyle);
+      setStyleModalIsOpen(false);
+    }
   };
+
   return (
     <>
-      <S.Background addTag={addTag} onClick={() => setAddTag(false)} />
-      <Modal height="80" isOpen={addTag}>
+      <Modal height="70" isOpen={styleModalIsOpen}>
         <S.Layout>
           <S.Label>
             <Title1>스타일 태그</Title1>
-            <AiOutlineClose onClick={() => setAddTag(false)} />
+            <AiOutlineClose onClick={() => setStyleModalIsOpen(false)} />
           </S.Label>
           <S.CheckBox>
             <Input>
-              <Input.CheckBox state={style} setState={setStyle} />
+              <Input.CheckBox state={style!} setState={setStyle} />
               <Input.HelperText className="helperText" state={1}>
                 최소 1개 이상 선택해주세요
               </Input.HelperText>
             </Input>
           </S.CheckBox>
           <NextButton
-            state={style.length > 0}
+            className="nextButton"
+            state={style !== null && style.length > 0}
             onClick={onClickStyleCompleteButton}
           >
             선택완료

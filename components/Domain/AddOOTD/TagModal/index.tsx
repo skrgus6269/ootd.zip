@@ -2,7 +2,7 @@ import SearchBar from '@/components/SearchBar';
 import S from './style';
 import ClothInformation from '@/components/ClothInformation';
 import { ClothInformationProps } from '@/components/ClothInformation/type';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import { Body4 } from '@/components/UI';
 import Modal from '@/components/Modal';
@@ -11,80 +11,86 @@ import NewRegister from './NewRegister';
 const ClothInformationSampleData = [
   {
     clothId: 1,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 2,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 3,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 4,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 5,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Adidas',
-    bodyFirst: '전북 현대 유니폼',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
     state: 'dark',
     icon: 'like',
+    category: '상의',
   },
   {
     clothId: 6,
-    size: 'big',
+    size: 'Free',
     clothImage:
       'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    headline: 'Nike',
-    bodyFirst: '나이키 하의',
-    state: 'light',
+    brand: 'Adidas',
+    name: '전북 현대 유니폼',
+    state: 'dark',
     icon: 'like',
+    category: '상의',
   },
 ] as [...ClothInformationProps[]];
 
 export type ImageWithTag = {
   ootdId: number;
   ootdImage: string;
-  tag?: {
-    clothId: number;
-    clothImage: string;
-    xRate: string;
-    yRate: string;
+  ootdImageClothesList?: {
+    clothesId: number;
+    clothesImage: string;
+    coordinate: { xrate: string; yrate: string };
+    deviceSize: { deviceWidth: number; deviceHeight: number };
     caption: string;
-    headline: string;
-    bodyFirst: string;
-    state: string;
-    deviceWidth?: number;
-    deviceHeight?: number;
+    size?: string;
+    state?: string;
+    name?: string;
+    brand?: string;
+    category?: string;
   }[];
 }[];
 
@@ -103,12 +109,12 @@ export default function AddTag({
   imageAndTag,
   slideIndex,
 }: AddTagProps) {
+  const [searchResult, setSearchResult] = useState();
   const categoryList = ['외투', '상의', '하의', '한벌옷', '신발'];
   const [letter, setLetter] = useState<string>('');
   const [clicked, setClicked] = useState<number | null>();
 
   const onClickCategory = (index: number) => {
-    console.log(clicked, index);
     if (clicked === index) {
       setClicked(null);
       return;
@@ -121,26 +127,30 @@ export default function AddTag({
     if (imageAndTag) {
       const newTag = JSON.parse(JSON.stringify(imageAndTag));
 
-      if (newTag[slideIndex].tag) {
-        newTag[slideIndex].tag?.push({
-          clothId: ClothInformationSampleData[index].clothId,
-          clothImage: ClothInformationSampleData[index].clothImage,
-          headline: ClothInformationSampleData[index].headline,
-          bodyFirst: ClothInformationSampleData[index].bodyFirst,
-          xRate: '0',
-          yRate: '0',
+      if (newTag[slideIndex].ootdImageClothesList) {
+        newTag[slideIndex].ootdImageClothesList?.push({
+          clothesId: ClothInformationSampleData[index].clothId,
+          clothesImage: ClothInformationSampleData[index].clothImage,
+          brand: ClothInformationSampleData[index].brand,
+          name: ClothInformationSampleData[index].name,
+          coordinate: {
+            xrate: '0',
+            yrate: '0',
+          },
           caption: '',
           state: 'light',
         });
       } else {
-        newTag[slideIndex].tag = [
+        newTag[slideIndex].ootdImageClothesList = [
           {
-            clothId: ClothInformationSampleData[index].clothId,
-            clothImage: ClothInformationSampleData[index].clothImage,
-            headline: ClothInformationSampleData[index].headline,
-            bodyFirst: ClothInformationSampleData[index].bodyFirst,
-            xRate: '0',
-            yRate: '0',
+            clothesId: ClothInformationSampleData[index].clothId,
+            clothesImage: ClothInformationSampleData[index].clothImage,
+            brand: ClothInformationSampleData[index].brand,
+            name: ClothInformationSampleData[index].name,
+            coordinate: {
+              xrate: '0',
+              yrate: '0',
+            },
             caption: '',
             state: 'light',
           },
@@ -200,14 +210,13 @@ export default function AddTag({
                           >
                             <ClothInformation
                               clothId={item.clothId}
-                              size={item.size}
+                              size="small"
                               clothImage={item.clothImage}
-                              caption=""
-                              headline={item.headline}
-                              subHeadline={item.subHeadline}
-                              bodyFirst={item.bodyFirst}
-                              bodySecond={item.bodySecond}
-                              icon={item.icon}
+                              caption="옷"
+                              brand={item.brand}
+                              category={item.category}
+                              name={item.name}
+                              clothSize={item.size}
                             />
                           </div>
                           <hr />

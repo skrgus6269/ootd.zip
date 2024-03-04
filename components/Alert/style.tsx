@@ -11,7 +11,6 @@ const Layout = styled.div`
   transform: translate(-50%, -50%);
   border-radius: 14px;
   background: #e5e5e5;
-  opacity: 0.87;
   backdrop-filter: blur(40px);
   text-align: center;
 `;
