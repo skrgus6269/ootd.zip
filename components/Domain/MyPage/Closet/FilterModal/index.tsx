@@ -132,7 +132,7 @@ export default function FilterModal({
   };
 
   return (
-    <Modal isOpen={isOpen} height="60">
+    <Modal isOpen={isOpen} height="65">
       <S.Layout>
         <TabView>
           <TabView.TabBar tab={['카테고리', '색상', '브랜드']} />
@@ -173,50 +173,58 @@ export default function FilterModal({
             </TabView.Tabs>
           </div>
         </TabView>
-        <S.SelectedFilter>
-          {selectedCategory?.map((item, index) => {
-            return (
-              <S.SelectedFilterSpan key={index}>
-                {!item.state ? (
-                  <Button3>{item.detailCategories![0].name}</Button3>
-                ) : (
+        {
+          <S.SelectedFilter
+            state={
+              (selectedCategory !== null && selectedCategory.length !== 0) ||
+              (selectedBrand !== null && selectedBrand.length !== 0) ||
+              (selectedColorList !== null && selectedColorList.length !== 0)
+            }
+          >
+            {selectedCategory?.map((item, index) => {
+              return (
+                <S.SelectedFilterSpan key={index}>
+                  {!item.state ? (
+                    <Button3>{item.detailCategories![0].name}</Button3>
+                  ) : (
+                    <Button3>{item.name}</Button3>
+                  )}
+                  <AiOutlineClose
+                    onClick={() =>
+                      onClickCloseCategoryButton(
+                        item.state ? item.id : item.detailCategories![0].id,
+                        item.state ? 'big' : 'small'
+                      )
+                    }
+                    className="close"
+                  />
+                </S.SelectedFilterSpan>
+              );
+            })}
+            {selectedColorList?.map((item, index) => {
+              return (
+                <S.SelectedFilterSpan key={index}>
                   <Button3>{item.name}</Button3>
-                )}
-                <AiOutlineClose
-                  onClick={() =>
-                    onClickCloseCategoryButton(
-                      item.state ? item.id : item.detailCategories![0].id,
-                      item.state ? 'big' : 'small'
-                    )
-                  }
-                  className="close"
-                />
-              </S.SelectedFilterSpan>
-            );
-          })}
-          {selectedColorList?.map((item, index) => {
-            return (
-              <S.SelectedFilterSpan key={index}>
-                <Button3>{item.name}</Button3>
-                <AiOutlineClose
-                  onClick={() => onClickCloseColorButton(item.id)}
-                  className="close"
-                />
-              </S.SelectedFilterSpan>
-            );
-          })}
-          {selectedBrand?.map((item, index) => {
-            return (
-              <S.SelectedFilterSpan key={index}>
-                <Button3>{item.name}</Button3>
-                <AiOutlineClose
-                  onClick={() => onClickCloseBrandButton(item.id)}
-                  className="close"
-                />
-              </S.SelectedFilterSpan>
-            );
-          })}
-        </S.SelectedFilter>
+                  <AiOutlineClose
+                    onClick={() => onClickCloseColorButton(item.id)}
+                    className="close"
+                  />
+                </S.SelectedFilterSpan>
+              );
+            })}
+            {selectedBrand?.map((item, index) => {
+              return (
+                <S.SelectedFilterSpan key={index}>
+                  <Button3>{item.name}</Button3>
+                  <AiOutlineClose
+                    onClick={() => onClickCloseBrandButton(item.id)}
+                    className="close"
+                  />
+                </S.SelectedFilterSpan>
+              );
+            })}
+          </S.SelectedFilter>
+        }
         <S.SelectedButton
           state={
             (selectedCategory !== null && selectedCategory.length > 0) ||

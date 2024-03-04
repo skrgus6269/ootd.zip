@@ -4,7 +4,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   height: 45vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 `;
 const Title = styled.div`
   padding: 21px 0;
