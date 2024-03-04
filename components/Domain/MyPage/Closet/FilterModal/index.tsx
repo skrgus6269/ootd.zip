@@ -43,21 +43,6 @@ export default function FilterModal({
     null
   );
 
-  const { getColor } = ClothApi();
-
-  useEffect(() => {
-    const fetchColor = async () => {
-      const color = (await getColor()) as ColorListType;
-
-      const newColor = color.map((item) => {
-        return { ...item, state: false };
-      });
-
-      setColorList(newColor);
-    };
-    fetchColor();
-  }, []);
-
   const [colorList, setColorList] = useState<ColorListType>([]);
 
   const [brandList, setBrandList] = useState<BrandType[] | null>([
@@ -149,10 +134,10 @@ export default function FilterModal({
               </TabView.Tab>
               <TabView.Tab>
                 <ColorList
-                  colorInitital={colorInitital}
                   setSelectedColorList={setSelectedColorList}
                   className="colorList"
                   colorList={colorList}
+                  colorInitital={colorInitital}
                   setColorList={setColorList}
                 />
               </TabView.Tab>
