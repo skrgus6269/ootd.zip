@@ -34,10 +34,10 @@ export interface OOTDType {
   userImage: string; //유저 프로필 이미지
   userId: number;
   createAt: string; //작성일
-  bookmark: Boolean;
-  like: Boolean;
-  private: Boolean;
-  following: Boolean;
+  isBookmark: Boolean;
+  isLike: Boolean;
+  isPrivate: Boolean;
+  isFollowing: Boolean;
   ootdImages: {
     ootdImage: string; //ootd 이미지
     ootdImageClothesList?: {
@@ -109,7 +109,7 @@ const OOTD: ComponentWithLayout = () => {
         });
       } catch (err) {
         alert('없는 페이지입니다');
-        router.push('/main');
+        // router.push('/main');
       }
     };
     fetchData();

@@ -70,9 +70,9 @@ export default function Posting({
   const router = useRouter();
 
   useEffect(() => {
-    setHeartState(data.like);
-    setBookMarkState(data.bookmark);
-    setFollowState(data.following);
+    setHeartState(data.isLike);
+    setBookMarkState(data.isBookmark);
+    setFollowState(data.isFollowing);
   }, [data]);
 
   //컴포넌트 크기 계산
@@ -306,7 +306,7 @@ export default function Posting({
           setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
-          isPrivate={data.private}
+          isPrivate={data.isPrivate}
           setGetPostReRender={setGetPostReRender}
           getPostReRender={getPostReRender}
         />
