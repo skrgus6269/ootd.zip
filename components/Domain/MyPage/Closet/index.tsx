@@ -2,69 +2,33 @@ import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
-import ClosetOOTD from './ClosetOOTD';
+import ClosetOOTD, { MyPageOOTDType } from './ClosetOOTD';
+import { useEffect, useState } from 'react';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 export default function Closet() {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
-
-  // const [, getOOTD] = useOOTD();
+  const myId = useRecoilValue(userId);
+  const { getOOTD } = OOTDApi();
   // const [getCloth] = useClogth();
 
-  // const myPageOOTDList = getOOTD({ id: 0 });
   // const myPageClothList = getCloth({ id: 0 });
 
-  const myPageOOTDList = [
-    {
-      ootdId: 0,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 2,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 3,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 4,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const { content } = await getOOTD(myId);
+      setMyPageOOTDList(
+        content.map((item: any) => {
+          return { ootdId: item.id, ootdImage: item.image };
+        })
+      );
+    };
+    fetchData();
+  }, []);
+
+  const [myPageOOTDList, setMyPageOOTDList] = useState<MyPageOOTDType[]>([]);
 
   const myPageClothList = [
     {
