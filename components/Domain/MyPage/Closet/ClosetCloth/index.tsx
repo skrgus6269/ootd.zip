@@ -68,7 +68,14 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
       />
       <S.Layout>
         <S.SearchFilter>
-          <S.Span onClick={onClickInitButton}>
+          <S.Span
+            state={
+              (filter.category !== null && filter.category.length !== 0) ||
+              (filter.brand !== null && filter.brand.length !== 0) ||
+              (filter.color !== null && filter.color.length !== 0)
+            }
+            onClick={onClickInitButton}
+          >
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
           <S.Span
