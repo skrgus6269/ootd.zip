@@ -20,15 +20,15 @@ export type searchClothType = {
 };
 
 interface genderProps {
-  man?: Boolean | null | undefined;
-  woman?: Boolean | null | undefined;
+  man: Boolean;
+  woman: Boolean;
 }
 
 export interface FilterData {
   category: CategoryType[] | null;
   color: ColorListType | null;
   brand: BrandType[] | null;
-  gender: genderProps | null;
+  gender: genderProps;
 }
 
 export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
@@ -40,7 +40,10 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
     category: null,
     color: null,
     brand: null,
-    gender: null,
+    gender: {
+      man: false,
+      woman: false,
+    },
   });
 
   const [searchResult, setSearchResult] = useState(searchClothList);
@@ -62,7 +65,10 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
       category: null,
       color: null,
       brand: null,
-      gender: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
     });
   };
 
@@ -80,22 +86,22 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
           <S.Span
-            state={filter.gender !== null && filter.gender.man === true}
+            state={filter.gender.man}
             onClick={() =>
               setFilter({
                 ...filter,
-                gender: { ...filter.gender, man: !filter.gender?.man },
+                gender: { ...filter.gender, man: !filter.gender.man },
               })
             }
           >
             <Body4 state="emphasis">남성</Body4>
           </S.Span>
           <S.Span
-            state={filter.gender !== null && filter.gender.woman === true}
+            state={filter.gender.woman}
             onClick={() =>
               setFilter({
                 ...filter,
-                gender: { ...filter.gender, woman: !filter.gender?.woman },
+                gender: { ...filter.gender, woman: !filter.gender.woman },
               })
             }
           >

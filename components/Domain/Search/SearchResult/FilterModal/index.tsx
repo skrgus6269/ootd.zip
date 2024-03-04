@@ -48,12 +48,10 @@ export default function FilterModal({
 
   const onClickSubmitButton = () => {
     setFilter({
-      // category: selectedCategory,
-      // color: selectedColorList,
       category: selectedCategory,
       color: selectedColorList,
       brand: selectedBrand,
-      isMan: null,
+      gender: null,
     });
     setFilterModalIsOpen(false);
   };
