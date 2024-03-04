@@ -81,7 +81,7 @@ const Cloth = () => {
   };
 
   const onClickNoButton = () => {
-    console.log('아니요');
+    setDeleteOpen(false);
   };
 
   const isOpenButton = async () => {
@@ -178,7 +178,7 @@ const Cloth = () => {
         size={data?.size.name}
         buyDate={data?.purchaseDate}
       />
-      <ClothOOTD count={5} data={OOTDData} />
+      <ClothOOTD data={OOTDData} />
       {clickedRight && <ActionSheet buttons={buttons} />}
       {deleteOpen && (
         <DeleteAlert

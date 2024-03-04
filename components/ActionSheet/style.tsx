@@ -10,6 +10,7 @@ const Layout = styled.div`
   background-color: white;
   z-index: 3;
   padding-top: 10px;
+  border-top: 2px solid black;
 `;
 
 const ButtonWrap = styled.div`
