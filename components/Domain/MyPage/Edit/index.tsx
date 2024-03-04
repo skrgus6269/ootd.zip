@@ -45,7 +45,7 @@ export default function Closet() {
   }, []);
 
   const buttons = [
-    { name: '사진 촬영', buttonClick: takePicture },
+    // { name: '사진 촬영', buttonClick: takePicture }, // 2차 배포
     { name: '앨범에서 선택', buttonClick: choosePicture },
     { name: '기본 이미지로 변경', buttonClick: deleteImage },
   ];
