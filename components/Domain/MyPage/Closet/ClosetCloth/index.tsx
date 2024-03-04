@@ -70,9 +70,11 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
         <S.SearchFilter>
           <S.Span
             state={
-              (filter.category !== null && filter.category.length !== 0) ||
-              (filter.brand !== null && filter.brand.length !== 0) ||
-              (filter.color !== null && filter.color.length !== 0)
+              !!(
+                filter?.category?.length ||
+                filter?.brand?.length ||
+                filter?.color?.length
+              )
             }
             onClick={onClickInitButton}
           >
