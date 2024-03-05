@@ -1,4 +1,5 @@
 import fetcher from '../fetcher';
+import { postReportPayload } from './type';
 
 export const getClothCategory = async () => {
   const { data } = await fetcher.get('/api/v1/category');
@@ -26,6 +27,18 @@ export const getSize = async (id: number) => {
 
 export const getStyle = async () => {
   const { data } = await fetcher.get('/api/v1/style/');
+
+  return data;
+};
+
+export const getReport = async () => {
+  const { data } = await fetcher.get('/api/v1/report');
+
+  return data;
+};
+
+export const postReport = async (payload: postReportPayload) => {
+  const { data } = await fetcher.post('api/v1/report', payload);
 
   return data;
 };
