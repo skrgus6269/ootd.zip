@@ -33,7 +33,7 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
   background-color: ${(props) => props.theme.color.grey_90};
