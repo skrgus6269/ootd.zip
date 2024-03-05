@@ -54,7 +54,7 @@ const Cloth = () => {
     router.push(`/EditCloth/${router.query.ClothNumber![0]}`);
   };
 
-  const [URLState, setURLState] = useState<any>(true);
+  const [URLState, setURLState] = useState<any>(false);
 
   const shareButton = () => {
     console.log('공유');
