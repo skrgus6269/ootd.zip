@@ -3,6 +3,7 @@ import SearchBar from '@/components/SearchBar';
 import S from '@/style/search/style';
 import { Headline2 } from '@/components/UI';
 import SearchResult from '@/components/Domain/Search/SearchResult';
+import Recents from '@/components/Domain/Search/Recents';
 
 export default function Search() {
   const [keyword, setKeyword] = useState<string>('');
@@ -12,7 +13,7 @@ export default function Search() {
       <S.SearchField>
         <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
       </S.SearchField>
-      {keyword !== '' && <SearchResult />}
+      {keyword === '' ? <Recents /> : <SearchResult />}
     </S.Layout>
   );
 }
