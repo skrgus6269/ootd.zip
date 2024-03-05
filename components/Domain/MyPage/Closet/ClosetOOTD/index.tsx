@@ -1,6 +1,5 @@
 import { Caption1 } from '@/components/UI';
 import S from './style';
-import Divider from '@/public/images/Divider.svg';
 import { useEffect, useState } from 'react';
 import ImageList from '@/components/ImageList';
 import { useRouter } from 'next/router';
@@ -35,7 +34,7 @@ export default function ClosetOOTD({ myPageOOTDList }: ClosetOOTDProps) {
         <Caption1 onClick={() => setSortStandard('오래된 순')} className="old">
           오래된 순
         </Caption1>
-        <Divider />
+        <S.Divider />
         <Caption1 onClick={() => setSortStandard('최신순')} className="new">
           최신순
         </Caption1>
