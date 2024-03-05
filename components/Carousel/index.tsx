@@ -10,6 +10,7 @@ interface CarouselProps {
   afterChange?: (currentIndex: number) => void;
   beforeChange?: (currentIndex: number, nextIndex: number) => void;
   swipe?: boolean;
+  dots?: boolean;
 }
 
 export default function Carousel({
@@ -17,6 +18,7 @@ export default function Carousel({
   slidesToShow,
   ParentRef,
   infinite,
+  dots,
   afterChange,
   beforeChange,
 }: CarouselProps) {
@@ -27,7 +29,7 @@ export default function Carousel({
     afterChange,
     beforeChange,
     arrows: false,
-    dots: true,
+    dots: dots,
     slickGoTo: 4,
   };
 
