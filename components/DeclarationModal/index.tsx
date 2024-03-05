@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Button3, Caption1, Title1 } from '../UI';
 import WithdrawBlock from '../Setting/WithdrawBlock';
+import ReportApi from '@/apis/domain/Report/ReportApi';
 
 interface DeclarationModalProps {
   declaration: Boolean;
@@ -32,6 +33,8 @@ export default function DeclarationModal({
     setPossible(checks.some((check) => check));
   }, [checks]);
 
+  const { getReport, postReport } = ReportApi();
+
   const withdrawBlockTitles: string[] = [
     '판매 또는 직거래 유도',
     '비방, 명예훼손 또는 수치심 유발',
@@ -42,6 +45,33 @@ export default function DeclarationModal({
     '스팸 또는 지나치게 상업적인 내용',
     '개인정보 도용, 사칭 또는 타인의 정보를 무단 위변조',
   ];
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      const report = await getReport();
+
+      console.log(report);
+    };
+
+    fetchReport();
+  }, []);
+
+  const onClickDeclarationButton = async () => {
+    const payload = {
+      reportId: 3,
+      targetId: 95,
+      reportType: 'OOTD',
+    };
+
+    const addReportSuccess = await postReport(payload);
+
+    if (addReportSuccess) {
+      setReceivedDeclaration(true); // 차단 모달 열기
+      setDeclaration(false); // 신고하기 모달 닫기
+    } else {
+      alert('신고 실패');
+    }
+  };
 
   return (
     <Modal isOpen={declaration} height="90">
@@ -72,13 +102,7 @@ export default function DeclarationModal({
             }}
           />
         ))}
-        <S.Button
-          state={possible}
-          onClick={() => {
-            setReceivedDeclaration(true);
-            setDeclaration(false);
-          }}
-        >
+        <S.Button state={possible} onClick={onClickDeclarationButton}>
           <Button3>신고하기</Button3>
         </S.Button>
       </S.Layout>

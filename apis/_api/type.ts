@@ -47,5 +47,5 @@ export interface patchClothIsPrivateType {
 export interface postReportPayload {
   reportId: number;
   targetId: number;
-  reportType: 'OOTD' | 'COMMENT' | 'CLOTHES';
+  reportType: string;
 }
