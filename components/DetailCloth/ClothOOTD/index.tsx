@@ -15,7 +15,7 @@ interface ClothOOTDProps {
 }
 
 export default function ClothOOTD({ data }: ClothOOTDProps) {
-  const [clicked, setClicked] = useState<'new' | 'old'>('new');
+  const [clicked, setClicked] = useState<string>('new');
   return (
     <S.Layout>
       <Header text="이 옷을 활용한 OOTD" />

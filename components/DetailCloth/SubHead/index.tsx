@@ -7,8 +7,8 @@ import { Dispatch, SetStateAction } from 'react';
 interface SubHeadProps {
   count: number;
   state?: string;
-  clicked: 'new' | 'old';
-  setClicked: Dispatch<SetStateAction<'new' | 'old'>>;
+  clicked: string;
+  setClicked: Dispatch<SetStateAction<string>>;
 }
 
 export default function SubHead({

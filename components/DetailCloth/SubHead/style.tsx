@@ -22,7 +22,7 @@ const Frame = styled.div`
   }
 `;
 interface WrapType {
-  clicked: 'new' | 'old';
+  clicked: string;
 }
 const Wrap = styled.div<WrapType>`
   display: flex;
