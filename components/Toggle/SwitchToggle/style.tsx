@@ -14,7 +14,7 @@ const ToggleContainer = styled.div<ToggleProps>`
   width: 34px;
   height: 20px;
   background-color: ${(props) =>
-    props.state ? '#FF8A00' : (props) => props.theme.color.grey_90};
+    props.state ? props.theme.color.correct : props.theme.color.grey_90};
   border-radius: 100px;
   transition: 0.5s;
 `;
