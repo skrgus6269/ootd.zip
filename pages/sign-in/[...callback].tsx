@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface QueryParams {
   code?: string;

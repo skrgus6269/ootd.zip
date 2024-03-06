@@ -11,6 +11,7 @@ import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Style } from '../AddOOTD';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -32,6 +33,7 @@ const SignUp: ComponentWithLayout = () => {
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
   const [styleListState, setStyleListState] = useState<Style[]>([]);
+  const { postRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const canAdvanceBasicState = canUseId && age?.length > 0;
@@ -48,17 +50,20 @@ const SignUp: ComponentWithLayout = () => {
     setSelectedStyle(selectedStyles);
   }, [canUseId, age, weight, height, styleListState]);
 
-  const onClickSubmitButton = () => {
-    console.log({
-      id,
-      age,
-      height,
-      weight,
-      open,
-      gender,
-      selectedStyle,
-    });
-    router.push('/main');
+  const onClickSubmitButton = async () => {
+    const payload = {
+      name: id,
+      gender: gender ? 'MALE' : 'FEMALE',
+      age: Number(age),
+      height: Number(height),
+      weight: Number(weight),
+      isBodyPrivate: !open,
+      styles: selectedStyle.map((item) => item.id),
+    };
+
+    const result = await postRegistUserInfo(payload);
+
+    if (result) router.push('/main');
   };
 
   const router = useRouter();
