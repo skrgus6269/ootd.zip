@@ -14,7 +14,21 @@ export const RegisterApi = () => {
       console.log('에러명', err);
     }
   };
+
+  //유저정보 입력 유무 확인
+  const getCheckCompleteRegistUserInfo = async () => {
+    try {
+      const { result } = await authService.getCheckCompleteRegistUserInfo();
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     postRegistUserInfo,
+    getCheckCompleteRegistUserInfo,
   };
 };

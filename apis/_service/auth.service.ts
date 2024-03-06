@@ -13,3 +13,9 @@ export const postRegistUserInfo = async (
 
   return data;
 };
+
+export const getCheckCompleteRegistUserInfo = async () => {
+  const data = await authApi.getCheckCompleteRegistUserInfo();
+
+  return data;
+};
