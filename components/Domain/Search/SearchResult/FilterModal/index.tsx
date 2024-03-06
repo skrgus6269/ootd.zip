@@ -8,7 +8,7 @@ import { Body4, Button3 } from '@/components/UI';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/Button';
 import { BrandType } from '@/components/BrandList/Brand';
-import { FilterData } from '../ClosetCloth';
+import { FilterData, GenderTypes } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 
@@ -18,6 +18,7 @@ interface FilterModalProps {
   categoryInitital: CategoryListType[] | null;
   colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
+  genderInitial: GenderTypes | null;
   setFilter: Dispatch<SetStateAction<FilterData>>;
 }
 
@@ -43,15 +44,19 @@ export default function FilterModal({
   );
 
   const [colorList, setColorList] = useState<ColorListType>([]);
-
   const [brandList, setBrandList] = useState<BrandType[] | null>(null);
+
+  const [selectedGender, setSelectedGender] = useState<GenderTypes>({
+    man: false,
+    woman: false,
+  });
 
   const onClickSubmitButton = () => {
     setFilter({
       category: selectedCategory,
       color: selectedColorList,
       brand: selectedBrand,
-      gender: null,
+      gender: selectedGender,
     });
     setFilterModalIsOpen(false);
   };
@@ -61,7 +66,10 @@ export default function FilterModal({
       category: null,
       color: null,
       brand: null,
-      isMan: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
     });
     setFilterModalIsOpen(false);
   };

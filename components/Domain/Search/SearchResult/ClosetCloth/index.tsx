@@ -19,16 +19,16 @@ export type searchClothType = {
   clothImage: string;
 };
 
-interface genderProps {
+export type GenderTypes = {
   man: Boolean;
   woman: Boolean;
-}
+};
 
 export interface FilterData {
   category: CategoryType[] | null;
   color: ColorListType | null;
   brand: BrandType[] | null;
-  gender: genderProps;
+  gender: GenderTypes;
 }
 
 export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
@@ -160,6 +160,7 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
           categoryInitital={filter.category}
           colorInitital={filter.color}
           brandInitial={filter.brand}
+          genderInitial={filter.gender}
           setFilter={setFilter}
         />
       )}
