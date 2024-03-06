@@ -22,6 +22,12 @@ export const kakaoLogin = async () => {
 export const postRegistUserInfo = async (
   payload: postRegistUserInfoPayload
 ) => {
+  return data;
+};
+
+export const getCheckCompleteRegistUserInfo = async () => {
+  const { data } = await fetcher.get(`api/v1/user/complete`);
+
   const { data } = await fetcher.post(`api/v1/user/register`, payload);
 
   return data;
