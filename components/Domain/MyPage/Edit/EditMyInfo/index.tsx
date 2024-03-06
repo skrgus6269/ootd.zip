@@ -85,7 +85,9 @@ export default function EditMyInfo({
           <SwitchToggle state={open} setState={setOpen} />
         </S.Wrap>
         <HelperText state={3}>
-          다른 사람에게 내 체형정보가 표시되지 않습니다.
+          {open
+            ? '다른 사람에게 내 체형정보가 표시됩니다.'
+            : '다른 사람에게 내 체형정보가 표시되지 않습니다.'}
         </HelperText>
       </S.OpenStatus>
     </>

@@ -5,6 +5,9 @@ export const UserApi = () => {
   const getProfile = async () => {
     try {
       const data = await userService.profile();
+      if (data.statusCode === 200) {
+        return data.result;
+      }
       return data;
     } catch (err) {
       alert('관리자에게 문의하세요');

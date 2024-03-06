@@ -57,10 +57,14 @@ export default function Closet() {
   useEffect(() => {
     const ferchData = async () => {
       let result = await getProfile();
+      console.log(result);
 
-      if (result.statusCode === 200) {
-        console.log(result);
-      }
+      setNickName(result.name);
+      setIntroduction(result.description);
+      setOpen(!result.isBodyPrivate);
+      setHeight(result.height);
+      setWeight(result.weight);
+      setProfileImage(result.profileImage);
     };
 
     ferchData();
