@@ -6,6 +6,13 @@ export const login = async (platform: string, code: string) => {
 
   return data;
 };
+
+export const checkName = async (name: string) => {
+  const data = await authApi.checkName(name);
+
+  return data;
+};
+
 export const postRegistUserInfo = async (
   payload: postRegistUserInfoPayload
 ) => {

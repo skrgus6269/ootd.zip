@@ -19,16 +19,23 @@ export const kakaoLogin = async () => {
     redirectUri: `${NEXT_PUBLIC_DOMAIN_HOST}/callback`,
   });
 };
+
+export const checkName = async (name: string) => {
+  const { data } = await fetcher.get(`api/v1/user/check-name?name=${name}`);
+
+  return data;
+};
+
 export const postRegistUserInfo = async (
   payload: postRegistUserInfoPayload
 ) => {
+  const { data } = await fetcher.post(`api/v1/user/register`, payload);
+
   return data;
 };
 
 export const getCheckCompleteRegistUserInfo = async () => {
   const { data } = await fetcher.get(`api/v1/user/complete`);
-
-  const { data } = await fetcher.post(`api/v1/user/register`, payload);
 
   return data;
 };
