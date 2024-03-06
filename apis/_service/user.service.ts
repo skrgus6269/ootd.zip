@@ -180,3 +180,10 @@ export const unFollow = async (id: number) => {
 
   return data;
 };
+
+// 프로필 정보 조회
+export const profile = async () => {
+  const data = await userApi.profile();
+
+  return data;
+};

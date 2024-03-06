@@ -11,3 +11,9 @@ export const unFollow = async (id: number) => {
 
   return data;
 };
+
+export const profile = async () => {
+  const { data } = await fetcher.get('/api/v1/user/profile');
+
+  return data;
+};

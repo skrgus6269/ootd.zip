@@ -8,6 +8,8 @@ import {
   sendReactNativeMessage,
 } from '@/utils/reactNativeMessage';
 
+import { UserApi } from '@/apis/domain/User/UserApi';
+
 export default function Closet() {
   const [profileImage, setProfileImage] = useState<string>(
     '/images/basicProfile.svg'
@@ -19,6 +21,8 @@ export default function Closet() {
   const [open, setOpen] = useState<Boolean>(true);
 
   const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
+
+  const { getProfile } = UserApi();
 
   const takePicture = () => {
     console.log('사진 촬영');
@@ -49,6 +53,18 @@ export default function Closet() {
     { name: '앨범에서 선택', buttonClick: choosePicture },
     { name: '기본 이미지로 변경', buttonClick: deleteImage },
   ];
+
+  useEffect(() => {
+    const ferchData = async () => {
+      let result = await getProfile();
+
+      if (result.statusCode === 200) {
+        console.log(result);
+      }
+    };
+
+    ferchData();
+  }, []);
 
   return (
     <>
