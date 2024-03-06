@@ -83,7 +83,7 @@ export type ImageWithTag = {
   ootdImageClothesList?: {
     clothesId: number;
     clothesImage: string;
-    coordinate: { xRate: string; yRate: string };
+    coordinate: { xrate: string; yrate: string };
     deviceSize: { deviceWidth: number; deviceHeight: number };
     caption: string;
     size?: string;
@@ -134,8 +134,8 @@ export default function AddTag({
           brand: ClothInformationSampleData[index].brand,
           name: ClothInformationSampleData[index].name,
           coordinate: {
-            xRate: '0',
-            yRate: '0',
+            xrate: '0',
+            yrate: '0',
           },
           caption: '',
           state: 'light',
@@ -148,8 +148,8 @@ export default function AddTag({
             brand: ClothInformationSampleData[index].brand,
             name: ClothInformationSampleData[index].name,
             coordinate: {
-              xRate: '0',
-              yRate: '0',
+              xrate: '0',
+              yrate: '0',
             },
             caption: '',
             state: 'light',

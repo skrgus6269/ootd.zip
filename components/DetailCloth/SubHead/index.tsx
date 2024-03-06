@@ -20,20 +20,19 @@ export default function SubHead({
   return (
     <S.Layout state={style}>
       <S.Frame>
-        <Body4 style={{ fontWeight: '500', color: '#BBBBBB' }}>{count}</Body4>
-        <Body4 style={{ color: '#BBBBBB' }}>개의 게시물</Body4>
+        <Body4 state="emphasis">{count}개의 게시물</Body4>
       </S.Frame>
-      <S.Wrap>
+      <S.Wrap clicked={state}>
         <Caption1
-          style={{ color: state === '오래된 순' ? '#030303' : '#8B8B8B' }}
-          onClick={() => setState('오래된 순')}
+          style={{ color: state === 'old' ? '#030303' : '#8B8B8B' }}
+          onClick={() => setState('old')}
         >
           오래된 순
         </Caption1>
         <Image src={Rectangle} alt="Rectangle" />
         <Caption1
-          style={{ color: state === '최신 순' ? '#030303' : '#8B8B8B' }}
-          onClick={() => setState('최신 순')}
+          style={{ color: state === 'new' ? '#030303' : '#8B8B8B' }}
+          onClick={() => setState('new')}
         >
           최신순
         </Caption1>

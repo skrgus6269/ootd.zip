@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Layout = styled.div`
   height: 100%;
   .main {
-    height: 55%;
     margin-top: 16px;
     overflow-y: scroll;
   }
@@ -17,9 +16,17 @@ const Layout = styled.div`
   }
 `;
 
-const SelectedFilter = styled.div`
-  display: flex;
+interface SelectedFilterType {
+  state: Boolean;
+}
+
+const SelectedFilter = styled.div<SelectedFilterType>`
+  display: ${(props) => (props.state ? 'flex' : 'none')};
+  position: absolute;
+  z-index: 999;
   gap: 8px;
+  background-color: white;
+  bottom: 75px;
   overflow-x: scroll;
   ::-webkit-scrollbar {
     display: none;
@@ -49,10 +56,16 @@ const SelectedFilterSpan = styled.div`
 interface SelectedButtonState {
   state: Boolean;
 }
+
 const SelectedButton = styled.div<SelectedButtonState>`
   display: flex;
-  padding: 0 20px;
+  padding: 16px 20px 24px 20px;
   gap: 8px;
+  position: fixed;
+  z-index: 999;
+  background-color: white;
+  width: 100%;
+  bottom: 0px;
   .init {
     width: 30%;
     border: 1px solid ${(props) => props.theme.color.grey_80};

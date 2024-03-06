@@ -12,10 +12,11 @@ import { ColorListType } from '@/components/ColorList';
 import { BrandType } from '@/components/BrandList/Brand';
 import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
 import BasicInfo from './BasicInfo';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 export interface ClothWhereBuy {
   letter: string;
-  type: 'link' | 'write';
+  type: 'Link' | 'Write';
 }
 
 const EditCloth: ComponentWithLayout = () => {
@@ -23,13 +24,7 @@ const EditCloth: ComponentWithLayout = () => {
   const steps = ['기본정보', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
 
-  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([
-    {
-      ootdId: 0,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ]);
+  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>();
   const [clothName, setClothName] = useState<string>('');
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null
@@ -37,40 +32,107 @@ const EditCloth: ComponentWithLayout = () => {
   const [clothBrand, setClothBrand] = useState<BrandType[] | null>(null);
   const [clothWhereBuy, setClothWhereBuy] = useState<ClothWhereBuy>({
     letter: '',
-    type: 'link',
+    type: 'Link',
   });
   const [clothColor, setClothColor] = useState<ColorListType | null>(null);
   const [clothSize, setClothSize] = useState<SizeItem | null>(null);
   const [clothOpen, setClothOpen] = useState<Boolean>(true);
   const [clothBuyDate, setClothBuyDate] = useState('');
   const [clothMemo, setClothMemo] = useState('');
+  const [sizeRerender, setSizeRerender] = useState(0);
+
+  const { getClothDetail, putCloth } = ClothApi();
 
   useEffect(() => {
-    setClothName('나이키');
-    setClothBrand([{ id: 697, name: '허그본' }]);
-    setClothWhereBuy({ type: 'link', letter: 'www.musinsa.com' });
-    setClothColor([
-      { id: 1, name: '버건디', colorCode: '#BB193E', state: true },
-    ]);
-    setClothSize({ id: 1, name: 'FREE' });
-    setClothCategory([
-      { id: 1, name: '외투', detailCategories: [{ id: 10, name: '재킷' }] },
-    ]);
-    setClothOpen(false);
-  }, []);
+    const fetchData = async () => {
+      if (!router.isReady) return;
+      const result = await getClothDetail(Number(router.query.ClothNumber![0]));
+      setClothName(result.name);
+      setClothBrand([result.brand]);
+      setClothWhereBuy({
+        type: result.purchaseStoreType,
+        letter: result.purchaseStore,
+      });
+      setClothColor(result.colors);
+      setClothOpen(!result.isPrivate);
+      setClothImage([{ ootdId: 1, ootdImage: result.imageUrl }]);
+      setClothCategory([
+        {
+          id: result.category.parentCategoryId,
+          name: result.category.parentCategoryName,
+          detailCategories: [
+            {
+              id: result.category.id,
+              name: result.category.categoryName,
+            },
+          ],
+        },
+      ]);
+      setClothSize(result.size);
+      setSizeRerender(sizeRerender + 1);
+    };
+    fetchData();
+  }, [router.isReady]);
 
-  const onClickSubmitButton = () => {
+  useEffect(() => {
+    setSizeRerender(sizeRerender + 1);
+  }, [clothCategory]);
+
+  useEffect(() => {
+    if (sizeRerender >= 4) {
+      setClothSize(null);
+    }
+  }, [sizeRerender]);
+
+  const onClickSubmitButton = async () => {
+    if (clothName.length === 0) {
+      alert('이름을 입력해주세요');
+      return;
+    }
+    if (!clothCategory) {
+      alert('카테고리를 선택해주세요');
+      return;
+    }
+    if (!clothBrand) {
+      alert('브랜드를 선택해주세요');
+      return;
+    }
+    if (!clothColor || clothColor.length === 0) {
+      alert('색상을 선택해주세요');
+      return;
+    }
+    if (!clothSize) {
+      alert('사이즈를 선택해주세요');
+      return;
+    }
+
     //옷 등록 api
-  };
-
-  const onClickCancle = () => {
-    router.push(`/DetailCloth`);
+    const payload = {
+      purchaseStore: clothWhereBuy.letter,
+      purchaseStoreType: clothWhereBuy.type,
+      brandId: clothBrand![0].id,
+      categoryId: clothCategory![0].detailCategories![0].id,
+      colorIds: [...clothColor!].map((item) => item.id),
+      isPrivate: !clothOpen,
+      sizeId: clothSize!.id,
+      clothesImageUrl: clothImage![0].ootdImage,
+      name: clothName,
+      purchaseDate: clothBuyDate,
+      memo: clothMemo,
+    };
+    const result = await putCloth(
+      Number(router.query.ClothNumber![0]),
+      payload
+    );
+    if (result) router.push(`/Cloth/${Number(router.query.ClothNumber![0])}`);
   };
 
   return (
     <Funnel>
       <AppBar
-        leftProps={<Button3 onClick={onClickCancle}>취소</Button3>}
+        leftProps={
+          <Button3 onClick={() => router.push(`/DetailCloth`)}>취소</Button3>
+        }
         middleProps={<Title1>수정하기</Title1>}
         rightProps={<></>}
       />

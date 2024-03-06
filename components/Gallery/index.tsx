@@ -144,6 +144,7 @@ const Gallery = ({
           </Body4>
           <Carousel
             infinite={false}
+            dots={true}
             slidesToShow={imageAndTag.length <= 3 ? imageAndTag!.length : 3.2}
           >
             {imageAndTag &&

@@ -33,10 +33,10 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.color.grey_90};
   flex-shrink: 0;
 `;
 

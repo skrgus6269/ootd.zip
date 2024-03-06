@@ -11,17 +11,15 @@ interface OOTDDataProps {
 }
 
 interface ClothOOTDProps {
-  count: number;
   data: OOTDDataProps[];
 }
 
-export default function ClothOOTD({ count, data }: ClothOOTDProps) {
-  const [clicked, setClicked] = useState<string>('오래된 순');
-
+export default function ClothOOTD({ data }: ClothOOTDProps) {
+  const [clicked, setClicked] = useState<string>('new');
   return (
     <S.Layout>
       <Header text="이 옷을 활용한 OOTD" />
-      <SubHead count={count} state={clicked} setState={setClicked} />
+      <SubHead state={clicked} setState={setClicked} count={data.length} />
       <S.OOTDLayout>
         <ImageList data={data} type="column" />
       </S.OOTDLayout>

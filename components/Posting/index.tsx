@@ -21,18 +21,18 @@ import {
 } from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
-import ReportModal from '../Domain/OOTD/ReportModal';
-import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclaration';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import FixModal from '../Domain/OOTD/FixModal';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
+import ReportModal from '../Domain/OOTD/ReportModal';
+import FixModal from '../Domain/OOTD/FixModal';
+import DeclarationModal from '../DeclarationModal';
 
 interface PostingProps {
   data: OOTDType;
@@ -70,9 +70,9 @@ export default function Posting({
   const router = useRouter();
 
   useEffect(() => {
-    setHeartState(data.like);
-    setBookMarkState(data.bookmark);
-    setFollowState(data.following);
+    setHeartState(data.isLike);
+    setBookMarkState(data.isBookmark);
+    setFollowState(data.isFollowing);
   }, [data]);
 
   //컴포넌트 크기 계산
@@ -204,7 +204,7 @@ export default function Posting({
             onClick={() => setClothTagOpen(!clothTagOpen)}
             className="tag"
           />
-          <Carousel infinite={false} slidesToShow={1}>
+          <Carousel infinite={false} slidesToShow={1} dots={true}>
             {data.ootdImages?.map((item, index) => {
               return (
                 <S.ImageWithTag key={index}>
@@ -306,7 +306,7 @@ export default function Posting({
           setPublicSetting={setPublicSetting}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
-          isPrivate={data.private}
+          isPrivate={data.isPrivate}
           setGetPostReRender={setGetPostReRender}
           getPostReRender={getPostReRender}
         />

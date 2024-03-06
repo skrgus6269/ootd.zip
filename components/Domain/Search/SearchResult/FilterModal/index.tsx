@@ -109,7 +109,7 @@ export default function FilterModal({
         <TabView>
           <TabView.TabBar tab={['카테고리', '색상', '브랜드']} />
           <div className="main">
-            <TabView.Tabs>
+            <TabView.Tabs dots={false}>
               <TabView.Tab>
                 <ClothCategory
                   setCategoryList={setCategoryList}

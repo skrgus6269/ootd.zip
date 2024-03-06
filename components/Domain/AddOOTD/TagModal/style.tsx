@@ -78,7 +78,7 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
   background-color: #f2f2f2;

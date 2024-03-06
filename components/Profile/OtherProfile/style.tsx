@@ -5,8 +5,15 @@ const Layout = styled.div``;
 const Name = styled.div``;
 
 const Info = styled.div`
+  display: flex;
+  gap: 2px;
+  align-items: center;
   p {
     color: ${(props) => props.theme.color.grey_50};
+  }
+  .dot {
+    margin: 0 2px;
+    margin-bottom: 1px;
   }
 `;
 

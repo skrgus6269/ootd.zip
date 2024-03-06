@@ -60,7 +60,7 @@ export default function EditMyInfo({
               defaultValue={height}
               size="small"
               line="outline"
-              unit="cm"
+              unit="CM"
               type="number"
               onChange={setHeight}
             />
@@ -71,7 +71,7 @@ export default function EditMyInfo({
               defaultValue={weight}
               size="small"
               line="outline"
-              unit="kg"
+              unit="KG"
               type="number"
               onChange={setWeight}
             />

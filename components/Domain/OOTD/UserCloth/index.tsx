@@ -46,7 +46,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
         <Button3 onClick={() => router.push(`/mypage`)}>더보기</Button3>
       </S.Title>
       <S.Cloth>
-        <Carousel slidesToShow={1.1} infinite={false}>
+        <Carousel slidesToShow={1.1} infinite={false} dots={false}>
           {data &&
             data.map((item, index) => {
               if (index % 2 === 0) {
