@@ -6,6 +6,11 @@ import { Button3, Caption1, Title1 } from '../UI';
 import WithdrawBlock from '../Setting/WithdrawBlock';
 import ReportApi from '@/apis/domain/Report/ReportApi';
 
+export type withdrawBlockType = {
+  id: number;
+  message: string;
+}[];
+
 interface DeclarationModalProps {
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -35,22 +40,14 @@ export default function DeclarationModal({
 
   const { getReport, postReport } = ReportApi();
 
-  const withdrawBlockTitles: string[] = [
-    '판매 또는 직거래 유도',
-    '비방, 명예훼손 또는 수치심 유발',
-    '혐오적, 외설적, 범죄적 행위 등 공공질서 및 미풍양속 위반',
-    '서비스에 대한 허위 및 오해의 소지가 있는 행동',
-    '저작권 위반, 개인정보 노출 등 권리침해 우려',
-    '정치적, 종교적 분쟁 야기',
-    '스팸 또는 지나치게 상업적인 내용',
-    '개인정보 도용, 사칭 또는 타인의 정보를 무단 위변조',
-  ];
+  const [withdrawBlockTitles, setWithdrawBlockTitles] =
+    useState<withdrawBlockType>([]);
 
   useEffect(() => {
     const fetchReport = async () => {
       const report = await getReport();
 
-      console.log(report);
+      setWithdrawBlockTitles(report);
     };
 
     fetchReport();
@@ -73,6 +70,8 @@ export default function DeclarationModal({
     }
   };
 
+  console.log(checks);
+
   return (
     <Modal isOpen={declaration} height="90">
       <S.Layout>
@@ -92,12 +91,12 @@ export default function DeclarationModal({
         </S.Frame>
         {withdrawBlockTitles.map((item, index) => (
           <WithdrawBlock
-            key={index}
-            title={withdrawBlockTitles[index]}
-            checked={checks[index]}
+            key={item.id}
+            title={item.message}
+            checked={checks[item.id]}
             setChecked={() => {
               const newChecks = [...checks];
-              newChecks[index] = !newChecks[index];
+              newChecks[item.id] = !newChecks[item.id];
               setChecks(newChecks);
             }}
           />
