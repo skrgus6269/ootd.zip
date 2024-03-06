@@ -14,7 +14,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 export interface Style {
   id: number;
   name: string;
-  state: Boolean;
+  state?: Boolean;
 }
 
 const AddOOTD: ComponentWithLayout = () => {

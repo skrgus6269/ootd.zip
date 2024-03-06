@@ -32,7 +32,6 @@ const SignUp: ComponentWithLayout = () => {
   const [styleState, setStyleState] = useState<Boolean>(false);
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
-  const [styleListState, setStyleListState] = useState<Style[]>([]);
   const { postRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
@@ -40,15 +39,12 @@ const SignUp: ComponentWithLayout = () => {
 
     const canAdvanceBodyState = weight?.length > 0 && height?.length > 0;
 
-    const selectedStyles = styleListState.filter((item) => item.state === true);
-
-    const canAdvanceStyleState = selectedStyles?.length >= 3;
+    const canAdvanceStyleState = selectedStyle?.length >= 3;
 
     setBasicState(canAdvanceBasicState);
     setBodyState(canAdvanceBodyState);
     setStyleState(canAdvanceStyleState);
-    setSelectedStyle(selectedStyles);
-  }, [canUseId, age, weight, height, styleListState]);
+  }, [canUseId, age, weight, height, selectedStyle]);
 
   const onClickSubmitButton = async () => {
     const payload = {
@@ -151,7 +147,8 @@ const SignUp: ComponentWithLayout = () => {
               <StyleInfo
                 gender={gender}
                 setGender={setGender}
-                setStyleListState={setStyleListState}
+                selectedStyle={selectedStyle}
+                setSelectedStyle={setSelectedStyle}
               />
               <NextButton
                 className="nextButton"
