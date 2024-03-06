@@ -15,7 +15,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 export default function Setting() {
   const router = useRouter();
 
-  const [URLState, setURLState] = useState<any>(true);
+  const [URLState, setURLState] = useState<any>(false);
 
   const shareButton = () => {
     console.log('이메일 복사');

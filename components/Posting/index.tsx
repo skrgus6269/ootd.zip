@@ -60,7 +60,7 @@ export default function Posting({
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
-  const [publicSetting, setPublicSetting] = useState<Boolean>(false);
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
   const myId = useRecoilValue(userId);
@@ -303,7 +303,7 @@ export default function Posting({
           setDeclaration={setDeclaration}
         />
         <FixModal
-          setPublicSetting={setPublicSetting}
+          setToastOpen={setToastOpen}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
           isPrivate={data.isPrivate}
@@ -323,8 +323,11 @@ export default function Posting({
             setReceivedDeclaration={setReceivedDeclaration}
           />
         )}
-        {publicSetting && (
+        {toastOpen && !data.isPrivate && (
           <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
+        )}
+        {toastOpen && data.isPrivate && (
+          <Toast text="다른 사람이 이 ootd를 볼 수 없도록 변경되었습니다." />
         )}
       </S.Layout>
     </>
