@@ -38,7 +38,7 @@ const Headline = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   font-size: 16px;
   color: ${(props) => props.theme.color.grey_80};
 `;

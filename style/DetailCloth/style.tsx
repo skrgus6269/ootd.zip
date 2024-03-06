@@ -12,6 +12,7 @@ const Background = styled.div<BackgroundProps>`
   width: 100vw;
   height: calc(100vh - 48px);
   position: absolute;
+  top: 0;
 `;
 
 const Layout = styled.div`
@@ -21,12 +22,6 @@ const Layout = styled.div`
   flex-direction: column;
   gap: 40px;
   height: 100%;
-  img {
-    width: 100%;
-    height: 45%;
-    max-height: 400px;
-    object-fit: cover;
-  }
 `;
 
 const TypoGraphy = styled.div`
@@ -44,6 +39,7 @@ const ButtonGroup = styled.div`
 const Img = styled.div`
   img {
     width: 100vw;
+    height: 100vw;
     object-fit: cover;
   }
 `;

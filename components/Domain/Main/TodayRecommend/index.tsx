@@ -27,7 +27,7 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
         <Body3>최고온도 00.0℃ 최저온도 00.0℃ </Body3>
       </S.Weather>
       <S.CarouselLayout>
-        <Carousel slidesToShow={1.05} infinite={false}>
+        <Carousel slidesToShow={1.05} infinite={false} dots={false}>
           {props.data.map((item, index) => {
             return (
               <S.CarouselItem key={index}>

@@ -81,7 +81,7 @@ const Cloth = () => {
   };
 
   const onClickNoButton = () => {
-    console.log('아니요');
+    setDeleteOpen(false);
   };
 
   const isOpenButton = async () => {
@@ -166,7 +166,7 @@ const Cloth = () => {
       )}
       <S.Img>{data && <img src={data.imageUrl} />}</S.Img>
       <DetailClothDiscription
-        isLink={true}
+        isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
         uploadDate={new Date(data?.createdAt!).toLocaleDateString()}
         memo={data?.memo}
@@ -178,7 +178,7 @@ const Cloth = () => {
         size={data?.size.name}
         buyDate={data?.purchaseDate}
       />
-      <ClothOOTD count={5} data={OOTDData} />
+      <ClothOOTD data={OOTDData} />
       {clickedRight && <ActionSheet buttons={buttons} />}
       {deleteOpen && (
         <DeleteAlert

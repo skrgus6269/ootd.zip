@@ -15,8 +15,7 @@ const Category = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
-
-  .isLink {
+  p {
     color: ${(props) => props.theme.color.grey_70};
   }
 `;
@@ -31,21 +30,14 @@ const IconSpan = styled.span`
   svg {
     width: 20px;
     height: 20px;
+    color: ${(props) => props.theme.color.grey_70};
   }
-`;
-
-const CategoryStart = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
 `;
 
 const S = {
   Layout,
   Category,
   IconSpan,
-  CategoryStart,
 };
 
 export default S;

@@ -39,6 +39,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
   });
 
   const [searchResult, setSearchResult] = useState(myPageClothList);
+  const [clicked, setClicked] = useState<string>('new');
 
   useEffect(() => {
     console.log(filter);
@@ -118,7 +119,8 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
         </S.SearchFilter>
         <SubHead
           count={myPageClothList?.length || 0}
-          clicked="new"
+          clicked={clicked}
+          setClicked={setClicked}
           state="noPadding"
         />
         <S.ClothList>
