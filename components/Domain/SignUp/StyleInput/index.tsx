@@ -39,7 +39,7 @@ export default function StyleInput({
         <Input.Label size="big">선호 스타일</Input.Label>
         <div>
           <Input.CheckBox state={style} setState={setStyle}></Input.CheckBox>
-          {selectedStyle.length < 3 && (
+          {selectedStyle?.length < 3 && (
             <Input.HelperText className="helperText" state={2}>
               최소 3개 이상 선택해주세요.
             </Input.HelperText>
