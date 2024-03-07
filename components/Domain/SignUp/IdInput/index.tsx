@@ -16,6 +16,7 @@ import {
   NICKNAME_PLACEHODER,
   HELPER_TEXT_2_LENGTH,
   HELPER_TEXT_BAD_NICKNAME,
+  HELPER_TEXT_EXIST_SAMEID,
 } from '@/constants/business.constants';
 import Input from '@/components/Input';
 import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
@@ -65,10 +66,13 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
       updateHelperText(HELPER_TEXT_BAD_NICKNAME, 2);
       setCanUseId(false);
     } else {
-      // if (await checkNameApi(value)) {
-      updateHelperText(HELPER_TEXT_VALID, 3);
-      setCanUseId(true);
-      // }
+      if (await checkNameApi(value)) {
+        updateHelperText(HELPER_TEXT_VALID, 3);
+        setCanUseId(true);
+        return;
+      }
+      updateHelperText(HELPER_TEXT_EXIST_SAMEID, 2);
+      setCanUseId(false);
     }
   };
 
