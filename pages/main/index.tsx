@@ -5,6 +5,7 @@ import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';
 import UserCloset from '@/components/Domain/Main/MyCloset';
 import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
+import { useRouter } from 'next/router';
 
 const MyClosetDataSample = {
   user: {
@@ -163,13 +164,14 @@ const SameClothDifferentFeeling = [
 ];
 
 export default function Main() {
+  const router = useRouter();
   return (
     <S.Layout>
       <AppBar
         leftProps={<></>}
         middleProps={<Headline>logo</Headline>}
         rightProps={
-          <div className="bell">
+          <div className="bell" onClick={() => router.push('/Alarm')}>
             <AiOutlineBell />
           </div>
         }
