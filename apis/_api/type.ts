@@ -45,7 +45,7 @@ export interface patchClothIsPrivateType {
 }
 
 export interface postReportPayload {
-  reportId: number;
+  reportIds: number[];
   targetId: number;
   reportType: string;
 }

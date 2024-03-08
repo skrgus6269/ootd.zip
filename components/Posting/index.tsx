@@ -312,6 +312,7 @@ export default function Posting({
         />
         {declaration && (
           <DeclarationModal
+            pageNumber={Number(router.query.OOTDNumber![0])}
             declaration={declaration}
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}

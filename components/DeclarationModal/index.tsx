@@ -12,12 +12,14 @@ export type withdrawBlockType = {
 }[];
 
 interface DeclarationModalProps {
+  pageNumber: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function DeclarationModal({
+  pageNumber,
   declaration,
   setDeclaration,
   setReceivedDeclaration,
@@ -54,9 +56,19 @@ export default function DeclarationModal({
   }, []);
 
   const onClickDeclarationButton = async () => {
+    const trueIndices: number[] = checks.reduce(
+      (acc: number[], currentValue: boolean, currentIndex: number) => {
+        if (currentValue === true) {
+          acc.push(currentIndex);
+        }
+        return acc;
+      },
+      []
+    );
+
     const payload = {
-      reportId: 3,
-      targetId: 95,
+      reportIds: trueIndices,
+      targetId: Number(pageNumber),
       reportType: 'OOTD',
     };
 
