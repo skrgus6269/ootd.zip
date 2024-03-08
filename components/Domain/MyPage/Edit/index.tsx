@@ -24,7 +24,7 @@ export default function Closet() {
 
   const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
 
-  const { getProfile } = UserApi();
+  const { getProfile, patchProfile } = UserApi();
 
   const takePicture = () => {
     console.log('사진 촬영');
@@ -72,8 +72,18 @@ export default function Closet() {
     ferchData();
   }, []);
 
-  const onClickNextButton = () => {
-    console.log(111);
+  const onClickNextButton = async () => {
+    const payload = {
+      name: nickName,
+      profileImage: profileImage,
+      description: introduction,
+      height: Number(height),
+      weight: Number(weight),
+      isBodyPrivate: open,
+    };
+
+    const result = await patchProfile(payload);
+    console.log(result);
   };
 
   return (
@@ -101,7 +111,7 @@ export default function Closet() {
           setOpen={setOpen}
         />
 
-        <S.ButtonWrap>
+        <S.ButtonWrap onClick={onClickNextButton}>
           <Button3>수정 완료</Button3>
         </S.ButtonWrap>
       </S.Layout>
