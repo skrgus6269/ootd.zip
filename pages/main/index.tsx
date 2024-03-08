@@ -1,10 +1,11 @@
 import S from '@/style/main/style';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';
 import UserCloset from '@/components/Domain/Main/MyCloset';
 import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
+import { useRouter } from 'next/router';
 
 const MyClosetDataSample = {
   user: {
@@ -163,19 +164,23 @@ const SameClothDifferentFeeling = [
 ];
 
 export default function Main() {
+  const router = useRouter();
   return (
-    <>
+    <S.Layout>
       <AppBar
         leftProps={<></>}
         middleProps={<Headline>logo</Headline>}
-        rightProps={<AiOutlineSearch />}
+        rightProps={
+          <div className="bell" onClick={() => router.push('/Alarm')}>
+            <AiOutlineBell />
+          </div>
+        }
       />
-      <S.Layout>
-        <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
+      <S.Main>
         <TodayRecommend data={TodayRecommendSampleData} />
         <SameCloth data={SameClothDifferentFeeling} />
         {/* <button onClick={onClickButton}>클릭해봐</button> */}
-      </S.Layout>
-    </>
+      </S.Main>
+    </S.Layout>
   );
 }
