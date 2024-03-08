@@ -43,3 +43,13 @@ export interface postOOTDComentPayload {
 export interface patchClothIsPrivateType {
   isPrivate: Boolean;
 }
+
+export interface postRegistUserInfoPayload {
+  name: string;
+  gender: string;
+  age: number;
+  height: number;
+  weight: number;
+  isBodyPrivate: Boolean;
+  styles: number[];
+}

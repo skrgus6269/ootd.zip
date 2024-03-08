@@ -13,7 +13,7 @@ export default function LikeInfo() {
 
   const [gender, setGender] = useState<Boolean>(true);
 
-  const [style, setStyle] = useState<Style[]>([]);
+  const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
   const [possible, setPossible] = useState<Boolean>(false);
 
@@ -55,7 +55,10 @@ export default function LikeInfo() {
         </S.SexContent>
 
         <S.StyleContent>
-          <StyleInput setStyleListState={setStyle} />
+          <StyleInput
+            selectedStyle={selectedStyle}
+            setSelectedStyle={setSelectedStyle}
+          />
         </S.StyleContent>
 
         <S.Button state={possible}>
