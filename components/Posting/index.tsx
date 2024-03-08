@@ -23,7 +23,7 @@ import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
-import ReceivedDeclarationModal from '../ReceivedDeclaration';
+import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
@@ -312,7 +312,8 @@ export default function Posting({
         />
         {declaration && (
           <DeclarationModal
-            pageNumber={Number(router.query.OOTDNumber![0])}
+            type="OOTD"
+            ID={Number(router.query.OOTDNumber![0])}
             declaration={declaration}
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}

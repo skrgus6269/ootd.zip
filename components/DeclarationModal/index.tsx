@@ -12,14 +12,16 @@ export type withdrawBlockType = {
 }[];
 
 interface DeclarationModalProps {
-  pageNumber: number;
+  type: string;
+  ID: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function DeclarationModal({
-  pageNumber,
+  type,
+  ID,
   declaration,
   setDeclaration,
   setReceivedDeclaration,
@@ -68,9 +70,11 @@ export default function DeclarationModal({
 
     const payload = {
       reportIds: trueIndices,
-      targetId: Number(pageNumber),
-      reportType: 'OOTD',
+      targetId: Number(ID),
+      reportType: type,
     };
+
+    console.log(payload);
 
     const addReportSuccess = await postReport(payload);
 
@@ -81,8 +85,6 @@ export default function DeclarationModal({
       alert('신고 실패');
     }
   };
-
-  console.log(checks);
 
   return (
     <Modal isOpen={declaration} height="90">
@@ -95,7 +97,11 @@ export default function DeclarationModal({
         </S.Header>
         <S.Frame>
           <Title1>@user님의</Title1>
-          <Title1>게시글을 신고합니다.</Title1>
+          {type === 'COMMENT' ? (
+            <Title1>댓글을 신고합니다.</Title1>
+          ) : (
+            <Title1>게시글을 신고합니다.</Title1>
+          )}
           <Caption1 style={{ color: '#8B8B8B' }}>
             아래에서 신고 사유를 선택해주세요. 회원님의 신고는 익명으로
             처리됩니다.
