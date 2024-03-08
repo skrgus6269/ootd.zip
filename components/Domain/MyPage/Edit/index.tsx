@@ -9,6 +9,8 @@ import {
 } from '@/utils/reactNativeMessage';
 
 import { UserApi } from '@/apis/domain/User/UserApi';
+import NextButton from '@/components/NextButton';
+import { Button3 } from '@/components/UI';
 
 export default function Closet() {
   const [profileImage, setProfileImage] = useState<string>(
@@ -70,6 +72,10 @@ export default function Closet() {
     ferchData();
   }, []);
 
+  const onClickNextButton = () => {
+    console.log(111);
+  };
+
   return (
     <>
       <S.Background
@@ -94,6 +100,10 @@ export default function Closet() {
           open={open}
           setOpen={setOpen}
         />
+
+        <S.ButtonWrap>
+          <Button3>수정 완료</Button3>
+        </S.ButtonWrap>
       </S.Layout>
 
       {openActionSheet && <ActionSheet buttons={buttons} />}
