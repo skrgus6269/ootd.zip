@@ -6,6 +6,8 @@ import UserCloset from '@/components/Domain/Main/MyCloset';
 import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 
 const MyClosetDataSample = {
   user: {
@@ -165,8 +167,20 @@ const SameClothDifferentFeeling = [
 
 export default function Main() {
   const router = useRouter();
+  const [isExistNotReadAlarm, setIsExistNotReadAlarm] =
+    useState<Boolean>(false);
+  const { getExistIsNotReadAlarm } = AlarmApi();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getExistIsNotReadAlarm();
+      setIsExistNotReadAlarm(result);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <S.Layout>
+    <S.Layout isExistNotReadAlarm={isExistNotReadAlarm}>
       <AppBar
         leftProps={<></>}
         middleProps={<Headline>logo</Headline>}
