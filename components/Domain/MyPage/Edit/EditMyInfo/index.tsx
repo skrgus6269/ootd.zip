@@ -30,6 +30,22 @@ export default function EditMyInfo({
   open,
   setOpen,
 }: MyInfoProps) {
+  const [commentState, setCommentState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if (
+      nickName === '' ||
+      height === '0' ||
+      weight === '0' ||
+      height === '' ||
+      weight === ''
+    ) {
+      setCommentState(true);
+    } else {
+      setCommentState(false);
+    }
+  }, [nickName, weight, height]);
+
   return (
     <>
       <S.Layout>
@@ -90,6 +106,14 @@ export default function EditMyInfo({
             : '다른 사람에게 내 체형정보가 표시되지 않습니다.'}
         </HelperText>
       </S.OpenStatus>
+
+      <S.StateLayout>
+        {commentState && (
+          <HelperText state={2}>
+            닉네임, 신장, 체중은 필수정보입니다.
+          </HelperText>
+        )}
+      </S.StateLayout>
     </>
   );
 }
