@@ -11,6 +11,11 @@ const Left = styled.div`
     object-fit: cover;
     border-radius: 50%;
   }
+  svg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
 `;
 const Middle = styled.div`
   display: flex;

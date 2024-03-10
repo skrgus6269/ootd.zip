@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import S from './style';
 import { Body4, Caption2 } from '@/components/UI';
+import Avatar from '@/public/images/Avatar.svg';
 
 export interface AlarmType {
   id: number;
-  profileImage: string;
+  profileImage: string | null;
   timeType: string;
   timeStamp: string;
   message: string;
@@ -24,7 +25,15 @@ export default function Alarms({
   return (
     <S.Layout>
       <S.Left>
-        <Image width={32} height={32} src={profileImage} alt="프로필 이미지" />
+        {profileImage && (
+          <Image
+            width={32}
+            height={32}
+            src={profileImage}
+            alt="프로필 이미지"
+          />
+        )}
+        {!profileImage && <Avatar />}
       </S.Left>
       <S.Middle>
         <S.Message>
