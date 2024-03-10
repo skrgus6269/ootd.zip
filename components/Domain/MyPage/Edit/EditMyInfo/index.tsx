@@ -33,6 +33,18 @@ export default function EditMyInfo({
   const [commentState, setCommentState] = useState<Boolean>(false);
 
   useEffect(() => {
+    if (nickName === '') {
+      // input의 상태 추가
+    }
+
+    if (height === '0' || height === '') {
+      // input의 상태 추가
+    }
+
+    if (weight === '0' || weight === '') {
+      // input의 상태 추가
+    }
+
     if (
       nickName === '' ||
       height === '0' ||
