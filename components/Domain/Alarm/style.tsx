@@ -23,8 +23,12 @@ const Middle = styled.div`
   gap: 4px;
   flex-grow: 1;
   margin: 0 8px;
+  position: relative;
+  z-index: 1;
   .userName {
     white-space: nowrap;
+    position: relative;
+    z-index: 2;
   }
   .content,
   .timeStamp {
