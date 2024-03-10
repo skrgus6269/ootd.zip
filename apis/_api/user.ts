@@ -20,7 +20,7 @@ export const profile = async () => {
 };
 
 export const patchProfile = async (payload: patchProfilePayload) => {
-  const { data } = await fetcher.patch(`api/v1/profile`, payload);
+  const { data } = await fetcher.patch(`api/v1/user/profile`, payload);
 
   return data;
 };
