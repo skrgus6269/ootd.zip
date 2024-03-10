@@ -12,6 +12,8 @@ export interface AlarmType {
   userName: string;
   content?: string;
   contentImage?: string;
+  goUrl: string;
+  userId: number;
 }
 
 export default function Alarms({
