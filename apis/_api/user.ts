@@ -11,3 +11,11 @@ export const unFollow = async (id: number) => {
 
   return data;
 };
+
+export const getAlarm = async (isRead: Boolean) => {
+  const { data } = await fetcher.get(
+    `/api/v1/notification?page=0&size=10&isRead=${isRead}`
+  );
+
+  return data;
+};

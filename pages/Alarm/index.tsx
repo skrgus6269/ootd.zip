@@ -1,3 +1,4 @@
+import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import AppBar from '@/components/Appbar';
 import Alarms, { AlarmType } from '@/components/Domain/Alarm';
 import AlarmLayout from '@/components/Domain/Alarm/AlarmLayout';
@@ -16,103 +17,42 @@ export default function Alarm() {
 
   const router = useRouter();
 
+  const { getIsReadAlarm, getNotIsReadAlarm } = AlarmApi();
+
   useEffect(() => {
-    const result = [
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '읽음',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content: '클린스만 경질 기원 정권찌르기 1일차',
-        userName: '히찬',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '오늘',
-        message: '님이 회원님의 ootd를 좋아합니다.',
-        userName: 'username',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '어제',
-        message: '님이 회원님을 팔로우합니다.',
-        userName: 'nak',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님을 팔로우합니다.',
-        userName: 'nak',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-    ] as AlarmType[];
+    const fetchData = async () => {
+      const notIsReadData = await getNotIsReadAlarm();
+      const isReadData = await getIsReadAlarm();
 
-    const map = new Map<string, AlarmType[]>();
+      const map = new Map<string, AlarmType[]>();
+      const newResult = [] as AlarmType[];
 
-    result.forEach((item) => {
-      if (map.has(item.timeType)) {
-        map.set(item.timeType, [...map.get(item.timeType)!, item]);
-      } else {
-        map.set(item.timeType, [item]);
-      }
-    });
+      if (notIsReadData.content as AlarmType[])
+        newResult.push(...(notIsReadData.content as AlarmType[]));
+      if (isReadData.content as AlarmType[])
+        newResult.push(...(isReadData.content as AlarmType[]));
 
-    const newData = [] as FetchedAlarmType[];
-
-    map.forEach((item, key) => {
-      newData.push({
-        timeType: key,
-        data: item,
+      newResult.forEach((item: AlarmType) => {
+        if (map.has(item.timeType)) {
+          map.set(item.timeType, [...map.get(item.timeType)!, item]);
+        } else {
+          map.set(item.timeType, [item]);
+        }
       });
-    });
 
-    setData(newData);
+      const newData = [] as FetchedAlarmType[];
+
+      map.forEach((item, key) => {
+        newData.push({
+          timeType: key,
+          data: item,
+        });
+      });
+
+      setData(newData);
+    };
+
+    fetchData();
   }, []);
 
   return (

@@ -180,3 +180,17 @@ export const unFollow = async (id: number) => {
 
   return data;
 };
+
+//유저의 이미 읽은 알림 조회
+export const getIsReadAlarm = async () => {
+  const data = await userApi.getAlarm(true);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const getNotIsReadAlarm = async () => {
+  const data = await userApi.getAlarm(false);
+
+  return data;
+};
