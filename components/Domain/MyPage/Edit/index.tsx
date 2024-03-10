@@ -11,8 +11,11 @@ import {
 import { UserApi } from '@/apis/domain/User/UserApi';
 import NextButton from '@/components/NextButton';
 import { Button3 } from '@/components/UI';
+import { useRouter } from 'next/router';
 
 export default function Closet() {
+  const router = useRouter();
+
   const [profileImage, setProfileImage] = useState<string>(
     '/images/basicProfile.svg'
   );
@@ -72,18 +75,45 @@ export default function Closet() {
     ferchData();
   }, []);
 
-  const onClickNextButton = async () => {
-    const payload = {
-      name: nickName,
-      profileImage: profileImage,
-      description: introduction,
-      height: Number(height),
-      weight: Number(weight),
-      isBodyPrivate: open,
-    };
+  const [possible, setPossible] = useState<boolean>(false);
 
-    const result = await patchProfile(payload);
-    console.log(result);
+  useEffect(() => {
+    if (
+      nickName === '' ||
+      height === '0' ||
+      weight === '0' ||
+      height === '' ||
+      weight === ''
+    ) {
+      setPossible(false);
+    } else {
+      setPossible(true);
+    }
+  }, [nickName, weight, height]);
+
+  const onClickNextButton = async () => {
+    if (possible) {
+      const payload = {
+        name: nickName,
+        profileImage:
+          profileImage === '/images/basicProfile.svg' ? '' : profileImage,
+        description: introduction,
+        height: Number(height),
+        weight: Number(weight),
+        isBodyPrivate: open,
+      };
+
+      const result = await patchProfile(payload);
+
+      if (result) {
+        router.push({
+          pathname: '/mypage',
+          query: { state: 'editSuccess' },
+        });
+      } else {
+        alert('실패');
+      }
+    }
   };
 
   return (
@@ -111,7 +141,7 @@ export default function Closet() {
           setOpen={setOpen}
         />
 
-        <S.ButtonWrap onClick={onClickNextButton}>
+        <S.ButtonWrap onClick={onClickNextButton} state={possible}>
           <Button3>수정 완료</Button3>
         </S.ButtonWrap>
       </S.Layout>
