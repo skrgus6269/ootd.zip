@@ -17,6 +17,7 @@ interface DeclarationModalProps {
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  setReportStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function DeclarationModal({
@@ -25,6 +26,7 @@ export default function DeclarationModal({
   declaration,
   setDeclaration,
   setReceivedDeclaration,
+  setReportStatus,
 }: DeclarationModalProps) {
   const [checks, setChecks] = useState<Array<boolean>>([
     false,
@@ -78,9 +80,17 @@ export default function DeclarationModal({
 
     const addReportSuccess = await postReport(payload);
 
-    if (addReportSuccess) {
+    console.log(addReportSuccess);
+    console.log(addReportSuccess.response.data.divisionCode);
+
+    if (addReportSuccess.response.data.divisionCode === 'R002') {
       setReceivedDeclaration(true); // 차단 모달 열기
       setDeclaration(false); // 신고하기 모달 닫기
+      setReportStatus(false);
+    } else if (addReportSuccess.response.data.statusCode === 200) {
+      setReceivedDeclaration(true); // 차단 모달 열기
+      setDeclaration(false); // 신고하기 모달 닫기
+      setReportStatus(true);
     } else {
       alert('신고 실패');
     }

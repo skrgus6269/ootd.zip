@@ -12,16 +12,12 @@ export default function ReportApi() {
   // 신고
   const postReport = async (payload: postReportPayload) => {
     try {
-      const { statusCode } = await systemService.postReport(payload);
+      const { result } = await systemService.postReport(payload);
+      console.log(result);
 
-      if (statusCode === 200) {
-        return true;
-      } else {
-        return false;
-      }
+      return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
-      console.log('에러명', err);
+      return err;
     }
   };
 

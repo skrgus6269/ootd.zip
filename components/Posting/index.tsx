@@ -56,9 +56,9 @@ export default function Posting({
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
-  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false); // 신고 Modal
   const [receivedDeclaration, setReceivedDeclaration] =
-    useState<Boolean>(false);
+    useState<Boolean>(false); // 신고 후 차단 Modal
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
   const [publicSetting, setPublicSetting] = useState<Boolean>(false);
 
@@ -91,6 +91,8 @@ export default function Posting({
     if (heartState) await deleteOOTDLike(Number(router.query.OOTDNumber![0]));
     setHeartState(!heartState);
   };
+
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
   const onClickShareButton = () => {
     //웹에서는 정상 작동하나 웹뷰에서는 작동하지 않음
@@ -317,10 +319,13 @@ export default function Posting({
             declaration={declaration}
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
           />
         )}
         {receivedDeclaration && (
           <ReceivedDeclarationModal
+            type="게시글"
+            reportStatus={reportStatus}
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />
