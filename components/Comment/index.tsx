@@ -60,6 +60,8 @@ function Comment({
     setDeclaration(true);
   };
 
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
+
   return (
     <>
       <S.Layout type={type}>
@@ -106,10 +108,13 @@ function Comment({
           declaration={declaration}
           setDeclaration={setDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
+          setReportStatus={setReportStatus}
         />
       )}
       {receivedDeclaration && (
         <ReceivedDeclarationModal
+          reportStatus={reportStatus}
+          type="댓글"
           receivedDeclaration={receivedDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
         />
