@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-const Layout = styled.div`
+interface LayoutProps {
+  isExistNotReadAlarm: Boolean;
+}
+
+const Layout = styled.div<LayoutProps>`
+  ${(props) =>
+    props.isExistNotReadAlarm &&
+    `
   .bell {
     position: relative;
   }
@@ -12,9 +19,10 @@ const Layout = styled.div`
     right: -3px;
     width: 6px;
     height: 6px;
-    background-color: ${(props) => props.theme.color.accent};
+    background-color: ${props.theme.color.accent};
     border-radius: 50%;
   }
+  `}
 `;
 const Main = styled.div`
   padding: 0 20px;

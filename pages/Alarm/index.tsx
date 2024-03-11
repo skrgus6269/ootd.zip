@@ -1,6 +1,8 @@
+import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import AppBar from '@/components/Appbar';
 import Alarms, { AlarmType } from '@/components/Domain/Alarm';
 import AlarmLayout from '@/components/Domain/Alarm/AlarmLayout';
+import NoAlarm from '@/components/Domain/Alarm/NoAlarm';
 import { Title1 } from '@/components/UI';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -12,107 +14,46 @@ interface FetchedAlarmType {
 }
 
 export default function Alarm() {
-  const [data, setData] = useState<FetchedAlarmType[] | null>(null);
+  const [notIsReadAlarm, setNotIsReadAlarm] = useState<AlarmType[] | null>(
+    null
+  );
+  const [isReadAlarm, setIsReadAlarm] = useState<FetchedAlarmType[] | null>(
+    null
+  );
 
   const router = useRouter();
 
+  const { getIsReadAlarm, getNotIsReadAlarm } = AlarmApi();
+
   useEffect(() => {
-    const result = [
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '읽음',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content: '클린스만 경질 기원 정권찌르기 1일차',
-        userName: '히찬',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '오늘',
-        message: '님이 회원님의 ootd를 좋아합니다.',
-        userName: 'username',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '어제',
-        message: '님이 회원님을 팔로우합니다.',
-        userName: 'nak',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님을 팔로우합니다.',
-        userName: 'nak',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-      {
-        profileImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/e91eede3-0938-401f-a9c0-10facffcba60_2024-03-05.jpg',
-        contentImage:
-          'https://ootdzip.s3.ap-northeast-2.amazonaws.com/2f89d9d8-f46c-4e6a-aec4-7db995b9e859_2024-03-05.jpg',
-        timeStamp: '1분전',
-        timeType: '작년',
-        message: '님이 회원님의 ootd에 댓글을 남겼습니다.',
-        content:
-          '올해 전북현대 유니폼도 구매하셨나요? 풀마킹까지 하려고합니다.',
-        userName: '가나다라마바사아자차카타',
-      },
-    ] as AlarmType[];
+    const fetchData = async () => {
+      const { content: notIsReadData } = await getNotIsReadAlarm();
+      const { content: isReadData } = await getIsReadAlarm();
 
-    const map = new Map<string, AlarmType[]>();
+      //Map 자료구조를 통한 timeType별 구분
+      const map = new Map<string, AlarmType[]>();
 
-    result.forEach((item) => {
-      if (map.has(item.timeType)) {
-        map.set(item.timeType, [...map.get(item.timeType)!, item]);
-      } else {
-        map.set(item.timeType, [item]);
-      }
-    });
-
-    const newData = [] as FetchedAlarmType[];
-
-    map.forEach((item, key) => {
-      newData.push({
-        timeType: key,
-        data: item,
+      isReadData.forEach((item: AlarmType) => {
+        if (map.has(item.timeType)) {
+          map.set(item.timeType, [...map.get(item.timeType)!, item]);
+        } else {
+          map.set(item.timeType, [item]);
+        }
       });
-    });
 
-    setData(newData);
+      const newIsReadAlarm = [] as FetchedAlarmType[];
+
+      map.forEach((item, key) => {
+        newIsReadAlarm.push({
+          timeType: key,
+          data: item,
+        });
+      });
+
+      if (notIsReadData.length !== 0) setNotIsReadAlarm(notIsReadData);
+      if (newIsReadAlarm.length !== 0) setIsReadAlarm(newIsReadAlarm);
+    };
+    fetchData();
   }, []);
 
   return (
@@ -122,12 +63,35 @@ export default function Alarm() {
         middleProps={<Title1>알림함</Title1>}
         rightProps={<></>}
       />
-      {data?.map((item, index) => (
-        <AlarmLayout index={index} key={index}>
+      {!notIsReadAlarm && !isReadAlarm && <NoAlarm />}
+      {notIsReadAlarm && (
+        <AlarmLayout index={0}>
+          <Title1 className="title">읽지 않음</Title1>
+          {notIsReadAlarm?.map((item, index) => {
+            return (
+              <Alarms
+                key={index}
+                id={item.id}
+                profileImage={item.profileImage}
+                timeStamp={item.timeStamp}
+                message={item.message}
+                userName={item.userName}
+                timeType={item.timeType}
+                contentImage={item.contentImage}
+                content={item.content}
+                goUrl={item.goUrl}
+                userId={item.userId}
+              />
+            );
+          })}
+        </AlarmLayout>
+      )}
+      {isReadAlarm?.map((item, index) => (
+        <AlarmLayout index={!Number(notIsReadAlarm) ? index : 1} key={index}>
           <Title1 className="title">{item.timeType}</Title1>
           {item.data.map((innerItem, innerIndex) => (
             <Alarms
-              id={innerIndex}
+              id={innerItem.id}
               key={innerIndex}
               profileImage={innerItem.profileImage}
               timeStamp={innerItem.timeStamp}
@@ -136,6 +100,8 @@ export default function Alarm() {
               timeType={innerItem.timeType}
               contentImage={innerItem.contentImage}
               content={innerItem.content}
+              goUrl={innerItem.goUrl}
+              userId={innerItem.userId}
             />
           ))}
         </AlarmLayout>

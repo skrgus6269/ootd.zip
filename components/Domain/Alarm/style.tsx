@@ -11,6 +11,11 @@ const Left = styled.div`
     object-fit: cover;
     border-radius: 50%;
   }
+  svg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
 `;
 const Middle = styled.div`
   display: flex;
@@ -18,8 +23,12 @@ const Middle = styled.div`
   gap: 4px;
   flex-grow: 1;
   margin: 0 8px;
+  position: relative;
+  z-index: 1;
   .userName {
     white-space: nowrap;
+    position: relative;
+    z-index: 2;
   }
   .content,
   .timeStamp {
