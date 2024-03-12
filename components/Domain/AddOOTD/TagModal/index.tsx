@@ -168,7 +168,7 @@ export default function AddTag({
       <Modal height="80" isOpen={addTag}>
         <S.Layout>
           <TabView>
-            <TabView.TabBar tab={['내 옷장', '신규 등록']} />
+            <TabView.TabBar tab={['내 옷장', '신규 등록']} display="block" />
             <TabView.Tabs>
               <TabView.Tab>
                 <S.MyCloset>
