@@ -120,7 +120,10 @@ export default function FilterModal({
     <Modal isOpen={isOpen} height="65">
       <S.Layout>
         <TabView>
-          <TabView.TabBar tab={['카테고리', '색상', '브랜드']} />
+          <TabView.TabBar
+            tab={['카테고리', '색상', '브랜드']}
+            display="block"
+          />
           <div className="main">
             <TabView.Tabs>
               <TabView.Tab>

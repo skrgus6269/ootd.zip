@@ -8,6 +8,9 @@ import SameCloth from '@/components/Domain/Main/SameCloth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
+import Carousel from '@/components/Carousel';
+import TabView from '@/components/TabView';
+import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
 
 const MyClosetDataSample = {
   user: {
@@ -183,18 +186,33 @@ export default function Main() {
     <S.Layout isExistNotReadAlarm={isExistNotReadAlarm}>
       <AppBar
         leftProps={<></>}
-        middleProps={<Headline>logo</Headline>}
+        middleProps={<></>}
         rightProps={
           <div className="bell" onClick={() => router.push('/Alarm')}>
             <AiOutlineBell />
           </div>
         }
       />
-      <S.Main>
-        <TodayRecommend data={TodayRecommendSampleData} />
-        <SameCloth data={SameClothDifferentFeeling} />
-        {/* <button onClick={onClickButton}>클릭해봐</button> */}
-      </S.Main>
+      <TabView>
+        <TabView.TabBar
+          display="inline"
+          tab={['큐레이팅', '탐색']}
+          className="tabBar"
+        />
+        <TabView.Tabs>
+          <TabView.Tab>
+            <S.Curation>
+              <TodayRecommend data={TodayRecommendSampleData} />
+              <LikeOOTD />
+              <SameCloth data={SameClothDifferentFeeling} />
+              {/* <button onClick={onClickButton}>클릭해봐</button> */}
+            </S.Curation>
+          </TabView.Tab>
+          <TabView.Tab>
+            <S.Explore>준비중</S.Explore>
+          </TabView.Tab>
+        </TabView.Tabs>
+      </TabView>
     </S.Layout>
   );
 }
