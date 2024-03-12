@@ -42,8 +42,6 @@ function Comment({
   const [declaration, setDeclaration] = useState<Boolean>(false);
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false);
-  const [reportedID, setReportedID] = useState<number>(id);
-  console.log(id);
 
   const { deleteOOTDComment } = OOTDApi();
 
@@ -104,7 +102,7 @@ function Comment({
       {declaration && (
         <DeclarationModal
           type="COMMENT"
-          ID={reportedID}
+          ID={id}
           declaration={declaration}
           setDeclaration={setDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}

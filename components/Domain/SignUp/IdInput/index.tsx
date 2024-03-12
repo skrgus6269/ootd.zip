@@ -16,8 +16,10 @@ import {
   NICKNAME_PLACEHODER,
   HELPER_TEXT_2_LENGTH,
   HELPER_TEXT_BAD_NICKNAME,
+  HELPER_TEXT_EXIST_SAMEID,
 } from '@/constants/business.constants';
 import Input from '@/components/Input';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface InputProps {
   setInput: Dispatch<SetStateAction<string>>;
@@ -27,13 +29,24 @@ interface InputProps {
 export default function IdInput({ setInput, setCanUseId }: InputProps) {
   const [helperText, setHelperText] = useState<string>('입력해주세요');
   const [state, setState] = useState<number>(1);
+  const { checkName } = RegisterApi();
 
   const updateHelperText = (text: string, newState: number) => {
     setHelperText(text);
     setState(newState);
   };
 
-  const idInputValidity = (value: string) => {
+  const checkNameApi = (name: string) => {
+    const fetchCheckName = async () => {
+      const result = await checkName(name);
+
+      return result;
+    };
+
+    return fetchCheckName();
+  };
+
+  const idInputValidity = async (value: string) => {
     if (value !== undefined && value.length === 0) {
       updateHelperText(HELPER_TEXT_NULL, 1);
       setCanUseId(false);
@@ -53,16 +66,14 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
       updateHelperText(HELPER_TEXT_BAD_NICKNAME, 2);
       setCanUseId(false);
     } else {
-      if (중복확인()) {
+      if (await checkNameApi(value)) {
         updateHelperText(HELPER_TEXT_VALID, 3);
         setCanUseId(true);
+        return;
       }
+      updateHelperText(HELPER_TEXT_EXIST_SAMEID, 2);
+      setCanUseId(false);
     }
-  };
-
-  const 중복확인 = () => {
-    console.log('중복확인');
-    return true;
   };
 
   return (

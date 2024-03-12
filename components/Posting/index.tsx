@@ -27,12 +27,12 @@ import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import FixModal from '../Domain/OOTD/FixModal';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
+import FixModal from '../Domain/OOTD/FixModal';
 
 interface PostingProps {
   data: OOTDType;
@@ -60,7 +60,7 @@ export default function Posting({
   const [receivedDeclaration, setReceivedDeclaration] =
     useState<Boolean>(false); // 신고 후 차단 Modal
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
-  const [publicSetting, setPublicSetting] = useState<Boolean>(false);
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
   const myId = useRecoilValue(userId);
@@ -206,7 +206,7 @@ export default function Posting({
             onClick={() => setClothTagOpen(!clothTagOpen)}
             className="tag"
           />
-          <Carousel infinite={false} slidesToShow={1}>
+          <Carousel infinite={false} slidesToShow={1} dots={true}>
             {data.ootdImages?.map((item, index) => {
               return (
                 <S.ImageWithTag key={index}>
@@ -305,7 +305,7 @@ export default function Posting({
           setDeclaration={setDeclaration}
         />
         <FixModal
-          setPublicSetting={setPublicSetting}
+          setToastOpen={setToastOpen}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
           isPrivate={data.isPrivate}
@@ -330,8 +330,11 @@ export default function Posting({
             setReceivedDeclaration={setReceivedDeclaration}
           />
         )}
-        {publicSetting && (
+        {toastOpen && !data.isPrivate && (
           <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
+        )}
+        {toastOpen && data.isPrivate && (
+          <Toast text="다른 사람이 이 ootd를 볼 수 없도록 변경되었습니다." />
         )}
       </S.Layout>
     </>

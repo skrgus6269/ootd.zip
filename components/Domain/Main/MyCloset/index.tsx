@@ -31,7 +31,7 @@ export default function UserCloset({ isUser, userOOTD }: UserClosetProps) {
         follow={userOOTD.user.follow}
         myCloth={userOOTD.user.myCloth}
       />
-      <Carousel slidesToShow={2.3} infinite={false}>
+      <Carousel slidesToShow={2.3} infinite={false} dots={false}>
         {userOOTD.data.map((item, index) => {
           return (
             <S.CarouselLayout key={index}>

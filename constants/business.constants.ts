@@ -7,22 +7,5 @@ export const HELPER_TEXT_NULL = '입력해주세요';
 export const NICKNAME_PLACEHODER = '특수문자,초성 단독사용 불가/12자 이내';
 export const HELPER_TEXT_2_LENGTH = '2글자 이상 입력해주세요.';
 export const HELPER_TEXT_BAD_NICKNAME = '욕설을 사용하지 말아주세요.';
+export const HELPER_TEXT_EXIST_SAMEID = '이미 존재하는 닉네임입니다.';
 export const MAX_TEXTAREA_LENGTH = 2000;
-export const styleList = [
-  '미니멀',
-  '아메카지',
-  '시티보이',
-  '캐주얼',
-  '스트릿',
-  '비즈니스 캐주얼',
-  '하이틴',
-  '로맨틱',
-  '걸리시',
-  '스포티',
-  '비즈니스 캐주얼',
-  '하이틴',
-  '로맨틱',
-  '걸리시',
-  '스포티',
-  '비즈니스 캐주얼',
-];
