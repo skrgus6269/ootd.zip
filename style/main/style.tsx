@@ -23,8 +23,12 @@ const Layout = styled.div<LayoutProps>`
     border-radius: 50%;
   }
   `}
+  .tabBar {
+    padding: 0 4px;
+  }
 `;
-const Main = styled.div`
+const Curation = styled.div`
+  margin-top: 57px;
   padding: 0 20px;
   overflow-x: hidden;
   display: flex;
@@ -32,6 +36,8 @@ const Main = styled.div`
   gap: 126px;
 `;
 
-const S = { Layout, Main };
+const Explore = styled.div``;
+
+const S = { Layout, Curation, Explore };
 
 export default S;
