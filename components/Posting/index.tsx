@@ -32,9 +32,8 @@ import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
-import FixModal from '../Domain/OOTD/FixModal'; 
-import DeclarationModal from '../DeclarationModal';
-import LikeToggle from '../Toggle/LikeToggle'; 
+import FixModal from '../Domain/OOTD/FixModal';
+import LikeToggle from '../Toggle/LikeToggle';
 
 interface PostingProps {
   data: OOTDType;
