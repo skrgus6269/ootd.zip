@@ -17,6 +17,7 @@ const Layout = styled.div<LayoutProps>`
   text-overflow: ellipsis;
   overflow: hidden;
   position: relative;
+  border-radius: 2px;
 
   padding: 0 16px;
   ${(props) =>

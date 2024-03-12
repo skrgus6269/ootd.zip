@@ -21,7 +21,9 @@ import {
 } from 'react';
 import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
-import ReceivedDeclarationModal from '../ReceivedDeclaration';
+import ReportModal from '../Domain/OOTD/ReportModal';
+import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
@@ -30,10 +32,9 @@ import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
-import ReportModal from '../Domain/OOTD/ReportModal';
-import FixModal from '../Domain/OOTD/FixModal';
+import FixModal from '../Domain/OOTD/FixModal'; 
 import DeclarationModal from '../DeclarationModal';
-import LikeToggle from '../Toggle/LikeToggle';
+import LikeToggle from '../Toggle/LikeToggle'; 
 
 interface PostingProps {
   data: OOTDType;
@@ -57,9 +58,9 @@ export default function Posting({
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
-  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false); // 신고 Modal
   const [receivedDeclaration, setReceivedDeclaration] =
-    useState<Boolean>(false);
+    useState<Boolean>(false); // 신고 후 차단 Modal
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
   const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
@@ -92,6 +93,8 @@ export default function Posting({
     if (heartState) await deleteOOTDLike(Number(router.query.OOTDNumber![0]));
     setHeartState(!heartState);
   };
+
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
   const onClickShareButton = () => {
     //웹에서는 정상 작동하나 웹뷰에서는 작동하지 않음
@@ -310,13 +313,18 @@ export default function Posting({
         />
         {declaration && (
           <DeclarationModal
+            type="OOTD"
+            ID={Number(router.query.OOTDNumber![0])}
             declaration={declaration}
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
           />
         )}
         {receivedDeclaration && (
           <ReceivedDeclarationModal
+            type="게시글"
+            reportStatus={reportStatus}
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />

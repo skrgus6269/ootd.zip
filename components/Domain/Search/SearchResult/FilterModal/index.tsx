@@ -8,9 +8,10 @@ import { Body4, Button3 } from '@/components/UI';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/Button';
 import { BrandType } from '@/components/BrandList/Brand';
-import { FilterData } from '../ClosetCloth';
+import { FilterData, GenderTypes } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -18,6 +19,7 @@ interface FilterModalProps {
   categoryInitital: CategoryListType[] | null;
   colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
+  genderInitial: GenderTypes | null;
   setFilter: Dispatch<SetStateAction<FilterData>>;
 }
 
@@ -29,6 +31,8 @@ export default function FilterModal({
   colorInitital,
   brandInitial,
 }: FilterModalProps) {
+  const { getBrand } = ClothApi();
+
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
 
@@ -43,17 +47,19 @@ export default function FilterModal({
   );
 
   const [colorList, setColorList] = useState<ColorListType>([]);
-
   const [brandList, setBrandList] = useState<BrandType[] | null>(null);
+
+  const [selectedGender, setSelectedGender] = useState<GenderTypes>({
+    man: false,
+    woman: false,
+  });
 
   const onClickSubmitButton = () => {
     setFilter({
-      // category: selectedCategory,
-      // color: selectedColorList,
       category: selectedCategory,
       color: selectedColorList,
       brand: selectedBrand,
-      isMan: null,
+      gender: selectedGender,
     });
     setFilterModalIsOpen(false);
   };
@@ -63,7 +69,10 @@ export default function FilterModal({
       category: null,
       color: null,
       brand: null,
-      isMan: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
     });
     setFilterModalIsOpen(false);
   };
@@ -105,6 +114,15 @@ export default function FilterModal({
     console.log(selectedCategory);
   }, [selectedCategory]);
 
+  useEffect(() => {
+    const fetchBrand = async () => {
+      const result = await getBrand('');
+      setBrandList(result);
+    };
+
+    fetchBrand();
+  }, []);
+
   return (
     <Modal isOpen={isOpen} height="60">
       <S.Layout>
@@ -140,6 +158,7 @@ export default function FilterModal({
                     : `총 0개의 브랜드`}
                 </Body4>
                 <BrandList
+                  keyword=""
                   many="many"
                   brandList={brandList}
                   setBrandList={setBrandList}
