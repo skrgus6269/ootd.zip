@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface QueryParams {
   code?: string;
@@ -11,6 +12,7 @@ export default function SignUpCallbackPage() {
   const router = useRouter();
   const { code, callback } = router.query as QueryParams;
   const [login] = SignInApi();
+  const { getCheckCompleteRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,10 +23,11 @@ export default function SignUpCallbackPage() {
         // login 함수 호출 이후에 상태 확인 및 라우팅
         switch (loginSuccess) {
           case true:
-            router.push('../onboarding');
+            if (await getCheckCompleteRegistUserInfo()) router.push('/main');
+            else router.push('/sign-up');
             break;
           case false:
-            router.push('../sign-up');
+            router.push('../sign-in');
             break;
           default:
           // 상태가 정의되지 않은 경우에 대한 처리

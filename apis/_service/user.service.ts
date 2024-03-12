@@ -1,4 +1,4 @@
-import { clothApi, ootdApi, userApi } from '@/apis/_api';
+import { alarmApi, clothApi, ootdApi, userApi } from '@/apis/_api';
 import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
@@ -185,13 +185,37 @@ export const unFollow = async (id: number) => {
 // 프로필 정보 조회
 export const profile = async () => {
   const data = await userApi.profile();
-
-  return data;
 };
 
 // 프로필 정보 업데이트
 export const patchProfile = async (payload: patchProfilePayload) => {
   const data = await userApi.patchProfile(payload);
+};
+
+//유저의 이미 읽은 알림 조회
+export const getIsReadAlarm = async () => {
+  const data = await alarmApi.getAlarm(true);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const getNotIsReadAlarm = async () => {
+  const data = await alarmApi.getAlarm(false);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const readAlarm = async (userId: number) => {
+  const data = await alarmApi.readAlarm(userId);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const getExistIsNotReadAlarm = async () => {
+  const data = await alarmApi.getExistIsNotReadAlarm();
 
   return data;
 };

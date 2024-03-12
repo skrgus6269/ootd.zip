@@ -16,6 +16,8 @@ interface MyInfoProps {
   setWeight: Dispatch<SetStateAction<string>>;
   open: Boolean;
   setOpen: Dispatch<SetStateAction<Boolean>>;
+  possible: Boolean;
+  setPossible: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function EditMyInfo({
@@ -29,6 +31,8 @@ export default function EditMyInfo({
   setWeight,
   open,
   setOpen,
+  possible,
+  setPossible,
 }: MyInfoProps) {
   const [commentState, setCommentState] = useState<Boolean>(false);
 
@@ -52,9 +56,9 @@ export default function EditMyInfo({
       height === '' ||
       weight === ''
     ) {
-      setCommentState(true);
+      setPossible(true);
     } else {
-      setCommentState(false);
+      setPossible(false);
     }
   }, [nickName, weight, height]);
 
@@ -120,7 +124,7 @@ export default function EditMyInfo({
       </S.OpenStatus>
 
       <S.StateLayout>
-        {commentState && (
+        {!possible && (
           <HelperText state={2}>
             닉네임, 신장, 체중은 필수정보입니다.
           </HelperText>

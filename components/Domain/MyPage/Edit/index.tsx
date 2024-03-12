@@ -75,7 +75,7 @@ export default function Closet() {
     ferchData();
   }, []);
 
-  const [possible, setPossible] = useState<boolean>(false);
+  const [possible, setPossible] = useState<Boolean>(false);
 
   useEffect(() => {
     if (
@@ -139,8 +139,9 @@ export default function Closet() {
           setWeight={setWeight}
           open={open}
           setOpen={setOpen}
+          possible={possible}
+          setPossible={setPossible}
         />
-
         <S.ButtonWrap onClick={onClickNextButton} state={possible}>
           <Button3>수정 완료</Button3>
         </S.ButtonWrap>

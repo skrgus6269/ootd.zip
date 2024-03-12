@@ -11,6 +11,7 @@ import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Style } from '../AddOOTD';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -31,34 +32,34 @@ const SignUp: ComponentWithLayout = () => {
   const [styleState, setStyleState] = useState<Boolean>(false);
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
-  const [styleListState, setStyleListState] = useState<Style[]>([]);
+  const { postRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const canAdvanceBasicState = canUseId && age?.length > 0;
 
     const canAdvanceBodyState = weight?.length > 0 && height?.length > 0;
 
-    const selectedStyles = styleListState.filter((item) => item.state === true);
-
-    const canAdvanceStyleState = selectedStyles?.length >= 3;
+    const canAdvanceStyleState = selectedStyle?.length >= 3;
 
     setBasicState(canAdvanceBasicState);
     setBodyState(canAdvanceBodyState);
     setStyleState(canAdvanceStyleState);
-    setSelectedStyle(selectedStyles);
-  }, [canUseId, age, weight, height, styleListState]);
+  }, [canUseId, age, weight, height, selectedStyle]);
 
-  const onClickSubmitButton = () => {
-    console.log({
-      id,
-      age,
-      height,
-      weight,
-      open,
-      gender,
-      selectedStyle,
-    });
-    router.push('/main');
+  const onClickSubmitButton = async () => {
+    const payload = {
+      name: id,
+      gender: gender ? 'MALE' : 'FEMALE',
+      age: Number(age),
+      height: Number(height),
+      weight: Number(weight),
+      isBodyPrivate: !open,
+      styles: selectedStyle.map((item) => item.id),
+    };
+
+    const result = await postRegistUserInfo(payload);
+
+    if (result) router.push('/main');
   };
 
   const router = useRouter();
@@ -146,7 +147,8 @@ const SignUp: ComponentWithLayout = () => {
               <StyleInfo
                 gender={gender}
                 setGender={setGender}
-                setStyleListState={setStyleListState}
+                selectedStyle={selectedStyle}
+                setSelectedStyle={setSelectedStyle}
               />
               <NextButton
                 className="nextButton"
