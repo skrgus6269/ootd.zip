@@ -33,6 +33,7 @@ import Toast from '../Toast';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import FixModal from '../Domain/OOTD/FixModal';
 import DeclarationModal from '../DeclarationModal';
+import LikeToggle from '../Toggle/LikeToggle';
 
 interface PostingProps {
   data: OOTDType;
@@ -250,14 +251,11 @@ export default function Posting({
           </Carousel>
         </S.PostingImage>
         <S.PostingCommunication>
-          {heartState ? (
-            <AiFillHeart onClick={onClickHeartButton} className="likedHeart" />
-          ) : (
-            <AiOutlineHeart
-              onClick={onClickHeartButton}
-              className="unLikedHeart"
-            />
-          )}
+          <LikeToggle
+            state={heartState}
+            setState={setHeartState}
+            onClick={onClickHeartButton}
+          />
           <MessageOutlined
             className="comment"
             onClick={() => commentRef.current.focus()}
