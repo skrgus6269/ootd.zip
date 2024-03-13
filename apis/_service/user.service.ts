@@ -208,3 +208,10 @@ export const getExistIsNotReadAlarm = async () => {
 
   return data;
 };
+
+//이 옷을 활용한 OOTD 조회
+export const getOOTDWithCloth = async (clothId: number) => {
+  const data = await ootdApi.getOOTDWithCloth(clothId);
+
+  return data;
+};

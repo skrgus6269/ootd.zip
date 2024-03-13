@@ -110,6 +110,17 @@ export default function ClothApi() {
     const result = await systemService.getSize(id);
     return result;
   };
+
+  //이 옷을 활용한 OOTD 조회
+  const getOOTDWithCloth = async (clothId: number) => {
+    try {
+      const { result } = await userService.getOOTDWithCloth(clothId);
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
   return {
     postCloth,
     getUserClothList,
@@ -121,5 +132,6 @@ export default function ClothApi() {
     getColor,
     getBrand,
     getSize,
+    getOOTDWithCloth,
   };
 }
