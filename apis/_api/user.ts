@@ -13,7 +13,13 @@ export const unFollow = async (id: number) => {
   return data;
 };
 
-export const profile = async () => {
+export const getMypage = async (id: number) => {
+  const { data } = await fetcher.get(`/api/v1/user/${id}/mypage`);
+
+  return data;
+};
+
+export const getProfile = async () => {
   const { data } = await fetcher.get('/api/v1/user/profile');
 
   return data;

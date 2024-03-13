@@ -182,9 +182,16 @@ export const unFollow = async (id: number) => {
   return data;
 };
 
-// 프로필 정보 조회
-export const profile = async () => {
-  const data = await userApi.profile();
+// 유저 프로필 정보 조회
+export const getMypage = async (id: number) => {
+  const data = await userApi.getMypage(id);
+
+  return data;
+};
+
+// 나의 프로필 정보 조회
+export const getProfile = async () => {
+  const data = await userApi.getProfile();
 
   return data;
 };
