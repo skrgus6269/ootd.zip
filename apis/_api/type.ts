@@ -16,15 +16,15 @@ export interface postOOTDPayload {
 
 export interface patchOOTDIsPrivatePayload {
   isPrivate: Boolean;
-  id: number;
 }
 
 export interface postClothPayload {
   purchaseStore: string;
+  purchaseStoreType: string;
   brandId: number;
   categoryId: number;
   colorIds: number[];
-  isOpen: Boolean;
+  isPrivate: Boolean;
   sizeId: number;
   clothesImageUrl: string;
   name: string;
@@ -45,4 +45,24 @@ export interface postOOTDComentPayload {
   content: string;
   taggedUserName?: string;
   commentParentId?: number;
+}
+
+export interface patchClothIsPrivateType {
+  isPrivate: Boolean;
+}
+
+export interface postReportPayload {
+  reportIds: number[];
+  targetId: number;
+  reportType: string;
+}
+
+export interface postRegistUserInfoPayload {
+  name: string;
+  gender: string;
+  age: number;
+  height: number;
+  weight: number;
+  isBodyPrivate: Boolean;
+  styles: number[];
 }

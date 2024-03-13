@@ -1,4 +1,5 @@
 import { systemApi } from '@/apis/_api';
+import { postReportPayload } from '../_api/type';
 
 export const getClothCategory = async () => {
   const data = await systemApi.getClothCategory();
@@ -26,6 +27,18 @@ export const getSize = async (id: number) => {
 
 export const getStyle = async () => {
   const data = await systemApi.getStyle();
+
+  return data;
+};
+
+export const getReport = async () => {
+  const data = await systemApi.getReport();
+
+  return data;
+};
+
+export const postReport = async (payload: postReportPayload) => {
+  const data = await systemApi.postReport(payload);
 
   return data;
 };

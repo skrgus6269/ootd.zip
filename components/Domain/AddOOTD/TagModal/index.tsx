@@ -83,7 +83,7 @@ export type ImageWithTag = {
   ootdImageClothesList?: {
     clothesId: number;
     clothesImage: string;
-    coordinate: { xRate: string; yRate: string };
+    coordinate: { xrate: string; yrate: string };
     deviceSize: { deviceWidth: number; deviceHeight: number };
     caption: string;
     size?: string;
@@ -134,8 +134,8 @@ export default function AddTag({
           brand: ClothInformationSampleData[index].brand,
           name: ClothInformationSampleData[index].name,
           coordinate: {
-            xRate: '0',
-            yRate: '0',
+            xrate: '0',
+            yrate: '0',
           },
           caption: '',
           state: 'light',
@@ -148,8 +148,8 @@ export default function AddTag({
             brand: ClothInformationSampleData[index].brand,
             name: ClothInformationSampleData[index].name,
             coordinate: {
-              xRate: '0',
-              yRate: '0',
+              xrate: '0',
+              yrate: '0',
             },
             caption: '',
             state: 'light',
@@ -168,7 +168,7 @@ export default function AddTag({
       <Modal height="80" isOpen={addTag}>
         <S.Layout>
           <TabView>
-            <TabView.TabBar tab={['내 옷장', '신규 등록']} />
+            <TabView.TabBar tab={['내 옷장', '신규 등록']} display="block" />
             <TabView.Tabs>
               <TabView.Tab>
                 <S.MyCloset>

@@ -7,6 +7,7 @@ import {
 } from 'react-icons/ai';
 
 interface colorProps {
+  id: number;
   color: string;
   name: string;
 }

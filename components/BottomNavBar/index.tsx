@@ -4,12 +4,7 @@ import { BottomComponent, BottomComponentItem } from './style';
 
 import {
   AiOutlineUser,
-  AiOutlineTag,
-  AiFillTag,
-  AiFillPlusSquare,
   AiOutlinePlusSquare,
-  AiOutlineCrown,
-  AiFillCrown,
   AiOutlineHome,
   AiFillHome,
   AiOutlineSearch,
@@ -22,6 +17,7 @@ import UserFilled from '@/public/images/UserFilled.svg';
 import SearchFilled from '@/public/images/SearchFilled.svg';
 import { useRecoilState } from 'recoil';
 import { BottomNavbarPlusButtonState } from '@/utils/recoil/atom';
+import FilledSquare from '@/public/images/FilledPlusSquare.svg';
 
 const icons = [
   <AiOutlineHome />,
@@ -34,7 +30,7 @@ const icons = [
 const activeIcons = [
   <AiFillHome />,
   <SearchFilled />,
-  <AiFillPlusSquare />,
+  <FilledSquare />,
   <BookmarkFilled />,
   <UserFilled />,
 ];
@@ -82,7 +78,7 @@ export default function BottomNavBar() {
       {bottomNavBarLinkers.map((item, index) => {
         return index === 2 ? (
           <BottomComponentItem key={index} onClick={onClickPlusButton}>
-            {addModalState ? <AiFillPlusSquare /> : item.icon}
+            {addModalState ? <FilledSquare /> : item.icon}
           </BottomComponentItem>
         ) : (
           <BottomComponentItem key={index} onClick={item.click}>

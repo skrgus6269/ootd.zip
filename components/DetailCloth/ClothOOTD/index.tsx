@@ -3,6 +3,7 @@ import { Headline1, Body2, Body3 } from '@/components/UI';
 import Header from '@/components/Header';
 import SubHead from '../SubHead';
 import ImageList from '@/components/ImageList';
+import { useEffect, useState } from 'react';
 
 interface OOTDDataProps {
   clothId: number;
@@ -10,15 +11,15 @@ interface OOTDDataProps {
 }
 
 interface ClothOOTDProps {
-  count: number;
   data: OOTDDataProps[];
 }
 
-export default function ClothOOTD({ count, data }: ClothOOTDProps) {
+export default function ClothOOTD({ data }: ClothOOTDProps) {
+  const [clicked, setClicked] = useState<string>('new');
   return (
     <S.Layout>
       <Header text="이 옷을 활용한 OOTD" />
-      <SubHead count={count} clicked="new" />
+      <SubHead state={clicked} setState={setClicked} count={data.length} />
       <S.OOTDLayout>
         <ImageList data={data} type="column" />
       </S.OOTDLayout>

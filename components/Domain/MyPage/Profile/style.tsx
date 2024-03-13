@@ -17,11 +17,9 @@ const BodyInformation = styled.div`
   gap: 4px;
   color: ${(props) => props.theme.color.grey_50};
   margin-bottom: 4px;
-
+  align-items: center;
   .dot {
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 14px;
+    margin-bottom: 1px;
   }
 `;
 const Introduce = styled.div``;

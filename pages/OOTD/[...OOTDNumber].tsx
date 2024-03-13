@@ -34,10 +34,10 @@ export interface OOTDType {
   userImage: string; //유저 프로필 이미지
   userId: number;
   createAt: string; //작성일
-  bookmark: Boolean;
-  like: Boolean;
-  private: Boolean;
-  following: Boolean;
+  isBookmark: Boolean;
+  isLike: Boolean;
+  isPrivate: Boolean;
+  isFollowing: Boolean;
   ootdImages: {
     ootdImage: string; //ootd 이미지
     ootdImageClothesList?: {
@@ -83,7 +83,7 @@ export interface OOTDType {
 }
 
 const OOTD: ComponentWithLayout = () => {
-  const { getOOTD, postOOTDComment } = OOTDApi();
+  const { getOOTDDetail, postOOTDComment } = OOTDApi();
 
   const router = useRouter();
 
@@ -94,7 +94,7 @@ const OOTD: ComponentWithLayout = () => {
     const fetchData = async () => {
       if (!router.isReady) return;
       try {
-        const result = (await getOOTD(
+        const result = (await getOOTDDetail(
           Number(router.query.OOTDNumber![0])
         )) as OOTDType;
 
@@ -109,7 +109,7 @@ const OOTD: ComponentWithLayout = () => {
         });
       } catch (err) {
         alert('없는 페이지입니다');
-        router.push('/main');
+        // router.push('/main');
       }
     };
     fetchData();

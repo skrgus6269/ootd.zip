@@ -11,22 +11,27 @@ import { CategoryType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
 
 interface ClosetClothProps {
-  myPageClothList?: myPageClothType[];
+  searchClothList?: searchClothType[];
 }
 
-export type myPageClothType = {
+export type searchClothType = {
   clothId: number;
   clothImage: string;
+};
+
+export type GenderTypes = {
+  man: Boolean;
+  woman: Boolean;
 };
 
 export interface FilterData {
   category: CategoryType[] | null;
   color: ColorListType | null;
   brand: BrandType[] | null;
-  isMan: Boolean | null;
+  gender: GenderTypes;
 }
 
-export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
+export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
   const router = useRouter();
 
   const [filterModalIsOpen, setFilterModalIsOpen] = useState<Boolean>(false);
@@ -35,10 +40,13 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
     category: null,
     color: null,
     brand: null,
-    isMan: null,
+    gender: {
+      man: false,
+      woman: false,
+    },
   });
 
-  const [searchResult, setSearchResult] = useState(myPageClothList);
+  const [searchResult, setSearchResult] = useState(searchClothList);
 
   useEffect(() => {
     console.log(filter);
@@ -57,9 +65,14 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
       category: null,
       color: null,
       brand: null,
-      isMan: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
     });
   };
+
+  const [clicked, setClicked] = useState<string>('오래된 순');
 
   return (
     <>
@@ -73,14 +86,24 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
           <S.Span
-            state={filter.isMan === true}
-            onClick={() => setFilter({ ...filter, isMan: true })}
+            state={filter.gender.man}
+            onClick={() =>
+              setFilter({
+                ...filter,
+                gender: { ...filter.gender, man: !filter.gender.man },
+              })
+            }
           >
             <Body4 state="emphasis">남성</Body4>
           </S.Span>
           <S.Span
-            state={filter.isMan === false}
-            onClick={() => setFilter({ ...filter, isMan: false })}
+            state={filter.gender.woman}
+            onClick={() =>
+              setFilter({
+                ...filter,
+                gender: { ...filter.gender, woman: !filter.gender.woman },
+              })
+            }
           >
             <Body4 state="emphasis">여성</Body4>
           </S.Span>
@@ -117,9 +140,10 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
           </S.FilterSpan>
         </S.SearchFilter>
         <SubHead
-          count={myPageClothList?.length || 0}
-          clicked="new"
-          state="noPadding"
+          setState={setClicked}
+          state={clicked}
+          count={searchClothList?.length || 0}
+          style="noPadding"
         />
         <S.ClothList>
           <ImageList
@@ -136,6 +160,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
           categoryInitital={filter.category}
           colorInitital={filter.color}
           brandInitial={filter.brand}
+          genderInitial={filter.gender}
           setFilter={setFilter}
         />
       )}

@@ -1,29 +1,33 @@
 import styled from 'styled-components';
 
 interface LayoutProps {
+  state?: Boolean;
   size: 'big' | 'small';
   line: 'underline' | 'outline';
 }
 
 interface InputProps {
   line: 'underline' | 'outline';
-  type?: 'link' | 'number';
+  type?: 'Link' | 'number';
 }
 
 const Layout = styled.div<LayoutProps>`
-  display: inline-flex;
+  display: flex;
   width: 100%;
   max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
   height: 44px;
   gap: 2px;
   position: relative;
+  border-radius: 2px;
 
   ${(props) =>
     props.line === 'underline' &&
     `
-  border-bottom: 2px solid ${props.theme.color.grey_80};
-  &:hover {
-    border-bottom: 2px solid ${props.theme.color.grey_00};
+    border-bottom: 2px solid ${props.theme.color.grey_80};
+    ${props.state && ` border-bottom: 2px solid ${props.theme.color.grey_00};`};
+    
+  &:focus {
+    border-bottom: 2px solid ${props.theme.color.grey_00}; 
   }
   `}
 
@@ -33,8 +37,16 @@ const Layout = styled.div<LayoutProps>`
   border: 1px solid ${props.theme.color.grey_80};
   &:hover {
     border: 1px solid ${props.theme.color.grey_00};
+    .close {
+      display: flex;
+    } 
   }
-  `}
+  ${
+    props.state === false &&
+    `
+    border: 1px solid ${props.theme.color.error};
+  `
+  }`}
 `;
 
 const FlexLayout = styled.div`
@@ -57,7 +69,7 @@ const SearchInput = styled(FlexLayout)`
 const Input = styled.input<InputProps>`
   font-family: 'Pretendard Regular';
   text-decoration: ${(props) =>
-    props.type === 'link' ? '1px solid underline' : ''};
+    props.type === 'Link' ? '1px solid underline' : ''};
   ${(props) =>
     props.line === 'underline' &&
     `
@@ -80,7 +92,7 @@ const Input = styled.input<InputProps>`
   ${(props) =>
     props.line === 'outline' &&
     `
-    padding: ${props.type === 'link' ? '0 16px 0 42px' : '0 16px'};
+    padding: ${props.type === 'Link' ? '0 16px 0 42px' : '0 16px'};
     width: 100%;
     border: none; 
     font-size: 14px;

@@ -64,8 +64,8 @@ export default function WriteOOTD({
                     clothesId: tag.clothesId,
                     deviceWidth: tag.deviceSize.deviceWidth,
                     deviceHeight: tag.deviceSize.deviceHeight,
-                    xrate: tag.coordinate.xRate,
-                    yrate: tag.coordinate.yRate,
+                    xrate: tag.coordinate.xrate,
+                    yrate: tag.coordinate.yrate,
                   };
                 })
               : [],

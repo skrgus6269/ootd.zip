@@ -1,10 +1,11 @@
-import { clothApi, ootdApi, userApi } from '@/apis/_api';
+import { alarmApi, clothApi, ootdApi, userApi } from '@/apis/_api';
 import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
   postClothPayload,
   getUserBookmarkListPayload,
   postOOTDComentPayload,
+  patchClothIsPrivateType,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -21,9 +22,16 @@ export const getOOTD = async (id: number) => {
   return data;
 };
 
+//ootd 상세정보 조회
+export const getOOTDDetail = async (id: number) => {
+  const data = await ootdApi.getOOTDDetail(id);
+
+  return data;
+};
+
 //ootd 전체 수정
-export const putOOTD = async (params: postOOTDPayload) => {
-  const data = await ootdApi.putOOTD(params);
+export const putOOTD = async (ootdId: number, params: postOOTDPayload) => {
+  const data = await ootdApi.putOOTD(ootdId, params);
 
   return data;
 };
@@ -58,9 +66,10 @@ export const DeleteOOTDComent = async (id: number) => {
 
 //ootd 내용, 공개/비공개 여부 수정
 export const patchOOTDIsPrivate = async (
+  ootdId: number,
   payload: patchOOTDIsPrivatePayload
 ) => {
-  const data = await ootdApi.patchOOTDIsPrivate(payload);
+  const data = await ootdApi.patchOOTDIsPrivate(ootdId, payload);
 
   return data;
 };
@@ -150,6 +159,23 @@ export const getUserBookmarkList = async (
   return data;
 };
 
+//cloth 수정
+export const putCloth = async (id: number, payload: postClothPayload) => {
+  const data = await clothApi.putCloth(id, payload);
+
+  return data;
+};
+
+//cloth 공개여부 수정
+export const patchClothIsPrivate = async (
+  id: number,
+  payload: patchClothIsPrivateType
+) => {
+  const data = await clothApi.patchClothIsPrivate(id, payload);
+
+  return data;
+};
+
 //팔로잉
 export const follow = async (id: number) => {
   const data = await userApi.follow(id);
@@ -160,6 +186,34 @@ export const follow = async (id: number) => {
 //언팔로잉
 export const unFollow = async (id: number) => {
   const data = await userApi.unFollow(id);
+
+  return data;
+};
+
+//유저의 이미 읽은 알림 조회
+export const getIsReadAlarm = async () => {
+  const data = await alarmApi.getAlarm(true);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const getNotIsReadAlarm = async () => {
+  const data = await alarmApi.getAlarm(false);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const readAlarm = async (userId: number) => {
+  const data = await alarmApi.readAlarm(userId);
+
+  return data;
+};
+
+//유저의 읽지 않은 알림 조회
+export const getExistIsNotReadAlarm = async () => {
+  const data = await alarmApi.getExistIsNotReadAlarm();
 
   return data;
 };

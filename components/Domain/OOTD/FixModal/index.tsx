@@ -12,7 +12,7 @@ interface ReportModalProps {
   isPrivate: Boolean;
   setGetPostReRender: Dispatch<SetStateAction<number>>;
   getPostReRender: number;
-  setPublicSetting: Dispatch<SetStateAction<Boolean>>;
+  setToastOpen: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function FixModal({
@@ -21,7 +21,7 @@ export default function FixModal({
   getPostReRender,
   setGetPostReRender,
   isPrivate,
-  setPublicSetting,
+  setToastOpen,
 }: ReportModalProps) {
   const onClickReportButton = () => {
     setReportModalIsOpen(false);
@@ -38,13 +38,12 @@ export default function FixModal({
   };
 
   const onClickIsPrivateButton = async () => {
-    await patchOOTDIsPrivate({
-      id: Number(router.query!.OOTDNumber![0]),
+    await patchOOTDIsPrivate(Number(router.query!.OOTDNumber![0]), {
       isPrivate: !isPrivate,
     });
-    setPublicSetting(true);
     setGetPostReRender(getPostReRender + 1);
     setDeleteAlertIsOpen(false);
+    setToastOpen(true);
   };
   return (
     <>
