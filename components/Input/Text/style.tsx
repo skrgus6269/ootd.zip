@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 interface LayoutProps {
+  state?: Boolean;
   size: 'big' | 'small';
   line: 'underline' | 'outline';
 }
@@ -11,19 +12,22 @@ interface InputProps {
 }
 
 const Layout = styled.div<LayoutProps>`
-  display: inline-flex;
+  display: flex;
   width: 100%;
   max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
   height: 44px;
   gap: 2px;
   position: relative;
+  border-radius: 2px;
 
   ${(props) =>
     props.line === 'underline' &&
     `
-  border-bottom: 2px solid ${props.theme.color.grey_80};
-  &:hover {
-    border-bottom: 2px solid ${props.theme.color.grey_00};
+    border-bottom: 2px solid ${props.theme.color.grey_80};
+    ${props.state && ` border-bottom: 2px solid ${props.theme.color.grey_00};`};
+    
+  &:focus {
+    border-bottom: 2px solid ${props.theme.color.grey_00}; 
   }
   `}
 
@@ -33,8 +37,16 @@ const Layout = styled.div<LayoutProps>`
   border: 1px solid ${props.theme.color.grey_80};
   &:hover {
     border: 1px solid ${props.theme.color.grey_00};
+    .close {
+      display: flex;
+    } 
   }
-  `}
+  ${
+    props.state === false &&
+    `
+    border: 1px solid ${props.theme.color.error};
+  `
+  }`}
 `;
 
 const FlexLayout = styled.div`

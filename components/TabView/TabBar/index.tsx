@@ -4,9 +4,11 @@ import { useTabViewContext } from '@/hooks/use-tabview/context';
 import { useEffect, useState } from 'react';
 interface TabBarProps {
   tab: string[];
+  display: 'inline' | 'block';
+  className?: string;
 }
 
-export default function TabBar({ tab }: TabBarProps) {
+export default function TabBar({ tab, display, className }: TabBarProps) {
   const { index, setIndex } = useTabViewContext();
 
   //props로 전달받은 tab의 개수만큼 유동적으로 초깃값 관리
@@ -26,10 +28,11 @@ export default function TabBar({ tab }: TabBarProps) {
 
   return (
     <>
-      <Layout>
+      <Layout className={className}>
         {tab.map((item, index) => {
           return (
             <Tab
+              display={display}
               key={index}
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}

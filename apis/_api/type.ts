@@ -52,6 +52,12 @@ export interface patchProfilePayload {
   weight: number;
   isBodyPrivate: Boolean;
 }
+export interface postReportPayload {
+  reportIds: number[];
+  targetId: number;
+  reportType: string;
+}
+
 export interface postRegistUserInfoPayload {
   name: string;
   gender: string;

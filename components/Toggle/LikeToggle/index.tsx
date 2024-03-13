@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { LikeToggleLayout } from './style';
 import theme from '@/styles/theme';
 
-export default function LikeToggle() {
-  const [state, setState] = useState<Boolean>(false);
+interface LikeToggleProps {
+  state: Boolean;
+  setState: Dispatch<SetStateAction<Boolean>>;
+  onClick: () => void;
+}
 
+export default function LikeToggle({
+  state,
+  setState,
+  onClick,
+}: LikeToggleProps) {
   const onClickLikeButton = () => {
+    onClick();
     setState(!state);
   };
 
@@ -15,12 +24,7 @@ export default function LikeToggle() {
       {state && (
         <AiFillHeart onClick={onClickLikeButton} style={{ color: 'red' }} />
       )}
-      {!state && (
-        <AiOutlineHeart
-          onClick={onClickLikeButton}
-          style={{ color: theme.color.grey_90 }}
-        />
-      )}
+      {!state && <AiOutlineHeart onClick={onClickLikeButton} />}
     </LikeToggleLayout>
   );
 }

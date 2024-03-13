@@ -5,11 +5,15 @@ import { AiOutlineClose, AiOutlineExclamationCircle } from 'react-icons/ai';
 import { Button3, Caption1, Headline2, Body3 } from '../UI';
 
 interface ReceivedDeclarationModalProps {
+  type: string;
+  reportStatus: Boolean;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function ReceivedDeclarationModal({
+  type,
+  reportStatus,
   receivedDeclaration,
   setReceivedDeclaration,
 }: ReceivedDeclarationModalProps) {
@@ -24,7 +28,11 @@ export default function ReceivedDeclarationModal({
         </S.Header>
         <S.Frame>
           <AiOutlineExclamationCircle />
-          <Headline2>신고가 접수되었습니다.</Headline2>
+          <Headline2>
+            {reportStatus === true
+              ? '신고가 접수되었습니다.'
+              : `이미 신고한 ${type}입니다.`}
+          </Headline2>
           <S.ColorSpan>
             <Body3>
               추가 조치로 해당 사용자를 차단할 수 있습니다.

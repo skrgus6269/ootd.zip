@@ -116,11 +116,6 @@ const PostingCommunication = styled.div`
   display: flex;
   gap: 16px;
 
-  .likedHeart {
-    color: red;
-  }
-  .unLikedHeart {
-  }
   .bookmark {
     flex-grow: 1;
     position: absolute;

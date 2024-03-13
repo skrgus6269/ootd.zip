@@ -32,7 +32,11 @@ export default function SameCloth({ data }: SameClothProps) {
       <S.Filter>
         {data.map((item, index) => {
           return (
-            <S.FilterItem key={index} state={index === currentIndex}>
+            <S.FilterItem
+              onTouchMove={(e) => e.stopPropagation()}
+              key={index}
+              state={index === currentIndex}
+            >
               <Image
                 onClick={() => onClickImage(index)}
                 width={56}

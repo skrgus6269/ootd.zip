@@ -3,6 +3,7 @@ import { Body3, Headline2 } from '@/components/UI';
 import S from './style';
 import Carousel from '@/components/Carousel';
 import ClothInformation from '@/components/ClothInformation';
+import { useEffect, useRef, useState } from 'react';
 
 interface TodayRecommendSampleData {
   data: {
@@ -26,7 +27,7 @@ export default function TodayRecommend(props: TodayRecommendSampleData) {
         <Headline2>오늘 입기 좋은 옷</Headline2>
         <Body3>최고온도 00.0℃ 최저온도 00.0℃ </Body3>
       </S.Weather>
-      <S.CarouselLayout>
+      <S.CarouselLayout onTouchMove={(e) => e.stopPropagation()}>
         <Carousel slidesToShow={1.05} infinite={false} dots={false}>
           {props.data.map((item, index) => {
             return (
