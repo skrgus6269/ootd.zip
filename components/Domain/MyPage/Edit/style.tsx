@@ -29,7 +29,7 @@ const ButtonWrap = styled.div<ButtonProps>`
   background-color: ${(props) =>
     props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
   padding: 14px 0px;
-  color: #fff;
+  color: ${(props) => props.theme.color.grey_100};
   text-align: center;
 `;
 

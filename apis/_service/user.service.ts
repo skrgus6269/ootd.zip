@@ -185,11 +185,15 @@ export const unFollow = async (id: number) => {
 // 프로필 정보 조회
 export const profile = async () => {
   const data = await userApi.profile();
+
+  return data;
 };
 
 // 프로필 정보 업데이트
 export const patchProfile = async (payload: patchProfilePayload) => {
   const data = await userApi.patchProfile(payload);
+
+  return data;
 };
 
 //유저의 이미 읽은 알림 조회

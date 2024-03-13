@@ -9,7 +9,6 @@ import {
 } from '@/utils/reactNativeMessage';
 
 import { UserApi } from '@/apis/domain/User/UserApi';
-import NextButton from '@/components/NextButton';
 import { Button3 } from '@/components/UI';
 import { useRouter } from 'next/router';
 
@@ -43,7 +42,7 @@ export default function Closet() {
 
   const deleteImage = () => {
     console.log('기본 이미지로 변경');
-    setProfileImage('/images/basicProfile.svg');
+    setProfileImage('/images/Avatar.svg');
     setOpenActionSheet(false); // 액션 시트 자동 종료
   };
 
@@ -61,7 +60,7 @@ export default function Closet() {
 
   useEffect(() => {
     const ferchData = async () => {
-      let result = await getProfile();
+      const result = await getProfile();
       console.log(result);
 
       setNickName(result.name);
@@ -95,8 +94,7 @@ export default function Closet() {
     if (possible) {
       const payload = {
         name: nickName,
-        profileImage:
-          profileImage === '/images/basicProfile.svg' ? '' : profileImage,
+        profileImage: profileImage === '/images/Avatar.svg' ? '' : profileImage,
         description: introduction,
         height: Number(height),
         weight: Number(weight),

@@ -4,13 +4,19 @@ import { AiOutlineArrowLeft, AiOutlineSetting } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import Profile from '@/components/Domain/MyPage/Profile';
 import Closet from '@/components/Domain/MyPage/Closet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Toast from '@/components/Toast';
 
 export default function MyPage() {
   const router = useRouter();
 
-  const [queryState, setQueryState] = useState(router.query.state);
+  useEffect(() => {
+    if (router.query.state !== '') {
+      setQueryState(router.query.state as string);
+    }
+  }, []);
+
+  const [queryState, setQueryState] = useState<string>('');
 
   return (
     <>
