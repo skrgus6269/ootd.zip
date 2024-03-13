@@ -14,7 +14,19 @@ export default function BookmarkApi() {
     }
   };
 
+  const deleteOOTDBookmark = async (params: number[]) => {
+    try {
+      const { result } = await userService.deleteOOTDBookmark(params);
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+
   return {
     getUserBookmarkList,
+    deleteOOTDBookmark,
   };
 }

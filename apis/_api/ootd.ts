@@ -59,7 +59,7 @@ export const postOOTDBookmark = async (id: number) => {
 };
 
 //ootd 북마크 제거
-export const deleteOOTDBookmark = async (id: number) => {
+export const deleteOOTDBookmark = async (id: number[]) => {
   const { data } = await fetcher.delete(`api/v1/ootd/bookmark/${id}`);
 
   return data;
