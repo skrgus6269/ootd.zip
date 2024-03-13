@@ -4,6 +4,7 @@ import CheckBoxTrue from 'public/images/checkBoxTrue.png';
 import CheckBoxFalse from 'public/images/checkBoxFalse.png';
 import { useState } from 'react';
 import { BookmarkListType } from '@/pages/Bookmark';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
 export type dataType = {
   pages: BookmarkListType[];
@@ -13,14 +14,16 @@ export type dataType = {
 interface ImageCheckBoxListProps {
   data: dataType | undefined;
   checkBox: Boolean;
+  checkedItems: number[];
+  setCheckedItems: Dispatch<SetStateAction<number[]>>;
 }
 
 export default function ImageCheckBoxList({
   data,
   checkBox,
+  checkedItems,
+  setCheckedItems,
 }: ImageCheckBoxListProps) {
-  const [checkedItems, setCheckedItems] = useState<number[]>([]);
-
   const toggleChecked = (clothId: number) => {
     if (checkedItems.includes(clothId)) {
       setCheckedItems(checkedItems.filter((id) => id !== clothId));
@@ -28,8 +31,6 @@ export default function ImageCheckBoxList({
       setCheckedItems([...checkedItems, clothId]);
     }
   };
-
-  console.log(data);
 
   return (
     <S.Layout>

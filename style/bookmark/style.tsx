@@ -24,15 +24,18 @@ const ClothList = styled.div`
 
 const TopButton = styled.div`
   position: fixed;
-  bottom: 100px;
+  bottom: 60px;
   right: 20px;
   width: 48px;
   height: 48px;
   flex-shrink: 0;
   padding: 10px;
-  border-radius: 50%;
-  background-color: blue;
   z-index: 9999;
+
+  img {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 const S = { Background, Layout, ClothList, TopButton };

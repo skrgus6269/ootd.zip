@@ -21,6 +21,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
 
+import BackTop from '@/public/images/BackTop.svg';
+
 export type OOTDdataType = {
   ootdId: number;
   ootdBookmarkId: number;
@@ -52,7 +54,6 @@ export default function Bookmark() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      console.log(scrollTop);
 
       setIsVisible(scrollTop > 10);
     };
@@ -69,11 +70,11 @@ export default function Bookmark() {
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
   const onClickYesButton = () => {
-    console.log('YES');
+    setAlertOpen(false);
   };
 
   const onClickNoButton = () => {
-    //옷 등록 api
+    console.log(checkedItems);
   };
 
   const onClickBackground = () => {
@@ -125,6 +126,8 @@ export default function Bookmark() {
       }
     );
 
+  const [checkedItems, setCheckedItems] = useState<number[]>([]);
+
   return (
     <>
       <S.Background isOpen={alertOpen} onClick={onClickBackground} />
@@ -142,10 +145,19 @@ export default function Bookmark() {
         />
         <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
           <S.ClothList>
-            <ImageCheckBoxList checkBox={editing} data={data} />
+            <ImageCheckBoxList
+              checkedItems={checkedItems}
+              setCheckedItems={setCheckedItems}
+              checkBox={editing}
+              data={data}
+            />
           </S.ClothList>
         </InfiniteScroll>
-        {isVisible && <S.TopButton onClick={scrollToTop}>버튼</S.TopButton>}
+        {isVisible && (
+          <S.TopButton>
+            <BackTop onClick={scrollToTop}>버튼</BackTop>
+          </S.TopButton>
+        )}
         {alertOpen && (
           <BookmarkAlert
             onClickYesButton={onClickYesButton}
