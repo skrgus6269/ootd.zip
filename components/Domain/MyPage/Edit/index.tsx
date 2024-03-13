@@ -98,7 +98,7 @@ export default function Closet() {
         description: introduction,
         height: Number(height),
         weight: Number(weight),
-        isBodyPrivate: open,
+        isBodyPrivate: !open,
       };
 
       const result = await patchProfile(payload);

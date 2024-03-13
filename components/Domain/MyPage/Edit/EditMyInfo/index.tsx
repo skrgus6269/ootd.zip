@@ -68,6 +68,7 @@ export default function EditMyInfo({
         <S.Category>
           <Body3>닉네임</Body3>
           <Input.Text
+            state={nickName === '' ? false : true}
             defaultValue={nickName}
             size="big"
             line="outline"
@@ -89,6 +90,7 @@ export default function EditMyInfo({
           <S.Category>
             <Body3>신장</Body3>
             <Input.Text
+              state={height === '' || height === '0' ? false : true}
               defaultValue={height}
               size="small"
               line="outline"
@@ -100,6 +102,7 @@ export default function EditMyInfo({
           <S.Category>
             <Body3>체중</Body3>
             <Input.Text
+              state={weight === '' || weight === '0' ? false : true}
               defaultValue={weight}
               size="small"
               line="outline"
