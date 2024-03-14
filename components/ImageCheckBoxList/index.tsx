@@ -6,13 +6,8 @@ import { useState } from 'react';
 import { BookmarkListType } from '@/pages/Bookmark';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
-export type dataType = {
-  pages: BookmarkListType[];
-  pageParams: any;
-};
-
 interface ImageCheckBoxListProps {
-  data: dataType | undefined;
+  data: BookmarkListType | undefined;
   checkBox: Boolean;
   checkedItems: number[];
   setCheckedItems: Dispatch<SetStateAction<number[]>>;
@@ -35,28 +30,25 @@ export default function ImageCheckBoxList({
   return (
     <S.Layout>
       {data &&
-        data.pages.map((onePage) => {
-          return onePage.content.map((item) => {
-            const isChecked = checkedItems.includes(item.ootdId);
-
-            return (
-              <S.CheckBoxLayout key={item.ootdId}>
-                <img
-                  src={item.ootdImage}
-                  alt=""
-                  className={`clothImage ${isChecked ? 'checked' : ''}`}
+        data.content.map((item) => {
+          const isChecked = checkedItems.includes(item.ootdId);
+          return (
+            <S.CheckBoxLayout key={item.ootdId}>
+              <img
+                src={item.ootdImage}
+                alt=""
+                className={`clothImage ${isChecked ? 'checked' : ''}`}
+              />
+              {checkBox && (
+                <Image
+                  src={isChecked ? CheckBoxTrue : CheckBoxFalse}
+                  alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
+                  className="checkBoxImage"
+                  onClick={() => toggleChecked(item.ootdId)}
                 />
-                {checkBox && (
-                  <Image
-                    src={isChecked ? CheckBoxTrue : CheckBoxFalse}
-                    alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
-                    className="checkBoxImage"
-                    onClick={() => toggleChecked(item.ootdId)}
-                  />
-                )}
-              </S.CheckBoxLayout>
-            );
-          });
+              )}
+            </S.CheckBoxLayout>
+          );
         })}
     </S.Layout>
   );

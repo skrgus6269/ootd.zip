@@ -22,6 +22,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
 
 import BackTop from '@/public/images/BackTop.svg';
+import Toast from '@/components/Toast';
 
 export type OOTDdataType = {
   ootdId: number;
@@ -33,8 +34,7 @@ export type BookmarkListType = {
   content: OOTDdataType[];
   page: number;
   size: number;
-  sortCriteria: string;
-  sortDirection: string;
+  isLast: Boolean;
 };
 
 export default function Bookmark() {
@@ -44,6 +44,7 @@ export default function Bookmark() {
   const [showButton, setShowButton] = useState<Boolean>(false);
 
   const [isVisible, setIsVisible] = useState<Boolean>(false);
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -73,8 +74,16 @@ export default function Bookmark() {
     setAlertOpen(false);
   };
 
-  const onClickNoButton = () => {
-    deleteOOTDBookmark(checkedItems);
+  const onClickNoButton = async () => {
+    console.log(checkedItems);
+    const result = await deleteOOTDBookmark(checkedItems);
+    if (result.statusCode === 200) {
+      // 북마크 재정렬 코드 필요
+      setAlertOpen(false);
+      setToastOpen(true);
+      setEditing(false);
+      scrollToTop();
+    }
   };
 
   const onClickBackground = () => {
@@ -82,49 +91,21 @@ export default function Bookmark() {
   };
 
   const { getUserBookmarkList, deleteOOTDBookmark } = BookmarkApi();
+  const [data, setData] = useState();
 
-  const getData = async ({
-    content,
-    page,
-    size,
-    sortCriteria,
-    sortDirection,
-  }: BookmarkListType) => {
-    try {
+  useEffect(() => {
+    const fetchData = async () => {
       const result = await getUserBookmarkList({
-        page: page,
-        size: size,
-        sortCriteria: sortCriteria,
-        sortDirection: sortDirection,
+        page: 1,
+        size: 10,
+        sortCriteria: 'createdAt',
+        sortDirection: 'DESC',
       });
-      return result;
-    } catch (error) {
-      console.error('Error in getFeedPost:', error);
-      throw error;
-    }
-  };
+      setData(result);
+    };
 
-  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
-    useInfiniteQuery(
-      ['datas'],
-      ({ pageParam = 0 }) =>
-        getData({
-          content: [],
-          page: pageParam,
-          size: 10,
-          sortCriteria: 'createdAt',
-          sortDirection: 'DESC',
-        }),
-      {
-        getNextPageParam: (lastPage, allPages) => {
-          if (lastPage.last) {
-            return;
-          } else {
-            return lastPage.page + 1;
-          }
-        },
-      }
-    );
+    fetchData();
+  }, []);
 
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
@@ -143,16 +124,14 @@ export default function Bookmark() {
           setEditing={setEditing}
           setAlertOpen={setAlertOpen}
         />
-        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <S.ClothList>
-            <ImageCheckBoxList
-              checkedItems={checkedItems}
-              setCheckedItems={setCheckedItems}
-              checkBox={editing}
-              data={data}
-            />
-          </S.ClothList>
-        </InfiniteScroll>
+        <S.ClothList>
+          <ImageCheckBoxList
+            checkedItems={checkedItems}
+            setCheckedItems={setCheckedItems}
+            checkBox={editing}
+            data={data}
+          />
+        </S.ClothList>
         {isVisible && (
           <S.TopButton>
             <BackTop onClick={scrollToTop}>버튼</BackTop>
@@ -164,6 +143,7 @@ export default function Bookmark() {
             onClickNoButton={onClickNoButton}
           />
         )}
+        {toastOpen && <Toast text="북마크에서 삭제되었습니다." />}
       </S.Layout>
     </>
   );
