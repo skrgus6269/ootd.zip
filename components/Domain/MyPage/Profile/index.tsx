@@ -53,9 +53,11 @@ export default function Profile({
         <Body3>{data.description}</Body3>
       </S.Introduce>
       {localUserId === showingId ? (
-        <Button3 onClick={() => router.push(`/EditMypage`)}>
-          프로필 수정
-        </Button3>
+        <S.ButtonWrap state={false}>
+          <Button3 onClick={() => router.push(`/EditMypage`)}>
+            프로필 수정
+          </Button3>
+        </S.ButtonWrap>
       ) : (
         <S.ButtonWrap state={data.isFollow}>
           {data.isFollow ? (
