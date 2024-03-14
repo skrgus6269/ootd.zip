@@ -74,14 +74,14 @@ export default function Bookmark() {
   };
 
   const onClickNoButton = () => {
-    console.log(checkedItems);
+    deleteOOTDBookmark(checkedItems);
   };
 
   const onClickBackground = () => {
     if (alertOpen) setAlertOpen(false);
   };
 
-  const { getUserBookmarkList } = BookmarkApi();
+  const { getUserBookmarkList, deleteOOTDBookmark } = BookmarkApi();
 
   const getData = async ({
     content,
