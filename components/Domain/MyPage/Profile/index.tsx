@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export interface UserProfileDataType {
+  userId: number;
   userImage: string;
   userName: string;
   followerCount: number;
   followingCount: number;
   height: number;
   weight: number;
-  followingState: Boolean;
+  isFollow: Boolean;
   description: string;
   OOTDNumber: number;
   clothNumber: number;
@@ -22,14 +23,15 @@ interface profileProps {
   data: UserProfileDataType;
   localUserId: number;
   showingId: number | undefined;
+  onClickFollowButton: () => void;
 }
 
 export default function Profile({
   data,
   localUserId,
   showingId,
+  onClickFollowButton,
 }: profileProps) {
-  const onClickFollowButton = () => {};
   const router = useRouter();
 
   return (
@@ -50,22 +52,19 @@ export default function Profile({
       <S.Introduce>
         <Body3>{data.description}</Body3>
       </S.Introduce>
-      <Button
-        className="followButton"
-        size="big"
-        backgroundColor="grey_00"
-        color="grey_100"
-        border={false}
-        onClick={onClickFollowButton}
-      >
-        {localUserId === showingId ? (
-          <Button3 onClick={() => router.push(`/EditMypage`)}>
-            프로필 수정
-          </Button3>
-        ) : (
-          <Button3 onClick={() => ''}>팔로우</Button3>
-        )}
-      </Button>
+      {localUserId === showingId ? (
+        <Button3 onClick={() => router.push(`/EditMypage`)}>
+          프로필 수정
+        </Button3>
+      ) : (
+        <S.ButtonWrap state={data.isFollow}>
+          {data.isFollow ? (
+            <Button3 onClick={onClickFollowButton}>팔로우</Button3>
+          ) : (
+            <Button3 onClick={onClickFollowButton}>팔로잉</Button3>
+          )}
+        </S.ButtonWrap>
+      )}
     </S.Layout>
   );
 }

@@ -15,6 +15,7 @@ import { useRecoilValue } from 'recoil';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
 import BlockAlert from '@/components/Domain/MyPage/BlockAlert';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
 
 export default function MyPage() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function MyPage() {
   const localUserId = useRecoilValue(userId);
 
   const [userProfileData, setUserProfileData] = useState<UserProfileDataType>({
+    userId: 1,
     userImage:
       'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     userName: '낙낙',
@@ -32,13 +34,16 @@ export default function MyPage() {
     followingCount: 132,
     height: 177,
     weight: 72,
-    followingState: false,
+    isFollow: false,
     description: '간계밥',
     OOTDNumber: 0,
     clothNumber: 0,
   });
 
+  const [followState, setFollowState] = useState<Boolean>(false);
+
   const { getMypage } = UserApi();
+  const { follow, unFollow } = PublicApi();
 
   useEffect(() => {
     const ferchData = async () => {
@@ -71,7 +76,20 @@ export default function MyPage() {
   };
 
   const onClickNoButton = () => {
-    console.log('no');
+    setBlockOpen(false);
+  };
+
+  const onClickFollowButton = async () => {
+    if (!userProfileData.isFollow) {
+      await follow(userProfileData.userId);
+      const result = await getMypage(Number(router.query.UserId![0]));
+      setUserProfileData(result);
+    }
+    if (userProfileData.isFollow) {
+      await unFollow(userProfileData.userId);
+      const result = await getMypage(Number(router.query.UserId![0]));
+      setUserProfileData(result);
+    }
   };
 
   return (
@@ -101,6 +119,7 @@ export default function MyPage() {
           data={userProfileData}
           localUserId={localUserId}
           showingId={showingId}
+          onClickFollowButton={onClickFollowButton}
         />
         <Closet localUserId={localUserId} showingId={showingId} />
         {queryState === 'editSuccess' && (
