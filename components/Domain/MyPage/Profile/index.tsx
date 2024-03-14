@@ -21,7 +21,7 @@ export interface UserProfileDataType {
 interface profileProps {
   data: UserProfileDataType;
   localUserId: number;
-  showingId: number;
+  showingId: number | undefined;
 }
 
 export default function Profile({

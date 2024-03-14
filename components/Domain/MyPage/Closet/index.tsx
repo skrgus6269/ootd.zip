@@ -10,7 +10,7 @@ import { userId } from '@/utils/recoil/atom';
 
 interface ClosetType {
   localUserId: number;
-  showingId: number;
+  showingId: number | undefined;
 }
 
 export default function Closet({ localUserId, showingId }: ClosetType) {

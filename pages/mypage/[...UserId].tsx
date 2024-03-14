@@ -18,8 +18,9 @@ import BlockAlert from '@/components/Domain/MyPage/BlockAlert';
 
 export default function MyPage() {
   const router = useRouter();
-  const path = router.asPath;
-  const [showingId, setShowingId] = useState<number>(1);
+
+  const [showingId, setShowingId] = useState<number>();
+
   const [queryState, setQueryState] = useState<string>('');
   const localUserId = useRecoilValue(userId);
 
@@ -41,12 +42,18 @@ export default function MyPage() {
 
   useEffect(() => {
     const ferchData = async () => {
-      const result = await getMypage(showingId);
-      setUserProfileData(result);
+      if (!router.isReady) return;
+      try {
+        const result = await getMypage(Number(router.query.UserId![0]));
+        setUserProfileData(result);
+        setShowingId(Number(router.query.UserId![0]));
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     ferchData();
-  });
+  }, [router.isReady, router.query.userId]);
 
   useEffect(() => {
     if (router.query.state !== '') {
