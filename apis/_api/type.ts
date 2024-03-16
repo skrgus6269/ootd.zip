@@ -32,6 +32,13 @@ export interface postClothPayload {
   purchaseDate?: string;
 }
 
+export interface getUserBookmarkListPayload {
+  page: number;
+  size: number;
+  sortCriteria: string;
+  sortDirection: string;
+}
+
 export interface postOOTDComentPayload {
   ootdId: number;
   parentDepth: number;
@@ -44,6 +51,14 @@ export interface patchClothIsPrivateType {
   isPrivate: Boolean;
 }
 
+export interface patchProfilePayload {
+  name: string;
+  profileImage: string;
+  description: string;
+  height: number;
+  weight: number;
+  isBodyPrivate: Boolean;
+}
 export interface postReportPayload {
   reportIds: number[];
   targetId: number;

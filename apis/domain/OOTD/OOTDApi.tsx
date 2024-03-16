@@ -123,7 +123,10 @@ export const OOTDApi = () => {
   const deleteOOTDBookmark = async (id: number) => {
     try {
       const data = await userService.deleteOOTDBookmark(id);
-      return data;
+
+      if (data.statusCode === 200) {
+        return data;
+      }
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);

@@ -5,6 +5,8 @@ const BottomComponent = styled.div`
   justify-content: center;
   width: 100%;
   background-color: #ffffff;
+  position: fixed;
+  bottom: 0;
 `;
 
 const BottomComponentItem = styled.div`

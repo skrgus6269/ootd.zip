@@ -3,8 +3,10 @@ import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
   postClothPayload,
+  getUserBookmarkListPayload,
   postOOTDComentPayload,
   patchClothIsPrivateType,
+  patchProfilePayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -150,6 +152,22 @@ export const deleteCloth = async (id: number) => {
   return data;
 };
 
+// 유저의 북마크 리스트 조회
+export const getUserBookmarkList = async (
+  params: getUserBookmarkListPayload
+) => {
+  const data = await ootdApi.getUserBookmarkList(params);
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const data = await ootdApi.deleteBookmarkList(bookamrkIds);
+
+  return data;
+};
+
 //cloth 수정
 export const putCloth = async (id: number, payload: postClothPayload) => {
   const data = await clothApi.putCloth(id, payload);
@@ -181,6 +199,27 @@ export const unFollow = async (id: number) => {
   return data;
 };
 
+// 유저 프로필 정보 조회
+export const getMypage = async (id: number) => {
+  const data = await userApi.getMypage(id);
+
+  return data;
+};
+
+// 나의 프로필 정보 조회
+export const getProfile = async () => {
+  const data = await userApi.getProfile();
+
+  return data;
+};
+
+// 프로필 정보 업데이트
+export const patchProfile = async (payload: patchProfilePayload) => {
+  const data = await userApi.patchProfile(payload);
+
+  return data;
+};
+
 //유저의 이미 읽은 알림 조회
 export const getIsReadAlarm = async () => {
   const data = await alarmApi.getAlarm(true);
@@ -205,6 +244,13 @@ export const readAlarm = async (userId: number) => {
 //유저의 읽지 않은 알림 조회
 export const getExistIsNotReadAlarm = async () => {
   const data = await alarmApi.getExistIsNotReadAlarm();
+
+  return data;
+};
+
+//이 옷을 활용한 OOTD 조회
+export const getOOTDWithCloth = async (clothId: number) => {
+  const data = await ootdApi.getOOTDWithCloth(clothId);
 
   return data;
 };

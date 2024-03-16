@@ -18,7 +18,7 @@ export default function OtherProfile({
   return (
     <ProfileLayout
       isUser={isUser}
-      imgSrc={userImage!}
+      imgSrc={userImage}
       isMine={false}
       className={className}
     >

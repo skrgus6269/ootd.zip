@@ -8,7 +8,12 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 
-export default function Closet() {
+interface ClosetType {
+  localUserId: number;
+  showingId: number | undefined;
+}
+
+export default function Closet({ localUserId, showingId }: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
   const myId = useRecoilValue(userId);
   const { getOOTD } = OOTDApi();

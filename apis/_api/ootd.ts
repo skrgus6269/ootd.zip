@@ -1,8 +1,9 @@
 import fetcher from '../fetcher';
 import {
   patchOOTDIsPrivatePayload,
-  postOOTDComentPayload,
   postOOTDPayload,
+  getUserBookmarkListPayload,
+  postOOTDComentPayload,
 } from './type';
 
 //ootd 작성
@@ -85,6 +86,24 @@ export const lookUpOOTDAll = async () => {
   return data;
 };
 
+//유저의 북마크 리스트 조회
+export const getUserBookmarkList = async (
+  payload: getUserBookmarkListPayload
+) => {
+  const { data } = await fetcher.get(
+    `/api/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
+  );
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const { data } = await fetcher.delete(`/api/v1/bookmarks/${bookamrkIds}`);
+
+  return data;
+};
+
 //ootd 작성자의 다른 ootd 조회
 export const otherOOTD = async (userId: number, ootdId: number) => {
   const { data } = await fetcher.get(
@@ -122,6 +141,15 @@ export const postOOTDComent = async (payload: postOOTDComentPayload) => {
 //ootd 댓글 삭제
 export const DeleteOOTDComent = async (commentId: number) => {
   const { data } = await fetcher.delete(`/api/v1/comment/${commentId}`);
+
+  return data;
+};
+
+//이 옷으로 이루어진 OOTD 조회
+export const getOOTDWithCloth = async (clothId: number) => {
+  const { data } = await fetcher.get(
+    `/api/v1/ootd/clothes?page=0&size=20&clothesId=${clothId}`
+  );
 
   return data;
 };
