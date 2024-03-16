@@ -3,6 +3,7 @@ import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
   postClothPayload,
+  getUserBookmarkListPayload,
   postOOTDComentPayload,
   patchClothIsPrivateType,
   getOOTDParams,
@@ -150,6 +151,22 @@ export const getClothDetail = async (id: number) => {
 //cloth 삭제
 export const deleteCloth = async (id: number) => {
   const data = await clothApi.deleteCloth(id);
+
+  return data;
+};
+
+// 유저의 북마크 리스트 조회
+export const getUserBookmarkList = async (
+  params: getUserBookmarkListPayload
+) => {
+  const data = await ootdApi.getUserBookmarkList(params);
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const data = await ootdApi.deleteBookmarkList(bookamrkIds);
 
   return data;
 };

@@ -3,8 +3,9 @@ import {
   getOOTDCommentParams,
   getOOTDParams,
   patchOOTDIsPrivatePayload,
-  postOOTDComentPayload,
   postOOTDPayload,
+  getUserBookmarkListPayload,
+  postOOTDComentPayload,
 } from './type';
 
 //ootd 작성
@@ -91,6 +92,24 @@ export const deleteOOTDLike = async (id: number) => {
 //ootd 전체 조회
 export const lookUpOOTDAll = async () => {
   const { data } = await fetcher.get('/api/v1/ootd/all');
+
+  return data;
+};
+
+//유저의 북마크 리스트 조회
+export const getUserBookmarkList = async (
+  payload: getUserBookmarkListPayload
+) => {
+  const { data } = await fetcher.get(
+    `/api/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
+  );
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const { data } = await fetcher.delete(`/api/v1/bookmarks/${bookamrkIds}`);
 
   return data;
 };

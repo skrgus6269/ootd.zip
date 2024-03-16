@@ -11,7 +11,7 @@ const Layout = styled.div`
   flex-direction: column;
 `;
 
-const MainComponent = styled.div`
+const MainComponent = styled.div` 
   height: calc(100vh - 56px);
 `;
 
