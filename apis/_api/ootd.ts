@@ -139,3 +139,12 @@ export const DeleteOOTDComent = async (commentId: number) => {
 
   return data;
 };
+
+//이 옷으로 이루어진 OOTD 조회
+export const getOOTDWithCloth = async (clothId: number) => {
+  const { data } = await fetcher.get(
+    `/api/v1/ootd/clothes?page=0&size=20&clothesId=${clothId}`
+  );
+
+  return data;
+};
