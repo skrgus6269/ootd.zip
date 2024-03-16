@@ -59,3 +59,10 @@ export interface postRegistUserInfoPayload {
   isBodyPrivate: Boolean;
   styles: number[];
 }
+
+export interface paginationType {
+  page: number;
+  size: number;
+  sortCriteria?: string;
+  sortDirection?: 'ASC' | 'DESC';
+}
