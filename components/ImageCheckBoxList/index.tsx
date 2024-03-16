@@ -45,6 +45,8 @@ export default function ImageCheckBoxList({
                   alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
                   className="checkBoxImage"
                   onClick={() => toggleChecked(item.ootdId)}
+                  width={24}
+                  height={24}
                 />
               )}
             </S.CheckBoxLayout>
