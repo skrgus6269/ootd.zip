@@ -66,3 +66,15 @@ export interface paginationType {
   sortCriteria?: string;
   sortDirection?: 'ASC' | 'DESC';
 }
+
+export interface getOOTDParams extends paginationType {
+  userId: number;
+}
+
+export interface getOOTDCommentParams extends paginationType {
+  ootdId: number;
+}
+
+export interface getClothListParams extends paginationType {
+  userId: number;
+}

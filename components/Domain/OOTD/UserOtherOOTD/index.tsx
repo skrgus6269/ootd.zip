@@ -24,24 +24,16 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady || userId === undefined) return;
-      try {
-        const result = await otherOOTD(
-          userId,
-          Number(router.query.OOTDNumber![0])
-        );
-        setData(result.content);
-      } catch (err) {
-        console.log(err);
-      }
+      const result = await otherOOTD(
+        userId,
+        Number(router.query.OOTDNumber![0])
+      );
+      setData(result.content);
     };
     fetchData();
   }, [router.isReady, userId, router.query.OOTDNumber]);
 
   const [data, setData] = useState<OOTDListType[] | null>(null);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <S.Layout>
