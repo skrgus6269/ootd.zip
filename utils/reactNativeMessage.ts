@@ -1,12 +1,10 @@
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { Dispatch, SetStateAction } from 'react';
 import { WebViewMessageEvent } from 'react-native-webview';
-
 interface Message {
   type: string;
   payload?: any;
 }
-
 export const getReactNativeMessage = (
   setState: Dispatch<SetStateAction<any>>
 ) => {
@@ -51,16 +49,13 @@ export const getReactNativeMessage = (
       }
     }
   };
-
   if (window.ReactNativeWebView) {
     //android
     document.addEventListener('message', listener);
-
     // //ios
     window.addEventListener('message', listener);
   }
 };
-
 export const sendReactNativeMessage = ({ type, payload }: Message) => {
   if (window.ReactNativeWebView) {
     window.ReactNativeWebView.postMessage(JSON.stringify({ type, payload }));
