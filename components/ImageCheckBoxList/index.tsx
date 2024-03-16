@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from 'public/images/checkBoxTrue.png';
-import CheckBoxFalse from 'public/images/checkBoxFalse.png';
+import CheckBoxTrue from '@/public/images/checkBoxTrue.png';
+import CheckBoxFalse from '@/public/images/checkBoxFalse.png';
 import { useState } from 'react';
 import { BookmarkListType } from '@/pages/bookmark';
 import { Dispatch, SetStateAction, useEffect } from 'react';
