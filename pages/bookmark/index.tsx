@@ -77,7 +77,7 @@ export default function Bookmark() {
   const onClickNoButton = async () => {
     console.log(checkedItems);
     const result = await deleteOOTDBookmark(checkedItems);
-    if (result.statusCode === 200) {
+    if (result) {
       // 북마크 재정렬 코드 필요
       setAlertOpen(false);
       setToastOpen(true);

@@ -36,7 +36,7 @@ export default function BookmarSubHead({
                 </Button3>
               </button>
 
-              <Image src={Rectangle} alt="Rectangle" />
+              <Image src={Rectangle} alt="Rectangle" width={1} height={20} />
 
               <button onClick={() => setEditing(false)}>
                 <Button3 state="emphasis">취소</Button3>
