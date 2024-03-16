@@ -25,7 +25,7 @@ const ToggleCircle = styled.div<ToggleProps>`
   position: absolute;
   top: 1px;
   background-color: ${(props) => props.theme.color.grey_100};
-  left: ${(props) => (props.state ? '15px' : '1px')};
+  left: ${(props) => (props.state ? '1px' : '15px')};
   border-radius: 50%;
   transition: 0.5s;
 `;

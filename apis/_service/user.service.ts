@@ -8,6 +8,7 @@ import {
   getOOTDParams,
   getOOTDCommentParams,
   getClothListParams,
+  patchProfilePayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -180,6 +181,27 @@ export const follow = async (id: number) => {
 //언팔로잉
 export const unFollow = async (id: number) => {
   const data = await userApi.unFollow(id);
+
+  return data;
+};
+
+// 유저 프로필 정보 조회
+export const getMypage = async (id: number) => {
+  const data = await userApi.getMypage(id);
+
+  return data;
+};
+
+// 나의 프로필 정보 조회
+export const getProfile = async () => {
+  const data = await userApi.getProfile();
+
+  return data;
+};
+
+// 프로필 정보 업데이트
+export const patchProfile = async (payload: patchProfilePayload) => {
+  const data = await userApi.patchProfile(payload);
 
   return data;
 };

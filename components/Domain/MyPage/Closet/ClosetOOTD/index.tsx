@@ -31,10 +31,10 @@ export default function ClosetOOTD() {
     '최신순'
   );
 
-  const fetchDataFunction = async (ootdPage: number) => {
+  const fetchDataFunction = async (ootdPage: number, size: number) => {
     const data = await getOOTD({
       page: ootdPage,
-      size: 20,
+      size,
       userId: myId,
       sortCriteria: 'createdAt',
       sortDirection: sortStandard === '오래된 순' ? 'ASC' : 'DESC',
@@ -51,6 +51,7 @@ export default function ClosetOOTD() {
     reset,
   } = useInfiniteScroll({
     fetchDataFunction,
+    size: 20,
     initialData: [],
   });
 

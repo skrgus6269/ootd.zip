@@ -44,6 +44,14 @@ export interface patchClothIsPrivateType {
   isPrivate: Boolean;
 }
 
+export interface patchProfilePayload {
+  name: string;
+  profileImage: string;
+  description: string;
+  height: number;
+  weight: number;
+  isBodyPrivate: Boolean;
+}
 export interface postReportPayload {
   reportIds: number[];
   targetId: number;

@@ -10,7 +10,7 @@ const Layout = styled.div`
 `;
 
 const UserPhoto = styled.div`
-  img {
+  .userImage {
     width: 44px;
     height: 44px;
     border-radius: 50%;

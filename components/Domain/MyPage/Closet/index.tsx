@@ -2,8 +2,18 @@ import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
-import ClosetOOTD from './ClosetOOTD';
-export default function Closet() {
+import ClosetOOTD, { MyPageOOTDType } from './ClosetOOTD';
+import { useEffect, useState } from 'react';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+
+interface ClosetType {
+  localUserId: number;
+  showingId: number | undefined;
+}
+
+export default function Closet({ localUserId, showingId }: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
 
   const myPageClothList = [
