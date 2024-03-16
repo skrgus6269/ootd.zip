@@ -178,7 +178,9 @@ const Cloth = () => {
         size={data?.size.name}
         buyDate={data?.purchaseDate}
       />
-      <ClothOOTD data={OOTDData} />
+      {router.isReady && (
+        <ClothOOTD clothId={Number(router.query.ClothNumber![0])} />
+      )}
       {clickedRight && <ActionSheet buttons={buttons} />}
       {deleteOpen && (
         <DeleteAlert

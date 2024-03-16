@@ -33,12 +33,22 @@ const OpenStatus = styled.div`
   width: 100%;
 `;
 
+const StateLayout = styled.div`
+  display: inline-flex;
+  padding: 0px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 16px;
+  gap: 4px;
+  width: 100%;
+`;
+
 const Wrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
-const S = { Layout, Category, BodyInfo, OpenStatus, Wrap };
+const S = { Layout, Category, BodyInfo, OpenStatus, Wrap, StateLayout };
 
 export default S;

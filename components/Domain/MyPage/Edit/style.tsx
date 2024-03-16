@@ -18,6 +18,21 @@ const Background = styled.div<BackgroundProps>`
   position: absolute;
 `;
 
-const S = { Layout, Background };
+interface ButtonProps {
+  state: Boolean;
+}
+
+const ButtonWrap = styled.div<ButtonProps>`
+  margin: 0px 20px;
+  width: calc(100% - 40px);
+  margin-top: 88px;
+  background-color: ${(props) =>
+    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
+  padding: 14px 0px;
+  color: ${(props) => props.theme.color.grey_100};
+  text-align: center;
+`;
+
+const S = { Layout, Background, ButtonWrap };
 
 export default S;
