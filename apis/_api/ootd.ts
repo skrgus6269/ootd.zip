@@ -59,7 +59,7 @@ export const postOOTDBookmark = async (id: number) => {
 };
 
 //ootd 북마크 제거
-export const deleteOOTDBookmark = async (id: number[]) => {
+export const deleteOOTDBookmark = async (id: number) => {
   const { data } = await fetcher.delete(`api/v1/ootd/bookmark/${id}`);
 
   return data;
@@ -93,6 +93,13 @@ export const getUserBookmarkList = async (
   const { data } = await fetcher.get(
     `/api/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
   );
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const { data } = await fetcher.delete(`/api/v1/bookmarks/${bookamrkIds}`);
 
   return data;
 };

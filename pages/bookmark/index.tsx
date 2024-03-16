@@ -76,7 +76,7 @@ export default function Bookmark() {
 
   const onClickNoButton = async () => {
     console.log(checkedItems);
-    const result = await deleteOOTDBookmark(checkedItems);
+    const result = await deleteBookmarkList(checkedItems);
     if (result) {
       // 북마크 재정렬 코드 필요
       setAlertOpen(false);
@@ -90,7 +90,7 @@ export default function Bookmark() {
     if (alertOpen) setAlertOpen(false);
   };
 
-  const { getUserBookmarkList, deleteOOTDBookmark } = BookmarkApi();
+  const { getUserBookmarkList, deleteBookmarkList } = BookmarkApi();
   const [data, setData] = useState();
 
   useEffect(() => {

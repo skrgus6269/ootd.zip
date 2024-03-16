@@ -83,7 +83,7 @@ export const postOOTDBookmark = async (id: number) => {
 };
 
 //ootd 북마크 제거
-export const deleteOOTDBookmark = async (id: number[]) => {
+export const deleteOOTDBookmark = async (id: number) => {
   const data = await ootdApi.deleteOOTDBookmark(id);
 
   return data;
@@ -152,10 +152,18 @@ export const deleteCloth = async (id: number) => {
   return data;
 };
 
+// 유저의 북마크 리스트 조회
 export const getUserBookmarkList = async (
   params: getUserBookmarkListPayload
 ) => {
   const data = await ootdApi.getUserBookmarkList(params);
+
+  return data;
+};
+
+//유저의 북마크 리스트 삭제
+export const deleteBookmarkList = async (bookamrkIds: number[]) => {
+  const data = await ootdApi.deleteBookmarkList(bookamrkIds);
 
   return data;
 };

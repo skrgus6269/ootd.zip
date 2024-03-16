@@ -120,7 +120,7 @@ export const OOTDApi = () => {
   };
 
   //ootd 북마크 제거
-  const deleteOOTDBookmark = async (id: number[]) => {
+  const deleteOOTDBookmark = async (id: number) => {
     try {
       const data = await userService.deleteOOTDBookmark(id);
 

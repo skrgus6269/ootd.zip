@@ -14,9 +14,9 @@ export default function BookmarkApi() {
     }
   };
 
-  const deleteOOTDBookmark = async (params: number[]) => {
+  const deleteBookmarkList = async (params: number[]) => {
     try {
-      const result = await userService.deleteOOTDBookmark(params);
+      const result = await userService.deleteBookmarkList(params);
       console.log(result);
       return result;
     } catch (err) {
@@ -27,6 +27,6 @@ export default function BookmarkApi() {
 
   return {
     getUserBookmarkList,
-    deleteOOTDBookmark,
+    deleteBookmarkList,
   };
 }
