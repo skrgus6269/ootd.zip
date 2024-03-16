@@ -32,6 +32,13 @@ export interface postClothPayload {
   purchaseDate?: string;
 }
 
+export interface getUserBookmarkListPayload {
+  page: number;
+  size: number;
+  sortCriteria: string;
+  sortDirection: string;
+}
+
 export interface postOOTDComentPayload {
   ootdId: number;
   parentDepth: number;
