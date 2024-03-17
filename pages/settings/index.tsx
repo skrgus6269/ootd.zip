@@ -47,15 +47,15 @@ export default function Setting() {
           <Header text="내 계정" />
           <SettingBlock
             text="소셜로그인 정보"
-            buttonClick={() => router.push('/SocialLoginInfo')}
+            buttonClick={() => router.push('/social-login-info')}
           />
           <SettingBlock
             text="내 취향정보 수정"
-            buttonClick={() => router.push('/LikeInfo')}
+            buttonClick={() => router.push('/like-info')}
           />
           <SettingBlock
             text="차단한 계정"
-            buttonClick={() => router.push('/BlockedAccount')}
+            buttonClick={() => router.push('/blocked-account')}
           />
         </S.MyAccount>
 

@@ -93,7 +93,7 @@ const EditOOTD: ComponentWithLayout = () => {
 
       //edit ootd 성공 여부에 따른 페이지 이동
       if (editOOTDSuccess) {
-        router.push(`/OOTD/${Number(router.query.OOTDNumber![0])}`);
+        router.push(`/ootd/${Number(router.query.OOTDNumber![0])}`);
       } else {
         alert('등록 실패');
       }

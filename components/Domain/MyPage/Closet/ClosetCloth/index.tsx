@@ -44,7 +44,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
   }, [filter]);
 
   const onClickImageList = (index: number) => {
-    router.push(`/OOTD/${index}`);
+    router.push(`/cloth/${index}`);
   };
 
   const onClickFilterSpan = () => {

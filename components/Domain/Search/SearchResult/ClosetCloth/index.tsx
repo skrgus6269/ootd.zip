@@ -53,7 +53,7 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
   }, [filter]);
 
   const onClickImageList = (index: number) => {
-    router.push(`/OOTD/${index}`);
+    router.push(`/ootd/${index}`);
   };
 
   const onClickFilterSpan = () => {

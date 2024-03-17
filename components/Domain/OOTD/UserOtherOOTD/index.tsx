@@ -43,7 +43,7 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
       <S.OOTD>
         {data && (
           <ImageList
-            onClick={(ootdId: number) => router.push(`/OOTD/${ootdId}`)}
+            onClick={(ootdId: number) => router.push(`/ootd/${ootdId}`)}
             type="row"
             data={data.map((item) => {
               return { ootdId: item.id, ootdImage: item.image };

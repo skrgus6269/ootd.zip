@@ -26,7 +26,7 @@ export default function SocialLoginInfo() {
           <Header text="소설로그인 정보" />
           <SettingBlock text="카카오" />
         </S.MyAccount>
-        <S.Text onClick={() => router.push('/Withdraw')}>
+        <S.Text onClick={() => router.push('/with-draw')}>
           <Body3>탈퇴하기</Body3>
         </S.Text>
       </S.Layout>

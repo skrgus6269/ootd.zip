@@ -51,7 +51,7 @@ const Cloth = () => {
   }, [router.isReady, reRender]);
 
   const modifyButton = () => {
-    router.push(`/EditCloth/${router.query.ClothNumber![0]}`);
+    router.push(`/edit-cloth/${router.query.ClothNumber![0]}`);
   };
 
   const [URLState, setURLState] = useState<Boolean>(false);

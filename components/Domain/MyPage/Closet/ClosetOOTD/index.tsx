@@ -20,7 +20,7 @@ export default function ClosetOOTD() {
   const [myPageOOTDList, setMyPageOOTDList] = useState<MyPageOOTDType[]>([]);
 
   const onClickImageList = (index: number) => {
-    router.push(`/OOTD/${index}`);
+    router.push(`/ootd/${index}`);
   };
 
   const myId = useRecoilValue(userId);

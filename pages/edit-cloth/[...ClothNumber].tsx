@@ -124,14 +124,14 @@ const EditCloth: ComponentWithLayout = () => {
       Number(router.query.ClothNumber![0]),
       payload
     );
-    if (result) router.push(`/Cloth/${Number(router.query.ClothNumber![0])}`);
+    if (result) router.push(`/cloth/${Number(router.query.ClothNumber![0])}`);
   };
 
   return (
     <Funnel>
       <AppBar
         leftProps={
-          <Button3 onClick={() => router.push(`/DetailCloth`)}>취소</Button3>
+          <Button3 onClick={() => router.push(`/detail-cloth`)}>취소</Button3>
         }
         middleProps={<Title1>수정하기</Title1>}
         rightProps={<></>}

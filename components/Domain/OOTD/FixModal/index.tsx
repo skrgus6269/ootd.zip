@@ -57,7 +57,7 @@ export default function FixModal({
           </S.Span>
           <S.Span
             onClick={() =>
-              router.push(`/EditOOTD/${Number(router.query!.OOTDNumber![0])}`)
+              router.push(`/edit-ootd/${Number(router.query!.OOTDNumber![0])}`)
             }
           >
             <Button1 className="report">ootd 수정</Button1>
