@@ -6,7 +6,7 @@ import { Button3, Title1 } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
-import { Style } from '../AddOOTD';
+import { Style } from '../add-ootd';
 
 export default function LikeInfo() {
   const router = useRouter();

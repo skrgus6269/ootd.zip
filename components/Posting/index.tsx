@@ -24,7 +24,7 @@ import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
-import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
+import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';

@@ -12,7 +12,7 @@ import {
   AiOutlineClose,
   AiOutlinePlus,
 } from 'react-icons/ai';
-import { Style } from '../AddOOTD';
+import { Style } from '../add-ootd';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { useRouter } from 'next/router';
