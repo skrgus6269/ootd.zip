@@ -5,6 +5,7 @@ interface ProfileType {
   follow?: number;
   myCloth?: number;
   className?: string;
+  showingId?: number;
 }
 
 export type { ProfileType };
