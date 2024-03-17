@@ -169,8 +169,8 @@ const OOTD: ComponentWithLayout = () => {
         reRender={reRender}
         setReRender={setReRender}
       />
-      <UserCloth userName={data?.userName} userId={data?.userId} />
-      <UserOtherOOTD userName={data?.userName} userId={data?.userId} />
+      {data && <UserCloth userName={data.userName} userId={data.userId} />}
+      {data && <UserOtherOOTD userName={data.userName} userId={data.userId} />}
       <SimilarOOTD />
       <PostingCommentWrite
         userImage={data && data.userImage}

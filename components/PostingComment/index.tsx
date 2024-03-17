@@ -58,35 +58,32 @@ export default function PostingComment({
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
-      try {
-        const { result } = await getOOTDComment(
-          Number(router.query.OOTDNumber![0])
-        );
-        const map = new Map<number, PostingCommentData>();
-        const resultData: PostingCommentData[] = [];
+      const { content } = await getOOTDComment({
+        page: 0,
+        size: 100,
+        ootdId: Number(router.query.OOTDNumber![0]),
+      });
+      const map = new Map<number, PostingCommentData>();
+      const resultData: PostingCommentData[] = [];
 
-        result.content.forEach((comment: PostingCommentData) => {
-          if (comment.depth === 1) map.set(comment.id, comment);
-        });
+      content.forEach((comment: PostingCommentData) => {
+        if (comment.depth === 1) map.set(comment.id, comment);
+      });
 
-        result.content.forEach((comment: PostingCommentData) => {
-          if (comment.parentId !== null) {
-            const parentComment = map.get(comment.parentId!);
-            if (parentComment) {
-              if (!parentComment.childComment) {
-                parentComment.childComment = [];
-              }
-              parentComment.childComment.push(comment);
+      content.forEach((comment: PostingCommentData) => {
+        if (comment.parentId !== null) {
+          const parentComment = map.get(comment.parentId!);
+          if (parentComment) {
+            if (!parentComment.childComment) {
+              parentComment.childComment = [];
             }
-          } else {
-            resultData.push(comment);
+            parentComment.childComment.push(comment);
           }
-        });
-        setData(resultData);
-      } catch (err) {
-        alert('없는 페이지입니다');
-        console.log(err);
-      }
+        } else {
+          resultData.push(comment);
+        }
+      });
+      setData(resultData);
     };
     fetchData();
   }, [router.isReady, reRender, router.query.OOTDNumber]);

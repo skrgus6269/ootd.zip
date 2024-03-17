@@ -6,6 +6,9 @@ import {
   getUserBookmarkListPayload,
   postOOTDComentPayload,
   patchClothIsPrivateType,
+  getOOTDParams,
+  getOOTDCommentParams,
+  getClothListParams,
   patchProfilePayload,
 } from '@/apis/_api/type';
 
@@ -17,8 +20,8 @@ export const postOOTD = async (payload: postOOTDPayload) => {
 };
 
 //ootd 조회
-export const getOOTD = async (id: number) => {
-  const data = await ootdApi.getOOTD(id);
+export const getOOTD = async (params: getOOTDParams) => {
+  const data = await ootdApi.getOOTD(params);
 
   return data;
 };
@@ -45,8 +48,8 @@ export const deleteOOTD = async (id: number) => {
 };
 
 //ootd 댓글 조회
-export const getOOTDComment = async (id: number) => {
-  const data = await ootdApi.getOOTDComment(id);
+export const getOOTDComment = async (params: getOOTDCommentParams) => {
+  const data = await ootdApi.getOOTDComment(params);
 
   return data;
 };
@@ -132,8 +135,8 @@ export const postCloth = async (payload: postClothPayload) => {
 };
 
 //유저의 cloth 리스트 조회
-export const getUserClothList = async (id: number) => {
-  const data = await clothApi.getUserClothList(id);
+export const getUserClothList = async (params: getClothListParams) => {
+  const data = await clothApi.getUserClothList(params);
 
   return data;
 };

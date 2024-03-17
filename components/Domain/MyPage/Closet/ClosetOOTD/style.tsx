@@ -28,7 +28,7 @@ const OOTDSort = styled.div<OOTDSortProps>`
   }
 `;
 const OOTDList = styled.div`
-  height: calc(100vh - 220px);
+  height: calc(100vh - 200px);
   overflow-y: scroll;
 `;
 
