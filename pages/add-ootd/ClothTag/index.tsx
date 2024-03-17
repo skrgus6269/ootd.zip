@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import S from '@/style/AddOOTD/ClothTag/style';
+import S from '@/pageStyle/add-ootd/ClothTag/style';
 import { Body3 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';

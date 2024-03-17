@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/BlockedAccount/style';
+import S from '@/pageStyle/blocked-account/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';

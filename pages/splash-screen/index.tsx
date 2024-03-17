@@ -1,5 +1,5 @@
 import { ComponentWithLayout } from '../sign-up';
-import S from '@/style/SplashScreen/style';
+import S from '@/pageStyle/splash-screen/style';
 import SplashLogo from '@/public/images/SplashLogo.svg';
 import { AppLayoutProps } from '@/AppLayout';
 import { useEffect } from 'react';

@@ -1,4 +1,4 @@
-import S from '@/style/OOTD/style';
+import S from '@/pageStyle/ootd/style';
 import Posting from '@/components/Posting';
 import PostingComment from '@/components/PostingComment';
 import PostingCommentWrite from '@/components/PostingComment/PostingCommentWrite';

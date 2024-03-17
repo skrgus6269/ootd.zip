@@ -4,7 +4,7 @@ import BasicInfo from './BasicInfo';
 import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
 import NextButton from '@/components/NextButton';
-import S from '@/style/sign-up/style';
+import S from '@/pageStyle/sign-up/style';
 import Title1 from '@/components/UI/TypoGraphy/Title1';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';

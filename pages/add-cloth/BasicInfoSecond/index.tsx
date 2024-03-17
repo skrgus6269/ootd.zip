@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Headline2, Title1 } from '@/components/UI';
-import S from '@/style/AddCloth/BasicInfoSecond/style';
+import S from '@/pageStyle/add-cloth/BasicInfoSecond/style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';

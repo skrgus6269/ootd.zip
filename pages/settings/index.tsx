@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/Setting/style';
+import S from '@/pageStyle/setting/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Title1 } from '@/components/UI';

@@ -5,7 +5,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
 import { Body4, Button3, Title1 } from '@/components/UI';
-import S from '@/style/EditOOTD/style';
+import S from '@/pageStyle/edit-ootd/style';
 import { useEffect, useState } from 'react';
 import {
   AiFillCloseCircle,

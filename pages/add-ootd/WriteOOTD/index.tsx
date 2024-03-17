@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Input from '@/components/Input';
-import S from '@/style/AddOOTD/WriteOOTD/style';
+import S from '@/pageStyle/add-ootd/WriteOOTD/style';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Body4, Button3, Title1 } from '@/components/UI';
 import { AiOutlinePlus } from 'react-icons/ai';

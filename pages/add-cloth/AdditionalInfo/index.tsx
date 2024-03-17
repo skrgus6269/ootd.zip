@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import S from '@/style/AddCloth/AdditionalInfo/style';
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
@@ -7,6 +6,7 @@ import NextButton from '@/components/NextButton';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
+import S from '@/pageStyle/add-cloth/AdditionalInfo/style';
 
 interface AdditionalInfo {
   clothName: string;

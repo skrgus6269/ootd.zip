@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Headline2 } from '@/components/UI';
-import S from '@/style/AddCloth/ClothName/style';
+import S from '@/pageStyle/add-cloth/ClothName/style';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';

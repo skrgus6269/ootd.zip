@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/EditMypage/style';
+import S from '@/pageStyle/edit-mypage/style';
 import { AiOutlineArrowLeft, AiOutlineSetting } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import Edit from '@/components/Domain/MyPage/Edit';

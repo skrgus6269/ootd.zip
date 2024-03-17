@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import S from '@/style/EditCloth/BasicInfo/style';
+import S from '@/pageStyle/edit-cloth/BasicInfo/style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
 import { Body3, Title1 } from '@/components/UI';

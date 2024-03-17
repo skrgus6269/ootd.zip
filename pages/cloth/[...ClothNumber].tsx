@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import S from '@/style/DetailCloth/style';
+import S from '@/pageStyle/cloth/style';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft, AiOutlineEllipsis } from 'react-icons/ai';
 import DetailClothHeader from '@/components/DetailCloth/DetailClothHeader';

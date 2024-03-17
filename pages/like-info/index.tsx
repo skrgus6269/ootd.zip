@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/LikeInfo/style';
+import S from '@/pageStyle/like-info/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
