@@ -33,7 +33,7 @@ import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
 import FixModal from '../Domain/OOTD/FixModal';
 import LikeToggle from '../Toggle/LikeToggle';
-import { OOTDType } from '@/pages/ootds/[...OOTDNumber]';
+import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
 
 interface PostingProps {
   data: OOTDType;

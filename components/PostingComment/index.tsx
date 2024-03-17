@@ -8,7 +8,7 @@ import React, {
 import S from './style';
 import Comment, { CommentProps } from '../Comment';
 import { Body4, Caption1, Title1 } from '../UI';
-import { CommentStateType } from '@/pages/ootds/[...OOTDNumber]';
+import { CommentStateType } from '@/pages/ootd/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
