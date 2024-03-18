@@ -37,6 +37,7 @@ export default function Profile({
   return (
     <S.Layout>
       <OtherProfile
+        showingId={showingId}
         className="profile"
         userImage={data.userImage}
         userName={data.userName}

@@ -20,9 +20,43 @@ const Background = styled.div<BackgroundState>`
   position: absolute;
 `;
 
+const FollowBlockLayout = styled.div`
+  display: flex;
+  padding: 8px 20px;
+  align-items: center;
+  gap: 16px;
+
+  img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .name {
+    flex: 1 0 0;
+  }
+
+  .delete {
+    width: 70px;
+    height: 30px;
+    background-color: ${(props) => props.theme.color.grey_95};
+    color: ${(props) => props.theme.color.grey_00};
+    border-radius: 2px;
+    border: '1px solid black';
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+`;
+
 const S = {
   Layout,
   Background,
+  FollowBlockLayout,
 };
 
 export default S;
