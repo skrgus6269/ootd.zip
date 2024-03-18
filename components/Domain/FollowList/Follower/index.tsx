@@ -44,8 +44,6 @@ export default function Follower({
     // else await follow(id);
   };
 
-  console.log(localUserId, showingId);
-
   return (
     <>
       <S.Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
