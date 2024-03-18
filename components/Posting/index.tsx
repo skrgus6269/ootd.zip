@@ -24,7 +24,6 @@ import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
-import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
@@ -34,6 +33,7 @@ import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
 import FixModal from '../Domain/OOTD/FixModal';
 import LikeToggle from '../Toggle/LikeToggle';
+import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
 
 interface PostingProps {
   data: OOTDType;

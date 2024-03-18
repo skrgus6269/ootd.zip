@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
-import S from '@/style/sign-up/StyleInfo/style';
+import S from '@/pageStyle/sign-up/StyleInfo/style';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
-import { Style } from '@/pages/AddOOTD';
+import { Style } from '@/pages/add-ootd';
 
 interface StyleInfoProps {
   gender: Boolean;

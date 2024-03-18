@@ -43,7 +43,7 @@ export default function ClothOOTD({ clothId }: ClothOOTDProps) {
         <ImageList
           data={data}
           type="column"
-          onClick={(index) => router.push(`/OOTD/${index}`)}
+          onClick={(index) => router.push(`/ootd/${index}`)}
         />
       </S.OOTDLayout>
     </S.Layout>

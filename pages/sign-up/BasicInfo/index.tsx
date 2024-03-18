@@ -1,5 +1,5 @@
 import IdInput from '@/components/Domain/SignUp/IdInput';
-import S from '@/style/sign-up/BasicInfo/style';
+import S from '@/pageStyle/sign-up/BasicInfo/style';
 import { Dispatch, SetStateAction } from 'react';
 import AgeInput from '@/components/Domain/SignUp/AgeInput';
 

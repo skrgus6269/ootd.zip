@@ -15,25 +15,6 @@ interface ClosetType {
 
 export default function Closet({ localUserId, showingId }: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
-  const myId = useRecoilValue(userId);
-  const { getOOTD } = OOTDApi();
-  // const [getCloth] = useClogth();
-
-  // const myPageClothList = getCloth({ id: 0 });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { content } = await getOOTD(myId);
-      setMyPageOOTDList(
-        content.map((item: any) => {
-          return { ootdId: item.id, ootdImage: item.image };
-        })
-      );
-    };
-    fetchData();
-  }, []);
-
-  const [myPageOOTDList, setMyPageOOTDList] = useState<MyPageOOTDType[]>([]);
 
   const myPageClothList = [
     {
@@ -87,19 +68,18 @@ export default function Closet({ localUserId, showingId }: ClosetType) {
         'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
     },
   ];
-
   return (
     <>
       <S.Layout>
         <ClosetTabbar
-          OOTDNumber={myPageOOTDList ? myPageOOTDList.length : 0}
-          clothNumber={myPageClothList ? myPageClothList.length : 0}
+          OOTDNumber={2}
+          clothNumber={2}
           handleStep={handleStep}
           currentStep={currentStep}
         />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            <ClosetOOTD myPageOOTDList={myPageOOTDList} />
+            <ClosetOOTD />
           </Funnel.Steps>
           <Funnel.Steps name="Cloth">
             <ClosetCloth myPageClothList={myPageClothList} />

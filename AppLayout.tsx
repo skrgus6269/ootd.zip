@@ -11,8 +11,7 @@ const Layout = styled.div`
   flex-direction: column;
 `;
 
-const MainComponent = styled.div`
-  /* overflow-y: scroll; */
+const MainComponent = styled.div` 
   height: calc(100vh - 56px);
 `;
 

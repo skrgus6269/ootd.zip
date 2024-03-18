@@ -1,5 +1,7 @@
 import fetcher from '../fetcher';
 import {
+  getOOTDCommentParams,
+  getOOTDParams,
   patchOOTDIsPrivatePayload,
   postOOTDPayload,
   getUserBookmarkListPayload,
@@ -14,8 +16,16 @@ export const postOOTD = async (payload: postOOTDPayload) => {
 };
 
 //ootd 조회
-export const getOOTD = async (id: number) => {
-  const { data } = await fetcher.get(`api/v1/ootd?page=0&size=10&userId=${id}`);
+export const getOOTD = async ({
+  page,
+  size,
+  sortCriteria,
+  sortDirection,
+  userId,
+}: getOOTDParams) => {
+  const { data } = await fetcher.get(
+    `api/v1/ootd?page=${page}&size=${size}&userId=${userId}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}`
+  );
 
   return data;
 };
@@ -107,7 +117,7 @@ export const deleteBookmarkList = async (bookamrkIds: number[]) => {
 //ootd 작성자의 다른 ootd 조회
 export const otherOOTD = async (userId: number, ootdId: number) => {
   const { data } = await fetcher.get(
-    `/api/v1/ootd/other?page=0&size=20&userId=${userId}&ootdId=${ootdId}`
+    `/api/v1/ootd/other?page=0&size=8&userId=${userId}&ootdId=${ootdId}`
   );
 
   return data;
@@ -116,16 +126,20 @@ export const otherOOTD = async (userId: number, ootdId: number) => {
 //해당 ootd와 비슷한 ootd
 export const getSimilarOOTD = async (ootdId: number) => {
   const { data } = await fetcher.get(
-    `/api/v1/ootd/similar?page=0&size=20&ootdId=${ootdId}`
+    `/api/v1/ootd/similar?page=0&size=6&ootdId=${ootdId}&sortDirection=ASC`
   );
 
   return data;
 };
 
 //ootd 댓글 조회
-export const getOOTDComment = async (ootdId: number) => {
+export const getOOTDComment = async ({
+  page,
+  size,
+  ootdId,
+}: getOOTDCommentParams) => {
   const { data } = await fetcher.get(
-    `/api/v1/comments?page=0&size=20&ootdId=${ootdId}`
+    `api/v1/comments?page=${page}&size=${size}&ootdId=${ootdId}`
   );
 
   return data;

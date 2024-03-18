@@ -55,7 +55,7 @@ export default function Profile({
       </S.Introduce>
       {localUserId === showingId ? (
         <S.ButtonWrap state={false}>
-          <Button3 onClick={() => router.push(`/EditMypage`)}>
+          <Button3 onClick={() => router.push(`/edit-mypage`)}>
             프로필 수정
           </Button3>
         </S.ButtonWrap>

@@ -1,6 +1,6 @@
 import Input from '@/components/Input';
 import S from './style';
-import { Style } from '@/pages/AddOOTD';
+import { Style } from '@/pages/add-ootd';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 

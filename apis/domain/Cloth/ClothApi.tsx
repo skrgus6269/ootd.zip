@@ -1,4 +1,8 @@
-import { patchClothIsPrivateType, postClothPayload } from '@/apis/_api/type';
+import {
+  getClothListParams,
+  patchClothIsPrivateType,
+  postClothPayload,
+} from '@/apis/_api/type';
 import { systemService, userService } from '@/apis/_service';
 
 export default function ClothApi() {
@@ -18,9 +22,9 @@ export default function ClothApi() {
   };
 
   //유저의 cloth 리스트 조회
-  const getUserClothList = async (id: number) => {
+  const getUserClothList = async (params: getClothListParams) => {
     try {
-      const { result } = await userService.getUserClothList(id);
+      const { result } = await userService.getUserClothList(params);
 
       return result;
     } catch (err) {

@@ -3,8 +3,9 @@ import S from './style';
 import Carousel from '@/components/Carousel';
 import ClothInformation from '@/components/ClothInformation';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 interface UserClothDataType {
   id: number;
@@ -18,25 +19,33 @@ interface UserClothDataType {
 }
 
 interface UserClothProps {
-  userName: string | undefined;
-  userId: number | undefined;
+  userName: string;
+  userId: number;
 }
 export default function UserCloth({ userName, userId }: UserClothProps) {
   const router = useRouter();
   const { getUserClothList } = ClothApi();
 
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getUserClothList({
+      page,
+      size,
+      userId,
+    });
+
+    return data;
+  };
+
+  const { data: userClothData } = useInfiniteScroll({
+    fetchDataFunction,
+    initialData: [],
+    size: 10,
+  });
+
   useEffect(() => {
-    const fetchData = async () => {
-      if (!router.isReady || userId === undefined) return;
-      try {
-        const result = await getUserClothList(userId);
-        setData(result);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [router.isReady, userId, router.query.OOTDNumber]);
+    console.log(userClothData);
+    setData(userClothData);
+  }, [userClothData]);
 
   const [data, setData] = useState<UserClothDataType[] | null>(null);
   return (
@@ -53,7 +62,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                 return (
                   <S.CarouselItem key={item.id}>
                     <ClothInformation
-                      onClick={() => router.push(`/Cloth/${item.id}`)}
+                      onClick={() => router.push(`/cloth/${item.id}`)}
                       clothId={item.id}
                       clothImage={item.imageUrl}
                       caption={'옷장'}
@@ -65,7 +74,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                     {data[index + 1] && (
                       <ClothInformation
                         onClick={() =>
-                          router.push(`Cloth/${data[index + 1].id}`)
+                          router.push(`cloth/${data[index + 1].id}`)
                         }
                         clothId={data[index + 1].id}
                         clothImage={data[index + 1].imageUrl}
