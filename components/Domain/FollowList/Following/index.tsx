@@ -1,7 +1,7 @@
 import { Body3, Body4, Button3, Caption2 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
-import { followListType } from '@/pages/followList/[...UserId]';
+import { followListType } from '@/pages/follow-list/[...UserId]';
 import FollowBlock from '@/components/FollowBlock';
 import Button from '@/components/Button';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';

@@ -5,7 +5,7 @@ import FollowBlock from '@/components/FollowBlock';
 import FollowAlert from '../FollowAlert';
 import { useState } from 'react';
 import Toast from '@/components/Toast';
-import { followListType } from '@/pages/followList/[...UserId]';
+import { followListType } from '@/pages/follow-list/[...UserId]';
 
 interface followerProps {
   followerList?: followListType[];
