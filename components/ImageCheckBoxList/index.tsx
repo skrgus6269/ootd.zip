@@ -7,7 +7,11 @@ import { BookmarkListType } from '@/pages/bookmark';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
 interface ImageCheckBoxListProps {
-  data: BookmarkListType | undefined;
+  data: {
+    ootdId?: number;
+    ootdBookmarkId?: number;
+    ootdImage?: string;
+  }[];
   checkBox: Boolean;
   checkedItems: number[];
   setCheckedItems: Dispatch<SetStateAction<number[]>>;
@@ -19,21 +23,21 @@ export default function ImageCheckBoxList({
   checkedItems,
   setCheckedItems,
 }: ImageCheckBoxListProps) {
-  const toggleChecked = (clothId: number) => {
-    if (checkedItems.includes(clothId)) {
-      setCheckedItems(checkedItems.filter((id) => id !== clothId));
+  const toggleChecked = (ootdBookmarkId: number) => {
+    if (checkedItems.includes(ootdBookmarkId)) {
+      setCheckedItems(checkedItems.filter((id) => id !== ootdBookmarkId));
     } else {
-      setCheckedItems([...checkedItems, clothId]);
+      setCheckedItems([...checkedItems, ootdBookmarkId]);
     }
   };
 
   return (
     <S.Layout>
       {data &&
-        data.content.map((item) => {
-          const isChecked = checkedItems.includes(item.ootdId);
+        data.map((item) => {
+          const isChecked = checkedItems.includes(item.ootdBookmarkId!);
           return (
-            <S.CheckBoxLayout key={item.ootdId}>
+            <S.CheckBoxLayout key={item.ootdBookmarkId}>
               <img
                 src={item.ootdImage}
                 alt=""
@@ -44,7 +48,7 @@ export default function ImageCheckBoxList({
                   src={isChecked ? CheckBoxTrue : CheckBoxFalse}
                   alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
                   className="checkBoxImage"
-                  onClick={() => toggleChecked(item.ootdId)}
+                  onClick={() => toggleChecked(item.ootdBookmarkId!)}
                   width={24}
                   height={24}
                 />

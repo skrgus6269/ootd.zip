@@ -9,20 +9,13 @@ import { useEffect, useRef, useState } from 'react';
 import BookmarSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
 import ImageCheckBoxList from '@/components/ImageCheckBoxList';
 import BookmarkAlert from '@/components/Domain/Bookmark/BookmarkAlert';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
-import InfiniteScroll from 'react-infinite-scroller';
-
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
-
 import BackTop from '@/public/images/BackTop.svg';
 import Toast from '@/components/Toast';
+import { userId } from '@/utils/recoil/atom';
+import { useRecoilValue } from 'recoil';
+import Spinner from '@/components/Spinner';
 
 export type OOTDdataType = {
   ootdId: number;
@@ -78,7 +71,6 @@ export default function Bookmark() {
     console.log(checkedItems);
     const result = await deleteBookmarkList(checkedItems);
     if (result) {
-      // 북마크 재정렬 코드 필요
       setAlertOpen(false);
       setToastOpen(true);
       setEditing(false);
@@ -91,21 +83,47 @@ export default function Bookmark() {
   };
 
   const { getUserBookmarkList, deleteBookmarkList } = BookmarkApi();
-  const [data, setData] = useState();
+  const [bookmarkList, setBookmarkList] = useState<OOTDdataType[]>([]);
+
+  const fetchDataFunction = async (bookmarkPage: number, size: number) => {
+    const data = await getUserBookmarkList({
+      page: bookmarkPage,
+      size,
+      sortCriteria: 'createdAt',
+      sortDirection: 'ASC',
+    });
+
+    return data;
+  };
+
+  const {
+    data: bookmarkData,
+    isLoading: isLoading,
+    containerRef: bookmarkRef,
+    hasNextPage: bookmarkHasNextPage,
+    reset,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    size: 7,
+    initialData: [],
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getUserBookmarkList({
-        page: 1,
-        size: 10,
-        sortCriteria: 'createdAt',
-        sortDirection: 'DESC',
-      });
-      setData(result);
-    };
+    setBookmarkList(
+      bookmarkData.map((item: any) => {
+        return {
+          ootdId: item.ootdId,
+          ootdBookmarkId: item.ootdBookmarkId,
+          ootdImage: item.ootdImage,
+        };
+      })
+    );
+  }, [bookmarkData]);
 
-    fetchData();
-  }, []);
+  useEffect(() => {
+    setBookmarkList([]);
+    reset();
+  }, [toastOpen]);
 
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
@@ -124,13 +142,14 @@ export default function Bookmark() {
           setEditing={setEditing}
           setAlertOpen={setAlertOpen}
         />
-        <S.ClothList>
+        <S.ClothList ref={bookmarkRef}>
           <ImageCheckBoxList
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
             checkBox={editing}
-            data={data}
+            data={bookmarkList!}
           />
+          {isLoading && bookmarkHasNextPage && <Spinner />}
         </S.ClothList>
         {isVisible && (
           <S.TopButton>
