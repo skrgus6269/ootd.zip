@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/mypage/style';
+import S from '@/pageStyle/mypage/style';
 import {
   AiOutlineArrowLeft,
   AiOutlineEllipsis,

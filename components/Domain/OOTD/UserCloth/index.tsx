@@ -62,7 +62,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                 return (
                   <S.CarouselItem key={item.id}>
                     <ClothInformation
-                      onClick={() => router.push(`/Cloth/${item.id}`)}
+                      onClick={() => router.push(`/cloth/${item.id}`)}
                       clothId={item.id}
                       clothImage={item.imageUrl}
                       caption={'옷장'}
@@ -74,7 +74,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                     {data[index + 1] && (
                       <ClothInformation
                         onClick={() =>
-                          router.push(`Cloth/${data[index + 1].id}`)
+                          router.push(`cloth/${data[index + 1].id}`)
                         }
                         clothId={data[index + 1].id}
                         clothImage={data[index + 1].imageUrl}

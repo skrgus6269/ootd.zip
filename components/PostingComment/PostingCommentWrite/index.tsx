@@ -2,7 +2,7 @@
 import { Body3, Button3 } from '@/components/UI';
 import S from './style';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
-import { CommentStateType } from '@/pages/OOTD/[...OOTDNumber]';
+import { CommentStateType } from '@/pages/ootd/[...OOTDNumber]';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Avatar from '@/public/images/Avatar.svg';
 

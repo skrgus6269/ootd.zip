@@ -1,4 +1,4 @@
-import S from '@/style/main/style';
+import S from '@/pageStyle/main/style';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
-import S from '@/style/onboarding/style';
+import S from '@/pageStyle/onboarding/style';
 import { Body3, Body4, Button3, Headline1 } from '@/components/UI';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
