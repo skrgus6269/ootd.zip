@@ -188,10 +188,18 @@ export default function FollowList() {
         </S.Wrap>
         <Funnel>
           <Funnel.Steps name="팔로워">
-            <Follower followerList={followerList} />
+            <Follower
+              followerList={followerList}
+              localUserId={localUserId}
+              showingId={showingId}
+            />
           </Funnel.Steps>
           <Funnel.Steps name="팔로잉">
-            <Following followingList={followingList} />
+            <Following
+              followingList={followingList}
+              localUserId={localUserId}
+              showingId={showingId}
+            />
           </Funnel.Steps>
         </Funnel>
       </S.Layout>

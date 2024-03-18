@@ -51,6 +51,32 @@ const FollowBlockLayout = styled.div`
     align-items: center;
     align-content: center;
   }
+
+  .unfollow {
+    width: 70px;
+    height: 30px;
+    background-color: ${(props) => props.theme.color.grey_95};
+    color: ${(props) => props.theme.color.grey_00};
+    border-radius: 2px;
+    border: '1px solid black';
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  .following {
+    width: 70px;
+    height: 30px;
+    background-color: ${(props) => props.theme.color.subdued};
+    border-radius: 2px;
+    border: '1px solid black';
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
 `;
 
 const S = {

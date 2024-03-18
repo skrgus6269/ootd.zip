@@ -9,16 +9,22 @@ import { followListType } from '@/pages/followList/[...UserId]';
 
 interface followerProps {
   followerList?: followListType[];
+  localUserId: number;
+  showingId: number | undefined;
 }
 
-export default function Follower({ followerList }: followerProps) {
+export default function Follower({
+  followerList,
+  localUserId,
+  showingId,
+}: followerProps) {
   const router = useRouter();
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
   const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   console.log(followerList);
 
-  const onClickFollow = () => {
+  const onClickDelete = () => {
     setAlertOpen(true);
   };
 
@@ -32,6 +38,14 @@ export default function Follower({ followerList }: followerProps) {
     setAlertOpen(false);
   };
 
+  const onClickFollow = async (status: Boolean, id: number) => {
+    console.log(status, id);
+    // if (status) await unFollow(id);
+    // else await follow(id);
+  };
+
+  console.log(localUserId, showingId);
+
   return (
     <>
       <S.Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
@@ -44,10 +58,25 @@ export default function Follower({ followerList }: followerProps) {
                 <Body3 state="emphasis" className="name">
                   {item.userName}
                 </Body3>
-
-                <Button3 className="delete" onClick={() => onClickFollow()}>
-                  삭제
-                </Button3>
+                {localUserId === showingId ? (
+                  <Button3 className="delete" onClick={() => onClickDelete()}>
+                    삭제
+                  </Button3>
+                ) : item.isFollow ? (
+                  <Button3
+                    className="unfollow"
+                    onClick={() => onClickFollow(item.isFollow, item.userId)}
+                  >
+                    팔로잉
+                  </Button3>
+                ) : (
+                  <Button3
+                    className="following"
+                    onClick={() => onClickFollow(item.isFollow, item.userId)}
+                  >
+                    팔로우
+                  </Button3>
+                )}
               </S.FollowBlockLayout>
             );
           })}

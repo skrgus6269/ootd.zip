@@ -8,6 +8,8 @@ import { PublicApi } from '@/apis/domain/Public/PublicApi';
 
 interface followingProps {
   followingList?: followListType[];
+  localUserId: number;
+  showingId: number | undefined;
 }
 
 export default function Following({ followingList }: followingProps) {
