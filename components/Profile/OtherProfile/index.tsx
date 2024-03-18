@@ -27,7 +27,7 @@ export default function OtherProfile({
         <S.Name>
           <Title1>{userName}</Title1>
         </S.Name>
-        <S.Info onClick={() => router.push(`/followList/${showingId}`)}>
+        <S.Info onClick={() => router.push(`/follow-list/${showingId}`)}>
           <Body4>팔로우</Body4>
           <Body4 state="emphasis">{follow}</Body4>
           <Body4>명</Body4>
