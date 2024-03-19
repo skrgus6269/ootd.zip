@@ -12,7 +12,6 @@ const Layout = styled.div`
 `;
 
 const MainComponent = styled.div`
-  /* overflow-y: scroll; */
   height: calc(100vh - 56px);
 `;
 

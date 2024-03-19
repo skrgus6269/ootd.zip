@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import RecentsSearchBar from '@/components/RecentsSearchBar';
-import S from '@/style/search/style';
+import S from '@/pageStyle/search/style';
+import SearchBar from '@/components/SearchBar';
 import { Headline2 } from '@/components/UI';
 import SearchResult from '@/components/Domain/Search/SearchResult';
 import Recents from '@/components/Domain/Search/Recents';

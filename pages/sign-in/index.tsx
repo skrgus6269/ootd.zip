@@ -1,7 +1,7 @@
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineClose } from 'react-icons/ai';
-import S from '@/style/sign-in/style';
+import S from '@/pageStyle/sign-in/style';
 import Body from '@/components/UI/TypoGraphy/Body2';
 import { Headline1 } from '@/components/UI';
 import { AppLayoutProps } from '@/AppLayout';

@@ -1,5 +1,9 @@
 import fetcher from '../fetcher';
-import { patchClothIsPrivateType, postClothPayload } from './type';
+import {
+  getClothListParams,
+  patchClothIsPrivateType,
+  postClothPayload,
+} from './type';
 
 //cloth 작성
 export const postCloth = async (payload: postClothPayload) => {
@@ -9,10 +13,31 @@ export const postCloth = async (payload: postClothPayload) => {
 };
 
 //유저의 cloth 리스트 조회
-export const getUserClothList = async (id: number) => {
-  const { data } = await fetcher.get(
-    `/api/v1/clothes?page=1&size=20&userId=${id}`
-  );
+export const getUserClothList = async ({
+  page,
+  size,
+  userId,
+  brandIds,
+  categoryIds,
+  colorIds,
+  isPrivate,
+}: getClothListParams) => {
+  let url = `/api/v1/clothes?page=${page}&size=${size}&userId=${userId}&sortCriteria=createdAt&sortDirection=DESC`;
+
+  const brandUrl = brandIds?.map((item) => `brandIds=${item}`).join('&');
+  const categoryUrl = categoryIds
+    ?.map((item) => `categoryIds=${item}`)
+    .join('&');
+  const colorUrl = colorIds?.map((item) => `colorIds=${item}`).join('&');
+  const isPrivateUrl =
+    isPrivate !== undefined ? `isPrivate=${!isPrivate}` : null;
+
+  if (brandUrl) url += `&${brandUrl}`;
+  if (categoryUrl) url += `&${categoryUrl}`;
+  if (colorUrl) url += `&${colorUrl}`;
+  if (isPrivateUrl) url += `&${isPrivateUrl}`;
+
+  const { data } = await fetcher.get(url);
 
   return data;
 };

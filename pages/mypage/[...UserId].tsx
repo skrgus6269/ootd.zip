@@ -1,5 +1,5 @@
 import AppBar from '@/components/Appbar';
-import S from '@/style/mypage/style';
+import S from '@/pageStyle/mypage/style';
 import {
   AiOutlineArrowLeft,
   AiOutlineEllipsis,
@@ -20,7 +20,7 @@ import { PublicApi } from '@/apis/domain/Public/PublicApi';
 export default function MyPage() {
   const router = useRouter();
 
-  const [showingId, setShowingId] = useState<number>();
+  const [showingId, setShowingId] = useState<number>(0);
 
   const [queryState, setQueryState] = useState<string>('');
   const localUserId = useRecoilValue(userId);

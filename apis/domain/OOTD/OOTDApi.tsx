@@ -3,13 +3,15 @@ import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
   postOOTDComentPayload,
+  getOOTDParams,
+  getOOTDCommentParams,
 } from '@/apis/_api/type';
 
 export const OOTDApi = () => {
   //ootd 조회
-  const getOOTD = async (id: number) => {
+  const getOOTD = async (params: getOOTDParams) => {
     try {
-      const { result } = await userService.getOOTD(id);
+      const { result } = await userService.getOOTD(params);
 
       return result;
     } catch (err) {
@@ -63,10 +65,11 @@ export const OOTDApi = () => {
   };
 
   //ootd 댓글 조회
-  const getOOTDComment = async (id: number) => {
+  const getOOTDComment = async (params: getOOTDCommentParams) => {
     try {
-      const data = await userService.getOOTDComment(id);
-      return data;
+      const { result } = await userService.getOOTDComment(params);
+
+      return result;
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);
