@@ -92,4 +92,8 @@ export interface getOOTDCommentParams extends paginationType {
 
 export interface getClothListParams extends paginationType {
   userId: number;
+  isPrivate?: Boolean;
+  brandIds?: number[];
+  categoryIds?: number[];
+  colorIds?: number[];
 }
