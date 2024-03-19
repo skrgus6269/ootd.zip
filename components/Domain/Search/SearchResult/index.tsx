@@ -5,7 +5,7 @@ import ClosetCloth from './ClosetCloth';
 import Follow from './Follow';
 import EmptySearch from '@/components/EmptySearch';
 
-export default function Closet() {
+export default function SearchResult() {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
 
   const searchClothList = [
