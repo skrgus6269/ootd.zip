@@ -8,7 +8,6 @@ interface TabProps {
 const Layout = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 16px;
   p {
     padding: 13px 0px;
   }

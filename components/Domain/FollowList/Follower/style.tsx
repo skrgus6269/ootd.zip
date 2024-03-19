@@ -13,11 +13,11 @@ const Background = styled.div<BackgroundState>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
   opacity: 0.3;
-  z-index: 900;
-  top: 0;
+  z-index: 2;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 48px);
   position: absolute;
+  top: 0;
 `;
 
 const FollowBlockLayout = styled.div`
@@ -79,10 +79,15 @@ const FollowBlockLayout = styled.div`
   }
 `;
 
+const Wrap = styled.div`
+  padding: 16px 20px;
+`;
+
 const S = {
   Layout,
   Background,
   FollowBlockLayout,
+  Wrap,
 };
 
 export default S;

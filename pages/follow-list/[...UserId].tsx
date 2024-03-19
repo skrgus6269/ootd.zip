@@ -25,7 +25,6 @@ export type followListType = {
 
 export default function FollowList() {
   const router = useRouter();
-  const [Funnel, currentStep, handleStep] = useFunnel(['팔로워', '팔로잉']);
 
   const [showingId, setShowingId] = useState<number>();
   const localUserId = useRecoilValue(userId);
@@ -156,6 +155,10 @@ export default function FollowList() {
 
   return (
     <>
+      <S.Background
+        isOpen={openActionSheet}
+        onClick={() => setOpenActionSheet(false)}
+      />
       <S.Layout>
         <AppBar
           leftProps={
@@ -175,7 +178,6 @@ export default function FollowList() {
         />
         <TabView>
           <TabView.TabBar
-            type="followList"
             tab={['팔로워', '팔로잉']}
             count={[
               followerList ? followerList.length : 0,
@@ -184,16 +186,11 @@ export default function FollowList() {
             display="block"
             onChangeState={() => setKeyword('')}
           />
-          <S.Wrap>
-            <SearchBar
-              placeholder="검색"
-              letter={keyword}
-              setLetter={setKeyword}
-            />
-          </S.Wrap>
           <TabView.Tabs>
             <TabView.Tab>
               <Follower
+                keyword={keyword}
+                setKeyword={setKeyword}
                 followerList={followerList}
                 localUserId={localUserId}
                 showingId={showingId}
@@ -201,9 +198,9 @@ export default function FollowList() {
             </TabView.Tab>
             <TabView.Tab>
               <Following
+                keyword={keyword}
+                setKeyword={setKeyword}
                 followingList={followingList}
-                localUserId={localUserId}
-                showingId={showingId}
               />
             </TabView.Tab>
           </TabView.Tabs>

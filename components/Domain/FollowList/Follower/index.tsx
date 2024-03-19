@@ -1,19 +1,24 @@
-import { Body3, Body4, Button3, Caption2 } from '@/components/UI';
+import { Body3, Button3 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
-import FollowBlock from '@/components/FollowBlock';
 import FollowAlert from '../FollowAlert';
 import { useState } from 'react';
 import Toast from '@/components/Toast';
+import SearchBar from '@/components/SearchBar';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { followListType } from '@/pages/follow-list/[...UserId]';
 
 interface followerProps {
+  keyword: string;
+  setKeyword: Dispatch<SetStateAction<string>>;
   followerList?: followListType[];
   localUserId: number;
   showingId: number | undefined;
 }
 
 export default function Follower({
+  keyword,
+  setKeyword,
   followerList,
   localUserId,
   showingId,
@@ -47,6 +52,9 @@ export default function Follower({
   return (
     <>
       <S.Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
+      <S.Wrap>
+        <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
+      </S.Wrap>
       <S.Layout>
         {followerList &&
           followerList.map((item, index) => {

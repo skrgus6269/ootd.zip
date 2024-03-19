@@ -65,10 +65,15 @@ const FollowBlockLayout = styled.div`
   }
 `;
 
+const Wrap = styled.div`
+  padding: 16px 20px;
+`;
+
 const S = {
   Layout,
   Background,
   FollowBlockLayout,
+  Wrap,
 };
 
 export default S;

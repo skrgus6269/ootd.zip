@@ -7,12 +7,10 @@ interface TabBarProps {
   tab: string[];
   display: 'inline' | 'block';
   className?: string;
-  type?: string;
   onChangeState?: () => void;
 }
 
 export default function TabBar({
-  type,
   count,
   tab,
   display,
@@ -52,7 +50,7 @@ export default function TabBar({
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}
             >
-              {type === 'followList' ? (
+              {count && count.length > 0 ? (
                 <Body2 state="emphasis">
                   {count && count[index]}
                   <br />

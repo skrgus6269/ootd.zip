@@ -2,17 +2,21 @@ import { Body3, Body4, Button3, Caption2 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
 import { followListType } from '@/pages/follow-list/[...UserId]';
-import FollowBlock from '@/components/FollowBlock';
-import Button from '@/components/Button';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import SearchBar from '@/components/SearchBar';
 
 interface followingProps {
+  keyword: string;
+  setKeyword: Dispatch<SetStateAction<string>>;
   followingList?: followListType[];
-  localUserId: number;
-  showingId: number | undefined;
 }
 
-export default function Following({ followingList }: followingProps) {
+export default function Following({
+  keyword,
+  setKeyword,
+  followingList,
+}: followingProps) {
   const router = useRouter();
 
   console.log(followingList);
@@ -27,6 +31,9 @@ export default function Following({ followingList }: followingProps) {
   return (
     <>
       <S.Background isOpen={false}></S.Background>
+      <S.Wrap>
+        <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
+      </S.Wrap>
       <S.Layout>
         {followingList &&
           followingList.map((item, index) => {
