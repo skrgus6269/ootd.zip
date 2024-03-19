@@ -17,6 +17,8 @@ import { useRouter } from 'next/router';
 import DeleteAlert from '@/components/DetailCloth/DeleteAlert';
 import Toast from '@/components/Toast';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 export interface ClothDataType {
   id: number;
@@ -41,10 +43,14 @@ const Cloth = () => {
   const [reRender, setReRender] = useState(0);
   const { getClothDetail, deleteCloth, patchClothIsPrivate } = ClothApi();
 
+  const [showingId, setShowingId] = useState<number>(0);
+  const localUserId = useRecoilValue(userId);
+
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
       const result = await getClothDetail(Number(router.query.ClothNumber![0]));
+      setShowingId(result.userId);
       setData(result);
     };
     fetchData();
@@ -84,6 +90,10 @@ const Cloth = () => {
     setDeleteOpen(false);
   };
 
+  const delclationButton = () => {
+    console.log('신고');
+  };
+
   const isOpenButton = async () => {
     const payload = { isPrivate: !data!.isPrivate };
     const result = await patchClothIsPrivate(
@@ -94,7 +104,7 @@ const Cloth = () => {
     console.log(result);
   };
 
-  const buttons = [
+  const myButtons = [
     {
       name: !data?.isPrivate ? '비공개로 변경' : '공개로 변경',
       buttonClick: isOpenButton,
@@ -102,6 +112,11 @@ const Cloth = () => {
     { name: '게시글 수정', buttonClick: modifyButton },
     { name: '공유', buttonClick: shareButton },
     { name: '삭제', buttonClick: deleteButton },
+  ];
+
+  const otherButtons = [
+    { name: '공유', buttonClick: shareButton },
+    { name: '신고', buttonClick: delclationButton },
   ];
 
   const [clickedRight, setClickedRight] = useState<Boolean>(false);
@@ -181,7 +196,12 @@ const Cloth = () => {
       {router.isReady && (
         <ClothOOTD clothId={Number(router.query.ClothNumber![0])} />
       )}
-      {clickedRight && <ActionSheet buttons={buttons} />}
+      {clickedRight && localUserId === showingId && (
+        <ActionSheet buttons={myButtons} />
+      )}
+      {clickedRight && localUserId !== showingId && (
+        <ActionSheet buttons={otherButtons} />
+      )}
       {deleteOpen && (
         <DeleteAlert
           onClickYesButton={onClickYesButton}
