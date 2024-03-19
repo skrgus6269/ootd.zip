@@ -20,6 +20,7 @@ const Tab = styled.span<TabProps>`
   align-items: center;
   display: inline-flex;
   color: ${(props) => props.theme.color.grey_50};
+  text-align: center;
   ${(props) =>
     props.focus &&
     `  

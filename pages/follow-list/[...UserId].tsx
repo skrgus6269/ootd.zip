@@ -8,13 +8,13 @@ import {
 import { useRouter } from 'next/router';
 import { useFunnel } from '@/hooks/use-funnel';
 import Follower from '@/components/Domain/FollowList/Follower';
-import FollowTabbar from '@/components/Domain/FollowList/FollowTabbar';
 import Following from '@/components/Domain/FollowList/Following';
 import SearchBar from '@/components/SearchBar';
 import { useEffect, useState } from 'react';
 import ActionSheet from '@/components/ActionSheet';
 import { userId } from '@/utils/recoil/atom';
 import { useRecoilValue } from 'recoil';
+import TabView from '@/components/TabView';
 
 export type followListType = {
   userId: number;
@@ -173,35 +173,40 @@ export default function FollowList() {
             )
           }
         />
-        <FollowTabbar
-          followerNumber={followerList ? followerList.length : 0}
-          followingNumber={followingList ? followingList.length : 0}
-          handleStep={handleStep}
-          currentStep={currentStep}
-        />
-        <S.Wrap>
-          <SearchBar
-            placeholder="검색"
-            letter={keyword}
-            setLetter={setKeyword}
+        <TabView>
+          <TabView.TabBar
+            value="followList"
+            tab={['팔로워', '팔로잉']}
+            count={[
+              followerList ? followerList.length : 0,
+              followingList ? followingList.length : 0,
+            ]}
+            display="block"
           />
-        </S.Wrap>
-        <Funnel>
-          <Funnel.Steps name="팔로워">
-            <Follower
-              followerList={followerList}
-              localUserId={localUserId}
-              showingId={showingId}
+          <S.Wrap>
+            <SearchBar
+              placeholder="검색"
+              letter={keyword}
+              setLetter={setKeyword}
             />
-          </Funnel.Steps>
-          <Funnel.Steps name="팔로잉">
-            <Following
-              followingList={followingList}
-              localUserId={localUserId}
-              showingId={showingId}
-            />
-          </Funnel.Steps>
-        </Funnel>
+          </S.Wrap>
+          <TabView.Tabs>
+            <TabView.Tab>
+              <Follower
+                followerList={followerList}
+                localUserId={localUserId}
+                showingId={showingId}
+              />
+            </TabView.Tab>
+            <TabView.Tab>
+              <Following
+                followingList={followingList}
+                localUserId={localUserId}
+                showingId={showingId}
+              />
+            </TabView.Tab>
+          </TabView.Tabs>
+        </TabView>
       </S.Layout>
       {openActionSheet && <ActionSheet buttons={buttons} />}
     </>
