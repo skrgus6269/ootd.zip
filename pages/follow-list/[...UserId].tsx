@@ -150,7 +150,7 @@ export default function FollowList() {
   const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
 
   const goBlockedList = () => {
-    router.push('/BlockedAccount');
+    router.push('/blocked-account');
   };
   const buttons = [{ name: '차단한 계정 관리', buttonClick: goBlockedList }];
 
@@ -175,13 +175,14 @@ export default function FollowList() {
         />
         <TabView>
           <TabView.TabBar
-            value="followList"
+            type="followList"
             tab={['팔로워', '팔로잉']}
             count={[
               followerList ? followerList.length : 0,
               followingList ? followingList.length : 0,
             ]}
             display="block"
+            cleanLetter={() => setKeyword('')}
           />
           <S.Wrap>
             <SearchBar

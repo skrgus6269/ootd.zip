@@ -1,21 +1,23 @@
 import { Body2, Body3, Caption1 } from '@/components/UI';
 import { Layout, Tab, Hr } from './style';
 import { useTabViewContext } from '@/hooks/use-tabview/context';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 interface TabBarProps {
   count?: number[];
   tab: string[];
   display: 'inline' | 'block';
   className?: string;
-  value?: string;
+  type?: string;
+  cleanLetter?: () => void;
 }
 
 export default function TabBar({
-  value,
+  type,
   count,
   tab,
   display,
   className,
+  cleanLetter,
 }: TabBarProps) {
   const { index, setIndex } = useTabViewContext();
 
@@ -34,6 +36,11 @@ export default function TabBar({
     setState(newArray);
   }, [index, tab.length]);
 
+  // 검색어 초기화
+  useEffect(() => {
+    cleanLetter?.();
+  }, [state]);
+
   return (
     <>
       <Layout className={className}>
@@ -45,7 +52,7 @@ export default function TabBar({
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}
             >
-              {value === 'followList' ? (
+              {type === 'followList' ? (
                 <Body2 state="emphasis">
                   {count && count[index]}
                   <br />
