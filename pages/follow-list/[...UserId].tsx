@@ -182,7 +182,7 @@ export default function FollowList() {
               followingList ? followingList.length : 0,
             ]}
             display="block"
-            cleanLetter={() => setKeyword('')}
+            onChangeState={() => setKeyword('')}
           />
           <S.Wrap>
             <SearchBar

@@ -8,7 +8,7 @@ interface TabBarProps {
   display: 'inline' | 'block';
   className?: string;
   type?: string;
-  cleanLetter?: () => void;
+  onChangeState?: () => void;
 }
 
 export default function TabBar({
@@ -17,7 +17,7 @@ export default function TabBar({
   tab,
   display,
   className,
-  cleanLetter,
+  onChangeState,
 }: TabBarProps) {
   const { index, setIndex } = useTabViewContext();
 
@@ -38,7 +38,7 @@ export default function TabBar({
 
   // 검색어 초기화
   useEffect(() => {
-    cleanLetter?.();
+    onChangeState?.();
   }, [state]);
 
   return (
