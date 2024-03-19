@@ -18,7 +18,7 @@ import DeleteAlert from '@/components/DetailCloth/DeleteAlert';
 import Toast from '@/components/Toast';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
-interface ClothDataType {
+export interface ClothDataType {
   id: number;
   name: string;
   userName: string;
