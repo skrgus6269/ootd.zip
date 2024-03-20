@@ -1,41 +1,45 @@
-import { Title1, Caption2, Caption1, Button3 } from '@/components/UI';
+import { Title1, Caption1, Button3 } from '@/components/UI';
 import S from './style';
-import { useEffect, useState } from 'react';
-import FollowBlock from '@/components/FollowBlock';
 import { useRouter } from 'next/router';
 import { AiOutlineClose } from 'react-icons/ai';
+import { keywordsInterface } from '@/pages/search';
 
-export default function Recents() {
+interface recentsProps {
+  handleClearKeywords: () => void;
+  handleRemoveKeyword: (id: number) => void;
+  keywords: keywordsInterface[];
+}
+export default function Recents({
+  handleClearKeywords,
+  handleRemoveKeyword,
+  keywords,
+}: recentsProps) {
   const router = useRouter();
-
-  const ment = [
-    '우리프론트안녕안녕안녕안연 최고',
-    'Haezooseyo',
-    '나이키',
-    '나이키',
-    '나이키',
-    '블루',
-  ];
 
   return (
     <>
-      {ment.length > 0 && (
+      {keywords.length > 0 && (
         <S.Layout>
           <S.Menu>
             <Title1>최근 검색어</Title1>
             <S.CaptionText>
-              <Caption1>모두 지우기</Caption1>
+              <Caption1 onClick={handleClearKeywords}>모두 지우기</Caption1>
             </S.CaptionText>
           </S.Menu>
 
           <S.Keywords>
-            {ment.map((item, index) => {
+            {keywords.map(({ id, text }) => {
               return (
-                <S.Chip key={index}>
+                <S.Chip key={id}>
                   <Button3 className="tagName" state="emphasis">
-                    {item}
+                    {text}
                   </Button3>
-                  <AiOutlineClose className="close" />
+                  <AiOutlineClose
+                    className="close"
+                    onClick={() => {
+                      handleRemoveKeyword(id);
+                    }}
+                  />
                 </S.Chip>
               );
             })}
