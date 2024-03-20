@@ -97,3 +97,7 @@ export interface getClothListParams extends paginationType {
   categoryIds?: number[];
   colorIds?: number[];
 }
+
+export interface getOOTDClothesParams extends paginationType {
+  clothesId: number;
+}

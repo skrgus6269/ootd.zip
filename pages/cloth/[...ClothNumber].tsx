@@ -110,12 +110,12 @@ const Cloth = () => {
       buttonClick: isOpenButton,
     },
     { name: '게시글 수정', buttonClick: modifyButton },
-    { name: '공유', buttonClick: shareButton },
+    // { name: '공유', buttonClick: shareButton },
     { name: '삭제', buttonClick: deleteButton },
   ];
 
   const otherButtons = [
-    { name: '공유', buttonClick: shareButton },
+    // { name: '공유', buttonClick: shareButton },
     { name: '신고', buttonClick: delclationButton },
   ];
 
@@ -183,7 +183,7 @@ const Cloth = () => {
       <DetailClothDiscription
         isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
-        uploadDate={new Date(data?.createdAt!).toLocaleDateString()}
+        uploadDate={new Date(data?.createdAt!).toLocaleDateString('ko-kr')}
         memo={data?.memo}
       />
       <DetailClothDetailInfo

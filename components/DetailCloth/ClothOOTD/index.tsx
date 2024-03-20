@@ -6,6 +6,8 @@ import ImageList from '@/components/ImageList';
 import { useEffect, useState } from 'react';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import { useRouter } from 'next/router';
+import Spinner from '@/components/Spinner';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 interface OOTDDataProps {
   ootdId: number;
@@ -22,21 +24,46 @@ export default function ClothOOTD({ clothId }: ClothOOTDProps) {
 
   const { getOOTDWithCloth } = ClothApi();
 
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getOOTDWithCloth({
+      clothesId: clothId,
+      page,
+      size,
+      sortCriteria: 'createdAt',
+      sortDirection: clicked === 'new' ? 'DESC' : 'ASC',
+    });
+    return data;
+  };
+
+  const {
+    data: ootdData,
+    isLoading,
+    hasNextPage,
+    containerRef: ootdRef,
+    reset,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    initialData: [],
+    size: 7,
+  });
+
   useEffect(() => {
-    const fetchData = async () => {
-      const { content } = await getOOTDWithCloth(clothId);
-      const newContent = content.map((item: any) => {
-        return { clothId: item.id, clothImage: item.image };
-      });
-      setData(newContent);
-    };
-    fetchData();
-  }, []);
+    setData(
+      ootdData.map((item: any) => {
+        return { ootdId: item.id, ootdImage: item.image };
+      })
+    );
+  }, [ootdData]);
+
+  useEffect(() => {
+    setData([]);
+    reset();
+  }, [clicked]);
 
   const router = useRouter();
 
   return (
-    <S.Layout>
+    <S.Layout ref={ootdRef}>
       <Header text="이 옷을 활용한 OOTD" />
       <SubHead state={clicked} setState={setClicked} count={data?.length} />
       <S.OOTDLayout>
@@ -46,6 +73,7 @@ export default function ClothOOTD({ clothId }: ClothOOTDProps) {
           onClick={(index) => router.push(`/ootd/${index}`)}
         />
       </S.OOTDLayout>
+      {isLoading && hasNextPage && <Spinner />}
     </S.Layout>
   );
 }

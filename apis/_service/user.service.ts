@@ -10,6 +10,7 @@ import {
   getOOTDCommentParams,
   getClothListParams,
   patchProfilePayload,
+  getOOTDClothesParams,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -252,8 +253,8 @@ export const getExistIsNotReadAlarm = async () => {
 };
 
 //이 옷을 활용한 OOTD 조회
-export const getOOTDWithCloth = async (clothId: number) => {
-  const data = await ootdApi.getOOTDWithCloth(clothId);
+export const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
+  const data = await ootdApi.getOOTDWithCloth(params);
 
   return data;
 };
