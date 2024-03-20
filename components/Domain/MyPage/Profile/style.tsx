@@ -10,6 +10,10 @@ const Layout = styled.div`
   .profile {
     padding: 24px 0;
   }
+  .editButton {
+    height: 36px;
+    margin: 32px 0 40px 0;
+  }
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
 `;
 const BodyInformation = styled.div`
@@ -22,7 +26,13 @@ const BodyInformation = styled.div`
     margin-bottom: 1px;
   }
 `;
-const Introduce = styled.div``;
+const Introduce = styled.div`
+  p {
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+  }
+`;
 
 interface ButtonProps {
   state: Boolean;
