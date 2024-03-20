@@ -15,6 +15,8 @@ import ActionSheet from '@/components/ActionSheet';
 import { userId } from '@/utils/recoil/atom';
 import { useRecoilValue } from 'recoil';
 import TabView from '@/components/TabView';
+import FollowAlert from '@/components/Domain/FollowList/FollowAlert';
+import Toast from '@/components/Toast';
 
 export type followListType = {
   userId: number;
@@ -147,17 +149,38 @@ export default function FollowList() {
 
   const [keyword, setKeyword] = useState<string>('');
   const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const goBlockedList = () => {
     router.push('/blocked-account');
   };
   const buttons = [{ name: '차단한 계정 관리', buttonClick: goBlockedList }];
+  const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+
+  const onClickBackground = () => {
+    if (alertOpen) {
+      setAlertOpen(false);
+    }
+    if (openActionSheet) {
+      setOpenActionSheet(false);
+    }
+  };
+
+  const onClickYesButton = () => {
+    console.log('팔로우');
+    setAlertOpen(false);
+    setToastOpen(true);
+  };
+
+  const onClickNoButton = () => {
+    setAlertOpen(false);
+  };
 
   return (
     <>
       <S.Background
-        isOpen={openActionSheet}
-        onClick={() => setOpenActionSheet(false)}
+        isOpen={openActionSheet || alertOpen}
+        onClick={onClickBackground}
       />
       <S.Layout>
         <AppBar
@@ -189,6 +212,7 @@ export default function FollowList() {
           <TabView.Tabs>
             <TabView.Tab>
               <Follower
+                setAlertOpen={setAlertOpen}
                 keyword={keyword}
                 setKeyword={setKeyword}
                 followerList={followerList}
@@ -205,8 +229,15 @@ export default function FollowList() {
             </TabView.Tab>
           </TabView.Tabs>
         </TabView>
+        {toastOpen && <Toast text="삭제되었습니다." />}
       </S.Layout>
       {openActionSheet && <ActionSheet buttons={buttons} />}
+      {alertOpen && (
+        <FollowAlert
+          onClickYesButton={onClickYesButton}
+          onClickNoButton={onClickNoButton}
+        />
+      )}
     </>
   );
 }
