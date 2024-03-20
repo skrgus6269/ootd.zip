@@ -34,7 +34,7 @@ export default function Alarms({
 
   const onClickAlarm = async () => {
     await readAlarm(id);
-    // router.push(`/${goUrl}`);
+    router.push(`/${goUrl}`);
   };
 
   return (

@@ -4,10 +4,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import ImageList from '@/components/ImageList';
 import { useRouter } from 'next/router';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useRecoilValue } from 'recoil';
-import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import Spinner from '@/components/Spinner';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 export type MyPageOOTDType = {
   ootdId: number;
@@ -23,8 +22,6 @@ export default function ClosetOOTD() {
     router.push(`/ootd/${index}`);
   };
 
-  const myId = useRecoilValue(userId);
-
   const { getOOTD } = OOTDApi();
 
   const [sortStandard, setSortStandard] = useState<'오래된 순' | '최신순'>(
@@ -32,10 +29,11 @@ export default function ClosetOOTD() {
   );
 
   const fetchDataFunction = async (ootdPage: number, size: number) => {
+    if (!router.isReady) return;
     const data = await getOOTD({
       page: ootdPage,
       size,
-      userId: myId,
+      userId: Number(router.query.UserId![0]),
       sortCriteria: 'createdAt',
       sortDirection: sortStandard === '오래된 순' ? 'ASC' : 'DESC',
     });
@@ -63,7 +61,7 @@ export default function ClosetOOTD() {
     );
   }, [ootdData]);
 
-  useEffect(() => {
+  useEffectAfterMount(() => {
     setMyPageOOTDList([]);
     reset();
   }, [sortStandard]);

@@ -28,7 +28,7 @@ export default function SimilarOOTD() {
   }, [router.isReady, router.query.OOTDNumber]);
 
   const onClickSimilarOOTDImage = (ootdId: number) => {
-    router.push(`/OOTD/${ootdId}`);
+    router.push(`/ootd/${ootdId}`);
   };
 
   return (
@@ -43,7 +43,7 @@ export default function SimilarOOTD() {
         {data && (
           <ImageList
             onClick={onClickSimilarOOTDImage}
-            type="row"
+            type="column"
             data={data.map((item) => {
               return { ootdId: item.id, ootdImage: item.image };
             })}

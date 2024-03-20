@@ -56,8 +56,9 @@ export const OOTDApi = () => {
   //ootd 삭제
   const deleteOOTD = async (id: number) => {
     try {
-      const data = await userService.deleteOOTD(id);
-      return data;
+      const { statusCode } = await userService.deleteOOTD(id);
+      if (statusCode === 200) return true;
+      return false;
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);

@@ -1,14 +1,22 @@
-import { Body2 } from '@/components/UI';
+import { Body2, Body3, Caption1 } from '@/components/UI';
 import { Layout, Tab, Hr } from './style';
 import { useTabViewContext } from '@/hooks/use-tabview/context';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 interface TabBarProps {
+  count?: number[];
   tab: string[];
   display: 'inline' | 'block';
   className?: string;
+  onChangeState?: () => void;
 }
 
-export default function TabBar({ tab, display, className }: TabBarProps) {
+export default function TabBar({
+  count,
+  tab,
+  display,
+  className,
+  onChangeState,
+}: TabBarProps) {
   const { index, setIndex } = useTabViewContext();
 
   //props로 전달받은 tab의 개수만큼 유동적으로 초깃값 관리
@@ -26,6 +34,11 @@ export default function TabBar({ tab, display, className }: TabBarProps) {
     setState(newArray);
   }, [index, tab.length]);
 
+  // 검색어 초기화
+  useEffect(() => {
+    onChangeState?.();
+  }, [state]);
+
   return (
     <>
       <Layout className={className}>
@@ -37,7 +50,15 @@ export default function TabBar({ tab, display, className }: TabBarProps) {
               focus={state[index]}
               onClick={() => handleTabClick(index + 1)}
             >
-              <Body2 state="emphasis">{item}</Body2>
+              {count && count.length > 0 ? (
+                <Body2 state="emphasis">
+                  {count && count[index]}
+                  <br />
+                  {item}
+                </Body2>
+              ) : (
+                <Body2 state="emphasis">{item}</Body2>
+              )}
             </Tab>
           );
         })}
