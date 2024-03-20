@@ -100,7 +100,7 @@ const OOTD: ComponentWithLayout = () => {
 
         setData({
           ...result,
-          createAt: new Date(result.createAt).toLocaleDateString(),
+          createAt: new Date(result.createAt).toLocaleDateString('ko-KR'),
         });
         setComment({
           ootdId: Number(router.query.OOTDNumber![0]),

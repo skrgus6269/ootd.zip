@@ -52,7 +52,9 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
     <S.Layout>
       <S.Title>
         <Title1>{userName}님의 옷장</Title1>
-        <Button3 onClick={() => router.push(`/mypage`)}>더보기</Button3>
+        <Button3 onClick={() => router.push(`/mypage/${userId}`)}>
+          더보기
+        </Button3>
       </S.Title>
       <S.Cloth>
         <Carousel slidesToShow={1.1} infinite={false} dots={false}>

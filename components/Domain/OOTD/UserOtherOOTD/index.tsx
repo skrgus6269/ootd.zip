@@ -2,10 +2,10 @@
 import { Title1 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
-import ImageList from '@/components/ImageList';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import Carousel from '@/components/Carousel';
 
 interface UserOOTDProps {
   userId?: number;
@@ -37,20 +37,27 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
 
   return (
     <S.Layout>
-      <S.Title>
-        <Title1>{userName}님의 다른 OOTD</Title1>
-      </S.Title>
-      <S.OOTD>
-        {data && (
-          <ImageList
-            onClick={(ootdId: number) => router.push(`/ootd/${ootdId}`)}
-            type="row"
-            data={data.map((item) => {
-              return { ootdId: item.id, ootdImage: item.image };
-            })}
-          />
-        )}
-      </S.OOTD>
+      {data && (
+        <>
+          <S.Title>
+            <Title1>{userName}님의 다른 OOTD</Title1>
+          </S.Title>
+          <S.OOTD>
+            <Carousel infinite={false} slidesToShow={2.1} dots={false}>
+              {data.map((item) => {
+                return (
+                  <img
+                    onClick={() => router.push(`/ootd/${item.id}`)}
+                    key={item.id}
+                    src={item.image}
+                    alt="이 유저의 다른 ootd"
+                  />
+                );
+              })}
+            </Carousel>
+          </S.OOTD>
+        </>
+      )}
     </S.Layout>
   );
 }
