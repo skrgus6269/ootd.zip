@@ -3,7 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Layout = styled.div`
-  padding: 0 0 0 20px;
+  padding: 0 0 48px 20px;
 `;
 const Title = styled.div`
   padding: 21px 0;

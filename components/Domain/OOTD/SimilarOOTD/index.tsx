@@ -43,7 +43,7 @@ export default function SimilarOOTD() {
         {data && (
           <ImageList
             onClick={onClickSimilarOOTDImage}
-            type="row"
+            type="column"
             data={data.map((item) => {
               return { ootdId: item.id, ootdImage: item.image };
             })}
