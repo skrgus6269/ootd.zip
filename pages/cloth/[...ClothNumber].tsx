@@ -35,6 +35,7 @@ export interface ClothDataType {
   purchaseDate: string;
   imageUrl: string;
   createdAt: string;
+  userId: number;
 }
 
 const Cloth = () => {
@@ -43,14 +44,12 @@ const Cloth = () => {
   const [reRender, setReRender] = useState(0);
   const { getClothDetail, deleteCloth, patchClothIsPrivate } = ClothApi();
 
-  const [showingId, setShowingId] = useState<number>(0);
   const localUserId = useRecoilValue(userId);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
       const result = await getClothDetail(Number(router.query.ClothNumber![0]));
-      setShowingId(result.userId);
       setData(result);
     };
     fetchData();
@@ -131,34 +130,6 @@ const Cloth = () => {
     if (deleteOpen) setDeleteOpen(false);
   };
 
-  const OOTDData = [
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
-
   return (
     <>
       <AppBar
@@ -196,10 +167,10 @@ const Cloth = () => {
       {router.isReady && (
         <ClothOOTD clothId={Number(router.query.ClothNumber![0])} />
       )}
-      {clickedRight && localUserId === showingId && (
+      {clickedRight && localUserId === data?.userId && (
         <ActionSheet buttons={myButtons} />
       )}
-      {clickedRight && localUserId !== showingId && (
+      {clickedRight && localUserId !== data?.userId && (
         <ActionSheet buttons={otherButtons} />
       )}
       {deleteOpen && (
