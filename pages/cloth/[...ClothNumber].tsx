@@ -101,6 +101,7 @@ const Cloth = () => {
     );
     setReRender(reRender + 1);
     console.log(result);
+    setClickedRight(false); // ActionSheet 숨기기
   };
 
   const myButtons = [
