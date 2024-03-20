@@ -5,6 +5,8 @@ import Alert from '@/components/Alert';
 import { useRouter } from 'next/router';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import ActionSheet from '@/components/ActionSheet';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
@@ -28,13 +30,16 @@ export default function FixModal({
   };
 
   const router = useRouter();
+  const myId = useRecoilValue(userId);
+
   const { deleteOOTD, patchOOTDIsPrivate } = OOTDApi();
 
   const [deleteAlertIsOpen, setDeleteAlertIsOpen] = useState<Boolean>(false);
 
   const onClickYesButton = async () => {
-    await deleteOOTD(Number(router.query!.OOTDNumber![0]));
+    const result = await deleteOOTD(Number(router.query!.OOTDNumber![0]));
     setDeleteAlertIsOpen(false);
+    if (result) router.push(`/mypage/${myId}`);
   };
 
   const onClickIsPrivateButton = async () => {
@@ -46,6 +51,10 @@ export default function FixModal({
     setToastOpen(true);
   };
 
+  const onClickDeleteButton = async () => {
+    setDeleteAlertIsOpen(true);
+  };
+
   const buttons = [
     {
       name: (!isPrivate ? '비' : '') + `공개로 설정`,
@@ -54,11 +63,12 @@ export default function FixModal({
     },
     {
       name: 'ootd 수정',
-      buttonClick: onClickIsPrivateButton,
+      buttonClick: () =>
+        router.push(`/edit-ootd/${Number(router.query.OOTDNumber![0])}`),
     },
     {
       name: 'ootd 삭제',
-      buttonClick: onClickIsPrivateButton,
+      buttonClick: onClickDeleteButton,
     },
   ];
   return (
