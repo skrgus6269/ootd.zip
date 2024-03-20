@@ -23,9 +23,8 @@ export default function useInfiniteScroll({
     if (!router.isReady) return;
     fetchDataFunction(0, size).then((result: any) => {
       if (!result) return;
-
-      setData(result?.content);
-      setHasNextPage(!result?.isLast);
+      setData(result.content);
+      setHasNextPage(!result.isLast);
       setPage(1);
       setIsLoading(false);
     });
