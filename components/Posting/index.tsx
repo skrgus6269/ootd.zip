@@ -184,12 +184,25 @@ export default function Posting({
       <S.Layout>
         <S.PostingTop>
           {data.userName === 'string' ? (
-            <img src={data.userImage} className="userImage" alt="유저 이미지" />
+            <img
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              src={data.userImage}
+              className="userImage"
+              alt="유저 이미지"
+            />
           ) : (
-            <Avatar className="avatar" />
+            <Avatar
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              className="avatar"
+            />
           )}
 
-          <Body3 className="userName">{data.userName}</Body3>
+          <Body3
+            onClick={() => router.push(`/mypage/${data.userId}`)}
+            className="userName"
+          >
+            {data.userName}
+          </Body3>
           {!myPost && !followState && (
             <Button3 onClick={onClickFollowButton} className="unfollow">
               팔로우
