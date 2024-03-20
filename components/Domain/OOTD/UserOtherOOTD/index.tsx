@@ -47,6 +47,7 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
               {data.map((item) => {
                 return (
                   <img
+                    onClick={() => router.push(`/ootd/${item.id}`)}
                     key={item.id}
                     src={item.image}
                     alt="이 유저의 다른 ootd"

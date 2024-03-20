@@ -28,7 +28,7 @@ export default function SimilarOOTD() {
   }, [router.isReady, router.query.OOTDNumber]);
 
   const onClickSimilarOOTDImage = (ootdId: number) => {
-    router.push(`/OOTD/${ootdId}`);
+    router.push(`/ootd/${ootdId}`);
   };
 
   return (
