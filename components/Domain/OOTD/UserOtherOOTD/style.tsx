@@ -1,22 +1,22 @@
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Layout = styled.div`
-  padding: 0 20px;
+  padding: 0 0 0 20px;
 `;
 const Title = styled.div`
   padding: 21px 0;
 `;
 const OOTD = styled.div`
-  display: flex;
-  gap: 4px;
-  width: 100%;
-  overflow-x: scroll;
-  padding-bottom: 48px;
   img {
-    width: 167px;
+    width: 167 !important;
     height: 167px;
     object-fit: cover;
-    flex-shrink: 0;
+    padding-right: 4px;
+  }
+  .slick-track {
+    margin: 0;
   }
 `;
 
