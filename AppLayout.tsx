@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import BottomNavBar from '@/components/BottomNavBar';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { BottomNavbarPlusButtonState } from './utils/recoil/atom';
 import AddModal from './components/BottomNavBar/AddModal';
 
 const Layout = styled.div`
@@ -34,9 +32,8 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-  const [addModalState, setAddModalState] = useRecoilState(
-    BottomNavbarPlusButtonState
-  );
+  const [addModalState, setAddModalState] = useState<Boolean>(false);
+
   return (
     <Layout>
       <MainComponent>
@@ -47,7 +44,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         {children}
         {addModalState && <AddModal />}
       </MainComponent>
-      <BottomNavBar />
+      <BottomNavBar
+        addModalState={addModalState}
+        setAddModalState={setAddModalState}
+      />
     </Layout>
   );
 };
