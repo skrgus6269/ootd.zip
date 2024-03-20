@@ -9,7 +9,7 @@ import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
 import Toast from '@/components/Toast';
 
-export default function LikeInfo() {
+export default function BlockedAccount() {
   const router = useRouter();
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 

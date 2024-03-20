@@ -8,7 +8,6 @@ interface TabProps {
 const Layout = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 16px;
   p {
     padding: 13px 0px;
   }
@@ -20,6 +19,7 @@ const Tab = styled.span<TabProps>`
   align-items: center;
   display: inline-flex;
   color: ${(props) => props.theme.color.grey_50};
+  text-align: center;
   ${(props) =>
     props.focus &&
     `  
