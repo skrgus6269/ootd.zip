@@ -142,7 +142,7 @@ export default function Bookmark() {
           setEditing={setEditing}
           setAlertOpen={setAlertOpen}
         />
-        <S.ClothList ref={bookmarkRef}>
+        <S.BookmarkList ref={bookmarkRef}>
           <ImageCheckBoxList
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
@@ -150,7 +150,7 @@ export default function Bookmark() {
             data={bookmarkList!}
           />
           {isLoading && bookmarkHasNextPage && <Spinner />}
-        </S.ClothList>
+        </S.BookmarkList>
         {isVisible && (
           <S.TopButton>
             <BackTop onClick={scrollToTop}>버튼</BackTop>
