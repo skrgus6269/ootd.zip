@@ -1,8 +1,9 @@
 import fetcher from '../fetcher';
+import { getAlarmParams } from './type';
 
-export const getAlarm = async (isRead: Boolean) => {
+export const getAlarm = async ({ page, size, isRead }: getAlarmParams) => {
   const { data } = await fetcher.get(
-    `/api/v1/notification?page=0&size=10&isRead=${isRead}`
+    `/api/v1/notification?page=${page}&size=${size}&isRead=${isRead}`
   );
 
   return data;

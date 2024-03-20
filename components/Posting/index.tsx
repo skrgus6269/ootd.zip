@@ -184,12 +184,25 @@ export default function Posting({
       <S.Layout>
         <S.PostingTop>
           {data.userName === 'string' ? (
-            <img src={data.userImage} className="userImage" alt="유저 이미지" />
+            <img
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              src={data.userImage}
+              className="userImage"
+              alt="유저 이미지"
+            />
           ) : (
-            <Avatar className="avatar" />
+            <Avatar
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              className="avatar"
+            />
           )}
 
-          <Body3 className="userName">{data.userName}</Body3>
+          <Body3
+            onClick={() => router.push(`/mypage/${data.userId}`)}
+            className="userName"
+          >
+            {data.userName}
+          </Body3>
           {!myPost && !followState && (
             <Button3 onClick={onClickFollowButton} className="unfollow">
               팔로우
@@ -236,6 +249,9 @@ export default function Posting({
                           )}
                         >
                           <TagInformation
+                            onClick={() =>
+                              router.push(`/cloth/${items.clothesId}`)
+                            }
                             clothId={items.clothesId}
                             clothImage={items.clothesImage}
                             caption={'tag'}
@@ -263,11 +279,11 @@ export default function Posting({
             onClick={() => commentRef.current.focus()}
             alt="댓글"
           />
-          <ShareOutlined
+          {/* <ShareOutlined
             className="share"
             onClick={onClickShareButton}
             alt="공유하기"
-          />
+          /> */}
           {bookMarkState ? (
             <BookmarkFilled
               className="bookmark"

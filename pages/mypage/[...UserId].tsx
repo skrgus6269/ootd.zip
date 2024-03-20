@@ -107,7 +107,7 @@ export default function MyPage() {
             localUserId === showingId ? (
               <AiOutlineSetting
                 className="setting"
-                onClick={() => router.push('/Setting')}
+                onClick={() => router.push('/settings')}
               />
             ) : (
               <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />

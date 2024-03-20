@@ -1,10 +1,11 @@
+import { paginationType } from '@/apis/_api/type';
 import { userService } from '@/apis/_service';
 
 export const AlarmApi = () => {
   //이미 읽은 알림 조회
-  const getIsReadAlarm = async () => {
+  const getIsReadAlarm = async (params: paginationType) => {
     try {
-      const { result } = await userService.getIsReadAlarm();
+      const { result } = await userService.getIsReadAlarm(params);
       return result;
     } catch (err) {
       alert('관리자에게 문의하세요');
@@ -13,9 +14,9 @@ export const AlarmApi = () => {
   };
 
   //읽지 않은 알림 조회
-  const getNotIsReadAlarm = async () => {
+  const getNotIsReadAlarm = async (params: paginationType) => {
     try {
-      const { result } = await userService.getNotIsReadAlarm();
+      const { result } = await userService.getNotIsReadAlarm(params);
       return result;
     } catch (err) {
       alert('관리자에게 문의하세요');

@@ -11,6 +11,7 @@ import {
   getClothListParams,
   patchProfilePayload,
   getOOTDClothesParams,
+  paginationType,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -225,15 +226,15 @@ export const patchProfile = async (payload: patchProfilePayload) => {
 };
 
 //유저의 이미 읽은 알림 조회
-export const getIsReadAlarm = async () => {
-  const data = await alarmApi.getAlarm(true);
+export const getIsReadAlarm = async (params: paginationType) => {
+  const data = await alarmApi.getAlarm({ ...params, isRead: true });
 
   return data;
 };
 
 //유저의 읽지 않은 알림 조회
-export const getNotIsReadAlarm = async () => {
-  const data = await alarmApi.getAlarm(false);
+export const getNotIsReadAlarm = async (params: paginationType) => {
+  const data = await alarmApi.getAlarm({ ...params, isRead: false });
 
   return data;
 };

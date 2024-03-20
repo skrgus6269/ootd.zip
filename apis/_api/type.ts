@@ -101,3 +101,6 @@ export interface getClothListParams extends paginationType {
 export interface getOOTDClothesParams extends paginationType {
   clothesId: number;
 }
+export interface getAlarmParams extends paginationType {
+  isRead: Boolean;
+}

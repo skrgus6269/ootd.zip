@@ -28,7 +28,7 @@ const ButtonWrap = styled.div<ButtonWrapType>`
   flex: 1 0 0;
   border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
   color: ${(props) =>
-    (props.name === '삭제' || props.name === '신고') &&
+    (props.name.includes('삭제') || props.name.includes('신고')) &&
     `${props.theme.color.error}`};
 `;
 
