@@ -111,42 +111,16 @@ export default function Alarm() {
         {notIsReadAlarm && notIsReadAlarm.length > 0 && (
           <AlarmLayout index={0}>
             <Title1 className="title">읽지 않음</Title1>
-            {notIsReadAlarm?.map((item, index) => {
-              return (
-                <Alarms
-                  key={index}
-                  id={item.id}
-                  profileImage={item.profileImage}
-                  timeStamp={item.timeStamp}
-                  message={item.message}
-                  userName={item.userName}
-                  timeType={item.timeType}
-                  contentImage={item.contentImage}
-                  content={item.content}
-                  goUrl={item.goUrl}
-                  userId={item.userId}
-                />
-              );
-            })}
+            {notIsReadAlarm?.map((item, index) => (
+              <Alarms key={index} {...item} />
+            ))}
           </AlarmLayout>
         )}
         {isReadAlarm?.map((item, index) => (
-          <AlarmLayout index={!Number(notIsReadAlarm) ? index : 1} key={index}>
+          <AlarmLayout index={notIsReadAlarm !== null ? index : 1} key={index}>
             <Title1 className="title">{item.timeType}</Title1>
             {item.data.map((innerItem, innerIndex) => (
-              <Alarms
-                id={innerItem.id}
-                key={innerIndex}
-                profileImage={innerItem.profileImage}
-                timeStamp={innerItem.timeStamp}
-                message={innerItem.message}
-                userName={innerItem.userName}
-                timeType={innerItem.timeType}
-                contentImage={innerItem.contentImage}
-                content={innerItem.content}
-                goUrl={innerItem.goUrl}
-                userId={innerItem.userId}
-              />
+              <Alarms key={innerIndex} {...innerItem} />
             ))}
           </AlarmLayout>
         ))}
