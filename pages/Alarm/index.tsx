@@ -4,6 +4,8 @@ import Alarms, { AlarmType } from '@/components/Domain/Alarm';
 import AlarmLayout from '@/components/Domain/Alarm/AlarmLayout';
 import NoAlarm from '@/components/Domain/Alarm/NoAlarm';
 import { Title1 } from '@/components/UI';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import S from '@/pageStyle/alarm/style';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -21,40 +23,81 @@ export default function Alarm() {
     null
   );
 
+  const map = new Map<string, AlarmType[]>();
+
   const router = useRouter();
 
   const { getIsReadAlarm, getNotIsReadAlarm } = AlarmApi();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { content: notIsReadData } = await getNotIsReadAlarm();
-      const { content: isReadData } = await getIsReadAlarm();
+  const fetchIsReadAlarm = async (page: number, size: number) => {
+    const data = await getIsReadAlarm({ page, size });
 
-      //Map 자료구조를 통한 timeType별 구분
-      const map = new Map<string, AlarmType[]>();
+    data.content.forEach((item: AlarmType) => {
+      if (map.has(item.timeType)) {
+        map.set(item.timeType, [...map.get(item.timeType)!, item]);
+      } else {
+        map.set(item.timeType, [item]);
+      }
+    });
 
-      isReadData.forEach((item: AlarmType) => {
-        if (map.has(item.timeType)) {
-          map.set(item.timeType, [...map.get(item.timeType)!, item]);
-        } else {
-          map.set(item.timeType, [item]);
-        }
+    const newIsReadAlarm = [] as FetchedAlarmType[];
+
+    map.forEach((item, key) => {
+      newIsReadAlarm.push({
+        timeType: key,
+        data: item,
       });
+    });
 
-      const newIsReadAlarm = [] as FetchedAlarmType[];
-
-      map.forEach((item, key) => {
-        newIsReadAlarm.push({
-          timeType: key,
-          data: item,
-        });
-      });
-
-      if (notIsReadData.length !== 0) setNotIsReadAlarm(notIsReadData);
-      if (newIsReadAlarm.length !== 0) setIsReadAlarm(newIsReadAlarm);
+    const newData = {
+      content: newIsReadAlarm.length !== 0 && newIsReadAlarm,
+      page: data.page,
+      size: data.size,
+      isLast: data.isLast,
     };
-    fetchData();
+
+    return newData;
+  };
+
+  const fetchNotIsReadAlarm = async () => {
+    const { content: notIsReadData } = await getNotIsReadAlarm({
+      page: 0,
+      size: 100,
+    });
+
+    setNotIsReadAlarm(notIsReadData);
+  };
+
+  useEffect(() => {
+    fetchNotIsReadAlarm();
   }, []);
+
+  const { data: isReadAlarmList, containerRef } = useInfiniteScroll({
+    fetchDataFunction: fetchIsReadAlarm,
+    initialData: [],
+    size: 20,
+  });
+
+  useEffect(() => {
+    const map = new Map();
+    isReadAlarmList.forEach((item: FetchedAlarmType) => {
+      if (map.has(item.timeType)) {
+        map.set(item.timeType, [...map.get(item.timeType), ...item.data]);
+      } else {
+        map.set(item.timeType, item.data);
+      }
+    });
+
+    const newIsReadAlarm = [] as FetchedAlarmType[];
+
+    map.forEach((item, key) => {
+      newIsReadAlarm.push({
+        timeType: key,
+        data: item,
+      });
+    });
+    setIsReadAlarm(newIsReadAlarm);
+  }, [isReadAlarmList]);
 
   return (
     <>
@@ -64,48 +107,50 @@ export default function Alarm() {
         rightProps={<></>}
       />
       {!notIsReadAlarm && !isReadAlarm && <NoAlarm />}
-      {notIsReadAlarm && (
-        <AlarmLayout index={0}>
-          <Title1 className="title">읽지 않음</Title1>
-          {notIsReadAlarm?.map((item, index) => {
-            return (
+      <S.Layout ref={containerRef}>
+        {notIsReadAlarm && notIsReadAlarm.length > 0 && (
+          <AlarmLayout index={0}>
+            <Title1 className="title">읽지 않음</Title1>
+            {notIsReadAlarm?.map((item, index) => {
+              return (
+                <Alarms
+                  key={index}
+                  id={item.id}
+                  profileImage={item.profileImage}
+                  timeStamp={item.timeStamp}
+                  message={item.message}
+                  userName={item.userName}
+                  timeType={item.timeType}
+                  contentImage={item.contentImage}
+                  content={item.content}
+                  goUrl={item.goUrl}
+                  userId={item.userId}
+                />
+              );
+            })}
+          </AlarmLayout>
+        )}
+        {isReadAlarm?.map((item, index) => (
+          <AlarmLayout index={!Number(notIsReadAlarm) ? index : 1} key={index}>
+            <Title1 className="title">{item.timeType}</Title1>
+            {item.data.map((innerItem, innerIndex) => (
               <Alarms
-                key={index}
-                id={item.id}
-                profileImage={item.profileImage}
-                timeStamp={item.timeStamp}
-                message={item.message}
-                userName={item.userName}
-                timeType={item.timeType}
-                contentImage={item.contentImage}
-                content={item.content}
-                goUrl={item.goUrl}
-                userId={item.userId}
+                id={innerItem.id}
+                key={innerIndex}
+                profileImage={innerItem.profileImage}
+                timeStamp={innerItem.timeStamp}
+                message={innerItem.message}
+                userName={innerItem.userName}
+                timeType={innerItem.timeType}
+                contentImage={innerItem.contentImage}
+                content={innerItem.content}
+                goUrl={innerItem.goUrl}
+                userId={innerItem.userId}
               />
-            );
-          })}
-        </AlarmLayout>
-      )}
-      {isReadAlarm?.map((item, index) => (
-        <AlarmLayout index={!Number(notIsReadAlarm) ? index : 1} key={index}>
-          <Title1 className="title">{item.timeType}</Title1>
-          {item.data.map((innerItem, innerIndex) => (
-            <Alarms
-              id={innerItem.id}
-              key={innerIndex}
-              profileImage={innerItem.profileImage}
-              timeStamp={innerItem.timeStamp}
-              message={innerItem.message}
-              userName={innerItem.userName}
-              timeType={innerItem.timeType}
-              contentImage={innerItem.contentImage}
-              content={innerItem.content}
-              goUrl={innerItem.goUrl}
-              userId={innerItem.userId}
-            />
-          ))}
-        </AlarmLayout>
-      ))}
+            ))}
+          </AlarmLayout>
+        ))}
+      </S.Layout>
     </>
   );
 }
