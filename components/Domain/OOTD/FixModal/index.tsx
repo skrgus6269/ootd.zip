@@ -1,10 +1,10 @@
-import Modal from '@/components/Modal';
 import S from './style';
 import { Body3, Button1, Title1 } from '@/components/UI';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Alert from '@/components/Alert';
 import { useRouter } from 'next/router';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import ActionSheet from '@/components/ActionSheet';
 
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
@@ -45,27 +45,27 @@ export default function FixModal({
     setDeleteAlertIsOpen(false);
     setToastOpen(true);
   };
+
+  const buttons = [
+    {
+      name: (!isPrivate ? '비' : '') + `공개로 설정`,
+      buttonClick: onClickIsPrivateButton,
+      color: 'error',
+    },
+    {
+      name: 'ootd 수정',
+      buttonClick: onClickIsPrivateButton,
+    },
+    {
+      name: 'ootd 삭제',
+      buttonClick: onClickIsPrivateButton,
+    },
+  ];
   return (
     <>
       <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
-        <Modal className="modal" isOpen={reportModalIsOpen} height="30">
-          <S.Span onClick={onClickIsPrivateButton}>
-            <Button1 className="report">
-              {!isPrivate && <>비</>}공개로 설정
-            </Button1>
-          </S.Span>
-          <S.Span
-            onClick={() =>
-              router.push(`/edit-ootd/${Number(router.query!.OOTDNumber![0])}`)
-            }
-          >
-            <Button1 className="report">ootd 수정</Button1>
-          </S.Span>
-          <S.Span onClick={() => setDeleteAlertIsOpen(true)}>
-            <Button1 className="report delete">ootd 삭제</Button1>
-          </S.Span>
-        </Modal>
+        {reportModalIsOpen && <ActionSheet buttons={buttons} />}
         {deleteAlertIsOpen && (
           <Alert
             headline={<Title1>게시글을 삭제하시겠습니까?</Title1>}
