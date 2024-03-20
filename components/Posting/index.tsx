@@ -236,6 +236,9 @@ export default function Posting({
                           )}
                         >
                           <TagInformation
+                            onClick={() =>
+                              router.push(`/cloth/${items.clothesId}`)
+                            }
                             clothId={items.clothesId}
                             clothImage={items.clothesImage}
                             caption={'tag'}
@@ -263,11 +266,11 @@ export default function Posting({
             onClick={() => commentRef.current.focus()}
             alt="댓글"
           />
-          <ShareOutlined
+          {/* <ShareOutlined
             className="share"
             onClick={onClickShareButton}
             alt="공유하기"
-          />
+          /> */}
           {bookMarkState ? (
             <BookmarkFilled
               className="bookmark"
