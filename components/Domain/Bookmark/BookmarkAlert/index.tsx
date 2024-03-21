@@ -14,13 +14,14 @@ export default function BookmarkAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>북마크에서 삭제하시겠습니까?</Title1>}
+      headline="북마크에서 삭제하시겠습니까?"
       body={
         <>
-          <Body3>삭제냐 안 삭제냐 그것이 문제로다</Body3>
+          <Body3>삭제를 누르면 해당 콘텐츠의 북마크가 해제됩니다.</Body3>
         </>
       }
       yes={'취소'}
+      yesColor="error"
       no={'삭제'}
     />
   );

@@ -14,14 +14,15 @@ export default function FollowAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>팔로워에서 삭제하시겠습니까?</Title1>}
+      headline="팔로워에서 삭제하시겠습니까?"
       body={
         <>
-          <Body3>Username님은 회원님의 팔로워 리스트에서</Body3>
-          <Body3>삭제된 것을 알 수 없습니다.</Body3>
+          <Body3>Username님은 회원님의 팔로워 리스트에</Body3>
+          <Body3>서 삭제된 것을 알 수 없습니다.</Body3>
         </>
       }
       yes={'삭제'}
+      yesColor="error"
       no={'닫기'}
     />
   );
