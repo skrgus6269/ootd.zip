@@ -80,11 +80,18 @@ export default function DeclarationModal({
 
     const addReportSuccess = await postReport(payload);
 
-    if (addReportSuccess.response.data.divisionCode === 'R002') {
+    if (
+      addReportSuccess.response &&
+      addReportSuccess.response.data.divisionCode === 'R002'
+    ) {
       setReceivedDeclaration(true); // 차단 모달 열기
       setDeclaration(false); // 신고하기 모달 닫기
       setReportStatus(false);
-    } else if (addReportSuccess.response.data.statusCode === 200) {
+    } else if (
+      addReportSuccess.result &&
+      addReportSuccess.result.id &&
+      addReportSuccess.result.reportCount > 0
+    ) {
       setReceivedDeclaration(true); // 차단 모달 열기
       setDeclaration(false); // 신고하기 모달 닫기
       setReportStatus(true);
