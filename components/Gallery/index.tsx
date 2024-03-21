@@ -200,8 +200,8 @@ const Gallery = ({
           }
           onClickYesButton={getStoredImage}
           onClickNoButton={dontGetStoredImage}
-          yes="취소"
-          no="확인"
+          no="취소"
+          yes="확인"
         />
       )}
     </S.Layout>

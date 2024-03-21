@@ -33,7 +33,7 @@ export default function Alert({
         {yes && no && (
           <S.AlertButton yesColor={yesColor} noColor={noColor}>
             <button onClick={onClickNoButton} className="no">
-              <Button1>{no}</Button1>
+              <Button1 state="thin">{no}</Button1>
             </button>
             <button onClick={onClickYesButton} className="yes">
               <Button1>{yes}</Button1>
