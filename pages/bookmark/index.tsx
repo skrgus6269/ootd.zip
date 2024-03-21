@@ -12,6 +12,7 @@ import BookmarkApi from '@/apis/domain/Bookmark/BookmarkApi';
 import BackTop from '@/public/images/BackTop.svg';
 import Toast from '@/components/Toast';
 import Spinner from '@/components/Spinner';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 export type OOTDdataType = {
   ootdId: number;
@@ -129,7 +130,7 @@ export default function Bookmark() {
     );
   }, [bookmarkData]);
 
-  useEffect(() => {
+  useEffectAfterMount(() => {
     setBookmarkList([]);
     reset();
   }, [toastOpen]);
