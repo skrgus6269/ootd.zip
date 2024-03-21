@@ -17,6 +17,8 @@ import { useRouter } from 'next/router';
 import DeleteAlert from '@/components/DetailCloth/DeleteAlert';
 import Toast from '@/components/Toast';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 export interface ClothDataType {
   id: number;
@@ -33,6 +35,7 @@ export interface ClothDataType {
   purchaseDate: string;
   imageUrl: string;
   createdAt: string;
+  userId: number;
 }
 
 const Cloth = () => {
@@ -40,6 +43,8 @@ const Cloth = () => {
   const [data, setData] = useState<ClothDataType | null>(null);
   const [reRender, setReRender] = useState(0);
   const { getClothDetail, deleteCloth, patchClothIsPrivate } = ClothApi();
+
+  const localUserId = useRecoilValue(userId);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +89,10 @@ const Cloth = () => {
     setDeleteOpen(false);
   };
 
+  const delclationButton = () => {
+    console.log('신고');
+  };
+
   const isOpenButton = async () => {
     const payload = { isPrivate: !data!.isPrivate };
     const result = await patchClothIsPrivate(
@@ -92,16 +101,22 @@ const Cloth = () => {
     );
     setReRender(reRender + 1);
     console.log(result);
+    setClickedRight(false); // ActionSheet 숨기기
   };
 
-  const buttons = [
+  const myButtons = [
     {
       name: !data?.isPrivate ? '비공개로 변경' : '공개로 변경',
       buttonClick: isOpenButton,
     },
     { name: '게시글 수정', buttonClick: modifyButton },
-    { name: '공유', buttonClick: shareButton },
+    // { name: '공유', buttonClick: shareButton },
     { name: '삭제', buttonClick: deleteButton },
+  ];
+
+  const otherButtons = [
+    // { name: '공유', buttonClick: shareButton },
+    { name: '신고', buttonClick: delclationButton },
   ];
 
   const [clickedRight, setClickedRight] = useState<Boolean>(false);
@@ -115,34 +130,6 @@ const Cloth = () => {
     if (clickedRight) setClickedRight(false);
     if (deleteOpen) setDeleteOpen(false);
   };
-
-  const OOTDData = [
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
 
   return (
     <>
@@ -168,7 +155,7 @@ const Cloth = () => {
       <DetailClothDiscription
         isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
-        uploadDate={new Date(data?.createdAt!).toLocaleDateString()}
+        uploadDate={new Date(data?.createdAt!).toLocaleDateString('ko-kr')}
         memo={data?.memo}
       />
       <DetailClothDetailInfo
@@ -181,7 +168,12 @@ const Cloth = () => {
       {router.isReady && (
         <ClothOOTD clothId={Number(router.query.ClothNumber![0])} />
       )}
-      {clickedRight && <ActionSheet buttons={buttons} />}
+      {clickedRight && localUserId === data?.userId && (
+        <ActionSheet buttons={myButtons} />
+      )}
+      {clickedRight && localUserId !== data?.userId && (
+        <ActionSheet buttons={otherButtons} />
+      )}
       {deleteOpen && (
         <DeleteAlert
           onClickYesButton={onClickYesButton}

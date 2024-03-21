@@ -6,6 +6,7 @@ import {
   postOOTDPayload,
   getUserBookmarkListPayload,
   postOOTDComentPayload,
+  getOOTDClothesParams,
 } from './type';
 
 //ootd 작성
@@ -162,9 +163,15 @@ export const DeleteOOTDComent = async (commentId: number) => {
 };
 
 //이 옷으로 이루어진 OOTD 조회
-export const getOOTDWithCloth = async (clothId: number) => {
+export const getOOTDWithCloth = async ({
+  page,
+  size,
+  sortCriteria,
+  sortDirection,
+  clothesId,
+}: getOOTDClothesParams) => {
   const { data } = await fetcher.get(
-    `/api/v1/ootd/clothes?page=0&size=20&clothesId=${clothId}`
+    `api/v1/ootd/clothes?page=${page}&size=${size}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}&clothesId=${clothesId}`
   );
 
   return data;

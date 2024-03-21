@@ -1,5 +1,6 @@
 import {
   getClothListParams,
+  getOOTDClothesParams,
   patchClothIsPrivateType,
   postClothPayload,
 } from '@/apis/_api/type';
@@ -116,9 +117,9 @@ export default function ClothApi() {
   };
 
   //이 옷을 활용한 OOTD 조회
-  const getOOTDWithCloth = async (clothId: number) => {
+  const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
     try {
-      const { result } = await userService.getOOTDWithCloth(clothId);
+      const { result } = await userService.getOOTDWithCloth(params);
       return result;
     } catch (err) {
       alert('관리자에게 문의하세요');
