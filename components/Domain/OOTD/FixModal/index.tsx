@@ -78,10 +78,11 @@ export default function FixModal({
         {reportModalIsOpen && <ActionSheet buttons={buttons} />}
         {deleteAlertIsOpen && (
           <Alert
-            headline={<Title1>게시글을 삭제하시겠습니까?</Title1>}
-            body={<Body3>삭제된 게시글은 다시 복구할 수 없습니다.</Body3>}
-            yes="확인"
+            headline="게시글을 삭제하시겠습니까?"
+            body={<Body3>삭제된 게시글은 다시 복구할 수 없습니다. </Body3>}
+            yes="삭제"
             no="취소"
+            yesColor="error"
             onClickYesButton={onClickYesButton}
             onClickNoButton={() => setDeleteAlertIsOpen(false)}
           />
