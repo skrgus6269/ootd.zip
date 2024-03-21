@@ -17,6 +17,7 @@ const Background = styled.div<BackgroundProps>`
 const Layout = styled.div``;
 
 const BookmarkList = styled.div`
+  height: calc(100vh - 56px);
   overflow-y: scroll;
   padding: 0px 20px;
 `;

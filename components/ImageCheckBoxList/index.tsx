@@ -2,9 +2,8 @@ import Image from 'next/image';
 import S from './style';
 import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
 import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
-import { useState } from 'react';
-import { BookmarkListType } from '@/pages/bookmark';
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 interface ImageCheckBoxListProps {
   data: {
@@ -31,13 +30,18 @@ export default function ImageCheckBoxList({
     }
   };
 
+  const router = useRouter();
+
   return (
     <S.Layout>
       {data &&
         data.map((item) => {
           const isChecked = checkedItems.includes(item.ootdBookmarkId!);
           return (
-            <S.CheckBoxLayout key={item.ootdBookmarkId}>
+            <S.CheckBoxLayout
+              key={item.ootdBookmarkId}
+              onClick={() => router.push(`/ootd/${item.ootdId}`)}
+            >
               <img
                 src={item.ootdImage}
                 alt=""
