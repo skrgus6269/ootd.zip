@@ -109,8 +109,9 @@ export const getUserBookmarkList = async (
 
 //유저의 북마크 리스트 삭제
 export const deleteBookmarkList = async (bookamrkIds: number[]) => {
-  const params = { data: bookamrkIds };
-  const { data } = await fetcher.delete(`/api/v1/bookmarks`, params);
+  const { data } = await fetcher.delete(
+    `/api/v1/bookmarks?ootdBookmarkIds=${bookamrkIds}`
+  );
 
   return data;
 };

@@ -37,15 +37,14 @@ export default function ImageCheckBoxList({
       {data &&
         data.map((item) => {
           const isChecked = checkedItems.includes(item.ootdBookmarkId!);
+
           return (
-            <S.CheckBoxLayout
-              key={item.ootdBookmarkId}
-              onClick={() => router.push(`/ootd/${item.ootdId}`)}
-            >
+            <S.CheckBoxLayout key={item.ootdBookmarkId}>
               <img
                 src={item.ootdImage}
                 alt=""
                 className={`clothImage ${isChecked ? 'checked' : ''}`}
+                onClick={() => router.push(`ootd/${item.ootdId}`)}
               />
               {checkBox && (
                 <Image

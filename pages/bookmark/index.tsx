@@ -35,24 +35,32 @@ export default function Bookmark() {
   const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const scrollToTop = () => {
-    window.scrollTo({
+    const container = bookmarkRef.current;
+    container.scrollTo({
       top: 0,
     });
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
+    const container = bookmarkRef.current;
 
-      setIsVisible(scrollTop > 10);
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = container;
+      console.log(scrollTop, clientHeight, scrollHeight);
+      if (scrollTop >= 50) {
+        setIsVisible(true);
+      }
+      if (scrollTop < 50) {
+        setIsVisible(false);
+      }
     };
 
     // 스크롤 이벤트 리스너 등록
-    window.addEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll);
 
     // 컴포넌트 언마운트 시에 이벤트 리스너 제거
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      container.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -63,7 +71,6 @@ export default function Bookmark() {
   };
 
   const onClickNoButton = async () => {
-    console.log(checkedItems);
     const result = await deleteBookmarkList(checkedItems);
     if (result) {
       setAlertOpen(false);
@@ -134,12 +141,12 @@ export default function Bookmark() {
           rightProps={<></>}
         />
 
-        <BookmarSubHead
-          editing={editing}
-          setEditing={setEditing}
-          setAlertOpen={setAlertOpen}
-        />
         <S.BookmarkList ref={bookmarkRef}>
+          <BookmarSubHead
+            editing={editing}
+            setEditing={setEditing}
+            setAlertOpen={setAlertOpen}
+          />
           <ImageCheckBoxList
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
@@ -147,12 +154,13 @@ export default function Bookmark() {
             data={bookmarkList!}
           />
           {bookmarkIsLoading && bookmarkHasNextPage && <Spinner />}
+          {isVisible && (
+            <S.TopButton>
+              <BackTop onClick={scrollToTop}>버튼</BackTop>
+            </S.TopButton>
+          )}
         </S.BookmarkList>
-        {isVisible && (
-          <S.TopButton>
-            <BackTop onClick={scrollToTop}>버튼</BackTop>
-          </S.TopButton>
-        )}
+
         {alertOpen && (
           <BookmarkAlert
             onClickYesButton={onClickYesButton}

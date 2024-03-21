@@ -11,7 +11,9 @@ const Background = styled.div<BackgroundProps>`
   z-index: 2;
   width: 100vw;
   height: calc(100vh - 48px);
+  top: 0;
   position: absolute;
+  z-index: 999;
 `;
 
 const Layout = styled.div``;
