@@ -20,6 +20,10 @@ const Frame = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1 0 0;
+
+  .bookmarkSubHeadText {
+    color: ${(props) => props.theme.color.grey_50};
+  }
 `;
 
 const Wrap = styled.div`

@@ -151,6 +151,7 @@ export default function Bookmark() {
             editing={editing}
             setEditing={setEditing}
             setAlertOpen={setAlertOpen}
+            count={checkedItems.length}
           />
           <ImageCheckBoxList
             checkedItems={checkedItems}
