@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
-import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
+import BookmarkCheckBoxTrue from '@/public/images/BookmarkCheckBoxTrue.png';
+import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -48,7 +48,7 @@ export default function ImageCheckBoxList({
               />
               {checkBox && (
                 <Image
-                  src={isChecked ? CheckBoxTrue : CheckBoxFalse}
+                  src={isChecked ? BookmarkCheckBoxTrue : BookmarkCheckBoxFalse}
                   alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
                   className="checkBoxImage"
                   onClick={() => toggleChecked(item.ootdBookmarkId!)}

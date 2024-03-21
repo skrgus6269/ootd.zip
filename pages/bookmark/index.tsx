@@ -1,7 +1,7 @@
 import { Title1 } from '@/components/UI';
 import S from '@/pageStyle/bookmark/style';
 import AppBar from '@/components/Appbar';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import BookmarSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
@@ -80,6 +80,11 @@ export default function Bookmark() {
     }
   };
 
+  // 편집 초기화 시 체크 박스 클릭한 값들 초기화
+  useEffect(() => {
+    setCheckedItems([]);
+  }, [editing]);
+
   const onClickBackground = () => {
     if (alertOpen) setAlertOpen(false);
   };
@@ -136,7 +141,7 @@ export default function Bookmark() {
       <S.Background isOpen={alertOpen} onClick={onClickBackground} />
       <S.Layout>
         <AppBar
-          leftProps={<AiOutlineClose onClick={() => router.back()} />}
+          leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
           middleProps={<Title1>북마크</Title1>}
           rightProps={<></>}
         />
