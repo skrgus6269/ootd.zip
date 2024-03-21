@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
-import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
-import { useState } from 'react';
-import { BookmarkListType } from '@/pages/bookmark';
+import BookmarkCheckBoxTrue from '@/public/images/BookmarkCheckBoxTrue.png';
+import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 interface ImageCheckBoxListProps {
-  data: BookmarkListType | undefined;
+  data: {
+    ootdId?: number;
+    ootdBookmarkId?: number;
+    ootdImage?: string;
+  }[];
   checkBox: Boolean;
   checkedItems: number[];
   setCheckedItems: Dispatch<SetStateAction<number[]>>;
@@ -19,32 +22,36 @@ export default function ImageCheckBoxList({
   checkedItems,
   setCheckedItems,
 }: ImageCheckBoxListProps) {
-  const toggleChecked = (clothId: number) => {
-    if (checkedItems.includes(clothId)) {
-      setCheckedItems(checkedItems.filter((id) => id !== clothId));
+  const toggleChecked = (ootdBookmarkId: number) => {
+    if (checkedItems.includes(ootdBookmarkId)) {
+      setCheckedItems(checkedItems.filter((id) => id !== ootdBookmarkId));
     } else {
-      setCheckedItems([...checkedItems, clothId]);
+      setCheckedItems([...checkedItems, ootdBookmarkId]);
     }
   };
+
+  const router = useRouter();
 
   return (
     <S.Layout>
       {data &&
-        data.content.map((item) => {
-          const isChecked = checkedItems.includes(item.ootdId);
+        data.map((item) => {
+          const isChecked = checkedItems.includes(item.ootdBookmarkId!);
+
           return (
-            <S.CheckBoxLayout key={item.ootdId}>
+            <S.CheckBoxLayout key={item.ootdBookmarkId}>
               <img
                 src={item.ootdImage}
                 alt=""
                 className={`clothImage ${isChecked ? 'checked' : ''}`}
+                onClick={() => router.push(`ootd/${item.ootdId}`)}
               />
               {checkBox && (
                 <Image
-                  src={isChecked ? CheckBoxTrue : CheckBoxFalse}
+                  src={isChecked ? BookmarkCheckBoxTrue : BookmarkCheckBoxFalse}
                   alt={`CheckBox ${isChecked ? 'True' : 'False'}`}
                   className="checkBoxImage"
-                  onClick={() => toggleChecked(item.ootdId)}
+                  onClick={() => toggleChecked(item.ootdBookmarkId!)}
                   width={24}
                   height={24}
                 />

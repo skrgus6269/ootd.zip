@@ -6,15 +6,24 @@ interface LayoutProps {
 
 const headLayout = styled.div<LayoutProps>`
   display: flex;
-  padding: 12px 20px;
+  padding: 12px 0px;
   justify-content: flex-end;
   align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: ${(props) => props.theme.color.grey_100};
+  z-index: 1;
 `;
 
 const Frame = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1 0 0;
+
+  .bookmarkSubHeadText {
+    color: ${(props) => props.theme.color.grey_50};
+  }
 `;
 
 const Wrap = styled.div`

@@ -9,23 +9,22 @@ interface BookmarkSubHeadProps {
   editing: Boolean;
   setEditing: Dispatch<SetStateAction<Boolean>>;
   setAlertOpen: Dispatch<SetStateAction<Boolean>>;
+  count: number;
 }
 
 export default function BookmarSubHead({
   editing,
   setEditing,
   setAlertOpen,
+  count,
 }: BookmarkSubHeadProps) {
   return (
     <>
       <S.headLayout>
         <S.Frame>
-          {!editing && (
-            <>
-              <Body4 style={{ fontWeight: '500', color: '#BBBBBB' }}>4</Body4>
-              <Body4 style={{ color: '#BBBBBB' }}>개의 게시물</Body4>
-            </>
-          )}
+          <Body4 state="emphasis" className="bookmarkSubHeadText">
+            {editing ? `${count}개의 게시글이 선택됨` : `4개의 게시글`}
+          </Body4>
         </S.Frame>
         <S.Wrap>
           {editing ? (
