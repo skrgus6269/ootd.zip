@@ -186,8 +186,8 @@ export default function AddTag({
                       {categoryList.map((item, index) => {
                         return (
                           <S.CategorySpan
-                            onTouchStart={(e) => e.stopPropagation()}
-                            onTouchEnd={() => onClickCategory(index)}
+                            onTouchMove={(e) => e.stopPropagation()}
+                            onClick={() => onClickCategory(index)}
                             state={index === clicked}
                             key={index}
                           >
