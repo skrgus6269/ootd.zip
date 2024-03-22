@@ -84,6 +84,10 @@ export default function WriteOOTD({
   };
   return (
     <>
+      <S.Background
+        onClick={() => setStyleModalIsOpen(false)}
+        state={styleModalIsOpen}
+      />
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">
           {imageAndTag !== undefined && imageAndTag!.length}장의 사진이 선택됨

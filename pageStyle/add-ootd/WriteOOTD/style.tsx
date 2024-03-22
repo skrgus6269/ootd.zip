@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+interface LayoutProps {
+  state: Boolean;
+}
+
+const Background = styled.div<LayoutProps>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.state ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+`;
+
 const Layout = styled.div`
   padding: 24px 0 0 0;
   height: 100%;
@@ -97,6 +112,7 @@ const StyleListSpan = styled.div`
 `;
 
 const S = {
+  Background,
   Layout,
   OOTDImage,
   Text,
