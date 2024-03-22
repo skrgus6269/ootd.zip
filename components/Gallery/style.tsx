@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   .nextButton {
-    padding: 16px 20px 24px 16px;
+    padding: 16px 20px 0px 16px;
     position: fixed;
-    bottom: 0px;
+    bottom: 20px;
   }
   .helperText {
     padding: 42px 0 18px 0;

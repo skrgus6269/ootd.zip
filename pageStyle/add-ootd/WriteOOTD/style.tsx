@@ -11,7 +11,7 @@ const Layout = styled.div`
   }
   .nextButon {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     padding: 0 20px;
   }
 `;
