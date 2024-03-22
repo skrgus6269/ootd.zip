@@ -7,75 +7,13 @@ import TabView from '@/components/TabView';
 import { Body4 } from '@/components/UI';
 import Modal from '@/components/Modal';
 import NewRegister from './NewRegister';
-
-const ClothInformationSampleData = [
-  {
-    clothId: 1,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-  {
-    clothId: 2,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-  {
-    clothId: 3,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-  {
-    clothId: 4,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-  {
-    clothId: 5,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-  {
-    clothId: 6,
-    size: 'Free',
-    clothImage:
-      'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    brand: 'Adidas',
-    name: '전북 현대 유니폼',
-    state: 'dark',
-    icon: 'like',
-    category: '상의',
-  },
-] as [...ClothInformationProps[]];
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import { UserClothDataType } from '../../OOTD/UserCloth';
+import Spinner from '@/components/Spinner';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 export type ImageWithTag = {
   ootdId: number;
@@ -100,6 +38,8 @@ interface AddTagProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
   imageAndTag: ImageWithTag | undefined;
   slideIndex: number;
+  componentHeight: number;
+  componentWidth: number;
 }
 
 export default function AddTag({
@@ -108,10 +48,23 @@ export default function AddTag({
   setImageAndTag,
   imageAndTag,
   slideIndex,
+  componentHeight,
+  componentWidth,
 }: AddTagProps) {
-  const [searchResult, setSearchResult] = useState();
-  const categoryList = ['외투', '상의', '하의', '한벌옷', '신발'];
-  const [letter, setLetter] = useState<string>('');
+  const [searchResult, setSearchResult] = useState<UserClothDataType[] | null>(
+    null
+  );
+  const categoryList = [
+    '외투',
+    '상의',
+    '니트웨어',
+    '하의',
+    '원피스',
+    '스포츠',
+    '신발',
+    '가방',
+  ];
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [clicked, setClicked] = useState<number | null>();
 
   const onClickCategory = (index: number) => {
@@ -129,13 +82,17 @@ export default function AddTag({
 
       if (newTag[slideIndex].ootdImageClothesList) {
         newTag[slideIndex].ootdImageClothesList?.push({
-          clothesId: ClothInformationSampleData[index].clothId,
-          clothesImage: ClothInformationSampleData[index].clothImage,
-          brand: ClothInformationSampleData[index].brand,
-          name: ClothInformationSampleData[index].name,
+          clothesId: searchResult![index].id,
+          clothesImage: searchResult![index].imageUrl,
+          brand: searchResult![index].brand.name,
+          name: searchResult![index].name,
           coordinate: {
             xrate: '0',
             yrate: '0',
+          },
+          deviceSize: {
+            deviceHeight: componentHeight,
+            deviceWidth: componentWidth,
           },
           caption: '',
           state: 'light',
@@ -143,13 +100,17 @@ export default function AddTag({
       } else {
         newTag[slideIndex].ootdImageClothesList = [
           {
-            clothesId: ClothInformationSampleData[index].clothId,
-            clothesImage: ClothInformationSampleData[index].clothImage,
-            brand: ClothInformationSampleData[index].brand,
-            name: ClothInformationSampleData[index].name,
+            clothesId: searchResult![index].id,
+            clothesImage: searchResult![index].imageUrl,
+            brand: searchResult![index].brand.name,
+            name: searchResult![index].name,
             coordinate: {
               xrate: '0',
               yrate: '0',
+            },
+            deviceSize: {
+              deviceHeight: componentHeight,
+              deviceWidth: componentWidth,
             },
             caption: '',
             state: 'light',
@@ -162,6 +123,41 @@ export default function AddTag({
     }
   };
 
+  const { getUserClothList } = ClothApi();
+  const myId = useRecoilValue(userId);
+
+  useEffectAfterMount(() => {
+    setSearchResult(null);
+    reset();
+  }, [clicked]);
+
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getUserClothList({
+      page,
+      size,
+      userId: myId,
+      brandIds: clicked ? [clicked + 1] : undefined,
+    });
+
+    return data;
+  };
+
+  const {
+    data: fetchData,
+    isLoading,
+    hasNextPage,
+    reset,
+    containerRef,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    initialData: [],
+    size: 7,
+  });
+
+  useEffect(() => {
+    setSearchResult(fetchData);
+  }, [fetchData]);
+
   return (
     <>
       <S.Background onClick={() => setAddTag(false)} addTag={addTag} />
@@ -173,9 +169,10 @@ export default function AddTag({
               <TabView.Tab>
                 <S.MyCloset>
                   <SearchBar
-                    letter={letter}
-                    setLetter={setLetter}
+                    letter={searchKeyword}
+                    setLetter={setSearchKeyword}
                     placeholder="이름, 카테고리 등"
+                    onChange={reset}
                   />
                   <S.SearchFilter>
                     <S.IsOpenSpan state={true}>
@@ -200,23 +197,23 @@ export default function AddTag({
                       })}
                     </S.Category>
                   </S.SearchFilter>
-                  <S.List>
-                    {ClothInformationSampleData.map((item, index) => {
+                  <S.List ref={containerRef}>
+                    {searchResult?.map((item, index) => {
                       return (
                         <>
                           <div
-                            onClick={() => onClickClothInformation(index)}
                             key={index}
+                            onClick={() => onClickClothInformation(index)}
                           >
                             <ClothInformation
-                              clothId={item.clothId}
+                              clothId={item.id}
                               size="small"
-                              clothImage={item.clothImage}
-                              caption="옷"
-                              brand={item.brand}
-                              category={item.category}
+                              clothImage={item.imageUrl}
+                              caption=""
+                              brand={item.brand.name}
+                              category={item.category.categoryName}
                               name={item.name}
-                              clothSize={item.size}
+                              clothSize={item.size.name}
                             />
                           </div>
                           <hr />
@@ -224,6 +221,7 @@ export default function AddTag({
                       );
                     })}
                   </S.List>
+                  {isLoading && hasNextPage && <Spinner />}
                 </S.MyCloset>
               </TabView.Tab>
               <TabView.Tab>
