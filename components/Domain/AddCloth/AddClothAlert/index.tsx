@@ -14,7 +14,7 @@ export default function AddClothAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>추가정보...입력하지 않을래?</Title1>}
+      headline="추가정보...입력하지 않을래?"
       body={
         <>
           <Body3>추가정보...입력하면 좋을텐데...</Body3>

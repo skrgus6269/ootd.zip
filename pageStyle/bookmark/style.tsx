@@ -11,13 +11,15 @@ const Background = styled.div<BackgroundProps>`
   z-index: 2;
   width: 100vw;
   height: calc(100vh - 48px);
+  top: 0;
   position: absolute;
+  z-index: 999;
 `;
 
 const Layout = styled.div``;
 
-const ClothList = styled.div`
-  height: 100vh;
+const BookmarkList = styled.div`
+  height: calc(100vh - 56px);
   overflow-y: scroll;
   padding: 0px 20px;
 `;
@@ -38,6 +40,6 @@ const TopButton = styled.div`
   }
 `;
 
-const S = { Background, Layout, ClothList, TopButton };
+const S = { Background, Layout, BookmarkList, TopButton };
 
 export default S;

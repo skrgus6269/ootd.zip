@@ -187,21 +187,21 @@ const Gallery = ({
       </NextButton>
       {isOpenStoredImageAlert && (
         <Alert
-          headline={<Title1>작성 중이던 게시글이 있습니다.</Title1>}
+          headline="작성 중이던 게시글이 있습니다."
           body={
             <>
               <Body3>
                 이어서 작성하시겠습니까?
                 <br />
-                아니오를 누를 경우 임시저장본은 삭제되며 새<br />
-                로운 게시글을 작성할 수 있습니다.
+                아니오를 누를 경우 임시저장본은 삭제되며 새로운 게시글을 작성할
+                수 있습니다.
               </Body3>
             </>
           }
           onClickYesButton={getStoredImage}
           onClickNoButton={dontGetStoredImage}
-          yes="네"
-          no="아니오"
+          no="취소"
+          yes="확인"
         />
       )}
     </S.Layout>
