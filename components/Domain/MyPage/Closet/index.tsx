@@ -2,35 +2,55 @@ import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
-import ClosetOOTD, { MyPageOOTDType } from './ClosetOOTD';
-import { useEffect, useState } from 'react';
-import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
-import { useRecoilValue } from 'recoil';
-import { userId } from '@/utils/recoil/atom';
+import ClosetOOTD from './ClosetOOTD';
+import ClosetEmpty from './ClosetEmpty';
+import { useRouter } from 'next/router';
 
 interface ClosetType {
-  localUserId: number;
   showingId: number;
+  ootdCount: number;
+  clothesCount: number;
 }
 
-export default function Closet({ localUserId, showingId }: ClosetType) {
+export default function Closet({
+  showingId,
+  ootdCount,
+  clothesCount,
+}: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
+  const router = useRouter();
 
   return (
     <>
       <S.Layout>
         <ClosetTabbar
-          OOTDNumber={2}
-          clothNumber={2}
+          ootdCount={ootdCount}
+          clothesCount={clothesCount}
           handleStep={handleStep}
           currentStep={currentStep}
         />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            <ClosetOOTD />
+            {ootdCount === 0 ? (
+              <ClosetEmpty
+                text="공유하신 사진이 없습니다."
+                button="OOTD 게시하기"
+                onClick={() => router.push('/add-ootd')}
+              />
+            ) : (
+              <ClosetOOTD />
+            )}
           </Funnel.Steps>
           <Funnel.Steps name="Cloth">
-            <ClosetCloth showingId={showingId} />
+            {clothesCount === 0 ? (
+              <ClosetEmpty
+                text="옷장이 비어있습니다."
+                button="의류 추가하기"
+                onClick={() => router.push('/add-closet')}
+              />
+            ) : (
+              <ClosetCloth showingId={showingId} />
+            )}
           </Funnel.Steps>
         </Funnel>
       </S.Layout>

@@ -36,8 +36,8 @@ export default function MyPage() {
     weight: 72,
     isFollow: false,
     description: '간계밥',
-    OOTDNumber: 0,
-    clothNumber: 0,
+    ootdCount: 0,
+    clothesCount: 0,
   });
 
   const [followState, setFollowState] = useState<Boolean>(false);
@@ -121,10 +121,15 @@ export default function MyPage() {
           showingId={showingId}
           onClickFollowButton={onClickFollowButton}
         />
-        <Closet localUserId={localUserId} showingId={showingId} />
+        <Closet
+          showingId={showingId}
+          ootdCount={userProfileData.ootdCount}
+          clothesCount={userProfileData.clothesCount}
+        />
         {queryState === 'editSuccess' && (
           <Toast text="프로필이 수정되었습니다." />
         )}
+
         {blockOpen && (
           <BlockAlert
             blockUserName={userProfileData.userName}
