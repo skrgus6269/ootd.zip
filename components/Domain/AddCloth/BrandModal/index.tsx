@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import Modal from '@/components/Modal';
 import S from './style';
-import { Button3, Title1 } from '@/components/UI';
+import { Body4, Button3, Title1 } from '@/components/UI';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import BrandList from '@/components/BrandList';
 import { BrandType } from '@/components/BrandList/Brand';
@@ -8,6 +9,9 @@ import SearchBar from '@/components/SearchBar';
 import { AiOutlineClose } from 'react-icons/ai';
 import NextButton from '@/components/NextButton';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
+import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
+import Image from 'next/image';
 
 interface BrandModalProps {
   brandModalIsOpen: Boolean;
@@ -25,21 +29,31 @@ export default function BrandModal({
   const [selectedBrandList, setSelectedBrandList] = useState<
     BrandType[] | null
   >(null);
+  const [noBrandState, setNoBrandState] = useState<Boolean>(false);
 
   const { getBrand } = ClothApi();
 
   const onClickCloseBrandButton = (id: number) => {
-    const newBrandList = brandList!.map((item) => {
-      if (item.id === id) {
-        return { ...item, state: false };
-      }
-      return item;
-    });
+    if (brandList) {
+      const newBrandList = brandList.map((item) => {
+        if (item.id === id) {
+          return { ...item, state: false };
+        }
+        return item;
+      });
 
-    setBrandList(newBrandList);
+      setBrandList(newBrandList);
+    } else {
+      setSelectedBrandList(null);
+    }
   };
 
   const onClickNextButton = () => {
+    if (noBrandState) {
+      setClothBrand([{ id: 1, name: '브랜드 없음' }]);
+      setBrandModalIsOpen(false);
+      return;
+    }
     setClothBrand(selectedBrandList);
     setBrandModalIsOpen(false);
   };
@@ -52,6 +66,12 @@ export default function BrandModal({
     if (searchKeyword === '') setBrandList(null);
     if (searchKeyword.length > 0) fetchBrand();
   }, [searchKeyword]);
+
+  useEffect(() => {
+    if (brandList && brandList.length > 0) {
+      setNoBrandState(false);
+    }
+  }, [brandList]);
 
   return (
     <Modal isOpen={brandModalIsOpen} height="90">
@@ -71,6 +91,20 @@ export default function BrandModal({
           />
         </S.Search>
         <S.BrandList>
+          {(!brandList || brandList.length === 0) && (
+            <S.NoBrand
+              onClick={() => setNoBrandState(!noBrandState)}
+              state={noBrandState}
+            >
+              <Image
+                src={noBrandState ? CheckBoxTrue : CheckBoxFalse}
+                width={18}
+                height={18}
+                alt="브랜드가 없음"
+              />
+              <Body4 className="noBrand">찾고있는 브랜드가 없어요.</Body4>
+            </S.NoBrand>
+          )}
           <BrandList
             brandInitial={null}
             brandList={brandList}
@@ -96,7 +130,10 @@ export default function BrandModal({
         </S.SelectedBrand>
         <NextButton
           className="nextButton"
-          state={selectedBrandList !== null && selectedBrandList.length > 0}
+          state={
+            (selectedBrandList !== null && selectedBrandList.length > 0) ||
+            noBrandState
+          }
           onClick={onClickNextButton}
         >
           완료
