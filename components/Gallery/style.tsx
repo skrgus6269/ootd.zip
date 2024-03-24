@@ -49,6 +49,7 @@ const ImageList = styled.div<ImageListProps>`
     width: calc(106px * ${props.imageListlength} + 8px);
   `}
   .selected {
+    color: ${(props) => props.theme.color.grey_30};
     margin: 24px 4px 8px 4px;
     width: 100px;
   }
