@@ -162,14 +162,27 @@ const Gallery = ({
                       if (item.ootdId === items.ootdId) flag = 0;
                       return (
                         item.ootdId === items.ootdId && (
-                          <S.ImageNumber state={true} key={indexs}>
+                          <S.ImageNumber
+                            onClick={() =>
+                              onClickImage(item.ootdId, item.ootdImage)
+                            }
+                            state={true}
+                            key={indexs}
+                          >
                             <Caption1>{indexs + 1}</Caption1>
                           </S.ImageNumber>
                         )
                       );
                     })}
                     {flag === 1 && (
-                      <S.ImageNumber state={false}>{''}</S.ImageNumber>
+                      <S.ImageNumber
+                        onClick={() =>
+                          onClickImage(item.ootdId, item.ootdImage)
+                        }
+                        state={false}
+                      >
+                        {''}
+                      </S.ImageNumber>
                     )}
                   </S.Image>
                 );
