@@ -12,7 +12,7 @@ export default function ReportApi() {
   // 신고
   const postReport = async (payload: postReportPayload) => {
     try {
-      const { result } = await systemService.postReport(payload);
+      const result = await systemService.postReport(payload);
       console.log(result);
 
       return result;

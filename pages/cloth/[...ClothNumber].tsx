@@ -19,6 +19,8 @@ import Toast from '@/components/Toast';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import DeclarationModal from '@/components/DeclarationModal';
+import ReceivedDeclarationModal from '@/components/ReceivedDeclarationModal';
 
 export interface ClothDataType {
   id: number;
@@ -43,6 +45,12 @@ const Cloth = () => {
   const [data, setData] = useState<ClothDataType | null>(null);
   const [reRender, setReRender] = useState(0);
   const { getClothDetail, deleteCloth, patchClothIsPrivate } = ClothApi();
+
+  const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false); // 신고 Modal
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false); // 신고 후 차단 Modal
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
   const localUserId = useRecoilValue(userId);
 
@@ -91,6 +99,7 @@ const Cloth = () => {
 
   const delclationButton = () => {
     console.log('신고');
+    setDeclaration(true);
   };
 
   const isOpenButton = async () => {
@@ -178,6 +187,24 @@ const Cloth = () => {
         <DeleteAlert
           onClickYesButton={onClickYesButton}
           onClickNoButton={onClickNoButton}
+        />
+      )}
+      {declaration && (
+        <DeclarationModal
+          type="CLOTHES"
+          ID={Number(router.query.ClothNumber![0])}
+          declaration={declaration}
+          setDeclaration={setDeclaration}
+          setReceivedDeclaration={setReceivedDeclaration}
+          setReportStatus={setReportStatus}
+        />
+      )}
+      {receivedDeclaration && (
+        <ReceivedDeclarationModal
+          type="게시글"
+          reportStatus={reportStatus}
+          receivedDeclaration={receivedDeclaration}
+          setReceivedDeclaration={setReceivedDeclaration}
         />
       )}
       {URLState && <Toast text="URL이 클립보드에 복사되었습니다." />}
