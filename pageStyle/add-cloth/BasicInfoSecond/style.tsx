@@ -19,7 +19,7 @@ const Background = styled.div<BackgroundProps>`
   opacity: 0.3;
   z-index: 2;
   width: 100vw;
-  height: 100vh;
+  height: 127vh;
   position: absolute;
   top: 0;
 `;
@@ -79,7 +79,7 @@ const Title = styled.div`
 
 const Information = styled.div`
   overflow-y: scroll;
-  height: 80%;
+  height: 64vh;
   display: flex;
   flex-direction: column;
   gap: 24px;

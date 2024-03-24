@@ -5,7 +5,7 @@ interface BackgroundProps {
 }
 
 const Layout = styled.div`
-  height: 100vh;
+  height: 104vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
