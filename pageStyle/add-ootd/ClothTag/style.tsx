@@ -37,6 +37,8 @@ const Layout = styled.div`
 
   .nextButton {
     padding: 0 20px;
+    bottom: 20px;
+    position: fixed;
   }
 `;
 
