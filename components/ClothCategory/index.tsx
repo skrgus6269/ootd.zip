@@ -158,7 +158,8 @@ export default function ClothCategory({
                   <S.SmallCategorySpan
                     state={
                       type === 'one'
-                        ? smallCategoryClickedIndex === index
+                        ? smallCategoryClickedIndex === index &&
+                          item.state === true
                         : item.state === true
                     }
                     onClick={() => onClickSmallCategory(index)}

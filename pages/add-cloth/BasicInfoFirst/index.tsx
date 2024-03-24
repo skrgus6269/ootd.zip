@@ -58,13 +58,16 @@ export default function BasicInfoFirst({
 
   const Category = clothCategory && (
     <S.Category>
-      <Body3>{clothCategory && clothCategory[0]?.name}</Body3>
+      <Body3>
+        {clothCategory && clothCategory[clothCategory.length - 1]?.name}
+      </Body3>
       <Body3>&gt;</Body3>
       <Body3 style={{ fontWeight: '700' }}>
         {clothCategory &&
-          clothCategory[0]?.detailCategories &&
-          clothCategory[0]?.detailCategories[0].name}
-        ;
+          clothCategory[clothCategory.length - 1]?.detailCategories &&
+          clothCategory[clothCategory.length - 1]?.detailCategories![
+            clothCategory[clothCategory.length - 1].detailCategories!.length - 1
+          ].name}
       </Body3>
     </S.Category>
   );
@@ -153,6 +156,11 @@ export default function BasicInfoFirst({
           isOpen={categoryModalOpen}
           setIsOpen={setCategoryModalOpen}
           setClothCategory={setClothCategory}
+          categoryInitial={
+            clothCategory
+              ? [clothCategory[clothCategory.length - 1]]
+              : undefined
+          }
         />
       )}
       {brandModalOpen && (
