@@ -16,8 +16,8 @@ const Layout = styled.div`
     margin-top: 8px;
   }
   .nextButton {
-    position: absolute;
-    bottom: 25px;
+    position: fixed;
+    bottom: 20px;
     width: calc(100% - 40px);
   }
 `;

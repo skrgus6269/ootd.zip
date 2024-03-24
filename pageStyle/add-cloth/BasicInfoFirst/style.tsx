@@ -10,10 +10,11 @@ const Layout = styled.div`
   flex-direction: column;
   overflow: hidden;
   .nextButton {
-    margin: 0 20px;
-    width: calc(100% - 40px);
+    padding-bottom: 0;
     position: fixed;
-    bottom: 25px;
+    padding: 20px 20px;
+    bottom: 0;
+    background-color: white;
   }
 `;
 

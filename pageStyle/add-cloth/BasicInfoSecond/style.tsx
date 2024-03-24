@@ -31,11 +31,11 @@ const Layout = styled.div`
   height: calc(100vh - 48px);
   .nextButton {
     position: fixed;
-    width: calc(100% - 40px);
-    background-color: white;
-    bottom: 25px;
+    padding: 20px 0;
+    bottom: 0;
+    width: calc(100vw - 40px);
     flex-grow: 0;
-    z-index: 999;
+    z-index: 2;
   }
 `;
 
