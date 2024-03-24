@@ -17,6 +17,8 @@ import ClothName from './ClothName';
 import { SizeItem } from '@/components/Domain/AddCloth/ClothSizeModal';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import { BrandType } from '@/components/BrandList/Brand';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 export interface ClothWhereBuy {
   letter: string;
@@ -43,6 +45,7 @@ const AddCloth: ComponentWithLayout = () => {
   const [clothMemo, setClothMemo] = useState('');
 
   const router = useRouter();
+  const myId = useRecoilValue(userId);
 
   const { postCloth } = ClothApi();
 
@@ -64,7 +67,7 @@ const AddCloth: ComponentWithLayout = () => {
     };
 
     const result = await postCloth(payload);
-    if (result) router.push('/mypage');
+    if (result) router.push(`/mypage/${myId}`);
   };
 
   const onClickAppbarLeftButton = () => {
