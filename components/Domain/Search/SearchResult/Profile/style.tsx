@@ -7,8 +7,29 @@ const Layout = styled.div`
   gap: 16px;
 `;
 
+const ProfileLayout = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+
+  .userImage {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+`;
+
+const NameText = styled.div`
+  flex: 1 0 0;
+`;
+
 const S = {
   Layout,
+  ProfileLayout,
+  NameText,
 };
 
 export default S;
