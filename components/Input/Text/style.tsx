@@ -34,6 +34,7 @@ const Layout = styled.div<LayoutProps>`
   ${(props) =>
     props.line === 'outline' &&
     ` 
+    padding-right:8px;
   border: 1px solid ${props.theme.color.grey_80};
   &:hover {
     border: 1px solid ${props.theme.color.grey_00};
