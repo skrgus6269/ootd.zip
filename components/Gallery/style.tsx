@@ -25,8 +25,7 @@ const Image = styled.div<ImageProps>`
     width: 106px;
     height: 106px;
     object-fit: cover;
-    padding: 0 4px;
-    border-radius: 4px;
+    border-radius: 2px;
     opacity: ${(props) => (props.state ? 0.5 : 1)};
   }
   .bigImage {
