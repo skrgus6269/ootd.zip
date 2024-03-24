@@ -67,7 +67,7 @@ export default function Search() {
         />
       </S.SearchField>
       {state ? (
-        <SearchResult />
+        <SearchResult keywordsValue={keywords.slice(0, 1)[0].text} />
       ) : (
         <Recents
           handleClearKeywords={handleClearKeywords}

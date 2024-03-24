@@ -2,102 +2,17 @@ import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
-import Follow from './Follow';
+import Profile from './Profile';
 import EmptySearch from '@/components/EmptySearch';
 
-export default function SearchResult() {
+interface searchResultProps {
+  keywordsValue: string;
+}
+
+export default function SearchResult({ keywordsValue }: searchResultProps) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
 
-  const searchClothList = [
-    {
-      clothId: 0,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 2,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 3,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 4,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
-
-  const profileList = [
-    {
-      profileId: 0,
-      name: 'Userame0',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 1,
-      name: 'Userame1',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: false,
-    },
-    {
-      profileId: 2,
-      name: 'Userame2',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 3,
-      name: 'Userame3',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 4,
-      name: 'Userame4',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: false,
-    },
-  ];
+  console.log(keywordsValue);
 
   return (
     <>
@@ -105,18 +20,20 @@ export default function SearchResult() {
         <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            {searchClothList.length > 0 ? (
+            <h1>111</h1>
+            {/* {searchClothList.length > 0 ? (
               <ClosetCloth searchClothList={searchClothList} />
             ) : (
               <EmptySearch />
-            )}
+            )} */}
           </Funnel.Steps>
           <Funnel.Steps name="Profile">
-            {profileList.length > 0 ? (
-              <Follow profileList={profileList} />
+            <h1>222</h1>
+            {/* {profileList.length > 0 ? (
+              <Profile keywords={keywords} />
             ) : (
               <EmptySearch />
-            )}
+            )} */}
           </Funnel.Steps>
         </Funnel>
       </S.Layout>
