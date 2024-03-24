@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
+  height: 100vh;
   .title {
     margin-top: 40px;
   }
