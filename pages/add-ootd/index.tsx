@@ -45,7 +45,7 @@ const AddOOTD: ComponentWithLayout = () => {
   //앱바 왼쪽 네비게이션 클릭
   const onClickAppbarLeftButton = () => {
     if (currentStep === '편집') {
-      router.push('/name');
+      router.back();
     } else if (currentStep === '태그') {
       handleStep('편집');
     } else {

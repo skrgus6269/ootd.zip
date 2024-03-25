@@ -143,7 +143,7 @@ const Cloth = () => {
   return (
     <>
       <AppBar
-        leftProps={<AiOutlineArrowLeft />}
+        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
         middleProps={<></>}
         rightProps={<AiOutlineEllipsis onClick={onClickAppbarButton} />}
       />

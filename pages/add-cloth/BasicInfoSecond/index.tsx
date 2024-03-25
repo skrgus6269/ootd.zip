@@ -106,7 +106,7 @@ export default function BasicInfoSecond({
     };
 
     const result = await postCloth(payload);
-    if (result) router.push(`/mypage/${myId}`);
+    if (result) router.replace(`/mypage/${myId}`);
   };
 
   return (
