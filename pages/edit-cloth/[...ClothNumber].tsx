@@ -130,9 +130,7 @@ const EditCloth: ComponentWithLayout = () => {
   return (
     <Funnel>
       <AppBar
-        leftProps={
-          <Button3 onClick={() => router.push(`/detail-cloth`)}>취소</Button3>
-        }
+        leftProps={<Button3 onClick={() => router.back()}>취소</Button3>}
         middleProps={<Title1>수정하기</Title1>}
         rightProps={<></>}
       />

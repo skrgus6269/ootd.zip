@@ -109,7 +109,11 @@ const EditOOTD: ComponentWithLayout = () => {
       <AppBar
         leftProps={<></>}
         middleProps={<Title1>수정하기</Title1>}
-        rightProps={<Button3 style={{ color: 'red' }}>취소</Button3>}
+        rightProps={
+          <Button3 onClick={() => router.back()} style={{ color: 'red' }}>
+            취소
+          </Button3>
+        }
       />
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">
