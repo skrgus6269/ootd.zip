@@ -13,6 +13,7 @@ import {
   getOOTDClothesParams,
   paginationType,
   getSearchUserParams,
+  getSearchOOTDParams,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -264,6 +265,12 @@ export const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
 // 유저 프로필 검색
 export const getSearchUser = async (params: getSearchUserParams) => {
   const data = await userApi.getSearchUser(params);
+
+  return data;
+};
+
+export const getSearchOOTD = async (params: getSearchOOTDParams) => {
+  const data = await ootdApi.getSearchOOTD(params);
 
   return data;
 };

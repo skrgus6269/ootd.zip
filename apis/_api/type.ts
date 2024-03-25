@@ -110,3 +110,14 @@ export interface getSearchUserParams {
   page: number;
   size: number;
 }
+
+export interface getSearchOOTDParams {
+  searchText: string;
+  categoryIds?: number[];
+  colorIds?: number[];
+  brandIds?: number[];
+  writerGender?: string;
+  sortCriteria: string;
+  page: number;
+  size: number;
+}
