@@ -78,7 +78,7 @@ export default function WriteOOTD({
 
       //ootd 성공 여부에 따른 페이지 이동
       if (addOOTDSuccess) {
-        router.push(`/mypage/${myId}`);
+        router.replace(`/mypage/${myId}`);
       } else {
         alert('등록 실패');
       }
