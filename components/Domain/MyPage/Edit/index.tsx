@@ -11,8 +11,19 @@ import {
 import { UserApi } from '@/apis/domain/User/UserApi';
 import { Button3 } from '@/components/UI';
 import { useRouter } from 'next/router';
+import Button from '@/components/Button';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
-export default function Closet() {
+interface ActionSheetProps {
+  openActionSheet: Boolean;
+  setOpenActionSheet: Dispatch<SetStateAction<Boolean>>;
+}
+
+export default function Edit({
+  openActionSheet,
+  setOpenActionSheet,
+}: ActionSheetProps) {
   const router = useRouter();
 
   const [profileImage, setProfileImage] = useState<string>(
@@ -23,8 +34,6 @@ export default function Closet() {
   const [height, setHeight] = useState<string>('160');
   const [weight, setWeight] = useState<string>('40');
   const [open, setOpen] = useState<Boolean>(true);
-
-  const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
 
   const { getProfile, patchProfile } = UserApi();
 
@@ -57,6 +66,8 @@ export default function Closet() {
     { name: '앨범에서 선택', buttonClick: choosePicture },
     { name: '기본 이미지로 변경', buttonClick: deleteImage },
   ];
+
+  const myId = useRecoilValue(userId);
 
   useEffect(() => {
     const ferchData = async () => {
@@ -105,7 +116,7 @@ export default function Closet() {
 
       if (result) {
         router.push({
-          pathname: '/mypage',
+          pathname: `/mypage/${myId}`,
           query: { state: 'editSuccess' },
         });
       } else {
@@ -116,10 +127,6 @@ export default function Closet() {
 
   return (
     <>
-      <S.Background
-        isOpen={openActionSheet}
-        onClick={() => setOpenActionSheet(false)}
-      />
       <S.Layout>
         <EditProfile
           imageURL={profileImage}
@@ -140,9 +147,16 @@ export default function Closet() {
           possible={possible}
           setPossible={setPossible}
         />
-        <S.ButtonWrap onClick={onClickNextButton} state={possible}>
+        <Button
+          className="editMyPageButton"
+          backgroundColor={possible ? 'grey_00' : 'grey_90'}
+          color="grey_100"
+          size="big"
+          onClick={onClickNextButton}
+          border={false}
+        >
           <Button3>수정 완료</Button3>
-        </S.ButtonWrap>
+        </Button>
       </S.Layout>
 
       {openActionSheet && <ActionSheet buttons={buttons} />}

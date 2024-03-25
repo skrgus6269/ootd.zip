@@ -79,6 +79,7 @@ export default function EditMyInfo({
         <S.Category>
           <Body3>소개</Body3>
           <Input.Text
+            state={true}
             defaultValue={introduction}
             size="big"
             line="outline"
