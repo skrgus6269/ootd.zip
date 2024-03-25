@@ -1,7 +1,7 @@
 import Alert from '@/components/Alert';
 import { Body3, Title1 } from '@/components/UI';
 
-interface BlockAlertProps {
+export interface BlockAlertProps {
   blockUserName: string;
   onClickYesButton: () => void;
   onClickNoButton: () => void;
