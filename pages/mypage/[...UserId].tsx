@@ -14,8 +14,8 @@ import { userId } from '@/utils/recoil/atom';
 import { useRecoilValue } from 'recoil';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
-import BlockAlert from '@/components/Domain/MyPage/BlockAlert';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import OtherModal from '@/components/Domain/MyPage/OtherModal';
 
 export default function MyPage() {
   const router = useRouter();
@@ -36,11 +36,9 @@ export default function MyPage() {
     weight: 72,
     isFollow: false,
     description: '간계밥',
-    OOTDNumber: 0,
-    clothNumber: 0,
+    ootdCount: 0,
+    clothesCount: 0,
   });
-
-  const [followState, setFollowState] = useState<Boolean>(false);
 
   const { getMypage } = UserApi();
   const { follow, unFollow } = PublicApi();
@@ -121,15 +119,20 @@ export default function MyPage() {
           showingId={showingId}
           onClickFollowButton={onClickFollowButton}
         />
-        <Closet localUserId={localUserId} showingId={showingId} />
+        <Closet
+          showingId={showingId}
+          ootdCount={userProfileData.ootdCount}
+          clothesCount={userProfileData.clothesCount}
+        />
         {queryState === 'editSuccess' && (
           <Toast text="프로필이 수정되었습니다." />
         )}
+
         {blockOpen && (
-          <BlockAlert
+          <OtherModal
             blockUserName={userProfileData.userName}
-            onClickYesButton={onClickYesButton}
             onClickNoButton={onClickNoButton}
+            onClickYesButton={onClickYesButton}
           />
         )}
       </S.Layout>
