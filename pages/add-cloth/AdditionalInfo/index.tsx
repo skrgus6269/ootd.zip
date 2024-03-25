@@ -38,7 +38,6 @@ export default function AdditionalInfo({
           {clothCategory &&
             clothCategory[0]?.detailCategories &&
             clothCategory[0]?.detailCategories[0].name}
-          ;
         </Body3>
       </S.Category>
     );

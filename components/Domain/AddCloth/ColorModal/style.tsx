@@ -42,7 +42,7 @@ const ColorName = styled.div``;
 
 const ColorList = styled.div`
   overflow-y: scroll;
-  height: 70%;
+  height: 46vh;
 `;
 
 const SelectedColorList = styled.div`
@@ -52,7 +52,7 @@ const SelectedColorList = styled.div`
   gap: 8px;
   overflow-x: scroll;
   flex-grow: 1;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
   position: absolute;
   z-index: 999;
   background-color: white;

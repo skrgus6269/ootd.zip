@@ -25,8 +25,7 @@ const Image = styled.div<ImageProps>`
     width: 106px;
     height: 106px;
     object-fit: cover;
-    padding: 0 4px;
-    border-radius: 4px;
+    border-radius: 2px;
     opacity: ${(props) => (props.state ? 0.5 : 1)};
   }
   .bigImage {
@@ -49,6 +48,7 @@ const ImageList = styled.div<ImageListProps>`
     width: calc(106px * ${props.imageListlength} + 8px);
   `}
   .selected {
+    color: ${(props) => props.theme.color.grey_30};
     margin: 24px 4px 8px 4px;
     width: 100px;
   }
@@ -61,7 +61,7 @@ interface ImageNumberProps {
 const ImageNumber = styled.div<ImageNumberProps>`
   position: absolute;
   top: 4px;
-  right: 12px;
+  right: 8px;
   width: 20px;
   height: 20px;
   border-radius: 50%;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
+  height: 100vh;
   .title {
     margin-top: 40px;
   }
@@ -15,8 +16,8 @@ const Layout = styled.div`
     margin-top: 8px;
   }
   .nextButton {
-    position: absolute;
-    bottom: 25px;
+    position: fixed;
+    bottom: 20px;
     width: calc(100% - 40px);
   }
 `;
