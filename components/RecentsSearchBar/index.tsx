@@ -22,12 +22,18 @@ export default function SearchBar({
   setState,
 }: SearchProps) {
   const router = useRouter();
-
+  const { query } = router;
   const [searchValue, setSearchValue] = useState<string>(() => {
     // URL에서 검색어 갖고 옴
-    const { query } = router;
+
     return typeof query.q === 'string' ? query.q : ''; // string으로 형변환 후 반환
   });
+
+  useEffect(() => {
+    if (query.q !== undefined) {
+      setSearchValue(query.q);
+    }
+  }, [router]);
 
   const onChangeSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
