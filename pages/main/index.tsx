@@ -11,6 +11,7 @@ import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import Carousel from '@/components/Carousel';
 import TabView from '@/components/TabView';
 import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
+import Explore from '@/components/Domain/Main/LikeOOTD';
 
 const MyClosetDataSample = {
   user: {
@@ -209,7 +210,9 @@ export default function Main() {
             </S.Curation>
           </TabView.Tab>
           <TabView.Tab>
-            <S.Explore>준비중</S.Explore>
+            <S.Explore>
+              <Explore />
+            </S.Explore>
           </TabView.Tab>
         </TabView.Tabs>
       </TabView>
