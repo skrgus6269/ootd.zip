@@ -7,41 +7,54 @@ import {
 } from 'react';
 import { Layout, SearchIcon, SearchInput, Input, CloseIcon } from './style';
 import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
-import useDebounce from '@/hooks/useDebouce';
 import { useRouter } from 'next/router';
 
 interface SearchProps {
   onAddKeyword: (string: string) => void;
   state: Boolean;
   setState: Dispatch<SetStateAction<Boolean>>;
+  setSearchValue: Dispatch<SetStateAction<string>>;
+  searchValue: string;
 }
 
 export default function SearchBar({
   onAddKeyword,
   state,
   setState,
+  setSearchValue,
+  searchValue,
 }: SearchProps) {
   const router = useRouter();
 
-  // ① props로 전달받은 onAddKeyword의 데이터로 들어갈 state이다
-  const [searchValue, setSearchValue] = useState<string>('');
-  const onChangeSearch = useCallback((e: any) => {
-    setSearchValue(e.target.value);
-  }, []);
-
-  const onSubmit = useCallback(
-    (e: any) => {
-      e.preventDefault();
-      onAddKeyword(searchValue);
-      setSearchValue('');
-      setState(true);
+  const onChangeSearch = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
     },
-    [searchValue, router, onAddKeyword]
+    []
   );
 
-  //delete 아이콘 클릭 시 실행되는 함수
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onAddKeyword(searchValue);
+      setState(true);
+
+      // URL에 검색어 추가
+      router.push({
+        pathname: '/search', // 검색 결과 페이지 URL
+        query: { q: searchValue }, // 'q'라는 쿼리 매개변수에 검색어 추가
+      });
+    },
+    [searchValue, router, onAddKeyword, setState]
+  );
+
+  // delete 아이콘 클릭 시 실행
   const onClickCloseIcon = () => {
     setSearchValue('');
+    // URL에서 검색어 제거
+    router.push({
+      pathname: '/search', // 검색 결과 페이지 URL
+    });
   };
 
   return (

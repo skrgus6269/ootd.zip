@@ -1,5 +1,5 @@
 import fetcher from '../fetcher';
-import { patchProfilePayload } from './type';
+import { getSearchUserParams, patchProfilePayload } from './type';
 
 export const follow = async (id: number) => {
   const { data } = await fetcher.post('api/v1/user/follow', { userId: id });
@@ -27,6 +27,14 @@ export const getProfile = async () => {
 
 export const patchProfile = async (payload: patchProfilePayload) => {
   const { data } = await fetcher.patch(`api/v1/user/profile`, payload);
+
+  return data;
+};
+
+export const getSearchUser = async (params: getSearchUserParams) => {
+  const { data } = await fetcher.get(
+    `/api/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}`
+  );
 
   return data;
 };

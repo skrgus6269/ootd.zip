@@ -12,6 +12,8 @@ import {
   patchProfilePayload,
   getOOTDClothesParams,
   paginationType,
+  getSearchUserParams,
+  getSearchOOTDParams,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -256,6 +258,19 @@ export const getExistIsNotReadAlarm = async () => {
 //이 옷을 활용한 OOTD 조회
 export const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
   const data = await ootdApi.getOOTDWithCloth(params);
+
+  return data;
+};
+
+// 유저 프로필 검색
+export const getSearchUser = async (params: getSearchUserParams) => {
+  const data = await userApi.getSearchUser(params);
+
+  return data;
+};
+
+export const getSearchOOTD = async (params: getSearchOOTDParams) => {
+  const data = await ootdApi.getSearchOOTD(params);
 
   return data;
 };
