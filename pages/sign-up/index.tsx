@@ -93,7 +93,6 @@ const SignUp: ComponentWithLayout = () => {
               // 스타일 컴포넌트를 사용하여 스타일 적용
               currentStep === stepName ? (
                 <S.ActiveStep key={stepName}>
-                  {' '}
                   <S.Progress>
                     <div className="number">
                       <Title1>0{index + 1}.</Title1>
@@ -116,6 +115,8 @@ const SignUp: ComponentWithLayout = () => {
           <S.Main>
             <Funnel.Steps name="기본정보">
               <BasicInfo
+                id={id}
+                age={age}
                 setId={setId}
                 setAge={setAge}
                 setCanUseId={setCanUseId}
@@ -130,6 +131,8 @@ const SignUp: ComponentWithLayout = () => {
             </Funnel.Steps>
             <Funnel.Steps name="체형정보">
               <BodyInfo
+                weight={weight}
+                height={height}
                 heightSetState={setHeight}
                 weightSetState={setWeight}
                 open={open}

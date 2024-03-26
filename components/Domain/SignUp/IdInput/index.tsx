@@ -24,9 +24,10 @@ import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 interface InputProps {
   setInput: Dispatch<SetStateAction<string>>;
   setCanUseId: Dispatch<SetStateAction<Boolean>>;
+  id: string;
 }
 
-export default function IdInput({ setInput, setCanUseId }: InputProps) {
+export default function IdInput({ setInput, setCanUseId, id }: InputProps) {
   const [helperText, setHelperText] = useState<string>('입력해주세요');
   const [state, setState] = useState<number>(1);
   const { checkName } = RegisterApi();
@@ -81,15 +82,18 @@ export default function IdInput({ setInput, setCanUseId }: InputProps) {
       <Input>
         <Input.Label size="big">닉네임</Input.Label>
         <Input.Text
+          defaultValue={id}
           line="underline"
           size="big"
           placeholder={NICKNAME_PLACEHODER}
           validity={idInputValidity}
           onChange={setInput}
         />
-        <Input.HelperText className="helperText" state={state}>
-          {helperText}
-        </Input.HelperText>
+        {id.length > 0 && (
+          <Input.HelperText className="helperText" state={state}>
+            {helperText}
+          </Input.HelperText>
+        )}
       </Input>
     </S.Layout>
   );
