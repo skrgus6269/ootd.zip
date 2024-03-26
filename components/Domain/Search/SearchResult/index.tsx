@@ -18,24 +18,10 @@ interface searchResultProps {
 export default function SearchResult({ keywordsValue }: searchResultProps) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
 
-  const [filter, setFilter] = useState<FilterData>({
-    category: null,
-    color: null,
-    brand: null,
-    gender: {
-      man: false,
-      woman: false,
-    },
-  });
-
-  const [sortStandard, setSortStandard] = useState<string>('LATEST');
-
   const [profileList, setProfileList] = useState<ProfileListType[]>([]);
-  const [OOTDList, setOOTDList] = useState<OOTDListType[]>([]);
 
   const router = useRouter();
   const { getSearchUser } = UserApi();
-  const { getSearchOOTD } = OOTDApi();
 
   const fetchDataFunction = async (
     profilePage: number,
@@ -82,99 +68,13 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     reset();
   }, [keywordsValue]);
 
-  const [genderData, setGenderData] = useState<string>('');
-
-  useEffect(() => {
-    if (filter.gender.man && filter.gender.woman) {
-      setGenderData('');
-    } else if (filter.gender.man) {
-      setGenderData('MALE');
-    } else if (filter.gender.woman) {
-      setGenderData('FEMALE');
-    } else {
-      setGenderData('');
-    }
-  }, [filter.gender]);
-
-  const fetchOOTDDataFunction = async (ootdPage: number, ootdSize: number) => {
-    if (!router.isReady) return;
-
-    const data = await getSearchOOTD({
-      searchText: keywordsValue,
-      categoryIds: filter.category?.map((item) => {
-        if (item.state) {
-          return item.id;
-        }
-        return item.detailCategories![0].id;
-      }),
-      colorIds: filter.color?.map((item) => item.id),
-      brandIds: filter.brand?.map((item) => item.id),
-      writerGender: genderData,
-      sortCriteria: sortStandard,
-      page: ootdPage,
-      size: ootdSize,
-    });
-
-    return data;
-  };
-
-  const {
-    data: OOTDData,
-    isLoading: OOTDIsLoading,
-    containerRef: OOTDRef,
-    hasNextPage: OOTDHasNextPage,
-    reset: ootdReset,
-  } = useInfiniteScroll({
-    fetchDataFunction: fetchOOTDDataFunction,
-    size: 9,
-    initialData: [],
-  });
-
-  useEffect(() => {
-    setOOTDList(
-      OOTDData.map((item: any) => {
-        return {
-          id: item.id,
-          imageUrl: item.imageUrl,
-        };
-      })
-    );
-  }, [OOTDData]);
-
-  useEffectAfterMount(() => {
-    setOOTDList([]);
-    ootdReset();
-    setFilter({
-      category: null,
-      color: null,
-      brand: null,
-      gender: {
-        man: false,
-        woman: false,
-      },
-    });
-  }, [keywordsValue, sortStandard]);
-
   return (
     <>
       <S.Layout>
         <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            {OOTDList.length > 0 ? (
-              <ClosetCloth
-                filter={filter}
-                setFilter={setFilter}
-                sortStandard={sortStandard}
-                setSortStandard={setSortStandard}
-                OOTDList={OOTDList}
-                OOTDIsLoading={OOTDIsLoading}
-                OOTDRef={OOTDRef}
-                OOTDHasNextPage={OOTDHasNextPage}
-              />
-            ) : (
-              <EmptySearch />
-            )}
+            <ClosetCloth keywordsValue={keywordsValue} />
           </Funnel.Steps>
           <Funnel.Steps name="Profile">
             {profileList.length > 0 ? (
