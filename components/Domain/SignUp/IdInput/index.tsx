@@ -89,7 +89,7 @@ export default function IdInput({ setInput, setCanUseId, id }: InputProps) {
           validity={idInputValidity}
           onChange={setInput}
         />
-        {id.length > 0 && (
+        {id?.length > 0 && (
           <Input.HelperText className="helperText" state={state}>
             {helperText}
           </Input.HelperText>
