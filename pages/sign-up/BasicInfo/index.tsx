@@ -7,17 +7,21 @@ interface BasicInfoProps {
   setId: Dispatch<SetStateAction<string>>;
   setAge: Dispatch<SetStateAction<string>>;
   setCanUseId: Dispatch<SetStateAction<Boolean>>;
+  id: string;
+  age: string;
 }
 
 export default function BasicInfo({
   setId,
   setAge,
   setCanUseId,
+  id,
+  age,
 }: BasicInfoProps) {
   return (
     <S.Layout>
-      <IdInput setInput={setId} setCanUseId={setCanUseId} />
-      <AgeInput onChange={setAge} />
+      <IdInput id={id} setInput={setId} setCanUseId={setCanUseId} />
+      <AgeInput age={age} onChange={setAge} />
     </S.Layout>
   );
 }
