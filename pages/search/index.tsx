@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import RecentsSearchBar from '@/components/RecentsSearchBar';
 import S from '@/pageStyle/search/style';
-import SearchBar from '@/components/SearchBar';
-import { Headline2 } from '@/components/UI';
 import SearchResult from '@/components/Domain/Search/SearchResult';
 import Recents from '@/components/Domain/Search/Recents';
 import { useRouter } from 'next/router';
@@ -15,7 +13,6 @@ export interface keywordsInterface {
 export default function Search() {
   const [keywords, setKeywords] = useState<keywordsInterface[]>([]);
   const [state, setState] = useState<Boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
@@ -51,7 +48,6 @@ export default function Search() {
   };
 
   const handleSearch = (text: string) => {
-    setSearchQuery(text);
     setSearchValue(text);
     setState(true);
     router.push(`/search?q=${encodeURIComponent(text)}`);
