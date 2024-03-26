@@ -25,7 +25,6 @@ export default function SearchBar({
   searchValue,
 }: SearchProps) {
   const router = useRouter();
-  const { query } = router;
 
   const onChangeSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

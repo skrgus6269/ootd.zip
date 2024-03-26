@@ -21,7 +21,14 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 interface ClosetClothProps {
-  keywordsValue: string;
+  OOTDList: OOTDListType[];
+  OOTDIsLoading: Boolean;
+  OOTDRef: MutableRefObject<any>;
+  OOTDHasNextPage: Boolean;
+  filter: FilterData;
+  setFilter: Dispatch<SetStateAction<FilterData>>;
+  sortStandard: string;
+  setSortStandard: Dispatch<SetStateAction<string>>;
 }
 
 export type OOTDListType = {
@@ -41,24 +48,18 @@ export interface FilterData {
   gender: GenderTypes;
 }
 
-export default function ClosetCloth({ keywordsValue }: ClosetClothProps) {
+export default function ClosetCloth({
+  OOTDList,
+  OOTDIsLoading,
+  OOTDRef,
+  OOTDHasNextPage,
+  filter,
+  setFilter,
+  sortStandard,
+  setSortStandard,
+}: ClosetClothProps) {
   const router = useRouter();
-
   const [filterModalIsOpen, setFilterModalIsOpen] = useState<Boolean>(false);
-  const [filter, setFilter] = useState<FilterData>({
-    category: null,
-    color: null,
-    brand: null,
-    gender: {
-      man: false,
-      woman: false,
-    },
-  });
-
-  const [sortStandard, setSortStandard] = useState<string>('LATEST');
-  const [OOTDList, setOOTDList] = useState<OOTDListType[]>([]);
-
-  const { getSearchOOTD } = OOTDApi();
 
   const onClickImageList = (index: number) => {
     router.push(`/ootd/${index}`);
@@ -79,79 +80,6 @@ export default function ClosetCloth({ keywordsValue }: ClosetClothProps) {
       },
     });
   };
-
-  const [genderData, setGenderData] = useState<string>('');
-
-  useEffect(() => {
-    if (filter.gender.man && filter.gender.woman) {
-      setGenderData('');
-    } else if (filter.gender.man) {
-      setGenderData('MALE');
-    } else if (filter.gender.woman) {
-      setGenderData('FEMALE');
-    } else {
-      setGenderData('');
-    }
-  }, [filter.gender]);
-
-  const fetchOOTDDataFunction = async (ootdPage: number, ootdSize: number) => {
-    if (!router.isReady) return;
-
-    const data = await getSearchOOTD({
-      searchText: keywordsValue,
-      categoryIds: filter.category?.map((item) => {
-        if (item.state) {
-          return item.id;
-        }
-        return item.detailCategories![0].id;
-      }),
-      colorIds: filter.color?.map((item) => item.id),
-      brandIds: filter.brand?.map((item) => item.id),
-      writerGender: genderData,
-      sortCriteria: sortStandard,
-      page: ootdPage,
-      size: ootdSize,
-    });
-
-    return data;
-  };
-
-  const {
-    data: OOTDData,
-    isLoading: OOTDIsLoading,
-    containerRef: OOTDRef,
-    hasNextPage: OOTDHasNextPage,
-    reset: ootdReset,
-  } = useInfiniteScroll({
-    fetchDataFunction: fetchOOTDDataFunction,
-    size: 9,
-    initialData: [],
-  });
-
-  useEffect(() => {
-    setOOTDList(
-      OOTDData.map((item: any) => {
-        return {
-          id: item.id,
-          imageUrl: item.imageUrl,
-        };
-      })
-    );
-  }, [OOTDData]);
-
-  useEffectAfterMount(() => {
-    setOOTDList([]);
-    ootdReset();
-    setFilter({
-      category: null,
-      color: null,
-      brand: null,
-      gender: {
-        man: false,
-        woman: false,
-      },
-    });
-  }, [keywordsValue, sortStandard]);
 
   return (
     <>
