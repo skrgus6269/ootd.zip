@@ -1,22 +1,39 @@
 import { Body4, Caption2 } from '@/components/UI';
 import S from './style';
-import { useEffect, useState } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import ImageList from '@/components/ImageList';
 import { useRouter } from 'next/router';
 import { AiOutlineDown } from 'react-icons/ai';
 import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
-import SubHead from '@/components/DetailCloth/SubHead';
-import { CategoryType } from '@/components/Domain/AddCloth/ClothCategoryModal';
+import SubHead from '../SubHead';
+import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
+import Spinner from '@/components/Spinner';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 interface ClosetClothProps {
-  searchClothList?: searchClothType[];
+  OOTDList: OOTDListType[];
+  OOTDIsLoading: Boolean;
+  OOTDRef: MutableRefObject<any>;
+  OOTDHasNextPage: Boolean;
+  filter: FilterData;
+  setFilter: Dispatch<SetStateAction<FilterData>>;
+  sortStandard: string;
+  setSortStandard: Dispatch<SetStateAction<string>>;
 }
 
-export type searchClothType = {
-  clothId: number;
-  clothImage: string;
+export type OOTDListType = {
+  id: number;
+  imageUrl: string;
 };
 
 export type GenderTypes = {
@@ -25,32 +42,24 @@ export type GenderTypes = {
 };
 
 export interface FilterData {
-  category: CategoryType[] | null;
+  category: CategoryListType[] | null;
   color: ColorListType | null;
   brand: BrandType[] | null;
   gender: GenderTypes;
 }
 
-export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
+export default function ClosetCloth({
+  OOTDList,
+  OOTDIsLoading,
+  OOTDRef,
+  OOTDHasNextPage,
+  filter,
+  setFilter,
+  sortStandard,
+  setSortStandard,
+}: ClosetClothProps) {
   const router = useRouter();
-
   const [filterModalIsOpen, setFilterModalIsOpen] = useState<Boolean>(false);
-
-  const [filter, setFilter] = useState<FilterData>({
-    category: null,
-    color: null,
-    brand: null,
-    gender: {
-      man: false,
-      woman: false,
-    },
-  });
-
-  const [searchResult, setSearchResult] = useState(searchClothList);
-
-  useEffect(() => {
-    console.log(filter);
-  }, [filter]);
 
   const onClickImageList = (index: number) => {
     router.push(`/ootd/${index}`);
@@ -72,8 +81,6 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
     });
   };
 
-  const [clicked, setClicked] = useState<string>('오래된 순');
-
   return (
     <>
       <S.Background
@@ -82,7 +89,16 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
       />
       <S.Layout>
         <S.SearchFilter>
-          <S.Span onClick={onClickInitButton}>
+          <S.Span
+            state={
+              !!(
+                filter?.category?.length ||
+                filter?.brand?.length ||
+                filter?.color?.length
+              )
+            }
+            onClick={onClickInitButton}
+          >
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
           <S.Span
@@ -140,17 +156,20 @@ export default function ClosetCloth({ searchClothList }: ClosetClothProps) {
           </S.FilterSpan>
         </S.SearchFilter>
         <SubHead
-          setState={setClicked}
-          state={clicked}
-          count={searchClothList?.length || 0}
+          setState={setSortStandard}
+          state={sortStandard}
+          count={OOTDList?.length || 0}
           style="noPadding"
         />
-        <S.ClothList>
+        <S.ClothList ref={OOTDRef}>
           <ImageList
             onClick={onClickImageList}
-            data={searchResult!}
+            data={OOTDList.map((item) => {
+              return { ootdId: item.id, ootdImage: item.imageUrl };
+            })}
             type={'column'}
           />
+          {OOTDIsLoading && OOTDHasNextPage && <Spinner />}
         </S.ClothList>
       </S.Layout>
       {filterModalIsOpen && (

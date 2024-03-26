@@ -104,3 +104,20 @@ export interface getOOTDClothesParams extends paginationType {
 export interface getAlarmParams extends paginationType {
   isRead: Boolean;
 }
+
+export interface getSearchUserParams {
+  name: string;
+  page: number;
+  size: number;
+}
+
+export interface getSearchOOTDParams {
+  searchText: string;
+  categoryIds?: number[];
+  colorIds?: number[];
+  brandIds?: number[];
+  writerGender?: string;
+  sortCriteria: string;
+  page: number;
+  size: number;
+}

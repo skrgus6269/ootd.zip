@@ -7,6 +7,7 @@ import {
   getUserBookmarkListPayload,
   postOOTDComentPayload,
   getOOTDClothesParams,
+  getSearchOOTDParams,
 } from './type';
 
 //ootd 작성
@@ -173,6 +174,24 @@ export const getOOTDWithCloth = async ({
   const { data } = await fetcher.get(
     `api/v1/ootd/clothes?page=${page}&size=${size}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}&clothesId=${clothesId}`
   );
+
+  return data;
+};
+
+export const getSearchOOTD = async (params: getSearchOOTDParams) => {
+  let url = `/api/v1/ootd/search?searchText=${params.searchText}&page=${params.page}&size=${params.size}&sortCriteria=${params.sortCriteria}`;
+
+  const brandIds = params.brandIds?.map((item) => `brandIds=${item}`).join('&');
+  const categoryIds = params.categoryIds
+    ?.map((item) => `categoryIds=${item}`)
+    .join('&');
+  const colorIds = params.colorIds?.map((item) => `colorIds=${item}`).join('&');
+
+  if (brandIds) url += `&${brandIds}`;
+  if (categoryIds) url += `&${categoryIds}`;
+  if (colorIds) url += `&${colorIds}`;
+
+  const { data } = await fetcher.get(url);
 
   return data;
 };

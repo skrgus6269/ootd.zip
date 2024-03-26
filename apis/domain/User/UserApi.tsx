@@ -1,4 +1,4 @@
-import { patchProfilePayload } from '@/apis/_api/type';
+import { getSearchUserParams, patchProfilePayload } from '@/apis/_api/type';
 import { userService } from '@/apis/_service';
 
 export const UserApi = () => {
@@ -45,9 +45,23 @@ export const UserApi = () => {
     }
   };
 
+  const getSearchUser = async (params: getSearchUserParams) => {
+    try {
+      const data = await userService.getSearchUser(params);
+      if (data.statusCode === 200) {
+        return data.result;
+      }
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     getMypage,
     getProfile,
     patchProfile,
+    getSearchUser,
   } as const;
 };
