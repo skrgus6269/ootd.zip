@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
-interface UserClothDataType {
+export interface UserClothDataType {
   id: number;
   name: string;
   userName: string;

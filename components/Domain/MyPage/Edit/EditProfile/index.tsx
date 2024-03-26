@@ -21,10 +21,6 @@ export default function EditProfile({
     onClickImage();
   };
 
-  const onClickBackground = () => {
-    if (openActionSheet) setOpenActionSheet(false);
-  };
-
   return (
     <>
       <S.Layout>

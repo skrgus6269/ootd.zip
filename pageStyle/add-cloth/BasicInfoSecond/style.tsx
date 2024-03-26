@@ -19,7 +19,7 @@ const Background = styled.div<BackgroundProps>`
   opacity: 0.3;
   z-index: 2;
   width: 100vw;
-  height: 100vh;
+  height: 127vh;
   position: absolute;
   top: 0;
 `;
@@ -31,11 +31,11 @@ const Layout = styled.div`
   height: calc(100vh - 48px);
   .nextButton {
     position: fixed;
-    width: calc(100% - 40px);
-    background-color: white;
-    bottom: 25px;
+    padding: 20px 0;
+    bottom: 0;
+    width: calc(100vw - 40px);
     flex-grow: 0;
-    z-index: 999;
+    z-index: 2;
   }
 `;
 
@@ -79,7 +79,7 @@ const Title = styled.div`
 
 const Information = styled.div`
   overflow-y: scroll;
-  height: 80%;
+  height: 64vh;
   display: flex;
   flex-direction: column;
   gap: 24px;

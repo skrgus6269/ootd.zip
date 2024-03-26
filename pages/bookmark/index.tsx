@@ -142,7 +142,7 @@ export default function Bookmark() {
       <S.Background isOpen={alertOpen} onClick={onClickBackground} />
       <S.Layout>
         <AppBar
-          leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+          leftProps={<></>}
           middleProps={<Title1>북마크</Title1>}
           rightProps={<></>}
         />

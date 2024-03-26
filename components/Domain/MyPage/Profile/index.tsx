@@ -2,7 +2,6 @@ import { OtherProfile } from '@/components/Profile';
 import S from './style';
 import Button from '@/components/Button';
 import { Body3, Body4, Button3 } from '@/components/UI';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export interface UserProfileDataType {
@@ -15,8 +14,8 @@ export interface UserProfileDataType {
   weight: number;
   isFollow: Boolean;
   description: string;
-  OOTDNumber: number;
-  clothNumber: number;
+  ootdCount: number;
+  clothesCount: number;
 }
 
 interface profileProps {

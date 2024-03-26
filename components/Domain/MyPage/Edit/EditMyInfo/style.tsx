@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Layout = styled.div`
   width: 100%;
   display: inline-flex;
-  padding: 0px 20px;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
@@ -25,7 +24,6 @@ const BodyInfo = styled.div`
 
 const OpenStatus = styled.div`
   display: inline-flex;
-  padding: 0px 20px;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 16px;

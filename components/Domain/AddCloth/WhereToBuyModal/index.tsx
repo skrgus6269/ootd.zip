@@ -113,13 +113,14 @@ export default function WhereToBuyModal({
             )}
           </Input>
         </S.Write>
+        <NextButton
+          className="nextButton"
+          onClick={onClickNextButton}
+          state={linkLetter.length > 0 || writeLetter.length > 0}
+        >
+          추가하기
+        </NextButton>
       </S.Layout>
-      <NextButton
-        onClick={onClickNextButton}
-        state={linkLetter.length > 0 || writeLetter.length > 0}
-      >
-        추가하기
-      </NextButton>
     </Modal>
   );
 }

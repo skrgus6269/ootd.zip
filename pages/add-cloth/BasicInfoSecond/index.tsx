@@ -18,6 +18,8 @@ import { BrandType } from '@/components/BrandList/Brand';
 import { ClothWhereBuy } from '..';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 interface BasicInfoSecondProps {
   clothName: string;
@@ -56,6 +58,7 @@ export default function BasicInfoSecond({
 
   const { postCloth } = ClothApi();
   const router = useRouter();
+  const myId = useRecoilValue(userId);
 
   const Category = () => {
     return (
@@ -66,7 +69,6 @@ export default function BasicInfoSecond({
           {clothCategory &&
             clothCategory[0]?.detailCategories &&
             clothCategory[0]?.detailCategories[0].name}
-          ;
         </Body3>
       </S.Category>
     );
@@ -104,7 +106,7 @@ export default function BasicInfoSecond({
     };
 
     const result = await postCloth(payload);
-    if (result) router.push('/mypage');
+    if (result) router.replace(`/mypage/${myId}`);
   };
 
   return (

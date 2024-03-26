@@ -2,7 +2,14 @@
 import S from '@/pageStyle/add-ootd/ClothTag/style';
 import { Body3 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import TagInformation from '@/components/ClothInformation/TagInformation';
 import Carousel from '@/components/Carousel';
@@ -33,9 +40,8 @@ export default function ClothTag({
   useEffect(() => {
     if (dragRef.current) {
       const w = dragRef.current.offsetWidth;
-      const h = dragRef.current.offsetHeight;
       setComponentWidth(w);
-      setComponentHeight(h);
+      setComponentHeight(w);
     }
   }, []);
 
@@ -69,7 +75,6 @@ export default function ClothTag({
         deviceWidth: componentWidth,
       },
     };
-    console.log(updatedElements[ootdIndex].ootdImageClothesList![index]);
     setImageAndTag(updatedElements);
     e.stopPropagation();
   };
@@ -166,6 +171,8 @@ export default function ClothTag({
         setImageAndTag={setImageAndTag}
         imageAndTag={imageAndTag}
         slideIndex={slideIndex}
+        componentHeight={componentHeight}
+        componentWidth={componentWidth}
       />
     </S.Layout>
   );

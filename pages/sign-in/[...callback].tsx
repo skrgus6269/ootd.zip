@@ -23,11 +23,11 @@ export default function SignUpCallbackPage() {
         // login 함수 호출 이후에 상태 확인 및 라우팅
         switch (loginSuccess) {
           case true:
-            if (await getCheckCompleteRegistUserInfo()) router.push('/main');
-            else router.push('/sign-up');
+            if (await getCheckCompleteRegistUserInfo()) router.replace('/main');
+            else router.replace('/sign-up');
             break;
           case false:
-            router.push('../sign-in');
+            router.replace('../sign-in');
             break;
           default:
           // 상태가 정의되지 않은 경우에 대한 처리

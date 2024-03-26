@@ -11,6 +11,8 @@ import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 import NextButton from '@/components/NextButton';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
@@ -34,7 +36,7 @@ export default function WriteOOTD({
   complete,
 }: WriteOOTDProps) {
   const { postOOTD } = OOTDApi();
-
+  const myId = useRecoilValue(userId);
   const router = useRouter();
 
   const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
@@ -76,7 +78,7 @@ export default function WriteOOTD({
 
       //ootd 성공 여부에 따른 페이지 이동
       if (addOOTDSuccess) {
-        router.push('/mypage');
+        router.replace(`/mypage/${myId}`);
       } else {
         alert('등록 실패');
       }
@@ -84,6 +86,10 @@ export default function WriteOOTD({
   };
   return (
     <>
+      <S.Background
+        onClick={() => setStyleModalIsOpen(false)}
+        state={styleModalIsOpen}
+      />
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">
           {imageAndTag !== undefined && imageAndTag!.length}장의 사진이 선택됨

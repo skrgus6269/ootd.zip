@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 const Layout = styled.div`
-  height: 80vh;
+  padding-top: 8px;
 `;
 
 const Background = styled.div<LayoutProps>`
@@ -27,6 +27,7 @@ const Background = styled.div<LayoutProps>`
 
 const MyCloset = styled.div`
   width: 100vw;
+  height: 100vh;
   padding: 16px 20px 0 20px;
   display: flex;
   flex-direction: column;
@@ -90,6 +91,8 @@ const List = styled.div`
   flex-direction: column;
   gap: 15px;
   flex-grow: 1;
+  height: 30%;
+  overflow-y: scroll;
   hr {
     color: ${(props) => props.theme.color.grey_90};
     width: 100%;
