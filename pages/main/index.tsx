@@ -11,7 +11,7 @@ import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import Carousel from '@/components/Carousel';
 import TabView from '@/components/TabView';
 import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
-import Explore from '@/components/Domain/Main/LikeOOTD';
+import Explore from '@/components/Domain/Main/Explore';
 
 const MyClosetDataSample = {
   user: {
