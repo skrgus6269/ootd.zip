@@ -7,31 +7,29 @@ import {
 } from 'react';
 import { Layout, SearchIcon, SearchInput, Input, CloseIcon } from './style';
 import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
-import useDebounce from '@/hooks/useDebouce';
 import { useRouter } from 'next/router';
 
 interface SearchProps {
   onAddKeyword: (string: string) => void;
   state: Boolean;
   setState: Dispatch<SetStateAction<Boolean>>;
+  setSearchValue: Dispatch<SetStateAction<string>>;
+  searchValue: string;
 }
 
 export default function SearchBar({
   onAddKeyword,
   state,
   setState,
+  setSearchValue,
+  searchValue,
 }: SearchProps) {
   const router = useRouter();
   const { query } = router;
-  const [searchValue, setSearchValue] = useState<string>(() => {
-    // URL에서 검색어 갖고 옴
-
-    return typeof query.q === 'string' ? query.q : ''; // string으로 형변환 후 반환
-  });
 
   useEffect(() => {
     if (query.q !== undefined) {
-      setSearchValue(query.q);
+      console.log(query.q);
     }
   }, [router]);
 
@@ -69,7 +67,6 @@ export default function SearchBar({
   useEffect(() => {
     // 컴포넌트가 마운트될 때 URL에서 검색어를 가져와 state를 설정
     const { query } = router;
-    setSearchValue(typeof query.q === 'string' ? query.q : '');
   }, []);
 
   return (

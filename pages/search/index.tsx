@@ -52,9 +52,12 @@ export default function Search() {
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
+    setSearchValue(text);
     setState(true);
     router.push(`/search?q=${encodeURIComponent(text)}`);
   };
+
+  const [searchValue, setSearchValue] = useState<string>('');
 
   return (
     <S.Layout>
@@ -63,10 +66,12 @@ export default function Search() {
           onAddKeyword={handleAddKeyword}
           state={state}
           setState={setState}
+          setSearchValue={setSearchValue}
+          searchValue={searchValue}
         />
       </S.SearchField>
       {state ? (
-        <SearchResult keywordsValue={searchQuery} />
+        <SearchResult keywordsValue={searchValue} />
       ) : (
         <Recents
           handleClearKeywords={() => setKeywords([])}

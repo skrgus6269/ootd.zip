@@ -153,8 +153,6 @@ export default function ClosetCloth({ keywordsValue }: ClosetClothProps) {
     });
   }, [keywordsValue, sortStandard]);
 
-  console.log(OOTDRef);
-
   return (
     <>
       <S.Background

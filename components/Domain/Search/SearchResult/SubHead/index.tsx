@@ -17,8 +17,6 @@ export default function SubHead({
   state,
   setState,
 }: SubHeadProps) {
-  console.log(state);
-
   return (
     <S.Layout state={style}>
       <S.Frame>
