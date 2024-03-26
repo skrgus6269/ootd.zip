@@ -71,6 +71,9 @@ const Input = styled.input<InputProps>`
   font-family: 'Pretendard Regular';
   text-decoration: ${(props) =>
     props.type === 'Link' ? '1px solid underline' : ''};
+  &::placeholder {
+    color: ${(props) => props.theme.color.grey_80};
+  }
   ${(props) =>
     props.line === 'underline' &&
     `
@@ -116,6 +119,7 @@ const CloseIcon = styled(FlexLayout)<InputProps>`
   align-items: center;
   display: flex;
   width: 24px;
+  flex-shrink: 0;
   svg {
     width: 12px;
     height: 12px;
