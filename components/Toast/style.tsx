@@ -17,9 +17,15 @@ const Layout = styled.div<LayoutProps>`
   color: ${(props) => props.theme.color.grey_100};
   border-radius: 2px;
 
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .text {
     flex-grow: 1;
     align-self: flex-start;
+    margin-left: 4px;
   }
   .actionText {
     color: ${(props) => props.theme.color.accent};

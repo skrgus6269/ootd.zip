@@ -256,6 +256,7 @@ export default function AddTag({
               setState={setNotOpenState}
               actionText="옷장으로 이동"
               actionFunction={() => setGoToMypageAlertState(true)}
+              isHelperText={true}
             />
           )}
           {goToMypageAlertState && (

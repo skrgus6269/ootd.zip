@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Body3, Button3 } from '../UI';
 import S from './style';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 interface ToastProps {
   text: string;
@@ -8,6 +9,7 @@ interface ToastProps {
   className?: string;
   actionText?: string;
   actionFunction?: () => void;
+  isHelperText?: Boolean;
 }
 
 export default function Toast({
@@ -16,6 +18,7 @@ export default function Toast({
   className,
   actionText,
   actionFunction,
+  isHelperText,
 }: ToastProps) {
   const [isVisible, setIsVisible] = useState<Boolean>(true);
 
@@ -32,6 +35,7 @@ export default function Toast({
 
   return (
     <S.Layout className={className} state={isVisible}>
+      {isHelperText && <AiOutlineExclamationCircle />}
       <Body3 className="text">{text}</Body3>
       {actionText && actionFunction && (
         <Button3
