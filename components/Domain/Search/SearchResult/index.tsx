@@ -140,17 +140,12 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
         };
       })
     );
-    console.log(OOTDData);
-    console.log(OOTDData.length);
-    setff(OOTDData.length);
   }, [OOTDData]);
 
   useEffectAfterMount(() => {
     setOOTDList([]);
     ootdReset();
   }, [keywordsValue, sortStandard, filter]);
-
-  const [ff, setff] = useState(0);
 
   return (
     <>

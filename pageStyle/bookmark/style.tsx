@@ -31,7 +31,6 @@ const TopButton = styled.div`
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  padding: 10px;
   z-index: 9999;
 
   img {
