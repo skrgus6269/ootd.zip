@@ -34,9 +34,12 @@ const Curation = styled.div`
   display: flex;
   flex-direction: column;
   gap: 126px;
+  height: 100vh;
 `;
 
-const Explore = styled.div``;
+const Explore = styled.div`
+  height: 100vh;
+`;
 
 const S = { Layout, Curation, Explore };
 

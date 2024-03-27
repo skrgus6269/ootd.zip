@@ -77,8 +77,8 @@ export default function Edit({
       setNickName(result.name);
       setIntroduction(result.description);
       setOpen(!result.isBodyPrivate);
-      setHeight(result.height);
-      setWeight(result.weight);
+      setHeight(String(result.height));
+      setWeight(String(result.weight));
       setProfileImage(result.profileImage);
     };
 
