@@ -83,19 +83,17 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
 
   const { getSearchOOTD } = OOTDApi();
 
-  const [genderData, setGenderData] = useState<string>('');
-
   useEffect(() => {
-    if (filter.gender.man && filter.gender.woman) {
-      setGenderData('');
-    } else if (filter.gender.man) {
-      setGenderData('MALE');
-    } else if (filter.gender.woman) {
-      setGenderData('FEMALE');
-    } else {
-      setGenderData('');
-    }
-  }, [filter.gender]);
+    setFilter({
+      category: null,
+      color: null,
+      brand: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
+    });
+  }, [keywordsValue]);
 
   const fetchOOTDDataFunction = async (ootdPage: number, ootdSize: number) => {
     if (!router.isReady) return;
@@ -110,7 +108,17 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
       }),
       colorIds: filter.color?.map((item) => item.id),
       brandIds: filter.brand?.map((item) => item.id),
-      writerGender: genderData,
+      writerGender: (() => {
+        if (filter.gender.man && filter.gender.woman) {
+          return '';
+        } else if (filter.gender.man) {
+          return 'MALE';
+        } else if (filter.gender.woman) {
+          return 'FEMALE';
+        } else {
+          return '';
+        }
+      })(),
       sortCriteria: sortStandard,
       page: ootdPage,
       size: ootdSize,
