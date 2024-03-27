@@ -179,7 +179,7 @@ export const getOOTDWithCloth = async ({
 };
 
 export const getSearchOOTD = async (params: getSearchOOTDParams) => {
-  let url = `/api/v1/ootd/search?searchText=${params.searchText}&page=${params.page}&size=${params.size}&sortCriteria=${params.sortCriteria}`;
+  let url = `/api/v1/ootd/search?searchText=${params.searchText}&page=${params.page}&size=${params.size}&sortCriteria=${params.sortCriteria}&writerGender=${params.writerGender}`;
 
   const brandIds = params.brandIds?.map((item) => `brandIds=${item}`).join('&');
   const categoryIds = params.categoryIds
