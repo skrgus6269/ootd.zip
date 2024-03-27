@@ -150,6 +150,7 @@ export default function ClothTag({
 
   return (
     <S.Layout>
+      <S.Background state={addTag} onClick={() => setAddTag(false)} />
       {/* 이미지 + 태그 */}
       {ImageTag()}
       {/* 태그 가이드 */}
