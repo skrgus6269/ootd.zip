@@ -32,9 +32,9 @@ export default function ClothTag({
   const [componentWidth, setComponentWidth] = useState(0); //컴포넌트 길이
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [addTag, setAddTag] = useState<Boolean>(false); //옷 추가 모달 (열기/닫기)
-  const [init, setInit] = useState<Boolean>(false); // 초기 addTag 렌더링 방지
   const [slideIndex, setSlideIndex] = useState<number>(0); //OOTD 슬라이드 인덱스
   const [nextButtonState, setNextButtonState] = useState<Boolean>(false); //다음 버튼 상태
+  const [isDragging, setIsDragging] = useState(false);
 
   //컴포넌트 크기 계산
   useEffect(() => {
@@ -62,6 +62,7 @@ export default function ClothTag({
     e: DraggableEvent,
     data: DraggableData
   ) => {
+    setIsDragging(true);
     const updatedElements = JSON.parse(JSON.stringify(imageAndTag));
 
     updatedElements[ootdIndex].ootdImageClothesList![index] = {
@@ -79,10 +80,16 @@ export default function ClothTag({
     e.stopPropagation();
   };
 
+  const handleStopDrag = () => {
+    // 드래그가 끝날 때 이벤트 핸들러
+    setTimeout(() => {
+      setIsDragging(false); // 드래그가 끝날 때 flag변수를 false로 업데이트 해준다.
+    }, 100);
+  };
+
   //옷추가 모달창 열기
   const onClickImage = () => {
     setAddTag(true);
-    setInit(true);
   };
 
   //다음 버튼 클릭
@@ -91,6 +98,13 @@ export default function ClothTag({
       handleStep('게시하기');
       setImageAndTag(imageAndTag);
     }
+  };
+
+  const onClickCloseButton = (ootdIndex: number, clothIndex: number) => {
+    if (isDragging) return;
+    const updatedElements = [...imageAndTag!];
+    updatedElements[ootdIndex].ootdImageClothesList?.splice(clothIndex, 1);
+    setImageAndTag(updatedElements);
   };
 
   //이미지 + 태그 컴포넌트
@@ -112,7 +126,8 @@ export default function ClothTag({
                         key={index}
                         bounds=".image"
                         onDrag={(e, data) => onDrag(index, ootdIndex, e, data)}
-                        defaultPosition={{
+                        onStop={handleStopDrag}
+                        position={{
                           x: Number(element.coordinate.xrate),
                           y: Number(element.coordinate.yrate),
                         }}
@@ -127,6 +142,9 @@ export default function ClothTag({
                             category={element.category}
                             name={element.name}
                             state={element.state as 'dark' | 'light'}
+                            onTouchEnd={() =>
+                              onClickCloseButton(ootdIndex, index)
+                            }
                           />
                         </div>
                       </Draggable>
