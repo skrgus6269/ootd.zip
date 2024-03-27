@@ -4,16 +4,19 @@ import ClothInformation from '@/components/ClothInformation';
 import { ClothInformationProps } from '@/components/ClothInformation/type';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
-import { Body4 } from '@/components/UI';
+import { Body3, Body4 } from '@/components/UI';
 import Modal from '@/components/Modal';
 import NewRegister from './NewRegister';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
-import { useRecoilValue } from 'recoil';
-import { userId } from '@/utils/recoil/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { storedImageKey, userId } from '@/utils/recoil/atom';
 import { UserClothDataType } from '../../OOTD/UserCloth';
 import Spinner from '@/components/Spinner';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
+import Toast from '@/components/Toast';
+import { useRouter } from 'next/router';
+import Alert from '@/components/Alert';
 
 export type ImageWithTag = {
   ootdId: number;
@@ -66,6 +69,12 @@ export default function AddTag({
   ];
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [clicked, setClicked] = useState<number | null>();
+  const [notOpenState, setNotOpenState] = useState<Boolean>(false);
+  const [goToMypageAlertState, setGoToMypageAlertState] =
+    useState<Boolean>(false);
+
+  const setStoredImage = useSetRecoilState(storedImageKey);
+  const router = useRouter();
 
   const onClickCategory = (index: number) => {
     if (clicked === index) {
@@ -158,10 +167,18 @@ export default function AddTag({
     setSearchResult(fetchData);
   }, [fetchData]);
 
+  const onClickGoToMypageYesButton = () => {
+    setStoredImage(imageAndTag);
+    router.push(`/mypage/${myId}`);
+  };
+
   return (
     <>
-      <S.Background onClick={() => setAddTag(false)} addTag={addTag} />
-      <Modal height="80" isOpen={addTag}>
+      <Modal height="95" isOpen={addTag}>
+        <S.Background
+          onClick={() => setGoToMypageAlertState(false)}
+          addTag={goToMypageAlertState}
+        />
         <S.Layout>
           <TabView>
             <TabView.TabBar tab={['내 옷장', '신규 등록']} display="block" />
@@ -178,7 +195,10 @@ export default function AddTag({
                     <S.IsOpenSpan state={true}>
                       <Body4 state="emphasis">공개</Body4>
                     </S.IsOpenSpan>
-                    <S.IsOpenSpan state={false}>
+                    <S.IsOpenSpan
+                      onClick={() => setNotOpenState(true)}
+                      state={false}
+                    >
                       <Body4 state="emphasis">비공개</Body4>
                     </S.IsOpenSpan>
                     <S.Divider />
@@ -229,6 +249,30 @@ export default function AddTag({
               </TabView.Tab>
             </TabView.Tabs>
           </TabView>
+          {notOpenState && (
+            <Toast
+              className="toast"
+              text="공개로 설정된 옷만 태그할 수 있어요."
+              setState={setNotOpenState}
+              actionText="옷장으로 이동"
+              actionFunction={() => setGoToMypageAlertState(true)}
+            />
+          )}
+          {goToMypageAlertState && (
+            <Alert
+              headline="현재 페이지를 벗어납니다."
+              body={
+                <Body3>
+                  작성 중인 게시글은 임시저장됩니다. 옷장으로 이동하시겠습니까?
+                </Body3>
+              }
+              yes="이동"
+              no="취소"
+              yesColor="error"
+              onClickYesButton={onClickGoToMypageYesButton}
+              onClickNoButton={() => setGoToMypageAlertState(false)}
+            />
+          )}
         </S.Layout>
       </Modal>
     </>

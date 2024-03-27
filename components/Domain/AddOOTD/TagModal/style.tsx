@@ -12,13 +12,16 @@ interface LayoutProps {
 
 const Layout = styled.div`
   padding-top: 8px;
+  .toast {
+    bottom: 24px;
+  }
 `;
 
 const Background = styled.div<LayoutProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.addTag ? 'block' : 'none')};
   opacity: 0.3;
-  z-index: 2;
+  z-index: 998;
   width: 100vw;
   height: 100vh;
   position: absolute;
