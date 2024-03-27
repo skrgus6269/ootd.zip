@@ -7,14 +7,12 @@ import { MainFavoriteCardProps } from '@/components/Card/MainFavoriteCard';
 import { useRouter } from 'next/router';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
-import {
-  FilterData,
-  OOTDListType,
-} from '../../Search/SearchResult/ClosetCloth';
+import { OOTDListType } from '../../Search/SearchResult/ClosetCloth';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import SubHead from '../../Search/SearchResult/SubHead';
 import ImageList from '@/components/ImageList';
 import Spinner from '@/components/Spinner';
+import BackTop from '@/public/images/BackTop.svg';
 
 export default function Explore() {
   const router = useRouter();
@@ -49,7 +47,7 @@ export default function Explore() {
     reset: ootdReset,
   } = useInfiniteScroll({
     fetchDataFunction: fetchOOTDDataFunction,
-    size: 9,
+    size: 20,
     initialData: [],
   });
 
@@ -69,15 +67,46 @@ export default function Explore() {
     ootdReset();
   }, [sortStandard]);
 
+  const [isVisible, setIsVisible] = useState<Boolean>(false);
+
+  const scrollToTop = () => {
+    const container = OOTDRef.current;
+    container.scrollTo({
+      top: 0,
+    });
+  };
+
+  useEffect(() => {
+    const container = OOTDRef.current;
+
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = container;
+      console.log(scrollTop, clientHeight, scrollHeight);
+      if (scrollTop >= 50) {
+        setIsVisible(true);
+      } else if (scrollTop < 50) {
+        setIsVisible(false);
+      }
+    };
+
+    // 스크롤 이벤트 리스너 등록
+    container.addEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시에 이벤트 리스너 제거
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <S.SubHead>
+      <S.SubHeadDiv>
         <SubHead
           setState={setSortStandard}
           state={sortStandard}
           count={OOTDList?.length || 0}
         />
-      </S.SubHead>
+      </S.SubHeadDiv>
       <S.Layout>
         <S.ClothList ref={OOTDRef}>
           <ImageList
@@ -88,6 +117,11 @@ export default function Explore() {
             type={'column'}
           />
           {OOTDIsLoading && OOTDHasNextPage && <Spinner />}
+          {isVisible && (
+            <S.TopButton>
+              <BackTop onClick={scrollToTop}>버튼</BackTop>
+            </S.TopButton>
+          )}
         </S.ClothList>
       </S.Layout>
     </>

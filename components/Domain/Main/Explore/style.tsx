@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SubHead = styled.div`
+const SubHeadDiv = styled.div`
   padding: 16px 0px 0px 0px;
 `;
 
@@ -9,10 +9,29 @@ const Layout = styled.div`
 `;
 
 const ClothList = styled.div`
-  height: calc(100vh - 56px);
   overflow-y: scroll;
+  height: calc(100vh - 56px);
 `;
 
-const S = { SubHead, Layout, ClothList };
+const TopButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  bottom: 60px;
+  right: 20px;
+  position: fixed;
+  z-index: 9999;
+
+  img {
+    width: 48px;
+    height: 48px;
+    z-index: 9999;
+  }
+`;
+
+const S = { SubHeadDiv, Layout, ClothList, TopButton };
 
 export default S;
