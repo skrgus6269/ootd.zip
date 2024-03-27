@@ -68,6 +68,9 @@ export default function Text({
   return (
     <S.Layout
       state={state !== undefined ? state : letter.length > 0}
+      inputFocus={inputFocus}
+      onFocus={() => setInputFocus(true)}
+      onBlur={() => setInputFocus(false)}
       size={size}
       line={line}
       onClick={onClick}
@@ -81,7 +84,6 @@ export default function Text({
       <S.SearchInput>
         {type === 'number' && (
           <S.Input
-            onFocus={() => setInputFocus(true)}
             ref={inputRef}
             line={line}
             value={letter}
@@ -93,7 +95,6 @@ export default function Text({
         )}
         {type !== 'number' && (
           <S.Input
-            onFocus={() => setInputFocus(true)}
             ref={inputRef}
             line={line}
             value={letter}
@@ -104,7 +105,7 @@ export default function Text({
           />
         )}
       </S.SearchInput>
-      {inputFocus && letter.length > 0 && (
+      {letter.length > 0 && (
         <S.CloseIcon
           className="close"
           onClick={() => setLetter('')}

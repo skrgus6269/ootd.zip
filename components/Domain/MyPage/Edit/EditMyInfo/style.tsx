@@ -4,16 +4,13 @@ const Layout = styled.div`
   width: 100%;
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 24px;
 `;
 
 const Category = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+  .title {
+    margin-bottom: 16px;
+  }
 `;
 
 const BodyInfo = styled.div`
@@ -32,8 +29,7 @@ const OpenStatus = styled.div`
 `;
 
 const StateLayout = styled.div`
-  display: inline-flex;
-  padding: 0px 20px;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 16px;
