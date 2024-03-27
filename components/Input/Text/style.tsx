@@ -4,6 +4,7 @@ interface LayoutProps {
   state?: Boolean;
   size: 'big' | 'small';
   line: 'underline' | 'outline';
+  inputFocus?: Boolean;
 }
 
 interface InputProps {
@@ -20,32 +21,35 @@ const Layout = styled.div<LayoutProps>`
   position: relative;
   border-radius: 2px;
 
+  .close {
+    color: ${(props) => (!props.inputFocus ? 'white' : 'black')};
+  }
+
   ${(props) =>
     props.line === 'underline' &&
     `
     border-bottom: 2px solid ${props.theme.color.grey_80};
     ${props.state && ` border-bottom: 2px solid ${props.theme.color.grey_00};`};
     
-  &:focus {
-    border-bottom: 2px solid ${props.theme.color.grey_00}; 
-  }
+    &:hover {
+      border-bottom: 2px solid ${props.theme.color.grey_00}; 
+    } 
+   
   `}
 
   ${(props) =>
     props.line === 'outline' &&
     ` 
     padding-right:8px;
-  border: 1px solid ${props.theme.color.grey_80};
-  &:hover {
-    border: 1px solid ${props.theme.color.grey_00};
-    .close {
-      display: flex;
-    } 
-  }
+    border: 1px solid ${props.theme.color.grey_80};
+    &:hover {
+      border: 1px solid ${props.theme.color.grey_00}; 
+    }
+     
   ${
     props.state === false &&
     `
-    border: 1px solid ${props.theme.color.error};
+    border: 1px solid ${props.theme.color.error}; 
   `
   }`}
 `;

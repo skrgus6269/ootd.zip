@@ -66,51 +66,65 @@ export default function EditMyInfo({
     <>
       <S.Layout>
         <S.Category>
-          <Body3>닉네임</Body3>
-          <Input.Text
-            state={nickName === '' ? false : true}
-            defaultValue={nickName}
-            size="big"
-            line="outline"
-            onChange={setNickName}
-          />
+          <Input>
+            <Input.Label className="title" size="small">
+              닉네임
+            </Input.Label>
+            <Input.Text
+              state={nickName === '' ? false : true}
+              defaultValue={nickName}
+              size="big"
+              line="outline"
+              onChange={setNickName}
+            />
+          </Input>
         </S.Category>
-
         <S.Category>
-          <Body3>소개</Body3>
-          <Input.Text
-            state={true}
-            defaultValue={introduction}
-            size="big"
-            line="outline"
-            onChange={setIntroduction}
-          />
+          <Input>
+            <Input.Label className="title" size="small">
+              소개
+            </Input.Label>
+            <Input.Text
+              state={true}
+              defaultValue={introduction}
+              size="big"
+              line="outline"
+              onChange={setIntroduction}
+            />
+          </Input>
         </S.Category>
-
         <S.BodyInfo>
           <S.Category>
-            <Body3>신장</Body3>
-            <Input.Text
-              state={height === '' || height === '0' ? false : true}
-              defaultValue={height}
-              size="small"
-              line="outline"
-              unit="CM"
-              type="number"
-              onChange={setHeight}
-            />
+            <Input>
+              <Input.Label className="title" size="small">
+                신장
+              </Input.Label>
+              <Input.Text
+                state={height === '' || height === '0' ? false : true}
+                defaultValue={height}
+                size="small"
+                line="outline"
+                unit="CM"
+                type="number"
+                onChange={setHeight}
+              />
+            </Input>
           </S.Category>
           <S.Category>
-            <Body3>체중</Body3>
-            <Input.Text
-              state={weight === '' || weight === '0' ? false : true}
-              defaultValue={weight}
-              size="small"
-              line="outline"
-              unit="KG"
-              type="number"
-              onChange={setWeight}
-            />
+            <Input>
+              <Input.Label className="title" size="small">
+                체중
+              </Input.Label>
+              <Input.Text
+                state={weight === '' || weight === '0' ? false : true}
+                defaultValue={weight}
+                size="small"
+                line="outline"
+                unit="KG"
+                type="number"
+                onChange={setWeight}
+              />
+            </Input>
           </S.Category>
         </S.BodyInfo>
       </S.Layout>
