@@ -36,14 +36,17 @@ export default function SearchBar({
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      onAddKeyword(searchValue);
-      setState(true);
+      if (searchValue.trim() !== '') {
+        // 검색어가 빈 문자열이 아닌 경우에만 실행
+        onAddKeyword(searchValue);
+        setState(true);
 
-      // URL에 검색어 추가
-      router.push({
-        pathname: '/search', // 검색 결과 페이지 URL
-        query: { q: searchValue }, // 'q'라는 쿼리 매개변수에 검색어 추가
-      });
+        // URL에 검색어 추가
+        router.push({
+          pathname: '/search', // 검색 결과 페이지 URL
+          query: { q: searchValue }, // 'q'라는 쿼리 매개변수에 검색어 추가
+        });
+      }
     },
     [searchValue, router, onAddKeyword, setState]
   );
