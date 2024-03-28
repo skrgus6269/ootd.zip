@@ -17,10 +17,11 @@ const TabViewContext = createContext<TabViewContextType | undefined>(undefined);
 
 interface ProviderProps {
   children: ReactNode;
+  initialIndex?: number;
 }
 
-export const TabViewProvider = ({ children }: ProviderProps) => {
-  const [index, setIndex] = useState<number>(1);
+export const TabViewProvider = ({ children, initialIndex }: ProviderProps) => {
+  const [index, setIndex] = useState<number>(initialIndex ? initialIndex : 1);
   const contextValue = useMemo(() => ({ index, setIndex }), [index, setIndex]);
 
   return (

@@ -44,6 +44,8 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
     isOpen: null,
   });
   const [searchResult, setSearchResult] = useState([]);
+  const [filterModalInitialIndex, setFilterModalInitialIndex] =
+    useState<number>(1);
 
   const { getUserClothList } = ClothApi();
 
@@ -97,8 +99,9 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
     router.push(`/cloth/${index}`);
   };
 
-  const onClickFilterSpan = () => {
+  const onClickFilterSpan = (index: number) => {
     setFilterModalIsOpen(true);
+    setFilterModalInitialIndex(index);
   };
 
   const onClickInitButton = () => {
@@ -148,7 +151,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
           )}
           <S.Divider />
           <S.FilterSpan
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(1)}
             state={filter.category !== null}
           >
             <Body4 state="emphasis">카테고리</Body4>
@@ -159,7 +162,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.color !== null && filter.color.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(2)}
           >
             <Body4 state="emphasis">색상</Body4>
             <AiOutlineDown className="down" />
@@ -169,7 +172,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.brand !== null && filter.brand.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(3)}
           >
             <Body4 state="emphasis">브랜드</Body4>
             <AiOutlineDown className="down" />
@@ -195,6 +198,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
           colorInitital={filter.color}
           brandInitial={filter.brand}
           setFilter={setFilter}
+          initialIndex={filterModalInitialIndex}
         />
       )}
     </>

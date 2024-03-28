@@ -20,6 +20,7 @@ interface FilterModalProps {
   colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
   setFilter: Dispatch<SetStateAction<FilterData>>;
+  initialIndex: number;
 }
 
 export default function FilterModal({
@@ -29,6 +30,7 @@ export default function FilterModal({
   categoryInitital,
   colorInitital,
   brandInitial,
+  initialIndex,
 }: FilterModalProps) {
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
@@ -119,7 +121,7 @@ export default function FilterModal({
   return (
     <Modal isOpen={isOpen} height="65">
       <S.Layout>
-        <TabView>
+        <TabView initialIndex={initialIndex}>
           <TabView.TabBar
             tab={['카테고리', '색상', '브랜드']}
             display="block"
