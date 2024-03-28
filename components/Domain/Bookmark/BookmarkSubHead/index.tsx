@@ -23,7 +23,8 @@ export default function BookmarSubHead({
       <S.headLayout>
         <S.Frame>
           <Body4 state="emphasis" className="bookmarkSubHeadText">
-            {editing ? `${count}개의 게시글이 선택됨` : `4개의 게시글`}
+            {editing && count > 0 ? `${count}개의 게시글이 선택됨` : ``}
+            {!editing && `4개의 게시물`}
           </Body4>
         </S.Frame>
         <S.Wrap>
