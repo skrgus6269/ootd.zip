@@ -274,3 +274,9 @@ export const getSearchOOTD = async (params: getSearchOOTDParams) => {
 
   return data;
 };
+
+export const getUserBrand = async (userId: number) => {
+  const data = await userApi.getUserBrand(userId);
+
+  return data;
+};

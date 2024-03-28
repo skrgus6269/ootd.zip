@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, Suspense, useState } from 'react';
 import BottomNavBar from '@/components/BottomNavBar';
 import AddModal from './components/BottomNavBar/AddModal';
+import Spinner from './components/Spinner';
 
 const Layout = styled.div`
   height: 100%; //BottomNavBar를 아래로 보내기 위함
@@ -44,10 +45,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         {children}
         {addModalState && <AddModal />}
       </MainComponent>
-      <BottomNavBar
-        addModalState={addModalState}
-        setAddModalState={setAddModalState}
-      />
+      <Suspense fallback={<Spinner />}>
+        <BottomNavBar
+          addModalState={addModalState}
+          setAddModalState={setAddModalState}
+        />
+      </Suspense>
     </Layout>
   );
 };

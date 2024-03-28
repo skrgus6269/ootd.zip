@@ -52,6 +52,7 @@ const Span = styled.div<SpanProps>`
   ${(props) =>
     props.state &&
     `
+      border:none;
       background-color: ${props.theme.color.grey_00};
       color: ${props.theme.color.grey_100};
   `}
@@ -82,6 +83,7 @@ const FilterSpan = styled.div<FilterSpanProps>`
     .down {
         color: ${props.theme.color.grey_100};
     }
+    border:none;
     .counter {
         position: absolute;
         right: 28px;

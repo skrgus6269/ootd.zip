@@ -44,11 +44,13 @@ export default function Profile({
         follow={data.followerCount}
         myCloth={data.followingCount}
       />
-      <S.BodyInformation>
-        <Body4>{data.height}cm</Body4>
-        <p className="dot">•</p>
-        <Body4>{data.weight}kg</Body4>
-      </S.BodyInformation>
+      {String(data.height) !== '0' && (
+        <S.BodyInformation>
+          <Body4>{data.height}cm</Body4>
+          <p className="dot">•</p>
+          <Body4>{data.weight}kg</Body4>
+        </S.BodyInformation>
+      )}
       <S.Introduce>
         <Body3>{data.description}</Body3>
       </S.Introduce>
