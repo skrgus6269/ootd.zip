@@ -4,7 +4,7 @@ import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import BookmarSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
+import BookmarkSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
 import ImageCheckBoxList from '@/components/ImageCheckBoxList';
 import BookmarkAlert from '@/components/Domain/Bookmark/BookmarkAlert';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -148,7 +148,7 @@ export default function Bookmark() {
         />
 
         <S.BookmarkList ref={bookmarkRef}>
-          <BookmarSubHead
+          <BookmarkSubHead
             editing={editing}
             setEditing={setEditing}
             setAlertOpen={setAlertOpen}

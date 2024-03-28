@@ -29,7 +29,10 @@ export default function BookmarSubHead({
         <S.Wrap>
           {editing ? (
             <>
-              <button onClick={() => setAlertOpen(true)}>
+              <button
+                onClick={() => setAlertOpen(true)}
+                className="editingButton"
+              >
                 <Button3 style={{ color: '#EC0000' }} state="emphasis">
                   삭제
                 </Button3>
@@ -37,7 +40,10 @@ export default function BookmarSubHead({
 
               <Image src={Rectangle} alt="Rectangle" width={1} height={20} />
 
-              <button onClick={() => setEditing(false)}>
+              <button
+                onClick={() => setEditing(false)}
+                className="editingButton"
+              >
                 <Button3 state="emphasis">취소</Button3>
               </button>
             </>
