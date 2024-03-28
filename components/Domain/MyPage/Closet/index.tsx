@@ -3,137 +3,54 @@ import S from './style';
 import ClosetTabbar from './ClosetTabbar';
 import ClosetCloth from './ClosetCloth';
 import ClosetOOTD from './ClosetOOTD';
+import ClosetEmpty from './ClosetEmpty';
+import { useRouter } from 'next/router';
 
-export default function Closet() {
+interface ClosetType {
+  showingId: number;
+  ootdCount: number;
+  clothesCount: number;
+}
+
+export default function Closet({
+  showingId,
+  ootdCount,
+  clothesCount,
+}: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
-
-  // const [, getOOTD] = useOOTD();
-  // const [getCloth] = useClogth();
-
-  // const myPageOOTDList = getOOTD({ id: 0 });
-  // const myPageClothList = getCloth({ id: 0 });
-
-  const myPageOOTDList = [
-    {
-      ootdId: 0,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 1,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 2,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 3,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 4,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      ootdId: 5,
-      ootdImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
-
-  const myPageClothList = [
-    {
-      clothId: 0,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 2,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 3,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 4,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
+  const router = useRouter();
 
   return (
     <>
       <S.Layout>
         <ClosetTabbar
-          OOTDNumber={myPageOOTDList ? myPageOOTDList.length : 0}
-          clothNumber={myPageClothList ? myPageClothList.length : 0}
+          ootdCount={ootdCount}
+          clothesCount={clothesCount}
           handleStep={handleStep}
           currentStep={currentStep}
         />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            <ClosetOOTD myPageOOTDList={myPageOOTDList} />
+            {ootdCount === 0 ? (
+              <ClosetEmpty
+                text="공유하신 사진이 없습니다."
+                button="OOTD 게시하기"
+                onClick={() => router.push('/add-ootd')}
+              />
+            ) : (
+              <ClosetOOTD />
+            )}
           </Funnel.Steps>
           <Funnel.Steps name="Cloth">
-            <ClosetCloth myPageClothList={myPageClothList} />
+            {clothesCount === 0 ? (
+              <ClosetEmpty
+                text="옷장이 비어있습니다."
+                button="의류 추가하기"
+                onClick={() => router.push('/add-closet')}
+              />
+            ) : (
+              <ClosetCloth showingId={showingId} />
+            )}
           </Funnel.Steps>
         </Funnel>
       </S.Layout>

@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useLayoutEffect } from 'react';
 import S from './style';
 import ColorSpan from './ColorSpan';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
 
 export type ColorListType = {
   id: number;
@@ -24,22 +25,35 @@ export default function ColorList({
   colorList,
   setColorList,
 }: ColorListProps) {
+  const { getColor } = ClothApi();
+
   useEffect(() => {
-    const newColorList = [...colorList];
-    if (colorInitital)
-      for (let i = 0; i < colorInitital?.length; i++) {
-        for (let j = 0; j < newColorList.length; j++) {
-          if (colorInitital[i].id === newColorList[j].id) {
-            newColorList[j].state = true;
-          }
-        }
+    const fetchColor = async () => {
+      const color = (await getColor()) as ColorListType;
+
+      const newColor = color.map((item) => {
+        return { ...item, state: false };
+      });
+
+      if (!colorInitital) {
+        setColorList(newColor);
+        return;
       }
-    setColorList(newColorList);
+
+      const newColorList = newColor.map((color) => ({
+        ...color,
+        state:
+          colorInitital &&
+          colorInitital.some((initialColor) => initialColor.id === color.id),
+      }));
+
+      setColorList(newColorList);
+    };
+    fetchColor();
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const selectedColor = colorList.filter((item) => item.state);
-
     setSelectedColorList(selectedColor);
   }, [colorList]);
 
@@ -52,8 +66,8 @@ export default function ColorList({
   };
 
   return (
-    <S.Layout>
-      <S.ColorList className={className}>
+    <S.Layout className={className}>
+      <S.ColorList>
         {colorList.map((item, index) => {
           return (
             <ColorSpan

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Suspense, useState } from 'react';
 import BottomNavBar from '@/components/BottomNavBar';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { BottomNavbarPlusButtonState } from './utils/recoil/atom';
 import AddModal from './components/BottomNavBar/AddModal';
+import Spinner from './components/Spinner';
 
 const Layout = styled.div`
   height: 100%; //BottomNavBar를 아래로 보내기 위함
@@ -12,7 +11,6 @@ const Layout = styled.div`
 `;
 
 const MainComponent = styled.div`
-  overflow-y: scroll;
   height: calc(100vh - 56px);
 `;
 
@@ -35,9 +33,8 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-  const [addModalState, setAddModalState] = useRecoilState(
-    BottomNavbarPlusButtonState
-  );
+  const [addModalState, setAddModalState] = useState<Boolean>(false);
+
   return (
     <Layout>
       <MainComponent>
@@ -48,7 +45,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         {children}
         {addModalState && <AddModal />}
       </MainComponent>
-      <BottomNavBar />
+      <Suspense fallback={<Spinner />}>
+        <BottomNavBar
+          addModalState={addModalState}
+          setAddModalState={setAddModalState}
+        />
+      </Suspense>
     </Layout>
   );
 };

@@ -5,10 +5,10 @@ import Button from '../Button';
 
 interface FollowBlockProps {
   data: {
-    profileId: number;
+    profileId: Number;
     name: string;
     profileImage: string;
-    followCheck: boolean;
+    followCheck?: Boolean;
   };
   onClick: () => void;
   state?: string;

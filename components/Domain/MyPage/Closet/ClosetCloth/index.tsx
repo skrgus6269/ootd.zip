@@ -8,9 +8,15 @@ import FilterModal from '../FilterModal';
 import { ColorListType } from '@/components/ColorList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { ClothDataType } from '@/pages/cloth/[...ClothNumber]';
+import Spinner from '@/components/Spinner';
+import { useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 interface ClosetClothProps {
-  myPageClothList?: myPageClothType[];
+  showingId: number;
 }
 
 export type myPageClothType = {
@@ -25,8 +31,9 @@ export interface FilterData {
   isOpen: Boolean | null;
 }
 
-export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
+export default function ClosetCloth({ showingId }: ClosetClothProps) {
   const router = useRouter();
+  const localUserId = useRecoilValue(userId);
 
   const [filterModalIsOpen, setFilterModalIsOpen] = useState<Boolean>(false);
 
@@ -36,19 +43,65 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
     brand: null,
     isOpen: null,
   });
+  const [searchResult, setSearchResult] = useState([]);
+  const [filterModalInitialIndex, setFilterModalInitialIndex] =
+    useState<number>(1);
 
-  const [searchResult, setSearchResult] = useState(myPageClothList);
+  const { getUserClothList } = ClothApi();
 
-  useEffect(() => {
-    console.log(filter);
-  }, [filter]);
-
-  const onClickImageList = (index: number) => {
-    router.push(`/OOTD/${index}`);
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getUserClothList({
+      userId: showingId,
+      page,
+      size,
+      brandIds: filter.brand?.map((item) => item.id),
+      colorIds: filter.color?.map((item) => item.id),
+      categoryIds: filter.category?.map((item) => {
+        if (item.state) {
+          return item.id;
+        }
+        return item.detailCategories![0].id;
+      }),
+      isPrivate:
+        localUserId !== showingId
+          ? false
+          : filter.isOpen !== null
+          ? filter.isOpen
+          : undefined,
+    });
+    return data;
   };
 
-  const onClickFilterSpan = () => {
+  useEffect(() => {
+    reset();
+  }, [filter]);
+
+  const {
+    data: clothData,
+    isLoading,
+    hasNextPage,
+    containerRef,
+    reset,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    initialData: [],
+    size: 7,
+  });
+
+  useEffect(() => {
+    const newClothData = clothData.map((item: ClothDataType) => {
+      return { clothId: item.id, clothImage: item.imageUrl };
+    });
+    setSearchResult(newClothData);
+  }, [clothData]);
+
+  const onClickImageList = (index: number) => {
+    router.push(`/cloth/${index}`);
+  };
+
+  const onClickFilterSpan = (index: number) => {
     setFilterModalIsOpen(true);
+    setFilterModalInitialIndex(index);
   };
 
   const onClickInitButton = () => {
@@ -68,24 +121,37 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
       />
       <S.Layout>
         <S.SearchFilter>
-          <S.Span onClick={onClickInitButton}>
+          <S.Span
+            state={
+              !!(
+                filter?.category?.length ||
+                filter?.brand?.length ||
+                filter?.color?.length
+              )
+            }
+            onClick={onClickInitButton}
+          >
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
-          <S.Span
-            state={filter.isOpen === true}
-            onClick={() => setFilter({ ...filter, isOpen: true })}
-          >
-            <Body4 state="emphasis">공개</Body4>
-          </S.Span>
-          <S.Span
-            state={filter.isOpen === false}
-            onClick={() => setFilter({ ...filter, isOpen: false })}
-          >
-            <Body4 state="emphasis">비공개</Body4>
-          </S.Span>
+          {localUserId === showingId && (
+            <>
+              <S.Span
+                state={filter.isOpen === true}
+                onClick={() => setFilter({ ...filter, isOpen: true })}
+              >
+                <Body4 state="emphasis">공개</Body4>
+              </S.Span>
+              <S.Span
+                state={filter.isOpen === false}
+                onClick={() => setFilter({ ...filter, isOpen: false })}
+              >
+                <Body4 state="emphasis">비공개</Body4>
+              </S.Span>
+            </>
+          )}
           <S.Divider />
           <S.FilterSpan
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(1)}
             state={filter.category !== null}
           >
             <Body4 state="emphasis">카테고리</Body4>
@@ -96,7 +162,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.color !== null && filter.color.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(2)}
           >
             <Body4 state="emphasis">색상</Body4>
             <AiOutlineDown className="down" />
@@ -106,7 +172,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.brand !== null && filter.brand.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(3)}
           >
             <Body4 state="emphasis">브랜드</Body4>
             <AiOutlineDown className="down" />
@@ -115,7 +181,8 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
             )}
           </S.FilterSpan>
         </S.SearchFilter>
-        <S.ClothList>
+        {isLoading && hasNextPage && <Spinner />}
+        <S.ClothList ref={containerRef}>
           <ImageList
             onClick={onClickImageList}
             data={searchResult!}
@@ -131,6 +198,7 @@ export default function ClosetCloth({ myPageClothList }: ClosetClothProps) {
           colorInitital={filter.color}
           brandInitial={filter.brand}
           setFilter={setFilter}
+          initialIndex={filterModalInitialIndex}
         />
       )}
     </>

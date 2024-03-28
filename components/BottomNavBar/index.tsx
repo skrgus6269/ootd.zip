@@ -4,24 +4,20 @@ import { BottomComponent, BottomComponentItem } from './style';
 
 import {
   AiOutlineUser,
-  AiOutlineTag,
-  AiFillTag,
-  AiFillPlusSquare,
   AiOutlinePlusSquare,
-  AiOutlineCrown,
-  AiFillCrown,
   AiOutlineHome,
   AiFillHome,
   AiOutlineSearch,
 } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import UserFilled from '@/public/images/UserFilled.svg';
 import SearchFilled from '@/public/images/SearchFilled.svg';
-import { useRecoilState } from 'recoil';
-import { BottomNavbarPlusButtonState } from '@/utils/recoil/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
+import FilledSquare from '@/public/images/FilledPlusSquare.svg';
 
 const icons = [
   <AiOutlineHome />,
@@ -34,62 +30,75 @@ const icons = [
 const activeIcons = [
   <AiFillHome />,
   <SearchFilled />,
-  <AiFillPlusSquare />,
+  <FilledSquare />,
   <BookmarkFilled />,
   <UserFilled />,
 ];
 
-const routes = ['/main', '/search', '/plus', '/bookmark', '/mypage'];
-
-function getActiveIndex(path: string) {
-  for (let i = 0; i < routes.length; i++) {
-    if (path.includes(routes[i])) {
-      return i;
-    }
-  }
+interface BottomNavBarProps {
+  addModalState: Boolean;
+  setAddModalState: Dispatch<SetStateAction<Boolean>>;
 }
 
-export default function BottomNavBar() {
+export default function BottomNavBar({
+  addModalState,
+  setAddModalState,
+}: BottomNavBarProps) {
   const router = useRouter();
   const path = router.asPath;
-  const activeIndex = getActiveIndex(path);
+  const myId = useRecoilValue(userId);
+
+  const routes = ['/main', '/search', '/plus', '/bookmark', `/mypage/${myId}`];
+
+  const getActiveIndex = () =>
+    routes.findIndex((route) => path.includes(route));
+
+  const activeIndex = getActiveIndex();
 
   const [bottomNavBarLinkers, setBottomNavBarLinkers] = useState(
     icons.map((icon, index) => ({
       icon: index === activeIndex ? activeIcons[index] : icon,
-      click: () => router.push(routes[index]),
+      click: () => {
+        router.push(routes[index]);
+        setAddModalState(false);
+      },
     }))
   );
 
   useEffect(() => {
     const newLinkers = icons.map((icon, index) => ({
       icon: index === activeIndex ? activeIcons[index] : icon,
-      click: () => router.push(routes[index]),
+      click: () => {
+        router.push(routes[index]);
+        setAddModalState(false);
+      },
     }));
     setBottomNavBarLinkers(newLinkers);
   }, [router, activeIndex]);
 
-  const [addModalState, setAddModalState] = useRecoilState(
-    BottomNavbarPlusButtonState
-  );
-
   const onClickPlusButton = () => {
-    setAddModalState(true);
+    setAddModalState(!addModalState);
   };
-
   return (
     <BottomComponent>
-      {bottomNavBarLinkers.map((item, index) => {
-        return index === 2 ? (
-          <BottomComponentItem key={index} onClick={onClickPlusButton}>
-            {addModalState ? <AiFillPlusSquare /> : item.icon}
-          </BottomComponentItem>
-        ) : (
-          <BottomComponentItem key={index} onClick={item.click}>
-            {item.icon}
-          </BottomComponentItem>
-        );
-      })}
+      {bottomNavBarLinkers.map((item, index) => (
+        <BottomComponentItem
+          key={index}
+          onClick={index === 2 ? onClickPlusButton : item.click}
+        >
+          {index === 2 && addModalState ? (
+            <FilledSquare />
+          ) : path.includes('mypage') && index === 4 ? (
+            router.isReady && myId === Number(router.query.UserId![0]) ? (
+              activeIcons[index]
+            ) : (
+              item.icon
+            )
+          ) : (
+            item.icon
+          )}
+        </BottomComponentItem>
+      ))}
     </BottomComponent>
   );
 }

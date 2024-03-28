@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Layout, SearchIcon, SearchInput, Input, CloseIcon } from './style';
 import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
 import useDebounce from '@/hooks/useDebouce';
@@ -16,6 +16,7 @@ export default function SearchBar({
   setLetter,
   onChange,
 }: SearchProps) {
+  const [focusState, setFocusState] = useState<Boolean>(false);
   //input의 value
 
   //input 입력 시 letter를 업데이트 하는 함수
@@ -47,7 +48,11 @@ export default function SearchBar({
 
   return (
     <>
-      <Layout state={letter?.length > 0}>
+      <Layout
+        onFocus={() => setFocusState(true)}
+        onBlur={() => setFocusState(false)}
+        state={focusState}
+      >
         <SearchIcon>
           <AiOutlineSearch />
         </SearchIcon>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface LayoutProps {
   state: Boolean;
-  type?: 'link' | 'write';
+  type?: 'Link' | 'Write';
 }
 
 const Layout = styled.div<LayoutProps>`
@@ -17,10 +17,11 @@ const Layout = styled.div<LayoutProps>`
   text-overflow: ellipsis;
   overflow: hidden;
   position: relative;
+  border-radius: 2px;
 
   padding: 0 16px;
   ${(props) =>
-    props.type === 'link' &&
+    props.type === 'Link' &&
     `
     padding: 0 16px 0 42px;
   `}

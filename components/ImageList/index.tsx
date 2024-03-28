@@ -21,7 +21,7 @@ export default function ImageList({ data, onClick, type }: ImageListProps) {
             <img
               onClick={() => (onClick ? onClick(item.clothId!) : '')}
               key={index}
-              src={item.clothImage}
+              src={item.clothImage!}
               alt=""
             />
           );
@@ -31,7 +31,7 @@ export default function ImageList({ data, onClick, type }: ImageListProps) {
             <img
               onClick={() => (onClick ? onClick(item.ootdId!) : '')}
               key={index}
-              src={item.ootdImage}
+              src={item.ootdImage!}
               alt=""
             />
           );

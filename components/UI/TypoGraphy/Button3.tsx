@@ -12,7 +12,7 @@ const Button3 = styled.p<Button3State>`
   ${(props) =>
     props.state === 'emphasis' &&
     `
-    font-wiehgt: ${props.theme.weight.semibold};
+    font-weight: ${props.theme.weight.semibold};
   `}
 `;
 

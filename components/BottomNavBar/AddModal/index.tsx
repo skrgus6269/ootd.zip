@@ -9,11 +9,11 @@ export default function AddModal() {
 
   return (
     <S.Layout>
-      <S.OOTD onClick={() => router.push('/AddOOTD')}>
+      <S.OOTD onClick={() => router.push('/add-ootd')}>
         <AccentOOTD fill="black" />
         <Button3>OOTD</Button3>
       </S.OOTD>
-      <S.Closet onClick={() => router.push('/AddCloth')}>
+      <S.Closet onClick={() => router.push('/add-cloth')}>
         <AccentCloth />
         <Button3>의류</Button3>
       </S.Closet>

@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
+  .nextButton {
+    position: fixed;
+    bottom: 20px;
+    width: calc(100% - 40px);
+  }
 `;
 
 const Title = styled.div`

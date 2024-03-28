@@ -32,6 +32,7 @@ const ItemImage = styled.div`
   img {
     width: 32px;
     height: 32px;
+    object-fit: cover;
   }
   align-items: center;
 `;
@@ -51,7 +52,7 @@ const Close = styled.div<ThemeProps>`
   top: -10px;
   width: 24px;
   height: 24px;
-
+  z-index: 2;
   div {
     background-color: white;
     border-radius: 50%;

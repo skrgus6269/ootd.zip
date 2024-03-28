@@ -1,103 +1,159 @@
 import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
 import ClosetTabbar from './ClosetTabbar';
-import ClosetCloth from './ClosetCloth';
-import Follow from './Follow';
+import ClosetCloth, { FilterData, OOTDListType } from './ClosetCloth';
+import Profile, { ProfileListType } from './Profile';
 import EmptySearch from '@/components/EmptySearch';
+import { UserApi } from '@/apis/domain/User/UserApi';
+import { useRouter } from 'next/router';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { useEffect, useState } from 'react';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
-export default function Closet() {
+interface searchResultProps {
+  keywordsValue: string;
+}
+
+export default function SearchResult({ keywordsValue }: searchResultProps) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
 
-  const myPageClothList = [
-    {
-      clothId: 0,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 1,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 2,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 3,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 4,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-    {
-      clothId: 5,
-      clothImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-    },
-  ];
+  const [profileList, setProfileList] = useState<ProfileListType[]>([]);
 
-  const profileList = [
-    {
-      profileId: 0,
-      name: 'Userame0',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
+  const router = useRouter();
+  const { getSearchUser } = UserApi();
+
+  const fetchDataFunction = async (
+    profilePage: number,
+    profileSize: number
+  ) => {
+    if (!router.isReady) return;
+
+    const data = await getSearchUser({
+      page: profilePage,
+      size: profileSize,
+      name: keywordsValue,
+    });
+
+    return data;
+  };
+
+  const {
+    data: profileData,
+    isLoading: profileIsLoading,
+    containerRef: profileRef,
+    hasNextPage: profileHasNextPage,
+    reset,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    size: 10,
+    initialData: [],
+  });
+
+  useEffect(() => {
+    setProfileList(
+      profileData.map((item: any) => {
+        return {
+          id: item.id,
+          name: item.name,
+          profileImage: item.profileImage,
+          isFollow: item.isFollow,
+        };
+      })
+    );
+  }, [profileData]);
+
+  useEffectAfterMount(() => {
+    setProfileList([]);
+    reset();
+  }, [keywordsValue]);
+
+  const [filter, setFilter] = useState<FilterData>({
+    category: null,
+    color: null,
+    brand: null,
+    gender: {
+      man: false,
+      woman: false,
     },
-    {
-      profileId: 1,
-      name: 'Userame1',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: false,
-    },
-    {
-      profileId: 2,
-      name: 'Userame2',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 3,
-      name: 'Userame3',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 4,
-      name: 'Userame4',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: false,
-    },
-  ];
+  });
+
+  const [sortStandard, setSortStandard] = useState<string>('LATEST');
+  const [OOTDList, setOOTDList] = useState<OOTDListType[]>([]);
+
+  const { getSearchOOTD } = OOTDApi();
+
+  useEffect(() => {
+    setFilter({
+      category: null,
+      color: null,
+      brand: null,
+      gender: {
+        man: false,
+        woman: false,
+      },
+    });
+  }, [keywordsValue]);
+
+  const fetchOOTDDataFunction = async (ootdPage: number, ootdSize: number) => {
+    if (!router.isReady) return;
+
+    const data = await getSearchOOTD({
+      searchText: keywordsValue,
+      categoryIds: filter.category?.map((item) => {
+        if (item.state) {
+          return item.id;
+        }
+        return item.detailCategories![0].id;
+      }),
+      colorIds: filter.color?.map((item) => item.id),
+      brandIds: filter.brand?.map((item) => item.id),
+      writerGender: (() => {
+        if (filter.gender.man && filter.gender.woman) {
+          return '';
+        } else if (filter.gender.man) {
+          return 'MALE';
+        } else if (filter.gender.woman) {
+          return 'FEMALE';
+        } else {
+          return '';
+        }
+      })(),
+      sortCriteria: sortStandard,
+      page: ootdPage,
+      size: ootdSize,
+    });
+
+    return data;
+  };
+
+  const {
+    data: OOTDData,
+    isLoading: OOTDIsLoading,
+    containerRef: OOTDRef,
+    hasNextPage: OOTDHasNextPage,
+    reset: ootdReset,
+  } = useInfiniteScroll({
+    fetchDataFunction: fetchOOTDDataFunction,
+    size: 9,
+    initialData: [],
+  });
+
+  useEffect(() => {
+    setOOTDList(
+      OOTDData.map((item: any) => {
+        return {
+          id: item.id,
+          imageUrl: item.imageUrl,
+        };
+      })
+    );
+  }, [OOTDData]);
+
+  useEffectAfterMount(() => {
+    setOOTDList([]);
+    ootdReset();
+  }, [keywordsValue, sortStandard, filter]);
 
   return (
     <>
@@ -105,15 +161,29 @@ export default function Closet() {
         <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
         <Funnel>
           <Funnel.Steps name="OOTD">
-            {myPageClothList.length > 0 ? (
-              <ClosetCloth myPageClothList={myPageClothList} />
+            {OOTDData.length > 0 ? (
+              <ClosetCloth
+                OOTDList={OOTDList}
+                OOTDIsLoading={OOTDIsLoading}
+                OOTDRef={OOTDRef}
+                OOTDHasNextPage={OOTDHasNextPage}
+                filter={filter}
+                setFilter={setFilter}
+                sortStandard={sortStandard}
+                setSortStandard={setSortStandard}
+              />
             ) : (
               <EmptySearch />
             )}
           </Funnel.Steps>
           <Funnel.Steps name="Profile">
-            {profileList.length > 0 ? (
-              <Follow profileList={profileList} />
+            {profileData.length > 0 ? (
+              <Profile
+                profileList={profileList}
+                profileIsLoading={profileIsLoading}
+                profileRef={profileRef}
+                profileHasNextPage={profileHasNextPage}
+              />
             ) : (
               <EmptySearch />
             )}

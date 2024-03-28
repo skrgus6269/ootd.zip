@@ -14,11 +14,6 @@ export const userNames = atom<string>({
   default: '',
 });
 
-export const BottomNavbarPlusButtonState = atom<Boolean>({
-  key: 'bottomNavbarPlusButtonState',
-  default: false,
-});
-
 export const storedImageKey = atom<ImageWithTag | undefined>({
   key: 'storedImageKey',
   default: undefined,
@@ -27,6 +22,6 @@ export const storedImageKey = atom<ImageWithTag | undefined>({
 
 export const userId = atom<number>({
   key: 'userId',
-  default: 1,
+  default: 0,
   effects_UNSTABLE: [persistAtom],
 });

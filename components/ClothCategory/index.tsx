@@ -62,6 +62,7 @@ export default function ClothCategory({
             if (item.id === items.id) return { ...items, state: true };
             return items;
           });
+          return;
         }
         for (let i = 0; i < newCategory.length; i++) {
           for (let j = 0; j < newCategory[i].detailCategories!.length; j++) {
@@ -132,9 +133,6 @@ export default function ClothCategory({
     setSelectedCategory(selectedCategory.length > 0 ? selectedCategory : null);
   }, [categoryList]);
 
-  useEffect(() => {
-    console.log(categoryList);
-  }, [categoryList]);
   return (
     <S.Layout>
       <S.Category>
@@ -160,7 +158,8 @@ export default function ClothCategory({
                   <S.SmallCategorySpan
                     state={
                       type === 'one'
-                        ? smallCategoryClickedIndex === index
+                        ? smallCategoryClickedIndex === index &&
+                          item.state === true
                         : item.state === true
                     }
                     onClick={() => onClickSmallCategory(index)}

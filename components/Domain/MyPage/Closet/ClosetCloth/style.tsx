@@ -33,10 +33,10 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.color.grey_90};
   flex-shrink: 0;
 `;
 
@@ -52,6 +52,7 @@ const Span = styled.div<SpanProps>`
   ${(props) =>
     props.state &&
     `
+      border:none;
       background-color: ${props.theme.color.grey_00};
       color: ${props.theme.color.grey_100};
   `}
@@ -82,6 +83,7 @@ const FilterSpan = styled.div<FilterSpanProps>`
     .down {
         color: ${props.theme.color.grey_100};
     }
+    border:none;
     .counter {
         position: absolute;
         right: 28px;

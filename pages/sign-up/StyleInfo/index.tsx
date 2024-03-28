@@ -1,25 +1,30 @@
 import { Dispatch, SetStateAction } from 'react';
-import S from '@/style/sign-up/StyleInfo/style';
+import S from '@/pageStyle/sign-up/StyleInfo/style';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import StyleInput from '@/components/Domain/SignUp/StyleInput';
-import { Style } from '@/pages/AddOOTD';
+import { Style } from '@/pages/add-ootd';
 
 interface StyleInfoProps {
   gender: Boolean;
   setGender: Dispatch<SetStateAction<Boolean>>;
-  setStyleListState: Dispatch<SetStateAction<Style[]>>;
+  selectedStyle: Style[];
+  setSelectedStyle: Dispatch<SetStateAction<Style[]>>;
 }
 
 export default function StyleInfo({
   gender,
   setGender,
-  setStyleListState,
+  selectedStyle,
+  setSelectedStyle,
 }: StyleInfoProps) {
   return (
     <S.Layout>
       <GenderInput gender={gender} setGender={setGender} />
       <div className="styleInput">
-        <StyleInput setStyleListState={setStyleListState} />
+        <StyleInput
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+        />
       </div>
     </S.Layout>
   );

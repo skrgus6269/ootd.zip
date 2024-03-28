@@ -62,12 +62,14 @@ const ColorModal = ({
         <S.Title>
           <Title1>색상</Title1>
         </S.Title>
-        <ColorList
-          setSelectedColorList={setSelectedColorList}
-          colorList={colorList}
-          setColorList={setColorList}
-          colorInitital={colorInitial}
-        />
+        <S.ColorList>
+          <ColorList
+            setSelectedColorList={setSelectedColorList}
+            colorList={colorList}
+            setColorList={setColorList}
+            colorInitital={colorInitial}
+          />
+        </S.ColorList>
         {selectedColorList !== null && selectedColorList.length > 0 && (
           <S.SelectedColorList>
             {selectedColorList.map((item, index) => {

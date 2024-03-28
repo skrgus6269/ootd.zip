@@ -3,13 +3,16 @@ import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
   postOOTDComentPayload,
+  getOOTDParams,
+  getOOTDCommentParams,
+  getSearchOOTDParams,
 } from '@/apis/_api/type';
 
 export const OOTDApi = () => {
   //ootd 조회
-  const getOOTD = async (id: number) => {
+  const getOOTD = async (params: getOOTDParams) => {
     try {
-      const { result } = await userService.getOOTD(id);
+      const { result } = await userService.getOOTD(params);
 
       return result;
     } catch (err) {
@@ -18,6 +21,17 @@ export const OOTDApi = () => {
     }
   };
 
+  //ootd 상세정보 조회
+  const getOOTDDetail = async (id: number) => {
+    try {
+      const { result } = await userService.getOOTDDetail(id);
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
   //ootd 게시
   const postOOTD = async (payload: postOOTDPayload) => {
     try {
@@ -35,16 +49,17 @@ export const OOTDApi = () => {
   };
 
   //ootd 전체 수정
-  const putOOTD = async (payload: postOOTDPayload) => {
-    const data = await userService.putOOTD(payload);
+  const putOOTD = async (ootdId: number, payload: postOOTDPayload) => {
+    const data = await userService.putOOTD(ootdId, payload);
     return data;
   };
 
   //ootd 삭제
   const deleteOOTD = async (id: number) => {
     try {
-      const data = await userService.deleteOOTD(id);
-      return data;
+      const { statusCode } = await userService.deleteOOTD(id);
+      if (statusCode === 200) return true;
+      return false;
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);
@@ -52,10 +67,11 @@ export const OOTDApi = () => {
   };
 
   //ootd 댓글 조회
-  const getOOTDComment = async (id: number) => {
+  const getOOTDComment = async (params: getOOTDCommentParams) => {
     try {
-      const data = await userService.getOOTDComment(id);
-      return data;
+      const { result } = await userService.getOOTDComment(params);
+
+      return result;
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);
@@ -84,9 +100,12 @@ export const OOTDApi = () => {
     }
   };
   //ootd 내용, 공개/비공개 여부 수정
-  const patchOOTDIsPrivate = async (payload: patchOOTDIsPrivatePayload) => {
+  const patchOOTDIsPrivate = async (
+    ootdId: number,
+    payload: patchOOTDIsPrivatePayload
+  ) => {
     try {
-      const data = await userService.patchOOTDIsPrivate(payload);
+      const data = await userService.patchOOTDIsPrivate(ootdId, payload);
       return data;
     } catch (err) {
       alert('관리자에게 문의하세요');
@@ -109,7 +128,10 @@ export const OOTDApi = () => {
   const deleteOOTDBookmark = async (id: number) => {
     try {
       const data = await userService.deleteOOTDBookmark(id);
-      return data;
+
+      if (data.statusCode === 200) {
+        return data;
+      }
     } catch (err) {
       alert('관리자에게 문의하세요');
       console.log('에러명', err);
@@ -182,9 +204,21 @@ export const OOTDApi = () => {
     }
   };
 
+  const getSearchOOTD = async (params: getSearchOOTDParams) => {
+    try {
+      const { result } = await userService.getSearchOOTD(params);
+
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     postOOTD,
     getOOTD,
+    getOOTDDetail,
     putOOTD,
     deleteOOTD,
     getOOTDComment,
@@ -199,5 +233,6 @@ export const OOTDApi = () => {
     otherOOTD,
     getSimilarOOTD,
     getStyle,
+    getSearchOOTD,
   } as const;
 };

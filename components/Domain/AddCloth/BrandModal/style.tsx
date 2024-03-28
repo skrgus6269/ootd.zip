@@ -31,6 +31,19 @@ const Title = styled.div`
 const Search = styled.div`
   padding: 16px 20px;
 `;
+
+interface NoBrandState {
+  state: Boolean;
+}
+
+const NoBrand = styled.div<NoBrandState>`
+  display: inline-flex;
+  padding-left: 20px;
+  gap: 6px;
+  color: ${(props) =>
+    props.state ? props.theme.color.grey_00 : props.theme.color.grey_50};
+`;
+
 const BrandList = styled.div`
   flex-grow: 1;
   overflow-y: scroll;
@@ -74,6 +87,7 @@ const S = {
   BrandList,
   SelectedBrand,
   SelectedBrandSpan,
+  NoBrand,
 };
 
 export default S;

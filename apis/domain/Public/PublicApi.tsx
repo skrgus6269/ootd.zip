@@ -1,4 +1,4 @@
-import { userService } from '@/apis/_service';
+import { authService, userService } from '@/apis/_service';
 
 export const PublicApi = () => {
   const follow = async (id: number) => {
@@ -11,8 +11,14 @@ export const PublicApi = () => {
     return data;
   };
 
+  const getUserId = async () => {
+    const { result } = await authService.getUserId();
+
+    return result;
+  };
   return {
     follow,
     unFollow,
+    getUserId,
   } as const;
 };

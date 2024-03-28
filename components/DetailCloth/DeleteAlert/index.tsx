@@ -14,15 +14,15 @@ export default function DeleteAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>옷장에서 옷을 삭제하시겠습니까?</Title1>}
+      headline="옷장에서 옷을 삭제하시겠습니까"
       body={
-        <>
-          <Body3>확인을 누르시면 옷장에서 옷이 삭제되며 다시</Body3>
-          <Body3>복구할 수 없습니다.</Body3>
-        </>
+        <Body3>
+          확인을 누르시면 옷장에서 옷이 삭제되며 다시 복구할 수 없습니다.
+        </Body3>
       }
-      yes={'안 할래'}
-      no={'할래'}
+      yes={'취소'}
+      yesColor="error"
+      no={'확인'}
     />
   );
 }

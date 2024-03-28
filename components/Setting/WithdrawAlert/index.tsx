@@ -14,14 +14,15 @@ export default function WithdrawAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>정말 탈퇴하시겠습니까?</Title1>}
+      headline="정말 탈퇴하시겠습니까?"
       body={
         <>
           <Body3>탈퇴 버튼을 누르면 탈퇴가 완료됩니다.</Body3>
         </>
       }
-      yes={'취소'}
-      no={'탈퇴'}
+      no={'취소'}
+      yes={'탈퇴'}
+      yesColor="error"
     />
   );
 }

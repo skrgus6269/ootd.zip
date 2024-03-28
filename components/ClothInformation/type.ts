@@ -12,4 +12,5 @@ export interface ClothInformationProps {
   caption?: string;
   className?: string;
   onClick?: () => void;
+  onTouchEnd?: () => void;
 }
