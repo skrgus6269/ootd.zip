@@ -24,7 +24,7 @@ const Tab = styled.span<TabProps>`
     props.focus &&
     `  
     p{ 
-      border-bottom: 2px solid black;
+      border-bottom: 1px solid black;
       margin: 0;
     }
     color: ${props.theme.color.grey_00}
@@ -45,7 +45,8 @@ const Tab = styled.span<TabProps>`
 const Hr = styled.hr`
   width: 100%;
   margin: 0;
-  border: 1px solid ${(props) => props.theme.color.grey_90};
+  border: none;
+  border-top: 1px solid ${(props) => props.theme.color.grey_90};
 `;
 
 export { Layout, Tab, Hr };

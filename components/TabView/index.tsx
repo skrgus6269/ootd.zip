@@ -5,7 +5,7 @@ import { TabViewProvider } from '@/hooks/use-tabview/context';
 
 interface TabViewProps {
   children: React.ReactNode;
-  initialIndex: number;
+  initialIndex?: number;
 }
 
 export default function TabView({ children, initialIndex }: TabViewProps) {
