@@ -58,10 +58,40 @@ export const UserApi = () => {
     }
   };
 
+  const getUserStyle = async () => {
+    try {
+      const data = await userService.getUserStyle();
+      if (data.statusCode === 200) {
+        return data.result;
+      }
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
+  //style 수정
+  const putStyle = async (styleIds: number[]) => {
+    try {
+      const { statusCode } = await userService.putStyle(styleIds);
+
+      if (statusCode === 200) {
+        return true;
+      }
+      return false;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+
   return {
     getMypage,
     getProfile,
     patchProfile,
     getSearchUser,
+    getUserStyle,
+    putStyle,
   } as const;
 };

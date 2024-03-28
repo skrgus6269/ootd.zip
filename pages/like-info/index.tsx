@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
-import StyleInput from '@/components/Domain/SignUp/StyleInput';
+import LikeInfoStyleInput from '@/components/Domain/Setting/LikeInfo';
 import { Style } from '../add-ootd';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 export default function LikeInfo() {
   const router = useRouter();
@@ -55,7 +56,7 @@ export default function LikeInfo() {
         </S.SexContent>
 
         <S.StyleContent>
-          <StyleInput
+          <LikeInfoStyleInput
             selectedStyle={selectedStyle}
             setSelectedStyle={setSelectedStyle}
           />

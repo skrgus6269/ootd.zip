@@ -280,3 +280,15 @@ export const getUserBrand = async (userId: number) => {
 
   return data;
 };
+
+export const getUserStyle = async () => {
+  const data = await userApi.getUserStyle();
+
+  return data;
+};
+
+export const putStyle = async (styleIds: number[]) => {
+  const data = await userApi.putStyle(styleIds);
+
+  return data;
+};
