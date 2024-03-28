@@ -2,6 +2,21 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+interface BackgroundState {
+  state: Boolean;
+}
+
+const Background = styled.div<BackgroundState>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.state ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+`;
+
 const Layout = styled.div`
   width: 100%;
   display: flex;
@@ -63,6 +78,6 @@ const Tag = styled.div`
   }
 `;
 
-const S = { Layout, Tag, Image };
+const S = { Background, Layout, Tag, Image };
 
 export default S;
