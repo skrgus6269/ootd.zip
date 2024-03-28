@@ -5,15 +5,18 @@ import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+interface ImageData {
+  ootdId?: number;
+  ootdBookmarkId?: number;
+  ootdImage?: string;
+}
+
 interface ImageCheckBoxListProps {
-  data: {
-    ootdId?: number;
-    ootdBookmarkId?: number;
-    ootdImage?: string;
-  }[];
+  data: ImageData[];
   checkBox: Boolean;
   checkedItems: number[];
   setCheckedItems: Dispatch<SetStateAction<number[]>>;
+  editing?: Boolean;
 }
 
 export default function ImageCheckBoxList({
@@ -21,6 +24,7 @@ export default function ImageCheckBoxList({
   checkBox,
   checkedItems,
   setCheckedItems,
+  editing,
 }: ImageCheckBoxListProps) {
   const toggleChecked = (ootdBookmarkId: number) => {
     if (checkedItems.includes(ootdBookmarkId)) {
@@ -31,6 +35,14 @@ export default function ImageCheckBoxList({
   };
 
   const router = useRouter();
+
+  const handleClick = (item: ImageData) => {
+    if (editing) {
+      toggleChecked(item.ootdBookmarkId!);
+    } else {
+      router.push(`ootd/${item.ootdId}`);
+    }
+  };
 
   return (
     <S.Layout>
@@ -44,7 +56,7 @@ export default function ImageCheckBoxList({
                 src={item.ootdImage}
                 alt=""
                 className={`clothImage ${isChecked ? 'checked' : ''}`}
-                onClick={() => router.push(`ootd/${item.ootdId}`)}
+                onClick={() => handleClick(item)}
               />
               {checkBox && (
                 <Image
