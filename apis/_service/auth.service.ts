@@ -26,3 +26,9 @@ export const getCheckCompleteRegistUserInfo = async () => {
 
   return data;
 };
+
+export const getUserId = async () => {
+  const data = await authApi.getUserId();
+
+  return data;
+};
