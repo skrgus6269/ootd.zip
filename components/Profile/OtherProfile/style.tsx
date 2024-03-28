@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 const Layout = styled.div``;
 
-const Name = styled.div``;
+const Name = styled.div`
+  margin-bottom: 4px;
+`;
 
 const Info = styled.div`
   display: flex;
