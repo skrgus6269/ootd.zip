@@ -16,7 +16,7 @@ export default function LikeInfoStyleInput({
   const [style, setStyle] = useState<Style[]>([]);
   const { getStyle } = OOTDApi();
 
-  const { getUserStyle, putStyle } = UserApi();
+  const { getUserStyle } = UserApi();
 
   useEffect(() => {
     const ferchData = async () => {

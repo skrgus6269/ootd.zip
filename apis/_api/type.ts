@@ -121,3 +121,7 @@ export interface getSearchOOTDParams {
   page: number;
   size: number;
 }
+
+export interface putStylePayload {
+  styleIds: number[];
+}

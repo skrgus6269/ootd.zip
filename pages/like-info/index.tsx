@@ -19,8 +19,24 @@ export default function LikeInfo() {
   const [possible, setPossible] = useState<Boolean>(false);
 
   useEffect(() => {
-    setPossible(true);
-  }, []);
+    if (selectedStyle.length >= 3) setPossible(true);
+    else setPossible(false);
+  }, [selectedStyle]);
+
+  const { putStyle } = UserApi();
+
+  const onClickSubmitButton = async () => {
+    if (selectedStyle.length >= 3) {
+      const selectedIds = selectedStyle.map((item) => item.id);
+      const payload = {
+        styleIds: selectedIds,
+      };
+
+      const editStyleSuccess = await putStyle(payload);
+
+      if (editStyleSuccess) router.push('/settings');
+    }
+  };
 
   return (
     <>
@@ -62,7 +78,7 @@ export default function LikeInfo() {
           />
         </S.StyleContent>
 
-        <S.Button state={possible}>
+        <S.Button state={possible} onClick={onClickSubmitButton}>
           <Button3>수정 완료</Button3>
         </S.Button>
       </S.Layout>

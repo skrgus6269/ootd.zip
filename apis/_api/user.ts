@@ -1,5 +1,9 @@
 import fetcher from '../fetcher';
-import { getSearchUserParams, patchProfilePayload } from './type';
+import {
+  getSearchUserParams,
+  patchProfilePayload,
+  putStylePayload,
+} from './type';
 
 export const follow = async (id: number) => {
   const { data } = await fetcher.post('api/v1/user/follow', { userId: id });
@@ -51,8 +55,9 @@ export const getUserStyle = async () => {
   return data;
 };
 
-export const putStyle = async (styleIds: number[]) => {
-  const { data } = await fetcher.put(`/api/v1/user/user-styles`, styleIds);
+export const putStyle = async (params: putStylePayload) => {
+  console.log(params);
+  const { data } = await fetcher.put(`/api/v1/user/user-styles`, params);
 
   return data;
 };

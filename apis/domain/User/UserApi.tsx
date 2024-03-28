@@ -1,4 +1,8 @@
-import { getSearchUserParams, patchProfilePayload } from '@/apis/_api/type';
+import {
+  getSearchUserParams,
+  patchProfilePayload,
+  putStylePayload,
+} from '@/apis/_api/type';
 import { userService } from '@/apis/_service';
 
 export const UserApi = () => {
@@ -72,9 +76,9 @@ export const UserApi = () => {
   };
 
   //style 수정
-  const putStyle = async (styleIds: number[]) => {
+  const putStyle = async (params: putStylePayload) => {
     try {
-      const { statusCode } = await userService.putStyle(styleIds);
+      const { statusCode } = await userService.putStyle(params);
 
       if (statusCode === 200) {
         return true;

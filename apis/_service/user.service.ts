@@ -14,6 +14,7 @@ import {
   paginationType,
   getSearchUserParams,
   getSearchOOTDParams,
+  putStylePayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -287,8 +288,8 @@ export const getUserStyle = async () => {
   return data;
 };
 
-export const putStyle = async (styleIds: number[]) => {
-  const data = await userApi.putStyle(styleIds);
+export const putStyle = async (params: putStylePayload) => {
+  const data = await userApi.putStyle(params);
 
   return data;
 };
