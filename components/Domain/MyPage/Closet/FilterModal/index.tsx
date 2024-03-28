@@ -48,12 +48,7 @@ export default function FilterModal({
 
   const [colorList, setColorList] = useState<ColorListType>([]);
 
-  const [brandList, setBrandList] = useState<BrandType[] | null>([
-    { id: 0, name: '나이키', state: false },
-    { id: 1, name: '아디다스', state: false },
-    { id: 2, name: '퓨마', state: false },
-    { id: 3, name: '조던', state: false },
-  ]);
+  const [brandList, setBrandList] = useState<BrandType[] | null>(null);
 
   const { getUserBrand } = MyPageApi();
   const router = useRouter();
