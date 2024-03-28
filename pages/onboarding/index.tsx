@@ -22,7 +22,7 @@ const Onboarding: ComponentWithLayout = () => {
         </Body3>
       </S.TypoGraphy>
       <Button
-        onClick={() => router.push('/main')}
+        onClick={() => router.push('/sign-in')}
         size="big"
         backgroundColor="accent"
         color="grey_00"

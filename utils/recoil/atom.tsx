@@ -22,6 +22,6 @@ export const storedImageKey = atom<ImageWithTag | undefined>({
 
 export const userId = atom<number>({
   key: 'userId',
-  default: 3,
+  default: 0,
   effects_UNSTABLE: [persistAtom],
 });

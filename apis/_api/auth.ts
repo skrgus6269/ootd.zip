@@ -39,3 +39,9 @@ export const getCheckCompleteRegistUserInfo = async () => {
 
   return data;
 };
+
+export const getUserId = async () => {
+  const { data } = await fetcher.get('/api/v1/user/token/info');
+
+  return data;
+};

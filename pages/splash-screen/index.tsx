@@ -5,14 +5,21 @@ import { AppLayoutProps } from '@/AppLayout';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getCookie } from '@/utils/Cookie';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import { useSetRecoilState } from 'recoil';
+import { userId } from '@/utils/recoil/atom';
 
 const SplashScreen: ComponentWithLayout = () => {
   const router = useRouter();
+  const { getUserId } = PublicApi();
+  const setUserId = useSetRecoilState(userId);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
       if (getCookie('accessToken')) {
+        const { id } = await getUserId();
         router.push('/main');
+        setUserId(id);
         return;
       }
       router.push('/onboarding');

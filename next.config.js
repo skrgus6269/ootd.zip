@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/splash-screen',
+        permanent: true,
+      },
+    ]
+  },
   reactStrictMode: false,
   compiler: {
     styledComponents: true,
