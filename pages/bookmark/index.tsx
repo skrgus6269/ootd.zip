@@ -114,7 +114,7 @@ export default function Bookmark() {
     reset,
   } = useInfiniteScroll({
     fetchDataFunction,
-    size: 7,
+    size: 9,
     initialData: [],
   });
 
