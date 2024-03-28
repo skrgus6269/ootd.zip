@@ -11,7 +11,8 @@ import { BrandType } from '@/components/BrandList/Brand';
 import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
-import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { MyPageApi } from '@/apis/domain/MyPage/MyPageApi';
+import { useRouter } from 'next/router';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -53,6 +54,20 @@ export default function FilterModal({
     { id: 2, name: '퓨마', state: false },
     { id: 3, name: '조던', state: false },
   ]);
+
+  const { getUserBrand } = MyPageApi();
+  const router = useRouter();
+
+  const fetchDataFunction = async () => {
+    if (!router.isReady) return;
+    const data = await getUserBrand(Number(router.query.UserId![0]));
+
+    setBrandList(data);
+  };
+
+  useEffect(() => {
+    fetchDataFunction();
+  }, []);
 
   const onClickSubmitButton = () => {
     setFilter({

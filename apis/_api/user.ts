@@ -38,3 +38,9 @@ export const getSearchUser = async (params: getSearchUserParams) => {
 
   return data;
 };
+
+export const getUserBrand = async (userId: number) => {
+  const { data } = await fetcher.get(`/api/v1/brand/user/${userId}`);
+
+  return data;
+};
