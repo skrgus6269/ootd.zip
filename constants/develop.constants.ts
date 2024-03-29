@@ -16,3 +16,9 @@ export const NEXT_PUBLIC_GOOGLE_URI =
 //카카오 인증 관련 상수
 export const NEXT_PUBLIC_KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
 export const NEXT_PUBLIC_KAKAO_URI = `${NEXT_PUBLIC_DOMAIN_HOST}/sign-in/kakao/callback`;
+
+//애플 인증 관련 상수
+
+export const NEXT_PUBLIC_APPLE_CLIENT_ID =
+  process.env.NEXT_PUBLIC_APPLE_CLIENT_ID;
+export const NEXT_PUBLIC_APPLE_URI = `${NEXT_PUBLIC_DOMAIN_HOST}/sign-in/apple/callback`;
