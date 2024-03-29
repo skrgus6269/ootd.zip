@@ -6,8 +6,8 @@ export default function Document() {
       <Head>
         <meta
           name="viewport"
-          content="upgrade-insecure-requests"
-          http-equiv="Content-Security-Policy"
+          content="width=device-width"
+          initial-scale="1.0"
         />
       </Head>
 
