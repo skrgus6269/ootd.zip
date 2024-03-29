@@ -5,7 +5,6 @@ import { useRecoilState } from 'recoil';
 import { loginStates } from '@/utils/recoil/atom';
 import {
   NEXT_PUBLIC_KAKAO_URI,
-  NEXT_PUBLIC_GOOGLE_URI,
   NEXT_PUBLIC_APPLE_URI,
 } from '@/constants/develop.constants';
 import { useRouter } from 'next/router';
@@ -56,9 +55,7 @@ export const SignInApi = () => {
         break;
       }
       case 'APPLE': {
-        window.AppleID.Auth.authorize({
-          redirectUri: NEXT_PUBLIC_APPLE_URI,
-        });
+        router.push(NEXT_PUBLIC_APPLE_URI);
         break;
       }
     }
