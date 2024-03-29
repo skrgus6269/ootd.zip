@@ -7,7 +7,7 @@ import {
 
 //cloth 작성
 export const postCloth = async (payload: postClothPayload) => {
-  const { data } = await fetcher.post('/api/v1/clothes', payload);
+  const { data } = await fetcher.post('/v1/clothes', payload);
 
   return data;
 };
@@ -22,7 +22,7 @@ export const getUserClothList = async ({
   colorIds,
   isPrivate,
 }: getClothListParams) => {
-  let url = `/api/v1/clothes?page=${page}&size=${size}&userId=${userId}&sortCriteria=createdAt&sortDirection=DESC`;
+  let url = `/v1/clothes?page=${page}&size=${size}&userId=${userId}&sortCriteria=createdAt&sortDirection=DESC`;
 
   const brandUrl = brandIds?.map((item) => `brandIds=${item}`).join('&');
   const categoryUrl = categoryIds
@@ -44,21 +44,21 @@ export const getUserClothList = async ({
 
 //cloth 상세 정보 조회
 export const getClothDetail = async (id: number) => {
-  const { data } = await fetcher.get(`/api/v1/clothes/${id}`);
+  const { data } = await fetcher.get(`/v1/clothes/${id}`);
 
   return data;
 };
 
 //cloth 삭제
 export const deleteCloth = async (id: number) => {
-  const { data } = await fetcher.delete(`/api/v1/clothes/${id}`);
+  const { data } = await fetcher.delete(`/v1/clothes/${id}`);
 
   return data;
 };
 
 //cloth 수정
 export const putCloth = async (clothId: number, payload: postClothPayload) => {
-  const { data } = await fetcher.put(`/api/v1/clothes/${clothId}`, payload);
+  const { data } = await fetcher.put(`/v1/clothes/${clothId}`, payload);
 
   return data;
 };
@@ -68,7 +68,7 @@ export const patchClothIsPrivate = async (
   clothId: number,
   payload: patchClothIsPrivateType
 ) => {
-  const { data } = await fetcher.patch(`/api/v1/clothes/${clothId}`, payload);
+  const { data } = await fetcher.patch(`/v1/clothes/${clothId}`, payload);
 
   return data;
 };
