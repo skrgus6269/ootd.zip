@@ -13,9 +13,11 @@ export default function TagInformation({
   state,
   className,
   type,
+  onClick,
+  onTouchEnd,
 }: ClothInformationProps) {
   return (
-    <S.Layout className={className} state={state!}>
+    <S.Layout onClick={onClick} className={className} state={state!}>
       <S.ItemImage>
         <Image width={32} height={32} src={clothImage} alt="아이템" />
       </S.ItemImage>
@@ -24,7 +26,7 @@ export default function TagInformation({
         <Body4>{name}</Body4>
         {clothSize && <Body4>{clothSize}</Body4>}
       </S.Information>
-      <S.Close state={state!}>
+      <S.Close onTouchEnd={onTouchEnd} state={state!}>
         {type !== 'view' && (
           <div>
             <AiFillCloseCircle />

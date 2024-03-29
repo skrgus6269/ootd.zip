@@ -5,9 +5,10 @@ import Carousel from '@/components/Carousel';
 
 interface TabsProps {
   children: React.ReactNode;
+  dots?: boolean;
 }
 
-export default function Tabs({ children }: TabsProps) {
+export default function Tabs({ children, dots }: TabsProps) {
   const { index, setIndex } = useTabViewContext();
 
   const afterChangeHandler = (currentIndex: number) => {
@@ -31,6 +32,7 @@ export default function Tabs({ children }: TabsProps) {
       infinite={false}
       afterChange={afterChangeHandler}
       ParentRef={ref}
+      dots={dots}
     >
       {children}
     </Carousel>

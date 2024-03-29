@@ -2,68 +2,78 @@ import { OtherProfile } from '@/components/Profile';
 import S from './style';
 import Button from '@/components/Button';
 import { Body3, Body4, Button3 } from '@/components/UI';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-interface UserProfileDataType {
+export interface UserProfileDataType {
+  userId: number;
   userImage: string;
   userName: string;
-  follower: number;
-  following: number;
+  followerCount: number;
+  followingCount: number;
   height: number;
   weight: number;
-  followingState: Boolean;
-  introduce: string;
-  OOTDNumber: number;
-  clothNumber: number;
+  isFollow: Boolean;
+  description: string;
+  ootdCount: number;
+  clothesCount: number;
 }
 
-export default function Profile() {
-  const onClickFollowButton = () => {};
+interface profileProps {
+  data: UserProfileDataType;
+  localUserId: number;
+  showingId: number | undefined;
+  onClickFollowButton: () => void;
+}
 
-  // const [getMypageProfileData] = useCloset();
-
-  const [userProfileData, setUserProfileData] = useState<UserProfileDataType>({
-    userImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    userName: '낙낙',
-    follower: 72,
-    following: 132,
-    height: 177,
-    weight: 72,
-    followingState: false,
-    introduce: '간계밥',
-    OOTDNumber: 0,
-    clothNumber: 0,
-  });
+export default function Profile({
+  data,
+  localUserId,
+  showingId,
+  onClickFollowButton,
+}: profileProps) {
+  const router = useRouter();
 
   return (
     <S.Layout>
       <OtherProfile
+        showingId={showingId}
         className="profile"
-        userImage={userProfileData.userImage}
-        userName={userProfileData.userName}
+        userImage={data.userImage}
+        userName={data.userName}
         isUser={true}
-        follow={userProfileData.follower}
-        myCloth={userProfileData.following}
+        follow={data.followerCount}
+        myCloth={data.followingCount}
       />
-      <S.BodyInformation>
-        <Body4>{userProfileData.height}cm</Body4>
-        <p className="dot">•</p>
-        <Body4>{userProfileData.weight}kg</Body4>
-      </S.BodyInformation>
+      {String(data.height) !== '0' && (
+        <S.BodyInformation>
+          <Body4>{data.height}cm</Body4>
+          <p className="dot">•</p>
+          <Body4>{data.weight}kg</Body4>
+        </S.BodyInformation>
+      )}
       <S.Introduce>
-        <Body3>{userProfileData.introduce}</Body3>
+        <Body3>{data.description}</Body3>
       </S.Introduce>
-      <Button
-        className="followButton"
-        size="big"
-        backgroundColor="grey_00"
-        color="grey_100"
-        border={false}
-        onClick={onClickFollowButton}
-      >
-        <Button3>팔로우</Button3>
-      </Button>
+      {localUserId === showingId ? (
+        <Button
+          className="editButton"
+          backgroundColor="grey_95"
+          color="grey_00"
+          size="big"
+          onClick={() => router.push(`/edit-mypage`)}
+          border={false}
+        >
+          <Button3>프로필 수정</Button3>
+        </Button>
+      ) : (
+        <S.ButtonWrap state={data.isFollow}>
+          {!data.isFollow ? (
+            <Button3 onClick={onClickFollowButton}>팔로우</Button3>
+          ) : (
+            <Button3 onClick={onClickFollowButton}>팔로잉</Button3>
+          )}
+        </S.ButtonWrap>
+      )}
     </S.Layout>
   );
 }

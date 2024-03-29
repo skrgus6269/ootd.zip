@@ -4,17 +4,29 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Button3, Caption1, Title1 } from '../UI';
 import WithdrawBlock from '../Setting/WithdrawBlock';
+import ReportApi from '@/apis/domain/Report/ReportApi';
+
+export type withdrawBlockType = {
+  id: number;
+  message: string;
+}[];
 
 interface DeclarationModalProps {
+  type: string;
+  ID: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  setReportStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function DeclarationModal({
+  type,
+  ID,
   declaration,
   setDeclaration,
   setReceivedDeclaration,
+  setReportStatus,
 }: DeclarationModalProps) {
   const [checks, setChecks] = useState<Array<boolean>>([
     false,
@@ -32,16 +44,61 @@ export default function DeclarationModal({
     setPossible(checks.some((check) => check));
   }, [checks]);
 
-  const withdrawBlockTitles: string[] = [
-    '판매 또는 직거래 유도',
-    '비방, 명예훼손 또는 수치심 유발',
-    '혐오적, 외설적, 범죄적 행위 등 공공질서 및 미풍양속 위반',
-    '서비스에 대한 허위 및 오해의 소지가 있는 행동',
-    '저작권 위반, 개인정보 노출 등 권리침해 우려',
-    '정치적, 종교적 분쟁 야기',
-    '스팸 또는 지나치게 상업적인 내용',
-    '개인정보 도용, 사칭 또는 타인의 정보를 무단 위변조',
-  ];
+  const { getReport, postReport } = ReportApi();
+
+  const [withdrawBlockTitles, setWithdrawBlockTitles] =
+    useState<withdrawBlockType>([]);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      const report = await getReport();
+
+      setWithdrawBlockTitles(report);
+    };
+
+    fetchReport();
+  }, []);
+
+  const onClickDeclarationButton = async () => {
+    const trueIndices: number[] = checks.reduce(
+      (acc: number[], currentValue: boolean, currentIndex: number) => {
+        if (currentValue === true) {
+          acc.push(currentIndex);
+        }
+        return acc;
+      },
+      []
+    );
+
+    const payload = {
+      reportIds: trueIndices,
+      targetId: Number(ID),
+      reportType: type,
+    };
+
+    console.log(payload);
+
+    const addReportSuccess = await postReport(payload);
+
+    if (
+      addReportSuccess.response &&
+      addReportSuccess.response.data.divisionCode === 'R002'
+    ) {
+      setReceivedDeclaration(true); // 차단 모달 열기
+      setDeclaration(false); // 신고하기 모달 닫기
+      setReportStatus(false);
+    } else if (
+      addReportSuccess.result &&
+      addReportSuccess.result.id &&
+      addReportSuccess.result.reportCount > 0
+    ) {
+      setReceivedDeclaration(true); // 차단 모달 열기
+      setDeclaration(false); // 신고하기 모달 닫기
+      setReportStatus(true);
+    } else {
+      alert('신고 실패');
+    }
+  };
 
   return (
     <Modal isOpen={declaration} height="90">
@@ -54,7 +111,11 @@ export default function DeclarationModal({
         </S.Header>
         <S.Frame>
           <Title1>@user님의</Title1>
-          <Title1>게시글을 신고합니다.</Title1>
+          {type === 'COMMENT' ? (
+            <Title1>댓글을 신고합니다.</Title1>
+          ) : (
+            <Title1>게시글을 신고합니다.</Title1>
+          )}
           <Caption1 style={{ color: '#8B8B8B' }}>
             아래에서 신고 사유를 선택해주세요. 회원님의 신고는 익명으로
             처리됩니다.
@@ -62,23 +123,17 @@ export default function DeclarationModal({
         </S.Frame>
         {withdrawBlockTitles.map((item, index) => (
           <WithdrawBlock
-            key={index}
-            title={withdrawBlockTitles[index]}
-            checked={checks[index]}
+            key={item.id}
+            title={item.message}
+            checked={checks[item.id]}
             setChecked={() => {
               const newChecks = [...checks];
-              newChecks[index] = !newChecks[index];
+              newChecks[item.id] = !newChecks[item.id];
               setChecks(newChecks);
             }}
           />
         ))}
-        <S.Button
-          state={possible}
-          onClick={() => {
-            setReceivedDeclaration(true);
-            setDeclaration(false);
-          }}
-        >
+        <S.Button state={possible} onClick={onClickDeclarationButton}>
           <Button3>신고하기</Button3>
         </S.Button>
       </S.Layout>

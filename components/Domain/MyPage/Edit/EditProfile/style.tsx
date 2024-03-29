@@ -7,7 +7,7 @@ const Layout = styled.div`
   align-items: center;
   gap: 8px;
 
-  img {
+  .userImage {
     width: 88px;
     height: 88px;
     border-radius: 50%;

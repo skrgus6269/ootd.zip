@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useState, useEffect } from 'react';
+import React, { MutableRefObject, useState, useEffect, useRef } from 'react';
 import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import S from './style';
 import useDebounce from '@/hooks/useDebouce';
@@ -17,6 +17,7 @@ interface TextProps {
   inputRef?: MutableRefObject<null>;
   pressEnter?: () => void;
   onClick?: () => void;
+  state?: Boolean;
 }
 
 export default function Text({
@@ -31,14 +32,16 @@ export default function Text({
   inputRef,
   pressEnter,
   onClick,
+  state,
 }: TextProps) {
   //input의 value
 
   useEffect(() => {
-    setLetter(defaultValue!);
+    if (defaultValue) setLetter(defaultValue);
   }, [defaultValue]);
 
   const [letter, setLetter] = useState<string>('');
+  const [inputFocus, setInputFocus] = useState<Boolean>(false);
 
   //input 입력 시 letter를 업데이트 하는 함수
   const onChangeInput = (value: string) => {
@@ -48,11 +51,6 @@ export default function Text({
   const search = () => {
     if (validity) validity(letter && letter.trimEnd());
     onChange(letter);
-  };
-
-  //delete 아이콘 클릭 시 실행되는 함수
-  const onClickCloseIcon = () => {
-    setLetter('');
   };
 
   useDebounce({
@@ -68,7 +66,16 @@ export default function Text({
   };
 
   return (
-    <S.Layout size={size} line={line} onClick={onClick}>
+    <S.Layout
+      state={state !== undefined ? state : letter.length > 0}
+      inputFocus={inputFocus}
+      onFocus={() => setInputFocus(true)}
+      onBlur={() => setInputFocus(false)}
+      size={size}
+      line={line}
+      onClick={onClick}
+      ref={inputRef}
+    >
       {type === 'Link' && (
         <S.LinkIcon state={letter.length > 0}>
           <AiOutlineLink />
@@ -98,9 +105,13 @@ export default function Text({
           />
         )}
       </S.SearchInput>
-      {letter && (
-        <S.CloseIcon line={line}>
-          <AiFillCloseCircle onClick={onClickCloseIcon} />
+      {letter.length > 0 && (
+        <S.CloseIcon
+          className="close"
+          onClick={() => setLetter('')}
+          line={line}
+        >
+          <AiFillCloseCircle />
         </S.CloseIcon>
       )}
       {unit && (

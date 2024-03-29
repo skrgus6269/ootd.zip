@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import S from '@/style/sign-up/BodyInfo/style';
+import S from '@/pageStyle/sign-up/BodyInfo/style';
 import BodyInput from '@/components/Domain/SignUp/BodyInput';
 import WeightOpen from '@/components/Domain/SignUp/WeightOpen';
 
@@ -8,6 +8,8 @@ interface BodyInfoProps {
   setOpen: Dispatch<SetStateAction<Boolean>>;
   heightSetState: Dispatch<SetStateAction<string>>;
   weightSetState: Dispatch<SetStateAction<string>>;
+  weight: string;
+  height: string;
 }
 
 export default function BodyInfo({
@@ -15,10 +17,14 @@ export default function BodyInfo({
   setOpen,
   heightSetState,
   weightSetState,
+  weight,
+  height,
 }: BodyInfoProps) {
   return (
     <S.Layout>
       <BodyInput
+        weight={weight}
+        height={height}
         heightSetState={heightSetState}
         weightSetState={weightSetState}
       />

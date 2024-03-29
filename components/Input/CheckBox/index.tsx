@@ -6,7 +6,7 @@ import Body2 from '@/components/UI/TypoGraphy/Body2';
 
 interface BoxProps {
   id: number;
-  state: Boolean;
+  state?: Boolean;
   name: string;
 }
 

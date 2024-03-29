@@ -11,7 +11,8 @@ import { BrandType } from '@/components/BrandList/Brand';
 import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
-import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { MyPageApi } from '@/apis/domain/MyPage/MyPageApi';
+import { useRouter } from 'next/router';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -20,6 +21,7 @@ interface FilterModalProps {
   colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
   setFilter: Dispatch<SetStateAction<FilterData>>;
+  initialIndex: number;
 }
 
 export default function FilterModal({
@@ -29,6 +31,7 @@ export default function FilterModal({
   categoryInitital,
   colorInitital,
   brandInitial,
+  initialIndex,
 }: FilterModalProps) {
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
@@ -45,12 +48,21 @@ export default function FilterModal({
 
   const [colorList, setColorList] = useState<ColorListType>([]);
 
-  const [brandList, setBrandList] = useState<BrandType[] | null>([
-    { id: 0, name: '나이키', state: false },
-    { id: 1, name: '아디다스', state: false },
-    { id: 2, name: '퓨마', state: false },
-    { id: 3, name: '조던', state: false },
-  ]);
+  const [brandList, setBrandList] = useState<BrandType[] | null>(null);
+
+  const { getUserBrand } = MyPageApi();
+  const router = useRouter();
+
+  const fetchDataFunction = async () => {
+    if (!router.isReady) return;
+    const data = await getUserBrand(Number(router.query.UserId![0]));
+
+    setBrandList(data);
+  };
+
+  useEffect(() => {
+    fetchDataFunction();
+  }, []);
 
   const onClickSubmitButton = () => {
     setFilter({
@@ -119,8 +131,11 @@ export default function FilterModal({
   return (
     <Modal isOpen={isOpen} height="65">
       <S.Layout>
-        <TabView>
-          <TabView.TabBar tab={['카테고리', '색상', '브랜드']} />
+        <TabView initialIndex={initialIndex}>
+          <TabView.TabBar
+            tab={['카테고리', '색상', '브랜드']}
+            display="block"
+          />
           <div className="main">
             <TabView.Tabs>
               <TabView.Tab>

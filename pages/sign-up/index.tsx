@@ -4,13 +4,14 @@ import BasicInfo from './BasicInfo';
 import BodyInfo from './BodyInfo';
 import StyleInfo from './StyleInfo';
 import NextButton from '@/components/NextButton';
-import S from '@/style/sign-up/style';
+import S from '@/pageStyle/sign-up/style';
 import Title1 from '@/components/UI/TypoGraphy/Title1';
 import AppBar from '@/components/Appbar';
 import { AppLayoutProps } from '@/AppLayout';
 import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { Style } from '../AddOOTD';
+import { Style } from '../add-ootd';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -31,34 +32,34 @@ const SignUp: ComponentWithLayout = () => {
   const [styleState, setStyleState] = useState<Boolean>(false);
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
 
-  const [styleListState, setStyleListState] = useState<Style[]>([]);
+  const { postRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const canAdvanceBasicState = canUseId && age?.length > 0;
 
     const canAdvanceBodyState = weight?.length > 0 && height?.length > 0;
 
-    const selectedStyles = styleListState.filter((item) => item.state === true);
-
-    const canAdvanceStyleState = selectedStyles?.length >= 3;
+    const canAdvanceStyleState = selectedStyle?.length >= 3;
 
     setBasicState(canAdvanceBasicState);
     setBodyState(canAdvanceBodyState);
     setStyleState(canAdvanceStyleState);
-    setSelectedStyle(selectedStyles);
-  }, [canUseId, age, weight, height, styleListState]);
+  }, [canUseId, age, weight, height, selectedStyle]);
 
-  const onClickSubmitButton = () => {
-    console.log({
-      id,
-      age,
-      height,
-      weight,
-      open,
-      gender,
-      selectedStyle,
-    });
-    router.push('/main');
+  const onClickSubmitButton = async () => {
+    const payload = {
+      name: id,
+      gender: gender ? 'MALE' : 'FEMALE',
+      age: Number(age),
+      height: Number(height),
+      weight: Number(weight),
+      isBodyPrivate: !open,
+      styles: selectedStyle.map((item) => item.id),
+    };
+
+    const result = await postRegistUserInfo(payload);
+
+    if (result) router.push('/main');
   };
 
   const router = useRouter();
@@ -92,7 +93,6 @@ const SignUp: ComponentWithLayout = () => {
               // 스타일 컴포넌트를 사용하여 스타일 적용
               currentStep === stepName ? (
                 <S.ActiveStep key={stepName}>
-                  {' '}
                   <S.Progress>
                     <div className="number">
                       <Title1>0{index + 1}.</Title1>
@@ -115,6 +115,8 @@ const SignUp: ComponentWithLayout = () => {
           <S.Main>
             <Funnel.Steps name="기본정보">
               <BasicInfo
+                id={id}
+                age={age}
                 setId={setId}
                 setAge={setAge}
                 setCanUseId={setCanUseId}
@@ -129,6 +131,8 @@ const SignUp: ComponentWithLayout = () => {
             </Funnel.Steps>
             <Funnel.Steps name="체형정보">
               <BodyInfo
+                weight={weight}
+                height={height}
                 heightSetState={setHeight}
                 weightSetState={setWeight}
                 open={open}
@@ -146,7 +150,8 @@ const SignUp: ComponentWithLayout = () => {
               <StyleInfo
                 gender={gender}
                 setGender={setGender}
-                setStyleListState={setStyleListState}
+                selectedStyle={selectedStyle}
+                setSelectedStyle={setSelectedStyle}
               />
               <NextButton
                 className="nextButton"

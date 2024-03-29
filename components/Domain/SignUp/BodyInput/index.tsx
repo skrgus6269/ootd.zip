@@ -5,11 +5,15 @@ import S from './style';
 interface BodyInputProps {
   heightSetState: Dispatch<SetStateAction<string>>;
   weightSetState: Dispatch<SetStateAction<string>>;
+  weight: string;
+  height: string;
 }
 
 export default function BodyInput({
   heightSetState,
   weightSetState,
+  weight,
+  height,
 }: BodyInputProps) {
   return (
     <Input>
@@ -19,6 +23,7 @@ export default function BodyInput({
           <S.Weight>
             <Input.Label size="small">신장</Input.Label>
             <Input.Text
+              defaultValue={height}
               line="underline"
               size="small"
               unit="cm"
@@ -30,6 +35,7 @@ export default function BodyInput({
           <S.Height>
             <Input.Label size="small">몸무게</Input.Label>
             <Input.Text
+              defaultValue={weight}
               line="underline"
               size="small"
               unit="kg"

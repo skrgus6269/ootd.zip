@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import S from './style';
 import { Caption1 } from '@/components/UI';
 import ActionSheet from '@/components/ActionSheet';
+import Avatar from '@/public/images/Avatar.svg';
 
 interface EditProfileProps {
   imageURL: string;
@@ -20,14 +21,14 @@ export default function EditProfile({
     onClickImage();
   };
 
-  const onClickBackground = () => {
-    if (openActionSheet) setOpenActionSheet(false);
-  };
-
   return (
     <>
       <S.Layout>
-        <img src={imageURL} alt="유저 이미지" />
+        {imageURL === '' ? (
+          <Avatar className="userImage" />
+        ) : (
+          <img className="userImage" src={imageURL} alt="유저 이미지" />
+        )}
         <Caption1 style={{ color: '#8B8B8B' }} onClick={onClickPicutre}>
           사진 입력
         </Caption1>

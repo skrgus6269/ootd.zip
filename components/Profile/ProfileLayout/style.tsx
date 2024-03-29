@@ -10,11 +10,10 @@ const Layout = styled.div`
 `;
 
 const UserPhoto = styled.div`
-  img {
-    width: 44px;
-    height: 44px;
+  .userImage {
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background-color: black;
     object-fit: cover;
   }
 `;

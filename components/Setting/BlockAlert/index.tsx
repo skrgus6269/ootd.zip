@@ -14,7 +14,7 @@ export default function BlockAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline={<Title1>차단이 해제되었습니다.</Title1>}
+      headline="차단이 해제되었습니다."
       body={
         <>
           <Body3>팔로우하시겠습니까?</Body3>

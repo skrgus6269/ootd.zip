@@ -66,8 +66,8 @@ export default function ColorList({
   };
 
   return (
-    <S.Layout>
-      <S.ColorList className={className}>
+    <S.Layout className={className}>
+      <S.ColorList>
         {colorList.map((item, index) => {
           return (
             <ColorSpan

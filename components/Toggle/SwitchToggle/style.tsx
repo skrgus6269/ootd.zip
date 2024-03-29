@@ -14,7 +14,7 @@ const ToggleContainer = styled.div<ToggleProps>`
   width: 34px;
   height: 20px;
   background-color: ${(props) =>
-    props.state ? '#FF8A00' : (props) => props.theme.color.grey_90};
+    props.state ? props.theme.color.correct : props.theme.color.grey_90};
   border-radius: 100px;
   transition: 0.5s;
 `;
@@ -25,7 +25,7 @@ const ToggleCircle = styled.div<ToggleProps>`
   position: absolute;
   top: 1px;
   background-color: ${(props) => props.theme.color.grey_100};
-  left: ${(props) => (props.state ? '15px' : '1px')};
+  left: ${(props) => (props.state ? '1px' : '15px')};
   border-radius: 50%;
   transition: 0.5s;
 `;

@@ -33,7 +33,7 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
   background-color: #f2f2f2;
@@ -98,7 +98,7 @@ const FilterSpan = styled.div<FilterSpanProps>`
 `;
 
 const ClothList = styled.div`
-  height: calc(100vh - 246px);
+  height: calc(100vh - 56px);
   overflow-y: scroll;
 `;
 

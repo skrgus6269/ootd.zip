@@ -1,10 +1,17 @@
-import S from '@/style/main/style';
+import S from '@/pageStyle/main/style';
 import AppBar from '@/components/Appbar';
 import Headline from '@/components/UI/TypoGraphy/Title1';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';
 import UserCloset from '@/components/Domain/Main/MyCloset';
 import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
+import Carousel from '@/components/Carousel';
+import TabView from '@/components/TabView';
+import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
+import Explore from '@/components/Domain/Main/Explore';
 
 const MyClosetDataSample = {
   user: {
@@ -163,19 +170,52 @@ const SameClothDifferentFeeling = [
 ];
 
 export default function Main() {
+  const router = useRouter();
+  const [isExistNotReadAlarm, setIsExistNotReadAlarm] =
+    useState<Boolean>(false);
+  const { getExistIsNotReadAlarm } = AlarmApi();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getExistIsNotReadAlarm();
+      setIsExistNotReadAlarm(result);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <>
+    <S.Layout isExistNotReadAlarm={isExistNotReadAlarm}>
       <AppBar
         leftProps={<></>}
-        middleProps={<Headline>logo</Headline>}
-        rightProps={<AiOutlineSearch />}
+        middleProps={<></>}
+        rightProps={
+          <div className="bell" onClick={() => router.push('/Alarm')}>
+            <AiOutlineBell />
+          </div>
+        }
       />
-      <S.Layout>
-        <UserCloset isUser={true} userOOTD={MyClosetDataSample} />
-        <TodayRecommend data={TodayRecommendSampleData} />
-        <SameCloth data={SameClothDifferentFeeling} />
-        {/* <button onClick={onClickButton}>클릭해봐</button> */}
-      </S.Layout>
-    </>
+      <TabView>
+        <TabView.TabBar
+          display="inline"
+          tab={['큐레이팅', '탐색']}
+          className="tabBar"
+        />
+        <TabView.Tabs>
+          <TabView.Tab>
+            <S.Curation>
+              <TodayRecommend data={TodayRecommendSampleData} />
+              <LikeOOTD />
+              <SameCloth data={SameClothDifferentFeeling} />
+              {/* <button onClick={onClickButton}>클릭해봐</button> */}
+            </S.Curation>
+          </TabView.Tab>
+          <TabView.Tab>
+            <S.Explore>
+              <Explore />
+            </S.Explore>
+          </TabView.Tab>
+        </TabView.Tabs>
+      </TabView>
+    </S.Layout>
   );
 }

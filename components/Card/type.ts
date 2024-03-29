@@ -13,6 +13,7 @@ export interface CardProps {
   data: DataProps;
   size: string;
   children?: React.ReactNode;
+  onClick?: () => void;
 }
 
 // 카드로 만든 컴포넌트 Props

@@ -1,13 +1,16 @@
 import S from './style';
-import { Button2, Button3 } from '../UI';
+import { Body3, Button1, Button2, Button3, Title1 } from '../UI';
+import { ReactNode } from 'react';
 
 interface AlertProps {
   onClickYesButton: () => void;
   onClickNoButton: () => void;
-  headline: React.ReactNode;
-  body: React.ReactNode;
+  headline: string;
+  body: ReactNode;
   yes?: string;
+  yesColor?: string;
   no?: string;
+  noColor?: string;
 }
 
 export default function Alert({
@@ -16,20 +19,24 @@ export default function Alert({
   headline,
   body,
   yes,
+  yesColor,
   no,
+  noColor,
 }: AlertProps) {
   return (
     <S.Layout>
       <S.AlertPrompt>
-        <S.AlertHeadline>{headline}</S.AlertHeadline>
+        <S.AlertHeadline>
+          <Title1>{headline}</Title1>
+        </S.AlertHeadline>
         <S.AlertBody>{body}</S.AlertBody>
         {yes && no && (
-          <S.AlertButton>
+          <S.AlertButton yesColor={yesColor} noColor={noColor}>
             <button onClick={onClickNoButton} className="no">
-              <Button2>{no}</Button2>
+              <Button1 state="thin">{no}</Button1>
             </button>
             <button onClick={onClickYesButton} className="yes">
-              <Button3>{yes}</Button3>
+              <Button1>{yes}</Button1>
             </button>
           </S.AlertButton>
         )}

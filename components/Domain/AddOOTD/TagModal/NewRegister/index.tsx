@@ -16,7 +16,7 @@ export default function NewRegister({ imageAndTag }: NewRegisterProps) {
 
   const onClickAddClothButton = () => {
     setStoredImage(imageAndTag);
-    router.push(`/AddCloth`);
+    router.push(`/add-cloth`);
   };
 
   return (

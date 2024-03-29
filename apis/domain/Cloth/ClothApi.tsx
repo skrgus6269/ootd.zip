@@ -1,4 +1,9 @@
-import { patchClothIsPrivateType, postClothPayload } from '@/apis/_api/type';
+import {
+  getClothListParams,
+  getOOTDClothesParams,
+  patchClothIsPrivateType,
+  postClothPayload,
+} from '@/apis/_api/type';
 import { systemService, userService } from '@/apis/_service';
 
 export default function ClothApi() {
@@ -18,9 +23,9 @@ export default function ClothApi() {
   };
 
   //유저의 cloth 리스트 조회
-  const getUserClothList = async (id: number) => {
+  const getUserClothList = async (params: getClothListParams) => {
     try {
-      const { result } = await userService.getUserClothList(id);
+      const { result } = await userService.getUserClothList(params);
 
       return result;
     } catch (err) {
@@ -110,6 +115,17 @@ export default function ClothApi() {
     const result = await systemService.getSize(id);
     return result;
   };
+
+  //이 옷을 활용한 OOTD 조회
+  const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
+    try {
+      const { result } = await userService.getOOTDWithCloth(params);
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
   return {
     postCloth,
     getUserClothList,
@@ -121,5 +137,6 @@ export default function ClothApi() {
     getColor,
     getBrand,
     getSize,
+    getOOTDWithCloth,
   };
 }

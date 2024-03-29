@@ -16,6 +16,8 @@ interface MyInfoProps {
   setWeight: Dispatch<SetStateAction<string>>;
   open: Boolean;
   setOpen: Dispatch<SetStateAction<Boolean>>;
+  possible: Boolean;
+  setPossible: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function EditMyInfo({
@@ -29,52 +31,100 @@ export default function EditMyInfo({
   setWeight,
   open,
   setOpen,
+  possible,
+  setPossible,
 }: MyInfoProps) {
+  const [commentState, setCommentState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if (nickName === '') {
+      // input의 상태 추가
+    }
+
+    if (height === '0' || height === '') {
+      // input의 상태 추가
+    }
+
+    if (weight === '0' || weight === '') {
+      // input의 상태 추가
+    }
+
+    if (
+      nickName === '' ||
+      height === '0' ||
+      weight === '0' ||
+      height === '' ||
+      weight === ''
+    ) {
+      setPossible(true);
+    } else {
+      setPossible(false);
+    }
+  }, [nickName, weight, height]);
+
   return (
     <>
       <S.Layout>
         <S.Category>
-          <Body3>닉네임</Body3>
-          <Input.Text
-            defaultValue={nickName}
-            size="big"
-            line="outline"
-            onChange={setNickName}
-          />
+          <Input>
+            <Input.Label className="title" size="small">
+              닉네임
+            </Input.Label>
+            <Input.Text
+              state={nickName === '' ? false : true}
+              defaultValue={nickName}
+              size="big"
+              line="outline"
+              onChange={setNickName}
+            />
+          </Input>
         </S.Category>
-
         <S.Category>
-          <Body3>소개</Body3>
-          <Input.Text
-            defaultValue={introduction}
-            size="big"
-            line="outline"
-            onChange={setIntroduction}
-          />
+          <Input>
+            <Input.Label className="title" size="small">
+              소개
+            </Input.Label>
+            <Input.Text
+              state={true}
+              defaultValue={introduction}
+              size="big"
+              line="outline"
+              onChange={setIntroduction}
+            />
+          </Input>
         </S.Category>
-
         <S.BodyInfo>
           <S.Category>
-            <Body3>신장</Body3>
-            <Input.Text
-              defaultValue={height}
-              size="small"
-              line="outline"
-              unit="cm"
-              type="number"
-              onChange={setHeight}
-            />
+            <Input>
+              <Input.Label className="title" size="small">
+                신장
+              </Input.Label>
+              <Input.Text
+                state={height === '' || height === '0' ? false : true}
+                defaultValue={height}
+                size="small"
+                line="outline"
+                unit="CM"
+                type="number"
+                onChange={setHeight}
+              />
+            </Input>
           </S.Category>
           <S.Category>
-            <Body3>체중</Body3>
-            <Input.Text
-              defaultValue={weight}
-              size="small"
-              line="outline"
-              unit="kg"
-              type="number"
-              onChange={setWeight}
-            />
+            <Input>
+              <Input.Label className="title" size="small">
+                체중
+              </Input.Label>
+              <Input.Text
+                state={weight === '' || weight === '0' ? false : true}
+                defaultValue={weight}
+                size="small"
+                line="outline"
+                unit="KG"
+                type="number"
+                onChange={setWeight}
+              />
+            </Input>
           </S.Category>
         </S.BodyInfo>
       </S.Layout>
@@ -85,9 +135,19 @@ export default function EditMyInfo({
           <SwitchToggle state={open} setState={setOpen} />
         </S.Wrap>
         <HelperText state={3}>
-          다른 사람에게 내 체형정보가 표시되지 않습니다.
+          {open
+            ? '다른 사람에게 내 체형정보가 표시됩니다.'
+            : '다른 사람에게 내 체형정보가 표시되지 않습니다.'}
         </HelperText>
       </S.OpenStatus>
+
+      <S.StateLayout>
+        {!possible && (
+          <HelperText state={2}>
+            닉네임, 신장, 체중은 필수정보입니다.
+          </HelperText>
+        )}
+      </S.StateLayout>
     </>
   );
 }

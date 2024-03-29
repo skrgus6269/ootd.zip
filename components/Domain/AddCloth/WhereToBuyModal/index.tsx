@@ -4,7 +4,7 @@ import Input from '@/components/Input';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Modal from '@/components/Modal';
 import NextButton from '@/components/NextButton';
-import { ClothWhereBuy } from '@/pages/AddCloth';
+import { ClothWhereBuy } from '@/pages/add-cloth';
 
 interface WhereToBuyModal {
   storedClothWhereBuy?: ClothWhereBuy;
@@ -113,13 +113,14 @@ export default function WhereToBuyModal({
             )}
           </Input>
         </S.Write>
+        <NextButton
+          className="nextButton"
+          onClick={onClickNextButton}
+          state={linkLetter.length > 0 || writeLetter.length > 0}
+        >
+          추가하기
+        </NextButton>
       </S.Layout>
-      <NextButton
-        onClick={onClickNextButton}
-        state={linkLetter.length > 0 || writeLetter.length > 0}
-      >
-        추가하기
-      </NextButton>
     </Modal>
   );
 }

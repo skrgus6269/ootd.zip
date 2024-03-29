@@ -23,16 +23,17 @@ import TagInformation from '../ClothInformation/TagInformation';
 import Carousel from '../Carousel';
 import ReportModal from '../Domain/OOTD/ReportModal';
 import DeclarationModal from '../DeclarationModal';
-import ReceivedDeclarationModal from '../ReceivedDeclaration';
-import { OOTDType } from '@/pages/OOTD/[...OOTDNumber]';
+import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import FixModal from '../Domain/OOTD/FixModal';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
+import FixModal from '../Domain/OOTD/FixModal';
+import LikeToggle from '../Toggle/LikeToggle';
+import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
 
 interface PostingProps {
   data: OOTDType;
@@ -56,11 +57,11 @@ export default function Posting({
   const [componentHeight, setComponentHeight] = useState(0); //컴포넌트 높이
   const [clothTagOpen, setClothTagOpen] = useState<Boolean>(true);
   const [reportModalIsOpen, setReportModalIsOpen] = useState<Boolean>(false);
-  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [declaration, setDeclaration] = useState<Boolean>(false); // 신고 Modal
   const [receivedDeclaration, setReceivedDeclaration] =
-    useState<Boolean>(false);
+    useState<Boolean>(false); // 신고 후 차단 Modal
   const [fixModalIsOpen, setFixModalIsOpen] = useState<Boolean>(false);
-  const [publicSetting, setPublicSetting] = useState<Boolean>(false);
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
   const imgRef = useRef<HTMLDivElement>(null);
   const myId = useRecoilValue(userId);
@@ -91,6 +92,8 @@ export default function Posting({
     if (heartState) await deleteOOTDLike(Number(router.query.OOTDNumber![0]));
     setHeartState(!heartState);
   };
+
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
   const onClickShareButton = () => {
     //웹에서는 정상 작동하나 웹뷰에서는 작동하지 않음
@@ -181,12 +184,25 @@ export default function Posting({
       <S.Layout>
         <S.PostingTop>
           {data.userName === 'string' ? (
-            <img src={data.userImage} className="userImage" alt="유저 이미지" />
+            <img
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              src={data.userImage}
+              className="userImage"
+              alt="유저 이미지"
+            />
           ) : (
-            <Avatar className="avatar" />
+            <Avatar
+              onClick={() => router.push(`/mypage/${data.userId}`)}
+              className="avatar"
+            />
           )}
 
-          <Body3 className="userName">{data.userName}</Body3>
+          <Body3
+            onClick={() => router.push(`/mypage/${data.userId}`)}
+            className="userName"
+          >
+            {data.userName}
+          </Body3>
           {!myPost && !followState && (
             <Button3 onClick={onClickFollowButton} className="unfollow">
               팔로우
@@ -204,7 +220,7 @@ export default function Posting({
             onClick={() => setClothTagOpen(!clothTagOpen)}
             className="tag"
           />
-          <Carousel infinite={false} slidesToShow={1}>
+          <Carousel infinite={false} slidesToShow={1} dots={true}>
             {data.ootdImages?.map((item, index) => {
               return (
                 <S.ImageWithTag key={index}>
@@ -233,6 +249,9 @@ export default function Posting({
                           )}
                         >
                           <TagInformation
+                            onClick={() =>
+                              router.push(`/cloth/${items.clothesId}`)
+                            }
                             clothId={items.clothesId}
                             clothImage={items.clothesImage}
                             caption={'tag'}
@@ -250,24 +269,21 @@ export default function Posting({
           </Carousel>
         </S.PostingImage>
         <S.PostingCommunication>
-          {heartState ? (
-            <AiFillHeart onClick={onClickHeartButton} className="likedHeart" />
-          ) : (
-            <AiOutlineHeart
-              onClick={onClickHeartButton}
-              className="unLikedHeart"
-            />
-          )}
+          <LikeToggle
+            state={heartState}
+            setState={setHeartState}
+            onClick={onClickHeartButton}
+          />
           <MessageOutlined
             className="comment"
             onClick={() => commentRef.current.focus()}
             alt="댓글"
           />
-          <ShareOutlined
+          {/* <ShareOutlined
             className="share"
             onClick={onClickShareButton}
             alt="공유하기"
-          />
+          /> */}
           {bookMarkState ? (
             <BookmarkFilled
               className="bookmark"
@@ -303,7 +319,7 @@ export default function Posting({
           setDeclaration={setDeclaration}
         />
         <FixModal
-          setPublicSetting={setPublicSetting}
+          setToastOpen={setToastOpen}
           reportModalIsOpen={fixModalIsOpen}
           setReportModalIsOpen={setFixModalIsOpen}
           isPrivate={data.isPrivate}
@@ -312,19 +328,27 @@ export default function Posting({
         />
         {declaration && (
           <DeclarationModal
+            type="OOTD"
+            ID={Number(router.query.OOTDNumber![0])}
             declaration={declaration}
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
           />
         )}
         {receivedDeclaration && (
           <ReceivedDeclarationModal
+            type="게시글"
+            reportStatus={reportStatus}
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />
         )}
-        {publicSetting && (
+        {toastOpen && !data.isPrivate && (
           <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
+        )}
+        {toastOpen && data.isPrivate && (
+          <Toast text="다른 사람이 이 ootd를 볼 수 없도록 변경되었습니다." />
         )}
       </S.Layout>
     </>

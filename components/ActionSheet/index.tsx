@@ -16,8 +16,12 @@ export default function ActionSheet({ buttons }: ActionSheetProps) {
       {buttons &&
         buttons.map((item, index) => {
           return (
-            <S.ButtonWrap key={index}>
-              <Button2 onClick={item.buttonClick}>{item.name}</Button2>
+            <S.ButtonWrap
+              onClick={item.buttonClick}
+              key={index}
+              name={item.name}
+            >
+              <Button2>{item.name}</Button2>
             </S.ButtonWrap>
           );
         })}

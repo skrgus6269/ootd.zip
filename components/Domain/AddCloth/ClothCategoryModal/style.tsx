@@ -4,13 +4,16 @@ const Layout = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 60px;
   .title {
     padding: 23px 20px;
   }
   overflow-y: hidden;
 
-  button {
-    margin: 16px 20px 59px 20px;
+  .nextButton {
+    position: fixed;
+    bottom: 20px;
+    padding: 0 20px;
   }
 `;
 

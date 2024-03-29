@@ -1,10 +1,25 @@
 import styled from 'styled-components';
 
+interface BackgroundState {
+  state: Boolean;
+}
+
+const Background = styled.div<BackgroundState>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.state ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+`;
+
 const Layout = styled.div`
   .nextButton {
-    padding: 16px 20px 24px 16px;
+    padding: 16px 20px 0px 16px;
     position: fixed;
-    bottom: 0px;
+    bottom: 20px;
   }
   .helperText {
     padding: 42px 0 18px 0;
@@ -25,8 +40,7 @@ const Image = styled.div<ImageProps>`
     width: 106px;
     height: 106px;
     object-fit: cover;
-    padding: 0 4px;
-    border-radius: 4px;
+    border-radius: 2px;
     opacity: ${(props) => (props.state ? 0.5 : 1)};
   }
   .bigImage {
@@ -49,6 +63,7 @@ const ImageList = styled.div<ImageListProps>`
     width: calc(106px * ${props.imageListlength} + 8px);
   `}
   .selected {
+    color: ${(props) => props.theme.color.grey_30};
     margin: 24px 4px 8px 4px;
     width: 100px;
   }
@@ -61,7 +76,7 @@ interface ImageNumberProps {
 const ImageNumber = styled.div<ImageNumberProps>`
   position: absolute;
   top: 4px;
-  right: 12px;
+  right: 8px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -75,6 +90,6 @@ const ImageNumber = styled.div<ImageNumberProps>`
   background-color: ${(props) => (props.state ? '#00EACE' : '#9A9A9A')};
 `;
 
-const S = { Layout, Image, ImageList, ImageNumber };
+const S = { Background, Layout, Image, ImageList, ImageNumber };
 
 export default S;

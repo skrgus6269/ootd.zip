@@ -55,7 +55,11 @@ export default function ClothCategoryModal({
           type="one"
           categoryInitital={categoryInitial}
         />
-        <NextButton state={true} onClick={onClickNextButton}>
+        <NextButton
+          className="nextButton"
+          state={true}
+          onClick={onClickNextButton}
+        >
           선택 완료
         </NextButton>
       </S.Layout>

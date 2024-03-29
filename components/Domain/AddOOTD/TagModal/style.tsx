@@ -11,14 +11,17 @@ interface LayoutProps {
 }
 
 const Layout = styled.div`
-  height: 80vh;
+  padding-top: 8px;
+  .toast {
+    bottom: 24px;
+  }
 `;
 
 const Background = styled.div<LayoutProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.addTag ? 'block' : 'none')};
   opacity: 0.3;
-  z-index: 2;
+  z-index: 998;
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -27,6 +30,7 @@ const Background = styled.div<LayoutProps>`
 
 const MyCloset = styled.div`
   width: 100vw;
+  height: 100vh;
   padding: 16px 20px 0 20px;
   display: flex;
   flex-direction: column;
@@ -78,7 +82,7 @@ const SearchFilter = styled.div`
   }
 `;
 
-const Divider = styled.div`
+const Divider = styled.span`
   width: 1px;
   height: 34px;
   background-color: #f2f2f2;
@@ -90,6 +94,8 @@ const List = styled.div`
   flex-direction: column;
   gap: 15px;
   flex-grow: 1;
+  height: 30%;
+  overflow-y: scroll;
   hr {
     color: ${(props) => props.theme.color.grey_90};
     width: 100%;

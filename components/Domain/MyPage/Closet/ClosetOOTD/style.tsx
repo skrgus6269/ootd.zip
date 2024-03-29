@@ -28,10 +28,16 @@ const OOTDSort = styled.div<OOTDSortProps>`
   }
 `;
 const OOTDList = styled.div`
-  height: calc(100vh - 220px);
+  height: calc(100vh - 200px);
   overflow-y: scroll;
 `;
 
-const S = { Layout, OOTDSort, OOTDList };
+const Divider = styled.span`
+  width: 1px;
+  height: 12px;
+  background-color: ${(props) => props.theme.color.grey_90};
+`;
+
+const S = { Layout, OOTDSort, OOTDList, Divider };
 
 export default S;

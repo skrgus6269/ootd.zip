@@ -3,7 +3,7 @@ import S from './style';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
-import { Style } from '@/pages/AddOOTD';
+import { Style } from '@/pages/add-ootd';
 import NextButton from '@/components/NextButton';
 import Modal from '@/components/Modal';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';

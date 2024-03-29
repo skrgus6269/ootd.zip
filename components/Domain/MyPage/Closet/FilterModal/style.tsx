@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   height: 100%;
+  margin-top: 16px;
   .main {
-    height: 60%;
     margin-top: 16px;
     overflow-y: scroll;
   }
   .colorList {
     border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
-    padding-bottom: 10px;
+    padding-bottom: 130px;
   }
   .top {
     padding: 0 20px 8px 20px;
@@ -23,11 +23,11 @@ interface SelectedFilterType {
 
 const SelectedFilter = styled.div<SelectedFilterType>`
   display: ${(props) => (props.state ? 'flex' : 'none')};
-  position: relative;
+  position: fixed;
   z-index: 999;
   gap: 8px;
   background-color: white;
-  bottom: 30px;
+  bottom: 72px;
   overflow-x: scroll;
   ::-webkit-scrollbar {
     display: none;
@@ -60,11 +60,13 @@ interface SelectedButtonState {
 
 const SelectedButton = styled.div<SelectedButtonState>`
   display: flex;
-  padding: 0 20px;
+  padding: 16px 20px 24px 20px;
   gap: 8px;
   position: fixed;
+  z-index: 999;
+  background-color: white;
   width: 100%;
-  bottom: 20px;
+  bottom: 0px;
   .init {
     width: 30%;
     border: 1px solid ${(props) => props.theme.color.grey_80};
