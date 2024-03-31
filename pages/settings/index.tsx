@@ -15,6 +15,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 export default function Setting() {
   const router = useRouter();
 
+  const [queryState, setQueryState] = useState<string>('');
   const [URLState, setURLState] = useState<any>(false);
 
   const shareButton = () => {
@@ -22,6 +23,12 @@ export default function Setting() {
     setURLState(false); // 재공유 toast 노출 초기화
     sendReactNativeMessage({ type: 'copyEmail' }); // native로 클립보드 복사 처리
   };
+
+  useEffect(() => {
+    if (router.query.state !== '') {
+      setQueryState(router.query.state as string);
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -84,6 +91,9 @@ export default function Setting() {
           />
         </S.ServiceInfo>
         {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
+        {queryState === 'likeInfoEditSuccess' && (
+          <Toast text="취향정보 수정이 완료되었습니다." />
+        )}
       </S.Layout>
     </>
   );

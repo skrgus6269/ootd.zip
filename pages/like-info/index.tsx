@@ -34,7 +34,14 @@ export default function LikeInfo() {
 
       const editStyleSuccess = await putStyle(payload);
 
-      if (editStyleSuccess) router.push('/settings');
+      if (editStyleSuccess) {
+        router.push({
+          pathname: `/settings`,
+          query: { state: 'likeInfoEditSuccess' },
+        });
+      } else {
+        alert('실패');
+      }
     }
   };
 
