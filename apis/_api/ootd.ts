@@ -12,7 +12,7 @@ import {
 
 //ootd 작성
 export const postOOTD = async (payload: postOOTDPayload) => {
-  const { data } = await fetcher.post('api/v1/ootd', payload);
+  const { data } = await fetcher.post('v1/ootd', payload);
 
   return data;
 };
@@ -26,7 +26,7 @@ export const getOOTD = async ({
   userId,
 }: getOOTDParams) => {
   const { data } = await fetcher.get(
-    `api/v1/ootd?page=${page}&size=${size}&userId=${userId}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}`
+    `v1/ootd?page=${page}&size=${size}&userId=${userId}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}`
   );
 
   return data;
@@ -34,21 +34,21 @@ export const getOOTD = async ({
 
 //ootd 상세정보 조회
 export const getOOTDDetail = async (id: number) => {
-  const { data } = await fetcher.get(`api/v1/ootd/${id}`);
+  const { data } = await fetcher.get(`v1/ootd/${id}`);
 
   return data;
 };
 
 //ootd 전체 수정
 export const putOOTD = async (ootdId: number, payload: postOOTDPayload) => {
-  const { data } = await fetcher.put(`api/v1/ootd/${ootdId}`, payload);
+  const { data } = await fetcher.put(`v1/ootd/${ootdId}`, payload);
 
   return data;
 };
 
 //ootd 삭제
 export const deleteOOTD = async (id: number) => {
-  const { data } = await fetcher.delete(`api/v1/ootd/${id}`);
+  const { data } = await fetcher.delete(`v1/ootd/${id}`);
 
   return data;
 };
@@ -58,42 +58,42 @@ export const patchOOTDIsPrivate = async (
   ootdId: number,
   payload: patchOOTDIsPrivatePayload
 ) => {
-  const { data } = await fetcher.patch(`api/v1/ootd/${ootdId}`, payload);
+  const { data } = await fetcher.patch(`v1/ootd/${ootdId}`, payload);
 
   return data;
 };
 
 //ootd 북마크 추가
 export const postOOTDBookmark = async (id: number) => {
-  const { data } = await fetcher.post(`api/v1/ootd/bookmark/${id}`);
+  const { data } = await fetcher.post(`v1/ootd/bookmark/${id}`);
 
   return data;
 };
 
 //ootd 북마크 제거
 export const deleteOOTDBookmark = async (id: number) => {
-  const { data } = await fetcher.delete(`api/v1/ootd/bookmark/${id}`);
+  const { data } = await fetcher.delete(`v1/ootd/bookmark/${id}`);
 
   return data;
 };
 
 //ootd 좋아요 추가
 export const postOOTDLike = async (id: number) => {
-  const { data } = await fetcher.post(`api/v1/ootd/like/${id}`);
+  const { data } = await fetcher.post(`v1/ootd/like/${id}`);
 
   return data;
 };
 
 //ootd 좋아요 제거
 export const deleteOOTDLike = async (id: number) => {
-  const { data } = await fetcher.delete(`api/v1/ootd/like/${id}`);
+  const { data } = await fetcher.delete(`v1/ootd/like/${id}`);
 
   return data;
 };
 
 //ootd 전체 조회
 export const lookUpOOTDAll = async () => {
-  const { data } = await fetcher.get('/api/v1/ootd/all');
+  const { data } = await fetcher.get('/v1/ootd/all');
 
   return data;
 };
@@ -103,7 +103,7 @@ export const getUserBookmarkList = async (
   payload: getUserBookmarkListPayload
 ) => {
   const { data } = await fetcher.get(
-    `/api/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
+    `/v1/bookmarks?page=${payload.page}&size=${payload.size}&sortCriteria=${payload.sortCriteria}&sortDirection=${payload.sortDirection}`
   );
 
   return data;
@@ -112,7 +112,7 @@ export const getUserBookmarkList = async (
 //유저의 북마크 리스트 삭제
 export const deleteBookmarkList = async (bookamrkIds: number[]) => {
   const { data } = await fetcher.delete(
-    `/api/v1/bookmarks?ootdBookmarkIds=${bookamrkIds}`
+    `/v1/bookmarks?ootdBookmarkIds=${bookamrkIds}`
   );
 
   return data;
@@ -121,7 +121,7 @@ export const deleteBookmarkList = async (bookamrkIds: number[]) => {
 //ootd 작성자의 다른 ootd 조회
 export const otherOOTD = async (userId: number, ootdId: number) => {
   const { data } = await fetcher.get(
-    `/api/v1/ootd/other?page=0&size=8&userId=${userId}&ootdId=${ootdId}`
+    `/v1/ootd/other?page=0&size=8&userId=${userId}&ootdId=${ootdId}`
   );
 
   return data;
@@ -130,7 +130,7 @@ export const otherOOTD = async (userId: number, ootdId: number) => {
 //해당 ootd와 비슷한 ootd
 export const getSimilarOOTD = async (ootdId: number) => {
   const { data } = await fetcher.get(
-    `/api/v1/ootd/similar?page=0&size=6&ootdId=${ootdId}&sortDirection=ASC`
+    `/v1/ootd/similar?page=0&size=6&ootdId=${ootdId}&sortDirection=ASC`
   );
 
   return data;
@@ -143,7 +143,7 @@ export const getOOTDComment = async ({
   ootdId,
 }: getOOTDCommentParams) => {
   const { data } = await fetcher.get(
-    `api/v1/comments?page=${page}&size=${size}&ootdId=${ootdId}`
+    `v1/comments?page=${page}&size=${size}&ootdId=${ootdId}`
   );
 
   return data;
@@ -151,14 +151,14 @@ export const getOOTDComment = async ({
 
 //ootd 댓글 등록
 export const postOOTDComent = async (payload: postOOTDComentPayload) => {
-  const { data } = await fetcher.post(`/api/v1/comment`, payload);
+  const { data } = await fetcher.post(`/v1/comment`, payload);
 
   return data;
 };
 
 //ootd 댓글 삭제
 export const DeleteOOTDComent = async (commentId: number) => {
-  const { data } = await fetcher.delete(`/api/v1/comment/${commentId}`);
+  const { data } = await fetcher.delete(`/v1/comment/${commentId}`);
 
   return data;
 };
@@ -172,14 +172,14 @@ export const getOOTDWithCloth = async ({
   clothesId,
 }: getOOTDClothesParams) => {
   const { data } = await fetcher.get(
-    `api/v1/ootd/clothes?page=${page}&size=${size}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}&clothesId=${clothesId}`
+    `v1/ootd/clothes?page=${page}&size=${size}&sortCriteria=${sortCriteria}&sortDirection=${sortDirection}&clothesId=${clothesId}`
   );
 
   return data;
 };
 
 export const getSearchOOTD = async (params: getSearchOOTDParams) => {
-  let url = `/api/v1/ootd/search?searchText=${params.searchText}&page=${params.page}&size=${params.size}&sortCriteria=${params.sortCriteria}&writerGender=${params.writerGender}`;
+  let url = `/v1/ootd/search?searchText=${params.searchText}&page=${params.page}&size=${params.size}&sortCriteria=${params.sortCriteria}&writerGender=${params.writerGender}`;
 
   const brandIds = params.brandIds?.map((item) => `brandIds=${item}`).join('&');
   const categoryIds = params.categoryIds

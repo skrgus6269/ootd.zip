@@ -9,7 +9,7 @@ export const login = async (platform: string, code: string) => {
     authorizationCode: code,
   };
 
-  const { data } = await fetcher.post('api/v1/user/login', payload);
+  const { data } = await fetcher.post('v1/user/login', payload);
 
   return data;
 };
@@ -21,7 +21,7 @@ export const kakaoLogin = async () => {
 };
 
 export const checkName = async (name: string) => {
-  const { data } = await fetcher.get(`api/v1/user/check-name?name=${name}`);
+  const { data } = await fetcher.get(`v1/user/check-name?name=${name}`);
 
   return data;
 };
@@ -29,19 +29,19 @@ export const checkName = async (name: string) => {
 export const postRegistUserInfo = async (
   payload: postRegistUserInfoPayload
 ) => {
-  const { data } = await fetcher.post(`api/v1/user/register`, payload);
+  const { data } = await fetcher.post(`v1/user/register`, payload);
 
   return data;
 };
 
 export const getCheckCompleteRegistUserInfo = async () => {
-  const { data } = await fetcher.get(`api/v1/user/complete`);
+  const { data } = await fetcher.get(`v1/user/complete`);
 
   return data;
 };
 
 export const getUserId = async () => {
-  const { data } = await fetcher.get('/api/v1/user/token/info');
+  const { data } = await fetcher.get('/v1/user/token/info');
 
   return data;
 };
