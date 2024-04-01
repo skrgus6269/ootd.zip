@@ -1,7 +1,6 @@
 import SearchBar from '@/components/SearchBar';
 import S from './style';
 import ClothInformation from '@/components/ClothInformation';
-import { ClothInformationProps } from '@/components/ClothInformation/type';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import { Body3, Body4 } from '@/components/UI';
@@ -138,14 +137,15 @@ export default function AddTag({
   useEffectAfterMount(() => {
     setSearchResult(null);
     reset();
-  }, [clicked]);
+  }, [clicked, searchKeyword]);
 
   const fetchDataFunction = async (page: number, size: number) => {
     const data = await getUserClothList({
       page,
       size,
       userId: myId,
-      brandIds: clicked ? [clicked + 1] : undefined,
+      categoryIds: typeof clicked === 'number' ? [clicked + 1] : undefined,
+      searchText: searchKeyword,
     });
 
     return data;
