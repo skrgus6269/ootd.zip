@@ -48,7 +48,6 @@ export default function Bookmark() {
 
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = container;
-      console.log(scrollTop, clientHeight, scrollHeight);
       if (scrollTop >= 50) {
         setIsVisible(true);
       }
@@ -113,6 +112,7 @@ export default function Bookmark() {
     containerRef: bookmarkRef,
     hasNextPage: bookmarkHasNextPage,
     reset,
+    total: bookmarkTotal,
   } = useInfiniteScroll({
     fetchDataFunction,
     size: 9,
@@ -151,6 +151,7 @@ export default function Bookmark() {
 
         <S.BookmarkList ref={bookmarkRef}>
           <BookmarkSubHead
+            total={bookmarkTotal}
             editing={editing}
             setEditing={setEditing}
             setAlertOpen={setAlertOpen}

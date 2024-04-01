@@ -16,6 +16,7 @@ export default function useInfiniteScroll({
   const [data, setData] = useState(initialData);
   const [hasNextPage, setHasNextPage] = useState<Boolean>(false);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [total, setTotal] = useState<number>(0); // total 필드 추가
   const containerRef = useRef<any>(null);
   const router = useRouter();
 
@@ -27,6 +28,7 @@ export default function useInfiniteScroll({
       setHasNextPage(!result.isLast);
       setPage(1);
       setIsLoading(false);
+      setTotal(result.total && result.total);
     });
   }, [router.isReady]);
 
@@ -69,7 +71,16 @@ export default function useInfiniteScroll({
       setHasNextPage(!result.isLast);
       setPage(1);
       setIsLoading(false);
+      setTotal(0);
     });
   };
-  return { data, isLoading, hasNextPage, containerRef, reset, moreFetch };
+  return {
+    data,
+    isLoading,
+    hasNextPage,
+    containerRef,
+    reset,
+    moreFetch,
+    total,
+  };
 }

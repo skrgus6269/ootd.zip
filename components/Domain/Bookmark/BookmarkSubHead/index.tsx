@@ -10,6 +10,7 @@ interface BookmarkSubHeadProps {
   setEditing: Dispatch<SetStateAction<Boolean>>;
   setAlertOpen: Dispatch<SetStateAction<Boolean>>;
   count: number;
+  total: number;
 }
 
 export default function BookmarSubHead({
@@ -17,6 +18,7 @@ export default function BookmarSubHead({
   setEditing,
   setAlertOpen,
   count,
+  total,
 }: BookmarkSubHeadProps) {
   return (
     <>
@@ -24,7 +26,7 @@ export default function BookmarSubHead({
         <S.Frame>
           <Body4 state="emphasis" className="bookmarkSubHeadText">
             {editing && count > 0 ? `${count}개의 게시글이 선택됨` : ``}
-            {!editing && `4개의 게시물`}
+            {!editing && `${total}개의 게시물`}
           </Body4>
         </S.Frame>
         <S.Wrap>
