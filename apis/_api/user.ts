@@ -50,14 +50,14 @@ export const getUserBrand = async (userId: number) => {
 };
 
 export const getUserStyle = async () => {
-  const { data } = await fetcher.get(`/api/v1/user/user-styles`);
+  const { data } = await fetcher.get(`/v1/user/user-styles`);
 
   return data;
 };
 
 export const putStyle = async (params: putStylePayload) => {
   console.log(params);
-  const { data } = await fetcher.put(`/api/v1/user/user-styles`, params);
+  const { data } = await fetcher.put(`/v1/user/user-styles`, params);
 
   return data;
 };
