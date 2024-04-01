@@ -28,6 +28,13 @@ const CheckBoxLayout = styled.div`
     right: 8px;
     top: 8px;
   }
+
+  .moreIcon {
+    position: absolute;
+    z-index: 100;
+    right: 8px;
+    bottom: 8px;
+  }
 `;
 
 const S = { Layout, CheckBoxLayout };

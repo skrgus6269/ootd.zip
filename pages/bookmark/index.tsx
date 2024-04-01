@@ -18,6 +18,7 @@ export type OOTDdataType = {
   ootdId: number;
   ootdBookmarkId: number;
   ootdImage: string;
+  ootdImageCount: number;
 };
 
 export type BookmarkListType = {
@@ -121,6 +122,7 @@ export default function Bookmark() {
   useEffect(() => {
     setBookmarkList(
       bookmarkData.map((item: any) => {
+        console.log(item);
         return {
           ootdId: item.ootdId,
           ootdBookmarkId: item.ootdBookmarkId,
