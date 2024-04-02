@@ -2,18 +2,23 @@ import Image from 'next/image';
 import S from './style';
 import BookmarkCheckBoxTrue from '@/public/images/BookmarkCheckBoxTrue.png';
 import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
+import More from '@/public/images/More.png';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+interface ImageData {
+  ootdId?: number;
+  ootdBookmarkId?: number;
+  ootdImage?: string;
+  ootdImageCount?: number;
+}
+
 interface ImageCheckBoxListProps {
-  data: {
-    ootdId?: number;
-    ootdBookmarkId?: number;
-    ootdImage?: string;
-  }[];
+  data: ImageData[];
   checkBox: Boolean;
   checkedItems: number[];
   setCheckedItems: Dispatch<SetStateAction<number[]>>;
+  editing?: Boolean;
 }
 
 export default function ImageCheckBoxList({
@@ -21,6 +26,7 @@ export default function ImageCheckBoxList({
   checkBox,
   checkedItems,
   setCheckedItems,
+  editing,
 }: ImageCheckBoxListProps) {
   const toggleChecked = (ootdBookmarkId: number) => {
     if (checkedItems.includes(ootdBookmarkId)) {
@@ -31,6 +37,14 @@ export default function ImageCheckBoxList({
   };
 
   const router = useRouter();
+
+  const handleClick = (item: ImageData) => {
+    if (editing) {
+      toggleChecked(item.ootdBookmarkId!);
+    } else {
+      router.push(`ootd/${item.ootdId}`);
+    }
+  };
 
   return (
     <S.Layout>
@@ -44,7 +58,7 @@ export default function ImageCheckBoxList({
                 src={item.ootdImage}
                 alt=""
                 className={`clothImage ${isChecked ? 'checked' : ''}`}
-                onClick={() => router.push(`ootd/${item.ootdId}`)}
+                onClick={() => handleClick(item)}
               />
               {checkBox && (
                 <Image
@@ -54,6 +68,15 @@ export default function ImageCheckBoxList({
                   onClick={() => toggleChecked(item.ootdBookmarkId!)}
                   width={24}
                   height={24}
+                />
+              )}
+              {item.ootdImageCount! > 1 && (
+                <Image
+                  src={More}
+                  alt="More"
+                  className="moreIcon"
+                  width={14}
+                  height={14}
                 />
               )}
             </S.CheckBoxLayout>

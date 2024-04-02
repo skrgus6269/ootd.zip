@@ -4,7 +4,7 @@ import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import BookmarSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
+import BookmarkSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
 import ImageCheckBoxList from '@/components/ImageCheckBoxList';
 import BookmarkAlert from '@/components/Domain/Bookmark/BookmarkAlert';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -18,6 +18,7 @@ export type OOTDdataType = {
   ootdId: number;
   ootdBookmarkId: number;
   ootdImage: string;
+  ootdImageCount: number;
 };
 
 export type BookmarkListType = {
@@ -47,7 +48,6 @@ export default function Bookmark() {
 
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = container;
-      console.log(scrollTop, clientHeight, scrollHeight);
       if (scrollTop >= 50) {
         setIsVisible(true);
       }
@@ -112,15 +112,17 @@ export default function Bookmark() {
     containerRef: bookmarkRef,
     hasNextPage: bookmarkHasNextPage,
     reset,
+    total: bookmarkTotal,
   } = useInfiniteScroll({
     fetchDataFunction,
-    size: 7,
+    size: 9,
     initialData: [],
   });
 
   useEffect(() => {
     setBookmarkList(
       bookmarkData.map((item: any) => {
+        console.log(item);
         return {
           ootdId: item.ootdId,
           ootdBookmarkId: item.ootdBookmarkId,
@@ -148,13 +150,15 @@ export default function Bookmark() {
         />
 
         <S.BookmarkList ref={bookmarkRef}>
-          <BookmarSubHead
+          <BookmarkSubHead
+            total={bookmarkTotal}
             editing={editing}
             setEditing={setEditing}
             setAlertOpen={setAlertOpen}
             count={checkedItems.length}
           />
           <ImageCheckBoxList
+            editing={editing}
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
             checkBox={editing}

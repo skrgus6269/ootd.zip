@@ -31,11 +31,11 @@ const TopButton = styled.div`
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  z-index: 9999;
+  z-index: 999;
 
-  img {
-    width: 48px;
-    height: 48px;
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 

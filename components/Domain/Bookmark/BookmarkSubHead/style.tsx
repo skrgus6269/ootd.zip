@@ -31,6 +31,10 @@ const Wrap = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 14px;
+
+  .editingButton {
+    padding: 0px;
+  }
 `;
 
 const S = { headLayout, Frame, Wrap };
