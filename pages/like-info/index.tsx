@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
-import StyleInput from '@/components/Domain/SignUp/StyleInput';
+import LikeInfoStyleInput from '@/components/Domain/Setting/LikeInfo';
 import { Style } from '../add-ootd';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 export default function LikeInfo() {
   const router = useRouter();
@@ -18,8 +19,31 @@ export default function LikeInfo() {
   const [possible, setPossible] = useState<Boolean>(false);
 
   useEffect(() => {
-    setPossible(true);
-  }, []);
+    if (selectedStyle.length >= 3) setPossible(true);
+    else setPossible(false);
+  }, [selectedStyle]);
+
+  const { putStyle } = UserApi();
+
+  const onClickSubmitButton = async () => {
+    if (selectedStyle.length >= 3) {
+      const selectedIds = selectedStyle.map((item) => item.id);
+      const payload = {
+        styleIds: selectedIds,
+      };
+
+      const editStyleSuccess = await putStyle(payload);
+
+      if (editStyleSuccess) {
+        router.push({
+          pathname: `/settings`,
+          query: { state: 'likeInfoEditSuccess' },
+        });
+      } else {
+        alert('실패');
+      }
+    }
+  };
 
   return (
     <>
@@ -55,13 +79,13 @@ export default function LikeInfo() {
         </S.SexContent>
 
         <S.StyleContent>
-          <StyleInput
+          <LikeInfoStyleInput
             selectedStyle={selectedStyle}
             setSelectedStyle={setSelectedStyle}
           />
         </S.StyleContent>
 
-        <S.Button state={possible}>
+        <S.Button state={possible} onClick={onClickSubmitButton}>
           <Button3>수정 완료</Button3>
         </S.Button>
       </S.Layout>
