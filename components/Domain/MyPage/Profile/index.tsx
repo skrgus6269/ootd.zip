@@ -6,39 +6,33 @@ import { useRouter } from 'next/router';
 
 export interface UserProfileDataType {
   userId: number;
-  userImage: string;
   userName: string;
+  profileImage: string;
   followerCount: number;
   followingCount: number;
   height: number;
   weight: number;
-  isFollow: Boolean;
   description: string;
+  isMyProfile: Boolean;
+  isFollow: Boolean;
   ootdCount: number;
   clothesCount: number;
 }
 
 interface profileProps {
   data: UserProfileDataType;
-  localUserId: number;
-  showingId: number | undefined;
   onClickFollowButton: () => void;
 }
 
-export default function Profile({
-  data,
-  localUserId,
-  showingId,
-  onClickFollowButton,
-}: profileProps) {
+export default function Profile({ data, onClickFollowButton }: profileProps) {
   const router = useRouter();
 
   return (
     <S.Layout>
       <OtherProfile
-        showingId={showingId}
+        showingId={data.userId}
         className="profile"
-        userImage={data.userImage}
+        userImage={data.profileImage}
         userName={data.userName}
         isUser={true}
         follow={data.followerCount}
@@ -54,7 +48,7 @@ export default function Profile({
       <S.Introduce>
         <Body3>{data.description}</Body3>
       </S.Introduce>
-      {localUserId === showingId ? (
+      {data.isMyProfile ? (
         <Button
           className="editButton"
           backgroundColor="grey_95"

@@ -21,7 +21,7 @@ export default function ProfileLayout({
   return (
     <S.Layout className={className}>
       <S.UserPhoto>
-        {imgSrc === undefined ? (
+        {imgSrc === '' ? (
           <Avatar className="userImage" />
         ) : (
           <img className="userImage" src={imgSrc} alt="유저 이미지" />
