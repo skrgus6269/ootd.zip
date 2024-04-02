@@ -10,10 +10,10 @@ import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModa
 import { BrandType } from '@/components/BrandList/Brand';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
-import { ClothDataType } from '@/pages/cloth/[...ClothNumber]';
 import Spinner from '@/components/Spinner';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import { ClothDataType } from '@/pages/cloth/[...ClothNumber]';
 
 interface ClosetClothProps {
   showingId: number;
@@ -51,7 +51,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
 
   const fetchDataFunction = async (page: number, size: number) => {
     const data = await getUserClothList({
-      userId: showingId,
+      userId: Number(router.query.UserId![0]),
       page,
       size,
       brandIds: filter.brand?.map((item) => item.id),
