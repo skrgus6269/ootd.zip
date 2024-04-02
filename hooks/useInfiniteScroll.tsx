@@ -28,7 +28,7 @@ export default function useInfiniteScroll({
       setHasNextPage(!result.isLast);
       setPage(1);
       setIsLoading(false);
-      setTotal(result.total && result.total);
+      if (result.total) setTotal(result.total);
     });
   }, [router.isReady]);
 
