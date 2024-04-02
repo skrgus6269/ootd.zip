@@ -64,7 +64,7 @@ function Comment({
     <>
       <S.Layout type={type}>
         <S.CommentLeft>
-          {userImage == null ? (
+          {userImage === '' ? (
             <Avatar className="avatar" />
           ) : (
             <S.UserImage>

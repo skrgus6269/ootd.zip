@@ -47,10 +47,10 @@ export default function PostingCommentWrite({
 
       <S.CommentWrite>
         <S.UserImage>
-          {userImage === null ? (
+          {userImage === '' ? (
             <Avatar className="avatar" />
           ) : (
-            <img src={userImage} alt="유저 프로필 이미지" />
+            <img src={userImage!} alt="유저 프로필 이미지" />
           )}
         </S.UserImage>
         <S.Comment>

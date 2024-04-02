@@ -22,8 +22,8 @@ export const getUserClothList = async ({
   colorIds,
   isPrivate,
   searchText,
-}: getClothListParams) => { 
-  let url = `/api/v1/clothes?page=${page}&size=${size}&userId=${userId}&sortCriteria=createdAt&sortDirection=DESC&searchText=${searchText}`; 
+}: getClothListParams) => {
+  let url = `/v1/clothes?page=${page}&size=${size}&userId=${userId}&sortCriteria=createdAt&sortDirection=DESC`;
   const brandUrl = brandIds?.map((item) => `brandIds=${item}`).join('&');
   const categoryUrl = categoryIds
     ?.map((item) => `categoryIds=${item}`)
@@ -36,6 +36,7 @@ export const getUserClothList = async ({
   if (categoryUrl) url += `&${categoryUrl}`;
   if (colorUrl) url += `&${colorUrl}`;
   if (isPrivateUrl) url += `&${isPrivateUrl}`;
+  if (searchText) url += `&searchText=${searchText}`;
 
   const { data } = await fetcher.get(url);
 

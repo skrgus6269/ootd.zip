@@ -183,7 +183,7 @@ export default function Posting({
       />
       <S.Layout>
         <S.PostingTop>
-          {data.userName === 'string' ? (
+          {data.userImage !== '' ? (
             <img
               onClick={() => router.push(`/mypage/${data.userId}`)}
               src={data.userImage}
