@@ -13,7 +13,7 @@ import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import Spinner from '@/components/Spinner';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
-import { ClothDataType } from '@/pages/Cloth/[...ClothNumber]';
+import { ClothDataType } from '@/pages/cloth/[...ClothNumber]';
 
 interface ClosetClothProps {
   showingId: number;
