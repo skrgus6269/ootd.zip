@@ -71,7 +71,7 @@ export default function useInfiniteScroll({
       setHasNextPage(!result.isLast);
       setPage(1);
       setIsLoading(false);
-      setTotal(0);
+      if (result.total) setTotal(result.total);
     });
   };
   return {
