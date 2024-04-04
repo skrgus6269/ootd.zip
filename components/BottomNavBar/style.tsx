@@ -4,6 +4,7 @@ const BottomComponent = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 430px;
   background-color: #ffffff;
   position: fixed;
   bottom: 0;

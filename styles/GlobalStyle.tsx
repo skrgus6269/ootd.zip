@@ -27,6 +27,8 @@ const GlobalStyles = createGlobalStyle`
     } 
     body, html {
         height: 100dvh; //dvh와 같은 상황도 고려해야한다.
+        max-width: 430px;
+        margin: 0 auto;
     }
     input {
         font-family: "Pretendard Regular";
