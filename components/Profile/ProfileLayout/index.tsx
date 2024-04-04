@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import S from './style';
 import { AiOutlineBell } from 'react-icons/ai';
 import Avatar from '@/public/images/Avatar.svg';
+import NextImage from '@/components/NextImage';
 
 interface ProfileLayoutProps {
   children: React.ReactNode;
@@ -24,7 +24,14 @@ export default function ProfileLayout({
         {imgSrc === '' ? (
           <Avatar className="userImage" />
         ) : (
-          <img className="userImage" src={imgSrc} alt="유저 이미지" />
+          <NextImage
+            fill={false}
+            width={64}
+            height={64}
+            src={imgSrc}
+            alt="유저 이미지"
+            className="userImage"
+          />
         )}
       </S.UserPhoto>
       <S.UserInfo>{children}</S.UserInfo>

@@ -4,6 +4,7 @@ const Layout = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 430px;
 `;
 const CommentWriteState = styled.div`
   background-color: ${(props) => props.theme.color.grey_95};

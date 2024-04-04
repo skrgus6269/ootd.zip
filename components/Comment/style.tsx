@@ -17,8 +17,6 @@ const Layout = styled.div<LayoutProps>`
 const UserImage = styled.div`
   .userImage {
     margin-top: 6px;
-    width: 32px;
-    height: 32px;
     border-radius: 50%;
   }
 `;

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import S from './style';
 import { Headline2, Body3 } from '../UI';
 

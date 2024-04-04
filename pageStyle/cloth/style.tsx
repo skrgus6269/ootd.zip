@@ -37,11 +37,10 @@ const ButtonGroup = styled.div`
 `;
 
 const Img = styled.div`
-  img {
-    width: 100vw;
-    height: 100vw;
-    object-fit: cover;
-  }
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
 `;
 
 const S = { Layout, TypoGraphy, ButtonGroup, Background, Img };

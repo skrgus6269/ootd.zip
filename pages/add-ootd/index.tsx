@@ -26,6 +26,11 @@ const AddOOTD: ComponentWithLayout = () => {
       ootdImage:
         'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
     },
+    {
+      ootdId: 1,
+      ootdImage:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    },
   ]); //이미지 + 태그
   const [string, setString] = useState(''); //게시글
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);

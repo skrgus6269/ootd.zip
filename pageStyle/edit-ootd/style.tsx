@@ -12,10 +12,9 @@ const Layout = styled.div`
   .nextButon {
     position: fixed;
     bottom: 0;
-    left: 20px;
     width: calc(100% - 20px);
 
-    padding: 0 20px 25px 0;
+    padding: 0 20px 25px 20px;
     background-color: white;
   }
 `;
@@ -44,10 +43,6 @@ const OOTDImage = styled.div`
     display: none;
   }
   img {
-    min-width: 106px;
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     border-radius: 2px;
   }
   .image {

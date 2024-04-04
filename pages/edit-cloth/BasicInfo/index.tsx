@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import S from '@/pageStyle/edit-cloth/BasicInfo/style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Input from '@/components/Input';
@@ -24,6 +23,7 @@ import {
   getReactNativeMessage,
   sendReactNativeMessage,
 } from '@/utils/reactNativeMessage';
+import NextImage from '@/components/NextImage';
 
 interface BasicInfoProps {
   clothName: string;
@@ -129,10 +129,13 @@ export default function BasicInfo({
       />
       <S.Layout>
         <S.ClothImage>
-          <img
+          <NextImage
             onClick={onClickImage}
             src={clothImage !== undefined ? clothImage[0].ootdImage : ''}
             alt=""
+            fill={false}
+            width={106}
+            height={106}
           />
           <WriteIcon className="writeIcon" />
         </S.ClothImage>

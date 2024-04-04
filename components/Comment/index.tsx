@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Body3, Caption1 } from '../UI';
 import S from './style';
@@ -6,6 +5,7 @@ import Avatar from '@/public/images/Avatar.svg';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
+import NextImage from '../NextImage';
 
 export interface CommentProps {
   id: number;
@@ -68,7 +68,14 @@ function Comment({
             <Avatar className="avatar" />
           ) : (
             <S.UserImage>
-              <img className="userImage" src={userImage} alt="유저 이미지" />
+              <NextImage
+                className="userImage"
+                src={userImage}
+                alt="유저 이미지"
+                fill={false}
+                width={32}
+                height={32}
+              />
             </S.UserImage>
           )}
         </S.CommentLeft>

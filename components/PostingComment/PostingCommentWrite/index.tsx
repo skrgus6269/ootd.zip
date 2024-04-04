@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import { Body3, Button3 } from '@/components/UI';
 import S from './style';
 import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { CommentStateType } from '@/pages/ootd/[...OOTDNumber]';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Avatar from '@/public/images/Avatar.svg';
+import NextImage from '@/components/NextImage';
 
 interface PostingCommentWriteProps {
   comment: CommentStateType;
@@ -47,10 +47,16 @@ export default function PostingCommentWrite({
 
       <S.CommentWrite>
         <S.UserImage>
-          {userImage === '' ? (
+          {userImage === '' || userImage === null ? (
             <Avatar className="avatar" />
           ) : (
-            <img src={userImage!} alt="유저 프로필 이미지" />
+            <NextImage
+              fill={false}
+              width={32}
+              height={32}
+              src={userImage!}
+              alt="유저 프로필 이미지"
+            />
           )}
         </S.UserImage>
         <S.Comment>
