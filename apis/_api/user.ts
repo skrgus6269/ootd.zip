@@ -37,7 +37,7 @@ export const patchProfile = async (payload: patchProfilePayload) => {
 
 export const getSearchUser = async (params: getSearchUserParams) => {
   const { data } = await fetcher.get(
-    `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}`
+    `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}&searchType=USER`
   );
 
   return data;

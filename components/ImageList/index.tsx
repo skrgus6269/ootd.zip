@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import S from './style';
+import More from '@/public/images/More.png';
 
 interface ImageListProps {
   data: {
@@ -7,6 +9,7 @@ interface ImageListProps {
     clothImage?: string;
     ootdId?: number;
     ootdImage?: string;
+    ootdImageCount?: number;
   }[];
   onClick?: (index: number) => void;
   type: 'row' | 'column';

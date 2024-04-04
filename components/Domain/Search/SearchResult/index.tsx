@@ -133,6 +133,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     containerRef: OOTDRef,
     hasNextPage: OOTDHasNextPage,
     reset: ootdReset,
+    total: OOTDTotal,
   } = useInfiniteScroll({
     fetchDataFunction: fetchOOTDDataFunction,
     size: 9,
@@ -145,6 +146,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
         return {
           id: item.id,
           imageUrl: item.imageUrl,
+          imageCount: item.imageCount,
         };
       })
     );
@@ -163,6 +165,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
           <Funnel.Steps name="OOTD">
             {OOTDData.length > 0 ? (
               <ClosetCloth
+                OOTDTotal={OOTDTotal}
                 OOTDList={OOTDList}
                 OOTDIsLoading={OOTDIsLoading}
                 OOTDRef={OOTDRef}
