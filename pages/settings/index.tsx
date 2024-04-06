@@ -2,7 +2,7 @@ import AppBar from '@/components/Appbar';
 import S from '@/pageStyle/setting/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { Title1 } from '@/components/UI';
+import { Body3, Title1 } from '@/components/UI';
 import Header from '@/components/Header';
 import SettingBlock from '@/components/Setting/SettingBlock';
 import {
@@ -49,51 +49,65 @@ export default function Setting() {
           middleProps={<Title1>설정</Title1>}
           rightProps={<></>}
         />
+        <S.SettingDiv>
+          <S.MyAccount>
+            <Header text="내 계정" />
+            <SettingBlock
+              text="소셜로그인 정보"
+              buttonClick={() => router.push('/social-login-info')}
+            />
+            <SettingBlock
+              text="내 취향정보 수정"
+              buttonClick={() => router.push('/like-info')}
+            />
+            <SettingBlock
+              text="차단한 계정"
+              buttonClick={() => router.push('/blocked-account')}
+            />
+          </S.MyAccount>
 
-        <S.MyAccount>
-          <Header text="내 계정" />
-          <SettingBlock
-            text="소셜로그인 정보"
-            buttonClick={() => router.push('/social-login-info')}
-          />
-          <SettingBlock
-            text="내 취향정보 수정"
-            buttonClick={() => router.push('/like-info')}
-          />
-          <SettingBlock
-            text="차단한 계정"
-            buttonClick={() => router.push('/blocked-account')}
-          />
-        </S.MyAccount>
+          <S.ServiceInfo>
+            <Header text="서비스 정보" />
+            <SettingBlock text="문의하기" shareButton={shareButton} />
+            <SettingBlock
+              text="이용 정책"
+              buttonClick={() => router.push('/UsagePolicy')}
+            />
+            <SettingBlock
+              text="패널티 정책"
+              buttonClick={() => router.push('/PanaltyInfo')}
+            />
+            <SettingBlock
+              text="커뮤니티 가이드라인"
+              buttonClick={() => router.push('/CommunityGuideline')}
+            />
+            <SettingBlock
+              text="개인정보 처리 방침"
+              buttonClick={() => router.push('/PrivacyPolicy')}
+            />
+            <SettingBlock
+              text="오픈소스 라이선스"
+              buttonClick={() => router.push('/License')}
+            />
+          </S.ServiceInfo>
 
-        <S.ServiceInfo>
-          <Header text="서비스 정보" />
-          <SettingBlock text="문의하기" shareButton={shareButton} />
-          <SettingBlock
-            text="이용 정책"
-            buttonClick={() => router.push('/UsagePolicy')}
-          />
-          <SettingBlock
-            text="패널티 정책"
-            buttonClick={() => router.push('/PanaltyInfo')}
-          />
-          <SettingBlock
-            text="커뮤니티 가이드라인"
-            buttonClick={() => router.push('/CommunityGuideline')}
-          />
-          <SettingBlock
-            text="개인정보 처리 방침"
-            buttonClick={() => router.push('/PrivacyPolicy')}
-          />
-          <SettingBlock
-            text="오픈소스 라이선스"
-            buttonClick={() => router.push('/License')}
-          />
-        </S.ServiceInfo>
-        {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
-        {queryState === 'likeInfoEditSuccess' && (
-          <Toast text="취향정보 수정이 완료되었습니다." />
-        )}
+          <S.AccountInfo>
+            <S.Text>
+              <Body3>로그아웃</Body3>
+            </S.Text>
+          </S.AccountInfo>
+
+          <S.AccountInfo>
+            <S.Text onClick={() => router.push('/with-draw')}>
+              <Body3>탈퇴하기</Body3>
+            </S.Text>
+          </S.AccountInfo>
+
+          {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
+          {queryState === 'likeInfoEditSuccess' && (
+            <Toast text="취향정보 수정이 완료되었습니다." />
+          )}
+        </S.SettingDiv>
       </S.Layout>
     </>
   );
