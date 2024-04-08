@@ -33,9 +33,6 @@ const BasicInfoFirst = styled.div`
     color: ${(props) => props.theme.color.grey_50};
   }
   img {
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     margin-top: 20px;
   }
   hr {

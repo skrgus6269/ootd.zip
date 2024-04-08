@@ -293,3 +293,10 @@ export const putStyle = async (params: putStylePayload) => {
 
   return data;
 };
+
+// 탈퇴
+export const deleteUser = async () => {
+  const data = await userApi.deleteUser();
+
+  return data;
+};

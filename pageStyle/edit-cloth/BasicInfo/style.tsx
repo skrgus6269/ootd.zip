@@ -35,11 +35,6 @@ const ClothImage = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
   padding: 24px 20px 56px 20px;
 
-  img {
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
-  }
   .writeIcon {
     position: relative;
     width: 20px;

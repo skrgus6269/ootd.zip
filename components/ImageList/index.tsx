@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
+import NextImage from '../NextImage';
 import S from './style';
 import More from '@/public/images/More.png';
 
@@ -21,22 +20,27 @@ export default function ImageList({ data, onClick, type }: ImageListProps) {
       {data.map((item, index) => {
         if (item.clothId !== undefined) {
           return (
-            <img
-              onClick={() => (onClick ? onClick(item.clothId!) : '')}
-              key={index}
-              src={item.clothImage!}
-              alt=""
-            />
+            <S.Image key={index}>
+              <NextImage
+                onClick={() => (onClick ? onClick(item.clothId!) : '')}
+                src={item.clothImage!}
+                alt=""
+                fill={true}
+              />
+            </S.Image>
           );
         }
         if (item.ootdId !== undefined) {
           return (
-            <img
-              onClick={() => (onClick ? onClick(item.ootdId!) : '')}
-              key={index}
-              src={item.ootdImage!}
-              alt=""
-            />
+            <S.Image key={index}>
+              <NextImage
+                onClick={() => (onClick ? onClick(item.ootdId!) : '')}
+                key={index}
+                src={item.ootdImage!}
+                alt=""
+                fill={true}
+              />
+            </S.Image>
           );
         }
       })}

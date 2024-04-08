@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Modal from '@/components/Modal';
 import S from './style';
 import { Body4, Button3, Title1 } from '@/components/UI';

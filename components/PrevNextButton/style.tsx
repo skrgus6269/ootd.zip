@@ -4,6 +4,7 @@ const Layout = styled.div`
   display: flex;
   padding: 16px 20px 24px 16px;
   gap: 8px;
+  max-width: 430px;
   .leftButton {
     width: 30%;
     height: 48px;

@@ -66,6 +66,7 @@ const SelectedButton = styled.div<SelectedButtonState>`
   z-index: 999;
   background-color: white;
   width: 100%;
+  max-width: 430px;
   bottom: 0px;
   .init {
     width: 30%;

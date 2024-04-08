@@ -10,10 +10,7 @@ const Title = styled.div`
 `;
 const OOTD = styled.div`
   img {
-    width: 167 !important;
-    height: 167px;
-    object-fit: cover;
-    padding-right: 4px;
+    padding-right: 2px;
   }
   .slick-track {
     margin: 0;

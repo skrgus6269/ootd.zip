@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
 import Button from '@/components/Button';
 import Avatar from '@/public/images/Avatar.svg';
+import NextImage from '@/components/NextImage';
 
 export type ProfileListType = {
   id: number;
@@ -43,10 +44,13 @@ export default function Profile({
                 {item.profileImage === '' ? (
                   <Avatar className="userImage" />
                 ) : (
-                  <img
+                  <NextImage
                     className="userImage"
                     src={item.profileImage}
                     alt="유저 이미지"
+                    fill={false}
+                    width={64}
+                    height={64}
                   />
                 )}
                 <S.NameText>

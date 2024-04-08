@@ -11,6 +11,7 @@ const Layout = styled.div<ModalProps>`
   z-index: 997;
   bottom: 0px;
   width: 100%;
+  max-width: 430px;
   height: ${(props) => (props.isOpen ? `${props.height}vh` : '0')};
   flex-direction: column;
   border-radius: 8px 8px 0 0;

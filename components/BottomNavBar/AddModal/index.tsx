@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import S from './style';
 import { Button3 } from '@/components/UI';
 import { useRouter } from 'next/router';

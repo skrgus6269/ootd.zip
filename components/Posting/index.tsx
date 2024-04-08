@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import {
   AiFillHeart,
   AiFillTag,
@@ -34,6 +33,8 @@ import Toast from '../Toast';
 import FixModal from '../Domain/OOTD/FixModal';
 import LikeToggle from '../Toggle/LikeToggle';
 import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
+import Image from '../NextImage';
+import NextImage from '../NextImage';
 
 interface PostingProps {
   data: OOTDType;
@@ -184,11 +185,14 @@ export default function Posting({
       <S.Layout>
         <S.PostingTop>
           {data.userImage !== '' ? (
-            <img
+            <NextImage
               onClick={() => router.push(`/mypage/${data.userId}`)}
               src={data.userImage}
               className="userImage"
               alt="유저 이미지"
+              width={32}
+              height={32}
+              fill={false}
             />
           ) : (
             <Avatar
@@ -224,10 +228,10 @@ export default function Posting({
             {data.ootdImages?.map((item, index) => {
               return (
                 <S.ImageWithTag key={index}>
-                  <img
+                  <NextImage
                     src={item.ootdImage}
-                    className="postingImage"
                     alt="포스팅 이미지"
+                    fill={true}
                   />
                   {item.ootdImageClothesList &&
                     item.ootdImageClothesList.map((items, index) => {

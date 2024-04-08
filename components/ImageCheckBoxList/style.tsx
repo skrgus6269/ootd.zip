@@ -10,6 +10,8 @@ const Layout = styled.div`
 const CheckBoxLayout = styled.div`
   position: relative;
   width: calc(50% - 2px);
+  height: 0;
+  padding-bottom: calc(50% - 2px);
 
   .clothImage {
     height: 173px;

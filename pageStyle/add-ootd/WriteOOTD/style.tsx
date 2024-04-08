@@ -9,7 +9,8 @@ const Background = styled.div<LayoutProps>`
   display: ${(props) => (props.state ? 'block' : 'none')};
   opacity: 0.3;
   z-index: 2;
-  width: 100vw;
+  width: 100%;
+  max-width: 430px;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -37,10 +38,6 @@ const OOTDImage = styled.div`
   gap: 8px;
   overflow-x: scroll;
   img {
-    min-width: 106px;
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     border-radius: 2px;
   }
 `;
