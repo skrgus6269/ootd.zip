@@ -148,15 +148,14 @@ export default function Bookmark() {
           middleProps={<Title1>북마크</Title1>}
           rightProps={<></>}
         />
-
+        <BookmarkSubHead
+          total={bookmarkTotal}
+          editing={editing}
+          setEditing={setEditing}
+          setAlertOpen={setAlertOpen}
+          count={checkedItems.length}
+        />
         <S.BookmarkList ref={bookmarkRef}>
-          <BookmarkSubHead
-            total={bookmarkTotal}
-            editing={editing}
-            setEditing={setEditing}
-            setAlertOpen={setAlertOpen}
-            count={checkedItems.length}
-          />
           <ImageCheckBoxList
             editing={editing}
             checkedItems={checkedItems}

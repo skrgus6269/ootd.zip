@@ -6,14 +6,14 @@ interface LayoutProps {
 
 const headLayout = styled.div<LayoutProps>`
   display: flex;
-  padding: 12px 0px;
+  padding: 12px 20px;
   justify-content: flex-end;
   align-items: center;
   position: sticky;
   top: 0;
   left: 0;
   background-color: ${(props) => props.theme.color.grey_100};
-  z-index: 1;
+  z-index: 2;
 `;
 
 const Frame = styled.div`

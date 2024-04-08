@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import NextImage from '../NextImage';
 import { AiOutlineBorder, AiFillCheckSquare } from 'react-icons/ai';
+import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
 
 interface ImageData {
   ootdId?: number;
@@ -61,11 +62,21 @@ export default function ImageCheckBoxList({
                 onClick={() => handleClick(item)}
                 fill={true}
               />
-              {checkBox && (
-                <S.Icon>
-                  {isChecked ? <AiFillCheckSquare /> : <AiOutlineBorder />}
-                </S.Icon>
-              )}
+              {checkBox &&
+                (isChecked ? (
+                  <S.Icon onClick={() => toggleChecked(item.ootdBookmarkId!)}>
+                    <AiFillCheckSquare />
+                  </S.Icon>
+                ) : (
+                  <Image
+                    src={BookmarkCheckBoxFalse}
+                    alt={`CheckBox False'`}
+                    className="checkBoxImage"
+                    onClick={() => toggleChecked(item.ootdBookmarkId!)}
+                    width={24}
+                    height={24}
+                  />
+                ))}
               {item.ootdImageCount! > 1 && (
                 <Image
                   src={More}

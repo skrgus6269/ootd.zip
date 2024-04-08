@@ -33,7 +33,7 @@ const CheckBoxLayout = styled.div`
 
   .moreIcon {
     position: absolute;
-    z-index: 100;
+    z-index: 2;
     right: 8px;
     bottom: 8px;
   }
