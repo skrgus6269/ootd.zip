@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Headline2, Title1 } from '@/components/UI';
 import S from '@/pageStyle/add-cloth/BasicInfoSecond/style';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -20,6 +19,7 @@ import ClothApi from '@/apis/domain/Cloth/ClothApi';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import NextImage from '@/components/NextImage';
 
 interface BasicInfoSecondProps {
   clothName: string;
@@ -120,7 +120,13 @@ export default function BasicInfoSecond({
           <Category />
           <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
           <Body2 className="name">{clothName}</Body2>
-          <img src={clothImage && clothImage[0].ootdImage} alt="" />
+          <NextImage
+            width={106}
+            height={106}
+            fill={false}
+            src={clothImage! && clothImage[0].ootdImage}
+            alt=""
+          />
           <hr />
         </S.BasicInfoFirst>
         <S.BasicInfoSecond>

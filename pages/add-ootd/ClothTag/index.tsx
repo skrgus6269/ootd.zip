@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import S from '@/pageStyle/add-ootd/ClothTag/style';
 import { Body3 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
@@ -14,6 +13,7 @@ import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import TagInformation from '@/components/ClothInformation/TagInformation';
 import Carousel from '@/components/Carousel';
 import AddTag, { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
+import NextImage from '@/components/NextImage';
 
 interface ClothTagProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
@@ -151,13 +151,16 @@ export default function ClothTag({
                     );
                   })}
                 {/* 이미지 */}
-                <img
-                  onClick={onClickImage}
-                  className="image"
-                  ref={imageRef}
-                  src={item.ootdImage}
-                  alt=""
-                />
+                <S.BigImage>
+                  <NextImage
+                    onClick={onClickImage}
+                    className="image"
+                    ref={imageRef}
+                    src={item.ootdImage}
+                    alt=""
+                    fill={true}
+                  />
+                </S.BigImage>
               </S.Image>
             </>
           );

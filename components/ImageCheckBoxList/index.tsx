@@ -5,6 +5,7 @@ import BookmarkCheckBoxFalse from '@/public/images/BookmarkCheckBoxFalse.png';
 import More from '@/public/images/More.png';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import NextImage from '../NextImage';
 
 interface ImageData {
   ootdId?: number;
@@ -54,11 +55,12 @@ export default function ImageCheckBoxList({
 
           return (
             <S.CheckBoxLayout key={item.ootdBookmarkId}>
-              <img
-                src={item.ootdImage}
+              <NextImage
+                src={item.ootdImage!}
                 alt=""
                 className={`clothImage ${isChecked ? 'checked' : ''}`}
                 onClick={() => handleClick(item)}
+                fill={true}
               />
               {checkBox && (
                 <Image

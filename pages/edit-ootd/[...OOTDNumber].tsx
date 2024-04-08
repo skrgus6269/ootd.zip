@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import AppBar from '@/components/Appbar';
 import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
@@ -17,6 +16,7 @@ import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { useRouter } from 'next/router';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import NextImage from '@/components/NextImage';
 
 const EditOOTD: ComponentWithLayout = () => {
   const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>(
@@ -124,7 +124,13 @@ const EditOOTD: ComponentWithLayout = () => {
             imageAndTag.map((item, index) => {
               return (
                 <div className="image" key={index}>
-                  <img src={item.ootdImage} alt="" />
+                  <NextImage
+                    width={106}
+                    height={106}
+                    fill={false}
+                    src={item.ootdImage}
+                    alt=""
+                  />
                   <AiFillCloseCircle
                     onClick={() => onClickCloseImage(index)}
                     className="close"

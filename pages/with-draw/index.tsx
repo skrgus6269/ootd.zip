@@ -7,8 +7,9 @@ import WithdrawBlock from '@/components/Setting/WithdrawBlock';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Dot from 'public/images/dot.svg';
-import WithdrawAlert from '@/components/Setting/WithdrawAlert';
-import { UserApi } from '@/apis/domain/User/UserApi';
+import WithdrawAlert from '@/components/Setting/WithdrawAlert'; 
+import NextImage from '@/components/NextImage'; 
+import { UserApi } from '@/apis/domain/User/UserApi'; 
 
 export default function Withdraw() {
   const { deleteUser } = UserApi();
@@ -88,14 +89,26 @@ export default function Withdraw() {
           title="아래 경우에 해당할 경우 탈퇴 및 재가입이 제한됩니다."
           content={
             <>
-              <img src={'/images/dot.svg'} alt="Dot" width={16} height={16} />
+              <NextImage
+                src={'/images/dot.svg'}
+                alt="Dot"
+                width={16}
+                height={16}
+                fill={false}
+              />
               신고 누적으로 인해 활동이 정지된 계정
             </>
           }
           content2={
             <>
               <br />
-              <img src={'/images/dot.svg'} alt="Dot" width={16} height={16} />
+              <NextImage
+                src={'/images/dot.svg'}
+                alt="Dot"
+                width={16}
+                height={16}
+                fill={false}
+              />
               패널티 규정을 위해 소셜로그인 이메일 보관: 1년
             </>
           }
