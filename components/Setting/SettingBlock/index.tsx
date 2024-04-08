@@ -19,13 +19,13 @@ const SettingBlock = ({
 
   return (
     <S.Layout onClick={buttonClick}>
-      <Body3 style={{ flex: '1 0 0' }}>{text}</Body3>
+      <Body3 className="title">{text}</Body3>
       {buttonClick ? (
         <S.IconSpan>
           <AiOutlineRight />
         </S.IconSpan>
       ) : (
-        <Body3 onClick={shareButton} style={{ color: '#B1B1B1' }}>
+        <Body3 onClick={shareButton} className="settingEmail">
           ootdzip@gmail.com
         </Body3>
       )}
