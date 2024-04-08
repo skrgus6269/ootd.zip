@@ -7,10 +7,13 @@ import WithdrawBlock from '@/components/Setting/WithdrawBlock';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Dot from 'public/images/dot.svg';
-import WithdrawAlert from '@/components/Setting/WithdrawAlert';
-import NextImage from '@/components/NextImage';
+import WithdrawAlert from '@/components/Setting/WithdrawAlert'; 
+import NextImage from '@/components/NextImage'; 
+import { UserApi } from '@/apis/domain/User/UserApi'; 
 
 export default function Withdraw() {
+  const { deleteUser } = UserApi();
+
   const router = useRouter();
 
   const [check1, setCheck1] = useState<boolean>(false);
@@ -29,16 +32,17 @@ export default function Withdraw() {
     }
   }, [check1, check2, check3, check4]);
 
-  const onClickYesButton = () => {
-    setAlertOpen(false);
+  const onClickYesButton = async () => {
+    const result = await deleteUser();
+    if (result) router.push('/onboarding');
   };
 
   const onClickNoButton = () => {
-    router.push('/onboarding');
+    if (alertOpen) setAlertOpen(false);
   };
 
-  const onClickBackground = () => {
-    if (alertOpen) setAlertOpen(false);
+  const onClickBackground = async () => {
+    setAlertOpen(false);
   };
 
   return (

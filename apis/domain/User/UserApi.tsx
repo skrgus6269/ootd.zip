@@ -90,6 +90,19 @@ export const UserApi = () => {
     }
   };
 
+  // 탈퇴
+  const deleteUser = async () => {
+    try {
+      const { statusCode } = await userService.deleteUser();
+
+      if (statusCode === 200) return true;
+      return false;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+
   return {
     getMypage,
     getProfile,
@@ -97,5 +110,6 @@ export const UserApi = () => {
     getSearchUser,
     getUserStyle,
     putStyle,
+    deleteUser,
   } as const;
 };

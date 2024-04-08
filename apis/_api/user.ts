@@ -56,8 +56,13 @@ export const getUserStyle = async () => {
 };
 
 export const putStyle = async (params: putStylePayload) => {
-  console.log(params);
   const { data } = await fetcher.put(`/v1/user/user-styles`, params);
+
+  return data;
+};
+
+export const deleteUser = async () => {
+  const { data } = await fetcher.delete(`/v1/user`);
 
   return data;
 };

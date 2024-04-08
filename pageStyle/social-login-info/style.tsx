@@ -24,12 +24,6 @@ const ServiceInfo = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
 `;
 
-const Text = styled.div`
-  padding: 0px 20px;
-  margin: 16px 0px;
-  color: #ec0000;
-`;
-
-const S = { Layout, MyAccount, ServiceInfo, Text };
+const S = { Layout, MyAccount, ServiceInfo };
 
 export default S;
