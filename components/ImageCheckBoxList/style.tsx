@@ -33,12 +33,26 @@ const CheckBoxLayout = styled.div`
 
   .moreIcon {
     position: absolute;
-    z-index: 100;
+    z-index: 2;
     right: 8px;
     bottom: 8px;
   }
 `;
 
-const S = { Layout, CheckBoxLayout };
+const Icon = styled.div`
+  position: absolute;
+  z-index: 100;
+  right: 8px;
+  top: 8px;
+  width: 24px;
+  height: 24px;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+`;
+
+const S = { Layout, CheckBoxLayout, Icon };
 
 export default S;
