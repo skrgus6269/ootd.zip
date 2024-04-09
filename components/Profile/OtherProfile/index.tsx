@@ -31,7 +31,7 @@ export default function OtherProfile({
           <Body4>팔로워</Body4>
           <Body4 state="emphasis">{follow}</Body4>
           <Body4>명</Body4>
-          <p className="dot">•</p>
+          <Body4 className="dot">•</Body4>
           <Body4>팔로잉</Body4>
           <Body4 state="emphasis">{myCloth}</Body4>
           <Body4>명</Body4>
