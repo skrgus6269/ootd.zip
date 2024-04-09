@@ -73,7 +73,6 @@ const Input = styled.textarea<InputProps>`
   font-weight: 400;
   line-height: 20px;
   resize: none;
-  font-family: 'Pretendard';
   height: calc(20px * ${(props) => props.line});
   border: 1px solid ${(props) => props.theme.color.grey_90};
   max-height: 84px;
@@ -84,7 +83,6 @@ const Input = styled.textarea<InputProps>`
     outline: none;
   }
   &::placeholder {
-    font-family: 'Pretendard';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

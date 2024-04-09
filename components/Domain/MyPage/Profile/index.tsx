@@ -41,7 +41,7 @@ export default function Profile({ data, onClickFollowButton }: profileProps) {
       {String(data.height) !== '0' && (
         <S.BodyInformation>
           <Body4>{data.height}cm</Body4>
-          <p className="dot">•</p>
+          <Body4 className="dot">•</Body4>
           <Body4>{data.weight}kg</Body4>
         </S.BodyInformation>
       )}
