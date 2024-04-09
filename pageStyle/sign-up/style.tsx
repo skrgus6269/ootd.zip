@@ -4,7 +4,7 @@ const Layout = styled.div`
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 48px);
+  height: 102vh;
 `;
 
 const ProgressBar = styled.div`
@@ -30,7 +30,9 @@ const Main = styled.div`
   flex-direction: column;
   height: 100%;
   .nextButton {
-    padding-bottom: 26px;
+    position: fixed;
+    bottom: 24px;
+    width: calc(100% - 40px);
   }
 `;
 
