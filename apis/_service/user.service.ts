@@ -265,7 +265,27 @@ export const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
 
 // 유저 프로필 검색
 export const getSearchUser = async (params: getSearchUserParams) => {
-  const data = await userApi.getSearchUser(params);
+  const data = await userApi.getSearchUser({ ...params, searchType: 'USER' });
+
+  return data;
+};
+
+// 유저 팔로워 조회
+export const getSearchUserFollower = async (params: getSearchUserParams) => {
+  const data = await userApi.getSearchUser({
+    ...params,
+    searchType: 'FOLLOWER',
+  });
+
+  return data;
+};
+
+// 유저 팔로잉 조회
+export const getSearchUserFollowing = async (params: getSearchUserParams) => {
+  const data = await userApi.getSearchUser({
+    ...params,
+    searchType: 'FOLLOWING',
+  });
 
   return data;
 };

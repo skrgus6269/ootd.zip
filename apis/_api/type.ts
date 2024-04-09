@@ -106,10 +106,10 @@ export interface getAlarmParams extends paginationType {
   isRead: Boolean;
 }
 
-export interface getSearchUserParams {
-  name: string;
-  page: number;
-  size: number;
+export interface getSearchUserParams extends paginationType {
+  name?: string;
+  searchType?: 'USER' | 'FOLLOWING' | 'FOLLOWER';
+  userId?: number;
 }
 
 export interface getSearchOOTDParams {
