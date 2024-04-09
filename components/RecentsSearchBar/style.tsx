@@ -7,7 +7,6 @@ interface LayoutProps {
 const Layout = styled.div<LayoutProps>`
   display: inline-flex;
   width: 100%;
-  max-width: 350px;
   height: 42px;
   border: 1px solid
     ${(props) =>

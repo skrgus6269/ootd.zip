@@ -16,11 +16,9 @@ import SubHead from '../SubHead';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
 import Spinner from '@/components/Spinner';
-import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 interface ClosetClothProps {
+  OOTDTotal: number;
   OOTDList: OOTDListType[];
   OOTDIsLoading: Boolean;
   OOTDRef: MutableRefObject<any>;
@@ -34,6 +32,7 @@ interface ClosetClothProps {
 export type OOTDListType = {
   id: number;
   imageUrl: string;
+  imageCount: number;
 };
 
 export type GenderTypes = {
@@ -49,6 +48,7 @@ export interface FilterData {
 }
 
 export default function ClosetCloth({
+  OOTDTotal,
   OOTDList,
   OOTDIsLoading,
   OOTDRef,
@@ -158,14 +158,18 @@ export default function ClosetCloth({
         <SubHead
           setState={setSortStandard}
           state={sortStandard}
-          count={OOTDList?.length || 0}
+          count={OOTDTotal || 0}
           style="noPadding"
         />
         <S.ClothList ref={OOTDRef}>
           <ImageList
             onClick={onClickImageList}
             data={OOTDList.map((item) => {
-              return { ootdId: item.id, ootdImage: item.imageUrl };
+              return {
+                ootdId: item.id,
+                ootdImage: item.imageUrl,
+                ootdImageCount: item.imageCount,
+              };
             })}
             type={'column'}
           />

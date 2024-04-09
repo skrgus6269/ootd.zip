@@ -41,21 +41,23 @@ export default function Profile({
           profileList.map((item, index) => {
             return (
               <S.ProfileLayout key={index}>
-                {item.profileImage === '' ? (
-                  <Avatar className="userImage" />
-                ) : (
-                  <NextImage
-                    className="userImage"
-                    src={item.profileImage}
-                    alt="유저 이미지"
-                    fill={false}
-                    width={64}
-                    height={64}
-                  />
-                )}
-                <S.NameText>
-                  <Body3 state="emphasis">{item.name}</Body3>
-                </S.NameText>
+                <S.Profile onClick={() => router.push(`/mypage/${item.id}`)}>
+                  {item.profileImage === '' ? (
+                    <Avatar className="userImage" />
+                  ) : (
+                    <NextImage
+                      className="userImage"
+                      src={item.profileImage}
+                      alt="유저 이미지"
+                      fill={false}
+                      width={64}
+                      height={64}
+                    />
+                  )}
+                  <S.NameText>
+                    <Body3 state="emphasis">{item.name}</Body3>
+                  </S.NameText>
+                </S.Profile>
 
                 {item.isFollow ? (
                   <Button

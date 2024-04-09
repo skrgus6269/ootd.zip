@@ -7,6 +7,14 @@ const Layout = styled.div`
   gap: 16px;
 `;
 
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  flex: 1 0 0;
+`;
+
 const ProfileLayout = styled.div`
   display: flex;
   align-items: center;
@@ -28,6 +36,7 @@ const NameText = styled.div`
 
 const S = {
   Layout,
+  Profile,
   ProfileLayout,
   NameText,
 };
