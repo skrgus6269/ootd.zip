@@ -11,6 +11,7 @@ import Avatar from '@/public/images/Avatar.svg';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import Spinner from '@/components/Spinner';
 
 interface followerProps {
   setSelectedUserName: Dispatch<SetStateAction<string>>;
@@ -61,11 +62,12 @@ export default function Follower({
     return data;
   };
 
-  const { data, reset, containerRef, total } = useInfiniteScroll({
-    fetchDataFunction,
-    initialData: [],
-    size: 20,
-  });
+  const { data, reset, containerRef, total, isLoading, hasNextPage } =
+    useInfiniteScroll({
+      fetchDataFunction,
+      initialData: [],
+      size: 6,
+    });
 
   useEffect(() => {
     const newData = data.map((item: any) => {
@@ -85,7 +87,7 @@ export default function Follower({
   };
 
   useEffect(() => {
-    reset();
+    if (keyword.length > 0) reset();
   }, [keyword]);
 
   useEffect(() => {
@@ -97,6 +99,7 @@ export default function Follower({
       <S.Wrap>
         <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
       </S.Wrap>
+      {isLoading && hasNextPage && <Spinner />}
       <S.Layout ref={containerRef}>
         {followerList &&
           followerList.map((item, index) => {

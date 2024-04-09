@@ -9,6 +9,7 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import NextImage from '@/components/NextImage';
 import Avatar from '@/public/images/Avatar.svg';
+import Spinner from '@/components/Spinner';
 
 interface followingProps {
   followingList: followListType[];
@@ -53,11 +54,12 @@ export default function Following({
     return data;
   };
 
-  const { data, reset, containerRef, total } = useInfiniteScroll({
-    fetchDataFunction,
-    initialData: [],
-    size: 20,
-  });
+  const { data, reset, containerRef, total, isLoading, hasNextPage } =
+    useInfiniteScroll({
+      fetchDataFunction,
+      initialData: [],
+      size: 7,
+    });
 
   useEffect(() => {
     const newData = data.map((item: any) => {
@@ -72,7 +74,7 @@ export default function Following({
   }, [data]);
 
   useEffect(() => {
-    reset();
+    if (keyword.length > 0) reset();
   }, [keyword]);
 
   useEffect(() => {
@@ -81,6 +83,7 @@ export default function Following({
 
   return (
     <>
+      {isLoading && hasNextPage && <Spinner />}
       <S.Wrap>
         <SearchBar placeholder="검색" letter={keyword} setLetter={setKeyword} />
       </S.Wrap>
