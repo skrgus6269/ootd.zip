@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { loginStates } from '@/utils/recoil/atom';
 import {
   NEXT_PUBLIC_KAKAO_URI,
-  NEXT_PUBLIC_GOOGLE_URI,
+  NEXT_PUBLIC_APPLE_URI,
 } from '@/constants/develop.constants';
 import { useRouter } from 'next/router';
 
@@ -54,8 +54,9 @@ export const SignInApi = () => {
         });
         break;
       }
-      case 'GOOGLE': {
-        router.push(NEXT_PUBLIC_GOOGLE_URI);
+      case 'APPLE': {
+        router.push(NEXT_PUBLIC_APPLE_URI);
+        break;
       }
     }
   };

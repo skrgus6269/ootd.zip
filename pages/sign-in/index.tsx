@@ -38,10 +38,6 @@ const SignIn: ComponentWithLayout = () => {
               platform="APPLE"
               onClick={() => routing('APPLE')}
             />
-            <SocialLoginButton
-              platform="GOOGLE"
-              onClick={() => routing('GOOGLE')}
-            />
           </S.SocialLoginButton>
         </S.Main>
       </S.Layout>
