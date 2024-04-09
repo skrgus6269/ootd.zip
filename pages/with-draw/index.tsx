@@ -7,9 +7,9 @@ import WithdrawBlock from '@/components/Setting/WithdrawBlock';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Dot from 'public/images/dot.svg';
-import WithdrawAlert from '@/components/Setting/WithdrawAlert'; 
-import NextImage from '@/components/NextImage'; 
-import { UserApi } from '@/apis/domain/User/UserApi'; 
+import WithdrawAlert from '@/components/Setting/WithdrawAlert';
+import NextImage from '@/components/NextImage';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 export default function Withdraw() {
   const { deleteUser } = UserApi();

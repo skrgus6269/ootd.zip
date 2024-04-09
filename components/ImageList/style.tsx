@@ -22,6 +22,13 @@ const Image = styled.div`
   height: 0;
   padding-bottom: calc(50% - 2px);
   position: relative;
+
+  .moreIcon {
+    position: absolute;
+    z-index: 100;
+    right: 8px;
+    bottom: 8px;
+  }
 `;
 
 const S = { Layout, Image };
