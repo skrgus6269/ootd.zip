@@ -20,9 +20,9 @@ export default function BookmarkAlert({
           <Body3>삭제를 누르면 해당 콘텐츠의 북마크가 해제됩니다.</Body3>
         </>
       }
-      yes={'취소'}
+      yes={'삭제'}
       yesColor="error"
-      no={'삭제'}
+      no={'취소'}
     />
   );
 }

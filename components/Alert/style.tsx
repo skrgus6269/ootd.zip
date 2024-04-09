@@ -20,6 +20,7 @@ const AlertPrompt = styled.div``;
 
 const AlertHeadline = styled.div`
   padding-top: 35px;
+  padding-bottom: 4px;
 `;
 
 const AlertBody = styled.div`

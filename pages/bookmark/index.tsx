@@ -67,11 +67,11 @@ export default function Bookmark() {
 
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
-  const onClickYesButton = () => {
+  const onClickNoButton = () => {
     setAlertOpen(false);
   };
 
-  const onClickNoButton = async () => {
+  const onClickYesButton = async () => {
     const result = await deleteBookmarkList(checkedItems);
     if (result) {
       setAlertOpen(false);
