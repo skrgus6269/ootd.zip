@@ -183,6 +183,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
             {profileData.length > 0 ? (
               <Profile
                 profileList={profileList}
+                setProfileList={setProfileList}
                 profileIsLoading={profileIsLoading}
                 profileRef={profileRef}
                 profileHasNextPage={profileHasNextPage}

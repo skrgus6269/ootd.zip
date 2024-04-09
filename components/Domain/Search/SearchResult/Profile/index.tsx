@@ -1,12 +1,19 @@
 import { Body3, Body4, Caption2 } from '@/components/UI';
 import S from './style';
-import { MutableRefObject, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
 import Button from '@/components/Button';
 import Avatar from '@/public/images/Avatar.svg';
 import NextImage from '@/components/NextImage';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
 
 export type ProfileListType = {
   id: number;
@@ -17,6 +24,7 @@ export type ProfileListType = {
 
 interface ProfileProps {
   profileList: ProfileListType[];
+  setProfileList: Dispatch<SetStateAction<ProfileListType[]>>;
   profileIsLoading: Boolean;
   profileRef: MutableRefObject<any>;
   profileHasNextPage: Boolean;
@@ -24,14 +32,29 @@ interface ProfileProps {
 
 export default function Profile({
   profileList,
+  setProfileList,
   profileIsLoading,
   profileRef,
   profileHasNextPage,
 }: ProfileProps) {
   const router = useRouter();
 
-  const onClickFollow = () => {
-    console.log('클릭');
+  const { follow, unFollow } = PublicApi();
+
+  const onClickFollow = async (
+    isFollow: Boolean,
+    index: number,
+    userId: number
+  ) => {
+    let newProfileList = [...profileList];
+    newProfileList[index].isFollow = !newProfileList[index].isFollow;
+    setProfileList(newProfileList);
+
+    if (isFollow) {
+      await unFollow(userId);
+      return;
+    }
+    await follow(userId);
   };
 
   return (
@@ -66,7 +89,7 @@ export default function Profile({
                     backgroundColor="grey_95"
                     color="grey_00"
                     className="followButton"
-                    onClick={onClickFollow}
+                    onClick={() => onClickFollow(item.isFollow, index, item.id)}
                   >
                     <Body3>팔로잉</Body3>
                   </Button>
@@ -77,7 +100,7 @@ export default function Profile({
                     backgroundColor="subdued"
                     color="grey_00"
                     className="followButton"
-                    onClick={onClickFollow}
+                    onClick={() => onClickFollow(item.isFollow, index, item.id)}
                   >
                     <Body3>팔로우</Body3>
                   </Button>
