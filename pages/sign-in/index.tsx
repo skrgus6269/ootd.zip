@@ -1,34 +1,24 @@
-import AppBar from '@/components/Appbar';
-import Headline from '@/components/UI/TypoGraphy/Title1';
-import { AiOutlineClose } from 'react-icons/ai';
 import S from '@/pageStyle/sign-in/style';
-import Body from '@/components/UI/TypoGraphy/Body2';
-import { Headline1 } from '@/components/UI';
+import { Body2 } from '@/components/UI';
 import { AppLayoutProps } from '@/AppLayout';
 import { ComponentWithLayout } from '../sign-up';
 import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
 import SocialLoginButton from '@/components/Domain/SignIn/SocialLoginButton';
+import SplashLogo from '@/public/images/SplashLogo.svg';
 
 const SignIn: ComponentWithLayout = () => {
   const [, routing] = SignInApi();
 
   return (
     <>
-      <AppBar
-        leftProps={<AiOutlineClose />}
-        middleProps={<Headline>logo</Headline>}
-        rightProps={<></>}
-      />
       <S.Layout>
         <S.Main>
-          <S.Logo>{}</S.Logo>
-          <S.Text>
-            <Headline1>ootd.zip</Headline1>
-            <Body>
-              Lorem ipsum dolor sit amet consectetur. Iaculis lorem viverra
-              pellentesque etiam.
-            </Body>
-          </S.Text>
+          <S.Logo>
+            <S.Text>
+              <Body2>오늘도 옷장 앞에서 고민하는 당신을 위해 </Body2>
+            </S.Text>
+            <SplashLogo />
+          </S.Logo>
           <S.SocialLoginButton>
             <SocialLoginButton
               platform="KAKAO"
@@ -37,10 +27,6 @@ const SignIn: ComponentWithLayout = () => {
             <SocialLoginButton
               platform="APPLE"
               onClick={() => routing('APPLE')}
-            />
-            <SocialLoginButton
-              platform="GOOGLE"
-              onClick={() => routing('GOOGLE')}
             />
           </S.SocialLoginButton>
         </S.Main>
