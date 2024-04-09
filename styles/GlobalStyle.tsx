@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         font-size: 10px;
         vertical-align: baseline; 
-        font-family: "Pretendard Regular";
+        font-family: 'Pretendard';
     }
     button {
         /* padding: 0; */
@@ -30,8 +30,8 @@ const GlobalStyles = createGlobalStyle`
         max-width: 430px;
         margin: 0 auto;
     }
-    input {
-        font-family: "Pretendard Regular";
+    input, ::placeholder, textarea {
+        font-family: 'Pretendard';
     }
     div#__next{
         height: 100%;

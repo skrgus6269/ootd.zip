@@ -12,7 +12,6 @@ const TextArea = styled.textarea`
   border: 1px solid ${(props) => props.theme.color.grey_80};
   min-height: 116px;
   color: ${(props) => props.theme.color.grey_00};
-  font-family: 'Pretendard Variable';
   padding: 8px 8px 36px 8px;
 
   &:focus {
@@ -24,7 +23,6 @@ const TextArea = styled.textarea`
     color: ${(props) => props.theme.color.grey_80};
     font-size: 14px;
     font-weight: 400px;
-    font-family: 'Pretendard Variable';
     margin-left: 8px;
   }
 `;
