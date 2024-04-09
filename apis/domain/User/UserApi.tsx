@@ -62,6 +62,30 @@ export const UserApi = () => {
     }
   };
 
+  const getSearchUserFollower = async (params: getSearchUserParams) => {
+    try {
+      const data = await userService.getSearchUserFollower(params);
+      if (data.statusCode === 200) {
+        return data.result;
+      }
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+  const getSearchUserFollowing = async (params: getSearchUserParams) => {
+    try {
+      const data = await userService.getSearchUserFollowing(params);
+      if (data.statusCode === 200) {
+        return data.result;
+      }
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
   const getUserStyle = async () => {
     try {
       const data = await userService.getUserStyle();
@@ -108,6 +132,8 @@ export const UserApi = () => {
     getProfile,
     patchProfile,
     getSearchUser,
+    getSearchUserFollower,
+    getSearchUserFollowing,
     getUserStyle,
     putStyle,
     deleteUser,

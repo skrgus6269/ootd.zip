@@ -28,126 +28,12 @@ export type followListType = {
 export default function FollowList() {
   const router = useRouter();
 
-  const [showingId, setShowingId] = useState<number>();
   const localUserId = useRecoilValue(userId);
 
   const [followerList, setFollowerList] = useState<followListType[]>([]);
-
   const [followingList, setFollowingList] = useState<followListType[]>([]);
-
-  useEffect(() => {
-    const ferchData = async () => {
-      if (!router.isReady) return;
-      try {
-        // 팔로우 팔로잉 리스트 초기 API 호출
-
-        setFollowerList([
-          {
-            userId: 0,
-            userName: 'Userame0',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: false,
-          },
-          {
-            userId: 1,
-            userName: 'Userame1',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: false,
-          },
-          {
-            userId: 2,
-            userName: 'Userame2',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: false,
-          },
-          {
-            userId: 3,
-            userName: 'Userame3',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: false,
-          },
-          {
-            userId: 4,
-            userName: 'Userame4',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: false,
-          },
-        ]);
-
-        setFollowingList([
-          {
-            userId: 0,
-            userName: 'Userame0',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 1,
-            userName: 'Userame1',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 2,
-            userName: 'Userame2',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 3,
-            userName: 'Userame3',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 4,
-            userName: 'Userame4',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 4,
-            userName: 'Userame4',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 4,
-            userName: 'Userame4',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-          {
-            userId: 4,
-            userName: 'Userame4',
-            userImage:
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-            isFollow: true,
-          },
-        ]);
-
-        setShowingId(Number(router.query.UserId![0]));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    ferchData();
-  }, [router.isReady, router.query.userId]);
-
-  const [keyword, setKeyword] = useState<string>('');
+  const [followerTotalCount, setFollowerTotalCount] = useState<number>(0);
+  const [followingTotalCount, setFollowingTotalCount] = useState<number>(0);
   const [openActionSheet, setOpenActionSheet] = useState<Boolean>(false);
   const [toastOpen, setToastOpen] = useState<Boolean>(false);
 
@@ -156,6 +42,7 @@ export default function FollowList() {
   };
   const buttons = [{ name: '차단한 계정 관리', buttonClick: goBlockedList }];
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+  const [selectedUserName, setSelectedUserName] = useState<string>('');
 
   const onClickBackground = () => {
     if (alertOpen) {
@@ -183,48 +70,46 @@ export default function FollowList() {
         onClick={onClickBackground}
       />
       <S.Layout>
-        <AppBar
-          leftProps={
-            <AiOutlineArrowLeft
-              onClick={() => router.back()}
-              className="arrowleft"
-            />
-          }
-          middleProps={<></>}
-          rightProps={
-            localUserId === showingId ? (
-              <AiOutlineEllipsis onClick={() => setOpenActionSheet(true)} />
-            ) : (
-              <></>
-            )
-          }
-        />
+        {router.isReady && (
+          <AppBar
+            leftProps={
+              <AiOutlineArrowLeft
+                onClick={() => router.back()}
+                className="arrowleft"
+              />
+            }
+            middleProps={<></>}
+            rightProps={
+              localUserId === Number(router.query.UserId![0]) ? (
+                <AiOutlineEllipsis onClick={() => setOpenActionSheet(true)} />
+              ) : (
+                <></>
+              )
+            }
+          />
+        )}
         <TabView>
           <TabView.TabBar
             tab={['팔로워', '팔로잉']}
-            count={[
-              followerList ? followerList.length : 0,
-              followingList ? followingList.length : 0,
-            ]}
+            count={[followerTotalCount, followingTotalCount]}
             display="block"
-            onChangeState={() => setKeyword('')}
           />
           <TabView.Tabs>
             <TabView.Tab>
               <Follower
+                setSelectedUserName={setSelectedUserName}
                 setAlertOpen={setAlertOpen}
-                keyword={keyword}
-                setKeyword={setKeyword}
                 followerList={followerList}
+                setFollowerList={setFollowerList}
                 localUserId={localUserId}
-                showingId={showingId}
+                setFollowerTotalCount={setFollowerTotalCount}
               />
             </TabView.Tab>
             <TabView.Tab>
               <Following
-                keyword={keyword}
-                setKeyword={setKeyword}
                 followingList={followingList}
+                setFollowingList={setFollowingList}
+                setFollowingTotalCount={setFollowingTotalCount}
               />
             </TabView.Tab>
           </TabView.Tabs>
@@ -234,6 +119,7 @@ export default function FollowList() {
       {openActionSheet && <ActionSheet buttons={buttons} />}
       {alertOpen && (
         <FollowAlert
+          userName={selectedUserName}
           onClickYesButton={onClickYesButton}
           onClickNoButton={onClickNoButton}
         />

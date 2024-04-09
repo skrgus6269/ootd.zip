@@ -5,6 +5,8 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: calc(100vh - 174px);
+  overflow-y: scroll;
 `;
 
 const Profile = styled.div`

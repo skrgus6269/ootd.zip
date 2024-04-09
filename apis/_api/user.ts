@@ -36,9 +36,12 @@ export const patchProfile = async (payload: patchProfilePayload) => {
 };
 
 export const getSearchUser = async (params: getSearchUserParams) => {
-  const { data } = await fetcher.get(
-    `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}&searchType=USER`
-  );
+  let url = `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}&searchType=${params.searchType}`;
+
+  if (params.userId) {
+    url += `&userId=${params.userId}`;
+  }
+  const { data } = await fetcher.get(url);
 
   return data;
 };

@@ -3,21 +3,8 @@ import styled from 'styled-components';
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-interface BackgroundState {
-  isOpen: Boolean;
-}
-
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: calc(100vh - 48px);
-  position: absolute;
-  top: 0;
+  overflow-y: scroll;
+  height: calc(100vh - 245px);
 `;
 
 const FollowBlockLayout = styled.div`
@@ -26,10 +13,10 @@ const FollowBlockLayout = styled.div`
   align-items: center;
   gap: 16px;
 
-  img {
+  img,
+  .avatar {
     width: 52px;
     height: 52px;
-    object-fit: cover;
     flex-shrink: 0;
     border-radius: 50%;
   }
@@ -85,7 +72,6 @@ const Wrap = styled.div`
 
 const S = {
   Layout,
-  Background,
   FollowBlockLayout,
   Wrap,
 };
