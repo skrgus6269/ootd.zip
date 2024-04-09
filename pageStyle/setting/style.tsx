@@ -40,9 +40,33 @@ const AccountInfo = styled.div`
 const Text = styled.div`
   padding: 0px 20px;
   margin: 16px 0px;
-  color: #ec0000;
+  color: ${(props) => props.theme.color.error};
 `;
 
-const S = { Layout, SettingDiv, MyAccount, ServiceInfo, AccountInfo, Text };
+const Social = styled.div`
+  display: flex;
+  padding: 16px 20px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  .socialTitle {
+    flex: 1 0 0;
+  }
+
+  .socialInfo {
+    color: ${(props) => props.theme.color.grey_70};
+  }
+`;
+
+const S = {
+  Layout,
+  SettingDiv,
+  MyAccount,
+  ServiceInfo,
+  AccountInfo,
+  Text,
+  Social,
+};
 
 export default S;

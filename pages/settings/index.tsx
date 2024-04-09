@@ -52,10 +52,12 @@ export default function Setting() {
         <S.SettingDiv>
           <S.MyAccount>
             <Header text="내 계정" />
-            <SettingBlock
-              text="소셜로그인 정보"
-              buttonClick={() => router.push('/social-login-info')}
-            />
+
+            <S.Social>
+              <Body3 className="socialTitle">소셜 로그인 정보</Body3>
+              <Body3 className="socialInfo">카카오</Body3>
+            </S.Social>
+
             <SettingBlock
               text="내 취향정보 수정"
               buttonClick={() => router.push('/like-info')}
