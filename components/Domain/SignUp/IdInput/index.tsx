@@ -48,10 +48,7 @@ export default function IdInput({ setInput, setCanUseId, id }: InputProps) {
   };
 
   const idInputValidity = async (value: string) => {
-    if (value !== undefined && value.length === 0) {
-      updateHelperText(HELPER_TEXT_NULL, 1);
-      setCanUseId(false);
-    } else if (hasKoreanInitial(value)) {
+    if (hasKoreanInitial(value)) {
       updateHelperText(HELPER_TEXT_KOREAN_INITIAL, 2);
       setCanUseId(false);
     } else if (hasSpecialCharacter(value)) {
@@ -80,7 +77,9 @@ export default function IdInput({ setInput, setCanUseId, id }: InputProps) {
   return (
     <S.Layout>
       <Input>
-        <Input.Label size="big">닉네임</Input.Label>
+        <Input.Label className="title" size="big">
+          닉네임
+        </Input.Label>
         <Input.Text
           defaultValue={id}
           line="underline"
@@ -89,7 +88,13 @@ export default function IdInput({ setInput, setCanUseId, id }: InputProps) {
           validity={idInputValidity}
           onChange={setInput}
         />
-        {id?.length > 0 && (
+        {id?.length === 0 || state === 3 ? (
+          <div className="hidden">
+            <Input.HelperText className="helperText" state={state}>
+              {helperText}
+            </Input.HelperText>
+          </div>
+        ) : (
           <Input.HelperText className="helperText" state={state}>
             {helperText}
           </Input.HelperText>
