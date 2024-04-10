@@ -1,57 +1,13 @@
 import S from '@/pageStyle/main/style';
 import AppBar from '@/components/Appbar';
-import Headline from '@/components/UI/TypoGraphy/Title1';
 import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';
-import UserCloset from '@/components/Domain/Main/MyCloset';
-import TodayRecommend from '@/components/Domain/Main/TodayRecommend';
 import SameCloth from '@/components/Domain/Main/SameCloth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
-import Carousel from '@/components/Carousel';
 import TabView from '@/components/TabView';
 import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
 import Explore from '@/components/Domain/Main/Explore';
-
-const MyClosetDataSample = {
-  user: {
-    userImage:
-      'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    userName: 'username',
-    follow: 999,
-    myCloth: 999,
-  },
-  data: [
-    {
-      OOTDImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      caption: '옷장',
-      headline: '옷과 만난지 n년이 되었어요!',
-      subHeadline: '옷의 상태는 어떤가요?',
-    },
-    {
-      OOTDImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      caption: '옷장',
-      headline: '옷과 만난지 n년이 되었어요!',
-      subHeadline: '옷의 상태는 어떤가요?',
-    },
-    {
-      OOTDImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      caption: '옷장',
-      headline: '옷과 만난지 n년이 되었어요!',
-      subHeadline: '옷의 상태는 어떤가요?',
-    },
-    {
-      OOTDImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-      caption: '옷장',
-      headline: '옷과 만난지 n년이 되었어요!',
-      subHeadline: '옷의 상태는 어떤가요?',
-    },
-  ],
-};
 
 const TodayRecommendSampleData = [
   {
@@ -203,7 +159,7 @@ export default function Main() {
         <TabView.Tabs>
           <TabView.Tab>
             <S.Curation>
-              <TodayRecommend data={TodayRecommendSampleData} />
+              {/* <TodayRecommend data={TodayRecommendSampleData} /> */}
               <LikeOOTD />
               <SameCloth data={SameClothDifferentFeeling} />
               {/* <button onClick={onClickButton}>클릭해봐</button> */}

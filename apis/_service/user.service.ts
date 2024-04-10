@@ -320,3 +320,9 @@ export const deleteUser = async () => {
 
   return data;
 };
+
+export const getLikeOOTD = async () => {
+  const data = await ootdApi.getLikeOOTD();
+
+  return data;
+};
