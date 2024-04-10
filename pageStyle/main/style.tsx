@@ -30,15 +30,17 @@ const Layout = styled.div<LayoutProps>`
     display: flex;
     align-items: center;
   }
+  height: 100vh;
+  overflow-y: hidden;
 `;
 const Curation = styled.div`
-  margin-top: 57px;
-  padding: 0 20px;
+  padding: 57px 0 0 20px;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 126px;
-  height: 100vh;
+  height: calc(100vh - 151px);
+  overflow-y: scroll;
 `;
 
 const Explore = styled.div`
