@@ -9,7 +9,7 @@ const Layout = styled.div<LayoutProps>`
     props.isExistNotReadAlarm &&
     `
   .bell {
-    position: relative;
+    position: relative; 
   }
 
   .bell:after {
@@ -25,6 +25,10 @@ const Layout = styled.div<LayoutProps>`
   `}
   .tabBar {
     padding: 0 4px;
+  }
+  .bell {
+    display: flex;
+    align-items: center;
   }
 `;
 const Curation = styled.div`
