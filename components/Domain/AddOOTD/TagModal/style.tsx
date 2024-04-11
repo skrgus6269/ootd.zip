@@ -48,7 +48,8 @@ const CategorySpan = styled.div<CategorySpanProps>`
   color: ${(props) =>
     !props.state ? props.theme.color.grey_00 : props.theme.color.grey_100};
   padding: 8px 16px;
-  border: 1px solid ${(props) => props.theme.color.grey_80};
+  border: ${(props) =>
+    !props.state ? `1px solid ${props.theme.color.grey_80}` : 'none'};
   border-radius: 17px;
   flex-shrink: 0;
 `;
