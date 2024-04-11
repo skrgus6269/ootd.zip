@@ -174,7 +174,7 @@ export default function AddTag({
 
   return (
     <>
-      <Modal height="95" isOpen={addTag}>
+      <Modal height="96.5" isOpen={addTag}>
         <S.Background
           onClick={() => setGoToMypageAlertState(false)}
           addTag={goToMypageAlertState}
