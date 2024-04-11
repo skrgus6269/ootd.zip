@@ -43,7 +43,8 @@ const OOTDImage = styled.div`
 `;
 
 const ImageDivider = styled.hr`
-  border: 8px solid ${(props) => props.theme.color.grey_95};
+  border: 4px solid ${(props) => props.theme.color.grey_95};
+  margin: 0;
   width: 100%;
 `;
 
