@@ -4,7 +4,12 @@ interface FilterProps {
   state: Boolean;
 }
 
-const Layout = styled.div``;
+const Layout = styled.div`
+  .addButton {
+    width: calc(100% - 20px);
+    margin-bottom: 109px;
+  }
+`;
 
 const Label = styled.div`
   .body {

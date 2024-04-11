@@ -195,3 +195,9 @@ export const getSearchOOTD = async (params: getSearchOOTDParams) => {
 
   return data;
 };
+
+export const getLikeOOTD = async () => {
+  const { data } = await fetcher.get('v1/ootd-like');
+
+  return data;
+};
