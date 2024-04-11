@@ -9,7 +9,7 @@ const Layout = styled.div<LayoutProps>`
     props.isExistNotReadAlarm &&
     `
   .bell {
-    position: relative;
+    position: relative; 
   }
 
   .bell:after {
@@ -26,15 +26,21 @@ const Layout = styled.div<LayoutProps>`
   .tabBar {
     padding: 0 4px;
   }
+  .bell {
+    display: flex;
+    align-items: center;
+  }
+  height: 100vh;
+  overflow-y: hidden;
 `;
 const Curation = styled.div`
-  margin-top: 57px;
-  padding: 0 20px;
+  padding: 57px 0 0 20px;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 126px;
-  height: 100vh;
+  height: calc(100vh - 151px);
+  overflow-y: scroll;
 `;
 
 const Explore = styled.div`

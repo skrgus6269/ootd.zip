@@ -86,6 +86,7 @@ export default function SameCloth({ data }: SameClothProps) {
         color="grey_00"
         onClick={() => console.log('더보기')}
         border={true}
+        className="addButton"
       >
         <Button3>더보기</Button3>
       </Button>
