@@ -101,8 +101,10 @@ const List = styled.div`
   height: 30%;
   overflow-y: scroll;
   hr {
-    color: ${(props) => props.theme.color.grey_90};
     width: 100%;
+    border: none;
+    border-top: 0.5px solid ${(props) => props.theme.color.grey_90};
+    margin: 0;
   }
 `;
 
