@@ -15,7 +15,7 @@ export default function SocialLoginButton({
 }: SocialLoginButtonProps) {
   const platformInfo = {
     KAKAO: [<KakaoLogo />, '카카오로 로그인'],
-    APPLE: [<AppleLogo />, '애플로 로그인'],
+    APPLE: [<AppleLogo />, 'Apple로 로그인'],
     GOOGLE: [<AppleLogo />, 'Google 계정으로 로그인'],
   };
 
