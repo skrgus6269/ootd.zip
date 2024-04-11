@@ -169,7 +169,7 @@ export default function AddTag({
 
   const onClickGoToMypageYesButton = () => {
     setStoredImage(imageAndTag);
-    router.push(`/mypage/${myId}`);
+    router.push(`/mypage/${myId}/cloth`);
   };
 
   return (
