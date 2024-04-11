@@ -70,6 +70,7 @@ export default function Search() {
         <SearchResult keywordsValue={searchValue} />
       ) : (
         <Recents
+          setSearchValue={setSearchValue}
           handleClearKeywords={() => setKeywords([])}
           keywords={keywords}
           handleRemoveKeyword={handleRemoveKeyword}
