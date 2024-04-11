@@ -14,6 +14,9 @@ const TextArea = styled.textarea`
   padding: 8px 16px 0 16px;
   margin-bottom: 8px;
   border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 
   &:focus {
     outline: none;
