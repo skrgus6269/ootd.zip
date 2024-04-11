@@ -62,12 +62,15 @@ const IsOpenSpan = styled.div<IsOpenProps>`
   padding: 8px 16px;
   border-radius: 17px;
   background-color: ${(props) =>
-    props.state ? props.theme.color.grey_00 : props.theme.color.grey_95};
+    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
   color: ${(props) =>
     !props.state ? props.theme.color.grey_00 : props.theme.color.grey_100};
   flex-shrink: 0;
   border: ${(props) =>
-    !props.state && `1px solid ${props.theme.color.grey_90}`};
+    !props.state && `1px solid ${props.theme.color.grey_80}`};
+  .hidden {
+    color: ${(props) => props.theme.color.grey_100};
+  }
 `;
 
 const SearchFilter = styled.div`

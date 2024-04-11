@@ -199,7 +199,9 @@ export default function AddTag({
                       onClick={() => setNotOpenState(true)}
                       state={false}
                     >
-                      <Body4 state="emphasis">비공개</Body4>
+                      <Body4 className="hidden" state="emphasis">
+                        비공개
+                      </Body4>
                     </S.IsOpenSpan>
                     <S.Divider />
                     <S.Category>
