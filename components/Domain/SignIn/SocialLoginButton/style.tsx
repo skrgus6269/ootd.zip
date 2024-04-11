@@ -32,9 +32,12 @@ const ButtonString = styled.div<ButtonStringProps>`
       ? 'white'
       : 'black'};
   width: 100%;
-  img {
+  position: relative;
+  svg {
     position: absolute;
     left: 16px;
+    width: 18px;
+    height: 18px;
   }
 `;
 
