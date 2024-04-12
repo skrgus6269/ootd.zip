@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import ClothCategory from '@/components/ClothCategory';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface ClothCategoryModalProps {
   isOpen: Boolean;
@@ -65,7 +66,10 @@ export default function ClothCategoryModal({
   return (
     <Modal height="60" isOpen={isOpen}>
       <S.Layout>
-        <Title1 className="title">카테고리</Title1>
+        <S.Title>
+          <Title1 className="title">카테고리</Title1>
+          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
+        </S.Title>
         <ClothCategory
           categoryList={categoryList}
           setCategoryList={setCategoryList}

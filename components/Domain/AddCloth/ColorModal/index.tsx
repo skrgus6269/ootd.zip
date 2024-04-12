@@ -60,7 +60,8 @@ const ColorModal = ({
     <Modal isOpen={isOpen} height="65">
       <S.Layout>
         <S.Title>
-          <Title1>색상</Title1>
+          <Title1 className="title">색상</Title1>
+          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
         </S.Title>
         <S.ColorList>
           <ColorList

@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Modal from '@/components/Modal';
 import NextButton from '@/components/NextButton';
 import { ClothWhereBuy } from '@/pages/add-cloth';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface WhereToBuyModal {
   storedClothWhereBuy?: ClothWhereBuy;
@@ -66,6 +67,7 @@ export default function WhereToBuyModal({
       <S.Layout>
         <S.Title>
           <Title1 className="title">구매처</Title1>
+          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
         </S.Title>
         <S.Link>
           <Body3>링크로 입력하기</Body3>

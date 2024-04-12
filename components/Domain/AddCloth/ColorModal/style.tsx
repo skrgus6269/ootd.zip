@@ -17,7 +17,19 @@ const Layout = styled.div`
   }
 `;
 const Title = styled.div`
-  padding: 21px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .title {
+    padding: 22px 0;
+  }
+  .close {
+    position: absolute;
+    right: 0px;
+    width: 24px;
+    height: 24px;
+  }
 `;
 const Color = styled.div`
   height: 86px;

@@ -10,8 +10,18 @@ const Layout = styled.div`
   }
 `;
 const Title = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
   .title {
-    padding: 21px 0;
+    padding: 22px 0;
+  }
+  .close {
+    position: absolute;
+    right: 0px;
+    width: 24px;
+    height: 24px;
   }
 `;
 const SizeLayout = styled.div`
