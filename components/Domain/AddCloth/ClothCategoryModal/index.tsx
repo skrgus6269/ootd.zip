@@ -1,6 +1,6 @@
 import Modal from '@/components/Modal';
 import S from './style';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import ClothCategory from '@/components/ClothCategory';
@@ -38,6 +38,24 @@ export default function ClothCategoryModal({
   const [categoryList, setCategoryList] = useState<CategoryListType[] | null>(
     null
   );
+  const [submitButtonState, setSubmitButtonState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    const filteredCategoryList = [];
+    categoryList?.forEach((item: CategoryListType) => {
+      item.detailCategories!.forEach((items) => {
+        if (items.state) {
+          filteredCategoryList.push(1);
+        }
+        return;
+      });
+    });
+    if (filteredCategoryList.length !== 0) {
+      setSubmitButtonState(true);
+      return;
+    }
+    setSubmitButtonState(false);
+  }, [categoryList]);
 
   const onClickNextButton = () => {
     setClothCategory(selectedCategory);
@@ -57,7 +75,7 @@ export default function ClothCategoryModal({
         />
         <NextButton
           className="nextButton"
-          state={true}
+          state={submitButtonState}
           onClick={onClickNextButton}
         >
           선택 완료
