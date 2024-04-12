@@ -36,22 +36,21 @@ export default function WhereToBuyModal({
     storedClothWhereBuy && storedClothWhereBuy.type === 'Link' ? 1 : 2
   );
 
+  const [onClickInputState, setOnClickInputState] = useState<Boolean>(false);
+
   const linkRef = useRef<any>(null);
   const writeRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (selectedLetter === 1) linkRef.current.focus();
-    if (selectedLetter === 2) writeRef.current.focus();
-  }, [selectedLetter]);
 
   const onClickLinkLetter = () => {
     setSelectedLetter(1);
     setWriteLetter('');
+    setOnClickInputState(true);
   };
 
   const onClickWriteLetter = () => {
     setSelectedLetter(2);
     setLinkLetter('');
+    setOnClickInputState(true);
   };
 
   const onClickNextButton = () => {
@@ -72,7 +71,9 @@ export default function WhereToBuyModal({
         <S.Link>
           <Body3>링크로 입력하기</Body3>
           <Input>
-            {selectedLetter === 0 || selectedLetter === 1 ? (
+            {selectedLetter === 0 ||
+            selectedLetter === 1 ||
+            !onClickInputState ? (
               <Input.Text
                 defaultValue={linkLetter}
                 inputRef={linkRef}
@@ -82,6 +83,7 @@ export default function WhereToBuyModal({
                 type="Link"
                 onChange={setLinkLetter}
                 onClick={onClickLinkLetter}
+                state={true}
               />
             ) : (
               <Input.ReadOnly
@@ -96,7 +98,9 @@ export default function WhereToBuyModal({
         <S.Write>
           <Body3>직접 입력하기</Body3>
           <Input>
-            {selectedLetter === 0 || selectedLetter === 2 ? (
+            {selectedLetter === 0 ||
+            selectedLetter === 2 ||
+            !onClickInputState ? (
               <Input.Text
                 defaultValue={writeLetter}
                 inputRef={writeRef}
@@ -105,6 +109,7 @@ export default function WhereToBuyModal({
                 line="outline"
                 onChange={setWriteLetter}
                 onClick={onClickWriteLetter}
+                state={true}
               />
             ) : (
               <Input.ReadOnly
