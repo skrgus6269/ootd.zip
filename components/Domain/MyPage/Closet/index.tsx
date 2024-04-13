@@ -5,6 +5,7 @@ import ClosetCloth from './ClosetCloth';
 import ClosetOOTD from './ClosetOOTD';
 import ClosetEmpty from './ClosetEmpty';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 interface ClosetType {
   showingId: number;
@@ -19,6 +20,13 @@ export default function Closet({
 }: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (router.query.UserId![1] === 'cloth') {
+      handleStep('Cloth');
+    }
+  }, [router.isReady]);
 
   return (
     <>

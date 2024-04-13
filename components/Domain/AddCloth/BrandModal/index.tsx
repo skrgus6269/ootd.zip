@@ -8,8 +8,8 @@ import SearchBar from '@/components/SearchBar';
 import { AiOutlineClose } from 'react-icons/ai';
 import NextButton from '@/components/NextButton';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
-import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
-import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
+import CheckBoxTrue from '@/public/images/CheckBoxTrue.svg';
+import CheckBoxFalse from '@/public/images/CheckBoxFalse.svg';
 import Image from 'next/image';
 
 interface BrandModalProps {

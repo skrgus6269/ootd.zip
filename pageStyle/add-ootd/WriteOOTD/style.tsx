@@ -43,13 +43,21 @@ const OOTDImage = styled.div`
 `;
 
 const ImageDivider = styled.hr`
-  border: 8px solid ${(props) => props.theme.color.grey_95};
+  border: 4px solid ${(props) => props.theme.color.grey_95};
+  margin: 0;
   width: 100%;
 `;
 
-const Text = styled.div`
-  margin: 16px 0 0 0;
-  padding: 0 20px 0 20px;
+interface TextType {
+  state: Boolean;
+}
+
+const Text = styled.div<TextType>`
+  margin: 16px 20px 0 20px;
+  border: ${(props) =>
+    props.state
+      ? `1px solid ${props.theme.color.grey_00}`
+      : `1px solid ${props.theme.color.grey_80}`};
 `;
 
 const Style = styled.div`

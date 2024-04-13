@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
-import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
+import CheckBoxTrue from '@/public/images/CheckBoxTrue.svg';
+import CheckBoxFalse from '@/public/images/CheckBoxFalse.svg';
 import Body2 from '@/components/UI/TypoGraphy/Body2';
 
 interface BoxProps {
@@ -39,12 +39,8 @@ const CheckBox = ({ state, setState }: CheckBoxProps) => {
             <S.Box onClick={() => onClickCheckBox(index)} key={index}>
               <>
                 <S.Image>
-                  {item.state && (
-                    <Image src={CheckBoxTrue} alt="CheckBoxTrue" />
-                  )}
-                  {!item.state && (
-                    <Image src={CheckBoxFalse} alt="CheckBoxFalse" />
-                  )}
+                  {item.state && <CheckBoxTrue className="checkBoxTrue" />}
+                  {!item.state && <CheckBoxFalse alt="CheckBoxFalse" />}
                 </S.Image>
                 <S.Tag>
                   <Body2>{item.name}</Body2>
