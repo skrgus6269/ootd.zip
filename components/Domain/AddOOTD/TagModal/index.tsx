@@ -169,12 +169,12 @@ export default function AddTag({
 
   const onClickGoToMypageYesButton = () => {
     setStoredImage(imageAndTag);
-    router.push(`/mypage/${myId}`);
+    router.push(`/mypage/${myId}/cloth`);
   };
 
   return (
     <>
-      <Modal height="95" isOpen={addTag}>
+      <Modal height="96.5" isOpen={addTag}>
         <S.Background
           onClick={() => setGoToMypageAlertState(false)}
           addTag={goToMypageAlertState}
@@ -199,7 +199,9 @@ export default function AddTag({
                       onClick={() => setNotOpenState(true)}
                       state={false}
                     >
-                      <Body4 state="emphasis">비공개</Body4>
+                      <Body4 className="hidden" state="emphasis">
+                        비공개
+                      </Body4>
                     </S.IsOpenSpan>
                     <S.Divider />
                     <S.Category>
