@@ -333,6 +333,7 @@ export default function Posting({
         {declaration && (
           <DeclarationModal
             type="OOTD"
+            userName={data.userName}
             ID={Number(router.query.OOTDNumber![0])}
             declaration={declaration}
             setDeclaration={setDeclaration}

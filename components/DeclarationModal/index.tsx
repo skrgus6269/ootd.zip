@@ -13,6 +13,7 @@ export type withdrawBlockType = {
 
 interface DeclarationModalProps {
   type: string;
+  userName: string;
   ID: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -22,6 +23,7 @@ interface DeclarationModalProps {
 
 export default function DeclarationModal({
   type,
+  userName,
   ID,
   declaration,
   setDeclaration,
@@ -110,7 +112,7 @@ export default function DeclarationModal({
           />
         </S.Header>
         <S.Frame>
-          <Title1>@user님의</Title1>
+          <Title1>{userName}님의</Title1>
           {type === 'COMMENT' ? (
             <Title1>댓글을 신고합니다.</Title1>
           ) : (

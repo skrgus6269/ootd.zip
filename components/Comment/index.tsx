@@ -109,6 +109,7 @@ function Comment({
       {declaration && (
         <DeclarationModal
           type="COMMENT"
+          userName={userName}
           ID={id}
           declaration={declaration}
           setDeclaration={setDeclaration}
