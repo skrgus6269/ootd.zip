@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import S from './style';
-import CheckBoxTrue from 'public/images/CheckBoxTrue.png';
-import CheckBoxFalse from 'public/images/CheckBoxFalse.png';
+import CheckBoxTrue from 'public/images/CheckBoxTrue.svg';
+import CheckBoxFalse from 'public/images/CheckBoxFalse.svg';
 import { Body3, Body4 } from '@/components/UI';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
@@ -42,15 +42,13 @@ const WithdrawBlock = ({
       </S.TextWrap>
       <S.IconSpan>
         {checked ? (
-          <Image
-            src={CheckBoxTrue}
-            alt="CheckBoxTrue"
+          <CheckBoxTrue
+            className="checkBoxIcon"
             onClick={() => setChecked(false)}
           />
         ) : (
-          <Image
-            src={CheckBoxFalse}
-            alt="CheckBoxFalse"
+          <CheckBoxFalse
+            className="checkBoxIcon"
             onClick={() => setChecked(true)}
           />
         )}
