@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
-const Layout = styled.div`
+interface LayoutProps {
+  state: Boolean;
+}
+
+const Layout = styled.div<LayoutProps>`
   display: flex;
   padding: 16px 0px;
   margin: 0px 20px;
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
-  border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
+  border-bottom: 1px solid
+    ${(props) =>
+      props.state ? props.theme.color.grey_100 : props.theme.color.grey_95};
 `;
 
 const TextWrap = styled.div`
@@ -16,6 +22,12 @@ const TextWrap = styled.div`
   align-items: flex-start;
   gap: 4px;
   width: 100%;
+
+  .content {
+    color: ${(props) => props.theme.color.grey_50};
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const IconSpan = styled.span`

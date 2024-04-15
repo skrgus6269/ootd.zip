@@ -128,6 +128,7 @@ export default function DeclarationModal({
             key={item.id}
             title={item.message}
             checked={checks[item.id]}
+            lastItem={withdrawBlockTitles.length - 1 === index}
             setChecked={() => {
               const newChecks = [...checks];
               newChecks[item.id] = !newChecks[item.id];

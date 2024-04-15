@@ -11,6 +11,11 @@ const Header = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
+
+  .close {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Frame = styled.div`
@@ -46,6 +51,7 @@ const Button = styled.div<ButtonProps>`
   color: ${(props) => props.theme.color.grey_100};
   text-align: center;
   margin-bottom: 24px;
+  border-radius: 2px;
 `;
 
 const S = { Layout, Header, Frame, Button };

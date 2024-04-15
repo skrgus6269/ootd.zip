@@ -13,6 +13,7 @@ interface WithdrawBlockProps {
   buttonClick?: () => void;
   checked: boolean;
   setChecked: Dispatch<SetStateAction<boolean>>;
+  lastItem?: Boolean;
 }
 
 const WithdrawBlock = ({
@@ -22,23 +23,16 @@ const WithdrawBlock = ({
   buttonClick,
   checked,
   setChecked,
+  lastItem,
 }: WithdrawBlockProps) => {
   const router = useRouter();
 
   return (
-    <S.Layout onClick={buttonClick}>
+    <S.Layout onClick={buttonClick} state={lastItem}>
       <S.TextWrap>
         <Body3>{title}</Body3>
-        <Body4
-          style={{ color: '#8B8B8B', display: 'flex', alignItems: 'center' }}
-        >
-          {content}
-        </Body4>
-        <Body4
-          style={{ color: '#8B8B8B', display: 'flex', alignItems: 'center' }}
-        >
-          {content2}
-        </Body4>
+        <Body4 className="content">{content}</Body4>
+        <Body4 className="content">{content2}</Body4>
       </S.TextWrap>
       <S.IconSpan>
         {checked ? (
