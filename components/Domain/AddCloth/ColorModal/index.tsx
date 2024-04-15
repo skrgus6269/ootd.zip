@@ -87,7 +87,7 @@ const ColorModal = ({
         )}
         <NextButton
           onClick={onClickNextButton}
-          state={true}
+          state={selectedColorList !== null && selectedColorList.length > 0}
           className="nextButton"
         >
           선택완료
