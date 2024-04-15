@@ -7,7 +7,7 @@ interface Body2State {
 const Body2 = styled.p<Body2State>`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
   font-size: ${({ theme }) => theme.fontSize.md}; //16px
-  line-height: ${({ theme }) => theme.lineHeight.lg}; //20px
+  line-height: ${({ theme }) => theme.lineHeight.md}; //22px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
   ${(props) =>
     props.state === 'emphasis' &&
