@@ -81,7 +81,6 @@ const SelectedColorList = styled.div`
 `;
 
 const SelectedColor = styled.div`
-  border: 1px solid ${(props) => props.theme.color.grey_00};
   background-color: ${(props) => props.theme.color.grey_10};
   display: inline-flex;
   min-width: 68px;
