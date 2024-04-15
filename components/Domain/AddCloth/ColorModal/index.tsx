@@ -72,19 +72,23 @@ const ColorModal = ({
           />
         </S.ColorList>
         {selectedColorList !== null && selectedColorList.length > 0 && (
-          <S.SelectedColorList>
-            {selectedColorList.map((item, index) => {
-              return (
-                <S.SelectedColor key={index}>
-                  <Button3 className="selectedColor">{item.name}</Button3>
-                  <AiOutlineClose
-                    onClick={() => onClickCloseColorButton(item.id)}
-                  />
-                </S.SelectedColor>
-              );
-            })}
-          </S.SelectedColorList>
+          <>
+            <hr />
+            <S.SelectedColorList>
+              {selectedColorList.map((item, index) => {
+                return (
+                  <S.SelectedColor key={index}>
+                    <Button3 className="selectedColor">{item.name}</Button3>
+                    <AiOutlineClose
+                      onClick={() => onClickCloseColorButton(item.id)}
+                    />
+                  </S.SelectedColor>
+                );
+              })}
+            </S.SelectedColorList>
+          </>
         )}
+
         <NextButton
           onClick={onClickNextButton}
           state={selectedColorList !== null && selectedColorList.length > 0}

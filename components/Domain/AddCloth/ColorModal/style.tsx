@@ -15,6 +15,15 @@ const Layout = styled.div`
     bottom: 25px;
     width: calc(100% - 40px);
   }
+  hr {
+    position: relative;
+    left: -20px;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
+    margin: 0;
+    height: 0;
+    width: 120%;
+  }
 `;
 const Title = styled.div`
   position: relative;
@@ -65,7 +74,7 @@ const SelectedColorList = styled.div`
   overflow-x: scroll;
   flex-grow: 1;
   margin-bottom: 70px;
-  position: absolute;
+  position: relative;
   z-index: 999;
   background-color: white;
   bottom: 0;
