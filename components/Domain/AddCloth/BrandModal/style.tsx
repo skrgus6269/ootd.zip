@@ -43,6 +43,10 @@ const NoBrand = styled.div<NoBrandState>`
   gap: 6px;
   color: ${(props) =>
     props.state ? props.theme.color.grey_00 : props.theme.color.grey_50};
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 const BrandList = styled.div`
