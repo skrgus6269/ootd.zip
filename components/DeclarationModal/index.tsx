@@ -118,7 +118,7 @@ export default function DeclarationModal({
           ) : (
             <Title1>게시글을 신고합니다.</Title1>
           )}
-          <Caption1 style={{ color: '#8B8B8B' }}>
+          <Caption1 className="ment">
             아래에서 신고 사유를 선택해주세요. 회원님의 신고는 익명으로
             처리됩니다.
           </Caption1>

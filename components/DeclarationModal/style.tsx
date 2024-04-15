@@ -24,6 +24,11 @@ const Frame = styled.div`
     width: 44px;
     height: 44px;
   }
+
+  .ment {
+    color: ${(props) => props.theme.color.grey_50};
+    height: 22px;
+  }
 `;
 
 interface ButtonProps {
@@ -38,7 +43,7 @@ const Button = styled.div<ButtonProps>`
   background-color: ${(props) =>
     props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
   padding: 14px 0px;
-  color: #fff;
+  color: ${(props) => props.theme.color.grey_100};
   text-align: center;
   margin-bottom: 24px;
 `;
