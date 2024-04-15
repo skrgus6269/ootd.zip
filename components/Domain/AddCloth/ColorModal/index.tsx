@@ -57,7 +57,7 @@ const ColorModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} height="65">
+    <Modal isOpen={isOpen} height="70">
       <S.Layout>
         <S.Title>
           <Title1 className="title">색상</Title1>
