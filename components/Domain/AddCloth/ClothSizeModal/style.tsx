@@ -48,6 +48,7 @@ const Size = styled.div<SizeProps>`
   background-color: ${(props) =>
     props.state ? props.theme.color.grey_00 : ''};
   color: ${(props) => (props.state ? props.theme.color.grey_100 : '')};
+  border-radius: 2px;
 `;
 
 const S = { Layout, Title, SizeLayout, SizeBlock, Size };
