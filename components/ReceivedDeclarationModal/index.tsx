@@ -18,7 +18,7 @@ export default function ReceivedDeclarationModal({
   setReceivedDeclaration,
 }: ReceivedDeclarationModalProps) {
   return (
-    <Modal isOpen={receivedDeclaration} height="70">
+    <Modal isOpen={receivedDeclaration} height="55">
       <S.Layout>
         <S.Header>
           <AiOutlineClose
@@ -27,7 +27,7 @@ export default function ReceivedDeclarationModal({
           />
         </S.Header>
         <S.Frame>
-          <AiOutlineExclamationCircle />
+          <AiOutlineExclamationCircle className="infoIcon" />
           <Headline2>
             {reportStatus === true
               ? '신고가 접수되었습니다.'
