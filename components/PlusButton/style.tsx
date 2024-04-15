@@ -8,6 +8,10 @@ const Layout = styled.div`
     color: ${(props) => props.theme.color.grey_50};
     display: inline-block;
   }
+  svg {
+    width: 44px;
+    height: 44px;
+  }
 `;
 
 const S = { Layout };
