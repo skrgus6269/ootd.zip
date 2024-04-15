@@ -8,6 +8,10 @@ const Layout = styled.div`
   gap: 8px;
   margin-top: 50%;
   margin-left: 25%;
+
+  .text {
+    text-align: center;
+  }
 `;
 
 const S = { Layout };

@@ -20,11 +20,6 @@ const Body3 = styled.p<Body3State>`
     `
       text-decoration: underline;
   `}
-  ${(props) =>
-    props.state === 'center' &&
-    `
-      text-align: center;
-  `}
 `;
 
 export default Body3;
