@@ -40,8 +40,6 @@ export default function WriteOOTD({
   const router = useRouter();
 
   const [styleModalIsOpen, setStyleModalIsOpen] = useState<Boolean>(false);
-  const [onClickDescriptionState, setOnclickDescriptionState] =
-    useState<Boolean>(false);
 
   const onClickAddStyleTag = () => {
     setStyleModalIsOpen(true);
@@ -112,11 +110,7 @@ export default function WriteOOTD({
             })}
         </S.OOTDImage>
         <S.ImageDivider />
-        <S.Text
-          state={onClickDescriptionState}
-          onTouchStart={() => setOnclickDescriptionState(true)}
-          onBlur={() => setOnclickDescriptionState(false)}
-        >
+        <S.Text>
           <Input>
             <Input.TextArea
               input={string}
