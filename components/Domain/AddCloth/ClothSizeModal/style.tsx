@@ -2,11 +2,14 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   .nextButton {
-    padding: 16px 0 0 0;
-    position: absolute;
+    position: relative;
     bottom: 25px;
-    width: calc(100% - 40px);
+    background-color: white;
+    border: none;
   }
 `;
 const Title = styled.div`
@@ -28,6 +31,8 @@ const SizeLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: scroll;
+  padding-bottom: 30px;
 `;
 const SizeBlock = styled.div`
   display: flex;
