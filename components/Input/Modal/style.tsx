@@ -35,7 +35,7 @@ const SearchIcon = styled.div`
   justify-content: center;
   border: 1px solid ${(props) => props.theme.color.grey_90};
   flex-shrink: 0;
-
+  border-radius: 2px;
   svg {
     width: 24px;
     height: 24px;

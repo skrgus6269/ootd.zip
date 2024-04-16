@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
-const Layout = styled.div`
+interface LayoutProps {
+  onClickDescriptionState: Boolean;
+}
+
+const Layout = styled.div<LayoutProps>`
   width: 100%;
+  border: ${(props) =>
+    props.onClickDescriptionState
+      ? `1px solid ${props.theme.color.grey_00}`
+      : `1px solid ${props.theme.color.grey_80}`};
 `;
 
 const TextArea = styled.textarea`
@@ -17,7 +25,6 @@ const TextArea = styled.textarea`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-
   &:focus {
     outline: none;
   }

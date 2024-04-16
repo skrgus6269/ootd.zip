@@ -48,16 +48,8 @@ const ImageDivider = styled.hr`
   width: 100%;
 `;
 
-interface TextType {
-  state: Boolean;
-}
-
-const Text = styled.div<TextType>`
+const Text = styled.div`
   margin: 16px 20px 0 20px;
-  border: ${(props) =>
-    props.state
-      ? `1px solid ${props.theme.color.grey_00}`
-      : `1px solid ${props.theme.color.grey_80}`};
 `;
 
 const Style = styled.div`

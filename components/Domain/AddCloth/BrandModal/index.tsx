@@ -95,13 +95,8 @@ export default function BrandModal({
               onClick={() => setNoBrandState(!noBrandState)}
               state={noBrandState}
             >
-              <Image
-                src={noBrandState ? CheckBoxTrue : CheckBoxFalse}
-                width={18}
-                height={18}
-                alt="브랜드가 없음"
-              />
-              <Body4 className="noBrand">찾고있는 브랜드가 없어요.</Body4>
+              {noBrandState ? <CheckBoxTrue /> : <CheckBoxFalse />}
+              <Body4 className="noBrand">찾고 있는 브랜드가 없어요.</Body4>
             </S.NoBrand>
           )}
           <BrandList

@@ -26,7 +26,10 @@ const ClothName = styled.div`
 const Category = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
   p {
     margin-bottom: 0 !important;
   }

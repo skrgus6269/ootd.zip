@@ -99,7 +99,7 @@ const AddCloth: ComponentWithLayout = () => {
     <Funnel>
       <AppBar
         leftProps={<AppbarLeftProps />}
-        middleProps={<Title1>의류등록</Title1>}
+        middleProps={<Title1>의류 등록</Title1>}
         rightProps={<></>}
       />
       <Funnel.Steps name="편집">

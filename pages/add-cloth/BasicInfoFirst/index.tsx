@@ -12,6 +12,7 @@ import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
 import { BrandType } from '@/components/BrandList/Brand';
 import BrandModal from '@/components/Domain/AddCloth/BrandModal';
 import NextImage from '@/components/NextImage';
+import ArrowLeft from '@/public/images/ArrowLeft.svg';
 
 interface BaiscInfoFirst {
   clothName: string;
@@ -61,7 +62,7 @@ export default function BasicInfoFirst({
       <Body3>
         {clothCategory && clothCategory[clothCategory.length - 1]?.name}
       </Body3>
-      <Body3>&gt;</Body3>
+      <ArrowLeft />
       <Body3 style={{ fontWeight: '700' }}>
         {clothCategory &&
           clothCategory[clothCategory.length - 1]?.detailCategories &&
