@@ -1,11 +1,11 @@
 const lineHeight = {
-  xs: '12px',
-  sm: '14px',
-  base: '16px',
-  md: '18px',
-  lg: '20px',
-  xl: '30px',
-  vl: '38px',
+  xs: '16px',
+  sm: '18px',
+  base: '20px',
+  md: '22px',
+  lg: '24px',
+  xl: '32px',
+  xxl: '38px',
 };
 
 export default lineHeight;
