@@ -103,7 +103,7 @@ const Input = styled.input<InputProps>`
     border: none; 
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 20px; 
     :focus {
       outline: none;
