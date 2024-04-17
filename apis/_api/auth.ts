@@ -1,15 +1,13 @@
 import fetcher from '../fetcher';
 import { NEXT_PUBLIC_DOMAIN_HOST } from '@/constants/develop.constants';
 import { postRegistUserInfoPayload } from './type';
+import { QueryParams } from '@/pages/sign-in/[...callback]';
 
-export const login = async (platform: string, code: string) => {
-  const payload = {
-    redirectUri: `${NEXT_PUBLIC_DOMAIN_HOST}/sign-in/${platform}/callback`,
-    oauthProvider: platform.toUpperCase(),
-    authorizationCode: code,
-  };
-
-  const { data } = await fetcher.post('v1/user/login', payload);
+export const login = async (payload: QueryParams) => {
+  const { data } = await fetcher.post(
+    `v1/login/oauth/code/${payload.callback![0]}`,
+    payload
+  );
 
   return data;
 };

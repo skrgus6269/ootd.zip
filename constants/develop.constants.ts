@@ -15,7 +15,7 @@ export const NEXT_PUBLIC_GOOGLE_URI =
 
 //카카오 인증 관련 상수
 export const NEXT_PUBLIC_KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
-export const NEXT_PUBLIC_KAKAO_URI = `${NEXT_PUBLIC_DOMAIN_HOST}/sign-in/kakao/callback`;
+export const NEXT_PUBLIC_KAKAO_URI = 'api/v1/login/authorization/kakao';
 
 //애플 인증 관련 상수
 
@@ -24,8 +24,4 @@ export const NEXT_PUBLIC_APPLE_CLIENT_ID =
 export const NEXT_PUBLIC_APPLE_REDIRECT_RUI = `https://ootdzip.com/sign-in/apple/callback`;
 export const NEXT_PUBLIC_APPLE_STATE = process.env.NEXT_PUBLIC_APPLE_STATE;
 export const NEXT_PUBLIC_APPLE_SCOPE = '';
-export const NEXT_PUBLIC_APPLE_URI =
-  `https://appleid.apple.com/auth/authorize?response_type=code` +
-  `&redirect_uri=${NEXT_PUBLIC_APPLE_REDIRECT_RUI}` +
-  `&client_id=${NEXT_PUBLIC_APPLE_CLIENT_ID}` +
-  `&state=${NEXT_PUBLIC_APPLE_STATE}`;
+export const NEXT_PUBLIC_APPLE_URI = 'api/v1/login/authorization/apple';

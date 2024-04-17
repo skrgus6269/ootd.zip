@@ -3,22 +3,24 @@ import { useEffect } from 'react';
 import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
 import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
-interface QueryParams {
+export interface QueryParams {
   code?: string;
+  state?: string;
   callback?: string[];
 }
 
 export default function SignUpCallbackPage() {
   const router = useRouter();
-  const { code, callback } = router.query as QueryParams;
+  const { code } = router.query as QueryParams;
   const [login] = SignInApi();
   const { getCheckCompleteRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (callback !== undefined && code !== undefined) {
+      if (!router.isReady) return;
+      if (code !== undefined) {
         // login 함수 호출 이후에 상태 확인
-        const loginSuccess = await login({ platform: callback[0], code: code });
+        const loginSuccess = await login(router.query);
 
         // login 함수 호출 이후에 상태 확인 및 라우팅
         switch (loginSuccess) {
@@ -37,7 +39,7 @@ export default function SignUpCallbackPage() {
     };
 
     fetchData();
-  }, [code]);
+  }, [code, !router.isReady]);
 
   return <div>loading</div>;
 }

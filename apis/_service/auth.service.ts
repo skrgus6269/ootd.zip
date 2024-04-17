@@ -1,8 +1,9 @@
 import { authApi } from '@/apis/_api';
 import { postRegistUserInfoPayload } from '../_api/type';
+import { QueryParams } from '@/pages/sign-in/[...callback]';
 
-export const login = async (platform: string, code: string) => {
-  const data = await authApi.login(platform, code);
+export const login = async (payload: QueryParams) => {
+  const data = await authApi.login(payload);
 
   return data;
 };
