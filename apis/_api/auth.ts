@@ -4,9 +4,10 @@ import { postRegistUserInfoPayload } from './type';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
 
 export const login = async (payload: QueryParams) => {
-  const { data } = await fetcher.post(
-    `v1/login/oauth/code/${payload.callback![0]}`,
-    payload
+  const { data } = await fetcher.get(
+    `v1/login/oauth/code/${payload.callback![0]}?code=${payload.code}&state=${
+      payload.state
+    }`
   );
 
   return data;
