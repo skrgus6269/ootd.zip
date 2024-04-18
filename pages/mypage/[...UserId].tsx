@@ -114,8 +114,10 @@ export default function MyPage() {
         />
         <Closet
           showingId={userProfileData.userId}
+          userName={userProfileData.userName}
           ootdCount={userProfileData.ootdCount}
           clothesCount={userProfileData.clothesCount}
+          isMyProfile={userProfileData.isMyProfile}
         />
         {queryState === 'editSuccess' && (
           <Toast text="프로필이 수정되었습니다." />
