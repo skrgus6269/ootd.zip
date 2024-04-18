@@ -45,7 +45,7 @@ export const SignInApi = () => {
   const snsLogin = (platform: string) => {
     switch (platform) {
       case 'KAKAO': {
-        router.push(NEXT_PUBLIC_KAKAO_URI as string);
+        router.push(NEXT_PUBLIC_KAKAO_URI);
         break;
       }
       case 'APPLE': {
