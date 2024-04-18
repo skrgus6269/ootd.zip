@@ -81,11 +81,7 @@ const SelectedButton = styled.div<SelectedButtonState>`
     .init {
         border: 1px solid ${props.theme.color.grey_00};
         color:   ${props.theme.color.grey_00};
-    }
-    .submit {
-        background-color: ${props.theme.color.grey_00};
-        color:   ${props.theme.color.grey_100};
-    }
+    } 
   `}
 `;
 
