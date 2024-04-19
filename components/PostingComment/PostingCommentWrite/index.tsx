@@ -90,9 +90,11 @@ export default function PostingCommentWrite({
               value={comment.content}
             />
           </S.Text>
-          <S.Upload>
-            <Button3 onClick={registerComment}>등록</Button3>
-          </S.Upload>
+          {comment.content.length > 0 && (
+            <S.Upload>
+              <Button3 onClick={registerComment}>등록</Button3>
+            </S.Upload>
+          )}
         </S.Comment>
       </S.CommentWrite>
     </S.Layout>
