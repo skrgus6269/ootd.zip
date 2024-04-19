@@ -85,9 +85,9 @@ function Comment({
             <Caption1 className="createAt">{timeStamp}</Caption1>
           </S.UserName>
           <S.UserComment>
-            <Body3 className="taggedUser">
-              {taggedUserName && `@${taggedUserName}`}&nbsp;
-            </Body3>
+            {taggedUserName && (
+              <Body3 className="taggedUser">@{taggedUserName}</Body3>
+            )}
             <Body3>{content}</Body3>
           </S.UserComment>
           {view !== 'preview' ? (
