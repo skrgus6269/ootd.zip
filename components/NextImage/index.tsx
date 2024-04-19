@@ -6,7 +6,6 @@ interface ImageProps {
   alt: string;
   fill: boolean;
   className?: string;
-  key?: number;
   width?: number;
   height?: number;
   ref?: MutableRefObject<HTMLImageElement | null>;
@@ -18,7 +17,6 @@ export default function NextImage({
   alt,
   fill,
   className,
-  key,
   width,
   height,
   onClick,
@@ -32,7 +30,6 @@ export default function NextImage({
       style={{ objectFit: 'cover' }}
       className={className}
       onClick={onClick}
-      key={key}
       width={width}
       height={height}
       ref={ref}
