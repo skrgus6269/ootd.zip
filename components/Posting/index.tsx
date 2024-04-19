@@ -317,11 +317,13 @@ export default function Posting({
               );
             })}
         </S.PostingStyleTag>
-        <ReportModal
-          reportModalIsOpen={reportModalIsOpen}
-          setReportModalIsOpen={setReportModalIsOpen}
-          setDeclaration={setDeclaration}
-        />
+        {reportModalIsOpen && (
+          <ReportModal
+            reportModalIsOpen={reportModalIsOpen}
+            setReportModalIsOpen={setReportModalIsOpen}
+            setDeclaration={setDeclaration}
+          />
+        )}
         <FixModal
           setToastOpen={setToastOpen}
           reportModalIsOpen={fixModalIsOpen}
