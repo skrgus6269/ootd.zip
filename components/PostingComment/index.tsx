@@ -54,6 +54,8 @@ export default function PostingComment({
     if (commentType === 'all') setCommentType('preview');
   };
   const [data, setData] = useState<PostingCommentData[]>([]);
+  const [totalCount, setTotalCount] = useState<Number>(0);
+
   const { getOOTDComment } = OOTDApi();
 
   useEffect(() => {
@@ -66,6 +68,8 @@ export default function PostingComment({
       });
       const map = new Map<number, PostingCommentData>();
       const resultData: PostingCommentData[] = [];
+
+      setTotalCount(content.length);
 
       content.forEach((comment: PostingCommentData) => {
         if (comment.depth === 1) map.set(comment.id, comment);
@@ -129,7 +133,7 @@ export default function PostingComment({
   const ComentAll = () => {
     return (
       <S.Layout>
-        <Body4 className="commentLength">총{data!.length}개의 댓글</Body4>
+        <Body4 className="commentLength">총{String(totalCount)}개의 댓글</Body4>
         {data!.map((item, index) => (
           <>
             <Comment
