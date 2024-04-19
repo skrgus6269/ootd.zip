@@ -24,6 +24,7 @@ interface PostingCommentData extends CommentProps {
     parentId?: number;
     taggedUserName?: string;
     depth?: number;
+    userId: number;
   }[];
 }
 
@@ -150,7 +151,7 @@ export default function PostingComment({
               item.childComment?.map((items, indexs) => (
                 <Comment
                   key={items.id}
-                  userId={item.userId}
+                  userId={items.userId}
                   userImage={items.userImage}
                   id={items.id}
                   userName={items.userName}
@@ -164,7 +165,7 @@ export default function PostingComment({
                   type="child"
                   taggedUserName={items.taggedUserName}
                   timeStamp={items.timeStamp}
-                  myComment={localUserId === item.userId}
+                  myComment={localUserId === items.userId}
                   reRender={reRender}
                   setReRender={setReRender}
                 />
