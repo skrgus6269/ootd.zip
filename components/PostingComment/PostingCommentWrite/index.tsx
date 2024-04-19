@@ -80,7 +80,7 @@ export default function PostingCommentWrite({
         <S.Comment>
           <S.Text>
             <S.Input
-              line={Math.floor(comment.content.length / 21) + 2}
+              line={comment.content.split('\n').length}
               ref={commentRef}
               onChange={(e) => {
                 setComment({ ...comment, content: e.target.value });
