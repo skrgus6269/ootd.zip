@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Body3, Caption1 } from '../UI';
 import S from './style';
 import Avatar from '@/public/images/Avatar.svg';
@@ -73,8 +73,8 @@ function Comment({
                 src={userImage}
                 alt="유저 이미지"
                 fill={false}
-                width={32}
-                height={32}
+                width={type === 'child' ? 24 : 32}
+                height={type === 'child' ? 24 : 32}
               />
             </S.UserImage>
           )}
@@ -85,9 +85,9 @@ function Comment({
             <Caption1 className="createAt">{timeStamp}</Caption1>
           </S.UserName>
           <S.UserComment>
-            <Body3 className="taggedUser">
-              {taggedUserName && `@${taggedUserName}`}&nbsp;
-            </Body3>
+            {taggedUserName && (
+              <Body3 className="taggedUser">@{taggedUserName}</Body3>
+            )}
             <Body3>{content}</Body3>
           </S.UserComment>
           {view !== 'preview' ? (
