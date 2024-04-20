@@ -12,7 +12,6 @@ const Layout = styled.div`
   .nextButon {
     position: fixed;
     bottom: 0;
-    width: calc(100% - 20px);
 
     padding: 0 20px 25px 20px;
     background-color: white;
