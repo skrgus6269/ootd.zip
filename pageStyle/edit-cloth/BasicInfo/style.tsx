@@ -9,6 +9,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  padding-bottom: 80px;
 `;
 
 const Category = styled.div`
