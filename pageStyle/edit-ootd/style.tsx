@@ -63,6 +63,7 @@ const OOTDImage = styled.div`
 const ImageDivider = styled.hr`
   border: 8px solid ${(props) => props.theme.color.grey_95};
   width: 100%;
+  margin: 0;
 `;
 
 const Text = styled.div`
