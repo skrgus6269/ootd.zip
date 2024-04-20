@@ -40,7 +40,7 @@ export const getCheckCompleteRegistUserInfo = async () => {
 };
 
 export const getUserId = async () => {
-  const { data } = await fetcher.get('/v1/user/token/info');
+  const { data } = await fetcher.get('/v1/user/id');
 
   return data;
 };
