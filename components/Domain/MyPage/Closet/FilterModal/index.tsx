@@ -78,6 +78,29 @@ export default function FilterModal({
     setSelectedBrand(null);
     setSelectedCategory(null);
     setSelectedColorList(null);
+    setCategoryList(
+      categoryList &&
+        categoryList?.map((item) => {
+          return {
+            ...item,
+            state: false,
+            detailCategories: item.detailCategories?.map((items) => {
+              return { ...items, state: false };
+            }),
+          };
+        })
+    );
+    setColorList(
+      colorList.map((item) => {
+        return { ...item, state: false };
+      })
+    );
+    setBrandList(
+      brandList &&
+        brandList.map((item) => {
+          return { ...item, state: false };
+        })
+    );
   };
 
   const onClickCloseCategoryButton = (
@@ -162,13 +185,15 @@ export default function FilterModal({
                     ? `총 ${brandList!.length}개의 브랜드`
                     : `총 0개의 브랜드`}
                 </Body4>
-                <BrandList
-                  many="many"
-                  brandList={brandList}
-                  setBrandList={setBrandList}
-                  brandInitial={brandInitial}
-                  setSelectedBrand={setSelectedBrand}
-                />
+                {brandList && (
+                  <BrandList
+                    many="many"
+                    brandList={brandList}
+                    setBrandList={setBrandList}
+                    brandInitial={brandInitial}
+                    setSelectedBrand={setSelectedBrand}
+                  />
+                )}
               </TabView.Tab>
             </TabView.Tabs>
           </div>
@@ -247,7 +272,7 @@ export default function FilterModal({
             size="big"
             onClick={onClickSubmitButton}
             color="grey_100"
-            backgroundColor="grey_90"
+            backgroundColor="grey_00"
             border={false}
           >
             <Button3>완료</Button3>

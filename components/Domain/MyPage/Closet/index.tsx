@@ -9,14 +9,18 @@ import { useEffect } from 'react';
 
 interface ClosetType {
   showingId: number;
+  userName: string;
   ootdCount: number;
   clothesCount: number;
+  isMyProfile: Boolean;
 }
 
 export default function Closet({
   showingId,
   ootdCount,
+  userName,
   clothesCount,
+  isMyProfile,
 }: ClosetType) {
   const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Cloth']);
   const router = useRouter();
@@ -41,9 +45,10 @@ export default function Closet({
           <Funnel.Steps name="OOTD">
             {ootdCount === 0 ? (
               <ClosetEmpty
-                text="공유하신 사진이 없습니다."
+                text={`${userName}님이 공유한 사진이 없습니다.`}
                 button="OOTD 게시하기"
                 onClick={() => router.push('/add-ootd')}
+                isMyProfile={isMyProfile}
               />
             ) : (
               <ClosetOOTD />
@@ -52,9 +57,10 @@ export default function Closet({
           <Funnel.Steps name="Cloth">
             {clothesCount === 0 ? (
               <ClosetEmpty
-                text="옷장이 비어있습니다."
+                text={`${userName}님의 옷장이 비어있습니다.`}
                 button="의류 추가하기"
-                onClick={() => router.push('/add-closet')}
+                onClick={() => router.push('/add-cloth')}
+                isMyProfile={isMyProfile}
               />
             ) : (
               <ClosetCloth showingId={showingId} />
