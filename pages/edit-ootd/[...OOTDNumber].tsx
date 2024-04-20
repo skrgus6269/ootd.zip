@@ -100,11 +100,15 @@ const EditOOTD: ComponentWithLayout = () => {
     }
   };
 
+  const onClickBackground = () => {
+    if (styleModalIsOpen) setStyleModalIsOpen(false);
+    if (deleteImageAlertIndex > 0) setDeleteImageAlertIndex(0);
+  };
   return (
     <>
       <S.Background
-        isOpen={styleModalIsOpen}
-        onClick={() => setStyleModalIsOpen(false)}
+        isOpen={styleModalIsOpen || deleteImageAlertIndex > 0}
+        onClick={onClickBackground}
       />
       <AppBar
         leftProps={<></>}
