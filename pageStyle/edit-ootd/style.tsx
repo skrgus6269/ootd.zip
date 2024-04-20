@@ -89,7 +89,7 @@ const Style = styled.div`
 `;
 
 const Open = styled.div`
-  padding: 0 20px 60px 20px;
+  padding: 0 20px 100px 20px;
   h2 {
     padding: 22px 0;
   }
