@@ -130,6 +130,14 @@ export default function Main() {
   const [isExistNotReadAlarm, setIsExistNotReadAlarm] =
     useState<Boolean>(false);
   const { getExistIsNotReadAlarm } = AlarmApi();
+  const [mainInitialIndex, setMainInitialIndex] = useState<number>(1);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (router.query.main![0] === 'explore') {
+      setMainInitialIndex(2);
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -150,28 +158,28 @@ export default function Main() {
           </div>
         }
       />
-      <TabView>
-        <TabView.TabBar
-          display="inline"
-          tab={['큐레이팅', '탐색']}
-          className="tabBar"
-        />
-        <TabView.Tabs>
-          <TabView.Tab>
-            <S.Curation>
-              {/* <TodayRecommend data={TodayRecommendSampleData} /> */}
-              <LikeOOTD />
-              <SameCloth data={SameClothDifferentFeeling} />
-              {/* <button onClick={onClickButton}>클릭해봐</button> */}
-            </S.Curation>
-          </TabView.Tab>
-          <TabView.Tab>
-            <S.Explore>
-              <Explore />
-            </S.Explore>
-          </TabView.Tab>
-        </TabView.Tabs>
-      </TabView>
+      {router.isReady && (
+        <TabView initialIndex={router.query.main![0] === 'explore' ? 2 : 1}>
+          <TabView.TabBar
+            display="inline"
+            tab={['큐레이팅', '탐색']}
+            className="tabBar"
+          />
+          <TabView.Tabs>
+            <TabView.Tab>
+              <S.Curation>
+                <LikeOOTD />
+                <SameCloth data={SameClothDifferentFeeling} />
+              </S.Curation>
+            </TabView.Tab>
+            <TabView.Tab>
+              <S.Explore>
+                <Explore />
+              </S.Explore>
+            </TabView.Tab>
+          </TabView.Tabs>
+        </TabView>
+      )}
     </S.Layout>
   );
 }
