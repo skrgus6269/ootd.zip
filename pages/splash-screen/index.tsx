@@ -17,9 +17,9 @@ const SplashScreen: ComponentWithLayout = () => {
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (getCookie('accessToken')) {
-        const { id } = await getUserId();
+        const result = await getUserId();
         router.push('/main');
-        setUserId(id);
+        setUserId(result);
         return;
       }
       router.push('/onboarding');
