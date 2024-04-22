@@ -5,7 +5,7 @@ export const NEXT_PUBLIC_DOMAIN_HOST = process.env.NEXT_PUBLIC_DOMAIN_HOST;
 //카카오 인증 관련 상수
 export const NEXT_PUBLIC_KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
 export const NEXT_PUBLIC_KAKAO_URI =
-  'https://ootdzip.com/api/v1/login/authorization/kakao';
+  'https://ootdzip.com/api/v1/login/authorization/dev';
 
 //애플 인증 관련 상수
 

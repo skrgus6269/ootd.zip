@@ -103,7 +103,7 @@ export default function DeclarationModal({
   };
 
   return (
-    <Modal isOpen={declaration} height="90">
+    <Modal isOpen={declaration} height="85">
       <S.Layout>
         <S.Header>
           <AiOutlineClose

@@ -23,6 +23,10 @@ export interface CommentProps {
   reRender: number;
   depth?: number;
   setReRender: Dispatch<SetStateAction<number>>;
+  declaration: Boolean;
+  setDeclaration: Dispatch<SetStateAction<Boolean>>;
+  receivedDeclaration: Boolean;
+  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 function Comment({
@@ -38,11 +42,11 @@ function Comment({
   myComment,
   reRender,
   setReRender,
+  declaration,
+  setDeclaration,
+  receivedDeclaration,
+  setReceivedDeclaration,
 }: CommentProps) {
-  const [declaration, setDeclaration] = useState<Boolean>(false);
-  const [receivedDeclaration, setReceivedDeclaration] =
-    useState<Boolean>(false);
-
   const { deleteOOTDComment } = OOTDApi();
 
   const onClickDeleteButton = async () => {
@@ -60,8 +64,17 @@ function Comment({
 
   const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
+  const onClickBackground = () => {
+    if (declaration) setDeclaration(false);
+    if (receivedDeclaration) setReceivedDeclaration(false);
+  };
+
   return (
     <>
+      <S.Background
+        isOpen={declaration || receivedDeclaration}
+        onClick={onClickBackground}
+      />
       <S.Layout type={type}>
         <S.CommentLeft>
           {userImage === '' ? (
