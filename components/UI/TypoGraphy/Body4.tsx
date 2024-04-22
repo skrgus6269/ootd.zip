@@ -7,7 +7,7 @@ interface Body4State {
 const Body4 = styled.p<Body4State>`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
   font-size: ${({ theme }) => theme.fontSize.sm}; //12px
-  line-height: ${({ theme }) => theme.lineHeight.base}; //16px
+  line-height: ${({ theme }) => theme.lineHeight.sm}; //18px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
   ${(props) =>
     props.state === 'emphasis' &&

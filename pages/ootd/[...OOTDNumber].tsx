@@ -173,7 +173,6 @@ const OOTD: ComponentWithLayout = () => {
       {data && <UserOtherOOTD userName={data.userName} userId={data.userId} />}
       <SimilarOOTD />
       <PostingCommentWrite
-        userImage={data && data.userImage}
         setComment={setComment}
         commentRef={commentRef}
         comment={comment}

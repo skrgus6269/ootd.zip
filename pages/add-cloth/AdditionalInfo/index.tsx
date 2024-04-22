@@ -73,6 +73,7 @@ export default function AdditionalInfo({
               border={true}
               onChange={setClothBuyDate}
               line="outline"
+              state={true}
             />
           </Input>
           <Input>
@@ -82,7 +83,7 @@ export default function AdditionalInfo({
             <Input.TextArea
               input={clothMemo}
               setInput={setClothMemo}
-              placeholder="메모를 입력해주세요"
+              placeholder=""
             />
           </Input>
         </S.Information>

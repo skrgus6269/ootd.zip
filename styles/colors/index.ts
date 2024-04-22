@@ -2,7 +2,7 @@ const color = {
   subdued: '#b2f8ff',
   accent: '#58efff',
   error: '#ec0000',
-  correct: '#00d5bb',
+  correct: '#13ddf3',
   preferred: '#007aff',
   grey_100: '#ffffff',
   grey_95: '#f3f3f3',

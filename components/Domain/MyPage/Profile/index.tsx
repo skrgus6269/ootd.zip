@@ -60,11 +60,29 @@ export default function Profile({ data, onClickFollowButton }: profileProps) {
           <Button3>프로필 수정</Button3>
         </Button>
       ) : (
-        <S.ButtonWrap state={data.isFollow}>
+        <S.ButtonWrap>
           {!data.isFollow ? (
-            <Button3 onClick={onClickFollowButton}>팔로우</Button3>
+            <Button
+              className="followButton"
+              backgroundColor="grey_00"
+              color="grey_100"
+              size="big"
+              onClick={onClickFollowButton}
+              border={false}
+            >
+              <Button3>팔로우</Button3>
+            </Button>
           ) : (
-            <Button3 onClick={onClickFollowButton}>팔로잉</Button3>
+            <Button
+              className="followingButton"
+              backgroundColor="grey_100"
+              color="grey_70"
+              size="big"
+              onClick={onClickFollowButton}
+              border={false}
+            >
+              <Button3>팔로잉</Button3>
+            </Button>
           )}
         </S.ButtonWrap>
       )}

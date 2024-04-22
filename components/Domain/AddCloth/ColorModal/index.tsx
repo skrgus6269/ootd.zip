@@ -57,10 +57,11 @@ const ColorModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} height="65">
+    <Modal isOpen={isOpen} height="70">
       <S.Layout>
         <S.Title>
-          <Title1>색상</Title1>
+          <Title1 className="title">색상</Title1>
+          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
         </S.Title>
         <S.ColorList>
           <ColorList
@@ -71,22 +72,26 @@ const ColorModal = ({
           />
         </S.ColorList>
         {selectedColorList !== null && selectedColorList.length > 0 && (
-          <S.SelectedColorList>
-            {selectedColorList.map((item, index) => {
-              return (
-                <S.SelectedColor key={index}>
-                  <Button3 className="selectedColor">{item.name}</Button3>
-                  <AiOutlineClose
-                    onClick={() => onClickCloseColorButton(item.id)}
-                  />
-                </S.SelectedColor>
-              );
-            })}
-          </S.SelectedColorList>
+          <>
+            <hr />
+            <S.SelectedColorList>
+              {selectedColorList.map((item, index) => {
+                return (
+                  <S.SelectedColor key={index}>
+                    <Button3 className="selectedColor">{item.name}</Button3>
+                    <AiOutlineClose
+                      onClick={() => onClickCloseColorButton(item.id)}
+                    />
+                  </S.SelectedColor>
+                );
+              })}
+            </S.SelectedColorList>
+          </>
         )}
+
         <NextButton
           onClick={onClickNextButton}
-          state={true}
+          state={selectedColorList !== null && selectedColorList.length > 0}
           className="nextButton"
         >
           선택완료
