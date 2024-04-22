@@ -28,7 +28,7 @@ export default function LikeOOTD() {
   return (
     <S.Layout onTouchMove={(e) => e.stopPropagation()}>
       <Headline2>내가 '좋아요'한 OOTD</Headline2>
-      <Carousel infinite={false} slidesToShow={1.45}>
+      <Carousel infinite={false} slidesToShow={1.52}>
         {data?.map((item, index) => {
           return (
             <MainFavoriteCard
