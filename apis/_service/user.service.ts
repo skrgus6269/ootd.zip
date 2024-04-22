@@ -326,3 +326,9 @@ export const getLikeOOTD = async () => {
 
   return data;
 };
+
+export const getSameClothDifferentOOTD = async () => {
+  const data = await ootdApi.getSameClothDifferentOOTD();
+
+  return data;
+};

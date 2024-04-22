@@ -81,7 +81,6 @@ const SelectedColorList = styled.div`
 `;
 
 const SelectedColor = styled.div`
-  background-color: ${(props) => props.theme.color.grey_10};
   display: inline-flex;
   min-width: 68px;
   gap: 8px;
@@ -89,10 +88,11 @@ const SelectedColor = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border-radius: 17px;
   .selectedColor {
     padding: 8px 35px 8px 16px;
     color: ${(props) => props.theme.color.grey_100};
+    background-color: ${(props) => props.theme.color.grey_10};
+    border-radius: 17px;
   }
   svg {
     color: ${(props) => props.theme.color.grey_100};

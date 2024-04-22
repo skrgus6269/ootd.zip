@@ -90,6 +90,16 @@ const OOTD: ComponentWithLayout = () => {
   const [reRender, setReRender] = useState(0);
   const [getPostReRender, setGetPostReRender] = useState(0);
 
+  const onClickBackButton = () => {
+    if (router.query.OOTDNumber![1] === 'explore') {
+      router.push('/main/explore');
+    } else if (router.query.OOTDNumber![1] === 'curation') {
+      router.push('/main/curation');
+    } else {
+      router.back();
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
