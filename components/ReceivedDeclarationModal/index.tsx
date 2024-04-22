@@ -28,7 +28,7 @@ export default function ReceivedDeclarationModal({
         </S.Header>
         <S.Frame>
           <AiOutlineExclamationCircle className="infoIcon" />
-          <Headline2>
+          <Headline2 className="reportTitle">
             {reportStatus === true
               ? '신고가 접수되었습니다.'
               : `이미 신고한 ${type}입니다.`}

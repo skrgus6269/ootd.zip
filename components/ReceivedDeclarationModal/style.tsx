@@ -26,6 +26,10 @@ const Frame = styled.div`
     width: 44px;
     height: 44px;
   }
+
+  .reportTitle {
+    color: ${(props) => props.theme.color.grey_00};
+  }
 `;
 
 const Button = styled.div`
