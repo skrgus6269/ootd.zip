@@ -14,7 +14,6 @@ const Layout = styled.div`
     bottom: 0;
 
     padding: 0 20px 25px 20px;
-    background-color: white;
   }
 `;
 
