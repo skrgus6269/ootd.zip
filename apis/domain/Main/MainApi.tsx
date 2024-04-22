@@ -11,7 +11,20 @@ export const MainApi = () => {
       console.log('에러명', err);
     }
   };
+
+  const getSameClothDifferentOOTD = async () => {
+    try {
+      const data = await userService.getSameClothDifferentOOTD();
+      if (data.statusCode === 200) return data.result;
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     getLikeOOTD,
+    getSameClothDifferentOOTD,
   } as const;
 };

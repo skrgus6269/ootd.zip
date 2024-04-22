@@ -201,3 +201,9 @@ export const getLikeOOTD = async () => {
 
   return data;
 };
+
+export const getSameClothDifferentOOTD = async () => {
+  const { data } = await fetcher.get('v1/home/scdf?page=0&size=4');
+
+  return data;
+};

@@ -23,22 +23,7 @@ const ColorModal = ({
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
 
-  const { getColor } = ClothApi();
-
   const [colorList, setColorList] = useState<ColorListType>([]);
-
-  useEffect(() => {
-    const fetchColor = async () => {
-      const color = (await getColor()) as ColorListType;
-
-      const newColor = color.map((item) => {
-        return { ...item, state: false };
-      });
-
-      setColorList(newColor);
-    };
-    fetchColor();
-  }, []);
 
   const onClickNextButton = () => {
     setClothColor(selectedColorList);
