@@ -7,10 +7,11 @@ const Layout = styled.div`
   height: calc(100vh - 48px);
   .nextButton {
     background-color: white;
-    bottom: 25px;
+    bottom: 0px;
     flex-grow: 0;
     position: fixed;
     width: calc(100% - 40px);
+    padding: 20px 0;
   }
 `;
 
@@ -49,7 +50,7 @@ const AdditionalInfo = styled.div`
   .title {
     padding: 21px 0px;
   }
-  padding-bottom: 60px;
+  padding-bottom: 90px;
 `;
 const Title = styled.div`
   margin-bottom: 16px;

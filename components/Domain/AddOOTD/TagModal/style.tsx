@@ -48,7 +48,8 @@ const CategorySpan = styled.div<CategorySpanProps>`
   color: ${(props) =>
     !props.state ? props.theme.color.grey_00 : props.theme.color.grey_100};
   padding: 8px 16px;
-  border: 1px solid ${(props) => props.theme.color.grey_80};
+  border: ${(props) =>
+    !props.state ? `1px solid ${props.theme.color.grey_80}` : 'none'};
   border-radius: 17px;
   flex-shrink: 0;
 `;
@@ -62,12 +63,15 @@ const IsOpenSpan = styled.div<IsOpenProps>`
   padding: 8px 16px;
   border-radius: 17px;
   background-color: ${(props) =>
-    props.state ? props.theme.color.grey_00 : props.theme.color.grey_95};
+    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
   color: ${(props) =>
     !props.state ? props.theme.color.grey_00 : props.theme.color.grey_100};
   flex-shrink: 0;
   border: ${(props) =>
-    !props.state && `1px solid ${props.theme.color.grey_90}`};
+    !props.state && `1px solid ${props.theme.color.grey_80}`};
+  .hidden {
+    color: ${(props) => props.theme.color.grey_100};
+  }
 `;
 
 const SearchFilter = styled.div`
@@ -85,7 +89,7 @@ const SearchFilter = styled.div`
 const Divider = styled.span`
   width: 1px;
   height: 34px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.color.grey_90};
   flex-shrink: 0;
 `;
 
@@ -97,8 +101,10 @@ const List = styled.div`
   height: 30%;
   overflow-y: scroll;
   hr {
-    color: ${(props) => props.theme.color.grey_90};
     width: 100%;
+    border: none;
+    border-top: 0.5px solid ${(props) => props.theme.color.grey_90};
+    margin: 0;
   }
 `;
 

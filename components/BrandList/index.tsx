@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import Brand, { BrandType } from './Brand';
 import S from './style';
+import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 
 interface BrandListProps {
   keyword?: string;
@@ -19,13 +20,10 @@ export default function BrandList({
   brandInitial,
   many,
 }: BrandListProps) {
-  // const [getUserBrand] = useCloth();
-
   useEffect(() => {
     if (brandList) {
       const newBrandList = [...brandList];
-
-      if (brandInitial)
+      if (brandInitial) {
         for (let i = 0; i < brandInitial?.length; i++) {
           for (let j = 0; j < newBrandList.length; j++) {
             if (brandInitial[i].id === newBrandList[j].id) {
@@ -33,7 +31,8 @@ export default function BrandList({
             }
           }
         }
-      setBrandList(newBrandList);
+        setBrandList(newBrandList);
+      }
     }
   }, []);
 

@@ -59,12 +59,14 @@ export default function DetailClothDetailInfo({
         <Body3>{size}</Body3>
       </S.Category>
 
-      <S.Category>
-        <S.InfoTitle>
-          <Body3 style={{ fontWeight: '600' }}>구매시기</Body3>
-        </S.InfoTitle>
-        <Body3>{buyDate}</Body3>
-      </S.Category>
+      {buyDate && (
+        <S.Category>
+          <S.InfoTitle>
+            <Body3 style={{ fontWeight: '600' }}>구매시기</Body3>
+          </S.InfoTitle>
+          <Body3>{buyDate}</Body3>
+        </S.Category>
+      )}
     </S.Layout>
   );
 }

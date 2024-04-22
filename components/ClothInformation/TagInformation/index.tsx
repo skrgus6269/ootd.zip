@@ -18,9 +18,7 @@ export default function TagInformation({
 }: ClothInformationProps) {
   return (
     <S.Layout onClick={onClick} className={className} state={state!}>
-      <S.ItemImage>
-        <Image width={32} height={32} src={clothImage} alt="아이템" />
-      </S.ItemImage>
+      <Image width={32} height={32} src={clothImage} alt="아이템" />
       <S.Information>
         <Title2>{brand}</Title2>
         <Body4>{name}</Body4>

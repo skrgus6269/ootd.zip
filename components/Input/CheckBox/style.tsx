@@ -13,7 +13,7 @@ const Box = styled.div`
   width: 47.5%;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 11px;
 `;
 
 const Tag = styled.div``;
@@ -24,6 +24,13 @@ const Image = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  .checkBoxTrue {
+    border-radius: 2px;
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 const S = { Layout, Box, Tag, Image };

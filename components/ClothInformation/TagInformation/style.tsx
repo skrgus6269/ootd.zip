@@ -12,6 +12,7 @@ const Layout = styled.div<ThemeProps>`
   gap: 8px;
   padding: 8px;
   height: 100%;
+  border-radius: 2px;
   background-color: ${(props) =>
     props.state === 'dark'
       ? 'rgba(3, 3, 3, 0.7)'
@@ -25,16 +26,11 @@ const Layout = styled.div<ThemeProps>`
   h4 {
     color: ${(props) => (props.state === 'dark' ? 'white' : 'black')};
   }
-`;
-
-const ItemImage = styled.div`
-  display: flex;
   img {
+    object-fit: cover;
     width: 32px;
     height: 32px;
-    object-fit: cover;
   }
-  align-items: center;
 `;
 
 const Information = styled.div`
@@ -76,6 +72,6 @@ const Close = styled.div<ThemeProps>`
   }
 `;
 
-const S = { Layout, ItemImage, Information, Close };
+const S = { Layout, Information, Close };
 
 export default S;

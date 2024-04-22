@@ -9,6 +9,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  padding-bottom: 80px;
 `;
 
 const Category = styled.div`
@@ -33,7 +34,7 @@ const Background = styled.div<BackgroundProps>`
 
 const ClothImage = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
-  padding: 24px 20px 56px 20px;
+  padding: 24px 20px 48px 20px;
 
   .writeIcon {
     position: relative;

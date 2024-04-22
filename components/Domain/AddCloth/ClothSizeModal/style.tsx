@@ -2,22 +2,37 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   .nextButton {
-    padding: 16px 0 0 0;
-    position: absolute;
+    position: relative;
     bottom: 25px;
-    width: calc(100% - 40px);
+    background-color: white;
+    border: none;
   }
 `;
 const Title = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
   .title {
-    padding: 21px 0;
+    padding: 22px 0;
+  }
+  .close {
+    position: absolute;
+    right: 0px;
+    width: 24px;
+    height: 24px;
   }
 `;
 const SizeLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: scroll;
+  padding-bottom: 30px;
 `;
 const SizeBlock = styled.div`
   display: flex;
@@ -38,6 +53,7 @@ const Size = styled.div<SizeProps>`
   background-color: ${(props) =>
     props.state ? props.theme.color.grey_00 : ''};
   color: ${(props) => (props.state ? props.theme.color.grey_100 : '')};
+  border-radius: 2px;
 `;
 
 const S = { Layout, Title, SizeLayout, SizeBlock, Size };

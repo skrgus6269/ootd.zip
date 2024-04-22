@@ -24,7 +24,13 @@ const Layout = styled.div`
   }
   border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
   .slick-dots {
-    bottom: -35px;
+    bottom: -30px;
+
+    & li {
+      width: 6px;
+      height: 6px;
+      margin: 2px;
+    }
   }
 `;
 
@@ -68,7 +74,7 @@ const PostingImage = styled.div`
   padding-bottom: 100%;
   .tag {
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     left: 16px;
     bottom: 16px;
     color: white;

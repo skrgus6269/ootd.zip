@@ -7,6 +7,11 @@ const nextConfig = {
         destination: '/splash-screen',
         permanent: true,
       },
+      {
+        source: '/main',
+        destination: '/main/curation',
+        permanent: true,
+      },
     ]
   },
   reactStrictMode: false,

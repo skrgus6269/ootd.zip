@@ -90,6 +90,16 @@ const OOTD: ComponentWithLayout = () => {
   const [reRender, setReRender] = useState(0);
   const [getPostReRender, setGetPostReRender] = useState(0);
 
+  const onClickBackButton = () => {
+    if (router.query.OOTDNumber![1] === 'explore') {
+      router.push('/main/explore');
+    } else if (router.query.OOTDNumber![1] === 'curation') {
+      router.push('/main/curation');
+    } else {
+      router.back();
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
@@ -148,7 +158,7 @@ const OOTD: ComponentWithLayout = () => {
   return (
     <S.Layout>
       <AppBar
-        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+        leftProps={<AiOutlineArrowLeft onClick={onClickBackButton} />}
         middleProps={<></>}
         rightProps={<></>}
       />
@@ -173,7 +183,6 @@ const OOTD: ComponentWithLayout = () => {
       {data && <UserOtherOOTD userName={data.userName} userId={data.userId} />}
       <SimilarOOTD />
       <PostingCommentWrite
-        userImage={data && data.userImage}
         setComment={setComment}
         commentRef={commentRef}
         comment={comment}

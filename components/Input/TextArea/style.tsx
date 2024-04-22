@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
-const Layout = styled.div`
+interface LayoutProps {
+  onClickDescriptionState: Boolean;
+}
+
+const Layout = styled.div<LayoutProps>`
   width: 100%;
+  border: ${(props) =>
+    props.onClickDescriptionState
+      ? `1px solid ${props.theme.color.grey_00}`
+      : `1px solid ${props.theme.color.grey_80}`};
 `;
 
 const TextArea = styled.textarea`
@@ -9,14 +17,16 @@ const TextArea = styled.textarea`
   width: 100%;
   max-width: 350px;
   border-radius: 2px;
-  border: 1px solid ${(props) => props.theme.color.grey_80};
   min-height: 116px;
   color: ${(props) => props.theme.color.grey_00};
-  padding: 8px 8px 36px 8px;
-
+  padding: 8px 16px 0 16px;
+  margin-bottom: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
   &:focus {
-    outline: ${(props) => props.theme.color.grey_00};
-    border: 1px solid ${(props) => props.theme.color.grey_00};
+    outline: none;
   }
 
   ::placeholder {
@@ -32,7 +42,7 @@ const TextAreaLength = styled.div`
   max-width: 350px;
   position: relative;
   text-align: right;
-  bottom: 26px;
+  bottom: 8px;
   right: 8px;
   color: ${(props) => props.theme.color.grey_80};
 `;

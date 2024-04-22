@@ -81,7 +81,6 @@ export default function BasicInfo({
         {clothCategory &&
           clothCategory[0]?.detailCategories &&
           clothCategory[0]?.detailCategories[0].name}
-        ;
       </Body3>
     </S.Category>
   );

@@ -10,7 +10,8 @@ const Layout = styled.div`
   .profile {
     padding: 24px 0;
   }
-  .editButton {
+  .editButton,
+  .followingButton {
     height: 36px;
     margin: 32px 0 40px 0;
   }
@@ -34,21 +35,10 @@ const Introduce = styled.div`
   }
 `;
 
-interface ButtonProps {
-  state: Boolean;
-}
-
-const ButtonWrap = styled.div<ButtonProps>`
-  height: 36px;
-  margin: 32px 0 40px 0;
-  border-radius: 2px;
-  background-color: ${(props) =>
-    props.state ? props.theme.color.grey_100 : props.theme.color.grey_00};
-  padding: 8px 24px;
-  border: 1px solid ${(props) => props.theme.color.grey_90};
-  color: ${(props) =>
-    props.state ? props.theme.color.grey_70 : props.theme.color.grey_100};
-  text-align: center;
+const ButtonWrap = styled.div`
+  .followingButton {
+    border: 1px solid ${(props) => props.theme.color.grey_90};
+  }
 `;
 
 const S = { Layout, BodyInformation, Introduce, ButtonWrap };

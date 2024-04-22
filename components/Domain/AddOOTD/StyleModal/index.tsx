@@ -22,6 +22,8 @@ export default function StyleModal({
   styleInitial,
 }: StyleModalProps) {
   const [style, setStyle] = useState<Style[]>([]);
+  const [currentStyle, setCurrentStyle] = useState<Style[]>();
+
   const { getStyle } = OOTDApi();
   useEffect(() => {
     const ferchData = async () => {
@@ -52,6 +54,10 @@ export default function StyleModal({
     }
   };
 
+  useEffect(() => {
+    setCurrentStyle(style.filter((item) => item.state));
+  }, [style]);
+
   return (
     <>
       <Modal height="70" isOpen={styleModalIsOpen}>
@@ -63,9 +69,11 @@ export default function StyleModal({
           <S.CheckBox>
             <Input>
               <Input.CheckBox state={style!} setState={setStyle} />
-              <Input.HelperText className="helperText" state={1}>
-                최소 1개 이상 선택해주세요
-              </Input.HelperText>
+              {currentStyle && currentStyle.length === 0 && (
+                <Input.HelperText className="helperText" state={2}>
+                  최소 1개 이상 선택해주세요
+                </Input.HelperText>
+              )}
             </Input>
           </S.CheckBox>
           <NextButton

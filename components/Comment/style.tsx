@@ -39,7 +39,10 @@ const UserName = styled.div`
 const UserComment = styled.div`
   .taggedUser {
     color: ${(prpos) => prpos.theme.color.correct};
+    padding: 0 4px;
+    margin-right: 4px;
   }
+  white-space: pre-line;
   display: flex;
   color: ${(props) => props.theme.color.grey_30};
   padding: 2px 0 16px 0;
