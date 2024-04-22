@@ -18,7 +18,7 @@ export default function Explore() {
   const router = useRouter();
 
   const onClickImageList = (index: number) => {
-    router.push(`/ootd/${index}`);
+    router.push(`/ootd/${index}/explore`);
   };
 
   const [sortStandard, setSortStandard] = useState<string>('LATEST');

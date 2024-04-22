@@ -12,7 +12,7 @@ export default function LikeOOTD() {
   const router = useRouter();
 
   const onClickCard = (ootdId: number) => {
-    router.push(`/ootd/${ootdId}`);
+    router.push(`/ootd/${ootdId}/curation`);
   };
 
   const { getLikeOOTD } = MainApi();
