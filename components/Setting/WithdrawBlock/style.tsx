@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface LayoutProps {
-  state: Boolean;
+  state?: Boolean;
 }
 
 const Layout = styled.div<LayoutProps>`
