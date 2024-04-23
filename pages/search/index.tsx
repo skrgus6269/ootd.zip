@@ -32,6 +32,15 @@ export default function Search() {
     }
   }, [keywords]);
 
+  useEffect(() => {
+    const { query } = router;
+    const { q } = query;
+    if (q) {
+      setSearchValue(q.toString());
+      setState(true);
+    }
+  }, [router.query]);
+
   const handleAddKeyword = (text: string) => {
     const newKeyword = {
       id: Date.now(),
@@ -70,6 +79,7 @@ export default function Search() {
         <SearchResult keywordsValue={searchValue} />
       ) : (
         <Recents
+          setSearchValue={setSearchValue}
           handleClearKeywords={() => setKeywords([])}
           keywords={keywords}
           handleRemoveKeyword={handleRemoveKeyword}
