@@ -35,6 +35,10 @@ interface PostingCommentProps {
   commentRef: MutableRefObject<any>;
   comment: CommentStateType;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
+  declaration: Boolean;
+  setDeclaration: Dispatch<SetStateAction<Boolean>>;
+  receivedDeclaration: Boolean;
+  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function PostingComment({
@@ -44,6 +48,10 @@ export default function PostingComment({
   commentRef,
   comment,
   setCommentWriting,
+  declaration,
+  setDeclaration,
+  receivedDeclaration,
+  setReceivedDeclaration,
 }: PostingCommentProps) {
   const [commentType, setCommentType] = useState<'preview' | 'all'>('preview');
   const localUserId = useRecoilValue(userId);
@@ -120,6 +128,10 @@ export default function PostingComment({
               timeStamp={item.timeStamp}
               reRender={reRender}
               setReRender={setReRender}
+              declaration={declaration}
+              setDeclaration={setDeclaration}
+              receivedDeclaration={receivedDeclaration}
+              setReceivedDeclaration={setReceivedDeclaration}
             />
           </>
         ))}
@@ -150,6 +162,10 @@ export default function PostingComment({
               myComment={localUserId === item.userId}
               reRender={reRender}
               setReRender={setReRender}
+              declaration={declaration}
+              setDeclaration={setDeclaration}
+              receivedDeclaration={receivedDeclaration}
+              setReceivedDeclaration={setReceivedDeclaration}
             />
             {item &&
               item.childComment?.map((items, indexs) => (
@@ -172,6 +188,10 @@ export default function PostingComment({
                   myComment={localUserId === items.userId}
                   reRender={reRender}
                   setReRender={setReRender}
+                  declaration={declaration}
+                  setDeclaration={setDeclaration}
+                  receivedDeclaration={receivedDeclaration}
+                  setReceivedDeclaration={setReceivedDeclaration}
                 />
               ))}
           </>
