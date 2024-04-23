@@ -27,9 +27,8 @@ const Keywords = styled.div`
 const Chip = styled.div`
   padding: 8px 11px 8px 16px;
   flex-shrink: 0;
-  border: 1px solid ${(props) => props.theme.color.grey_90};
   border-radius: 17px;
-  background-color: ${(props) => props.theme.color.grey_00};
+  background-color: ${(props) => props.theme.color.grey_10};
   color: ${(props) => props.theme.color.grey_100};
   gap: 8px;
   display: flex;
