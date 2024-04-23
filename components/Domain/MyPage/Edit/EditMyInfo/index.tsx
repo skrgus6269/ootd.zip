@@ -134,7 +134,13 @@ export default function EditMyInfo({
               onChange={setNickName}
               validity={idInputValidity}
             />
-            {nickName?.length > 0 && (
+            {nickName?.length === 0 || state === 3 ? (
+              <div className="hidden">
+                <Input.HelperText className="helperText" state={state}>
+                  {helperText}
+                </Input.HelperText>
+              </div>
+            ) : (
               <Input.HelperText className="helperText" state={state}>
                 {helperText}
               </Input.HelperText>
