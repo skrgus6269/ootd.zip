@@ -14,6 +14,7 @@ const headLayout = styled.div<LayoutProps>`
   left: 0;
   background-color: ${(props) => props.theme.color.grey_100};
   z-index: 2;
+  height: 44px;
 `;
 
 const Frame = styled.div`
