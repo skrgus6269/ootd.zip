@@ -29,7 +29,9 @@ export default function EditProfile({
           <Avatar className="userImage" />
         ) : (
           <NextImage
-            fill={true}
+            fill={false}
+            width={88}
+            height={88}
             className="userImage"
             src={imageURL}
             alt="유저 이미지"
