@@ -17,8 +17,6 @@ const Layout = styled.div<LayoutProps>`
 const UserImage = styled.div`
   .userImage {
     margin-top: 6px;
-    width: 32px;
-    height: 32px;
     border-radius: 50%;
   }
 `;
@@ -41,7 +39,10 @@ const UserName = styled.div`
 const UserComment = styled.div`
   .taggedUser {
     color: ${(prpos) => prpos.theme.color.correct};
+    padding: 0 4px;
+    margin-right: 4px;
   }
+  white-space: pre-line;
   display: flex;
   color: ${(props) => props.theme.color.grey_30};
   padding: 2px 0 16px 0;
@@ -49,6 +50,21 @@ const UserComment = styled.div`
 const CommentCommunication = styled.div`
   display: flex;
   gap: 16px;
+`;
+
+interface BackgroundProps {
+  isOpen: Boolean;
+}
+
+const Background = styled.div<BackgroundProps>`
+  background-color: ${(props) => props.theme.color.grey_00};
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  opacity: 0.3;
+  z-index: 2;
+  width: 100vw;
+  height: calc(100vh - 48px);
+  position: fixed;
+  top: 0;
 `;
 
 const S = {
@@ -59,6 +75,7 @@ const S = {
   UserName,
   UserComment,
   CommentCommunication,
+  Background,
 };
 
 export default S;

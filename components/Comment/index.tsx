@@ -1,11 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Body3, Caption1 } from '../UI';
 import S from './style';
 import Avatar from '@/public/images/Avatar.svg';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
+import NextImage from '../NextImage';
 
 export interface CommentProps {
   id: number;
@@ -23,6 +23,10 @@ export interface CommentProps {
   reRender: number;
   depth?: number;
   setReRender: Dispatch<SetStateAction<number>>;
+  declaration: Boolean;
+  setDeclaration: Dispatch<SetStateAction<Boolean>>;
+  receivedDeclaration: Boolean;
+  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 function Comment({
@@ -38,11 +42,11 @@ function Comment({
   myComment,
   reRender,
   setReRender,
+  declaration,
+  setDeclaration,
+  receivedDeclaration,
+  setReceivedDeclaration,
 }: CommentProps) {
-  const [declaration, setDeclaration] = useState<Boolean>(false);
-  const [receivedDeclaration, setReceivedDeclaration] =
-    useState<Boolean>(false);
-
   const { deleteOOTDComment } = OOTDApi();
 
   const onClickDeleteButton = async () => {
@@ -60,15 +64,31 @@ function Comment({
 
   const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
+  const onClickBackground = () => {
+    if (declaration) setDeclaration(false);
+    if (receivedDeclaration) setReceivedDeclaration(false);
+  };
+
   return (
     <>
+      <S.Background
+        isOpen={declaration || receivedDeclaration}
+        onClick={onClickBackground}
+      />
       <S.Layout type={type}>
         <S.CommentLeft>
           {userImage === '' ? (
             <Avatar className="avatar" />
           ) : (
             <S.UserImage>
-              <img className="userImage" src={userImage} alt="유저 이미지" />
+              <NextImage
+                className="userImage"
+                src={userImage}
+                alt="유저 이미지"
+                fill={false}
+                width={type === 'child' ? 24 : 32}
+                height={type === 'child' ? 24 : 32}
+              />
             </S.UserImage>
           )}
         </S.CommentLeft>
@@ -78,9 +98,9 @@ function Comment({
             <Caption1 className="createAt">{timeStamp}</Caption1>
           </S.UserName>
           <S.UserComment>
-            <Body3 className="taggedUser">
-              {taggedUserName && `@${taggedUserName}`}&nbsp;
-            </Body3>
+            {taggedUserName && (
+              <Body3 className="taggedUser">@{taggedUserName}</Body3>
+            )}
             <Body3>{content}</Body3>
           </S.UserComment>
           {view !== 'preview' ? (
@@ -102,6 +122,7 @@ function Comment({
       {declaration && (
         <DeclarationModal
           type="COMMENT"
+          userName={userName}
           ID={id}
           declaration={declaration}
           setDeclaration={setDeclaration}

@@ -14,16 +14,17 @@ export default function AddClothAlert({
     <Alert
       onClickYesButton={onClickYesButton}
       onClickNoButton={onClickNoButton}
-      headline="추가정보...입력하지 않을래?"
+      headline="추가정보를 입력하시겠습니까?"
       body={
         <>
-          <Body3>추가정보...입력하면 좋을텐데...</Body3>
-          <Body3>우리가 세탁법 추천도 해주고...</Body3>
-          <Body3>안 한다고 하면 옷은 그냥 등록해도돼..</Body3>
+          <Body3>입력한 추가정보는 맞춤형 콘텐츠 추천에</Body3>
+          <Body3>활용됩니다. 취소를 누를 경우 추가정보 입</Body3>
+          <Body3>력 없이 게시됩니다.</Body3>
         </>
       }
-      yes={'할래'}
-      no={'안할래'}
+      yes={'확인'}
+      yesColor="error"
+      no={'취소'}
     />
   );
 }

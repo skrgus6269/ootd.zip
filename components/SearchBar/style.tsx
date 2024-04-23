@@ -36,7 +36,6 @@ const SearchInput = styled(FlexLayout)`
   flex-grow: 1;
   input {
     ::placeholder {
-      font-family: Pretendard;
       font-size: 16px;
       font-weight: 400;
       line-height: 22px;

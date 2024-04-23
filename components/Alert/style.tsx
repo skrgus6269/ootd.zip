@@ -20,6 +20,7 @@ const AlertPrompt = styled.div``;
 
 const AlertHeadline = styled.div`
   padding-top: 35px;
+  padding-bottom: 4px;
 `;
 
 const AlertBody = styled.div`
@@ -43,7 +44,7 @@ interface AlertButtonProps {
 const AlertButton = styled.div<AlertButtonProps>`
   button {
     width: 50%;
-    border-top: 0.5px solid ${(props) => props.theme.color.grey_95};
+    border-top: 1px solid ${(props) => props.theme.color.grey_95};
     padding: 13px 0;
     color: ${(props) => props.theme.color.preferred};
     &.yes p {
@@ -52,6 +53,9 @@ const AlertButton = styled.div<AlertButtonProps>`
     }
     &.no p {
       color: ${(props) => props.noColor && props.theme.color[props.noColor]};
+    }
+    &.no {
+      border-right: 1px solid ${(props) => props.theme.color.grey_95};
     }
   }
 `;

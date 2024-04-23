@@ -23,9 +23,9 @@ export default function Modal({
   };
 
   return (
-    <S.Layout>
+    <S.Layout onClick={onClickSearchIcon}>
       <ReadOnly state={state} result={result} type={type}></ReadOnly>
-      <S.SearchIcon onClick={onClickSearchIcon}>
+      <S.SearchIcon>
         {action === 'write' ? <AiOutlineEdit /> : <AiOutlineSearch />}
       </S.SearchIcon>
     </S.Layout>

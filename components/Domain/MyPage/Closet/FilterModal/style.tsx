@@ -66,6 +66,7 @@ const SelectedButton = styled.div<SelectedButtonState>`
   z-index: 999;
   background-color: white;
   width: 100%;
+  max-width: 430px;
   bottom: 0px;
   .init {
     width: 30%;
@@ -80,11 +81,7 @@ const SelectedButton = styled.div<SelectedButtonState>`
     .init {
         border: 1px solid ${props.theme.color.grey_00};
         color:   ${props.theme.color.grey_00};
-    }
-    .submit {
-        background-color: ${props.theme.color.grey_00};
-        color:   ${props.theme.color.grey_100};
-    }
+    } 
   `}
 `;
 

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import S from '@/pageStyle/add-cloth/BasicInfoFirst/style';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Input';
@@ -12,6 +11,8 @@ import ClothCategoryModal, {
 import WhereToBuyModal from '@/components/Domain/AddCloth/WhereToBuyModal';
 import { BrandType } from '@/components/BrandList/Brand';
 import BrandModal from '@/components/Domain/AddCloth/BrandModal';
+import NextImage from '@/components/NextImage';
+import ArrowLeft from '@/public/images/ArrowLeft.svg';
 
 interface BaiscInfoFirst {
   clothName: string;
@@ -61,7 +62,7 @@ export default function BasicInfoFirst({
       <Body3>
         {clothCategory && clothCategory[clothCategory.length - 1]?.name}
       </Body3>
-      <Body3>&gt;</Body3>
+      <ArrowLeft />
       <Body3 style={{ fontWeight: '700' }}>
         {clothCategory &&
           clothCategory[clothCategory.length - 1]?.detailCategories &&
@@ -101,7 +102,13 @@ export default function BasicInfoFirst({
           <Body2>{clothName}</Body2>
         </S.ClothName>
         <S.ClothImage>
-          <img src={clothImage && clothImage[0].ootdImage} alt="" />
+          <NextImage
+            width={106}
+            height={106}
+            fill={false}
+            src={clothImage! && clothImage[0].ootdImage}
+            alt=""
+          />
         </S.ClothImage>
         <S.BasicInfo>
           <S.Title>

@@ -21,6 +21,7 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import DeclarationModal from '@/components/DeclarationModal';
 import ReceivedDeclarationModal from '@/components/ReceivedDeclarationModal';
+import NextImage from '@/components/NextImage';
 
 export interface ClothDataType {
   id: number;
@@ -160,7 +161,9 @@ const Cloth = () => {
           clothByName={data?.name!}
         />
       )}
-      <S.Img>{data && <img src={data.imageUrl} />}</S.Img>
+      <S.Img>
+        {data && <NextImage fill={true} alt="옷 사진" src={data.imageUrl} />}
+      </S.Img>
       <DetailClothDiscription
         isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
@@ -192,6 +195,7 @@ const Cloth = () => {
       {declaration && (
         <DeclarationModal
           type="CLOTHES"
+          userName={data?.userName}
           ID={Number(router.query.ClothNumber![0])}
           declaration={declaration}
           setDeclaration={setDeclaration}

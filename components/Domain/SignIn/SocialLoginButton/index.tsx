@@ -1,9 +1,8 @@
+/* eslint-disable react/jsx-key */
 import S from './style';
 import { Button3 } from '@/components/UI';
-import kakaoLogo from '@/public/images/kakaoLogo.png';
-import appleLogo from '@/public/images/appleLogo.png';
-import googleLogo from '@/public/images/googleLogo.png';
-import Image from 'next/image';
+import KakaoLogo from '@/public/images/kakaoLogos.svg';
+import AppleLogo from '@/public/images/appleLogos.svg';
 
 interface SocialLoginButtonProps {
   onClick: () => void;
@@ -15,16 +14,16 @@ export default function SocialLoginButton({
   platform,
 }: SocialLoginButtonProps) {
   const platformInfo = {
-    KAKAO: [kakaoLogo, '카카오로 로그인'],
-    APPLE: [appleLogo, '애플로 로그인'],
-    GOOGLE: [googleLogo, 'Google 계정으로 로그인'],
+    KAKAO: [<KakaoLogo />, '카카오로 로그인'],
+    APPLE: [<AppleLogo />, 'Apple로 로그인'],
+    GOOGLE: [<AppleLogo />, 'Google 계정으로 로그인'],
   };
 
   return (
     <S.Layout>
       <S.Button onClick={onClick}>
         <S.ButtonString platform={platform}>
-          <Image src={platformInfo[platform][0]} alt={`${platform}logo`} />
+          {platformInfo[platform][0]}
           <Button3>
             <>{platformInfo[platform][1]}</>
           </Button3>

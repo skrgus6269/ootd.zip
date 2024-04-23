@@ -24,7 +24,13 @@ const Layout = styled.div`
   }
   border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
   .slick-dots {
-    bottom: -35px;
+    bottom: -30px;
+
+    & li {
+      width: 6px;
+      height: 6px;
+      margin: 2px;
+    }
   }
 `;
 
@@ -41,8 +47,6 @@ const PostingTop = styled.div`
   }
 
   .userImage {
-    width: 32px;
-    height: 32px;
     border-radius: 50%;
   }
 
@@ -66,10 +70,11 @@ const PostingTop = styled.div`
 const PostingImage = styled.div`
   position: relative;
   width: 100%;
-  height: 100vw;
+  height: 0;
+  padding-bottom: 100%;
   .tag {
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     left: 16px;
     bottom: 16px;
     color: white;
@@ -77,17 +82,12 @@ const PostingImage = styled.div`
     border-radius: 50%;
     padding: 4px;
   }
-
-  .postingImage {
-    width: 100%;
-    height: 100vw;
-    max-height: 390px;
-    object-fit: cover;
-  }
 `;
 
 const ImageWithTag = styled.div`
   position: relative;
+  height: 0;
+  padding-bottom: 100%;
 `;
 interface ClothTagProps {
   xrate: string;

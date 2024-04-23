@@ -15,8 +15,7 @@ const Layout = styled.div`
 
 const Category = styled.div`
   display: flex;
-  height: 100%;
-  margin-bottom: 16px;
+  height: calc(100% - 16px);
   p {
     width: 163px;
     padding: 12px 8px 12px 24px;

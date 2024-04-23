@@ -1,8 +1,7 @@
 import ProfileLayout from '../ProfileLayout';
 import S from './style';
-import Title1 from '@/components/UI/TypoGraphy/Title1';
 import { ProfileType } from '../type';
-import { Body4 } from '@/components/UI';
+import { Body2, Body4 } from '@/components/UI';
 import { useRouter } from 'next/router';
 
 export default function OtherProfile({
@@ -25,13 +24,13 @@ export default function OtherProfile({
     >
       <S.Layout>
         <S.Name>
-          <Title1>{userName}</Title1>
+          <Body2>{userName}</Body2>
         </S.Name>
         <S.Info onClick={() => router.push(`/follow-list/${showingId}`)}>
           <Body4>팔로워</Body4>
           <Body4 state="emphasis">{follow}</Body4>
           <Body4>명</Body4>
-          <p className="dot">•</p>
+          <Body4 className="dot">•</Body4>
           <Body4>팔로잉</Body4>
           <Body4 state="emphasis">{myCloth}</Body4>
           <Body4>명</Body4>

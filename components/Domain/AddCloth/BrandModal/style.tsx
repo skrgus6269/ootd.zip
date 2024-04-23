@@ -39,9 +39,14 @@ interface NoBrandState {
 const NoBrand = styled.div<NoBrandState>`
   display: inline-flex;
   padding-left: 20px;
+  align-items: center;
   gap: 6px;
   color: ${(props) =>
     props.state ? props.theme.color.grey_00 : props.theme.color.grey_50};
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 const BrandList = styled.div`

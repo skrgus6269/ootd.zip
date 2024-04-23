@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import {
   getReactNativeMessage,
   sendReactNativeMessage,
@@ -9,10 +8,13 @@ import { useRouter } from 'next/router';
 import { ImageWithTag } from '../Domain/AddOOTD/TagModal';
 import S from './style';
 import NextButton from '../NextButton';
-import { Body3, Body4, Caption1, Title1 } from '../UI';
+import { Body3, Body4, Caption1 } from '../UI';
 import { useRecoilState } from 'recoil';
 import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
+import NextImage from '../NextImage';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import { getCookie } from '@/utils/Cookie';
 
 interface GalleryProps {
   imageAndTag: ImageWithTag | undefined;
@@ -56,7 +58,17 @@ const Gallery = ({
     setIsOpenStoredImageAlert(false);
   };
 
+  const getToken = async () => {
+    const { getNewToken } = PublicApi();
+    await getNewToken();
+    sendReactNativeMessage({
+      type: 'accessToken',
+      payload: getCookie('accessToken'),
+    });
+  };
+
   useEffect(() => {
+    getToken();
     if (storedImage !== undefined && item === 'OOTD') {
       setIsOpenStoredImageAlert(true);
     } else {
@@ -124,22 +136,28 @@ const Gallery = ({
         onClick={() => setIsOpenStoredImageAlert(false)}
       />
       <S.Layout>
-        <S.Image>
-          {selectedImage.length === 0 && (
-            <img
+        {selectedImage.length === 0 && (
+          <S.BigImage>
+            <NextImage
               className="bigImage"
               src="https://ootdzip.s3.ap-northeast-2.amazonaws.com/d2ff5b49-cbe3-40b3-8aa6-62551b5f3917_2024-01-31.png"
               alt="basic"
+              fill={true}
             />
-          )}
-        </S.Image>
+          </S.BigImage>
+        )}
         {selectedImage &&
           selectedImage.map((item, index) => {
             if (item.ootdId === realTouch)
               return (
-                <S.Image key={index}>
-                  <img className="bigImage" src={item.ootdImage} alt="" />
-                </S.Image>
+                <S.BigImage key={index}>
+                  <NextImage
+                    className="bigImage"
+                    src={item.ootdImage}
+                    alt=""
+                    fill={true}
+                  />
+                </S.BigImage>
               );
           })}
         {imageAndTag && (
@@ -156,29 +174,45 @@ const Gallery = ({
                 imageAndTag.map((item, index) => {
                   let flag = 1;
                   return (
-                    <S.Image key={index} state={item.ootdId === realTouch}>
-                      <img
+                    <S.SmallImage key={index} state={item.ootdId === realTouch}>
+                      <NextImage
                         className="smallImage"
                         onClick={() =>
                           onClickImage(item.ootdId, item.ootdImage)
                         }
                         src={item.ootdImage}
                         alt=""
+                        fill={false}
+                        width={106}
+                        height={106}
                       />
                       {selectedImage.map((items, indexs) => {
                         if (item.ootdId === items.ootdId) flag = 0;
                         return (
                           item.ootdId === items.ootdId && (
-                            <S.ImageNumber state={true} key={indexs}>
+                            <S.ImageNumber
+                              onClick={() =>
+                                onClickImage(item.ootdId, item.ootdImage)
+                              }
+                              state={true}
+                              key={indexs}
+                            >
                               <Caption1>{indexs + 1}</Caption1>
                             </S.ImageNumber>
                           )
                         );
                       })}
                       {flag === 1 && (
-                        <S.ImageNumber state={false}>{''}</S.ImageNumber>
+                        <S.ImageNumber
+                          onClick={() =>
+                            onClickImage(item.ootdId, item.ootdImage)
+                          }
+                          state={false}
+                        >
+                          {''}
+                        </S.ImageNumber>
                       )}
-                    </S.Image>
+                    </S.SmallImage>
                   );
                 })}
             </Carousel>

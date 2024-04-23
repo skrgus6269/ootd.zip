@@ -7,7 +7,6 @@ interface LayoutProps {
 const Layout = styled.div<LayoutProps>`
   display: inline-flex;
   width: 100%;
-  max-width: 350px;
   height: 42px;
   border: 1px solid
     ${(props) =>
@@ -36,7 +35,6 @@ const SearchInput = styled(FlexLayout)`
   flex-grow: 1;
   input {
     ::placeholder {
-      font-family: Pretendard;
       font-size: 16px;
       font-weight: 400;
       line-height: 22px;

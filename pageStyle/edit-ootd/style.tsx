@@ -12,11 +12,8 @@ const Layout = styled.div`
   .nextButon {
     position: fixed;
     bottom: 0;
-    left: 20px;
-    width: calc(100% - 20px);
 
-    padding: 0 20px 25px 0;
-    background-color: white;
+    padding: 0 20px 25px 20px;
   }
 `;
 
@@ -28,9 +25,9 @@ const Background = styled.div<BackgroundProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
   opacity: 0.3;
-  z-index: 999;
+  z-index: 3;
   width: 100vw;
-  height: calc(100vh - 48px);
+  height: 100vh;
   position: fixed;
   top: 0;
 `;
@@ -44,10 +41,6 @@ const OOTDImage = styled.div`
     display: none;
   }
   img {
-    min-width: 106px;
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     border-radius: 2px;
   }
   .image {
@@ -59,7 +52,7 @@ const OOTDImage = styled.div`
     top: 5px;
     width: 16px;
     height: 16px;
-    z-index: 10;
+    z-index: 1;
     border: none;
     background-color: white;
     border-radius: 50%;
@@ -69,6 +62,7 @@ const OOTDImage = styled.div`
 const ImageDivider = styled.hr`
   border: 8px solid ${(props) => props.theme.color.grey_95};
   width: 100%;
+  margin: 0;
 `;
 
 const Text = styled.div`
@@ -94,7 +88,7 @@ const Style = styled.div`
 `;
 
 const Open = styled.div`
-  padding: 0 20px 60px 20px;
+  padding: 0 20px 100px 20px;
   h2 {
     padding: 22px 0;
   }

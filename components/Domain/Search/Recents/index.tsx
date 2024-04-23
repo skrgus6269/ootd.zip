@@ -6,6 +6,7 @@ import { keywordsInterface } from '@/pages/search';
 import { Dispatch, SetStateAction } from 'react';
 
 interface recentsProps {
+  setSearchValue: Dispatch<SetStateAction<string>>;
   keywords: keywordsInterface[]; // 최근 검색어 목록을 받아올 prop
   handleClearKeywords: () => void; // 최근 검색어를 모두 지우는 함수를 받아올 prop
   handleRemoveKeyword: (id: number) => void; // 특정 검색어를 지우는 함수를 받아올 prop
@@ -13,6 +14,7 @@ interface recentsProps {
 }
 
 export default function Recents({
+  setSearchValue,
   handleClearKeywords,
   handleRemoveKeyword,
   keywords,
@@ -38,7 +40,10 @@ export default function Recents({
                   <Button3
                     className="tagName"
                     state="emphasis"
-                    onClick={() => onSearch(text)}
+                    onClick={() => {
+                      onSearch(text);
+                      setSearchValue(text);
+                    }}
                   >
                     {text}
                   </Button3>

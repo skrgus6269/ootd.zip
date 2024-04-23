@@ -36,9 +36,12 @@ export const patchProfile = async (payload: patchProfilePayload) => {
 };
 
 export const getSearchUser = async (params: getSearchUserParams) => {
-  const { data } = await fetcher.get(
-    `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}`
-  );
+  let url = `/v1/user/search?name=${params.name}&page=${params.page}&size=${params.size}&searchType=${params.searchType}`;
+
+  if (params.userId) {
+    url += `&userId=${params.userId}`;
+  }
+  const { data } = await fetcher.get(url);
 
   return data;
 };
@@ -56,8 +59,13 @@ export const getUserStyle = async () => {
 };
 
 export const putStyle = async (params: putStylePayload) => {
-  console.log(params);
   const { data } = await fetcher.put(`/v1/user/user-styles`, params);
+
+  return data;
+};
+
+export const deleteUser = async () => {
+  const { data } = await fetcher.delete(`/v1/user`);
 
   return data;
 };

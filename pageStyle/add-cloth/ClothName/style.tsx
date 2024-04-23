@@ -6,12 +6,6 @@ const Layout = styled.div`
   .title {
     margin-top: 40px;
   }
-  img {
-    margin: 40px 0;
-    width: 100%;
-    height: calc(100vw - 40px);
-    object-fit: cover;
-  }
   .helperText {
     margin-top: 8px;
   }
@@ -22,6 +16,14 @@ const Layout = styled.div`
   }
 `;
 
-const S = { Layout };
+const Image = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  margin: 40px 0;
+`;
+
+const S = { Layout, Image };
 
 export default S;

@@ -23,9 +23,15 @@ export default function TextArea({
   const onChangeTextArea = (e: any) => {
     setInput(e.target.value);
   };
+  const [onClickDescriptionState, setOnclickDescriptionState] =
+    useState<Boolean>(false);
 
   return (
-    <S.Layout>
+    <S.Layout
+      onFocus={() => setOnclickDescriptionState(true)}
+      onBlur={() => setOnclickDescriptionState(false)}
+      onClickDescriptionState={onClickDescriptionState}
+    >
       <S.TextArea
         onChange={onChangeTextArea}
         maxLength={2000}

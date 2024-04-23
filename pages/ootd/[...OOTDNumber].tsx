@@ -90,6 +90,16 @@ const OOTD: ComponentWithLayout = () => {
   const [reRender, setReRender] = useState(0);
   const [getPostReRender, setGetPostReRender] = useState(0);
 
+  const onClickBackButton = () => {
+    if (router.query.OOTDNumber![1] === 'explore') {
+      router.push('/main/explore');
+    } else if (router.query.OOTDNumber![1] === 'curation') {
+      router.push('/main/curation');
+    } else {
+      router.back();
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
@@ -145,45 +155,65 @@ const OOTD: ComponentWithLayout = () => {
     if (!commentWriting) setComment({ ...comment, parentDepth: 0 });
   }, [commentWriting]);
 
+  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false);
+
+  const onClickBackground = () => {
+    if (declaration) setDeclaration(false);
+    if (receivedDeclaration) setReceivedDeclaration(false);
+  };
+
   return (
-    <S.Layout>
-      <AppBar
-        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
-        middleProps={<></>}
-        rightProps={<></>}
-      />
-      {data && (
-        <Posting
-          data={data}
-          commentRef={commentRef}
-          myPost={data.userId === Number(myId)}
-          setGetPostReRender={setGetPostReRender}
-          getPostReRender={getPostReRender}
+    <>
+      <S.Layout>
+        <S.Background
+          isOpen={declaration || receivedDeclaration}
+          onClick={onClickBackground}
         />
-      )}
-      <PostingComment
-        comment={comment}
-        setComment={setComment}
-        commentRef={commentRef}
-        setCommentWriting={setCommentWriting}
-        reRender={reRender}
-        setReRender={setReRender}
-      />
-      {data && <UserCloth userName={data.userName} userId={data.userId} />}
-      {data && <UserOtherOOTD userName={data.userName} userId={data.userId} />}
-      <SimilarOOTD />
-      <PostingCommentWrite
-        userImage={data && data.userImage}
-        setComment={setComment}
-        commentRef={commentRef}
-        comment={comment}
-        commentWriting={commentWriting}
-        setCommentWriting={setCommentWriting}
-        registerComment={registerComment}
-        setCommentFinish={setCommentFinish}
-      />
-      {commentFinish && <Toast text="댓글이 등록되었습니다." />}
-    </S.Layout>
+        <AppBar
+          leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+          middleProps={<></>}
+          rightProps={<></>}
+        />
+        {data && (
+          <Posting
+            data={data}
+            commentRef={commentRef}
+            myPost={data.userId === Number(myId)}
+            setGetPostReRender={setGetPostReRender}
+            getPostReRender={getPostReRender}
+          />
+        )}
+        <PostingComment
+          declaration={declaration}
+          setDeclaration={setDeclaration}
+          receivedDeclaration={receivedDeclaration}
+          setReceivedDeclaration={setReceivedDeclaration}
+          comment={comment}
+          setComment={setComment}
+          commentRef={commentRef}
+          setCommentWriting={setCommentWriting}
+          reRender={reRender}
+          setReRender={setReRender}
+        />
+        {data && <UserCloth userName={data.userName} userId={data.userId} />}
+        {data && (
+          <UserOtherOOTD userName={data.userName} userId={data.userId} />
+        )}
+        <SimilarOOTD />
+        <PostingCommentWrite
+          setComment={setComment}
+          commentRef={commentRef}
+          comment={comment}
+          commentWriting={commentWriting}
+          setCommentWriting={setCommentWriting}
+          registerComment={registerComment}
+          setCommentFinish={setCommentFinish}
+        />
+        {commentFinish && <Toast text="댓글이 등록되었습니다." />}
+      </S.Layout>
+    </>
   );
 };
 

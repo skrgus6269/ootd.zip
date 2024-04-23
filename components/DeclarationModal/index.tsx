@@ -13,6 +13,7 @@ export type withdrawBlockType = {
 
 interface DeclarationModalProps {
   type: string;
+  userName?: string;
   ID: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -22,6 +23,7 @@ interface DeclarationModalProps {
 
 export default function DeclarationModal({
   type,
+  userName,
   ID,
   declaration,
   setDeclaration,
@@ -101,7 +103,7 @@ export default function DeclarationModal({
   };
 
   return (
-    <Modal isOpen={declaration} height="90">
+    <Modal isOpen={declaration} height="85">
       <S.Layout>
         <S.Header>
           <AiOutlineClose
@@ -110,13 +112,13 @@ export default function DeclarationModal({
           />
         </S.Header>
         <S.Frame>
-          <Title1>@user님의</Title1>
+          <Title1>{userName}님의</Title1>
           {type === 'COMMENT' ? (
             <Title1>댓글을 신고합니다.</Title1>
           ) : (
             <Title1>게시글을 신고합니다.</Title1>
           )}
-          <Caption1 style={{ color: '#8B8B8B' }}>
+          <Caption1 className="ment">
             아래에서 신고 사유를 선택해주세요. 회원님의 신고는 익명으로
             처리됩니다.
           </Caption1>
@@ -126,6 +128,7 @@ export default function DeclarationModal({
             key={item.id}
             title={item.message}
             checked={checks[item.id]}
+            lastItem={withdrawBlockTitles.length - 1 === index}
             setChecked={() => {
               const newChecks = [...checks];
               newChecks[item.id] = !newChecks[item.id];

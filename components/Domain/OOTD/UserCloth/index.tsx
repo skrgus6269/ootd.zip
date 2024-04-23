@@ -43,7 +43,6 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
   });
 
   useEffect(() => {
-    console.log(userClothData);
     setData(userClothData);
   }, [userClothData]);
 
@@ -52,7 +51,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
     <S.Layout>
       <S.Title>
         <Title1>{userName}님의 옷장</Title1>
-        <Button3 onClick={() => router.push(`/mypage/${userId}`)}>
+        <Button3 onClick={() => router.push(`/mypage/${userId}/cloth`)}>
           더보기
         </Button3>
       </S.Title>

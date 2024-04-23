@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Modal from '@/components/Modal';
 import S from './style';
 import { Body4, Button3, Title1 } from '@/components/UI';
@@ -9,8 +8,8 @@ import SearchBar from '@/components/SearchBar';
 import { AiOutlineClose } from 'react-icons/ai';
 import NextButton from '@/components/NextButton';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
-import CheckBoxTrue from '@/public/images/CheckBoxTrue.png';
-import CheckBoxFalse from '@/public/images/CheckBoxFalse.png';
+import CheckBoxTrue from '@/public/images/CheckBoxTrue.svg';
+import CheckBoxFalse from '@/public/images/CheckBoxFalse.svg';
 import Image from 'next/image';
 
 interface BrandModalProps {
@@ -96,13 +95,8 @@ export default function BrandModal({
               onClick={() => setNoBrandState(!noBrandState)}
               state={noBrandState}
             >
-              <Image
-                src={noBrandState ? CheckBoxTrue : CheckBoxFalse}
-                width={18}
-                height={18}
-                alt="브랜드가 없음"
-              />
-              <Body4 className="noBrand">찾고있는 브랜드가 없어요.</Body4>
+              {noBrandState ? <CheckBoxTrue /> : <CheckBoxFalse />}
+              <Body4 className="noBrand">찾고 있는 브랜드가 없어요.</Body4>
             </S.NoBrand>
           )}
           <BrandList

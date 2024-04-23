@@ -24,6 +24,7 @@ interface PostingCommentData extends CommentProps {
     parentId?: number;
     taggedUserName?: string;
     depth?: number;
+    userId: number;
   }[];
 }
 
@@ -34,6 +35,10 @@ interface PostingCommentProps {
   commentRef: MutableRefObject<any>;
   comment: CommentStateType;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
+  declaration: Boolean;
+  setDeclaration: Dispatch<SetStateAction<Boolean>>;
+  receivedDeclaration: Boolean;
+  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function PostingComment({
@@ -43,6 +48,10 @@ export default function PostingComment({
   commentRef,
   comment,
   setCommentWriting,
+  declaration,
+  setDeclaration,
+  receivedDeclaration,
+  setReceivedDeclaration,
 }: PostingCommentProps) {
   const [commentType, setCommentType] = useState<'preview' | 'all'>('preview');
   const localUserId = useRecoilValue(userId);
@@ -53,6 +62,8 @@ export default function PostingComment({
     if (commentType === 'all') setCommentType('preview');
   };
   const [data, setData] = useState<PostingCommentData[]>([]);
+  const [totalCount, setTotalCount] = useState<Number>(0);
+
   const { getOOTDComment } = OOTDApi();
 
   useEffect(() => {
@@ -65,6 +76,8 @@ export default function PostingComment({
       });
       const map = new Map<number, PostingCommentData>();
       const resultData: PostingCommentData[] = [];
+
+      setTotalCount(content.length);
 
       content.forEach((comment: PostingCommentData) => {
         if (comment.depth === 1) map.set(comment.id, comment);
@@ -115,6 +128,10 @@ export default function PostingComment({
               timeStamp={item.timeStamp}
               reRender={reRender}
               setReRender={setReRender}
+              declaration={declaration}
+              setDeclaration={setDeclaration}
+              receivedDeclaration={receivedDeclaration}
+              setReceivedDeclaration={setReceivedDeclaration}
             />
           </>
         ))}
@@ -128,7 +145,7 @@ export default function PostingComment({
   const ComentAll = () => {
     return (
       <S.Layout>
-        <Body4 className="commentLength">총{data!.length}개의 댓글</Body4>
+        <Body4 className="commentLength">총{String(totalCount)}개의 댓글</Body4>
         {data!.map((item, index) => (
           <>
             <Comment
@@ -145,12 +162,16 @@ export default function PostingComment({
               myComment={localUserId === item.userId}
               reRender={reRender}
               setReRender={setReRender}
+              declaration={declaration}
+              setDeclaration={setDeclaration}
+              receivedDeclaration={receivedDeclaration}
+              setReceivedDeclaration={setReceivedDeclaration}
             />
             {item &&
               item.childComment?.map((items, indexs) => (
                 <Comment
                   key={items.id}
-                  userId={item.userId}
+                  userId={items.userId}
                   userImage={items.userImage}
                   id={items.id}
                   userName={items.userName}
@@ -164,9 +185,13 @@ export default function PostingComment({
                   type="child"
                   taggedUserName={items.taggedUserName}
                   timeStamp={items.timeStamp}
-                  myComment={localUserId === item.userId}
+                  myComment={localUserId === items.userId}
                   reRender={reRender}
                   setReRender={setReRender}
+                  declaration={declaration}
+                  setDeclaration={setDeclaration}
+                  receivedDeclaration={receivedDeclaration}
+                  setReceivedDeclaration={setReceivedDeclaration}
                 />
               ))}
           </>

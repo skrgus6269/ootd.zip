@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
@@ -7,6 +6,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
 import S from '@/pageStyle/add-cloth/AdditionalInfo/style';
+import NextImage from '@/components/NextImage';
 
 interface AdditionalInfo {
   clothName: string;
@@ -49,7 +49,13 @@ export default function AdditionalInfo({
         <Category />
         <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
         <Body2 className="name">{clothName}</Body2>
-        <img src={clothImage && clothImage![0].ootdImage} alt="" />
+        <NextImage
+          fill={false}
+          width={106}
+          height={106}
+          src={clothImage! && clothImage![0].ootdImage}
+          alt=""
+        />
         <hr />
       </S.BasicInfoFirst>
       <S.AdditionalInfo>
@@ -67,6 +73,7 @@ export default function AdditionalInfo({
               border={true}
               onChange={setClothBuyDate}
               line="outline"
+              state={true}
             />
           </Input>
           <Input>
@@ -76,7 +83,7 @@ export default function AdditionalInfo({
             <Input.TextArea
               input={clothMemo}
               setInput={setClothMemo}
-              placeholder="메모를 입력해주세요"
+              placeholder=""
             />
           </Input>
         </S.Information>

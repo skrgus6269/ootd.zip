@@ -46,12 +46,14 @@ export default function DetailClothDiscription({
         <Body3>{uploadDate}</Body3>
       </S.Category>
 
-      <S.Category>
-        <S.IconSpan>
-          <AiOutlineContainer />
-        </S.IconSpan>
-        <Body3>{memo}</Body3>
-      </S.Category>
+      {memo && (
+        <S.Category>
+          <S.IconSpan>
+            <AiOutlineContainer />
+          </S.IconSpan>
+          <Body3>{memo}</Body3>
+        </S.Category>
+      )}
     </S.Layout>
   );
 }

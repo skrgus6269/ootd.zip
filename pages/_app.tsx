@@ -3,7 +3,10 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '@/styles/GlobalStyle';
 import themes from '@/styles/theme';
 import Script from 'next/script';
-import { NEXT_PUBLIC_KAKAO_JS_KEY } from '@/constants/develop.constants';
+import {
+  NEXT_PUBLIC_APPLE_CLIENT_ID,
+  NEXT_PUBLIC_KAKAO_JS_KEY,
+} from '@/constants/develop.constants';
 import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
 import { RecoilRoot } from 'recoil';

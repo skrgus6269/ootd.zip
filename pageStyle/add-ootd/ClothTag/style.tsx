@@ -69,6 +69,7 @@ const Image = styled.div`
 `;
 
 const Tag = styled.div`
+  margin-bottom: 67px;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -78,6 +79,13 @@ const Tag = styled.div`
   }
 `;
 
-const S = { Background, Layout, Tag, Image };
+const BigImage = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+`;
+
+const S = { Background, Layout, Tag, Image, BigImage };
 
 export default S;

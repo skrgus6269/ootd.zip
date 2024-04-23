@@ -27,6 +27,10 @@ export default function SearchBar({
   const router = useRouter();
   const [value, setValue] = useState<string>('');
 
+  useEffect(() => {
+    setValue(searchValue);
+  }, [searchValue]);
+
   const onChangeSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value);
@@ -50,7 +54,7 @@ export default function SearchBar({
         });
       }
     },
-    [value, router, onAddKeyword, setState]
+    [value, router, onAddKeyword, setState, setSearchValue]
   );
 
   // delete 아이콘 클릭 시 실행
@@ -64,22 +68,20 @@ export default function SearchBar({
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <Layout state={searchValue?.length > 0}>
-          <SearchIcon>
-            <AiOutlineSearch />
-          </SearchIcon>
-          <SearchInput>
-            <Input value={value} onChange={onChangeSearch} placeholder="검색" />
-          </SearchInput>
-          {searchValue && (
-            <CloseIcon>
-              <AiFillCloseCircle onClick={onClickCloseIcon} />
-            </CloseIcon>
-          )}
-        </Layout>
-      </form>
-    </>
+    <form onSubmit={onSubmit}>
+      <Layout state={searchValue?.length > 0}>
+        <SearchIcon>
+          <AiOutlineSearch />
+        </SearchIcon>
+        <SearchInput>
+          <Input value={value} onChange={onChangeSearch} placeholder="검색" />
+        </SearchInput>
+        {searchValue && (
+          <CloseIcon>
+            <AiFillCloseCircle onClick={onClickCloseIcon} />
+          </CloseIcon>
+        )}
+      </Layout>
+    </form>
   );
 }

@@ -8,8 +8,10 @@ import GenderInput from '@/components/Domain/SignUp/GenderInput';
 import LikeInfoStyleInput from '@/components/Domain/Setting/LikeInfo';
 import { Style } from '../add-ootd';
 import { UserApi } from '@/apis/domain/User/UserApi';
+import { ComponentWithLayout } from '../sign-up';
+import { AppLayoutProps } from '@/AppLayout';
 
-export default function LikeInfo() {
+const LikeInfo: ComponentWithLayout = () => {
   const router = useRouter();
 
   const [gender, setGender] = useState<Boolean>(true);
@@ -74,10 +76,6 @@ export default function LikeInfo() {
           </S.BreadcrumbText>
         </S.Breadcrumb>
 
-        <S.SexContent>
-          <GenderInput gender={gender} setGender={setGender} />
-        </S.SexContent>
-
         <S.StyleContent>
           <LikeInfoStyleInput
             selectedStyle={selectedStyle}
@@ -91,4 +89,12 @@ export default function LikeInfo() {
       </S.Layout>
     </>
   );
-}
+};
+
+export default LikeInfo;
+
+LikeInfo.Layout = ({ children }: AppLayoutProps) => {
+  return <>{children}</>;
+};
+
+LikeInfo.Layout.displayName = 'LikeInfoLayout';

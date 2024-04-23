@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { NEXT_PUBLIC_API_HOST } from '@/constants/develop.constants';
 import { getCookie } from '@/utils/Cookie';
+import { PublicApi } from './domain/Public/PublicApi';
 
 const fetcher = axios.create({
   baseURL: NEXT_PUBLIC_API_HOST,
@@ -19,4 +20,17 @@ fetcher.interceptors.request.use((config) => {
   return config;
 });
 
+fetcher.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    if (error.response.data.divisionCode === 'U002') {
+      const { getNewToken } = PublicApi();
+      await getNewToken();
+
+      return fetcher.request(error.config);
+    }
+  }
+);
 export default fetcher;

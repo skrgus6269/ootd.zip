@@ -32,8 +32,6 @@ const Layout = styled.div<LayoutProps>`
 
   svg {
     color: ${(props) => (props.state ? '' : props.theme.color.grey_80)};
-    width: 8px;
-    height: 8px;
   }
 `;
 
