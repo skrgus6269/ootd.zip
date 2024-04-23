@@ -195,7 +195,7 @@ const Cloth = () => {
       {declaration && (
         <DeclarationModal
           type="CLOTHES"
-          userName={data.userName}
+          userName={data?.userName}
           ID={Number(router.query.ClothNumber![0])}
           declaration={declaration}
           setDeclaration={setDeclaration}
