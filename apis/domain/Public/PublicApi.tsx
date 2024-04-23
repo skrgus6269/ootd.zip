@@ -1,4 +1,5 @@
 import { authService, userService } from '@/apis/_service';
+import { setCookie } from '@/utils/Cookie';
 
 export const PublicApi = () => {
   const follow = async (id: number) => {
@@ -16,9 +17,18 @@ export const PublicApi = () => {
 
     return result;
   };
+
+  const getNewToken = async () => {
+    const { accessToken, refreshToken } = await authService.getNewToken();
+
+    setCookie('accessToken', accessToken, { path: '/' });
+    setCookie('refreshToken', refreshToken, { path: '/' });
+  };
+
   return {
     follow,
     unFollow,
     getUserId,
+    getNewToken,
   } as const;
 };

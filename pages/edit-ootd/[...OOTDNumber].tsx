@@ -3,7 +3,7 @@ import StyleModal from '@/components/Domain/AddOOTD/StyleModal';
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import Input from '@/components/Input';
 import NextButton from '@/components/NextButton';
-import { Body4, Button3, Title1 } from '@/components/UI';
+import { Body3, Body4, Button3, Title1 } from '@/components/UI';
 import S from '@/pageStyle/edit-ootd/style';
 import { useEffect, useState } from 'react';
 import {
@@ -17,6 +17,7 @@ import { ComponentWithLayout } from '../sign-up';
 import { useRouter } from 'next/router';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import NextImage from '@/components/NextImage';
+import Alert from '@/components/Alert';
 
 const EditOOTD: ComponentWithLayout = () => {
   const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>(
@@ -27,6 +28,7 @@ const EditOOTD: ComponentWithLayout = () => {
   const [selectedStyle, setSelectedStyle] = useState<Style[]>([]);
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const router = useRouter();
+  const [deleteImageAlertIndex, setDeleteImageAlertIndex] = useState<number>(0);
 
   const { getOOTDDetail, putOOTD } = OOTDApi();
 
@@ -62,9 +64,12 @@ const EditOOTD: ComponentWithLayout = () => {
     }
   };
 
-  const onClickSubmitButton = async () => {
-    console.log(imageAndTag);
+  const onClickDeleteImageAlertYesButton = () => {
+    onClickCloseImage(deleteImageAlertIndex);
+    setDeleteImageAlertIndex(0);
+  };
 
+  const onClickSubmitButton = async () => {
     if (imageAndTag !== undefined) {
       const payload = {
         id: Number(router.query!.OOTDNumber![0]),
@@ -100,11 +105,15 @@ const EditOOTD: ComponentWithLayout = () => {
     }
   };
 
+  const onClickBackground = () => {
+    if (styleModalIsOpen) setStyleModalIsOpen(false);
+    if (deleteImageAlertIndex > 0) setDeleteImageAlertIndex(0);
+  };
   return (
     <>
       <S.Background
-        isOpen={styleModalIsOpen}
-        onClick={() => setStyleModalIsOpen(false)}
+        isOpen={styleModalIsOpen || deleteImageAlertIndex > 0}
+        onClick={onClickBackground}
       />
       <AppBar
         leftProps={<></>}
@@ -132,8 +141,9 @@ const EditOOTD: ComponentWithLayout = () => {
                     alt=""
                   />
                   <AiFillCloseCircle
-                    onClick={() => onClickCloseImage(index)}
+                    onClick={() => setDeleteImageAlertIndex(index)}
                     className="close"
+                    viewBox="70 70 890 890"
                   />
                 </div>
               );
@@ -193,6 +203,22 @@ const EditOOTD: ComponentWithLayout = () => {
           styleModalIsOpen={styleModalIsOpen}
           setSelectedStyle={setSelectedStyle}
           styleInitial={selectedStyle}
+        />
+      )}
+      {deleteImageAlertIndex > 0 && (
+        <Alert
+          headline="첨부된 사진을 삭제하시겠습니까?"
+          body={
+            <>
+              <Body3>수정 단계에서는 새로운 사진을 추가할 수 </Body3>
+              <Body3>없습니다. 취소를 누르면 삭제되지 않습니다.</Body3>
+            </>
+          }
+          onClickYesButton={onClickDeleteImageAlertYesButton}
+          onClickNoButton={() => setDeleteImageAlertIndex(0)}
+          yes="삭제"
+          no="취소"
+          yesColor="error"
         />
       )}
     </>

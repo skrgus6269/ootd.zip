@@ -33,3 +33,9 @@ export const getUserId = async () => {
 
   return data;
 };
+
+export const getNewToken = async () => {
+  const data = await authApi.getNewToken();
+
+  return data;
+};
