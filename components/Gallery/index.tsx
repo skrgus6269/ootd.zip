@@ -13,6 +13,7 @@ import { useRecoilState } from 'recoil';
 import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
 import NextImage from '../NextImage';
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
 
 interface GalleryProps {
   imageAndTag: ImageWithTag | undefined;
@@ -56,7 +57,13 @@ const Gallery = ({
     setIsOpenStoredImageAlert(false);
   };
 
+  const getToken = async () => {
+    const { getNewToken } = PublicApi();
+    await getNewToken();
+  };
+
   useEffect(() => {
+    getToken();
     if (storedImage !== undefined && item === 'OOTD') {
       setIsOpenStoredImageAlert(true);
     } else {

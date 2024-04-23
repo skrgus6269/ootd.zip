@@ -2,6 +2,7 @@ import fetcher from '../fetcher';
 import { NEXT_PUBLIC_DOMAIN_HOST } from '@/constants/develop.constants';
 import { postRegistUserInfoPayload } from './type';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
+import { getCookie } from '@/utils/Cookie';
 
 export const login = async (payload: QueryParams) => {
   const { data } = await fetcher.get(
@@ -43,4 +44,14 @@ export const getUserId = async () => {
   const { data } = await fetcher.get('/v1/user/id');
 
   return data;
+};
+
+export const getNewToken = async () => {
+  const requestData = new URLSearchParams();
+  requestData.append('grantType', 'refresh_token');
+  requestData.append('refreshToken', getCookie('refreshToken'));
+
+  const data = await fetcher.post(`v1/oauth/token`, requestData);
+
+  return data.data;
 };
