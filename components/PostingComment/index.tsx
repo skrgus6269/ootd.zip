@@ -13,6 +13,8 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
+import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 
 interface PostingCommentData extends CommentProps {
   childComment?: {
@@ -132,6 +134,8 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
+              reportUserName={reportUserName}
+              setReportUserName={setReportUserName}
             />
           </>
         ))}
@@ -141,6 +145,9 @@ export default function PostingComment({
       </S.Layout>
     );
   };
+
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
+  const [reportUserName, setReportUserName] = useState<string>('');
 
   const ComentAll = () => {
     return (
@@ -166,33 +173,77 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
+              reportUserName={reportUserName}
+              setReportUserName={setReportUserName}
             />
+            {declaration && (
+              <DeclarationModal
+                type="COMMENT"
+                userName={reportUserName}
+                ID={item.id}
+                declaration={declaration}
+                setDeclaration={setDeclaration}
+                setReceivedDeclaration={setReceivedDeclaration}
+                setReportStatus={setReportStatus}
+              />
+            )}
+            {receivedDeclaration && (
+              <ReceivedDeclarationModal
+                reportStatus={reportStatus}
+                type="댓글"
+                receivedDeclaration={receivedDeclaration}
+                setReceivedDeclaration={setReceivedDeclaration}
+              />
+            )}
             {item &&
               item.childComment?.map((items, indexs) => (
-                <Comment
-                  key={items.id}
-                  userId={items.userId}
-                  userImage={items.userImage}
-                  id={items.id}
-                  userName={items.userName}
-                  content={items.content}
-                  onClickReplyButton={() =>
-                    onClickReplyButton(
-                      item.childComment![indexs].userName,
-                      item.id
-                    )
-                  }
-                  type="child"
-                  taggedUserName={items.taggedUserName}
-                  timeStamp={items.timeStamp}
-                  myComment={localUserId === items.userId}
-                  reRender={reRender}
-                  setReRender={setReRender}
-                  declaration={declaration}
-                  setDeclaration={setDeclaration}
-                  receivedDeclaration={receivedDeclaration}
-                  setReceivedDeclaration={setReceivedDeclaration}
-                />
+                <>
+                  <Comment
+                    key={items.id}
+                    userId={items.userId}
+                    userImage={items.userImage}
+                    id={items.id}
+                    userName={items.userName}
+                    content={items.content}
+                    onClickReplyButton={() =>
+                      onClickReplyButton(
+                        item.childComment![indexs].userName,
+                        item.id
+                      )
+                    }
+                    type="child"
+                    taggedUserName={items.taggedUserName}
+                    timeStamp={items.timeStamp}
+                    myComment={localUserId === items.userId}
+                    reRender={reRender}
+                    setReRender={setReRender}
+                    declaration={declaration}
+                    setDeclaration={setDeclaration}
+                    receivedDeclaration={receivedDeclaration}
+                    setReceivedDeclaration={setReceivedDeclaration}
+                    reportUserName={reportUserName}
+                    setReportUserName={setReportUserName}
+                  />
+                  {declaration && (
+                    <DeclarationModal
+                      type="COMMENT"
+                      userName={reportUserName}
+                      ID={items.id}
+                      declaration={declaration}
+                      setDeclaration={setDeclaration}
+                      setReceivedDeclaration={setReceivedDeclaration}
+                      setReportStatus={setReportStatus}
+                    />
+                  )}
+                  {receivedDeclaration && (
+                    <ReceivedDeclarationModal
+                      reportStatus={reportStatus}
+                      type="댓글"
+                      receivedDeclaration={receivedDeclaration}
+                      setReceivedDeclaration={setReceivedDeclaration}
+                    />
+                  )}
+                </>
               ))}
           </>
         ))}

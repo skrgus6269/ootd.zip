@@ -27,6 +27,8 @@ export interface CommentProps {
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  reportUserName: string;
+  setReportUserName: Dispatch<SetStateAction<string>>;
 }
 
 function Comment({
@@ -46,6 +48,8 @@ function Comment({
   setDeclaration,
   receivedDeclaration,
   setReceivedDeclaration,
+  reportUserName,
+  setReportUserName,
 }: CommentProps) {
   const { deleteOOTDComment } = OOTDApi();
 
@@ -59,10 +63,9 @@ function Comment({
   };
 
   const onClickReportButton = async () => {
+    setReportUserName(userName);
     setDeclaration(true);
   };
-
-  const [reportStatus, setReportStatus] = useState<Boolean>(false);
 
   const onClickBackground = () => {
     if (declaration) setDeclaration(false);
@@ -119,25 +122,6 @@ function Comment({
           )}
         </S.CommentRight>
       </S.Layout>
-      {declaration && (
-        <DeclarationModal
-          type="COMMENT"
-          userName={userName}
-          ID={id}
-          declaration={declaration}
-          setDeclaration={setDeclaration}
-          setReceivedDeclaration={setReceivedDeclaration}
-          setReportStatus={setReportStatus}
-        />
-      )}
-      {receivedDeclaration && (
-        <ReceivedDeclarationModal
-          reportStatus={reportStatus}
-          type="댓글"
-          receivedDeclaration={receivedDeclaration}
-          setReceivedDeclaration={setReceivedDeclaration}
-        />
-      )}
     </>
   );
 }
