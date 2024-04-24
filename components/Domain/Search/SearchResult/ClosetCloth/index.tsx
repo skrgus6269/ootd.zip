@@ -1,21 +1,13 @@
 import { Body4, Caption2 } from '@/components/UI';
 import S from './style';
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useState } from 'react';
 import ImageList from '@/components/ImageList';
 import { useRouter } from 'next/router';
 import { AiOutlineDown } from 'react-icons/ai';
-import FilterModal from '../FilterModal';
-import { ColorListType } from '@/components/ColorList';
 import SubHead from '../SubHead';
-import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
-import { BrandType } from '@/components/BrandList/Brand';
 import Spinner from '@/components/Spinner';
+import FilterModal from '@/components/Domain/MyPage/Closet/FilterModal';
+import { FilterData } from '@/components/Domain/MyPage/Closet/ClosetCloth';
 
 interface ClosetClothProps {
   OOTDTotal: number;
@@ -23,8 +15,8 @@ interface ClosetClothProps {
   OOTDIsLoading: Boolean;
   OOTDRef: MutableRefObject<any>;
   OOTDHasNextPage: Boolean;
-  filter: FilterData;
-  setFilter: Dispatch<SetStateAction<FilterData>>;
+  filter: FilterData | SearchFilterData;
+  setFilter: Dispatch<SetStateAction<FilterData | SearchFilterData>>;
   sortStandard: string;
   setSortStandard: Dispatch<SetStateAction<string>>;
 }
@@ -40,11 +32,8 @@ export type GenderTypes = {
   woman: Boolean;
 };
 
-export interface FilterData {
-  category: CategoryListType[] | null;
-  color: ColorListType | null;
-  brand: BrandType[] | null;
-  gender: GenderTypes;
+export interface SearchFilterData extends FilterData {
+  gender?: GenderTypes;
 }
 
 export default function ClosetCloth({
@@ -60,13 +49,16 @@ export default function ClosetCloth({
 }: ClosetClothProps) {
   const router = useRouter();
   const [filterModalIsOpen, setFilterModalIsOpen] = useState<Boolean>(false);
+  const [filterModalInitialIndex, setFilterModalInitialIndex] =
+    useState<number>(1);
 
   const onClickImageList = (index: number) => {
     router.push(`/ootd/${index}`);
   };
 
-  const onClickFilterSpan = () => {
+  const onClickFilterSpan = (index: number) => {
     setFilterModalIsOpen(true);
+    setFilterModalInitialIndex(index);
   };
 
   const onClickInitButton = () => {
@@ -74,6 +66,7 @@ export default function ClosetCloth({
       category: null,
       color: null,
       brand: null,
+      isOpen: true,
       gender: {
         man: false,
         woman: false,
@@ -86,9 +79,10 @@ export default function ClosetCloth({
       <S.Background
         isOpen={filterModalIsOpen}
         onClick={() => setFilterModalIsOpen(false)}
+        onTouchMove={(e) => e.stopPropagation()}
       />
       <S.Layout>
-        <S.SearchFilter>
+        <S.SearchFilter onTouchMove={(e) => e.stopPropagation()}>
           <S.Span
             state={
               !!(
@@ -102,22 +96,28 @@ export default function ClosetCloth({
             <Body4 state="emphasis">초기화</Body4>
           </S.Span>
           <S.Span
-            state={filter.gender.man}
+            state={filter.gender!.man}
             onClick={() =>
               setFilter({
                 ...filter,
-                gender: { ...filter.gender, man: !filter.gender.man },
+                gender: {
+                  woman: filter.gender!.woman!,
+                  man: !filter.gender!.man,
+                },
               })
             }
           >
             <Body4 state="emphasis">남성</Body4>
           </S.Span>
           <S.Span
-            state={filter.gender.woman}
+            state={filter.gender!.woman}
             onClick={() =>
               setFilter({
                 ...filter,
-                gender: { ...filter.gender, woman: !filter.gender.woman },
+                gender: {
+                  man: filter.gender!.man,
+                  woman: !filter.gender!.woman,
+                },
               })
             }
           >
@@ -125,7 +125,7 @@ export default function ClosetCloth({
           </S.Span>
           <S.Divider />
           <S.FilterSpan
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(1)}
             state={filter.category !== null}
           >
             <Body4 state="emphasis">카테고리</Body4>
@@ -136,7 +136,7 @@ export default function ClosetCloth({
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.color !== null && filter.color.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(2)}
           >
             <Body4 state="emphasis">색상</Body4>
             <AiOutlineDown className="down" />
@@ -146,7 +146,7 @@ export default function ClosetCloth({
           </S.FilterSpan>
           <S.FilterSpan
             state={filter.brand !== null && filter.brand.length > 0}
-            onClick={onClickFilterSpan}
+            onClick={() => onClickFilterSpan(3)}
           >
             <Body4 state="emphasis">브랜드</Body4>
             <AiOutlineDown className="down" />
@@ -183,8 +183,10 @@ export default function ClosetCloth({
           categoryInitital={filter.category}
           colorInitital={filter.color}
           brandInitial={filter.brand}
-          genderInitial={filter.gender}
           setFilter={setFilter}
+          page="search"
+          gender={filter.gender!}
+          initialIndex={filterModalInitialIndex}
         />
       )}
     </>

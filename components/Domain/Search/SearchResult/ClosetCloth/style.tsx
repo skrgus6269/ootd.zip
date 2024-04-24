@@ -98,7 +98,7 @@ const FilterSpan = styled.div<FilterSpanProps>`
 `;
 
 const ClothList = styled.div`
-  height: calc(100vh - 56px);
+  height: calc(100vh - 311px);
   overflow-y: scroll;
 `;
 
