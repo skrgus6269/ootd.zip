@@ -3,6 +3,8 @@ import { NEXT_PUBLIC_API_HOST } from '@/constants/develop.constants';
 import { getCookie } from '@/utils/Cookie';
 import { PublicApi } from './domain/Public/PublicApi';
 
+let refreshing = false; // 리프레시 중인지 여부를 추적하는 변수
+
 const fetcher = axios.create({
   baseURL: NEXT_PUBLIC_API_HOST,
   timeout: 2500,
@@ -26,11 +28,18 @@ fetcher.interceptors.response.use(
   },
   async (error) => {
     if (error.response.data.divisionCode === 'U002') {
-      const { getNewToken } = PublicApi();
-      await getNewToken();
-
-      return fetcher.request(error.config);
+      if (!refreshing) {
+        // 리프레시 중이 아닌 경우에만 리프레시 요청 진행
+        refreshing = true; // 리프레시 중으로 표시
+        const { getNewToken } = PublicApi();
+        await getNewToken();
+        refreshing = false; // 리프레시 완료 후 상태 변경
+        return fetcher.request(error.config); // 이전 요청 다시 시도
+      }
+      // 리프레시 중인 경우 요청 보류
+      return fetcher.request(error.config); // 리프레시가 완료된 후 다시 시도
     }
   }
 );
+
 export default fetcher;
