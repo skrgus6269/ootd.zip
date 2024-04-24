@@ -15,9 +15,10 @@ import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import UserFilled from '@/public/images/UserFilled.svg';
 import SearchFilled from '@/public/images/SearchFilled.svg';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import FilledSquare from '@/public/images/FilledPlusSquare.svg';
+import Link from 'next/link';
 
 const icons = [
   <AiOutlineHome />,
@@ -48,7 +49,13 @@ export default function BottomNavBar({
   const path = router.asPath;
   const myId = useRecoilValue(userId);
 
-  const routes = ['/main', '/search', '/plus', '/bookmark', `/mypage/${myId}`];
+  const routes = [
+    '/main/curation',
+    '/search',
+    '/plus',
+    '/bookmark',
+    `/mypage/${myId}`,
+  ];
 
   const getActiveIndex = () =>
     routes.findIndex((route) => path.includes(route));
@@ -79,26 +86,26 @@ export default function BottomNavBar({
   const onClickPlusButton = () => {
     setAddModalState(!addModalState);
   };
+
   return (
     <BottomComponent>
-      {bottomNavBarLinkers.map((item, index) => (
-        <BottomComponentItem
-          key={index}
-          onClick={index === 2 ? onClickPlusButton : item.click}
-        >
-          {index === 2 && addModalState ? (
-            <FilledSquare />
-          ) : path.includes('mypage') && index === 4 ? (
-            router.isReady && myId === Number(router.query.UserId![0]) ? (
-              activeIcons[index]
-            ) : (
-              item.icon
-            )
-          ) : (
-            item.icon
-          )}
-        </BottomComponentItem>
-      ))}
+      {bottomNavBarLinkers.map((item, index) =>
+        index === 2 ? (
+          <BottomComponentItem onClick={onClickPlusButton}>
+            {addModalState ? <FilledSquare /> : <AiOutlinePlusSquare />}
+          </BottomComponentItem>
+        ) : (
+          <Link href={routes[index]}>
+            <BottomComponentItem key={index} onClick={item.click}>
+              {path.includes('mypage') && index === 4
+                ? router.isReady && myId === Number(router.query.UserId![0])
+                  ? activeIcons[index]
+                  : item.icon
+                : item.icon}
+            </BottomComponentItem>
+          </Link>
+        )
+      )}
     </BottomComponent>
   );
 }
