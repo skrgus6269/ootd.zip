@@ -59,6 +59,9 @@ const Input = styled.input`
 `;
 
 const CloseIcon = styled(FlexLayout)`
+  width: 24px;
+  height: 24px;
+
   svg {
     width: 12px;
     height: 12px;

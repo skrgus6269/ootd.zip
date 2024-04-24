@@ -11,6 +11,7 @@ const Layout = styled.div`
 
   .text {
     text-align: center;
+    color: ${(props) => props.theme.color.grey_50};
   }
 `;
 

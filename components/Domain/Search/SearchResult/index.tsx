@@ -10,6 +10,7 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useEffect, useState } from 'react';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import TabView from '@/components/TabView';
 
 interface searchResultProps {
   keywordsValue: string;
@@ -160,39 +161,41 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
   return (
     <>
       <S.Layout>
-        <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
-        <Funnel>
-          <Funnel.Steps name="OOTD">
-            {OOTDData.length > 0 ? (
-              <ClosetCloth
-                OOTDTotal={OOTDTotal}
-                OOTDList={OOTDList}
-                OOTDIsLoading={OOTDIsLoading}
-                OOTDRef={OOTDRef}
-                OOTDHasNextPage={OOTDHasNextPage}
-                filter={filter}
-                setFilter={setFilter}
-                sortStandard={sortStandard}
-                setSortStandard={setSortStandard}
-              />
-            ) : (
-              <EmptySearch />
-            )}
-          </Funnel.Steps>
-          <Funnel.Steps name="Profile">
-            {profileData.length > 0 ? (
-              <Profile
-                profileList={profileList}
-                setProfileList={setProfileList}
-                profileIsLoading={profileIsLoading}
-                profileRef={profileRef}
-                profileHasNextPage={profileHasNextPage}
-              />
-            ) : (
-              <EmptySearch />
-            )}
-          </Funnel.Steps>
-        </Funnel>
+        <TabView>
+          <TabView.TabBar tab={['OOTD', '프로필']} display="block" />
+          <TabView.Tabs>
+            <TabView.Tab>
+              {OOTDData.length > 0 ? (
+                <ClosetCloth
+                  OOTDTotal={OOTDTotal}
+                  OOTDList={OOTDList}
+                  OOTDIsLoading={OOTDIsLoading}
+                  OOTDRef={OOTDRef}
+                  OOTDHasNextPage={OOTDHasNextPage}
+                  filter={filter}
+                  setFilter={setFilter}
+                  sortStandard={sortStandard}
+                  setSortStandard={setSortStandard}
+                />
+              ) : (
+                <EmptySearch />
+              )}
+            </TabView.Tab>
+            <TabView.Tab>
+              {profileData.length > 0 ? (
+                <Profile
+                  profileList={profileList}
+                  setProfileList={setProfileList}
+                  profileIsLoading={profileIsLoading}
+                  profileRef={profileRef}
+                  profileHasNextPage={profileHasNextPage}
+                />
+              ) : (
+                <EmptySearch />
+              )}
+            </TabView.Tab>
+          </TabView.Tabs>
+        </TabView>
       </S.Layout>
     </>
   );
