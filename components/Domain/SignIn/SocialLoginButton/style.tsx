@@ -11,26 +11,19 @@ const Button = styled.button`
 `;
 
 interface ButtonStringProps {
-  platform: 'KAKAO' | 'GOOGLE' | 'APPLE';
+  platform: 'KAKAO' | 'NAVER' | 'APPLE';
 }
 const ButtonString = styled.div<ButtonStringProps>`
   padding: 15px 0;
   border-radius: 2px;
-  border: 1px solid
-    ${(props) =>
-      props.platform === 'GOOGLE' ? props.theme.color.grey_90 : 'none'};
+  border: 'none';
   background-color: ${(props) =>
     props.platform === 'KAKAO'
       ? '#FEE500'
       : props.platform === 'APPLE'
       ? 'black'
-      : 'white'};
-  color: ${(props) =>
-    props.platform === 'KAKAO'
-      ? 'black'
-      : props.platform === 'APPLE'
-      ? 'white'
-      : 'black'};
+      : '#03C75A'};
+  color: ${(props) => (props.platform === 'KAKAO' ? 'black' : 'white')};
   width: 100%;
   position: relative;
   svg {

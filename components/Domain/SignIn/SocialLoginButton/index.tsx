@@ -3,10 +3,11 @@ import S from './style';
 import { Button3 } from '@/components/UI';
 import KakaoLogo from '@/public/images/kakaoLogos.svg';
 import AppleLogo from '@/public/images/appleLogos.svg';
+import NaverLogo from '@/public/images/naverLogo.svg';
 
 interface SocialLoginButtonProps {
   onClick: () => void;
-  platform: 'KAKAO' | 'GOOGLE' | 'APPLE';
+  platform: 'KAKAO' | 'NAVER' | 'APPLE';
 }
 
 export default function SocialLoginButton({
@@ -16,7 +17,7 @@ export default function SocialLoginButton({
   const platformInfo = {
     KAKAO: [<KakaoLogo />, '카카오로 로그인'],
     APPLE: [<AppleLogo />, 'Apple로 로그인'],
-    GOOGLE: [<AppleLogo />, 'Google 계정으로 로그인'],
+    NAVER: [<NaverLogo />, '네이버 계정으로 로그인'],
   };
 
   return (

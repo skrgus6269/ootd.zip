@@ -15,7 +15,7 @@ export const SignInApi = () => {
   const login = async (payload: QueryParams) => {
     // 액세스 토큰을 받아온다.
     const data = await authService.login(payload);
-
+    console.log(data);
     if (data.statusCode == 400) {
       return false;
     }
@@ -45,6 +45,10 @@ export const SignInApi = () => {
     switch (platform) {
       case 'KAKAO': {
         router.push(NEXT_PUBLIC_KAKAO_URI);
+        break;
+      }
+      case 'NAVER': {
+        router.push(NEXT_PUBLIC_APPLE_URI);
         break;
       }
       case 'APPLE': {
