@@ -4,6 +4,7 @@ import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import {
   NEXT_PUBLIC_APPLE_URI,
   NEXT_PUBLIC_KAKAO_URI,
+  NEXT_PUBLIC_NAVER_URI,
 } from '@/constants/develop.constants';
 import { useRouter } from 'next/router';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
@@ -15,7 +16,6 @@ export const SignInApi = () => {
   const login = async (payload: QueryParams) => {
     // 액세스 토큰을 받아온다.
     const data = await authService.login(payload);
-    console.log(data);
     if (data.statusCode == 400) {
       return false;
     }
@@ -48,7 +48,7 @@ export const SignInApi = () => {
         break;
       }
       case 'NAVER': {
-        router.push(NEXT_PUBLIC_APPLE_URI);
+        router.push(NEXT_PUBLIC_NAVER_URI);
         break;
       }
       case 'APPLE': {
