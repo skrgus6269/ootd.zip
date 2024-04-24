@@ -75,7 +75,7 @@ export default function Search() {
           searchValue={searchValue}
         />
       </S.SearchField>
-      {state ? (
+      {state && searchValue.length > 0 ? (
         <SearchResult keywordsValue={searchValue} />
       ) : (
         <Recents
