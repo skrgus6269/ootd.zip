@@ -71,7 +71,7 @@ export default function Setting() {
           <S.ServiceInfo>
             <Header text="서비스 정보" />
             <SettingBlock text="문의하기" shareButton={shareButton} />
-            <SettingBlock
+            {/* <SettingBlock
               text="이용 정책"
               buttonClick={() => router.push('/UsagePolicy')}
             />
@@ -82,15 +82,15 @@ export default function Setting() {
             <SettingBlock
               text="커뮤니티 가이드라인"
               buttonClick={() => router.push('/CommunityGuideline')}
-            />
+            /> */}
             <SettingBlock
               text="개인정보 처리 방침"
-              buttonClick={() => router.push('/PrivacyPolicy')}
+              buttonClick={() => router.push('/privacy-policy')}
             />
-            <SettingBlock
+            {/* <SettingBlock
               text="오픈소스 라이선스"
               buttonClick={() => router.push('/License')}
-            />
+            /> */}
           </S.ServiceInfo>
 
           <S.AccountInfo>
