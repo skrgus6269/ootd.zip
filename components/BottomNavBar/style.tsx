@@ -8,10 +8,10 @@ const BottomComponent = styled.div`
   background-color: #ffffff;
   position: fixed;
   bottom: 0;
+  justify-content: space-around;
 `;
 
 const BottomComponentItem = styled.div`
-  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
