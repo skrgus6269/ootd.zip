@@ -100,7 +100,7 @@ export default function Bookmark() {
       page: bookmarkPage,
       size,
       sortCriteria: 'createdAt',
-      sortDirection: 'ASC',
+      sortDirection: 'DESC',
     });
 
     return data;
