@@ -11,6 +11,12 @@ const Category = styled.div`
   .title {
     margin-bottom: 16px;
   }
+  .helperText {
+    margin-top: 8px;
+  }
+  .hidden {
+    visibility: hidden;
+  }
 `;
 
 const BodyInfo = styled.div`
