@@ -164,7 +164,14 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
           <TabView.TabBar tab={['OOTD', '프로필']} display="block" />
           <TabView.Tabs>
             <TabView.Tab>
-              {OOTDData.length > 0 ? (
+              {OOTDList.length === 0 &&
+              filter.brand === null &&
+              filter.category === null &&
+              filter.color === null &&
+              filter.gender?.man === false &&
+              filter.gender.woman === false ? (
+                <EmptySearch />
+              ) : (
                 <ClosetCloth
                   OOTDTotal={OOTDTotal}
                   OOTDList={OOTDList}
@@ -176,8 +183,6 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
                   sortStandard={sortStandard}
                   setSortStandard={setSortStandard}
                 />
-              ) : (
-                <EmptySearch />
               )}
             </TabView.Tab>
             <TabView.Tab>

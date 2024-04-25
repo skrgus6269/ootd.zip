@@ -9,6 +9,7 @@ import Spinner from '@/components/Spinner';
 import FilterModal from '@/components/Domain/MyPage/Closet/FilterModal';
 import { FilterData } from '@/components/Domain/MyPage/Closet/ClosetCloth';
 import Portal from '@/components/Portal';
+import EmptyFilteredResult from '../EmptyFilteredResult';
 
 interface ClosetClothProps {
   OOTDTotal: number;
@@ -158,26 +159,33 @@ export default function ClosetCloth({
             )}
           </S.FilterSpan>
         </S.SearchFilter>
-        <SubHead
-          setState={setSortStandard}
-          state={sortStandard}
-          count={OOTDTotal || 0}
-          style="noPadding"
-        />
-        <S.ClothList ref={OOTDRef}>
-          <ImageList
-            onClick={onClickImageList}
-            data={OOTDList.map((item) => {
-              return {
-                ootdId: item.id,
-                ootdImage: item.imageUrl,
-                ootdImageCount: item.imageCount,
-              };
-            })}
-            type={'column'}
-          />
-          {OOTDIsLoading && OOTDHasNextPage && <Spinner />}
-        </S.ClothList>
+
+        {OOTDList.length === 0 ? (
+          <EmptyFilteredResult />
+        ) : (
+          <>
+            <SubHead
+              setState={setSortStandard}
+              state={sortStandard}
+              count={OOTDTotal || 0}
+              style="noPadding"
+            />
+            <S.ClothList ref={OOTDRef}>
+              <ImageList
+                onClick={onClickImageList}
+                data={OOTDList.map((item) => {
+                  return {
+                    ootdId: item.id,
+                    ootdImage: item.imageUrl,
+                    ootdImageCount: item.imageCount,
+                  };
+                })}
+                type={'column'}
+              />
+              {OOTDIsLoading && OOTDHasNextPage && <Spinner />}
+            </S.ClothList>
+          </>
+        )}
       </S.Layout>
       {filterModalIsOpen && (
         <FilterModal
