@@ -7,8 +7,11 @@ export const NEXT_PUBLIC_KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
 export const NEXT_PUBLIC_KAKAO_URI =
   'https://ootdzip.com/api/v1/login/authorization/kakao';
 
-//애플 인증 관련 상수
+//네이버 인증 관련 상수
+export const NEXT_PUBLIC_NAVER_URI =
+  'https://ootdzip.com/api/v1/login/authorization/naver';
 
+//애플 인증 관련 상수
 export const NEXT_PUBLIC_APPLE_CLIENT_ID =
   process.env.NEXT_PUBLIC_APPLE_CLIENT_ID;
 export const NEXT_PUBLIC_APPLE_URI =

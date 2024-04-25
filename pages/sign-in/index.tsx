@@ -25,6 +25,10 @@ const SignIn: ComponentWithLayout = () => {
               onClick={() => routing('KAKAO')}
             />
             <SocialLoginButton
+              platform="NAVER"
+              onClick={() => routing('NAVER')}
+            />
+            <SocialLoginButton
               platform="APPLE"
               onClick={() => routing('APPLE')}
             />
