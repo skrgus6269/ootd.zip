@@ -69,3 +69,9 @@ export const deleteUser = async () => {
 
   return data;
 };
+
+export const getSocilLoginProvider = async () => {
+  const { data } = await fetcher.get(`/v1/user/social-login-provider`);
+
+  return data;
+};
