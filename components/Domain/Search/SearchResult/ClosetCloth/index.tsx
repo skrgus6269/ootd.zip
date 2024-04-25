@@ -8,6 +8,7 @@ import SubHead from '../SubHead';
 import Spinner from '@/components/Spinner';
 import FilterModal from '@/components/Domain/MyPage/Closet/FilterModal';
 import { FilterData } from '@/components/Domain/MyPage/Closet/ClosetCloth';
+import Portal from '@/components/Portal';
 
 interface ClosetClothProps {
   OOTDTotal: number;
@@ -76,11 +77,13 @@ export default function ClosetCloth({
 
   return (
     <>
-      <S.Background
-        isOpen={filterModalIsOpen}
-        onClick={() => setFilterModalIsOpen(false)}
-        onTouchMove={(e) => e.stopPropagation()}
-      />
+      <Portal>
+        <S.Background
+          isOpen={filterModalIsOpen}
+          onClick={() => setFilterModalIsOpen(false)}
+          onTouchMove={(e) => e.stopPropagation()}
+        />
+      </Portal>
       <S.Layout>
         <S.SearchFilter onTouchMove={(e) => e.stopPropagation()}>
           <S.Span

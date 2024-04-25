@@ -58,7 +58,6 @@ export default function Search() {
 
   const handleSearch = (text: string) => {
     setSearchValue(text);
-    setState(true);
     router.push(`/search?q=${encodeURIComponent(text)}`);
   };
 
@@ -75,7 +74,7 @@ export default function Search() {
           searchValue={searchValue}
         />
       </S.SearchField>
-      {state && searchValue.length > 0 ? (
+      {state ? (
         <SearchResult keywordsValue={searchValue} />
       ) : (
         <Recents
