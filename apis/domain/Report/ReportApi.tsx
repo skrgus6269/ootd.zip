@@ -13,7 +13,6 @@ export default function ReportApi() {
   const postReport = async (payload: postReportPayload) => {
     try {
       const result = await systemService.postReport(payload);
-      console.log(result);
 
       return result;
     } catch (err) {

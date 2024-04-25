@@ -78,14 +78,9 @@ export default function DeclarationModal({
       reportType: type,
     };
 
-    console.log(payload);
-
     const addReportSuccess = await postReport(payload);
 
-    if (
-      addReportSuccess.response &&
-      addReportSuccess.response.data.divisionCode === 'R002'
-    ) {
+    if (addReportSuccess.divisionCode === 'R002') {
       setReceivedDeclaration(true); // 차단 모달 열기
       setDeclaration(false); // 신고하기 모달 닫기
       setReportStatus(false);
