@@ -59,13 +59,13 @@ const SignUp: ComponentWithLayout = () => {
 
     const result = await postRegistUserInfo(payload);
 
-    if (result) router.push('/main');
+    if (result) router.push('/splash-screen');
   };
 
   const router = useRouter();
   const onClickAppbarButton = () => {
     if (currentStep === '기본정보') {
-      router.push('/name');
+      router.push('/sign-in');
     } else if (currentStep === '체형정보') {
       handleStep('기본정보');
     } else {
