@@ -1,8 +1,12 @@
 import fetcher from '../fetcher';
-import { NEXT_PUBLIC_DOMAIN_HOST } from '@/constants/develop.constants';
+import {
+  NEXT_PUBLIC_API_HOST,
+  NEXT_PUBLIC_DOMAIN_HOST,
+} from '@/constants/develop.constants';
 import { postRegistUserInfoPayload } from './type';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
 import { getCookie } from '@/utils/Cookie';
+import axios from 'axios';
 
 export const login = async (payload: QueryParams) => {
   const { data } = await fetcher.get(
@@ -51,7 +55,10 @@ export const getNewToken = async () => {
   requestData.append('grantType', 'refresh_token');
   requestData.append('refreshToken', getCookie('refreshToken'));
 
-  const data = await fetcher.post(`v1/oauth/token`, requestData);
+  const { data } = await axios.post(
+    `${NEXT_PUBLIC_API_HOST}/v1/oauth/token`,
+    requestData
+  );
 
-  return data.data;
+  return data;
 };
