@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface LayoutProps {
   state: Boolean;
+  inputFocus: Boolean;
 }
 
 const Layout = styled.div<LayoutProps>`
@@ -10,7 +11,7 @@ const Layout = styled.div<LayoutProps>`
   height: 42px;
   border: 1px solid
     ${(props) =>
-      props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
+      props.inputFocus ? props.theme.color.grey_00 : props.theme.color.grey_90};
   padding: 8px;
   gap: 8px;
   border-radius: 2px;
@@ -19,7 +20,9 @@ const Layout = styled.div<LayoutProps>`
     width: 24px;
     height: 24px;
     color: ${(props) =>
-      props.state ? props.theme.color.grey_00 : props.theme.color.grey_80};
+      props.state || props.inputFocus
+        ? props.theme.color.grey_00
+        : props.theme.color.grey_80};
   }
 `;
 
@@ -68,4 +71,6 @@ const CloseIcon = styled(FlexLayout)`
   }
 `;
 
-export { Layout, SearchIcon, SearchInput, Input, CloseIcon };
+const Form = styled.form``;
+
+export { Layout, SearchIcon, SearchInput, Input, CloseIcon, Form };

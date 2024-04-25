@@ -1,7 +1,5 @@
-import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
-import ClosetTabbar from './ClosetTabbar';
-import ClosetCloth, { FilterData, OOTDListType } from './ClosetCloth';
+import ClosetCloth, { OOTDListType } from './ClosetCloth';
 import Profile, { ProfileListType } from './Profile';
 import EmptySearch from '@/components/EmptySearch';
 import { UserApi } from '@/apis/domain/User/UserApi';
@@ -11,14 +9,13 @@ import { useEffect, useState } from 'react';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import TabView from '@/components/TabView';
+import { FilterData } from '../../MyPage/Closet/ClosetCloth';
 
 interface searchResultProps {
   keywordsValue: string;
 }
 
 export default function SearchResult({ keywordsValue }: searchResultProps) {
-  const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
-
   const [profileList, setProfileList] = useState<ProfileListType[]>([]);
 
   const router = useRouter();
@@ -73,6 +70,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     category: null,
     color: null,
     brand: null,
+    isOpen: true,
     gender: {
       man: false,
       woman: false,
@@ -89,6 +87,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
       category: null,
       color: null,
       brand: null,
+      isOpen: true,
       gender: {
         man: false,
         woman: false,
@@ -110,11 +109,11 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
       colorIds: filter.color?.map((item) => item.id),
       brandIds: filter.brand?.map((item) => item.id),
       writerGender: (() => {
-        if (filter.gender.man && filter.gender.woman) {
+        if (filter.gender?.man && filter.gender.woman) {
           return '';
-        } else if (filter.gender.man) {
+        } else if (filter.gender?.man) {
           return 'MALE';
-        } else if (filter.gender.woman) {
+        } else if (filter.gender?.woman) {
           return 'FEMALE';
         } else {
           return '';
@@ -165,7 +164,14 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
           <TabView.TabBar tab={['OOTD', '프로필']} display="block" />
           <TabView.Tabs>
             <TabView.Tab>
-              {OOTDData.length > 0 ? (
+              {OOTDList.length === 0 &&
+              filter.brand === null &&
+              filter.category === null &&
+              filter.color === null &&
+              filter.gender?.man === false &&
+              filter.gender.woman === false ? (
+                <EmptySearch />
+              ) : (
                 <ClosetCloth
                   OOTDTotal={OOTDTotal}
                   OOTDList={OOTDList}
@@ -177,8 +183,6 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
                   sortStandard={sortStandard}
                   setSortStandard={setSortStandard}
                 />
-              ) : (
-                <EmptySearch />
               )}
             </TabView.Tab>
             <TabView.Tab>

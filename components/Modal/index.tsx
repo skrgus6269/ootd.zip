@@ -1,3 +1,4 @@
+import Portal from '@/components/Portal/index';
 import S from './style';
 
 interface ModalProps {
@@ -9,9 +10,16 @@ interface ModalProps {
 
 const Modal = ({ isOpen, children, height, className }: ModalProps) => {
   return (
-    <S.Layout height={height} isOpen={isOpen} className={className}>
-      {children}
-    </S.Layout>
+    <Portal>
+      <S.Layout
+        onTouchMove={(e) => e.stopPropagation()}
+        height={height}
+        isOpen={isOpen}
+        className={className}
+      >
+        {children}
+      </S.Layout>
+    </Portal>
   );
 };
 

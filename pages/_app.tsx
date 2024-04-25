@@ -11,14 +11,9 @@ import AppLayout from '../AppLayout';
 import { NextPage } from 'next';
 import { RecoilRoot } from 'recoil';
 import '@/styles/font/font.css';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import Head from 'next/head';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -51,6 +46,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           <GlobalStyles />
           <ThemeProvider theme={themes}>
             <Layout>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="width=device-width"
+                  initial-scale="1.0"
+                />
+              </Head>
               <Component {...pageProps} />
             </Layout>
             <Script

@@ -29,6 +29,10 @@ export interface FilterData {
   color: ColorListType | null;
   brand: BrandType[] | null;
   isOpen: Boolean | null;
+  gender?: {
+    man: Boolean;
+    woman: Boolean;
+  };
 }
 
 export default function ClosetCloth({ showingId }: ClosetClothProps) {
@@ -199,6 +203,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
           brandInitial={filter.brand}
           setFilter={setFilter}
           initialIndex={filterModalInitialIndex}
+          page="mypage"
         />
       )}
     </>

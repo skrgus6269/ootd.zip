@@ -58,7 +58,6 @@ export default function Search() {
 
   const handleSearch = (text: string) => {
     setSearchValue(text);
-    setState(true);
     router.push(`/search?q=${encodeURIComponent(text)}`);
   };
 

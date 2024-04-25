@@ -47,6 +47,7 @@ export default function useInfiniteScroll({
     if (!container) return;
 
     const { scrollTop, clientHeight, scrollHeight } = container;
+
     if (scrollTop + clientHeight >= scrollHeight && !isLoading) {
       setIsLoading(true);
     }
@@ -59,7 +60,7 @@ export default function useInfiniteScroll({
     return () => {
       container.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [containerRef.current]);
 
   const moreFetch = () => {
     setIsLoading(true);
