@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { NEXT_PUBLIC_API_HOST } from '@/constants/develop.constants';
-import { getCookie } from '@/utils/Cookie';
 import { PublicApi } from './domain/Public/PublicApi';
 
 let refreshing = false; // 리프레시 중인지 여부를 추적하는 변수
@@ -11,7 +10,7 @@ const fetcher = axios.create({
 });
 
 fetcher.interceptors.request.use((config) => {
-  const accessToken = getCookie('accessToken');
+  const accessToken = localStorage.getItem('accessToken');
 
   // 로그인, 회원가입 단계 api에서는 accessToken이 없으니 바로 return
   if (accessToken === undefined) return config;

@@ -4,7 +4,6 @@ import SplashLogo from '@/public/images/SplashLogo.svg';
 import { AppLayoutProps } from '@/AppLayout';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getCookie } from '@/utils/Cookie';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { useSetRecoilState } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
@@ -16,7 +15,7 @@ const SplashScreen: ComponentWithLayout = () => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (getCookie('accessToken')) {
+      if (localStorage.getItem('accessToken')) {
         const result = await getUserId();
         router.push('/main');
         setUserId(result);
