@@ -15,6 +15,7 @@ import Alert from '../Alert';
 import NextImage from '../NextImage';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { getCookie } from '@/utils/Cookie';
+import Background from '../Background';
 
 interface GalleryProps {
   imageAndTag: ImageWithTag | undefined;
@@ -131,8 +132,8 @@ const Gallery = ({
 
   return (
     <>
-      <S.Background
-        state={isOpenStoredImageAlert}
+      <Background
+        isOpen={isOpenStoredImageAlert}
         onClick={() => setIsOpenStoredImageAlert(false)}
       />
       <S.Layout>

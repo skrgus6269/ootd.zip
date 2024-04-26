@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-interface BackgroundState {
-  isOpen: Boolean;
-}
-
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 900;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-`;
-
 const Layout = styled.div`
   padding: 0px 20px;
 `;
@@ -65,7 +50,6 @@ const Button = styled.div<ButtonProps>`
 `;
 
 const S = {
-  Background,
   Layout,
   Breadcrumb,
   BreadcrumbText,

@@ -17,6 +17,7 @@ import { useRecoilValue } from 'recoil';
 import TabView from '@/components/TabView';
 import FollowAlert from '@/components/Domain/FollowList/FollowAlert';
 import Toast from '@/components/Toast';
+import Background from '@/components/Background';
 
 export type followListType = {
   userId: number;
@@ -65,7 +66,7 @@ export default function FollowList() {
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={openActionSheet || alertOpen}
         onClick={onClickBackground}
       />

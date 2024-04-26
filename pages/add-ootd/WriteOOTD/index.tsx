@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
@@ -86,9 +87,9 @@ export default function WriteOOTD({
   };
   return (
     <>
-      <S.Background
+      <Background
         onClick={() => setStyleModalIsOpen(false)}
-        state={styleModalIsOpen}
+        isOpen={styleModalIsOpen}
       />
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">

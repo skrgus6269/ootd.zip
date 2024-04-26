@@ -10,6 +10,7 @@ import FilterModal from '@/components/Domain/MyPage/Closet/FilterModal';
 import { FilterData } from '@/components/Domain/MyPage/Closet/ClosetCloth';
 import Portal from '@/components/Portal';
 import EmptyFilteredResult from '../EmptyFilteredResult';
+import Background from '@/components/Background';
 
 interface ClosetClothProps {
   OOTDTotal: number;
@@ -78,13 +79,10 @@ export default function ClosetCloth({
 
   return (
     <>
-      <Portal>
-        <S.Background
-          isOpen={filterModalIsOpen}
-          onClick={() => setFilterModalIsOpen(false)}
-          onTouchMove={(e) => e.stopPropagation()}
-        />
-      </Portal>
+      <Background
+        isOpen={filterModalIsOpen}
+        onClick={() => setFilterModalIsOpen(false)}
+      />
       <S.Layout>
         <S.SearchFilter onTouchMove={(e) => e.stopPropagation()}>
           <S.Span

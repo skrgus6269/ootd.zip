@@ -13,6 +13,7 @@ import BackTop from '@/public/images/BackTop.svg';
 import Toast from '@/components/Toast';
 import Spinner from '@/components/Spinner';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
+import Background from '@/components/Background';
 
 export type OOTDdataType = {
   ootdId: number;
@@ -141,7 +142,7 @@ export default function Bookmark() {
 
   return (
     <>
-      <S.Background isOpen={alertOpen} onClick={onClickBackground} />
+      <Background isOpen={alertOpen} onClick={onClickBackground} />
       <S.Layout>
         <AppBar
           leftProps={<></>}
