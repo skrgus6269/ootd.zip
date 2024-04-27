@@ -1,22 +1,26 @@
-import { Body3, Button3, Headline2, Title2 } from '@/components/UI';
+import { Body3, Headline2, Title2 } from '@/components/UI';
 import S from './style';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Button from '@/components/Button';
 import { MainApi } from '@/apis/domain/Main/MainApi';
 import NextImage from '@/components/NextImage';
 import { useRouter } from 'next/router';
 
 type SameClothData = {
-  clothes: {
+  clothesId: number;
+  clothesName: string;
+  clothesCategory: {
     id: number;
-    name: string;
-    categoryType: string;
-    imageUrl: string;
+    categoryName: string;
   };
-  ootdImages: {
+  clothesImageUrl: string;
+  clothesColor: {
+    id: number;
+  }[];
+  ootds: {
     ootdId: number;
     imageUrl: string;
+    imageCount: number;
   }[];
 }[];
 
@@ -29,9 +33,8 @@ export default function SameCloth() {
   const { getSameClothDifferentOOTD } = MainApi();
 
   const fetchDataFunction = async () => {
-    const { content } = await getSameClothDifferentOOTD();
-
-    setSameClothData(content);
+    const data = await getSameClothDifferentOOTD();
+    setSameClothData(data);
   };
 
   const onClickImage = (index: number) => {
@@ -69,12 +72,12 @@ export default function SameCloth() {
                   onClick={() => onClickImage(index)}
                   width={56}
                   height={56}
-                  src={item.clothes.imageUrl}
+                  src={item.clothesImageUrl}
                   alt="같은옷"
                 />
                 <div className="filterItemTrue">
-                  <Title2>{item.clothes.categoryType}</Title2>
-                  <Body3>{item.clothes.name}</Body3>
+                  <Title2>{item.clothesCategory.categoryName}</Title2>
+                  <Body3>{item.clothesName}</Body3>
                 </div>
               </S.FilterItem>
             );
@@ -83,59 +86,57 @@ export default function SameCloth() {
 
       {sameClothData && (
         <S.List>
-          {sameClothData[currentIndex].ootdImages[0] && (
+          {sameClothData[currentIndex].ootds[0] && (
             <S.FirstImage>
               <NextImage
                 fill={true}
-                src={sameClothData[currentIndex].ootdImages[0].imageUrl}
+                src={sameClothData[currentIndex].ootds[0].imageUrl}
                 alt=""
                 onClick={() =>
-                  onClickListImage(
-                    sameClothData[currentIndex].ootdImages[0].ootdId
-                  )
+                  onClickListImage(sameClothData[currentIndex].ootds[0].ootdId)
                 }
               />
             </S.FirstImage>
           )}
 
           <div className="flexList">
-            {sameClothData[currentIndex].ootdImages[1] && (
+            {sameClothData[currentIndex].ootds[1] && (
               <S.FlexImage>
                 <NextImage
                   fill={true}
-                  src={sameClothData[currentIndex].ootdImages[1].imageUrl}
+                  src={sameClothData[currentIndex].ootds[1].imageUrl}
                   alt=""
                   onClick={() =>
                     onClickListImage(
-                      sameClothData[currentIndex].ootdImages[1].ootdId
+                      sameClothData[currentIndex].ootds[1].ootdId
                     )
                   }
                 />
               </S.FlexImage>
             )}
-            {sameClothData[currentIndex].ootdImages[2] && (
+            {sameClothData[currentIndex].ootds[2] && (
               <S.FlexImage>
                 <NextImage
                   fill={true}
-                  src={sameClothData[currentIndex].ootdImages[2].imageUrl}
+                  src={sameClothData[currentIndex].ootds[2].imageUrl}
                   alt=""
                   onClick={() =>
                     onClickListImage(
-                      sameClothData[currentIndex].ootdImages[2].ootdId
+                      sameClothData[currentIndex].ootds[2].ootdId
                     )
                   }
                 />
               </S.FlexImage>
             )}
-            {sameClothData[currentIndex].ootdImages[3] && (
+            {sameClothData[currentIndex].ootds[3] && (
               <S.FlexImage>
                 <NextImage
                   fill={true}
-                  src={sameClothData[currentIndex].ootdImages[3].imageUrl}
+                  src={sameClothData[currentIndex].ootds[3].imageUrl}
                   alt=""
                   onClick={() =>
                     onClickListImage(
-                      sameClothData[currentIndex].ootdImages[3].ootdId
+                      sameClothData[currentIndex].ootds[3].ootdId
                     )
                   }
                 />
@@ -144,16 +145,6 @@ export default function SameCloth() {
           </div>
         </S.List>
       )}
-      <Button
-        size="big"
-        backgroundColor="grey_100"
-        color="grey_00"
-        onClick={() => console.log('더보기')}
-        border={true}
-        className="addButton"
-      >
-        <Button3>더보기</Button3>
-      </Button>
     </S.Layout>
   );
 }
