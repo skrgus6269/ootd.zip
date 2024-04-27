@@ -103,7 +103,9 @@ export default function MyPage() {
                 onClick={() => router.push('/settings')}
               />
             ) : (
-              <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />
+              <>
+                {/* <AiOutlineEllipsis onClick={() => setBlockOpen(true)} /> */}
+              </>
             )
           }
         />
