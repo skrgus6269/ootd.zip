@@ -7,6 +7,7 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import ActionSheet from '@/components/ActionSheet';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import Background from '@/components/Background';
 
 interface ReportModalProps {
   reportModalIsOpen: Boolean;
@@ -73,7 +74,7 @@ export default function FixModal({
   ];
   return (
     <>
-      <S.Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
+      <Background onClick={() => ''} isOpen={deleteAlertIsOpen} />
       <S.Layout onClick={onClickReportButton}>
         {reportModalIsOpen && <ActionSheet buttons={buttons} />}
         {deleteAlertIsOpen && (

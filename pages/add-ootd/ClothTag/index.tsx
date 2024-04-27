@@ -14,6 +14,7 @@ import TagInformation from '@/components/ClothInformation/TagInformation';
 import Carousel from '@/components/Carousel';
 import AddTag, { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 interface ClothTagProps {
   setImageAndTag: Dispatch<SetStateAction<ImageWithTag | undefined>>;
@@ -171,7 +172,7 @@ export default function ClothTag({
 
   return (
     <S.Layout>
-      <S.Background state={addTag} onClick={() => setAddTag(false)} />
+      <Background isOpen={addTag} onClick={() => setAddTag(false)} />
       {/* 이미지 + 태그 */}
       {ImageTag()}
       {/* 태그 가이드 */}

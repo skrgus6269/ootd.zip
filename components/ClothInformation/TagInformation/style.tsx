@@ -22,6 +22,10 @@ const Layout = styled.div<ThemeProps>`
       props.state === 'dark'
         ? props.theme.color.grey_80
         : props.theme.color.grey_30};
+
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   h4 {
     color: ${(props) => (props.state === 'dark' ? 'white' : 'black')};
@@ -37,6 +41,7 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1px;
+  flex-grow: 1;
 `;
 
 const Close = styled.div<ThemeProps>`

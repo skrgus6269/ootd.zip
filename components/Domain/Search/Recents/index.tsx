@@ -1,6 +1,5 @@
 import { Title1, Caption1, Button3 } from '@/components/UI';
 import S from './style';
-import { useRouter } from 'next/router';
 import { AiOutlineClose } from 'react-icons/ai';
 import { keywordsInterface } from '@/pages/search';
 import { Dispatch, SetStateAction } from 'react';
@@ -20,8 +19,6 @@ export default function Recents({
   keywords,
   onSearch,
 }: recentsProps) {
-  const router = useRouter();
-
   return (
     <>
       {keywords.length > 0 && (

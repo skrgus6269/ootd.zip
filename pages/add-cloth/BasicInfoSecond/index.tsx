@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 interface BasicInfoSecondProps {
   clothName: string;
@@ -111,7 +112,7 @@ export default function BasicInfoSecond({
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={colorModalOpen || sizeModalOpen || alertOpen}
         onClick={onClickBackground}
       />

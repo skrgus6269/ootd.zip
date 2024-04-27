@@ -14,6 +14,7 @@ import { UserApi } from '@/apis/domain/User/UserApi';
 import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import OtherModal from '@/components/Domain/MyPage/OtherModal';
+import Background from '@/components/Background';
 
 export default function MyPage() {
   const router = useRouter();
@@ -103,11 +104,13 @@ export default function MyPage() {
                 onClick={() => router.push('/settings')}
               />
             ) : (
-              <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />
+              <>
+                {/* <AiOutlineEllipsis onClick={() => setBlockOpen(true)} /> */}
+              </>
             )
           }
         />
-        <S.Background isOpen={blockOpen} onClick={onClickBackground} />
+        <Background isOpen={blockOpen} onClick={onClickBackground} />
         <Profile
           data={userProfileData}
           onClickFollowButton={onClickFollowButton}

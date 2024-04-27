@@ -24,6 +24,7 @@ import {
   sendReactNativeMessage,
 } from '@/utils/reactNativeMessage';
 import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 interface BasicInfoProps {
   clothName: string;
@@ -116,7 +117,7 @@ export default function BasicInfo({
   };
   return (
     <>
-      <S.Background
+      <Background
         isOpen={
           categoryModalOpen ||
           whereToBuyModalOpen ||

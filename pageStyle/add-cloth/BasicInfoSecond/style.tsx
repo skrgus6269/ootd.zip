@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface BackgroundProps {
-  isOpen: Boolean;
-}
-
 const Category = styled.div`
   display: flex;
   align-items: center;
@@ -11,17 +7,6 @@ const Category = styled.div`
   p {
     margin-bottom: 0 !important;
   }
-`;
-
-const Background = styled.div<BackgroundProps>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: 127vh;
-  position: absolute;
-  top: 0;
 `;
 
 const Layout = styled.div`
@@ -102,7 +87,6 @@ const S = {
   BasicInfoFirst,
   Category,
   BasicInfoSecond,
-  Background,
   Title,
   Information,
   ClothColorSpanList,

@@ -10,6 +10,7 @@ import Dot from 'public/images/dot.svg';
 import WithdrawAlert from '@/components/Setting/WithdrawAlert';
 import NextImage from '@/components/NextImage';
 import { UserApi } from '@/apis/domain/User/UserApi';
+import Background from '@/components/Background';
 
 export default function Withdraw() {
   const { deleteUser } = UserApi();
@@ -47,7 +48,7 @@ export default function Withdraw() {
 
   return (
     <>
-      <S.Background isOpen={alertOpen} onClick={onClickBackground} />
+      <Background isOpen={alertOpen} onClick={onClickBackground} />
       <S.Layout>
         <AppBar
           leftProps={

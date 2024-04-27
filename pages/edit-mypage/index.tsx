@@ -6,6 +6,7 @@ import Edit from '@/components/Domain/MyPage/Edit';
 import React, { FC, useEffect, useState } from 'react';
 import { Style } from '../add-ootd';
 import { AppLayoutProps } from '@/AppLayout';
+import Background from '@/components/Background';
 
 interface ComponentWithLayout extends FC {
   Layout?: FC<AppLayoutProps>;
@@ -18,7 +19,7 @@ const EditMyPage: ComponentWithLayout = () => {
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={openActionSheet}
         onClick={() => setOpenActionSheet(false)}
       />

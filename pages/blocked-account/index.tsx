@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
 import Toast from '@/components/Toast';
+import Background from '@/components/Background';
 
 export default function BlockedAccount() {
   const router = useRouter();
@@ -69,7 +70,7 @@ export default function BlockedAccount() {
 
   return (
     <>
-      <S.Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
+      <Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
       <AppBar
         leftProps={
           <AiOutlineArrowLeft

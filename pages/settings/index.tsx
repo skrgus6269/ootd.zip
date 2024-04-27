@@ -18,6 +18,18 @@ export default function Setting() {
 
   const [queryState, setQueryState] = useState<string>('');
   const [URLState, setURLState] = useState<any>(false);
+  const [platform, setPlatform] = useState('');
+
+  const { getSocilLoginProvider } = UserApi();
+
+  useEffect(() => {
+    const ferchData = async () => {
+      const result = await getSocilLoginProvider();
+      setPlatform(result);
+    };
+
+    ferchData();
+  }, []);
 
   const { logout } = UserApi();
 
@@ -63,17 +75,17 @@ export default function Setting() {
 
             <S.Social>
               <Body3 className="socialTitle">소셜 로그인 정보</Body3>
-              <Body3 className="socialInfo">카카오</Body3>
+              <Body3 className="socialInfo">{platform}</Body3>
             </S.Social>
 
             <SettingBlock
               text="내 취향정보 수정"
               buttonClick={() => router.push('/like-info')}
             />
-            <SettingBlock
+            {/* <SettingBlock
               text="차단한 계정"
               buttonClick={() => router.push('/blocked-account')}
-            />
+            /> */}
           </S.MyAccount>
 
           <S.ServiceInfo>

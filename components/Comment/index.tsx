@@ -6,6 +6,7 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import DeclarationModal from '../DeclarationModal';
 import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import NextImage from '../NextImage';
+import Background from '../Background';
 
 export interface CommentProps {
   id: number;
@@ -74,7 +75,7 @@ function Comment({
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={declaration || receivedDeclaration}
         onClick={onClickBackground}
       />

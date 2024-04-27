@@ -142,6 +142,21 @@ export const UserApi = () => {
       console.log('에러명:', err);
     }
   };
+  
+  // 소셜 로그인 플랫폼 조회
+  const getSocilLoginProvider = async () => {
+    try {
+      const data = await userService.getSocilLoginProvider();
+      if (data.statusCode === 200) {
+        return data.result;
+      }
+      return data;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     getMypage,
     getProfile,
@@ -153,5 +168,6 @@ export const UserApi = () => {
     putStyle,
     deleteUser,
     logout,
+    getSocilLoginProvider,
   } as const;
 };

@@ -46,6 +46,7 @@ export default function Search() {
       id: Date.now(),
       text: text,
     };
+    if (keywords.filter((item) => item.text === text).length > 0) return;
     setKeywords([newKeyword, ...keywords]);
   };
 
