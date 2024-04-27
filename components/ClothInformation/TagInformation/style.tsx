@@ -23,7 +23,6 @@ const Layout = styled.div<ThemeProps>`
         ? props.theme.color.grey_80
         : props.theme.color.grey_30};
 
-    max-width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
