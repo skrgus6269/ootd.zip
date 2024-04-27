@@ -39,3 +39,9 @@ export const getNewToken = async () => {
 
   return data;
 };
+
+export const logout = async () => {
+  const data = await authApi.logout();
+
+  return data;
+};

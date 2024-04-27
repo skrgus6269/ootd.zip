@@ -11,12 +11,15 @@ import {
 } from '@/utils/reactNativeMessage';
 import Toast from '@/components/Toast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 export default function Setting() {
   const router = useRouter();
 
   const [queryState, setQueryState] = useState<string>('');
   const [URLState, setURLState] = useState<any>(false);
+
+  const { logout } = UserApi();
 
   const shareButton = () => {
     console.log('이메일 복사');
@@ -35,6 +38,11 @@ export default function Setting() {
       getReactNativeMessage(setURLState);
     }
   }, []);
+
+  const onClickLogoutButton = async () => {
+    const result = await logout();
+    if (result) router.push('/sign-in');
+  };
 
   return (
     <>
@@ -94,7 +102,7 @@ export default function Setting() {
           </S.ServiceInfo>
 
           <S.AccountInfo>
-            <S.Text>
+            <S.Text onClick={onClickLogoutButton}>
               <Body3>로그아웃</Body3>
             </S.Text>
           </S.AccountInfo>

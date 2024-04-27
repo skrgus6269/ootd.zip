@@ -61,3 +61,10 @@ export const getNewToken = async () => {
 
   return data;
 };
+
+export const logout = async () => {
+  const requestData = new URLSearchParams();
+  requestData.append('refreshToken', localStorage.getItem('refreshToken')!);
+  const data = await fetcher.post('/v1/oauth/token/revoke', requestData);
+  return data;
+};
