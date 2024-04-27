@@ -20,9 +20,9 @@ export default function DeleteAlert({
           확인을 누르시면 옷장에서 옷이 삭제되며 다시 복구할 수 없습니다.
         </Body3>
       }
-      yes={'취소'}
+      yes={'삭제'}
       yesColor="error"
-      no={'확인'}
+      no={'취소'}
     />
   );
 }
