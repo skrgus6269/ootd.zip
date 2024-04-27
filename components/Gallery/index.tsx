@@ -14,7 +14,6 @@ import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
 import NextImage from '../NextImage';
 import { PublicApi } from '@/apis/domain/Public/PublicApi';
-import { getCookie } from '@/utils/Cookie';
 
 interface GalleryProps {
   imageAndTag: ImageWithTag | undefined;
@@ -63,7 +62,7 @@ const Gallery = ({
     await getNewToken();
     sendReactNativeMessage({
       type: 'accessToken',
-      payload: getCookie('accessToken'),
+      payload: localStorage.getItem('accessToken'),
     });
   };
 

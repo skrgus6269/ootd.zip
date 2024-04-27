@@ -1,5 +1,4 @@
 import { authService } from '@/apis/_service';
-import { setCookie } from '@/utils/Cookie';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import {
   NEXT_PUBLIC_APPLE_URI,
@@ -22,14 +21,8 @@ export const SignInApi = () => {
 
     if (data.accessToken) {
       // 쿠키에 담아준다.
-      setCookie('accessToken', data.accessToken, {
-        path: '/',
-        // 보안 설정은 배포 직전에 설정해주기
-      });
-      setCookie('refreshToken', data.refreshToken, {
-        path: '/',
-        // 보안 설정은 배포 직전에 설정해주기
-      });
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
 
       sendReactNativeMessage({
         type: 'accessToken',
