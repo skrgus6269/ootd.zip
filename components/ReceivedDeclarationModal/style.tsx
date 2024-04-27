@@ -11,6 +11,11 @@ const Header = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
+
+  .close {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Frame = styled.div`

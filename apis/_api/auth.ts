@@ -5,7 +5,6 @@ import {
 } from '@/constants/develop.constants';
 import { postRegistUserInfoPayload } from './type';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
-import { getCookie } from '@/utils/Cookie';
 import axios from 'axios';
 
 export const login = async (payload: QueryParams) => {
@@ -53,7 +52,7 @@ export const getUserId = async () => {
 export const getNewToken = async () => {
   const requestData = new URLSearchParams();
   requestData.append('grantType', 'refresh_token');
-  requestData.append('refreshToken', getCookie('refreshToken'));
+  requestData.append('refreshToken', localStorage.getItem('refreshToken')!);
 
   const { data } = await axios.post(
     `${NEXT_PUBLIC_API_HOST}/v1/oauth/token`,
