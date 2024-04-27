@@ -3,7 +3,7 @@ import {
   patchProfilePayload,
   putStylePayload,
 } from '@/apis/_api/type';
-import { userService } from '@/apis/_service';
+import { authService, userService } from '@/apis/_service';
 
 export const UserApi = () => {
   // 사용자 프로필 정보 조회
@@ -127,6 +127,22 @@ export const UserApi = () => {
     }
   };
 
+  // 로그아웃
+  const logout = async () => {
+    try {
+      const { status } = await authService.logout();
+
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+
+      if (status === 200) return true;
+      return false;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명:', err);
+    }
+  };
+  
   // 소셜 로그인 플랫폼 조회
   const getSocilLoginProvider = async () => {
     try {
@@ -151,6 +167,7 @@ export const UserApi = () => {
     getUserStyle,
     putStyle,
     deleteUser,
+    logout,
     getSocilLoginProvider,
   } as const;
 };

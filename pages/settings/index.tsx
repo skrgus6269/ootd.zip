@@ -31,6 +31,8 @@ export default function Setting() {
     ferchData();
   }, []);
 
+  const { logout } = UserApi();
+
   const shareButton = () => {
     console.log('이메일 복사');
     setURLState(false); // 재공유 toast 노출 초기화
@@ -48,6 +50,11 @@ export default function Setting() {
       getReactNativeMessage(setURLState);
     }
   }, []);
+
+  const onClickLogoutButton = async () => {
+    const result = await logout();
+    if (result) router.push('/sign-in');
+  };
 
   return (
     <>
@@ -107,7 +114,7 @@ export default function Setting() {
           </S.ServiceInfo>
 
           <S.AccountInfo>
-            <S.Text>
+            <S.Text onClick={onClickLogoutButton}>
               <Body3>로그아웃</Body3>
             </S.Text>
           </S.AccountInfo>
