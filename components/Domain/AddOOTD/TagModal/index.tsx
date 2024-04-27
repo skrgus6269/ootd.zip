@@ -93,8 +93,8 @@ export default function AddTag({
         newTag[slideIndex].ootdImageClothesList?.push({
           clothesId: searchResult![index].id,
           clothesImage: searchResult![index].imageUrl,
-          brand: searchResult![index].brand.name,
-          name: searchResult![index].name,
+          brand: searchResult![index].brandName,
+          name: searchResult![index].clothesName,
           coordinate: {
             xrate: '0',
             yrate: '0',
@@ -111,8 +111,8 @@ export default function AddTag({
           {
             clothesId: searchResult![index].id,
             clothesImage: searchResult![index].imageUrl,
-            brand: searchResult![index].brand.name,
-            name: searchResult![index].name,
+            brand: searchResult![index].brandName,
+            name: searchResult![index].clothesName,
             coordinate: {
               xrate: '0',
               yrate: '0',
@@ -233,10 +233,10 @@ export default function AddTag({
                               size="small"
                               clothImage={item.imageUrl}
                               caption=""
-                              brand={item.brand.name}
-                              category={item.category.categoryName}
-                              name={item.name}
-                              clothSize={item.size.name}
+                              brand={item.brandName}
+                              category={item.categoryName}
+                              name={item.clothesName}
+                              clothSize={item.sizeName}
                             />
                           </div>
                           <hr />
