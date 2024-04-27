@@ -22,7 +22,7 @@ const Background = styled.div<BackgroundProps>`
   background-color: ${(props) => props.theme.color.grey_00};
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
   opacity: 0.3;
-  z-index: 10;
+  z-index: 3;
   width: 100vw;
   height: calc(100vh - 56px);
   position: fixed;

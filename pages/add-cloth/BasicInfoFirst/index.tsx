@@ -13,6 +13,7 @@ import { BrandType } from '@/components/BrandList/Brand';
 import BrandModal from '@/components/Domain/AddCloth/BrandModal';
 import NextImage from '@/components/NextImage';
 import ArrowLeft from '@/public/images/ArrowLeft.svg';
+import Background from '@/components/Background';
 
 interface BaiscInfoFirst {
   clothName: string;
@@ -93,7 +94,7 @@ export default function BasicInfoFirst({
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={categoryModalOpen || whereToBuyModalOpen || brandModalOpen}
         onClick={onClickBackground}
       />

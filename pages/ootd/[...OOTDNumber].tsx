@@ -15,6 +15,7 @@ import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD';
 import Toast from '@/components/Toast';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import Background from '@/components/Background';
 
 export interface CommentStateType {
   ootdId: number;
@@ -167,7 +168,7 @@ const OOTD: ComponentWithLayout = () => {
   return (
     <>
       <S.Layout>
-        <S.Background
+        <Background
           isOpen={declaration || receivedDeclaration}
           onClick={onClickBackground}
         />

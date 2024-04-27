@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-interface BackgroundState {
-  state: Boolean;
-}
-
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.state ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-`;
-
 const Layout = styled.div`
   .nextButton {
     padding: 16px 20px 0px 16px;
@@ -92,6 +77,6 @@ const ImageNumber = styled.div<ImageNumberProps>`
   background-color: ${(props) => (props.state ? '#00EACE' : '#9A9A9A')};
 `;
 
-const S = { Background, Layout, BigImage, SmallImage, ImageList, ImageNumber };
+const S = { Layout, BigImage, SmallImage, ImageList, ImageNumber };
 
 export default S;

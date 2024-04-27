@@ -14,6 +14,7 @@ import Spinner from '@/components/Spinner';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { ClothDataType } from '@/pages/cloth/[...ClothNumber]';
+import Background from '@/components/Background';
 
 interface ClosetClothProps {
   showingId: number;
@@ -119,7 +120,7 @@ export default function ClosetCloth({ showingId }: ClosetClothProps) {
 
   return (
     <>
-      <S.Background
+      <Background
         isOpen={filterModalIsOpen}
         onClick={() => setFilterModalIsOpen(false)}
       />

@@ -2,20 +2,6 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-interface BackgroundProps {
-  isOpen: Boolean;
-}
-const Background = styled.div<BackgroundProps>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: calc(100vh - 48px);
-  position: fixed;
-  top: 0;
-`;
-
 const Layout = styled.div`
   width: 100%;
   svg {
@@ -152,7 +138,6 @@ const PostingStyleTagSpan = styled.div`
 `;
 
 const S = {
-  Background,
   Layout,
   PostingTop,
   PostingImage,

@@ -16,6 +16,7 @@ import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import Toast from '@/components/Toast';
 import { useRouter } from 'next/router';
 import Alert from '@/components/Alert';
+import Background from '@/components/Background';
 
 export type ImageWithTag = {
   ootdId: number;
@@ -175,9 +176,9 @@ export default function AddTag({
   return (
     <>
       <Modal height="96.5" isOpen={addTag}>
-        <S.Background
+        <Background
           onClick={() => setGoToMypageAlertState(false)}
-          addTag={goToMypageAlertState}
+          isOpen={goToMypageAlertState}
         />
         <S.Layout>
           <TabView>

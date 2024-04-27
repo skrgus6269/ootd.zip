@@ -13,16 +13,6 @@ const Layout = styled.div`
   }
 `;
 
-const Background = styled.div<LayoutProps>`
-  position: absolute;
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.addTag ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-`;
-
 const Label = styled.div`
   h2 {
     padding: 33px 0 22px 0;
@@ -66,6 +56,6 @@ const DraggerBar = styled.div`
   );
 `;
 
-const S = { Layout, Label, CheckBox, Background, Dragger, DraggerBar };
+const S = { Layout, Label, CheckBox, Dragger, DraggerBar };
 
 export default S;

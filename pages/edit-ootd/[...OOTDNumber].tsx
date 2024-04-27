@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import NextImage from '@/components/NextImage';
 import Alert from '@/components/Alert';
+import Background from '@/components/Background';
 
 const EditOOTD: ComponentWithLayout = () => {
   const [imageAndTag, setImageAndTag] = useState<ImageWithTag | undefined>(
@@ -111,7 +112,7 @@ const EditOOTD: ComponentWithLayout = () => {
   };
   return (
     <>
-      <S.Background
+      <Background
         isOpen={styleModalIsOpen || deleteImageAlertIndex > 0}
         onClick={onClickBackground}
       />

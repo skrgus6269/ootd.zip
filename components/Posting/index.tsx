@@ -35,6 +35,7 @@ import LikeToggle from '../Toggle/LikeToggle';
 import { OOTDType } from '@/pages/ootd/[...OOTDNumber]';
 import Image from '../NextImage';
 import NextImage from '../NextImage';
+import Background from '../Background';
 
 interface PostingProps {
   data: OOTDType;
@@ -172,7 +173,7 @@ export default function Posting({
 
   return (
     <>
-      <S.Background
+      <Background
         onClick={onClickBackground}
         isOpen={
           reportModalIsOpen ||

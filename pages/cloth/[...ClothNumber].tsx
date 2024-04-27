@@ -22,6 +22,7 @@ import { userId } from '@/utils/recoil/atom';
 import DeclarationModal from '@/components/DeclarationModal';
 import ReceivedDeclarationModal from '@/components/ReceivedDeclarationModal';
 import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 export interface ClothDataType {
   id: number;
@@ -148,7 +149,7 @@ const Cloth = () => {
         middleProps={<></>}
         rightProps={<AiOutlineEllipsis onClick={onClickAppbarButton} />}
       />
-      <S.Background
+      <Background
         isOpen={clickedRight || deleteOpen}
         onClick={onClickBackground}
       />
