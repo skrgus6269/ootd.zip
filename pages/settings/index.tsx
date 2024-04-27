@@ -75,10 +75,10 @@ export default function Setting() {
               text="내 취향정보 수정"
               buttonClick={() => router.push('/like-info')}
             />
-            <SettingBlock
+            {/* <SettingBlock
               text="차단한 계정"
               buttonClick={() => router.push('/blocked-account')}
-            />
+            /> */}
           </S.MyAccount>
 
           <S.ServiceInfo>
