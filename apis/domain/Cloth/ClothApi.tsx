@@ -1,6 +1,7 @@
 import {
   getClothListParams,
   getOOTDClothesParams,
+  getUserTaggedClothListParams,
   patchClothIsPrivateType,
   postClothPayload,
 } from '@/apis/_api/type';
@@ -126,6 +127,20 @@ export default function ClothApi() {
       console.log('에러명', err);
     }
   };
+
+  //이 옷이 태그된 OOTD의 태그 조회
+  const getUserTaggedClothList = async (
+    params: getUserTaggedClothListParams
+  ) => {
+    try {
+      const { result } = await userService.getUserTaggedClothList(params);
+      return result;
+    } catch (err) {
+      alert('관리자에게 문의하세요');
+      console.log('에러명', err);
+    }
+  };
+
   return {
     postCloth,
     getUserClothList,
@@ -138,5 +153,6 @@ export default function ClothApi() {
     getBrand,
     getSize,
     getOOTDWithCloth,
+    getUserTaggedClothList,
   };
 }

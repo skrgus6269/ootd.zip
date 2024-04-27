@@ -126,3 +126,8 @@ export interface getSearchOOTDParams {
 export interface putStylePayload {
   styleIds: number[];
 }
+
+export interface getUserTaggedClothListParams {
+  ootdId: number;
+  userId: number;
+}

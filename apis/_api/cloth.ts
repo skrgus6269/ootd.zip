@@ -3,6 +3,7 @@ import {
   getClothListParams,
   patchClothIsPrivateType,
   postClothPayload,
+  getUserTaggedClothListParams,
 } from './type';
 
 //cloth 작성
@@ -70,6 +71,17 @@ export const patchClothIsPrivate = async (
   payload: patchClothIsPrivateType
 ) => {
   const { data } = await fetcher.patch(`/v1/clothes/${clothId}`, payload);
+
+  return data;
+};
+
+export const getUserTaggedClothList = async ({
+  ootdId,
+  userId,
+}: getUserTaggedClothListParams) => {
+  const { data } = await fetcher.get(
+    `v1/clothes/ootd?page=0&size=10&ootdId=${ootdId}&userId=${userId}`
+  );
 
   return data;
 };
