@@ -11,12 +11,25 @@ import {
 } from '@/utils/reactNativeMessage';
 import Toast from '@/components/Toast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 export default function Setting() {
   const router = useRouter();
 
   const [queryState, setQueryState] = useState<string>('');
   const [URLState, setURLState] = useState<any>(false);
+  const [platform, setPlatform] = useState('');
+
+  const { getSocilLoginProvider } = UserApi();
+
+  useEffect(() => {
+    const ferchData = async () => {
+      const result = await getSocilLoginProvider();
+      setPlatform(result);
+    };
+
+    ferchData();
+  }, []);
 
   const shareButton = () => {
     console.log('이메일 복사');
@@ -55,7 +68,7 @@ export default function Setting() {
 
             <S.Social>
               <Body3 className="socialTitle">소셜 로그인 정보</Body3>
-              <Body3 className="socialInfo">카카오</Body3>
+              <Body3 className="socialInfo">{platform}</Body3>
             </S.Social>
 
             <SettingBlock

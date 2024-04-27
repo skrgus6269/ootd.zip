@@ -332,3 +332,10 @@ export const getSameClothDifferentOOTD = async () => {
 
   return data;
 };
+
+// 소셜 로그인 플랫폼 조회
+export const getSocilLoginProvider = async () => {
+  const data = await userApi.getSocilLoginProvider();
+
+  return data;
+};
