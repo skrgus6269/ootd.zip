@@ -26,9 +26,7 @@ type SameClothData = {
 
 export default function SameCloth() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [sameClothData, setSameClothData] = useState<SameClothData | null>(
-    null
-  );
+  const [sameClothData, setSameClothData] = useState<SameClothData>([]);
 
   const { getSameClothDifferentOOTD } = MainApi();
 
@@ -60,7 +58,7 @@ export default function SameCloth() {
         </Body3>
       </S.Label>
       <S.Filter>
-        {sameClothData &&
+        {sameClothData.length > 0 &&
           sameClothData.map((item, index) => {
             return (
               <S.FilterItem
@@ -84,7 +82,7 @@ export default function SameCloth() {
           })}
       </S.Filter>
 
-      {sameClothData && (
+      {sameClothData.length > 0 && (
         <S.List>
           {sameClothData[currentIndex].ootds[0] && (
             <S.FirstImage>
