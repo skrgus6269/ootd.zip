@@ -113,7 +113,7 @@ export default function Alarm() {
           <AlarmLayout index={0}>
             <Title1 className="title">읽지 않음</Title1>
             {notIsReadAlarm?.map((item, index) => (
-              <Alarms key={index} {...item} />
+              <Alarms key={index} {...item} className={'isNotRead'} />
             ))}
           </AlarmLayout>
         )}

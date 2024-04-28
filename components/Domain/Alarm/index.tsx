@@ -17,6 +17,7 @@ export interface AlarmType {
   contentImage?: string;
   goUrl: string;
   userId: number;
+  className: string;
 }
 
 export default function Alarms({
@@ -29,6 +30,7 @@ export default function Alarms({
   userName,
   goUrl,
   userId,
+  className,
 }: AlarmType) {
   const router = useRouter();
   const { readAlarm } = AlarmApi();
@@ -40,11 +42,11 @@ export default function Alarms({
 
   const onClickUserName = (e: React.MouseEvent) => {
     e.stopPropagation();
-    router.push(`/mypage/${userId}`);
+    if (userId !== 0) router.push(`/mypage/${userId}`);
   };
 
   return (
-    <S.Layout>
+    <S.Layout className={className}>
       <S.Left onClick={() => router.push(`/mypage/${userId}`)}>
         {profileImage && (
           <Image
