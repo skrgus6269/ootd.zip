@@ -173,7 +173,7 @@ const OOTD: ComponentWithLayout = () => {
           onClick={onClickBackground}
         />
         <AppBar
-          leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+          leftProps={<AiOutlineArrowLeft onClick={onClickBackButton} />}
           middleProps={<></>}
           rightProps={<></>}
         />

@@ -92,7 +92,7 @@ const Cloth = () => {
 
   const onClickYesButton = async () => {
     const result = await deleteCloth(Number(router.query.ClothNumber![0]));
-    if (result) router.push('/mypage');
+    if (result) router.replace(`/mypage/${localUserId}`);
   };
 
   const onClickNoButton = () => {
