@@ -45,6 +45,17 @@ interface AddTagProps {
   componentWidth: number;
 }
 
+interface UserTagDataType {
+  id: number;
+  imageUrl: string;
+  name: string;
+  userName: string;
+  brand: { id: string; name: string };
+  category: { id: number; categoryName: string; parentCategoryName: string };
+  size: { id: number; name: string; lineNo: string };
+  memo: string;
+}
+
 export default function AddTag({
   setAddTag,
   addTag,
@@ -54,7 +65,7 @@ export default function AddTag({
   componentHeight,
   componentWidth,
 }: AddTagProps) {
-  const [searchResult, setSearchResult] = useState<UserClothDataType[] | null>(
+  const [searchResult, setSearchResult] = useState<UserTagDataType[] | null>(
     null
   );
   const categoryList = [
@@ -93,8 +104,8 @@ export default function AddTag({
         newTag[slideIndex].ootdImageClothesList?.push({
           clothesId: searchResult![index].id,
           clothesImage: searchResult![index].imageUrl,
-          brand: searchResult![index].brandName,
-          name: searchResult![index].clothesName,
+          brand: searchResult![index].brand.name,
+          name: searchResult![index].name,
           coordinate: {
             xrate: '0',
             yrate: '0',
@@ -111,8 +122,8 @@ export default function AddTag({
           {
             clothesId: searchResult![index].id,
             clothesImage: searchResult![index].imageUrl,
-            brand: searchResult![index].brandName,
-            name: searchResult![index].clothesName,
+            brand: searchResult![index].brand.name,
+            name: searchResult![index].name,
             coordinate: {
               xrate: '0',
               yrate: '0',
@@ -233,10 +244,10 @@ export default function AddTag({
                               size="small"
                               clothImage={item.imageUrl}
                               caption=""
-                              brand={item.brandName}
-                              category={item.categoryName}
-                              name={item.clothesName}
-                              clothSize={item.sizeName}
+                              brand={item.brand.name}
+                              category={item.category.categoryName}
+                              name={item.name}
+                              clothSize={item.size.name}
                             />
                           </div>
                           <hr />
