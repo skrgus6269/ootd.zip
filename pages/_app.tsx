@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
               <Head>
                 <meta
                   name="viewport"
-                  content="width=device-width"
+                  content="width=device-width,maximum-scale=1,user-scalable=no"
                   initial-scale="1.0"
                 />
               </Head>
