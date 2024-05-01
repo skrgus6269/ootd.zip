@@ -17,7 +17,11 @@ export const PublicApi = () => {
   };
 
   const getNewToken = async () => {
-    const { accessToken, refreshToken } = await authService.getNewToken();
+    const { accessToken, refreshToken } = await authService
+      .getNewToken()
+      .catch((err) => {
+        window.location.replace('/sign-in');
+      });
 
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
