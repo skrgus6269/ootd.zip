@@ -19,7 +19,7 @@ export default function ClosetEmpty({
       <Body3 className="text">{text}</Body3>
       {isMyProfile && (
         <button onClick={onClick} className="button">
-          <Button3> {button}</Button3>
+          <Button3>{button}</Button3>
         </button>
       )}
     </S.Layout>
