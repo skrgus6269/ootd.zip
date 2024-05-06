@@ -16,6 +16,7 @@ const Layout = styled.div`
     height: 36px;
     border: 1px solid black;
     border-radius: 2px;
+    color: ${(props) => props.theme.color.grey_00};
   }
 `;
 
