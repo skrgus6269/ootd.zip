@@ -13,8 +13,8 @@ import { useRecoilState } from 'recoil';
 import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
 import NextImage from '../NextImage';
-import { PublicApi } from '@/apis/domain/Public/PublicApi'; 
-import Background from '../Background'; 
+import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import Background from '../Background';
 
 interface GalleryProps {
   imageAndTag: ImageWithTag | undefined;
@@ -64,6 +64,10 @@ const Gallery = ({
     sendReactNativeMessage({
       type: 'accessToken',
       payload: localStorage.getItem('accessToken'),
+    });
+    sendReactNativeMessage({
+      type: 'refreshToken',
+      payload: localStorage.getItem('refreshToken'),
     });
   };
 

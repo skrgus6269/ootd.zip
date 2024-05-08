@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { SignInApi } from '@/apis/domain/SignIn/SignInApi';
 import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
+import Spinner from '@/components/Spinner';
 
 export interface QueryParams {
   code?: string;
@@ -41,5 +42,5 @@ export default function SignUpCallbackPage() {
     fetchData();
   }, [code, !router.isReady]);
 
-  return <div>loading</div>;
+  return <Spinner />;
 }

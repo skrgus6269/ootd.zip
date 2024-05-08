@@ -48,6 +48,12 @@ export const getReactNativeMessage = (
         setState(false);
       }
     }
+    if (parsedData!.type === 'token') {
+      const accessToken = parsedData?.payload.accessToken;
+      const refreshToken = parsedData?.payload.refreshToken;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+    }
   };
   if (window.ReactNativeWebView) {
     //android

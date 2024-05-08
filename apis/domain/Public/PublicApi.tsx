@@ -1,4 +1,5 @@
 import { authService, userService } from '@/apis/_service';
+import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 export const PublicApi = () => {
   const follow = async (id: number) => {
     const data = await userService.follow(id);
@@ -25,6 +26,8 @@ export const PublicApi = () => {
 
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
+    sendReactNativeMessage({ type: 'accessToken', payload: accessToken });
+    sendReactNativeMessage({ type: 'refreshToken', payload: refreshToken });
   };
 
   return {
