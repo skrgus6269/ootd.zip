@@ -4,6 +4,7 @@ import {
   putStylePayload,
 } from '@/apis/_api/type';
 import { authService, userService } from '@/apis/_service';
+import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 
 export const UserApi = () => {
   // 사용자 프로필 정보 조회
@@ -134,7 +135,7 @@ export const UserApi = () => {
 
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-
+      sendReactNativeMessage({ type: 'logout' });
       if (status === 200) return true;
       return false;
     } catch (err) {
@@ -142,7 +143,7 @@ export const UserApi = () => {
       console.log('에러명:', err);
     }
   };
-  
+
   // 소셜 로그인 플랫폼 조회
   const getSocilLoginProvider = async () => {
     try {

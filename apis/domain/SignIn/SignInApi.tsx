@@ -29,6 +29,10 @@ export const SignInApi = () => {
         payload: data.accessToken,
       });
 
+      sendReactNativeMessage({
+        type: 'refreshToken',
+        payload: data.refreshToken,
+      });
       return true;
     }
   };
