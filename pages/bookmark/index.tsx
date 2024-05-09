@@ -178,7 +178,13 @@ export default function Bookmark() {
             onClickNoButton={onClickNoButton}
           />
         )}
-        {toastOpen && <Toast text="북마크에서 삭제되었습니다." />}
+        {toastOpen && (
+          <Toast
+            text="북마크에서 삭제되었습니다."
+            setState={setToastOpen}
+            state={toastOpen}
+          />
+        )}
       </S.Layout>
     </>
   );

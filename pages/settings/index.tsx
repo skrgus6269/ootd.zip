@@ -16,7 +16,7 @@ import { UserApi } from '@/apis/domain/User/UserApi';
 export default function Setting() {
   const router = useRouter();
 
-  const [queryState, setQueryState] = useState<string>('');
+  const [queryState, setQueryState] = useState<Boolean>(false);
   const [URLState, setURLState] = useState<any>(false);
   const [platform, setPlatform] = useState('');
 
@@ -41,7 +41,7 @@ export default function Setting() {
 
   useEffect(() => {
     if (router.query.state !== '') {
-      setQueryState(router.query.state as string);
+      setQueryState(true);
     }
   }, []);
 
@@ -125,9 +125,19 @@ export default function Setting() {
             </S.Text>
           </S.AccountInfo>
 
-          {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
-          {queryState === 'likeInfoEditSuccess' && (
-            <Toast text="취향정보 수정이 완료되었습니다." />
+          {URLState && (
+            <Toast
+              text="이메일이 클립보드에 복사되었습니다."
+              setState={setURLState}
+              state={URLState}
+            />
+          )}
+          {queryState && (
+            <Toast
+              text="취향정보 수정이 완료되었습니다."
+              setState={setQueryState}
+              state={queryState}
+            />
           )}
         </S.SettingDiv>
       </S.Layout>

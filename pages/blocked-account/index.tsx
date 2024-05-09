@@ -100,7 +100,13 @@ export default function BlockedAccount() {
           onClickNoButton={onClickNoButton}
         />
       )}
-      {follow && <Toast text="@@@님을 팔로우합니다." />}
+      {follow && (
+        <Toast
+          text="@@@님을 팔로우합니다."
+          setState={setFollow}
+          state={follow}
+        />
+      )}
     </>
   );
 }
