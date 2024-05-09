@@ -267,6 +267,7 @@ export default function AddTag({
             <Toast
               className="toast"
               text="공개로 설정된 옷만 태그할 수 있어요."
+              state={notOpenState}
               setState={setNotOpenState}
               actionText="옷장으로 이동"
               actionFunction={() => setGoToMypageAlertState(true)}
