@@ -2,17 +2,15 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 24px 0 0 0;
-  height: calc(100vh + 20px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+
   .selectedPhoto {
     color: ${(props) => props.theme.color.grey_30};
     padding-left: 20px;
   }
   .nextButon {
-    position: fixed;
-    bottom: 0;
-
     padding: 0 20px 25px 20px;
   }
 `;
@@ -110,6 +108,11 @@ const StyleListSpan = styled.div`
   }
 `;
 
+const Main = styled.div`
+  height: calc(100vh - 116px);
+  overflow: scroll;
+`;
+
 const S = {
   Layout,
   OOTDImage,
@@ -119,6 +122,7 @@ const S = {
   StyleList,
   StyleListSpan,
   ImageDivider,
+  Main,
 };
 
 export default S;

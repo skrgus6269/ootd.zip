@@ -2,17 +2,14 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   .title {
     margin-top: 40px;
   }
   .helperText {
     margin-top: 8px;
-  }
-  .nextButton {
-    position: fixed;
-    bottom: 20px;
-    width: calc(100% - 40px);
   }
 `;
 
@@ -24,6 +21,11 @@ const Image = styled.div`
   margin: 40px 0;
 `;
 
-const S = { Layout, Image };
+const Main = styled.div`
+  height: calc(100vh - 116px);
+  overflow: scroll;
+`;
+
+const S = { Layout, Image, Main };
 
 export default S;

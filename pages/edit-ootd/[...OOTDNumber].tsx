@@ -126,69 +126,72 @@ const EditOOTD: ComponentWithLayout = () => {
         }
       />
       <S.Layout>
-        <Body4 className="selectedPhoto" state="emphasis">
-          {imageAndTag !== undefined && imageAndTag?.length}장의 사진이 선택됨
-        </Body4>
-        <S.OOTDImage>
-          {imageAndTag &&
-            imageAndTag.map((item, index) => {
-              return (
-                <div className="image" key={index}>
-                  <NextImage
-                    width={106}
-                    height={106}
-                    fill={false}
-                    src={item.ootdImage}
-                    alt=""
-                  />
-                  <AiFillCloseCircle
-                    onClick={() => setDeleteImageAlertIndex(index)}
-                    className="close"
-                    viewBox="70 70 890 890"
-                  />
-                </div>
-              );
-            })}
-        </S.OOTDImage>
-        <S.ImageDivider />
-        <S.Text>
-          <Input>
-            <Input.TextArea
-              input={contents}
-              setInput={setContents}
-              placeholder="OOTD에 대해 설명해주세요."
-            />
-          </Input>
-        </S.Text>
-        <S.Style>
-          <Title1>스타일태그</Title1>
-          <AiOutlinePlus onClick={onClickAddStyleTag} />
-        </S.Style>
-        <S.StyleList>
-          {selectedStyle?.length > 0 &&
-            selectedStyle?.map((item, index) => {
-              return (
-                <S.StyleListSpan
-                  onClick={() => onClickStyleTag(index)}
-                  key={index}
-                >
-                  <Button3 className="selectedStyleList">{item.name}</Button3>
-                  <AiOutlineClose />
-                </S.StyleListSpan>
-              );
-            })}
-        </S.StyleList>
-        <S.Open>
-          <Title1>공개여부</Title1>
-          <Input>
-            <Input.TrueFalse
-              left="공개"
-              right="비공개"
-              state={isOpen}
-              setState={setIsOpen}
-            />
-          </Input>
-        </S.Open>
+        <S.Main>
+          <Body4 className="selectedPhoto" state="emphasis">
+            {imageAndTag !== undefined && imageAndTag?.length}장의 사진이 선택됨
+          </Body4>
+          <S.OOTDImage>
+            {imageAndTag &&
+              imageAndTag.map((item, index) => {
+                return (
+                  <div className="image" key={index}>
+                    <NextImage
+                      width={106}
+                      height={106}
+                      fill={false}
+                      src={item.ootdImage}
+                      alt=""
+                    />
+                    <AiFillCloseCircle
+                      onClick={() => setDeleteImageAlertIndex(index)}
+                      className="close"
+                      viewBox="70 70 890 890"
+                    />
+                  </div>
+                );
+              })}
+          </S.OOTDImage>
+          <S.ImageDivider />
+          <S.Text>
+            <Input>
+              <Input.TextArea
+                input={contents}
+                setInput={setContents}
+                placeholder="OOTD에 대해 설명해주세요."
+              />
+            </Input>
+          </S.Text>
+          <S.Style>
+            <Title1>스타일태그</Title1>
+            <AiOutlinePlus onClick={onClickAddStyleTag} />
+          </S.Style>
+          <S.StyleList>
+            {selectedStyle?.length > 0 &&
+              selectedStyle?.map((item, index) => {
+                return (
+                  <S.StyleListSpan
+                    onClick={() => onClickStyleTag(index)}
+                    key={index}
+                  >
+                    <Button3 className="selectedStyleList">{item.name}</Button3>
+                    <AiOutlineClose />
+                  </S.StyleListSpan>
+                );
+              })}
+          </S.StyleList>
+          <S.Open>
+            <Title1>공개여부</Title1>
+            <Input>
+              <Input.TrueFalse
+                left="공개"
+                right="비공개"
+                state={isOpen}
+                setState={setIsOpen}
+              />
+            </Input>
+          </S.Open>
+        </S.Main>
+
         <NextButton
           className="nextButon"
           state={true}

@@ -2,11 +2,6 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0 20px;
-  .nextButton {
-    position: fixed;
-    bottom: 20px;
-    width: calc(100% - 40px);
-  }
 `;
 
 const Title = styled.div`
@@ -37,6 +32,11 @@ const Write = styled.div`
   }
 `;
 
-const S = { Layout, Title, Link, Write };
+const Main = styled.div`
+  height: calc(70vh - 68px);
+  overflow: scroll;
+`;
+
+const S = { Layout, Title, Link, Write, Main };
 
 export default S;

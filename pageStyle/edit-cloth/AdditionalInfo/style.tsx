@@ -4,11 +4,12 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: scroll;
+  height: calc(100vh - 116px);
   .prevNextButton {
     width: 100%;
-    background-color: white;
     bottom: 0;
-    position: fixed;
+    position: absolute;
   }
 `;
 

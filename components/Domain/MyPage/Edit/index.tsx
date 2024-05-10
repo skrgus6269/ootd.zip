@@ -128,25 +128,27 @@ export default function Edit({
   return (
     <>
       <S.Layout>
-        <EditProfile
-          imageURL={profileImage}
-          setImageURL={setProfileImage}
-          onClickImage={() => setOpenActionSheet(!openActionSheet)}
-        />
-        <EditMyInfo
-          nickName={nickName}
-          setNickName={setNickName}
-          introduction={introduction}
-          setIntroduction={setIntroduction}
-          height={height}
-          setHeight={setHeight}
-          weight={weight}
-          setWeight={setWeight}
-          open={open}
-          setOpen={setOpen}
-          possible={possible}
-          setPossible={setPossible}
-        />
+        <S.Main>
+          <EditProfile
+            imageURL={profileImage}
+            setImageURL={setProfileImage}
+            onClickImage={() => setOpenActionSheet(!openActionSheet)}
+          />
+          <EditMyInfo
+            nickName={nickName}
+            setNickName={setNickName}
+            introduction={introduction}
+            setIntroduction={setIntroduction}
+            height={height}
+            setHeight={setHeight}
+            weight={weight}
+            setWeight={setWeight}
+            open={open}
+            setOpen={setOpen}
+            possible={possible}
+            setPossible={setPossible}
+          />
+        </S.Main>
         <Button
           className="editMyPageButton"
           backgroundColor={possible ? 'grey_00' : 'grey_90'}

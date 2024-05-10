@@ -45,49 +45,51 @@ export default function AdditionalInfo({
 
   return (
     <S.Layout>
-      <S.BasicInfoFirst>
-        <Category />
-        <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
-        <Body2 className="name">{clothName}</Body2>
-        <NextImage
-          fill={false}
-          width={106}
-          height={106}
-          src={clothImage! && clothImage![0].ootdImage}
-          alt=""
-        />
-        <hr />
-      </S.BasicInfoFirst>
-      <S.AdditionalInfo>
-        <S.Title>
-          <Title1 className="title">추가 정보</Title1>
-        </S.Title>
-        <S.Information>
-          <Input>
-            <Input.Label size="small" className="label">
-              구매시기
-            </Input.Label>
-            <Input.Text
-              size="big"
-              placeholder=""
-              border={true}
-              onChange={setClothBuyDate}
-              line="outline"
-              state={true}
-            />
-          </Input>
-          <Input>
-            <Input.Label size="small" className="label">
-              메모
-            </Input.Label>
-            <Input.TextArea
-              input={clothMemo}
-              setInput={setClothMemo}
-              placeholder=""
-            />
-          </Input>
-        </S.Information>
-      </S.AdditionalInfo>
+      <S.Main>
+        <S.BasicInfoFirst>
+          <Category />
+          <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
+          <Body2 className="name">{clothName}</Body2>
+          <NextImage
+            fill={false}
+            width={106}
+            height={106}
+            src={clothImage! && clothImage![0].ootdImage}
+            alt=""
+          />
+          <hr />
+        </S.BasicInfoFirst>
+        <S.AdditionalInfo>
+          <S.Title>
+            <Title1 className="title">추가 정보</Title1>
+          </S.Title>
+          <S.Information>
+            <Input>
+              <Input.Label size="small" className="label">
+                구매시기
+              </Input.Label>
+              <Input.Text
+                size="big"
+                placeholder=""
+                border={true}
+                onChange={setClothBuyDate}
+                line="outline"
+                state={true}
+              />
+            </Input>
+            <Input>
+              <Input.Label size="small" className="label">
+                메모
+              </Input.Label>
+              <Input.TextArea
+                input={clothMemo}
+                setInput={setClothMemo}
+                placeholder=""
+              />
+            </Input>
+          </S.Information>
+        </S.AdditionalInfo>
+      </S.Main>
       <NextButton
         state={true}
         onClick={onClickSubmitButton}

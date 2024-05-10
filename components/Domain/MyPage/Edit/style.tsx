@@ -2,13 +2,19 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   margin: 0px 20px;
+  height: calc(100vh - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .editMyPageButton {
-    position: fixed;
-    bottom: 20px;
-    width: calc(100% - 40px);
+    flex-shrink: 0;
   }
 `;
 
-const S = { Layout };
+const Main = styled.div`
+  overflow: scroll;
+`;
+
+const S = { Layout, Main };
 
 export default S;
