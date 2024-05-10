@@ -47,6 +47,7 @@ export default function Search() {
       text: text,
     };
     if (keywords.filter((item) => item.text === text).length > 0) return;
+    if (text.trim() === '') return;
     setKeywords([newKeyword, ...keywords]);
   };
 
