@@ -19,7 +19,7 @@ import Background from '@/components/Background';
 export default function MyPage() {
   const router = useRouter();
 
-  const [queryState, setQueryState] = useState<string>('');
+  const [queryState, setQueryState] = useState<Boolean>(false);
 
   const [userProfileData, setUserProfileData] = useState<UserProfileDataType>({
     userId: 0,
@@ -56,7 +56,7 @@ export default function MyPage() {
 
   useEffect(() => {
     if (router.query.state !== '') {
-      setQueryState(router.query.state as string);
+      setQueryState(true);
     }
   }, []);
 
@@ -122,8 +122,12 @@ export default function MyPage() {
           clothesCount={userProfileData.clothesCount}
           isMyProfile={userProfileData.isMyProfile}
         />
-        {queryState === 'editSuccess' && (
-          <Toast text="프로필이 수정되었습니다." />
+        {queryState && (
+          <Toast
+            text="프로필이 수정되었습니다."
+            setState={setQueryState}
+            state={queryState}
+          />
         )}
 
         {blockOpen && (

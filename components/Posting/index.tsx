@@ -347,16 +347,25 @@ export default function Posting({
         {receivedDeclaration && (
           <ReceivedDeclarationModal
             type="게시글"
+            setReportStatus={setReportStatus}
             reportStatus={reportStatus}
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
           />
         )}
         {toastOpen && !data.isPrivate && (
-          <Toast text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다." />
+          <Toast
+            text="다른 사람이 이 ootd를 볼 수 있도록 변경되었습니다."
+            setState={setToastOpen}
+            state={toastOpen}
+          />
         )}
         {toastOpen && data.isPrivate && (
-          <Toast text="다른 사람이 이 ootd를 볼 수 없도록 변경되었습니다." />
+          <Toast
+            text="다른 사람이 이 ootd를 볼 수 없도록 변경되었습니다."
+            setState={setToastOpen}
+            state={toastOpen}
+          />
         )}
       </S.Layout>
     </>

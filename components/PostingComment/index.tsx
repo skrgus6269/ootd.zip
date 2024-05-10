@@ -189,6 +189,7 @@ export default function PostingComment({
             )}
             {receivedDeclaration && (
               <ReceivedDeclarationModal
+                setReportStatus={setReportStatus}
                 reportStatus={reportStatus}
                 type="댓글"
                 receivedDeclaration={receivedDeclaration}
@@ -237,6 +238,7 @@ export default function PostingComment({
                   )}
                   {receivedDeclaration && (
                     <ReceivedDeclarationModal
+                      setReportStatus={setReportStatus}
                       reportStatus={reportStatus}
                       type="댓글"
                       receivedDeclaration={receivedDeclaration}

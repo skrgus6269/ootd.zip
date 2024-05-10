@@ -7,6 +7,7 @@ import Toast from '../Toast';
 
 interface ReceivedDeclarationModalProps {
   type: string;
+  setReportStatus: Dispatch<SetStateAction<Boolean>>;
   reportStatus: Boolean;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -14,6 +15,7 @@ interface ReceivedDeclarationModalProps {
 
 export default function ReceivedDeclarationModal({
   type,
+  setReportStatus,
   reportStatus,
   receivedDeclaration,
   setReceivedDeclaration,
@@ -22,9 +24,17 @@ export default function ReceivedDeclarationModal({
     receivedDeclaration && (
       <>
         {reportStatus === true ? (
-          <Toast text="신고가 접수되었습니다." />
+          <Toast
+            text="신고가 접수되었습니다."
+            setState={setReportStatus}
+            state={reportStatus}
+          />
         ) : (
-          <Toast text="이미 접수된 신고입니다." />
+          <Toast
+            text="이미 접수된 신고입니다."
+            setState={setReportStatus}
+            state={reportStatus}
+          />
         )}
       </>
     )

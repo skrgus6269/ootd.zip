@@ -212,7 +212,13 @@ const OOTD: ComponentWithLayout = () => {
           registerComment={registerComment}
           setCommentFinish={setCommentFinish}
         />
-        {commentFinish && <Toast text="댓글이 등록되었습니다." />}
+        {commentFinish && (
+          <Toast
+            text="댓글이 등록되었습니다."
+            setState={setCommentFinish}
+            state={commentFinish}
+          />
+        )}
       </S.Layout>
     </>
   );

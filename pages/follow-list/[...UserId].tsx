@@ -115,7 +115,13 @@ export default function FollowList() {
             </TabView.Tab>
           </TabView.Tabs>
         </TabView>
-        {toastOpen && <Toast text="삭제되었습니다." />}
+        {toastOpen && (
+          <Toast
+            text="삭제되었습니다."
+            setState={setToastOpen}
+            state={toastOpen}
+          />
+        )}
       </S.Layout>
       {openActionSheet && <ActionSheet buttons={buttons} />}
       {alertOpen && (

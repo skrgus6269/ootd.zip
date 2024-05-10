@@ -207,12 +207,19 @@ const Cloth = () => {
       {receivedDeclaration && (
         <ReceivedDeclarationModal
           type="게시글"
+          setReportStatus={setReportStatus}
           reportStatus={reportStatus}
           receivedDeclaration={receivedDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
         />
       )}
-      {URLState && <Toast text="URL이 클립보드에 복사되었습니다." />}
+      {URLState && (
+        <Toast
+          text="URL이 클립보드에 복사되었습니다."
+          setState={setURLState}
+          state={URLState}
+        />
+      )}
     </>
   );
 };
