@@ -73,7 +73,7 @@ export default function UserCloth({ userName, userId }: UserClothProps) {
                     {data[index + 1] && (
                       <ClothInformation
                         onClick={() =>
-                          router.push(`cloth/${data[index + 1].id}`)
+                          router.push(`/cloth/${data[index + 1].id}`)
                         }
                         clothId={data[index + 1].id}
                         clothImage={data[index + 1].imageUrl}
