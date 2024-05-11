@@ -64,62 +64,67 @@ export default function WhereToBuyModal({
   return (
     <Modal height="70" isOpen={isOpen}>
       <S.Layout>
-        <S.Title>
-          <Title1 className="title">구매처</Title1>
-          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
-        </S.Title>
-        <S.Link>
-          <Body3>링크로 입력하기</Body3>
-          <Input>
-            {selectedLetter === 0 ||
-            selectedLetter === 1 ||
-            !onClickInputState ? (
-              <Input.Text
-                defaultValue={linkLetter}
-                inputRef={linkRef}
-                size="big"
-                placeholder="링크를 붙여넣으세요."
-                line="outline"
-                type="Link"
-                onChange={setLinkLetter}
-                onClick={onClickLinkLetter}
-                state={true}
-              />
-            ) : (
-              <Input.ReadOnly
-                state={false}
-                result={<Body3>{linkLetter}</Body3>}
-                type="Link"
-                onClick={onClickLinkLetter}
-              />
-            )}
-          </Input>
-        </S.Link>
-        <S.Write>
-          <Body3>직접 입력하기</Body3>
-          <Input>
-            {selectedLetter === 0 ||
-            selectedLetter === 2 ||
-            !onClickInputState ? (
-              <Input.Text
-                defaultValue={writeLetter}
-                inputRef={writeRef}
-                size="big"
-                placeholder="선물 받았어요, 래플 당첨 등"
-                line="outline"
-                onChange={setWriteLetter}
-                onClick={onClickWriteLetter}
-                state={true}
-              />
-            ) : (
-              <Input.ReadOnly
-                state={false}
-                result={<Body3>{writeLetter}</Body3>}
-                onClick={onClickWriteLetter}
-              />
-            )}
-          </Input>
-        </S.Write>
+        <S.Main>
+          <S.Title>
+            <Title1 className="title">구매처</Title1>
+            <AiOutlineClose
+              onClick={() => setIsOpen(false)}
+              className="close"
+            />
+          </S.Title>
+          <S.Link>
+            <Body3>링크로 입력하기</Body3>
+            <Input>
+              {selectedLetter === 0 ||
+              selectedLetter === 1 ||
+              !onClickInputState ? (
+                <Input.Text
+                  defaultValue={linkLetter}
+                  inputRef={linkRef}
+                  size="big"
+                  placeholder="링크를 붙여넣으세요."
+                  line="outline"
+                  type="Link"
+                  onChange={setLinkLetter}
+                  onClick={onClickLinkLetter}
+                  state={true}
+                />
+              ) : (
+                <Input.ReadOnly
+                  state={false}
+                  result={<Body3>{linkLetter}</Body3>}
+                  type="Link"
+                  onClick={onClickLinkLetter}
+                />
+              )}
+            </Input>
+          </S.Link>
+          <S.Write>
+            <Body3>직접 입력하기</Body3>
+            <Input>
+              {selectedLetter === 0 ||
+              selectedLetter === 2 ||
+              !onClickInputState ? (
+                <Input.Text
+                  defaultValue={writeLetter}
+                  inputRef={writeRef}
+                  size="big"
+                  placeholder="선물 받았어요, 래플 당첨 등"
+                  line="outline"
+                  onChange={setWriteLetter}
+                  onClick={onClickWriteLetter}
+                  state={true}
+                />
+              ) : (
+                <Input.ReadOnly
+                  state={false}
+                  result={<Body3>{writeLetter}</Body3>}
+                  onClick={onClickWriteLetter}
+                />
+              )}
+            </Input>
+          </S.Write>
+        </S.Main>
         <NextButton
           className="nextButton"
           onClick={onClickNextButton}

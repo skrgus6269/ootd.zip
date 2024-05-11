@@ -4,15 +4,6 @@ const Layout = styled.div`
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 48px);
-  .nextButton {
-    background-color: white;
-    bottom: 0px;
-    flex-grow: 0;
-    position: fixed;
-    width: calc(100% - 40px);
-    padding: 20px 0;
-  }
 `;
 
 const Category = styled.div`
@@ -64,6 +55,12 @@ const Information = styled.div`
   }
 `;
 
+const Main = styled.div`
+  height: calc(100vh - 116px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+`;
+
 const S = {
   Layout,
   Category,
@@ -71,6 +68,7 @@ const S = {
   AdditionalInfo,
   Title,
   Information,
+  Main,
 };
 
 export default S;
