@@ -15,7 +15,7 @@ interface InputProps {
 const Layout = styled.div<LayoutProps>`
   display: flex;
   width: 100%;
-  max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
+  max-width: ${(props) => (props.size === 'big' ? '430px' : '167px')};
   height: 44px;
   gap: 2px;
   position: relative;
