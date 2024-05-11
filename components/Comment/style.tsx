@@ -43,9 +43,11 @@ const UserComment = styled.div`
     margin-right: 4px;
   }
   white-space: pre-line;
-  display: flex;
   color: ${(props) => props.theme.color.grey_30};
   padding: 2px 0 16px 0;
+  p {
+    display: inline;
+  }
 `;
 const CommentCommunication = styled.div`
   display: flex;
