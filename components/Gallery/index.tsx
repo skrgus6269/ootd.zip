@@ -87,7 +87,7 @@ const Gallery = ({
   }, []);
 
   useEffect(() => {
-    if (imageAndTag && item === 'Cloth') {
+    if (imageAndTag) {
       setSelectedImage(imageAndTag);
       setRealTouch(0);
     }
