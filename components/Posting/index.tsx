@@ -346,6 +346,7 @@ export default function Posting({
         )}
         {receivedDeclaration && (
           <ReceivedDeclarationModal
+            ID={data.userId}
             type="게시글"
             setReportStatus={setReportStatus}
             reportStatus={reportStatus}
