@@ -1,0 +1,98 @@
+import React, { FC, useEffect, useState } from 'react';
+import { AppLayoutProps } from '@/AppLayout';
+import { Style } from '../add-ootd';
+import S from '@/pageStyle/agree/style';
+import AppBar from '@/components/Appbar';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { useRouter } from 'next/router';
+import Symbol from '@/public/images/symbol.svg';
+import { Button3, Headline2 } from '@/components/UI';
+import CheckBoxTrue from 'public/images/CheckBoxTrue.svg';
+import CheckBoxFalse from 'public/images/CheckBoxFalse.svg';
+import AgreeBlock from '@/components/AgreeBlock';
+import Button from '@/components/Button';
+
+interface ComponentWithLayout extends FC {
+  Layout?: FC<AppLayoutProps>;
+}
+
+const Agree: ComponentWithLayout = () => {
+  const router = useRouter();
+
+  const [check1, setCheck1] = useState<boolean>(false);
+  const [check2, setCheck2] = useState<boolean>(false);
+
+  const [possible, setPossible] = useState<boolean>(false);
+  const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if (check1 && check2) {
+      setPossible(true);
+    } else {
+      setPossible(false);
+    }
+  }, [check1, check2]);
+
+  const onClickNextButton = async () => {
+    if (possible) {
+      console.log(111);
+    }
+  };
+
+  return (
+    <S.Layout>
+      <AppBar
+        leftProps={
+          <AiOutlineArrowLeft
+            onClick={() => router.back()}
+            className="arrowleft"
+          />
+        }
+        middleProps={<></>}
+        rightProps={<></>}
+      />
+
+      <Symbol className="symbol" />
+      <S.Text>
+        <Headline2>만나서 반가워요!</Headline2>
+        <Headline2>ootdzip 서비스 이용을 위한</Headline2>
+        <Headline2>약관 동의가 필요해요.</Headline2>
+      </S.Text>
+
+      <S.CheckLayout>
+        <AgreeBlock
+          title="이용약관 동의"
+          checked={check1}
+          setChecked={setCheck1}
+        />
+        <AgreeBlock
+          title="개인정보처리방침 동의"
+          checked={check2}
+          setChecked={setCheck2}
+          lastItem={true}
+        />
+      </S.CheckLayout>
+
+      <Button
+        className="agreeButton"
+        backgroundColor={possible ? 'grey_00' : 'grey_90'}
+        color="grey_100"
+        size="big"
+        onClick={onClickNextButton}
+        border={false}
+      >
+        <Button3>다음</Button3>
+      </Button>
+    </S.Layout>
+  );
+};
+
+export default Agree;
+
+export type { ComponentWithLayout, Style };
+
+Agree.Layout = ({ children }: AppLayoutProps) => {
+  return <>{children}</>;
+};
+
+Agree.Layout.displayName = 'NameLayout';
