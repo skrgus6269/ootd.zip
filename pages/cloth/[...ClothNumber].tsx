@@ -204,8 +204,9 @@ const Cloth = () => {
           setReportStatus={setReportStatus}
         />
       )}
-      {receivedDeclaration && (
+      {data && receivedDeclaration && (
         <ReceivedDeclarationModal
+          ID={Number(data.userId)}
           type="게시글"
           setReportStatus={setReportStatus}
           reportStatus={reportStatus}
