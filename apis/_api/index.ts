@@ -4,3 +4,4 @@ export * as clothApi from './cloth';
 export * as ootdApi from './ootd';
 export * as userApi from './user';
 export * as alarmApi from './alarm';
+export * as blockApi from './block';
