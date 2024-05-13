@@ -35,7 +35,7 @@ const Agree: ComponentWithLayout = () => {
 
   const onClickNextButton = async () => {
     if (possible) {
-      console.log(111);
+      router.push('/sign-up');
     }
   };
 
