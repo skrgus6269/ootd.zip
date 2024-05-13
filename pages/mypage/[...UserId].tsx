@@ -55,7 +55,7 @@ export default function MyPage() {
   }, [getMypage, router.isReady, router.query.UserId]);
 
   useEffect(() => {
-    if (router.query.state !== '') {
+    if (router.query.state !== undefined) {
       setQueryState(true);
     }
   }, []);
