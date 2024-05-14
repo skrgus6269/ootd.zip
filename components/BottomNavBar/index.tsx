@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
+
 import { BottomComponent, BottomComponentItem } from './style';
 
 import {
@@ -41,6 +42,11 @@ interface BottomNavBarProps {
   setAddModalState: Dispatch<SetStateAction<Boolean>>;
 }
 
+interface BottomNavBarType {
+  icon: JSX.Element;
+  click: () => void;
+}
+
 export default function BottomNavBar({
   addModalState,
   setAddModalState,
@@ -62,16 +68,20 @@ export default function BottomNavBar({
 
   const activeIndex = getActiveIndex();
 
-  const [bottomNavBarLinkers, setBottomNavBarLinkers] = useState(
-    icons.map((icon, index) => ({
-      icon: index === activeIndex ? activeIcons[index] : icon,
-      click: () => {
-        router.push(routes[index]);
-        setAddModalState(false);
-      },
-    }))
-  );
+  const [bottomNavBarLinkers, setBottomNavBarLinkers] =
+    useState<BottomNavBarType[]>();
 
+  useEffect(() => {
+    setBottomNavBarLinkers(
+      icons.map((icon, index) => ({
+        icon: index === activeIndex ? activeIcons[index] : icon,
+        click: () => {
+          router.push(routes[index]);
+          setAddModalState(false);
+        },
+      }))
+    );
+  }, []);
   useEffect(() => {
     const newLinkers = icons.map((icon, index) => ({
       icon: index === activeIndex ? activeIcons[index] : icon,
@@ -89,23 +99,24 @@ export default function BottomNavBar({
 
   return (
     <BottomComponent>
-      {bottomNavBarLinkers.map((item, index) =>
-        index === 2 ? (
-          <BottomComponentItem onClick={onClickPlusButton}>
-            {addModalState ? <FilledSquare /> : <AiOutlinePlusSquare />}
-          </BottomComponentItem>
-        ) : (
-          <Link href={routes[index]}>
-            <BottomComponentItem key={index} onClick={item.click}>
-              {path.includes('mypage') && index === 4
-                ? router.isReady && myId === Number(router.query.UserId![0])
-                  ? activeIcons[index]
-                  : item.icon
-                : item.icon}
+      {bottomNavBarLinkers &&
+        bottomNavBarLinkers.map((item, index) =>
+          index === 2 ? (
+            <BottomComponentItem key={index} onClick={onClickPlusButton}>
+              {addModalState ? <FilledSquare /> : <AiOutlinePlusSquare />}
             </BottomComponentItem>
-          </Link>
-        )
-      )}
+          ) : (
+            <Link key={index} href={routes[index]}>
+              <BottomComponentItem onClick={item.click}>
+                {path.substring(1, 7) === 'mypage' && index === 4
+                  ? router.isReady && myId === Number(router.query.UserId![0])
+                    ? activeIcons[index]
+                    : item.icon
+                  : item.icon}
+              </BottomComponentItem>
+            </Link>
+          )
+        )}
     </BottomComponent>
   );
 }

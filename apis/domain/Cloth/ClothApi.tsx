@@ -6,8 +6,11 @@ import {
   postClothPayload,
 } from '@/apis/_api/type';
 import { systemService, userService } from '@/apis/_service';
+import { useState } from 'react';
 
 export default function ClothApi() {
+  const [error, setError] = useState<any>(null);
+
   //cloth 작성
   const postCloth = async (payload: postClothPayload) => {
     try {
@@ -18,7 +21,7 @@ export default function ClothApi() {
         return false;
       }
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -30,7 +33,7 @@ export default function ClothApi() {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -42,7 +45,7 @@ export default function ClothApi() {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -55,7 +58,7 @@ export default function ClothApi() {
       if (statusCode === 200) return true;
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -70,7 +73,7 @@ export default function ClothApi() {
       }
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -85,7 +88,7 @@ export default function ClothApi() {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명:', err);
     }
   };
@@ -123,7 +126,7 @@ export default function ClothApi() {
       const { result } = await userService.getOOTDWithCloth(params);
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -136,10 +139,14 @@ export default function ClothApi() {
       const { result } = await userService.getUserTaggedClothList(params);
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
+
+  if (error) {
+    throw error;
+  }
 
   return {
     postCloth,
