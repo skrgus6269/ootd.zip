@@ -13,7 +13,7 @@ export type withdrawBlockType = {
 
 interface DeclarationModalProps {
   type: string;
-  userName?: string;
+  userName: string;
   ID: number;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;

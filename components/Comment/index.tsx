@@ -28,8 +28,8 @@ export interface CommentProps {
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
-  reportUserName: string;
   setReportUserName: Dispatch<SetStateAction<string>>;
+  setReportID: Dispatch<SetStateAction<number>>;
 }
 
 function Comment({
@@ -49,8 +49,8 @@ function Comment({
   setDeclaration,
   receivedDeclaration,
   setReceivedDeclaration,
-  reportUserName,
   setReportUserName,
+  setReportID,
 }: CommentProps) {
   const { deleteOOTDComment } = OOTDApi();
 
@@ -64,6 +64,7 @@ function Comment({
   };
 
   const onClickReportButton = async () => {
+    setReportID(id);
     setReportUserName(userName);
     setDeclaration(true);
   };

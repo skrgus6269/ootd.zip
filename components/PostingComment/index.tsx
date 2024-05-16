@@ -134,8 +134,8 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
-              reportUserName={reportUserName}
               setReportUserName={setReportUserName}
+              setReportID={setReportID}
             />
           </>
         ))}
@@ -148,6 +148,7 @@ export default function PostingComment({
 
   const [reportStatus, setReportStatus] = useState<Boolean>(false);
   const [reportUserName, setReportUserName] = useState<string>('');
+  const [reportID, setReportID] = useState<number>(0);
 
   const ComentAll = () => {
     return (
@@ -173,20 +174,9 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
-              reportUserName={reportUserName}
               setReportUserName={setReportUserName}
+              setReportID={setReportID}
             />
-            {declaration && (
-              <DeclarationModal
-                type="COMMENT"
-                userName={reportUserName}
-                ID={item.id}
-                declaration={declaration}
-                setDeclaration={setDeclaration}
-                setReceivedDeclaration={setReceivedDeclaration}
-                setReportStatus={setReportStatus}
-              />
-            )}
             {receivedDeclaration && (
               <ReceivedDeclarationModal
                 ID={item.id}
@@ -223,20 +213,9 @@ export default function PostingComment({
                     setDeclaration={setDeclaration}
                     receivedDeclaration={receivedDeclaration}
                     setReceivedDeclaration={setReceivedDeclaration}
-                    reportUserName={reportUserName}
                     setReportUserName={setReportUserName}
+                    setReportID={setReportID}
                   />
-                  {declaration && (
-                    <DeclarationModal
-                      type="COMMENT"
-                      userName={reportUserName}
-                      ID={items.id}
-                      declaration={declaration}
-                      setDeclaration={setDeclaration}
-                      setReceivedDeclaration={setReceivedDeclaration}
-                      setReportStatus={setReportStatus}
-                    />
-                  )}
                   {receivedDeclaration && (
                     <ReceivedDeclarationModal
                       ID={items.id}
@@ -254,6 +233,17 @@ export default function PostingComment({
         <S.CommentOpenButton onClick={onClickCommentButton}>
           <Caption1>댓글 접기</Caption1>
         </S.CommentOpenButton>
+        {declaration && (
+          <DeclarationModal
+            type="COMMENT"
+            userName={reportUserName}
+            ID={reportID}
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
+          />
+        )}
       </S.Layout>
     );
   };
