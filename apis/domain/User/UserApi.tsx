@@ -5,8 +5,10 @@ import {
 } from '@/apis/_api/type';
 import { authService, userService } from '@/apis/_service';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
+import { useState } from 'react';
 
 export const UserApi = () => {
+  const [error, setError] = useState<any>();
   // 사용자 프로필 정보 조회
   const getMypage = async (id: number) => {
     try {
@@ -16,8 +18,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -30,8 +32,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -45,8 +47,8 @@ export const UserApi = () => {
         return false;
       }
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -58,8 +60,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -71,8 +73,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
   const getSearchUserFollowing = async (params: getSearchUserParams) => {
@@ -83,8 +85,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
   const getUserStyle = async () => {
@@ -95,8 +97,8 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -110,8 +112,8 @@ export const UserApi = () => {
       }
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명:', err);
+      setError(err);
     }
   };
 
@@ -123,8 +125,8 @@ export const UserApi = () => {
       if (statusCode === 200) return true;
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명:', err);
+      setError(err);
     }
   };
 
@@ -139,8 +141,8 @@ export const UserApi = () => {
       if (status === 200) return true;
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명:', err);
+      setError(err);
     }
   };
 
@@ -153,11 +155,11 @@ export const UserApi = () => {
       }
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
-
+  if (error) throw error;
   return {
     getMypage,
     getProfile,

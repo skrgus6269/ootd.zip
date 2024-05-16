@@ -40,7 +40,7 @@ export default function Setting() {
   };
 
   useEffect(() => {
-    if (router.query.state !== '') {
+    if (router.query.state !== undefined) {
       setQueryState(true);
     }
   }, []);

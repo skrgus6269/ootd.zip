@@ -4,7 +4,6 @@ import { Layout } from './style';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import { useState } from 'react';
 import Link from 'next/link';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 export interface MainFavoriteCardProps {

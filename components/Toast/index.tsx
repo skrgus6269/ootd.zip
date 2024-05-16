@@ -6,7 +6,7 @@ import { AiOutlineExclamationCircle } from 'react-icons/ai';
 interface ToastProps {
   text: string;
   state: Boolean;
-  setState?: Dispatch<SetStateAction<Boolean>>;
+  setState: Dispatch<SetStateAction<Boolean>>;
   className?: string;
   actionText?: string;
   actionFunction?: () => void;
@@ -24,7 +24,7 @@ export default function Toast({
 }: ToastProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      setState!(false);
+      setState(false);
     }, 3000);
 
     return () => {

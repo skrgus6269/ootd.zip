@@ -3,7 +3,7 @@ import S from './style';
 import { useRouter } from 'next/router';
 import { followListType } from '@/pages/follow-list/[...UserId]';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 import SearchBar from '@/components/SearchBar';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { UserApi } from '@/apis/domain/User/UserApi';
