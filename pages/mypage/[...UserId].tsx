@@ -52,7 +52,7 @@ export default function MyPage() {
     };
 
     ferchData();
-  }, [getMypage, router.isReady, router.query.UserId]);
+  }, [router.isReady, router.query.UserId]);
 
   useEffect(() => {
     if (router.query.state !== '') {
