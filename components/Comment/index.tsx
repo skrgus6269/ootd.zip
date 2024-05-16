@@ -34,6 +34,7 @@ export interface CommentProps {
 
 function Comment({
   id,
+  userId,
   userName,
   userImage,
   content,
@@ -64,7 +65,7 @@ function Comment({
   };
 
   const onClickReportButton = async () => {
-    setReportID(id);
+    setReportID(userId);
     setReportUserName(userName);
     setDeclaration(true);
   };

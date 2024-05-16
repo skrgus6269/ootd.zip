@@ -8,6 +8,7 @@ import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import TabView from '@/components/TabView';
 import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
 import Explore from '@/components/Domain/Main/Explore';
+import Toast from '@/components/Toast';
 
 export default function Main() {
   const router = useRouter();
@@ -22,6 +23,10 @@ export default function Main() {
     };
     fetchData();
   }, []);
+
+  const [notOpenState, setNotOpenState] = useState<Boolean>(false);
+  const [goToMypageAlertState, setGoToMypageAlertState] =
+    useState<Boolean>(false);
 
   return (
     <S.Layout isExistNotReadAlarm={isExistNotReadAlarm}>
@@ -55,6 +60,17 @@ export default function Main() {
             </TabView.Tab>
           </TabView.Tabs>
         </TabView>
+      )}
+      {notOpenState && (
+        <Toast
+          className="toast"
+          text="공개로 설정된 옷만 태그할 수 있어요."
+          state={notOpenState}
+          setState={setNotOpenState}
+          actionText="옷장으로 이동"
+          actionFunction={() => setGoToMypageAlertState(true)}
+          isHelperText={true}
+        />
       )}
     </S.Layout>
   );

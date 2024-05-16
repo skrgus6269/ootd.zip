@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlineExclamationCircle } from 'react-icons/ai';
 import { Button3, Caption1, Headline2, Body3 } from '../UI';
 import Toast from '../Toast';
 import { BlockApi } from '@/apis/domain/Block/BlockApi';
+import { useRouter } from 'next/router';
 
 interface ReceivedDeclarationModalProps {
   type: string;
@@ -23,29 +24,42 @@ export default function ReceivedDeclarationModal({
   setReceivedDeclaration,
   ID,
 }: ReceivedDeclarationModalProps) {
-  console.log('IDIDID', ID);
-
   const { postUserBlock } = BlockApi();
+  const router = useRouter();
 
   const blockUserButton = async () => {
     const blockUser = await postUserBlock({ userId: ID });
     console.log(blockUser);
 
-    // if (addReportSuccess.divisionCode === 'UB003') {
-    //   setReceivedDeclaration(true); // 차단 모달 열기
-    //   setDeclaration(false); // 신고하기 모달 닫기
-    //   setReportStatus(false);
-    // } else if (
-    //   addReportSuccess.result &&
-    //   addReportSuccess.result.id &&
-    //   addReportSuccess.result.reportCount > 0
-    // ) {
-    //   setReceivedDeclaration(true); // 차단 모달 열기
-    //   setDeclaration(false); // 신고하기 모달 닫기
-    //   setReportStatus(true);
-    // } else {
-    //   alert('신고 실패');
-    // }
+    if (blockUser.divisionCode === 'UB003') {
+      setReceivedDeclaration(false); // 차단 모달 닫기
+      setReportStatus(false);
+      goBackWithParams;
+    } else if (blockUser === '성공') {
+      setReceivedDeclaration(false); // 차단 모달 닫기
+      setReportStatus(true);
+      goBackWithParams;
+    } else {
+      alert('차단 실패');
+    }
+  };
+
+  const goBackWithParams = () => {
+    const currentUrl = router.asPath;
+    const previousUrl = document.referrer || '/default-fallback-url'; // referrer가 없는 경우를 대비한 기본 경로
+    const params = new URLSearchParams({
+      param1: 'value1',
+      param2: 'value2',
+    }).toString();
+
+    const newUrl = `${previousUrl}?${params}`;
+
+    // 현재 URL과 이전 URL이 동일하면 replace, 아니면 push를 사용하여 새로운 URL로 이동합니다.
+    if (previousUrl === currentUrl) {
+      router.replace(newUrl);
+    } else {
+      router.push(newUrl);
+    }
   };
 
   return (
@@ -61,7 +75,7 @@ export default function ReceivedDeclarationModal({
           <AiOutlineExclamationCircle className="infoIcon" />
           <Headline2 className="reportTitle">
             {reportStatus === true
-              ? '신고가 접수되었습니다.'
+              ? '신고가 완료되었습니다.'
               : `이미 신고한 ${type}입니다.`}
           </Headline2>
           <S.ColorSpan>

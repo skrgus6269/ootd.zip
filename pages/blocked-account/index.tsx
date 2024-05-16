@@ -80,9 +80,9 @@ export default function BlockedAccount() {
     userID: number
   ) => {
     await deleteUserBlock(deleteID);
-    setAlertOpen(true);
     setFollowID(userID);
     setFollowUserName(userName);
+    setAlertOpen(true);
   };
 
   return (
