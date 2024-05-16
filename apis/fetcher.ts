@@ -38,6 +38,18 @@ fetcher.interceptors.response.use(
       // 리프레시 중인 경우 요청 보류
       return fetcher.request(error.config); // 리프레시가 완료된 후 다시 시도
     }
+    if (error.response.data.statusCode === 404) {
+      throw Error(error.response.data.statusCode);
+    }
+    if (error.response.data.statusCode === 500) {
+      throw Error(error.response.data.statusCode);
+    }
+    if (
+      error.code === 'ECONNABORTED' ||
+      error.response.data.statusCode === 408
+    ) {
+      throw Error(error.response.data.statusCode);
+    }
   }
 );
 

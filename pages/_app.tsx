@@ -14,6 +14,7 @@ import '@/styles/font/font.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // eslint-disable-next-line @next/next/no-document-import-in-page
 import Head from 'next/head';
+import MyErrorBoundary from '@/components/MyErrorBoundary';
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -53,7 +54,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                   initial-scale="1.0"
                 />
               </Head>
-              <Component {...pageProps} />
+              <MyErrorBoundary>
+                <Component {...pageProps} />
+              </MyErrorBoundary>
             </Layout>
             <Script
               src="https://developers.kakao.com/sdk/js/kakao.js"
