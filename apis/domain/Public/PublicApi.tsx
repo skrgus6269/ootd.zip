@@ -1,15 +1,15 @@
 import { authService, userService } from '@/apis/_service';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import { useState } from 'react';
-export const PublicApi = () => {
-  const [error, setError] = useState<any>();
+export default function PublicApi() {
+  // const [error, setError] = useState<any>();
 
   const follow = async (id: number) => {
     try {
       const data = await userService.follow(id);
       return data;
     } catch (err) {
-      setError(err);
+      // setError(err);
     }
   };
 
@@ -18,7 +18,7 @@ export const PublicApi = () => {
       const data = await userService.unFollow(id);
       return data;
     } catch (err) {
-      setError(err);
+      // setError(err);
     }
   };
 
@@ -28,7 +28,7 @@ export const PublicApi = () => {
 
       return result;
     } catch (err) {
-      setError(err);
+      // setError(err);
     }
   };
 
@@ -45,11 +45,11 @@ export const PublicApi = () => {
     sendReactNativeMessage({ type: 'refreshToken', payload: refreshToken });
   };
 
-  if (error) throw error;
+  // if (error) throw error;
   return {
     follow,
     unFollow,
     getUserId,
     getNewToken,
   } as const;
-};
+}
