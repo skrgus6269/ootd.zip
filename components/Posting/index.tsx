@@ -43,6 +43,8 @@ interface PostingProps {
   myPost: Boolean;
   setGetPostReRender: Dispatch<SetStateAction<number>>;
   getPostReRender: number;
+  setGoBackAfterBlock: Dispatch<SetStateAction<Boolean>>;
+  setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function Posting({
@@ -51,6 +53,8 @@ export default function Posting({
   myPost,
   getPostReRender,
   setGetPostReRender,
+  setGoBackAfterBlock,
+  setBlockStatus,
 }: PostingProps) {
   const [followState, setFollowState] = useState<Boolean>(false);
   const [heartState, setHeartState] = useState<Boolean>(false);
@@ -352,6 +356,8 @@ export default function Posting({
             reportStatus={reportStatus}
             receivedDeclaration={receivedDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
+            setGoBackAfterBlock={setGoBackAfterBlock}
+            setBlockStatus={setBlockStatus}
           />
         )}
         {toastOpen && !data.isPrivate && (

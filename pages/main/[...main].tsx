@@ -24,9 +24,13 @@ export default function Main() {
     fetchData();
   }, []);
 
-  const [notOpenState, setNotOpenState] = useState<Boolean>(false);
-  const [goToMypageAlertState, setGoToMypageAlertState] =
-    useState<Boolean>(false);
+  const [queryState, setQueryState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if (router.query.block !== undefined) {
+      setQueryState(true);
+    }
+  }, []);
 
   return (
     <S.Layout isExistNotReadAlarm={isExistNotReadAlarm}>
@@ -61,14 +65,18 @@ export default function Main() {
           </TabView.Tabs>
         </TabView>
       )}
-      {notOpenState && (
+      {queryState && (
         <Toast
           className="toast"
-          text="공개로 설정된 옷만 태그할 수 있어요."
-          state={notOpenState}
-          setState={setNotOpenState}
-          actionText="옷장으로 이동"
-          actionFunction={() => setGoToMypageAlertState(true)}
+          text={
+            router.query.block === 'true'
+              ? '사용자를 차단하였습니다.'
+              : '사용자를 이미 차단하였습니다.'
+          }
+          state={queryState}
+          setState={setQueryState}
+          actionText="차단한 계정 관리"
+          actionFunction={() => router.push('/blocked-account')}
           isHelperText={true}
         />
       )}

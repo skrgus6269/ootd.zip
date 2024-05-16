@@ -14,6 +14,8 @@ interface ReceivedDeclarationModalProps {
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
   ID: number;
+  setGoBackAfterBlock: Dispatch<SetStateAction<Boolean>>;
+  setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function ReceivedDeclarationModal({
@@ -23,6 +25,8 @@ export default function ReceivedDeclarationModal({
   receivedDeclaration,
   setReceivedDeclaration,
   ID,
+  setGoBackAfterBlock,
+  setBlockStatus,
 }: ReceivedDeclarationModalProps) {
   const { postUserBlock } = BlockApi();
   const router = useRouter();
@@ -33,32 +37,12 @@ export default function ReceivedDeclarationModal({
 
     if (blockUser.divisionCode === 'UB003') {
       setReceivedDeclaration(false); // 차단 모달 닫기
-      setReportStatus(false);
-      goBackWithParams;
+      setBlockStatus(false);
+      setGoBackAfterBlock(true);
     } else if (blockUser === '성공') {
       setReceivedDeclaration(false); // 차단 모달 닫기
-      setReportStatus(true);
-      goBackWithParams;
-    } else {
-      alert('차단 실패');
-    }
-  };
-
-  const goBackWithParams = () => {
-    const currentUrl = router.asPath;
-    const previousUrl = document.referrer || '/default-fallback-url'; // referrer가 없는 경우를 대비한 기본 경로
-    const params = new URLSearchParams({
-      param1: 'value1',
-      param2: 'value2',
-    }).toString();
-
-    const newUrl = `${previousUrl}?${params}`;
-
-    // 현재 URL과 이전 URL이 동일하면 replace, 아니면 push를 사용하여 새로운 URL로 이동합니다.
-    if (previousUrl === currentUrl) {
-      router.replace(newUrl);
-    } else {
-      router.push(newUrl);
+      setBlockStatus(true);
+      setGoBackAfterBlock(true);
     }
   };
 

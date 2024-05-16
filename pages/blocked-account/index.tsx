@@ -59,7 +59,7 @@ export default function BlockedAccount() {
 
   useEffect(() => {
     reset();
-  }, [toastOpen]);
+  }, [alertOpen]);
 
   const { follow } = PublicApi();
 
