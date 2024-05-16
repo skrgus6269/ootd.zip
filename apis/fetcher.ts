@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NEXT_PUBLIC_API_HOST } from '@/constants/develop.constants';
-import { PublicApi } from './domain/Public/PublicApi';
+import PublicApi from './domain/Public/PublicApi';
 
 let refreshing = false; // 리프레시 중인지 여부를 추적하는 변수
 
