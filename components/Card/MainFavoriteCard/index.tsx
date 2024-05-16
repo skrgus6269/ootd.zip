@@ -43,7 +43,7 @@ export default function MainFavoriteCard({
       size="228px"
     >
       <Layout>
-        <Link className="userName" href={`mypage/${writerId}`}>
+        <Link className="userName" href={`/mypage/${writerId}`}>
           <Body3>{writerName}</Body3>
         </Link>
         <LikeToggle
