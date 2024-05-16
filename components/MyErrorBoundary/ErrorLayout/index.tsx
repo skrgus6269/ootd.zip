@@ -3,12 +3,14 @@ import S from './style';
 import { useRouter } from 'next/router';
 import Portal from '@/components/Portal';
 import Toast from '@/components/Toast';
+import { Dispatch, SetStateAction } from 'react';
 
 interface ErrorLayoutPropsType {
   headline: string;
   body: React.ReactNode;
   resetErrorBoundary: () => void;
   URLState?: Boolean;
+  setURLState?: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function ErrorLayout({
@@ -16,6 +18,7 @@ export default function ErrorLayout({
   body,
   URLState,
   resetErrorBoundary,
+  setURLState,
 }: ErrorLayoutPropsType) {
   const router = useRouter();
 
@@ -39,7 +42,13 @@ export default function ErrorLayout({
             </button>
           </S.Button>
         </S.Alert>
-        {URLState && <Toast text="이메일이 클립보드에 복사되었습니다." />}
+        {URLState && (
+          <Toast
+            state={URLState}
+            setState={setURLState!}
+            text="이메일이 클립보드에 복사되었습니다."
+          />
+        )}
       </S.Layout>
     </Portal>
   );
