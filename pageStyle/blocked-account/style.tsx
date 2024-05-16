@@ -1,36 +1,23 @@
 import styled from 'styled-components';
 
 const Layout = styled.div`
-  padding: 0px 20px;
-`;
-
-const Breadcrumb = styled.div`
-  margin-top: 32px;
-  margin-left: 20px;
-  margin-bottom: 64px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
+  padding: 8px 20px;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
 
-interface TextProps {
-  state: Boolean;
-}
+  img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
 
-const BreadcrumbText = styled.div<TextProps>`
-  display: flex;
-  gap: 4px;
-  color: ${(props) =>
-    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
-`;
-
-const SexContent = styled.div`
-  padding: 0px 20px;
-`;
-
-const StyleContent = styled.div`
-  margin-top: 68px;
-  padding: 0px 20px;
+  .userName {
+    flex: '1 0 0';
+  }
 `;
 
 interface ButtonProps {
@@ -51,10 +38,6 @@ const Button = styled.div<ButtonProps>`
 
 const S = {
   Layout,
-  Breadcrumb,
-  BreadcrumbText,
-  SexContent,
-  StyleContent,
   Button,
 };
 

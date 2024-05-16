@@ -2,55 +2,63 @@ import AppBar from '@/components/Appbar';
 import S from '@/pageStyle/blocked-account/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { Button3, Title1 } from '@/components/UI';
+import { Body3, Button3, Title1 } from '@/components/UI';
 import Header from '@/components/Header';
 import { useEffect, useState } from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
 import Toast from '@/components/Toast';
 import Background from '@/components/Background';
+import { BlockApi } from '@/apis/domain/Block/BlockApi';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import Button from '@/components/Button';
+
+export interface UserBlockListDataType {
+  id: number;
+  userId: number;
+  userName: string;
+  profileImage: string;
+}
 
 export default function BlockedAccount() {
   const router = useRouter();
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+  const [userBlockedList, setUserBlockedList] = useState<UserBlockListDataType>(
+    {
+      id: 0,
+      userId: 0,
+      userName: '',
+      profileImage:
+        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
+    }
+  );
 
-  const blockedList = [
-    {
-      profileId: 0,
-      name: 'Userame0',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 1,
-      name: 'Userame1',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 2,
-      name: 'Userame2',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 3,
-      name: 'Userame3',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 4,
-      name: 'Userame4',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-  ];
+  const { getUserBlock } = BlockApi();
+
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getUserBlock({
+      page,
+      size,
+    });
+    return data;
+  };
+
+  const {
+    data: userBlockData,
+    isLoading,
+    hasNextPage,
+    containerRef: ootdRef,
+    reset,
+  } = useInfiniteScroll({
+    fetchDataFunction,
+    initialData: [],
+    size: 7,
+  });
+
+  useEffect(() => {
+    console.log(userBlockData);
+    // setUserBlockedList(userBlockData)
+  }, []);
 
   const onClickFollow = () => {
     setAlertOpen(true);
@@ -68,6 +76,10 @@ export default function BlockedAccount() {
     setAlertOpen(false);
   };
 
+  const onClick = () => {
+    console.log(1);
+  };
+
   return (
     <>
       <Background isOpen={alertOpen} onClick={() => setAlertOpen(false)} />
@@ -82,16 +94,28 @@ export default function BlockedAccount() {
         rightProps={<></>}
       />
       <Header text="차단한 계정" />
-      {blockedList &&
-        blockedList.map((item, index) => {
+      {/* {userBlockedList &&
+        userBlockedList.map((item, index) => {
           return (
-            <FollowBlock
-              key={index}
-              data={item}
-              onClick={onClickFollow}
-              state="blcok"
-            />
-          );
+            <S.Layout key={index}>
+              <img src={item.profileImage} alt="" />
+              <Body3 state="emphasis" className="userName">
+                {item.userName}
+              </Body3>
+                <Button
+                  border={false}
+                  size="small"
+                  backgroundColor="grey_95"
+                  color="grey_00"
+                  className="followButton"
+                  onClick={onClick}
+                >
+                  <Body3>해제</Body3>
+                </Button>
+
+            </S.Layout>
+          )
+          
         })}
 
       {alertOpen && (
@@ -99,7 +123,7 @@ export default function BlockedAccount() {
           onClickYesButton={onClickYesButton}
           onClickNoButton={onClickNoButton}
         />
-      )}
+      )} */}
       {follow && (
         <Toast
           text="@@@님을 팔로우합니다."
