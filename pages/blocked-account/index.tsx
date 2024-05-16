@@ -4,7 +4,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { Body3, Button3, Title1 } from '@/components/UI';
 import Header from '@/components/Header';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
 import Toast from '@/components/Toast';
@@ -12,6 +12,11 @@ import Background from '@/components/Background';
 import { BlockApi } from '@/apis/domain/Block/BlockApi';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import Button from '@/components/Button';
+import Spinner from '@/components/Spinner';
+import NextImage from '@/components/NextImage';
+import Avatar from '@/public/images/Avatar.svg';
+import BlockUserAlert from '@/components/Domain/BlockUser/BlockUserAlert';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 
 export interface UserBlockListDataType {
   id: number;
@@ -23,15 +28,9 @@ export interface UserBlockListDataType {
 export default function BlockedAccount() {
   const router = useRouter();
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
-  const [userBlockedList, setUserBlockedList] = useState<UserBlockListDataType>(
-    {
-      id: 0,
-      userId: 0,
-      userName: '',
-      profileImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    }
-  );
+  const [userBlockedList, setUserBlockedList] = useState<
+    UserBlockListDataType[]
+  >([]);
 
   const { getUserBlock } = BlockApi();
 
@@ -43,41 +42,47 @@ export default function BlockedAccount() {
     return data;
   };
 
-  const {
-    data: userBlockData,
-    isLoading,
-    hasNextPage,
-    containerRef: ootdRef,
-    reset,
-  } = useInfiniteScroll({
-    fetchDataFunction,
-    initialData: [],
-    size: 7,
-  });
+  const { data, isLoading, hasNextPage, containerRef, reset } =
+    useInfiniteScroll({
+      fetchDataFunction,
+      initialData: [],
+      size: 7,
+    });
 
   useEffect(() => {
-    console.log(userBlockData);
-    // setUserBlockedList(userBlockData)
-  }, []);
+    setUserBlockedList(data);
+  }, [data]);
 
-  const onClickFollow = () => {
-    setAlertOpen(true);
-  };
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
+  const [followID, setFollowID] = useState<number>(0);
+  const [followUserName, setFollowUserName] = useState<string>('');
 
-  const [follow, setFollow] = useState<Boolean>(false);
+  useEffect(() => {
+    reset();
+  }, [toastOpen]);
 
-  const onClickYesButton = () => {
-    console.log('팔로우');
+  const { follow } = PublicApi();
+
+  const onClickYesButton = async () => {
     setAlertOpen(false);
-    setFollow(true);
+    setToastOpen(true);
+    await follow(followID);
   };
 
   const onClickNoButton = () => {
     setAlertOpen(false);
   };
 
-  const onClick = () => {
-    console.log(1);
+  const { deleteUserBlock } = BlockApi();
+  const onClickDelete = async (
+    deleteID: number,
+    userName: string,
+    userID: number
+  ) => {
+    await deleteUserBlock(deleteID);
+    setAlertOpen(true);
+    setFollowID(userID);
+    setFollowUserName(userName);
   };
 
   return (
@@ -94,43 +99,60 @@ export default function BlockedAccount() {
         rightProps={<></>}
       />
       <Header text="차단한 계정" />
-      {/* {userBlockedList &&
-        userBlockedList.map((item, index) => {
-          return (
-            <S.Layout key={index}>
-              <img src={item.profileImage} alt="" />
-              <Body3 state="emphasis" className="userName">
-                {item.userName}
-              </Body3>
-                <Button
-                  border={false}
-                  size="small"
-                  backgroundColor="grey_95"
-                  color="grey_00"
-                  className="followButton"
-                  onClick={onClick}
+      <S.WholeLayout ref={containerRef}>
+        {userBlockedList &&
+          userBlockedList.map((item, index) => {
+            return (
+              <S.Layout key={item.id}>
+                {item.profileImage === '' ? (
+                  <Avatar
+                    onClick={() => router.push(`/mypage/${item.userId}`)}
+                    className="avatar"
+                  />
+                ) : (
+                  <NextImage
+                    width={52}
+                    height={52}
+                    fill={false}
+                    src={item.profileImage}
+                    onClick={() => router.push(`/mypage/${item.userId}`)}
+                    alt=""
+                  />
+                )}
+                <Body3
+                  state="emphasis"
+                  className="userName"
+                  onClick={() => router.push(`/mypage/${item.userId}`)}
                 >
-                  <Body3>해제</Body3>
-                </Button>
+                  {item.userName}
+                </Body3>
+                <Button3
+                  className="deleteButton"
+                  onClick={() =>
+                    onClickDelete(item.id, item.userName, item.userId)
+                  }
+                >
+                  해제
+                </Button3>
+                {isLoading && hasNextPage && <Spinner />}
+              </S.Layout>
+            );
+          })}
 
-            </S.Layout>
-          )
-          
-        })}
-
-      {alertOpen && (
-        <BlockAlert
-          onClickYesButton={onClickYesButton}
-          onClickNoButton={onClickNoButton}
-        />
-      )} */}
-      {follow && (
-        <Toast
-          text="@@@님을 팔로우합니다."
-          setState={setFollow}
-          state={follow}
-        />
-      )}
+        {alertOpen && (
+          <BlockUserAlert
+            onClickYesButton={onClickYesButton}
+            onClickNoButton={onClickNoButton}
+          />
+        )}
+        {toastOpen && followUserName && (
+          <Toast
+            text={`${followUserName}님을 팔로우합니다.`}
+            setState={setToastOpen}
+            state={toastOpen}
+          />
+        )}
+      </S.WholeLayout>
     </>
   );
 }
