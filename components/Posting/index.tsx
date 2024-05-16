@@ -27,7 +27,7 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 import Avatar from '@/public/images/Avatar.svg';
 import Toast from '../Toast';
 import FixModal from '../Domain/OOTD/FixModal';
