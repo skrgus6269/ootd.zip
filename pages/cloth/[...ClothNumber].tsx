@@ -142,6 +142,9 @@ const Cloth = () => {
     if (deleteOpen) setDeleteOpen(false);
   };
 
+  const [goBackAfterBlock, setGoBackAfterBlock] = useState<Boolean>(false); // 사용자 차단 이후 스낵바 이용하여 이동
+  const [blockStatus, setBlockStatus] = useState<Boolean>(false); // 사용자 차단 상태 값
+
   return (
     <>
       <AppBar
@@ -206,12 +209,13 @@ const Cloth = () => {
       )}
       {data && receivedDeclaration && (
         <ReceivedDeclarationModal
-          ID={Number(data.userId)}
           type="게시글"
-          setReportStatus={setReportStatus}
           reportStatus={reportStatus}
           receivedDeclaration={receivedDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
+          ID={Number(data.userId)}
+          setGoBackAfterBlock={setGoBackAfterBlock}
+          setBlockStatus={setBlockStatus}
         />
       )}
       {URLState && (
