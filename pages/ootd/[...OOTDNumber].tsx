@@ -174,6 +174,8 @@ const OOTD: ComponentWithLayout = () => {
         router.push(`/main/explore?block=${blockStatus}`);
       } else if (router.query.OOTDNumber![1] === 'curation') {
         router.push(`/main/curation?block=${blockStatus}`);
+      } else if (router.query.OOTDNumber![1] === 'search') {
+        router.push(`/search?block=${blockStatus}`);
       } else {
         router.back();
       }
