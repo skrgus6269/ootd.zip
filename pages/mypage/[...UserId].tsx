@@ -15,6 +15,7 @@ import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
 import OtherModal from '@/components/Domain/MyPage/OtherModal';
 import Background from '@/components/Background';
 import PublicApi from '@/apis/domain/Public/PublicApi';
+import { BlockApi } from '@/apis/domain/Block/BlockApi';
 
 export default function MyPage() {
   const router = useRouter();
@@ -65,8 +66,26 @@ export default function MyPage() {
     if (blockOpen) setBlockOpen(false);
   };
 
+  const { postUserBlock } = BlockApi();
+
   const onClickYesButton = async () => {
-    console.log(11122);
+    const blockUser = await postUserBlock({ userId: userProfileData.userId });
+
+    if (blockUser) {
+      if (blockUser.divisionCode === 'UB003') {
+        if (router.query.UserId![1] === 'search') {
+          router.push(`/search?block=false`);
+        } else {
+          router.push(`/main/curation?block=false}`);
+        }
+      } else if (blockUser === '성공') {
+        if (router.query.UserId![1] === 'search') {
+          router.push(`/search?block=true`);
+        } else {
+          router.push(`/main/curation?block=true`);
+        }
+      }
+    }
   };
 
   const onClickNoButton = () => {
@@ -105,7 +124,7 @@ export default function MyPage() {
               />
             ) : (
               <>
-                {/* <AiOutlineEllipsis onClick={() => setBlockOpen(true)} /> */}
+                <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />
               </>
             )
           }
