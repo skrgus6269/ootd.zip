@@ -28,13 +28,7 @@ export interface ClothWhereBuy {
 const AddCloth: ComponentWithLayout = () => {
   const steps = ['편집', '제품명', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([
-    {
-      ootdId: 0,
-      ootdImage:
-        'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    },
-  ]);
+  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>();
   const [clothName, setClothName] = useState<string>('');
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null

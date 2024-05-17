@@ -7,33 +7,43 @@ import {
 } from '@/constants/develop.constants';
 import { useRouter } from 'next/router';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
+import { useState } from 'react';
 
 export const SignInApi = () => {
   const router = useRouter();
+  const [error, setError] = useState<any>();
 
   // callback 페이지에서 사용하는  API
   const login = async (payload: QueryParams) => {
-    // 액세스 토큰을 받아온다.
-    const data = await authService.login(payload);
-    if (data.statusCode == 400) {
-      return false;
+    try {
+      // 액세스 토큰을 받아온다.
+      const data = await authService.login(payload);
+      if (data.statusCode == 400) {
+        return false;
+      }
+
+      if (data.accessToken) {
+        // 쿠키에 담아준다.
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+
+        sendReactNativeMessage({
+          type: 'accessToken',
+          payload: data.accessToken,
+        });
+
+        sendReactNativeMessage({
+          type: 'refreshToken',
+          payload: data.refreshToken,
+        });
+        return true;
+      }
+    } catch (error) {
+      setError(error);
+      router.replace('/sign-in');
     }
-
-    if (data.accessToken) {
-      // 쿠키에 담아준다.
-      localStorage.setItem('accessToken', data.accessToken);
-      localStorage.setItem('refreshToken', data.refreshToken);
-
-      sendReactNativeMessage({
-        type: 'accessToken',
-        payload: data.accessToken,
-      });
-
-      sendReactNativeMessage({
-        type: 'refreshToken',
-        payload: data.refreshToken,
-      });
-      return true;
+    if (error) {
+      throw error;
     }
   };
 

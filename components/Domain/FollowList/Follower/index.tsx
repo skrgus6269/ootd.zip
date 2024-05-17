@@ -8,7 +8,7 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import NextImage from '@/components/NextImage';
 import Avatar from '@/public/images/Avatar.svg';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import Spinner from '@/components/Spinner';

@@ -7,8 +7,10 @@ import {
   getOOTDCommentParams,
   getSearchOOTDParams,
 } from '@/apis/_api/type';
+import { useState } from 'react';
 
 export const OOTDApi = () => {
+  const [error, setError] = useState<any>(null);
   //ootd 조회
   const getOOTD = async (params: getOOTDParams) => {
     try {
@@ -16,7 +18,7 @@ export const OOTDApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -28,7 +30,7 @@ export const OOTDApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -43,7 +45,7 @@ export const OOTDApi = () => {
         return false;
       }
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -61,7 +63,7 @@ export const OOTDApi = () => {
       if (statusCode === 200) return true;
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -73,7 +75,7 @@ export const OOTDApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -84,7 +86,7 @@ export const OOTDApi = () => {
       const data = await userService.postOOTDComent(payload);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -95,7 +97,7 @@ export const OOTDApi = () => {
       const data = await userService.DeleteOOTDComent(id);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -108,7 +110,7 @@ export const OOTDApi = () => {
       const data = await userService.patchOOTDIsPrivate(ootdId, payload);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -119,7 +121,7 @@ export const OOTDApi = () => {
       const data = await userService.postOOTDBookmark(id);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -133,7 +135,7 @@ export const OOTDApi = () => {
         return data;
       }
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -144,7 +146,7 @@ export const OOTDApi = () => {
       const data = await userService.postOOTDLike(id);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -155,7 +157,7 @@ export const OOTDApi = () => {
       const data = await userService.deleteOOTDLike(id);
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -166,7 +168,7 @@ export const OOTDApi = () => {
       const data = await userService.lookUpOOTDAll();
       return data;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -177,7 +179,7 @@ export const OOTDApi = () => {
       const { result } = await userService.otherOOTD(userId, ootdId);
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -188,7 +190,7 @@ export const OOTDApi = () => {
       const { result } = await userService.getSimilarOOTD(ootdId);
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -199,7 +201,7 @@ export const OOTDApi = () => {
       const { result } = await systemService.getStyle();
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
@@ -210,10 +212,14 @@ export const OOTDApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
+      setError(err);
       console.log('에러명', err);
     }
   };
+
+  if (error) {
+    throw error;
+  }
 
   return {
     postOOTD,

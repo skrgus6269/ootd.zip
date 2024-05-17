@@ -4,7 +4,6 @@ import { Layout } from './style';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import { useState } from 'react';
 import Link from 'next/link';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 export interface MainFavoriteCardProps {
@@ -44,7 +43,7 @@ export default function MainFavoriteCard({
       size="228px"
     >
       <Layout>
-        <Link className="userName" href={`mypage/${writerId}`}>
+        <Link className="userName" href={`/mypage/${writerId}`}>
           <Body3>{writerName}</Body3>
         </Link>
         <LikeToggle

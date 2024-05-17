@@ -13,7 +13,7 @@ import Spinner from '@/components/Spinner';
 import Button from '@/components/Button';
 import Avatar from '@/public/images/Avatar.svg';
 import NextImage from '@/components/NextImage';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 
 export type ProfileListType = {
   id: number;

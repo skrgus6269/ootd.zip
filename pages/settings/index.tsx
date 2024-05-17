@@ -40,7 +40,7 @@ export default function Setting() {
   };
 
   useEffect(() => {
-    if (router.query.state !== '') {
+    if (router.query.state !== undefined) {
       setQueryState(true);
     }
   }, []);
@@ -106,6 +106,10 @@ export default function Setting() {
             <SettingBlock
               text="개인정보 처리 방침"
               buttonClick={() => router.push('/privacy-policy')}
+            />
+            <SettingBlock
+              text="공지사항"
+              buttonClick={() => router.push('/announcement')}
             />
             {/* <SettingBlock
               text="오픈소스 라이선스"

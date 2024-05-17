@@ -1,7 +1,9 @@
 import { postRegistUserInfoPayload } from '@/apis/_api/type';
 import { authService } from '@/apis/_service';
+import { useState } from 'react';
 
 export const RegisterApi = () => {
+  const [error, setError] = useState<any>();
   //닉네임 중복 확인
   const checkName = async (name: string) => {
     try {
@@ -9,8 +11,8 @@ export const RegisterApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -22,8 +24,8 @@ export const RegisterApi = () => {
       if (statusCode === 200) return true;
       return false;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
 
@@ -34,11 +36,11 @@ export const RegisterApi = () => {
 
       return result;
     } catch (err) {
-      alert('관리자에게 문의하세요');
       console.log('에러명', err);
+      setError(err);
     }
   };
-
+  if (error) throw error;
   return {
     checkName,
     postRegistUserInfo,

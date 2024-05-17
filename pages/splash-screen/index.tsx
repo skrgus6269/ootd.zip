@@ -4,11 +4,11 @@ import SplashLogo from '@/public/images/SplashLogo.svg';
 import { AppLayoutProps } from '@/AppLayout';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { useSetRecoilState } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { getReactNativeMessage } from '@/utils/reactNativeMessage';
 import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 
 const SplashScreen: ComponentWithLayout = () => {
   const router = useRouter();

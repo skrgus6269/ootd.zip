@@ -158,6 +158,7 @@ export default function AddTag({
       userId: myId,
       categoryIds: typeof clicked === 'number' ? [clicked + 1] : undefined,
       searchText: searchKeyword,
+      isPrivate: true,
     });
 
     return data;

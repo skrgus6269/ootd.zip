@@ -119,7 +119,6 @@ const OOTD: ComponentWithLayout = () => {
           content: '',
         });
       } catch (err) {
-        alert('없는 페이지입니다');
         // router.push('/main');
       }
     };

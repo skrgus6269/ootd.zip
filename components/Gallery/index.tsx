@@ -13,7 +13,7 @@ import { useRecoilState } from 'recoil';
 import { storedImageKey } from '@/utils/recoil/atom';
 import Alert from '../Alert';
 import NextImage from '../NextImage';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 import Background from '../Background';
 
 interface GalleryProps {
@@ -87,7 +87,7 @@ const Gallery = ({
   }, []);
 
   useEffect(() => {
-    if (imageAndTag && item === 'Cloth') {
+    if (imageAndTag) {
       setSelectedImage(imageAndTag);
       setRealTouch(0);
     }

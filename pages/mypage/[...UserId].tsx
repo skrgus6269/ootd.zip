@@ -12,9 +12,9 @@ import { useState, useEffect } from 'react';
 import Toast from '@/components/Toast';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import OtherModal from '@/components/Domain/MyPage/OtherModal';
 import Background from '@/components/Background';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 
 export default function MyPage() {
   const router = useRouter();
@@ -52,10 +52,10 @@ export default function MyPage() {
     };
 
     ferchData();
-  }, [getMypage, router.isReady, router.query.UserId]);
+  }, [router.isReady, router.query.UserId]);
 
   useEffect(() => {
-    if (router.query.state !== '') {
+    if (router.query.state !== undefined) {
       setQueryState(true);
     }
   }, []);
