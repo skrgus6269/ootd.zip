@@ -18,7 +18,7 @@ const Title = styled.div`
     color: ${(props) => props.theme.color.grey_40};
   }
   .new {
-    color: ${(props) => props.theme.color.error};
+    color: ${(props) => props.theme.color.correct};
     position: relative;
     bottom: 1px;
   }

@@ -22,11 +22,7 @@ export default function AnnouncementBlock({
         onClick={() => setBodyIsOpen(!bodyIsOpen)}
       >
         <S.Title>
-          {newState && (
-            <Body3 className="new" state="emphasis">
-              new
-            </Body3>
-          )}
+          {newState && <Caption1 className="new">new</Caption1>}
           <Caption1 className="date">{date}</Caption1>
         </S.Title>
         <Body3 className="body">{headline}</Body3>
