@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 0px 20px;
-  height: calc(100vh - 24px);
+  height: calc(100vh - 56px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

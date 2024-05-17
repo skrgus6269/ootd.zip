@@ -23,6 +23,14 @@ const AgreeBlock = ({
 }: AgreeBlockProps) => {
   const router = useRouter();
 
+  const clickContent = () => {
+    if (title === '이용약관 동의') {
+      router.push('/agree-policy');
+    } else if (title === '개인정보처리방침 동의') {
+      router.push('/privacy-policy');
+    }
+  };
+
   return (
     <S.Layout onClick={buttonClick} state={lastItem}>
       <S.IconSpan>
@@ -40,7 +48,7 @@ const AgreeBlock = ({
       </S.IconSpan>
       <S.TextWrap>
         <Body3 className="title">{title}</Body3>
-        <Body3 state="underline" className="content">
+        <Body3 state="underline" className="content" onClick={clickContent}>
           전문확인
         </Body3>
       </S.TextWrap>
