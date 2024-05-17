@@ -30,6 +30,7 @@ export interface CommentProps {
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReportUserName: Dispatch<SetStateAction<string>>;
   setReportID: Dispatch<SetStateAction<number>>;
+  setBlockID: Dispatch<SetStateAction<number>>;
 }
 
 function Comment({
@@ -52,6 +53,7 @@ function Comment({
   setReceivedDeclaration,
   setReportUserName,
   setReportID,
+  setBlockID,
 }: CommentProps) {
   const { deleteOOTDComment } = OOTDApi();
 
@@ -65,7 +67,8 @@ function Comment({
   };
 
   const onClickReportButton = async () => {
-    setReportID(userId);
+    setReportID(id);
+    setBlockID(userId);
     setReportUserName(userName);
     setDeclaration(true);
   };
@@ -117,7 +120,9 @@ function Comment({
                   <Caption1 onClick={onClickDeleteButton}>삭제</Caption1>
                 </>
               ) : (
-                <Caption1 onClick={onClickReportButton}>신고</Caption1>
+                content !== '삭제된 댓글입니다.' && (
+                  <Caption1 onClick={onClickReportButton}>신고</Caption1>
+                )
               )}
             </S.CommentCommunication>
           ) : (

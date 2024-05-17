@@ -214,6 +214,8 @@ const OOTD: ComponentWithLayout = () => {
           setCommentWriting={setCommentWriting}
           reRender={reRender}
           setReRender={setReRender}
+          setGoBackAfterBlock={setGoBackAfterBlock}
+          setBlockStatus={setBlockStatus}
         />
         {data && <UserCloth userName={data.userName} userId={data.userId} />}
         {data && (

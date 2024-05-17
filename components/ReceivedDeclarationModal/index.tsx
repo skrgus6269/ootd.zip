@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 
 interface ReceivedDeclarationModalProps {
   type: string;
-  setReportStatus: Dispatch<SetStateAction<Boolean>>;
   reportStatus: Boolean;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -20,7 +19,6 @@ interface ReceivedDeclarationModalProps {
 
 export default function ReceivedDeclarationModal({
   type,
-  setReportStatus,
   reportStatus,
   receivedDeclaration,
   setReceivedDeclaration,
