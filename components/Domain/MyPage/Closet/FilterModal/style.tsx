@@ -24,7 +24,7 @@ interface SelectedFilterType {
 const SelectedFilter = styled.div<SelectedFilterType>`
   display: ${(props) => (props.state ? 'flex' : 'none')};
   position: fixed;
-  z-index: 999;
+  z-index: 10;
   gap: 8px;
   background-color: white;
   bottom: 72px;
@@ -63,7 +63,7 @@ const SelectedButton = styled.div<SelectedButtonState>`
   padding: 16px 20px 24px 20px;
   gap: 8px;
   position: fixed;
-  z-index: 999;
+  z-index: 10;
   background-color: white;
   width: 100%;
   max-width: 430px;

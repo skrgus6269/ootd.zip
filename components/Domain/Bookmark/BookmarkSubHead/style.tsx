@@ -13,7 +13,7 @@ const headLayout = styled.div<LayoutProps>`
   top: 0;
   left: 0;
   background-color: ${(props) => props.theme.color.grey_100};
-  z-index: 2;
+  z-index: 7;
   height: 44px;
 `;
 

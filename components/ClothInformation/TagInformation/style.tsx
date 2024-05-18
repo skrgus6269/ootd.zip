@@ -52,7 +52,7 @@ const Close = styled.div<ThemeProps>`
   top: -10px;
   width: 24px;
   height: 24px;
-  z-index: 2;
+  z-index: 5;
   div {
     background-color: white;
     border-radius: 50%;

@@ -26,14 +26,14 @@ const CheckBoxLayout = styled.div`
 
   .checkBoxImage {
     position: absolute;
-    z-index: 100;
+    z-index: 5;
     right: 8px;
     top: 8px;
   }
 
   .moreIcon {
     position: absolute;
-    z-index: 2;
+    z-index: 4;
     right: 8px;
     bottom: 8px;
   }
@@ -41,7 +41,7 @@ const CheckBoxLayout = styled.div`
 
 const Icon = styled.div`
   position: absolute;
-  z-index: 100;
+  z-index: 5;
   right: 8px;
   top: 8px;
   width: 24px;

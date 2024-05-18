@@ -4,7 +4,7 @@ const Layout = styled.div`
   padding: 0 16px;
   background-color: white;
   position: fixed;
-  z-index: 999;
+  z-index: 15;
   bottom: 70px;
   width: 160px;
   left: 50%;

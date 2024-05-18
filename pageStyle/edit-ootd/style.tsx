@@ -35,7 +35,7 @@ const OOTDImage = styled.div`
     top: 5px;
     width: 16px;
     height: 16px;
-    z-index: 1;
+    z-index: 5;
     border: none;
     background-color: white;
     border-radius: 50%;
