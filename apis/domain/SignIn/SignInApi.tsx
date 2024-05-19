@@ -2,12 +2,12 @@ import { authService } from '@/apis/_service';
 import { sendReactNativeMessage } from '@/utils/reactNativeMessage';
 import {
   NEXT_PUBLIC_APPLE_URI,
-  NEXT_PUBLIC_KAKAO_URI,
   NEXT_PUBLIC_NAVER_URI,
 } from '@/constants/develop.constants';
 import { useRouter } from 'next/router';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
 import { useState } from 'react';
+import { kakaoLogin } from '@/apis/_api/auth';
 
 export const SignInApi = () => {
   const router = useRouter();
@@ -51,7 +51,7 @@ export const SignInApi = () => {
   const snsLogin = (platform: string) => {
     switch (platform) {
       case 'KAKAO': {
-        router.push(NEXT_PUBLIC_KAKAO_URI);
+        kakaoLogin();
         break;
       }
       case 'NAVER': {
