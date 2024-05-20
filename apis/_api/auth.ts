@@ -1,17 +1,25 @@
 import fetcher from '../fetcher';
 import {
   NEXT_PUBLIC_API_HOST,
-  NEXT_PUBLIC_DOMAIN_HOST,
+  NEXT_PUBLIC_KAKAO_URI,
 } from '@/constants/develop.constants';
 import { postRegistUserInfoPayload } from './type';
 import { QueryParams } from '@/pages/sign-in/[...callback]';
 import axios from 'axios';
 
 export const login = async (payload: QueryParams) => {
+  if (payload.callback![0] === 'kakao') {
+    const requestData = new URLSearchParams();
+    requestData.append('code', payload.code!);
+    requestData.append('redirect_uri', NEXT_PUBLIC_KAKAO_URI);
+    const { data } = await fetcher.post(
+      `v1/oauth/token/code/kakao`,
+      requestData
+    );
+    return data;
+  }
   const { data } = await fetcher.get(
-    `v1/login/oauth/code/${payload.callback![0]}?code=${payload.code}&state=${
-      payload.state
-    }`
+    `v1/login/oauth/code/${payload.callback![0]}?code=${payload.code}`
   );
 
   return data;
@@ -19,7 +27,7 @@ export const login = async (payload: QueryParams) => {
 
 export const kakaoLogin = async () => {
   window.Kakao.Auth.authorize({
-    redirectUri: `${NEXT_PUBLIC_DOMAIN_HOST}/callback`,
+    redirectUri: NEXT_PUBLIC_KAKAO_URI,
   });
 };
 
