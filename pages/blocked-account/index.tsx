@@ -105,25 +105,17 @@ export default function BlockedAccount() {
             return (
               <S.Layout key={item.id}>
                 {item.profileImage === '' ? (
-                  <Avatar
-                    onClick={() => router.push(`/mypage/${item.userId}`)}
-                    className="avatar"
-                  />
+                  <Avatar className="avatar" />
                 ) : (
                   <NextImage
                     width={52}
                     height={52}
                     fill={false}
                     src={item.profileImage}
-                    onClick={() => router.push(`/mypage/${item.userId}`)}
                     alt=""
                   />
                 )}
-                <Body3
-                  state="emphasis"
-                  className="userName"
-                  onClick={() => router.push(`/mypage/${item.userId}`)}
-                >
+                <Body3 state="emphasis" className="userName">
                   {item.userName}
                 </Body3>
                 <Button3
