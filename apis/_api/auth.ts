@@ -19,7 +19,9 @@ export const login = async (payload: QueryParams) => {
     return data;
   }
   const { data } = await fetcher.get(
-    `v1/login/oauth/code/${payload.callback![0]}?code=${payload.code}`
+    `v1/login/oauth/code/${payload.callback![0]}?code=${payload.code}&state=${
+      payload.state
+    }`
   );
 
   return data;
