@@ -27,7 +27,7 @@ const SplashScreen: ComponentWithLayout = () => {
           setUserId(result);
           return;
         }
-        router.replace('/sign-up');
+        router.replace('/agree');
         return;
       }
       router.push('/onboarding');
