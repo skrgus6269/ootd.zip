@@ -15,7 +15,7 @@ const TopButton = styled.div`
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  z-index: 999;
+  z-index: 7;
 
   svg {
     width: 100%;

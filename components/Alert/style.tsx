@@ -7,7 +7,7 @@ const Layout = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 999;
+  z-index: 13;
   transform: translate(-50%, -50%);
   background: ${(props) => props.theme.color.grey_100};
   backdrop-filter: blur(40px);

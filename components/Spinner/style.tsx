@@ -7,7 +7,7 @@ const Layout = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  z-index: 3;
+  z-index: 10;
   top: 0;
   left: 0;
   opacity: 0.3;
@@ -16,7 +16,7 @@ const Layout = styled.div`
   .spinner {
     position: absolute;
     opacity: 1;
-    z-index: 4;
+    z-index: 10;
   }
 `;
 

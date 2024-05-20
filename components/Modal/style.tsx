@@ -8,7 +8,7 @@ interface ModalProps {
 const Layout = styled.div<ModalProps>`
   background-color: white;
   position: fixed;
-  z-index: 997;
+  z-index: 20;
   bottom: 0px;
   width: 100%;
   max-width: 430px;

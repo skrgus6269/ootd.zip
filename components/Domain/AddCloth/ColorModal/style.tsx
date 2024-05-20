@@ -75,7 +75,7 @@ const SelectedColorList = styled.div`
   flex-grow: 1;
   margin-bottom: 73px;
   position: relative;
-  z-index: 999;
+  z-index: 10;
   background-color: white;
   bottom: 0;
 `;

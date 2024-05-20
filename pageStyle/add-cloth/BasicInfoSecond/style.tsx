@@ -20,7 +20,7 @@ const Layout = styled.div`
     bottom: 0;
     width: calc(100vw - 40px);
     flex-grow: 0;
-    z-index: 2;
+    z-index: 5;
   }
 `;
 

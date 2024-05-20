@@ -25,7 +25,7 @@ const Image = styled.div`
 
   .moreIcon {
     position: absolute;
-    z-index: 100;
+    z-index: 4;
     right: 8px;
     bottom: 8px;
   }
