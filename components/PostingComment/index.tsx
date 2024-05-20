@@ -41,6 +41,8 @@ interface PostingCommentProps {
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  setGoBackAfterBlock: Dispatch<SetStateAction<Boolean>>;
+  setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function PostingComment({
@@ -54,6 +56,8 @@ export default function PostingComment({
   setDeclaration,
   receivedDeclaration,
   setReceivedDeclaration,
+  setGoBackAfterBlock,
+  setBlockStatus,
 }: PostingCommentProps) {
   const [commentType, setCommentType] = useState<'preview' | 'all'>('preview');
   const localUserId = useRecoilValue(userId);
@@ -134,8 +138,9 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
-              reportUserName={reportUserName}
               setReportUserName={setReportUserName}
+              setReportID={setReportID}
+              setBlockID={setBlockID}
             />
           </>
         ))}
@@ -148,6 +153,8 @@ export default function PostingComment({
 
   const [reportStatus, setReportStatus] = useState<Boolean>(false);
   const [reportUserName, setReportUserName] = useState<string>('');
+  const [reportID, setReportID] = useState<number>(0); // 신고할 ID
+  const [blockID, setBlockID] = useState<number>(0); // 사용자 차단할 ID
 
   const ComentAll = () => {
     return (
@@ -173,27 +180,19 @@ export default function PostingComment({
               setDeclaration={setDeclaration}
               receivedDeclaration={receivedDeclaration}
               setReceivedDeclaration={setReceivedDeclaration}
-              reportUserName={reportUserName}
               setReportUserName={setReportUserName}
+              setReportID={setReportID}
+              setBlockID={setBlockID}
             />
-            {declaration && (
-              <DeclarationModal
-                type="COMMENT"
-                userName={reportUserName}
-                ID={item.id}
-                declaration={declaration}
-                setDeclaration={setDeclaration}
-                setReceivedDeclaration={setReceivedDeclaration}
-                setReportStatus={setReportStatus}
-              />
-            )}
             {receivedDeclaration && (
               <ReceivedDeclarationModal
-                setReportStatus={setReportStatus}
-                reportStatus={reportStatus}
                 type="댓글"
+                reportStatus={reportStatus}
                 receivedDeclaration={receivedDeclaration}
                 setReceivedDeclaration={setReceivedDeclaration}
+                ID={blockID}
+                setGoBackAfterBlock={setGoBackAfterBlock}
+                setBlockStatus={setBlockStatus}
               />
             )}
             {item &&
@@ -222,27 +221,19 @@ export default function PostingComment({
                     setDeclaration={setDeclaration}
                     receivedDeclaration={receivedDeclaration}
                     setReceivedDeclaration={setReceivedDeclaration}
-                    reportUserName={reportUserName}
                     setReportUserName={setReportUserName}
+                    setReportID={setReportID}
+                    setBlockID={setBlockID}
                   />
-                  {declaration && (
-                    <DeclarationModal
-                      type="COMMENT"
-                      userName={reportUserName}
-                      ID={items.id}
-                      declaration={declaration}
-                      setDeclaration={setDeclaration}
-                      setReceivedDeclaration={setReceivedDeclaration}
-                      setReportStatus={setReportStatus}
-                    />
-                  )}
                   {receivedDeclaration && (
                     <ReceivedDeclarationModal
-                      setReportStatus={setReportStatus}
-                      reportStatus={reportStatus}
                       type="댓글"
+                      reportStatus={reportStatus}
                       receivedDeclaration={receivedDeclaration}
                       setReceivedDeclaration={setReceivedDeclaration}
+                      ID={blockID}
+                      setGoBackAfterBlock={setGoBackAfterBlock}
+                      setBlockStatus={setBlockStatus}
                     />
                   )}
                 </>
@@ -252,6 +243,17 @@ export default function PostingComment({
         <S.CommentOpenButton onClick={onClickCommentButton}>
           <Caption1>댓글 접기</Caption1>
         </S.CommentOpenButton>
+        {declaration && (
+          <DeclarationModal
+            type="COMMENT"
+            userName={reportUserName}
+            ID={reportID}
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
+          />
+        )}
       </S.Layout>
     );
   };

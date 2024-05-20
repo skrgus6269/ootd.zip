@@ -131,3 +131,12 @@ export interface getUserTaggedClothListParams {
   ootdId: number;
   userId: number;
 }
+
+export interface getUserBlockListParams {
+  page: number;
+  size: number;
+}
+
+export interface postUserBlockPayload {
+  userId: number;
+}

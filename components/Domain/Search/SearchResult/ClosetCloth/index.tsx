@@ -56,7 +56,7 @@ export default function ClosetCloth({
     useState<number>(1);
 
   const onClickImageList = (index: number) => {
-    router.push(`/ootd/${index}`);
+    router.push(`/ootd/${index}/search`);
   };
 
   const onClickFilterSpan = (index: number) => {

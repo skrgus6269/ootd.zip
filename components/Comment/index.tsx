@@ -28,12 +28,14 @@ export interface CommentProps {
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
-  reportUserName: string;
   setReportUserName: Dispatch<SetStateAction<string>>;
+  setReportID: Dispatch<SetStateAction<number>>;
+  setBlockID: Dispatch<SetStateAction<number>>;
 }
 
 function Comment({
   id,
+  userId,
   userName,
   userImage,
   content,
@@ -49,8 +51,9 @@ function Comment({
   setDeclaration,
   receivedDeclaration,
   setReceivedDeclaration,
-  reportUserName,
   setReportUserName,
+  setReportID,
+  setBlockID,
 }: CommentProps) {
   const { deleteOOTDComment } = OOTDApi();
 
@@ -64,6 +67,8 @@ function Comment({
   };
 
   const onClickReportButton = async () => {
+    setReportID(id);
+    setBlockID(userId);
     setReportUserName(userName);
     setDeclaration(true);
   };
@@ -115,7 +120,9 @@ function Comment({
                   <Caption1 onClick={onClickDeleteButton}>삭제</Caption1>
                 </>
               ) : (
-                <Caption1 onClick={onClickReportButton}>신고</Caption1>
+                content !== '삭제된 댓글입니다.' && (
+                  <Caption1 onClick={onClickReportButton}>신고</Caption1>
+                )
               )}
             </S.CommentCommunication>
           ) : (

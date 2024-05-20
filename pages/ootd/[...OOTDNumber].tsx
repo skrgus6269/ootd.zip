@@ -164,6 +164,24 @@ const OOTD: ComponentWithLayout = () => {
     if (receivedDeclaration) setReceivedDeclaration(false);
   };
 
+  const [goBackAfterBlock, setGoBackAfterBlock] = useState<Boolean>(false); // 사용자 차단 이후 스낵바 이용하여 이동
+  const [blockStatus, setBlockStatus] = useState<Boolean>(false); // 사용자 차단 상태 값
+
+  useEffect(() => {
+    if (goBackAfterBlock) {
+      // 사용자 차단 이후 이전 페이지로 이동
+      if (router.query.OOTDNumber![1] === 'explore') {
+        router.push(`/main/explore?block=${blockStatus}`);
+      } else if (router.query.OOTDNumber![1] === 'curation') {
+        router.push(`/main/curation?block=${blockStatus}`);
+      } else if (router.query.OOTDNumber![1] === 'search') {
+        router.push(`/search?block=${blockStatus}`);
+      } else {
+        router.back();
+      }
+    }
+  }, [goBackAfterBlock]);
+
   return (
     <>
       <S.Layout>
@@ -183,6 +201,8 @@ const OOTD: ComponentWithLayout = () => {
             myPost={data.userId === Number(myId)}
             setGetPostReRender={setGetPostReRender}
             getPostReRender={getPostReRender}
+            setGoBackAfterBlock={setGoBackAfterBlock}
+            setBlockStatus={setBlockStatus}
           />
         )}
         <PostingComment
@@ -196,6 +216,8 @@ const OOTD: ComponentWithLayout = () => {
           setCommentWriting={setCommentWriting}
           reRender={reRender}
           setReRender={setReRender}
+          setGoBackAfterBlock={setGoBackAfterBlock}
+          setBlockStatus={setBlockStatus}
         />
         {data && <UserCloth userName={data.userName} userId={data.userId} />}
         {data && (

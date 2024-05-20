@@ -1,4 +1,4 @@
-import { alarmApi, clothApi, ootdApi, userApi } from '@/apis/_api';
+import { alarmApi, blockApi, clothApi, ootdApi, userApi } from '@/apis/_api';
 import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
@@ -16,6 +16,8 @@ import {
   getSearchOOTDParams,
   putStylePayload,
   getUserTaggedClothListParams,
+  getUserBlockListParams,
+  postUserBlockPayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -345,6 +347,24 @@ export const getUserTaggedClothList = async (
   params: getUserTaggedClothListParams
 ) => {
   const data = await clothApi.getUserTaggedClothList(params);
+
+  return data;
+};
+
+export const getUserBlock = async (params: getUserBlockListParams) => {
+  const data = await blockApi.getUserBlock(params);
+
+  return data;
+};
+
+export const postUserBlock = async (payload: postUserBlockPayload) => {
+  const data = await blockApi.postUserBlock(payload);
+
+  return data;
+};
+
+export const deleteUserBlock = async (id: number) => {
+  const data = await blockApi.deleteUserBlock(id);
 
   return data;
 };

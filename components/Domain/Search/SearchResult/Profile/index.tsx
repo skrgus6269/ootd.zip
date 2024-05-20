@@ -64,7 +64,9 @@ export default function Profile({
           profileList.map((item, index) => {
             return (
               <S.ProfileLayout key={index}>
-                <S.Profile onClick={() => router.push(`/mypage/${item.id}`)}>
+                <S.Profile
+                  onClick={() => router.push(`/mypage/${item.id}/search`)}
+                >
                   {item.profileImage === '' ? (
                     <Avatar className="userImage" />
                   ) : (
