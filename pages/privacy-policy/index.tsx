@@ -74,8 +74,7 @@ const PrivacyPolicy: ComponentWithLayout = () => {
             회사는 이용자의 회사 서비스에 대한 회원가입을 위하여 다음과 같은
             정보를 수집합니다.
           </Body4>
-          <Body4>1. 필수 수집 정보: 닉네임</Body4>
-          <Body4>2. 선택 수집 정보: 키, 몸무게, 나이</Body4>
+          <Body4>1. 필수 수집 정보: 닉네임, 키, 몸무게, 나이</Body4>
           <br />
 
           <Body2>제6조(개인정보 수집 방법)</Body2>
@@ -379,7 +378,7 @@ const PrivacyPolicy: ComponentWithLayout = () => {
           </Body4>
           <Body4>가. 개인정보 보호 책임자</Body4>
           <Body4>1) 성명: 권낙현</Body4>
-          <Body4>2) 직책: CTO</Body4>
+          <Body4>2) 직책: CEO</Body4>
           <Body4>3) 전화번호: 01054636259</Body4>
           <Body4>4) 이메일: knh6269@gmail.com</Body4>
           <br />
