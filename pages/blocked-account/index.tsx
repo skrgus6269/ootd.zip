@@ -2,70 +2,87 @@ import AppBar from '@/components/Appbar';
 import S from '@/pageStyle/blocked-account/style';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { Button3, Title1 } from '@/components/UI';
+import { Body3, Button3, Title1 } from '@/components/UI';
 import Header from '@/components/Header';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import FollowBlock from '@/components/FollowBlock';
 import BlockAlert from '@/components/Setting/BlockAlert';
 import Toast from '@/components/Toast';
 import Background from '@/components/Background';
+import { BlockApi } from '@/apis/domain/Block/BlockApi';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import Button from '@/components/Button';
+import Spinner from '@/components/Spinner';
+import NextImage from '@/components/NextImage';
+import Avatar from '@/public/images/Avatar.svg';
+import BlockUserAlert from '@/components/Domain/BlockUser/BlockUserAlert';
+import PublicApi from '@/apis/domain/Public/PublicApi';
+
+export interface UserBlockListDataType {
+  id: number;
+  userId: number;
+  userName: string;
+  profileImage: string;
+}
 
 export default function BlockedAccount() {
   const router = useRouter();
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
+  const [userBlockedList, setUserBlockedList] = useState<
+    UserBlockListDataType[]
+  >([]);
 
-  const blockedList = [
-    {
-      profileId: 0,
-      name: 'Userame0',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 1,
-      name: 'Userame1',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 2,
-      name: 'Userame2',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 3,
-      name: 'Userame3',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-    {
-      profileId: 4,
-      name: 'Userame4',
-      profileImage:
-        'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg',
-      followCheck: true,
-    },
-  ];
+  const { getUserBlock } = BlockApi();
 
-  const onClickFollow = () => {
-    setAlertOpen(true);
+  const fetchDataFunction = async (page: number, size: number) => {
+    const data = await getUserBlock({
+      page,
+      size,
+    });
+    return data;
   };
 
-  const [follow, setFollow] = useState<Boolean>(false);
+  const { data, isLoading, hasNextPage, containerRef, reset } =
+    useInfiniteScroll({
+      fetchDataFunction,
+      initialData: [],
+      size: 7,
+    });
 
-  const onClickYesButton = () => {
-    console.log('팔로우');
+  useEffect(() => {
+    setUserBlockedList(data);
+  }, [data]);
+
+  const [toastOpen, setToastOpen] = useState<Boolean>(false);
+  const [followID, setFollowID] = useState<number>(0);
+  const [followUserName, setFollowUserName] = useState<string>('');
+
+  useEffect(() => {
+    reset();
+  }, [alertOpen]);
+
+  const { follow } = PublicApi();
+
+  const onClickYesButton = async () => {
     setAlertOpen(false);
-    setFollow(true);
+    setToastOpen(true);
+    await follow(followID);
   };
 
   const onClickNoButton = () => {
     setAlertOpen(false);
+  };
+
+  const { deleteUserBlock } = BlockApi();
+  const onClickDelete = async (
+    deleteID: number,
+    userName: string,
+    userID: number
+  ) => {
+    await deleteUserBlock(deleteID);
+    setFollowID(userID);
+    setFollowUserName(userName);
+    setAlertOpen(true);
   };
 
   return (
@@ -82,31 +99,52 @@ export default function BlockedAccount() {
         rightProps={<></>}
       />
       <Header text="차단한 계정" />
-      {blockedList &&
-        blockedList.map((item, index) => {
-          return (
-            <FollowBlock
-              key={index}
-              data={item}
-              onClick={onClickFollow}
-              state="blcok"
-            />
-          );
-        })}
+      <S.WholeLayout ref={containerRef}>
+        {userBlockedList &&
+          userBlockedList.map((item, index) => {
+            return (
+              <S.Layout key={item.id}>
+                {item.profileImage === '' ? (
+                  <Avatar className="avatar" />
+                ) : (
+                  <NextImage
+                    width={52}
+                    height={52}
+                    fill={false}
+                    src={item.profileImage}
+                    alt=""
+                  />
+                )}
+                <Body3 state="emphasis" className="userName">
+                  {item.userName}
+                </Body3>
+                <Button3
+                  className="deleteButton"
+                  onClick={() =>
+                    onClickDelete(item.id, item.userName, item.userId)
+                  }
+                >
+                  해제
+                </Button3>
+                {isLoading && hasNextPage && <Spinner />}
+              </S.Layout>
+            );
+          })}
 
-      {alertOpen && (
-        <BlockAlert
-          onClickYesButton={onClickYesButton}
-          onClickNoButton={onClickNoButton}
-        />
-      )}
-      {follow && (
-        <Toast
-          text="@@@님을 팔로우합니다."
-          setState={setFollow}
-          state={follow}
-        />
-      )}
+        {alertOpen && (
+          <BlockUserAlert
+            onClickYesButton={onClickYesButton}
+            onClickNoButton={onClickNoButton}
+          />
+        )}
+        {toastOpen && followUserName && (
+          <Toast
+            text={`${followUserName}님을 팔로우합니다.`}
+            setState={setToastOpen}
+            state={toastOpen}
+          />
+        )}
+      </S.WholeLayout>
     </>
   );
 }

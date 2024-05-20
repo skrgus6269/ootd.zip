@@ -8,6 +8,7 @@ import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
 import TabView from '@/components/TabView';
 import LikeOOTD from '@/components/Domain/Main/LikeOOTD';
 import Explore from '@/components/Domain/Main/Explore';
+import Toast from '@/components/Toast';
 
 export default function Main() {
   const router = useRouter();
@@ -21,6 +22,14 @@ export default function Main() {
       setIsExistNotReadAlarm(result);
     };
     fetchData();
+  }, []);
+
+  const [queryState, setQueryState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if (router.query.block !== undefined) {
+      setQueryState(true);
+    }
   }, []);
 
   return (
@@ -55,6 +64,21 @@ export default function Main() {
             </TabView.Tab>
           </TabView.Tabs>
         </TabView>
+      )}
+      {queryState && (
+        <Toast
+          className="toast"
+          text={
+            router.query.block === 'true'
+              ? '사용자를 차단하였습니다.'
+              : '사용자를 이미 차단하였습니다.'
+          }
+          state={queryState}
+          setState={setQueryState}
+          actionText="차단한 계정 관리"
+          actionFunction={() => router.push('/blocked-account')}
+          isHelperText={true}
+        />
       )}
     </S.Layout>
   );
