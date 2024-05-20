@@ -134,10 +134,7 @@ export default function PostingComment({
               timeStamp={item.timeStamp}
               reRender={reRender}
               setReRender={setReRender}
-              declaration={declaration}
               setDeclaration={setDeclaration}
-              receivedDeclaration={receivedDeclaration}
-              setReceivedDeclaration={setReceivedDeclaration}
               setReportUserName={setReportUserName}
               setReportID={setReportID}
               setBlockID={setBlockID}
@@ -176,25 +173,12 @@ export default function PostingComment({
               myComment={localUserId === item.userId}
               reRender={reRender}
               setReRender={setReRender}
-              declaration={declaration}
               setDeclaration={setDeclaration}
-              receivedDeclaration={receivedDeclaration}
-              setReceivedDeclaration={setReceivedDeclaration}
               setReportUserName={setReportUserName}
               setReportID={setReportID}
               setBlockID={setBlockID}
             />
-            {receivedDeclaration && (
-              <ReceivedDeclarationModal
-                type="댓글"
-                reportStatus={reportStatus}
-                receivedDeclaration={receivedDeclaration}
-                setReceivedDeclaration={setReceivedDeclaration}
-                ID={blockID}
-                setGoBackAfterBlock={setGoBackAfterBlock}
-                setBlockStatus={setBlockStatus}
-              />
-            )}
+
             {item &&
               item.childComment?.map((items, indexs) => (
                 <>
@@ -217,10 +201,7 @@ export default function PostingComment({
                     myComment={localUserId === items.userId}
                     reRender={reRender}
                     setReRender={setReRender}
-                    declaration={declaration}
                     setDeclaration={setDeclaration}
-                    receivedDeclaration={receivedDeclaration}
-                    setReceivedDeclaration={setReceivedDeclaration}
                     setReportUserName={setReportUserName}
                     setReportID={setReportID}
                     setBlockID={setBlockID}
@@ -252,6 +233,17 @@ export default function PostingComment({
             setDeclaration={setDeclaration}
             setReceivedDeclaration={setReceivedDeclaration}
             setReportStatus={setReportStatus}
+          />
+        )}
+        {receivedDeclaration && (
+          <ReceivedDeclarationModal
+            type="댓글"
+            reportStatus={reportStatus}
+            receivedDeclaration={receivedDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+            ID={blockID}
+            setGoBackAfterBlock={setGoBackAfterBlock}
+            setBlockStatus={setBlockStatus}
           />
         )}
       </S.Layout>
