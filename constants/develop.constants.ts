@@ -5,7 +5,7 @@ export const NEXT_PUBLIC_DOMAIN_HOST = process.env.NEXT_PUBLIC_DOMAIN_HOST;
 //카카오 인증 관련 상수
 export const NEXT_PUBLIC_KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
 export const NEXT_PUBLIC_KAKAO_URI =
-  'http://localhost:3000/sign-in/kakao/callback';
+  'https://ootdzip.com/sign-in/kakao/callback';
 
 //네이버 인증 관련 상수
 export const NEXT_PUBLIC_NAVER_URI =

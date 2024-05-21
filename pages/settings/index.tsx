@@ -104,6 +104,10 @@ export default function Setting() {
               buttonClick={() => router.push('/CommunityGuideline')}
             /> */}
             <SettingBlock
+              text="이용약관"
+              buttonClick={() => router.push('/agree-policy')}
+            />
+            <SettingBlock
               text="개인정보 처리 방침"
               buttonClick={() => router.push('/privacy-policy')}
             />
