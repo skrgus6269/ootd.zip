@@ -1,12 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Body3, Caption1 } from '../UI';
 import S from './style';
 import Avatar from '@/public/images/Avatar.svg';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
-import DeclarationModal from '../DeclarationModal';
-import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 import NextImage from '../NextImage';
-import Background from '../Background';
 
 export interface CommentProps {
   id: number;
@@ -24,10 +21,7 @@ export interface CommentProps {
   reRender: number;
   depth?: number;
   setReRender: Dispatch<SetStateAction<number>>;
-  declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
-  receivedDeclaration: Boolean;
-  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
   setReportUserName: Dispatch<SetStateAction<string>>;
   setReportID: Dispatch<SetStateAction<number>>;
   setBlockID: Dispatch<SetStateAction<number>>;
@@ -47,10 +41,7 @@ function Comment({
   myComment,
   reRender,
   setReRender,
-  declaration,
   setDeclaration,
-  receivedDeclaration,
-  setReceivedDeclaration,
   setReportUserName,
   setReportID,
   setBlockID,
@@ -73,17 +64,8 @@ function Comment({
     setDeclaration(true);
   };
 
-  const onClickBackground = () => {
-    if (declaration) setDeclaration(false);
-    if (receivedDeclaration) setReceivedDeclaration(false);
-  };
-
   return (
     <>
-      <Background
-        isOpen={declaration || receivedDeclaration}
-        onClick={onClickBackground}
-      />
       <S.Layout type={type}>
         <S.CommentLeft>
           {userImage === '' ? (
