@@ -76,13 +76,13 @@ export default function MyPage() {
         if (router.query.UserId![1] === 'search') {
           router.push(`/search?block=false`);
         } else {
-          router.push(`/main/curation?block=false}`);
+          router.push(`/main/explore?block=false}`);
         }
       } else if (blockUser === '성공') {
         if (router.query.UserId![1] === 'search') {
           router.push(`/search?block=true`);
         } else {
-          router.push(`/main/curation?block=true`);
+          router.push(`/main/explore?block=true`);
         }
       }
     }
