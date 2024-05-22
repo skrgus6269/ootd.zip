@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         source: '/main',
-        destination: '/main/curation',
+        destination: '/main/explore',
         permanent: true,
       },
     ]

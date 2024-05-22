@@ -56,7 +56,7 @@ export default function BottomNavBar({
   const myId = useRecoilValue(userId);
 
   const routes = [
-    '/main/curation',
+    '/main/explore',
     '/search',
     '/plus',
     '/bookmark',
