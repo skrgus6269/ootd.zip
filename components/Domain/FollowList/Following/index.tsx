@@ -58,7 +58,7 @@ export default function Following({
     useInfiniteScroll({
       fetchDataFunction,
       initialData: [],
-      size: 7,
+      size: 20,
     });
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Following({
   }, [data]);
 
   useEffect(() => {
-    if (keyword.length > 0) reset();
+    reset();
   }, [keyword]);
 
   useEffect(() => {
