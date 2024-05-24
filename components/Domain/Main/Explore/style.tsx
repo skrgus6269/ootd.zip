@@ -10,7 +10,7 @@ const Layout = styled.div`
 
 const ClothList = styled.div`
   overflow-y: scroll;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 202px);
 `;
 
 const TopButton = styled.div`
