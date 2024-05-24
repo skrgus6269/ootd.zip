@@ -49,7 +49,7 @@ export default function BrandModal({
 
   const onClickNextButton = () => {
     if (noBrandState) {
-      setClothBrand([{ id: 1, name: '브랜드 없음' }]);
+      setClothBrand([{ id: 9999, name: '브랜드 없음' }]);
       setBrandModalIsOpen(false);
       return;
     }
