@@ -25,6 +25,8 @@ import {
 import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
 
 interface MyInfoProps {
+  nickNameCheck: Boolean;
+  setNickNameCheck: Dispatch<SetStateAction<Boolean>>;
   nickName: string;
   setNickName: Dispatch<SetStateAction<string>>;
   introduction: string;
@@ -40,6 +42,8 @@ interface MyInfoProps {
 }
 
 export default function EditMyInfo({
+  nickNameCheck,
+  setNickNameCheck,
   nickName,
   setNickName,
   introduction,
@@ -105,18 +109,12 @@ export default function EditMyInfo({
   };
 
   useEffect(() => {
-    if (
-      nickName === '' ||
-      height === '0' ||
-      weight === '0' ||
-      height === '' ||
-      weight === ''
-    ) {
-      setPossible(true);
+    if (!canUseId) {
+      setNickNameCheck(false);
     } else {
-      setPossible(false);
+      setNickNameCheck(true);
     }
-  }, [nickName, weight, height]);
+  }, [canUseId]);
 
   return (
     <>

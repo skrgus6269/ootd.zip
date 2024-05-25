@@ -29,6 +29,8 @@ export default function Edit({
   const [profileImage, setProfileImage] = useState<string>(
     '/images/basicProfile.svg'
   );
+
+  const [nickNameCheck, setNickNameCheck] = useState<Boolean>(true);
   const [nickName, setNickName] = useState<string>('닉네임');
   const [introduction, setIntroduction] = useState<string>('소개');
   const [height, setHeight] = useState<string>('160');
@@ -93,13 +95,14 @@ export default function Edit({
       height === '0' ||
       weight === '0' ||
       height === '' ||
-      weight === ''
+      weight === '' ||
+      !nickNameCheck
     ) {
       setPossible(false);
     } else {
       setPossible(true);
     }
-  }, [nickName, weight, height]);
+  }, [nickName, weight, height, nickNameCheck]);
 
   const onClickNextButton = async () => {
     if (possible) {
@@ -135,6 +138,8 @@ export default function Edit({
             onClickImage={() => setOpenActionSheet(!openActionSheet)}
           />
           <EditMyInfo
+            nickNameCheck={nickNameCheck}
+            setNickNameCheck={setNickNameCheck}
             nickName={nickName}
             setNickName={setNickName}
             introduction={introduction}
