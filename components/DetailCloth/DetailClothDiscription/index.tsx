@@ -20,6 +20,9 @@ export default function DetailClothDiscription({
   uploadDate,
   memo,
 }: ClothDiscriptionProps) {
+  const clickedLink = (linkItem: string) => {
+    window.open(`https://${linkItem}`);
+  };
   return (
     <S.Layout>
       <S.Category>
@@ -31,7 +34,11 @@ export default function DetailClothDiscription({
           )}
         </S.IconSpan>
         {isLink ? (
-          <Body3 state="underline" className="isLink">
+          <Body3
+            state="underline"
+            className="isLink"
+            onClick={() => clickedLink(purchasing)}
+          >
             {purchasing}
           </Body3>
         ) : (
