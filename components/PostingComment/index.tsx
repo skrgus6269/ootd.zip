@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   MutableRefObject,
   SetStateAction,
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -35,7 +36,6 @@ interface PostingCommentProps {
   setReRender: Dispatch<SetStateAction<number>>;
   setComment: Dispatch<SetStateAction<CommentStateType>>;
   commentRef: MutableRefObject<any>;
-  comment: CommentStateType;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
   declaration: Boolean;
   setDeclaration: Dispatch<SetStateAction<Boolean>>;
@@ -45,12 +45,11 @@ interface PostingCommentProps {
   setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
-export default function PostingComment({
+function PostingComment({
   reRender,
   setReRender,
   setComment,
   commentRef,
-  comment,
   setCommentWriting,
   declaration,
   setDeclaration,
@@ -108,11 +107,13 @@ export default function PostingComment({
   }, [router.isReady, reRender, router.query.OOTDNumber]);
 
   const onClickReplyButton = (userName: string, commentId: number) => {
-    setComment({
-      ...comment,
-      taggedUserName: userName,
-      parentDepth: 1,
-      commentParentId: commentId,
+    setComment((previous) => {
+      return {
+        ...previous,
+        taggedUserName: userName,
+        parentDepth: 1,
+        commentParentId: commentId,
+      };
     });
     setCommentWriting(true);
     commentRef.current.focus();
@@ -259,3 +260,5 @@ export default function PostingComment({
   }
   return <>{commentType === 'preview' ? <ComentPreview /> : <ComentAll />}</>;
 }
+
+export default React.memo(PostingComment);
