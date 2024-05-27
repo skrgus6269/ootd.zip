@@ -210,7 +210,6 @@ const OOTD: ComponentWithLayout = () => {
           setDeclaration={setDeclaration}
           receivedDeclaration={receivedDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
-          comment={comment}
           setComment={setComment}
           commentRef={commentRef}
           setCommentWriting={setCommentWriting}
