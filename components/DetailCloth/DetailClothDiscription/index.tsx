@@ -14,6 +14,11 @@ interface ClothDiscriptionProps {
   memo?: string;
 }
 
+import {
+  getReactNativeMessage,
+  sendReactNativeMessage,
+} from '@/utils/reactNativeMessage';
+
 export default function DetailClothDiscription({
   isLink,
   purchasing,
@@ -21,7 +26,8 @@ export default function DetailClothDiscription({
   memo,
 }: ClothDiscriptionProps) {
   const clickedLink = (linkItem: string) => {
-    window.open(`${linkItem}`);
+    // window.open(`${linkItem}`);
+    sendReactNativeMessage({ type: 'clickedPurchaseLink', payload: linkItem });
   };
   return (
     <S.Layout>
