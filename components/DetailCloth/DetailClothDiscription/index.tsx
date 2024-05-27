@@ -21,7 +21,7 @@ export default function DetailClothDiscription({
   memo,
 }: ClothDiscriptionProps) {
   const clickedLink = (linkItem: string) => {
-    window.open(`https://${linkItem}`);
+    window.open(`${linkItem}`);
   };
   return (
     <S.Layout>
