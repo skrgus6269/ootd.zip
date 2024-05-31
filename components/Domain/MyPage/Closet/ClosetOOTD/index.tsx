@@ -85,30 +85,6 @@ export default function ClosetOOTD({ showingId }: ClosetOOTDProps) {
     list: myPageOOTDList,
   });
 
-  // useEffect(() => {
-  //   const container = ootdRef.current;
-  //   container.addEventListener('scroll', clothListOnScroll);
-  //   return () => {
-  //     container.removeEventListener('scroll', clothListOnScroll);
-  //   };
-  // }, []);
-
-  // const clothListOnScroll = () => {
-  //   const { scrollTop } = ootdRef.current;
-  //   sessionStorage.setItem(`mypage-ootd-${showingId}`, `${scrollTop}`);
-  // };
-
-  // useEffect(() => {
-  //   const container = ootdRef.current;
-  //   const memoScroll = sessionStorage.getItem(`mypage-ootd-${showingId}`);
-
-  //   if (!memoScroll) return;
-
-  //   container.scrollTo({
-  //     top: memoScroll,
-  //   });
-  // }, [myPageOOTDList]);
-
   useEffect(() => {
     //add eventlistener to window
     window.addEventListener('scroll', onScroll);
