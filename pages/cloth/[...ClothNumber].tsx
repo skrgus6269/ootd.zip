@@ -100,7 +100,6 @@ const Cloth = () => {
   };
 
   const delclationButton = () => {
-    console.log('신고');
     setDeclaration(true);
   };
 
@@ -142,13 +141,21 @@ const Cloth = () => {
     if (deleteOpen) setDeleteOpen(false);
   };
 
+  const onClickBackButton = () => {
+    if (router.asPath.includes('closet')) {
+      console.log('포함됨');
+      router.push(`/mypage/${data?.userId}/cloth`);
+      return;
+    }
+    router.back();
+  };
   const [goBackAfterBlock, setGoBackAfterBlock] = useState<Boolean>(false); // 사용자 차단 이후 스낵바 이용하여 이동
   const [blockStatus, setBlockStatus] = useState<Boolean>(false); // 사용자 차단 상태 값
 
   return (
     <>
       <AppBar
-        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+        leftProps={<AiOutlineArrowLeft onClick={onClickBackButton} />}
         middleProps={<></>}
         rightProps={<AiOutlineEllipsis onClick={onClickAppbarButton} />}
       />
