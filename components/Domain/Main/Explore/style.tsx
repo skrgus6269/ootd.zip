@@ -23,7 +23,7 @@ const TopButton = styled.div`
   bottom: 162px;
   right: 20px;
   position: fixed;
-  z-index: 20;
+  z-index: 7;
 
   img {
     width: 48px;
