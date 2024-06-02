@@ -40,7 +40,7 @@ const Wrap = styled.div`
 
   .cancelButton {
     padding: 0px;
-    color: ${(props) => props.theme.color.grey_05};
+    color: ${(props) => props.theme.color.grey_50};
   }
 
   .editingButton {
