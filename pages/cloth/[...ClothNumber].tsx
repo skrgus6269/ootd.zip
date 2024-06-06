@@ -165,6 +165,7 @@ const Cloth = () => {
       />
       {data && (
         <DetailClothHeader
+          state={localUserId === data?.userId ? true : false}
           isPublic={!data?.isPrivate}
           bigCategory={data?.category.parentCategoryName!}
           smallCategory={data?.category.categoryName!}
