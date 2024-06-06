@@ -3,36 +3,53 @@ import Card from '../CardLayout';
 import { Layout } from './style';
 import LikeToggle from '@/components/Toggle/LikeToggle';
 import { useState } from 'react';
+import Link from 'next/link';
+import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 
 export interface MainFavoriteCardProps {
-  userId: number;
-  userName: string;
-  ootdImage: string;
   ootdId: number;
+  ootdImageUrl: string;
+  ootdImageCount: number;
+  writerId: number;
+  writerProfileImage?: string;
+  writerName: string;
   onClick?: () => void;
 }
 
 export default function MainFavoriteCard({
-  userId,
-  userName,
   ootdId,
-  ootdImage,
+  ootdImageUrl,
+  ootdImageCount,
+  writerId,
+  writerProfileImage,
+  writerName,
   onClick,
 }: MainFavoriteCardProps) {
   const [favoriteState, setFavoriteState] = useState<Boolean>(true);
+  const { postOOTDLike, deleteOOTDLike } = OOTDApi();
+
+  const onClickLikeToggle = async () => {
+    if (favoriteState) {
+      deleteOOTDLike(ootdId);
+      return;
+    }
+    postOOTDLike(ootdId);
+  };
 
   return (
     <Card
       onClick={onClick}
-      data={{ src: ootdImage, alt: 'ootdimage', caption: '' }}
+      data={{ src: ootdImageUrl, alt: 'ootdimage', caption: '' }}
       size="228px"
     >
       <Layout>
-        <Body3 className="userName">{userName}</Body3>
+        <Link className="userName" href={`/mypage/${writerId}`}>
+          <Body3>{writerName}</Body3>
+        </Link>
         <LikeToggle
           state={favoriteState}
           setState={setFavoriteState}
-          onClick={() => ''}
+          onClick={onClickLikeToggle}
         />
       </Layout>
     </Card>

@@ -16,9 +16,25 @@ const Layout = styled.div`
     padding: 0 20px;
   }
 `;
+const Title = styled.div`
+  padding: 0 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
 
+  .title {
+    padding: 22px 0;
+  }
+  .close {
+    position: absolute;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+  }
+`;
 const S = {
   Layout,
+  Title,
 };
 
 export default S;

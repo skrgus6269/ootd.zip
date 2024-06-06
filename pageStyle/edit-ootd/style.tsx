@@ -2,37 +2,17 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   padding: 24px 0 0 0;
-  height: calc(100vh + 20px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+
   .selectedPhoto {
     color: ${(props) => props.theme.color.grey_30};
     padding-left: 20px;
   }
   .nextButon {
-    position: fixed;
-    bottom: 0;
-    left: 20px;
-    width: calc(100% - 20px);
-
-    padding: 0 20px 25px 0;
-    background-color: white;
+    padding: 0 20px 25px 20px;
   }
-`;
-
-interface BackgroundProps {
-  isOpen: Boolean;
-}
-
-const Background = styled.div<BackgroundProps>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 999;
-  width: 100vw;
-  height: calc(100vh - 48px);
-  position: fixed;
-  top: 0;
 `;
 
 const OOTDImage = styled.div`
@@ -44,10 +24,6 @@ const OOTDImage = styled.div`
     display: none;
   }
   img {
-    min-width: 106px;
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     border-radius: 2px;
   }
   .image {
@@ -59,7 +35,7 @@ const OOTDImage = styled.div`
     top: 5px;
     width: 16px;
     height: 16px;
-    z-index: 10;
+    z-index: 5;
     border: none;
     background-color: white;
     border-radius: 50%;
@@ -69,6 +45,7 @@ const OOTDImage = styled.div`
 const ImageDivider = styled.hr`
   border: 8px solid ${(props) => props.theme.color.grey_95};
   width: 100%;
+  margin: 0;
 `;
 
 const Text = styled.div`
@@ -94,7 +71,7 @@ const Style = styled.div`
 `;
 
 const Open = styled.div`
-  padding: 0 20px 60px 20px;
+  padding: 0 20px 100px 20px;
   h2 {
     padding: 22px 0;
   }
@@ -131,6 +108,11 @@ const StyleListSpan = styled.div`
   }
 `;
 
+const Main = styled.div`
+  height: calc(100vh - 116px);
+  overflow: scroll;
+`;
+
 const S = {
   Layout,
   OOTDImage,
@@ -140,7 +122,7 @@ const S = {
   StyleList,
   StyleListSpan,
   ImageDivider,
-  Background,
+  Main,
 };
 
 export default S;

@@ -4,16 +4,18 @@ const Layout = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 430px;
 `;
 const CommentWriteState = styled.div`
   background-color: ${(props) => props.theme.color.grey_95};
-  padding: 12px 16px;
+  padding: 13px 16px;
   display: flex;
   gap: 2px;
   position: relative;
   color: ${(props) => props.theme.color.grey_30};
   display: flex;
   align-items: center;
+  border: 1px solid #03030302;
 
   .taggedUserName {
     font-weight: 600;
@@ -57,6 +59,11 @@ const Comment = styled.div`
 `;
 const Text = styled.div`
   width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 22px;
+  max-height: 84px;
+  border: 1px solid #dbdbdb;
+  margin: 16px 0;
 `;
 interface InputProps {
   line: number;
@@ -72,18 +79,15 @@ const Input = styled.textarea<InputProps>`
   font-weight: 400;
   line-height: 20px;
   resize: none;
-  font-family: 'Pretendard';
   height: calc(20px * ${(props) => props.line});
-  border: 1px solid ${(props) => props.theme.color.grey_90};
-  max-height: 84px;
+  max-height: 60px;
   display: flex;
   align-items: flex-end;
-  padding-top: 8px;
+  margin: 8px 0;
   &:focus {
     outline: none;
   }
   &::placeholder {
-    font-family: 'Pretendard';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

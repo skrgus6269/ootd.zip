@@ -8,7 +8,7 @@ const Layout = styled.div`
   left: 0;
   width: 100%;
   background-color: white;
-  z-index: 3;
+  z-index: 15;
   padding-top: 10px;
   border-top: 2px solid black;
 `;

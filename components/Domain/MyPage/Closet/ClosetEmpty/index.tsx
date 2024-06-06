@@ -5,19 +5,23 @@ interface ClosetEmptyProps {
   text: string;
   button: string;
   onClick: () => void;
+  isMyProfile: Boolean;
 }
 
 export default function ClosetEmpty({
   text,
   button,
   onClick,
+  isMyProfile,
 }: ClosetEmptyProps) {
   return (
     <S.Layout>
       <Body3 className="text">{text}</Body3>
-      <button onClick={onClick} className="button">
-        <Button3> {button}</Button3>
-      </button>
+      {isMyProfile && (
+        <button onClick={onClick} className="button">
+          <Button3>{button}</Button3>
+        </button>
+      )}
     </S.Layout>
   );
 }

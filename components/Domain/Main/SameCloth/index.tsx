@@ -1,25 +1,53 @@
-/* eslint-disable @next/next/no-img-element */
-import { Body3, Button3, Headline2, Title2 } from '@/components/UI';
+import { Body3, Headline2, Title2 } from '@/components/UI';
 import S from './style';
 import Image from 'next/image';
-import { useState } from 'react';
-import Button from '@/components/Button';
+import { useEffect, useState } from 'react';
+import { MainApi } from '@/apis/domain/Main/MainApi';
+import NextImage from '@/components/NextImage';
+import { useRouter } from 'next/router';
 
-interface SameClothProps {
-  data: {
-    clothid: number;
-    image: string;
-    category: string;
-    name: string;
+type SameClothData = {
+  clothesId: number;
+  clothesName: string;
+  clothesCategory: {
+    id: number;
+    categoryName: string;
+  };
+  clothesImageUrl: string;
+  clothesColor: {
+    id: number;
   }[];
-}
+  ootds: {
+    ootdId: number;
+    imageUrl: string;
+    imageCount: number;
+  }[];
+}[];
 
-export default function SameCloth({ data }: SameClothProps) {
+export default function SameCloth() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [sameClothData, setSameClothData] = useState<SameClothData>([]);
+
+  const { getSameClothDifferentOOTD } = MainApi();
+
+  const fetchDataFunction = async () => {
+    const data = await getSameClothDifferentOOTD();
+    setSameClothData(data);
+  };
 
   const onClickImage = (index: number) => {
     setCurrentIndex(index);
   };
+
+  const router = useRouter();
+
+  const onClickListImage = (ootdId: number) => {
+    router.push(`/ootd/${ootdId}/curation`);
+  };
+
+  useEffect(() => {
+    fetchDataFunction();
+  }, []);
 
   return (
     <S.Layout>
@@ -30,65 +58,91 @@ export default function SameCloth({ data }: SameClothProps) {
         </Body3>
       </S.Label>
       <S.Filter>
-        {data.map((item, index) => {
-          return (
-            <S.FilterItem
-              onTouchMove={(e) => e.stopPropagation()}
-              key={index}
-              state={index === currentIndex}
-            >
-              <Image
-                onClick={() => onClickImage(index)}
-                width={56}
-                height={56}
-                src={item.image}
-                alt="같은옷"
-              />
-              <div className="filterItemTrue">
-                <Title2>{item.category}</Title2>
-                <Body3>{item.name}</Body3>
-              </div>
-            </S.FilterItem>
-          );
-        })}
+        {sameClothData.length > 0 &&
+          sameClothData.map((item, index) => {
+            return (
+              <S.FilterItem
+                onTouchMove={(e) => e.stopPropagation()}
+                key={index}
+                state={index === currentIndex}
+              >
+                <Image
+                  onClick={() => onClickImage(index)}
+                  width={56}
+                  height={56}
+                  src={item.clothesImageUrl}
+                  alt="같은옷"
+                />
+                <div className="filterItemTrue">
+                  <Title2>{item.clothesCategory.categoryName}</Title2>
+                  <Body3>{item.clothesName}</Body3>
+                </div>
+              </S.FilterItem>
+            );
+          })}
       </S.Filter>
-      <S.List>
-        <img
-          src={
-            'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg'
-          }
-          alt=""
-        />
-        <div className="flexList">
-          <img
-            src={
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg'
-            }
-            alt=""
-          />
-          <img
-            src={
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg'
-            }
-            alt=""
-          />
-          <img
-            src={
-              'https://image.msscdn.net/mfile_s01/_shopstaff/list.staff_6515b944a6206.jpg'
-            }
-            alt=""
-          />
-        </div>
-      </S.List>
-      <Button
-        size="big"
-        backgroundColor="grey_100"
-        color="grey_00"
-        onClick={() => console.log('더보기')}
-        border={true}
-      >
-        <Button3>더보기</Button3>
-      </Button>
+
+      {sameClothData.length > 0 && (
+        <S.List>
+          {sameClothData[currentIndex].ootds[0] && (
+            <S.FirstImage>
+              <NextImage
+                fill={true}
+                src={sameClothData[currentIndex].ootds[0].imageUrl}
+                alt=""
+                onClick={() =>
+                  onClickListImage(sameClothData[currentIndex].ootds[0].ootdId)
+                }
+              />
+            </S.FirstImage>
+          )}
+
+          <div className="flexList">
+            {sameClothData[currentIndex].ootds[1] && (
+              <S.FlexImage>
+                <NextImage
+                  fill={true}
+                  src={sameClothData[currentIndex].ootds[1].imageUrl}
+                  alt=""
+                  onClick={() =>
+                    onClickListImage(
+                      sameClothData[currentIndex].ootds[1].ootdId
+                    )
+                  }
+                />
+              </S.FlexImage>
+            )}
+            {sameClothData[currentIndex].ootds[2] && (
+              <S.FlexImage>
+                <NextImage
+                  fill={true}
+                  src={sameClothData[currentIndex].ootds[2].imageUrl}
+                  alt=""
+                  onClick={() =>
+                    onClickListImage(
+                      sameClothData[currentIndex].ootds[2].ootdId
+                    )
+                  }
+                />
+              </S.FlexImage>
+            )}
+            {sameClothData[currentIndex].ootds[3] && (
+              <S.FlexImage>
+                <NextImage
+                  fill={true}
+                  src={sameClothData[currentIndex].ootds[3].imageUrl}
+                  alt=""
+                  onClick={() =>
+                    onClickListImage(
+                      sameClothData[currentIndex].ootds[3].ootdId
+                    )
+                  }
+                />
+              </S.FlexImage>
+            )}
+          </div>
+        </S.List>
+      )}
     </S.Layout>
   );
 }

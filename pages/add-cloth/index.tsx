@@ -28,7 +28,7 @@ export interface ClothWhereBuy {
 const AddCloth: ComponentWithLayout = () => {
   const steps = ['편집', '제품명', '기본정보1', '기본정보2', '추가정보'];
   const [Funnel, currentStep, handleStep] = useFunnel(steps);
-  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>([]);
+  const [clothImage, setClothImage] = useState<ImageWithTag | undefined>();
   const [clothName, setClothName] = useState<string>('');
   const [clothCategory, setClothCategory] = useState<CategoryListType[] | null>(
     null
@@ -93,7 +93,7 @@ const AddCloth: ComponentWithLayout = () => {
     <Funnel>
       <AppBar
         leftProps={<AppbarLeftProps />}
-        middleProps={<Title1>의류등록</Title1>}
+        middleProps={<Title1>의류 등록</Title1>}
         rightProps={<></>}
       />
       <Funnel.Steps name="편집">

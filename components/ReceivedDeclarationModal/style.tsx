@@ -11,6 +11,11 @@ const Header = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
+
+  .close {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Frame = styled.div`
@@ -21,6 +26,15 @@ const Frame = styled.div`
   gap: 16px;
   align-self: stretch;
   text-align: center;
+
+  .infoIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .reportTitle {
+    color: ${(props) => props.theme.color.grey_00};
+  }
 `;
 
 const Button = styled.div`
@@ -33,6 +47,7 @@ const Button = styled.div`
   color: #fff;
   text-align: center;
   margin-bottom: 24px;
+  border-radius: 2px;
 `;
 
 const ColorSpan = styled.div`

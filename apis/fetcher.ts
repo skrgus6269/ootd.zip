@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { NEXT_PUBLIC_API_HOST } from '@/constants/develop.constants';
-import { getCookie } from '@/utils/Cookie';
+import PublicApi from './domain/Public/PublicApi';
+
+let refreshing = false; // 리프레시 중인지 여부를 추적하는 변수
 
 const fetcher = axios.create({
   baseURL: NEXT_PUBLIC_API_HOST,
@@ -8,15 +10,47 @@ const fetcher = axios.create({
 });
 
 fetcher.interceptors.request.use((config) => {
-  const accessToken = getCookie('accessToken');
+  const accessToken = localStorage.getItem('accessToken');
 
   // 로그인, 회원가입 단계 api에서는 accessToken이 없으니 바로 return
-  if (accessToken === undefined) return config;
+  if (!accessToken) return config;
 
   // 그 외의 api 에서는 accessToken을 사용해 사용자 인증
   config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;
 });
+
+fetcher.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    if (error.response.data.divisionCode === 'U002') {
+      if (!refreshing) {
+        // 리프레시 중이 아닌 경우에만 리프레시 요청 진행
+        refreshing = true; // 리프레시 중으로 표시
+        const { getNewToken } = PublicApi();
+        await getNewToken();
+        refreshing = false; // 리프레시 완료 후 상태 변경
+        return fetcher.request(error.config); // 이전 요청 다시 시도
+      }
+      // 리프레시 중인 경우 요청 보류
+      return fetcher.request(error.config); // 리프레시가 완료된 후 다시 시도
+    }
+    if (error.response.data.statusCode === 404) {
+      throw Error(error.response.data.statusCode);
+    }
+    if (error.response.data.statusCode === 500) {
+      throw Error(error.response.data.statusCode);
+    }
+    if (
+      error.code === 'ECONNABORTED' ||
+      error.response.data.statusCode === 408
+    ) {
+      throw Error(error.response.data.statusCode);
+    }
+  }
+);
 
 export default fetcher;

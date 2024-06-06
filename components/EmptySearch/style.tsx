@@ -8,6 +8,11 @@ const Layout = styled.div`
   gap: 8px;
   margin-top: 50%;
   margin-left: 25%;
+
+  .text {
+    text-align: center;
+    color: ${(props) => props.theme.color.grey_50};
+  }
 `;
 
 const S = { Layout };

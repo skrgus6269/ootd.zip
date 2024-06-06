@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Body2, Title1 } from '@/components/UI';
 import NextButton from '@/components/NextButton';
 import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface ClothSizeProps {
   isOpen: Boolean;
@@ -81,6 +82,7 @@ export default function ClothSizeModal({
       <S.Layout>
         <S.Title>
           <Title1 className="title">사이즈</Title1>
+          <AiOutlineClose onClick={() => setIsOpen(false)} className="close" />
         </S.Title>
         <S.SizeLayout>
           {sizeList &&

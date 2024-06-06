@@ -7,21 +7,7 @@ const Layout = styled.div`
     height: 24px;
   }
 `;
-interface BackgroundState {
-  isOpen: Boolean;
-}
 
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: 130vh;
-  top: 0;
-  position: absolute;
-`;
-
-const S = { Layout, Background };
+const S = { Layout };
 
 export default S;

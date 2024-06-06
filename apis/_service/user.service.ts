@@ -1,4 +1,4 @@
-import { alarmApi, clothApi, ootdApi, userApi } from '@/apis/_api';
+import { alarmApi, blockApi, clothApi, ootdApi, userApi } from '@/apis/_api';
 import {
   postOOTDPayload,
   patchOOTDIsPrivatePayload,
@@ -14,6 +14,10 @@ import {
   paginationType,
   getSearchUserParams,
   getSearchOOTDParams,
+  putStylePayload,
+  getUserTaggedClothListParams,
+  getUserBlockListParams,
+  postUserBlockPayload,
 } from '@/apis/_api/type';
 
 //ootd 신규 등록
@@ -264,7 +268,27 @@ export const getOOTDWithCloth = async (params: getOOTDClothesParams) => {
 
 // 유저 프로필 검색
 export const getSearchUser = async (params: getSearchUserParams) => {
-  const data = await userApi.getSearchUser(params);
+  const data = await userApi.getSearchUser({ ...params, searchType: 'USER' });
+
+  return data;
+};
+
+// 유저 팔로워 조회
+export const getSearchUserFollower = async (params: getSearchUserParams) => {
+  const data = await userApi.getSearchUser({
+    ...params,
+    searchType: 'FOLLOWER',
+  });
+
+  return data;
+};
+
+// 유저 팔로잉 조회
+export const getSearchUserFollowing = async (params: getSearchUserParams) => {
+  const data = await userApi.getSearchUser({
+    ...params,
+    searchType: 'FOLLOWING',
+  });
 
   return data;
 };
@@ -277,6 +301,70 @@ export const getSearchOOTD = async (params: getSearchOOTDParams) => {
 
 export const getUserBrand = async (userId: number) => {
   const data = await userApi.getUserBrand(userId);
+
+  return data;
+};
+
+export const getUserStyle = async () => {
+  const data = await userApi.getUserStyle();
+
+  return data;
+};
+
+export const putStyle = async (params: putStylePayload) => {
+  const data = await userApi.putStyle(params);
+
+  return data;
+};
+
+// 탈퇴
+export const deleteUser = async () => {
+  const data = await userApi.deleteUser();
+
+  return data;
+};
+
+export const getLikeOOTD = async () => {
+  const data = await ootdApi.getLikeOOTD();
+
+  return data;
+};
+
+export const getSameClothDifferentOOTD = async () => {
+  const data = await ootdApi.getSameClothDifferentOOTD();
+
+  return data;
+};
+
+// 소셜 로그인 플랫폼 조회
+export const getSocilLoginProvider = async () => {
+  const data = await userApi.getSocilLoginProvider();
+
+  return data;
+};
+
+export const getUserTaggedClothList = async (
+  params: getUserTaggedClothListParams
+) => {
+  const data = await clothApi.getUserTaggedClothList(params);
+
+  return data;
+};
+
+export const getUserBlock = async (params: getUserBlockListParams) => {
+  const data = await blockApi.getUserBlock(params);
+
+  return data;
+};
+
+export const postUserBlock = async (payload: postUserBlockPayload) => {
+  const data = await blockApi.postUserBlock(payload);
+
+  return data;
+};
+
+export const deleteUserBlock = async (id: number) => {
+  const data = await blockApi.deleteUserBlock(id);
 
   return data;
 };

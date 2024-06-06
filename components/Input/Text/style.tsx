@@ -15,7 +15,7 @@ interface InputProps {
 const Layout = styled.div<LayoutProps>`
   display: flex;
   width: 100%;
-  max-width: ${(props) => (props.size === 'big' ? '350px' : '167px')};
+  max-width: ${(props) => (props.size === 'big' ? '430px' : '167px')};
   height: 44px;
   gap: 2px;
   position: relative;
@@ -72,7 +72,6 @@ const SearchInput = styled(FlexLayout)`
 `;
 
 const Input = styled.input<InputProps>`
-  font-family: 'Pretendard Regular';
   text-decoration: ${(props) =>
     props.type === 'Link' ? '1px solid underline' : ''};
   &::placeholder {
@@ -93,7 +92,6 @@ const Input = styled.input<InputProps>`
 
     &::placeholder {
       font-size: 16px;
-      font-family: 'Pretendard Variable';
     }
   `}
 
@@ -105,14 +103,13 @@ const Input = styled.input<InputProps>`
     border: none; 
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 20px; 
     :focus {
       outline: none;
     }
     &::placeholder {
       font-size: 16px;
-      font-family: 'Pretendard Variable';
       font-weight: 400;
       line-height: 22px;
     }

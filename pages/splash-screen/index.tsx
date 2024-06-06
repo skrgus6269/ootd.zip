@@ -2,24 +2,32 @@ import { ComponentWithLayout } from '../sign-up';
 import S from '@/pageStyle/splash-screen/style';
 import SplashLogo from '@/public/images/SplashLogo.svg';
 import { AppLayoutProps } from '@/AppLayout';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getCookie } from '@/utils/Cookie';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import { useSetRecoilState } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import { getReactNativeMessage } from '@/utils/reactNativeMessage';
+import { RegisterApi } from '@/apis/domain/Register/RegisterApi';
+import PublicApi from '@/apis/domain/Public/PublicApi';
 
 const SplashScreen: ComponentWithLayout = () => {
   const router = useRouter();
   const { getUserId } = PublicApi();
   const setUserId = useSetRecoilState(userId);
+  const [_state, setState] = useState();
+  const { getCheckCompleteRegistUserInfo } = RegisterApi();
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (getCookie('accessToken')) {
-        const { id } = await getUserId();
-        router.push('/main');
-        setUserId(id);
+      getReactNativeMessage(setState);
+      if (localStorage.getItem('accessToken')) {
+        const result = await getUserId();
+        if (await getCheckCompleteRegistUserInfo()) {
+          router.push('/main');
+          setUserId(result);
+          return;
+        }
+        router.replace('/agree');
         return;
       }
       router.push('/onboarding');

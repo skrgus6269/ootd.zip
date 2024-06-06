@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-interface LayoutProps {
-  state: Boolean;
-}
-
-const Background = styled.div<LayoutProps>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.state ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-`;
-
 const Layout = styled.div`
   padding: 24px 0 0 0;
   height: 100%;
@@ -37,22 +22,18 @@ const OOTDImage = styled.div`
   gap: 8px;
   overflow-x: scroll;
   img {
-    min-width: 106px;
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     border-radius: 2px;
   }
 `;
 
 const ImageDivider = styled.hr`
-  border: 8px solid ${(props) => props.theme.color.grey_95};
+  border: 4px solid ${(props) => props.theme.color.grey_95};
+  margin: 0;
   width: 100%;
 `;
 
 const Text = styled.div`
-  margin: 16px 0 0 0;
-  padding: 0 20px 0 20px;
+  margin: 16px 20px 0 20px;
 `;
 
 const Style = styled.div`
@@ -112,7 +93,6 @@ const StyleListSpan = styled.div`
 `;
 
 const S = {
-  Background,
   Layout,
   OOTDImage,
   Text,

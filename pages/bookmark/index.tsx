@@ -1,10 +1,9 @@
 import { Title1 } from '@/components/UI';
 import S from '@/pageStyle/bookmark/style';
 import AppBar from '@/components/Appbar';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import BookmarSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
+import BookmarkSubHead from '@/components/Domain/Bookmark/BookmarkSubHead';
 import ImageCheckBoxList from '@/components/ImageCheckBoxList';
 import BookmarkAlert from '@/components/Domain/Bookmark/BookmarkAlert';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -13,11 +12,14 @@ import BackTop from '@/public/images/BackTop.svg';
 import Toast from '@/components/Toast';
 import Spinner from '@/components/Spinner';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
+import Background from '@/components/Background';
+import useRememberScroll from '@/hooks/useRememberScroll';
 
 export type OOTDdataType = {
   ootdId: number;
   ootdBookmarkId: number;
   ootdImage: string;
+  ootdImageCount: number;
 };
 
 export type BookmarkListType = {
@@ -47,7 +49,6 @@ export default function Bookmark() {
 
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = container;
-      console.log(scrollTop, clientHeight, scrollHeight);
       if (scrollTop >= 50) {
         setIsVisible(true);
       }
@@ -67,11 +68,11 @@ export default function Bookmark() {
 
   const [alertOpen, setAlertOpen] = useState<Boolean>(false);
 
-  const onClickYesButton = () => {
+  const onClickNoButton = () => {
     setAlertOpen(false);
   };
 
-  const onClickNoButton = async () => {
+  const onClickYesButton = async () => {
     const result = await deleteBookmarkList(checkedItems);
     if (result) {
       setAlertOpen(false);
@@ -100,7 +101,7 @@ export default function Bookmark() {
       page: bookmarkPage,
       size,
       sortCriteria: 'createdAt',
-      sortDirection: 'ASC',
+      sortDirection: 'DESC',
     });
 
     return data;
@@ -112,15 +113,32 @@ export default function Bookmark() {
     containerRef: bookmarkRef,
     hasNextPage: bookmarkHasNextPage,
     reset,
+    total: bookmarkTotal,
   } = useInfiniteScroll({
     fetchDataFunction,
-    size: 7,
-    initialData: [],
+    size: 9,
+    initialData:
+      typeof window !== 'undefined' && sessionStorage.getItem('bookmark-item')
+        ? JSON.parse(sessionStorage.getItem('bookmark-item')!)
+        : [],
+    initialPage:
+      typeof window !== 'undefined' && sessionStorage.getItem('bookmark-page')
+        ? JSON.parse(sessionStorage.getItem('bookmark-page')!)
+        : 0,
+    key: 'bookmark',
+  });
+
+  useRememberScroll({
+    key: 'bookmark',
+    containerRef: bookmarkRef,
+    setList: setBookmarkList,
+    list: bookmarkList,
   });
 
   useEffect(() => {
     setBookmarkList(
       bookmarkData.map((item: any) => {
+        console.log(item);
         return {
           ootdId: item.ootdId,
           ootdBookmarkId: item.ootdBookmarkId,
@@ -139,22 +157,23 @@ export default function Bookmark() {
 
   return (
     <>
-      <S.Background isOpen={alertOpen} onClick={onClickBackground} />
+      <Background isOpen={alertOpen} onClick={onClickBackground} />
       <S.Layout>
         <AppBar
           leftProps={<></>}
           middleProps={<Title1>북마크</Title1>}
           rightProps={<></>}
         />
-
+        <BookmarkSubHead
+          total={bookmarkTotal}
+          editing={editing}
+          setEditing={setEditing}
+          setAlertOpen={setAlertOpen}
+          count={checkedItems.length}
+        />
         <S.BookmarkList ref={bookmarkRef}>
-          <BookmarSubHead
-            editing={editing}
-            setEditing={setEditing}
-            setAlertOpen={setAlertOpen}
-            count={checkedItems.length}
-          />
           <ImageCheckBoxList
+            editing={editing}
             checkedItems={checkedItems}
             setCheckedItems={setCheckedItems}
             checkBox={editing}
@@ -174,7 +193,13 @@ export default function Bookmark() {
             onClickNoButton={onClickNoButton}
           />
         )}
-        {toastOpen && <Toast text="북마크에서 삭제되었습니다." />}
+        {toastOpen && (
+          <Toast
+            text="북마크에서 삭제되었습니다."
+            setState={setToastOpen}
+            state={toastOpen}
+          />
+        )}
       </S.Layout>
     </>
   );

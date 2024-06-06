@@ -4,7 +4,9 @@ const Layout = styled.div`
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 48px);
+
+  height: calc(100vh - 68px);
+  overflow: scroll;
 `;
 
 const ProgressBar = styled.div`
@@ -29,9 +31,6 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  .nextButton {
-    padding-bottom: 26px;
-  }
 `;
 
 const Step = styled.div`

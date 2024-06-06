@@ -3,12 +3,18 @@ import S from './style';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineExclamationCircle } from 'react-icons/ai';
 import { Button3, Caption1, Headline2, Body3 } from '../UI';
+import Toast from '../Toast';
+import { BlockApi } from '@/apis/domain/Block/BlockApi';
+import { useRouter } from 'next/router';
 
 interface ReceivedDeclarationModalProps {
   type: string;
   reportStatus: Boolean;
   receivedDeclaration: Boolean;
   setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  ID: number;
+  setGoBackAfterBlock: Dispatch<SetStateAction<Boolean>>;
+  setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
 export default function ReceivedDeclarationModal({
@@ -16,9 +22,30 @@ export default function ReceivedDeclarationModal({
   reportStatus,
   receivedDeclaration,
   setReceivedDeclaration,
+  ID,
+  setGoBackAfterBlock,
+  setBlockStatus,
 }: ReceivedDeclarationModalProps) {
+  const { postUserBlock } = BlockApi();
+  const router = useRouter();
+
+  const blockUserButton = async () => {
+    const blockUser = await postUserBlock({ userId: ID });
+    console.log(blockUser);
+
+    if (blockUser.divisionCode === 'UB003') {
+      setReceivedDeclaration(false); // 차단 모달 닫기
+      setBlockStatus(false);
+      setGoBackAfterBlock(true);
+    } else if (blockUser === '성공') {
+      setReceivedDeclaration(false); // 차단 모달 닫기
+      setBlockStatus(true);
+      setGoBackAfterBlock(true);
+    }
+  };
+
   return (
-    <Modal isOpen={receivedDeclaration} height="70">
+    <Modal isOpen={receivedDeclaration} height="55">
       <S.Layout>
         <S.Header>
           <AiOutlineClose
@@ -27,10 +54,10 @@ export default function ReceivedDeclarationModal({
           />
         </S.Header>
         <S.Frame>
-          <AiOutlineExclamationCircle />
-          <Headline2>
+          <AiOutlineExclamationCircle className="infoIcon" />
+          <Headline2 className="reportTitle">
             {reportStatus === true
-              ? '신고가 접수되었습니다.'
+              ? '신고가 완료되었습니다.'
               : `이미 신고한 ${type}입니다.`}
           </Headline2>
           <S.ColorSpan>
@@ -45,7 +72,7 @@ export default function ReceivedDeclarationModal({
             </Body3>
           </S.ColorSpan>
         </S.Frame>
-        <S.Button>
+        <S.Button onClick={blockUserButton}>
           <Button3>사용자 차단하기</Button3>
         </S.Button>
       </S.Layout>

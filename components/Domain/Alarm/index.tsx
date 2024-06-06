@@ -4,6 +4,7 @@ import { Body4, Caption2 } from '@/components/UI';
 import Avatar from '@/public/images/Avatar.svg';
 import { useRouter } from 'next/router';
 import { AlarmApi } from '@/apis/domain/Alarm/AlarmApi';
+import React from 'react';
 
 export interface AlarmType {
   id: number;
@@ -16,6 +17,7 @@ export interface AlarmType {
   contentImage?: string;
   goUrl: string;
   userId: number;
+  className: string;
 }
 
 export default function Alarms({
@@ -28,6 +30,7 @@ export default function Alarms({
   userName,
   goUrl,
   userId,
+  className,
 }: AlarmType) {
   const router = useRouter();
   const { readAlarm } = AlarmApi();
@@ -37,8 +40,13 @@ export default function Alarms({
     router.push(`/${goUrl}`);
   };
 
+  const onClickUserName = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (userId !== 0) router.push(`/mypage/${userId}`);
+  };
+
   return (
-    <S.Layout>
+    <S.Layout className={className}>
       <S.Left onClick={() => router.push(`/mypage/${userId}`)}>
         {profileImage && (
           <Image
@@ -53,7 +61,7 @@ export default function Alarms({
       <S.Middle onClick={onClickAlarm}>
         <S.Message>
           <Body4
-            onClick={() => router.push(`/mypage/${userId}`)}
+            onClick={onClickUserName}
             className="userName"
             state="emphasis"
           >

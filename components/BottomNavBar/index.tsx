@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
+
 import { BottomComponent, BottomComponentItem } from './style';
 
 import {
@@ -15,9 +16,10 @@ import BookmarkOutlined from '@/public/images/BookmarkOutlined.svg';
 import BookmarkFilled from '@/public/images/BookmarkFilled.svg';
 import UserFilled from '@/public/images/UserFilled.svg';
 import SearchFilled from '@/public/images/SearchFilled.svg';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import FilledSquare from '@/public/images/FilledPlusSquare.svg';
+import Link from 'next/link';
 
 const icons = [
   <AiOutlineHome />,
@@ -40,6 +42,11 @@ interface BottomNavBarProps {
   setAddModalState: Dispatch<SetStateAction<Boolean>>;
 }
 
+interface BottomNavBarType {
+  icon: JSX.Element;
+  click: () => void;
+}
+
 export default function BottomNavBar({
   addModalState,
   setAddModalState,
@@ -48,23 +55,33 @@ export default function BottomNavBar({
   const path = router.asPath;
   const myId = useRecoilValue(userId);
 
-  const routes = ['/main', '/search', '/plus', '/bookmark', `/mypage/${myId}`];
+  const routes = [
+    '/main/explore',
+    '/search',
+    '/plus',
+    '/bookmark',
+    `/mypage/${myId}`,
+  ];
 
   const getActiveIndex = () =>
     routes.findIndex((route) => path.includes(route));
 
   const activeIndex = getActiveIndex();
 
-  const [bottomNavBarLinkers, setBottomNavBarLinkers] = useState(
-    icons.map((icon, index) => ({
-      icon: index === activeIndex ? activeIcons[index] : icon,
-      click: () => {
-        router.push(routes[index]);
-        setAddModalState(false);
-      },
-    }))
-  );
+  const [bottomNavBarLinkers, setBottomNavBarLinkers] =
+    useState<BottomNavBarType[]>();
 
+  useEffect(() => {
+    setBottomNavBarLinkers(
+      icons.map((icon, index) => ({
+        icon: index === activeIndex ? activeIcons[index] : icon,
+        click: () => {
+          router.push(routes[index]);
+          setAddModalState(false);
+        },
+      }))
+    );
+  }, []);
   useEffect(() => {
     const newLinkers = icons.map((icon, index) => ({
       icon: index === activeIndex ? activeIcons[index] : icon,
@@ -79,26 +96,27 @@ export default function BottomNavBar({
   const onClickPlusButton = () => {
     setAddModalState(!addModalState);
   };
+
   return (
     <BottomComponent>
-      {bottomNavBarLinkers.map((item, index) => (
-        <BottomComponentItem
-          key={index}
-          onClick={index === 2 ? onClickPlusButton : item.click}
-        >
-          {index === 2 && addModalState ? (
-            <FilledSquare />
-          ) : path.includes('mypage') && index === 4 ? (
-            router.isReady && myId === Number(router.query.UserId![0]) ? (
-              activeIcons[index]
-            ) : (
-              item.icon
-            )
+      {bottomNavBarLinkers &&
+        bottomNavBarLinkers.map((item, index) =>
+          index === 2 ? (
+            <BottomComponentItem key={index} onClick={onClickPlusButton}>
+              {addModalState ? <FilledSquare /> : <AiOutlinePlusSquare />}
+            </BottomComponentItem>
           ) : (
-            item.icon
-          )}
-        </BottomComponentItem>
-      ))}
+            <Link key={index} href={routes[index]}>
+              <BottomComponentItem onClick={item.click}>
+                {path.substring(1, 7) === 'mypage' && index === 4
+                  ? router.isReady && myId === Number(router.query.UserId![0])
+                    ? activeIcons[index]
+                    : item.icon
+                  : item.icon}
+              </BottomComponentItem>
+            </Link>
+          )
+        )}
     </BottomComponent>
   );
 }

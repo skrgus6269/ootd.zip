@@ -1,7 +1,5 @@
-import { useFunnel } from '@/hooks/use-funnel';
 import S from './style';
-import ClosetTabbar from './ClosetTabbar';
-import ClosetCloth, { FilterData, OOTDListType } from './ClosetCloth';
+import ClosetCloth, { OOTDListType } from './ClosetCloth';
 import Profile, { ProfileListType } from './Profile';
 import EmptySearch from '@/components/EmptySearch';
 import { UserApi } from '@/apis/domain/User/UserApi';
@@ -10,14 +8,15 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useEffect, useState } from 'react';
 import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
+import TabView from '@/components/TabView';
+import { FilterData } from '../../MyPage/Closet/ClosetCloth';
+import useRememberScroll from '@/hooks/useRememberScroll';
 
 interface searchResultProps {
   keywordsValue: string;
 }
 
 export default function SearchResult({ keywordsValue }: searchResultProps) {
-  const [Funnel, currentStep, handleStep] = useFunnel(['OOTD', 'Profile']);
-
   const [profileList, setProfileList] = useState<ProfileListType[]>([]);
 
   const router = useRouter();
@@ -46,11 +45,25 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     reset,
   } = useInfiniteScroll({
     fetchDataFunction,
-    size: 10,
-    initialData: [],
+    size: 12,
+    initialData: sessionStorage.getItem('search-user-item')
+      ? JSON.parse(sessionStorage.getItem('search-user-item')!)
+      : 0,
+    initialPage: sessionStorage.getItem('search-user-page')
+      ? JSON.parse(sessionStorage.getItem('search-user-page')!)
+      : 0,
+    key: 'search-user',
+  });
+
+  useRememberScroll({
+    key: 'search-user',
+    containerRef: profileRef,
+    setList: setProfileList,
+    list: profileList,
   });
 
   useEffect(() => {
+    if (!profileData || profileData.length === 0) return;
     setProfileList(
       profileData.map((item: any) => {
         return {
@@ -72,6 +85,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     category: null,
     color: null,
     brand: null,
+    isOpen: true,
     gender: {
       man: false,
       woman: false,
@@ -88,6 +102,7 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
       category: null,
       color: null,
       brand: null,
+      isOpen: true,
       gender: {
         man: false,
         woman: false,
@@ -109,11 +124,11 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
       colorIds: filter.color?.map((item) => item.id),
       brandIds: filter.brand?.map((item) => item.id),
       writerGender: (() => {
-        if (filter.gender.man && filter.gender.woman) {
+        if (filter.gender?.man && filter.gender.woman) {
           return '';
-        } else if (filter.gender.man) {
+        } else if (filter.gender?.man) {
           return 'MALE';
-        } else if (filter.gender.woman) {
+        } else if (filter.gender?.woman) {
           return 'FEMALE';
         } else {
           return '';
@@ -133,18 +148,27 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
     containerRef: OOTDRef,
     hasNextPage: OOTDHasNextPage,
     reset: ootdReset,
+    total: OOTDTotal,
   } = useInfiniteScroll({
     fetchDataFunction: fetchOOTDDataFunction,
-    size: 9,
-    initialData: [],
+    size: 12,
+    initialData: sessionStorage.getItem('search-ootd-item')
+      ? JSON.parse(sessionStorage.getItem('search-ootd-item')!)
+      : [],
+    initialPage: sessionStorage.getItem('search-ootd-page')
+      ? JSON.parse(sessionStorage.getItem('search-ootd-page')!)
+      : 0,
+    key: 'search-ootd',
   });
 
   useEffect(() => {
+    if (OOTDData.length === 0) return;
     setOOTDList(
       OOTDData.map((item: any) => {
         return {
           id: item.id,
           imageUrl: item.imageUrl,
+          imageCount: item.imageCount,
         };
       })
     );
@@ -153,42 +177,85 @@ export default function SearchResult({ keywordsValue }: searchResultProps) {
   useEffectAfterMount(() => {
     setOOTDList([]);
     ootdReset();
-  }, [keywordsValue, sortStandard, filter]);
+  }, [keywordsValue, sortStandard]);
+
+  const [firstState, setFirstState] = useState<number>(0);
+
+  useEffectAfterMount(() => {
+    setFirstState(firstState + 1);
+    if (firstState > 0) {
+      setOOTDList([]);
+      ootdReset();
+    }
+  }, [filter]);
+
+  const onChangeTabBarIndex = () => {
+    const storedSearchType = sessionStorage.getItem('search-type');
+    if (storedSearchType) {
+      if (storedSearchType === 'ootd') {
+        sessionStorage.setItem('search-type', 'user');
+      } else {
+        sessionStorage.setItem('search-type', 'ootd');
+      }
+      return;
+    }
+    sessionStorage.setItem('search-type', 'ootd');
+  };
 
   return (
     <>
       <S.Layout>
-        <ClosetTabbar handleStep={handleStep} currentStep={currentStep} />
-        <Funnel>
-          <Funnel.Steps name="OOTD">
-            {OOTDData.length > 0 ? (
-              <ClosetCloth
-                OOTDList={OOTDList}
-                OOTDIsLoading={OOTDIsLoading}
-                OOTDRef={OOTDRef}
-                OOTDHasNextPage={OOTDHasNextPage}
-                filter={filter}
-                setFilter={setFilter}
-                sortStandard={sortStandard}
-                setSortStandard={setSortStandard}
-              />
-            ) : (
-              <EmptySearch />
-            )}
-          </Funnel.Steps>
-          <Funnel.Steps name="Profile">
-            {profileData.length > 0 ? (
-              <Profile
-                profileList={profileList}
-                profileIsLoading={profileIsLoading}
-                profileRef={profileRef}
-                profileHasNextPage={profileHasNextPage}
-              />
-            ) : (
-              <EmptySearch />
-            )}
-          </Funnel.Steps>
-        </Funnel>
+        <TabView
+          initialIndex={
+            sessionStorage.getItem('search-type')
+              ? Number(sessionStorage.getItem('search-type') === 'user') + 1
+              : 1
+          }
+        >
+          <TabView.TabBar
+            tab={['OOTD', '프로필']}
+            display="block"
+            onChangeState={onChangeTabBarIndex}
+          />
+          <TabView.Tabs>
+            <TabView.Tab>
+              {OOTDList.length === 0 &&
+              filter.brand === null &&
+              filter.category === null &&
+              filter.color === null &&
+              filter.gender?.man === false &&
+              filter.gender.woman === false ? (
+                <EmptySearch />
+              ) : (
+                <ClosetCloth
+                  OOTDTotal={OOTDTotal}
+                  OOTDList={OOTDList}
+                  setOOTDList={setOOTDList}
+                  OOTDIsLoading={OOTDIsLoading}
+                  OOTDRef={OOTDRef}
+                  OOTDHasNextPage={OOTDHasNextPage}
+                  filter={filter}
+                  setFilter={setFilter}
+                  sortStandard={sortStandard}
+                  setSortStandard={setSortStandard}
+                />
+              )}
+            </TabView.Tab>
+            <TabView.Tab>
+              {profileData.length > 0 ? (
+                <Profile
+                  profileList={profileList}
+                  setProfileList={setProfileList}
+                  profileIsLoading={profileIsLoading}
+                  profileRef={profileRef}
+                  profileHasNextPage={profileHasNextPage}
+                />
+              ) : (
+                <EmptySearch />
+              )}
+            </TabView.Tab>
+          </TabView.Tabs>
+        </TabView>
       </S.Layout>
     </>
   );

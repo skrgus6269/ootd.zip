@@ -80,13 +80,14 @@ export default function Alarm() {
 
   useEffect(() => {
     const map = new Map();
-    isReadAlarmList.forEach((item: FetchedAlarmType) => {
-      if (map.has(item.timeType)) {
-        map.set(item.timeType, [...map.get(item.timeType), ...item.data]);
-      } else {
-        map.set(item.timeType, item.data);
-      }
-    });
+    isReadAlarmList.length > 0 &&
+      isReadAlarmList.forEach((item: FetchedAlarmType) => {
+        if (map.has(item.timeType)) {
+          map.set(item.timeType, [...map.get(item.timeType), ...item.data]);
+        } else {
+          map.set(item.timeType, item.data);
+        }
+      });
 
     const newIsReadAlarm = [] as FetchedAlarmType[];
 
@@ -106,13 +107,13 @@ export default function Alarm() {
         middleProps={<Title1>알림함</Title1>}
         rightProps={<></>}
       />
-      {!notIsReadAlarm && !isReadAlarm && <NoAlarm />}
+      {!notIsReadAlarm?.length && !isReadAlarm?.length && <NoAlarm />}
       <S.Layout ref={containerRef}>
         {notIsReadAlarm && notIsReadAlarm.length > 0 && (
           <AlarmLayout index={0}>
             <Title1 className="title">읽지 않음</Title1>
             {notIsReadAlarm?.map((item, index) => (
-              <Alarms key={index} {...item} />
+              <Alarms key={index} {...item} className={'isNotRead'} />
             ))}
           </AlarmLayout>
         )}

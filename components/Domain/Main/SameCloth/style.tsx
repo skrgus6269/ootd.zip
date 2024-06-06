@@ -4,7 +4,12 @@ interface FilterProps {
   state: Boolean;
 }
 
-const Layout = styled.div``;
+const Layout = styled.div`
+  .addButton {
+    width: calc(100% - 20px);
+    margin-bottom: 109px;
+  }
+`;
 
 const Label = styled.div`
   .body {
@@ -34,6 +39,10 @@ const FilterItem = styled.div<FilterProps>`
 
   .filterItemTrue {
     width: 100px;
+  }
+
+  img {
+    object-fit: cover;
   }
 
   h5 {
@@ -67,24 +76,32 @@ const FilterItem = styled.div<FilterProps>`
 
 const List = styled.div`
   width: 100%;
-  img {
-    max-width: 350px;
-    max-height: 350px;
-    width: 100%;
-    object-fit: cover;
-    margin-top: 6px;
-  }
+  padding-right: 20px;
+  margin-bottom: 28px;
 
   .flexList {
+    margin-top: 6px;
     display: flex;
     gap: 6px;
-    max-width: 113px;
-    max-height: 113px;
-    width: 32%;
+    width: 100%;
+    position: relative;
   }
-  margin-bottom: 28px;
 `;
 
-const S = { Layout, Label, Filter, List, FilterItem };
+const FirstImage = styled.div`
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-bottom: 100%;
+`;
+
+const FlexImage = styled.div`
+  width: 32%;
+  height: 0;
+  padding-bottom: 32%;
+  position: relative;
+`;
+
+const S = { Layout, Label, Filter, List, FilterItem, FirstImage, FlexImage };
 
 export default S;

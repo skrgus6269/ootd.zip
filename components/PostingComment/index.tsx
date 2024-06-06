@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   MutableRefObject,
   SetStateAction,
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -13,6 +14,8 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
+import DeclarationModal from '../DeclarationModal';
+import ReceivedDeclarationModal from '../ReceivedDeclarationModal';
 
 interface PostingCommentData extends CommentProps {
   childComment?: {
@@ -24,6 +27,7 @@ interface PostingCommentData extends CommentProps {
     parentId?: number;
     taggedUserName?: string;
     depth?: number;
+    userId: number;
   }[];
 }
 
@@ -32,17 +36,27 @@ interface PostingCommentProps {
   setReRender: Dispatch<SetStateAction<number>>;
   setComment: Dispatch<SetStateAction<CommentStateType>>;
   commentRef: MutableRefObject<any>;
-  comment: CommentStateType;
   setCommentWriting: Dispatch<SetStateAction<Boolean>>;
+  declaration: Boolean;
+  setDeclaration: Dispatch<SetStateAction<Boolean>>;
+  receivedDeclaration: Boolean;
+  setReceivedDeclaration: Dispatch<SetStateAction<Boolean>>;
+  setGoBackAfterBlock: Dispatch<SetStateAction<Boolean>>;
+  setBlockStatus: Dispatch<SetStateAction<Boolean>>;
 }
 
-export default function PostingComment({
+function PostingComment({
   reRender,
   setReRender,
   setComment,
   commentRef,
-  comment,
   setCommentWriting,
+  declaration,
+  setDeclaration,
+  receivedDeclaration,
+  setReceivedDeclaration,
+  setGoBackAfterBlock,
+  setBlockStatus,
 }: PostingCommentProps) {
   const [commentType, setCommentType] = useState<'preview' | 'all'>('preview');
   const localUserId = useRecoilValue(userId);
@@ -53,6 +67,8 @@ export default function PostingComment({
     if (commentType === 'all') setCommentType('preview');
   };
   const [data, setData] = useState<PostingCommentData[]>([]);
+  const [totalCount, setTotalCount] = useState<Number>(0);
+
   const { getOOTDComment } = OOTDApi();
 
   useEffect(() => {
@@ -65,6 +81,8 @@ export default function PostingComment({
       });
       const map = new Map<number, PostingCommentData>();
       const resultData: PostingCommentData[] = [];
+
+      setTotalCount(content.length);
 
       content.forEach((comment: PostingCommentData) => {
         if (comment.depth === 1) map.set(comment.id, comment);
@@ -89,11 +107,13 @@ export default function PostingComment({
   }, [router.isReady, reRender, router.query.OOTDNumber]);
 
   const onClickReplyButton = (userName: string, commentId: number) => {
-    setComment({
-      ...comment,
-      taggedUserName: userName,
-      parentDepth: 1,
-      commentParentId: commentId,
+    setComment((previous) => {
+      return {
+        ...previous,
+        taggedUserName: userName,
+        parentDepth: 1,
+        commentParentId: commentId,
+      };
     });
     setCommentWriting(true);
     commentRef.current.focus();
@@ -115,6 +135,10 @@ export default function PostingComment({
               timeStamp={item.timeStamp}
               reRender={reRender}
               setReRender={setReRender}
+              setDeclaration={setDeclaration}
+              setReportUserName={setReportUserName}
+              setReportID={setReportID}
+              setBlockID={setBlockID}
             />
           </>
         ))}
@@ -125,10 +149,15 @@ export default function PostingComment({
     );
   };
 
+  const [reportStatus, setReportStatus] = useState<Boolean>(false);
+  const [reportUserName, setReportUserName] = useState<string>('');
+  const [reportID, setReportID] = useState<number>(0); // 신고할 ID
+  const [blockID, setBlockID] = useState<number>(0); // 사용자 차단할 ID
+
   const ComentAll = () => {
     return (
       <S.Layout>
-        <Body4 className="commentLength">총{data!.length}개의 댓글</Body4>
+        <Body4 className="commentLength">총{String(totalCount)}개의 댓글</Body4>
         {data!.map((item, index) => (
           <>
             <Comment
@@ -145,35 +174,79 @@ export default function PostingComment({
               myComment={localUserId === item.userId}
               reRender={reRender}
               setReRender={setReRender}
+              setDeclaration={setDeclaration}
+              setReportUserName={setReportUserName}
+              setReportID={setReportID}
+              setBlockID={setBlockID}
             />
+
             {item &&
               item.childComment?.map((items, indexs) => (
-                <Comment
-                  key={items.id}
-                  userId={item.userId}
-                  userImage={items.userImage}
-                  id={items.id}
-                  userName={items.userName}
-                  content={items.content}
-                  onClickReplyButton={() =>
-                    onClickReplyButton(
-                      item.childComment![indexs].userName,
-                      item.id
-                    )
-                  }
-                  type="child"
-                  taggedUserName={items.taggedUserName}
-                  timeStamp={items.timeStamp}
-                  myComment={localUserId === item.userId}
-                  reRender={reRender}
-                  setReRender={setReRender}
-                />
+                <>
+                  <Comment
+                    key={items.id}
+                    userId={items.userId}
+                    userImage={items.userImage}
+                    id={items.id}
+                    userName={items.userName}
+                    content={items.content}
+                    onClickReplyButton={() =>
+                      onClickReplyButton(
+                        item.childComment![indexs].userName,
+                        item.id
+                      )
+                    }
+                    type="child"
+                    taggedUserName={items.taggedUserName}
+                    timeStamp={items.timeStamp}
+                    myComment={localUserId === items.userId}
+                    reRender={reRender}
+                    setReRender={setReRender}
+                    setDeclaration={setDeclaration}
+                    setReportUserName={setReportUserName}
+                    setReportID={setReportID}
+                    setBlockID={setBlockID}
+                  />
+                  {receivedDeclaration && (
+                    <ReceivedDeclarationModal
+                      type="댓글"
+                      reportStatus={reportStatus}
+                      receivedDeclaration={receivedDeclaration}
+                      setReceivedDeclaration={setReceivedDeclaration}
+                      ID={blockID}
+                      setGoBackAfterBlock={setGoBackAfterBlock}
+                      setBlockStatus={setBlockStatus}
+                    />
+                  )}
+                </>
               ))}
           </>
         ))}
         <S.CommentOpenButton onClick={onClickCommentButton}>
           <Caption1>댓글 접기</Caption1>
         </S.CommentOpenButton>
+        {declaration && (
+          <DeclarationModal
+            type="COMMENT"
+            userName={reportUserName}
+            ID={reportID}
+            declaration={declaration}
+            setDeclaration={setDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+            setReportStatus={setReportStatus}
+          />
+        )}
+        {receivedDeclaration && (
+          <ReceivedDeclarationModal
+            type="댓글"
+            reportStatus={reportStatus}
+            receivedDeclaration={receivedDeclaration}
+            setReceivedDeclaration={setReceivedDeclaration}
+            ID={blockID}
+            setGoBackAfterBlock={setGoBackAfterBlock}
+            setBlockStatus={setBlockStatus}
+          />
+        )}
       </S.Layout>
     );
   };
@@ -187,3 +260,5 @@ export default function PostingComment({
   }
   return <>{commentType === 'preview' ? <ComentPreview /> : <ComentAll />}</>;
 }
+
+export default React.memo(PostingComment);

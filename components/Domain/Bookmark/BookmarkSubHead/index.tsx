@@ -10,6 +10,7 @@ interface BookmarkSubHeadProps {
   setEditing: Dispatch<SetStateAction<Boolean>>;
   setAlertOpen: Dispatch<SetStateAction<Boolean>>;
   count: number;
+  total: number;
 }
 
 export default function BookmarSubHead({
@@ -17,33 +18,42 @@ export default function BookmarSubHead({
   setEditing,
   setAlertOpen,
   count,
+  total,
 }: BookmarkSubHeadProps) {
   return (
     <>
       <S.headLayout>
         <S.Frame>
           <Body4 state="emphasis" className="bookmarkSubHeadText">
-            {editing ? `${count}개의 게시글이 선택됨` : `4개의 게시글`}
+            {editing && count > 0 ? `${count}개의 게시글이 선택됨` : ``}
+            {!editing && `${total}개의 게시물`}
           </Body4>
         </S.Frame>
         <S.Wrap>
           {editing ? (
             <>
-              <button onClick={() => setAlertOpen(true)}>
-                <Button3 style={{ color: '#EC0000' }} state="emphasis">
-                  삭제
-                </Button3>
+              <button
+                onClick={() => setAlertOpen(true)}
+                className="deleteButton"
+              >
+                <Button3 state="emphasis">삭제</Button3>
               </button>
 
               <Image src={Rectangle} alt="Rectangle" width={1} height={20} />
 
-              <button onClick={() => setEditing(false)}>
+              <button
+                onClick={() => setEditing(false)}
+                className="cancelButton"
+              >
                 <Button3 state="emphasis">취소</Button3>
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => setEditing(true)}>
+              <button
+                onClick={() => setEditing(true)}
+                className="editingButton"
+              >
                 <Button3 state="emphasis">편집</Button3>
               </button>
             </>

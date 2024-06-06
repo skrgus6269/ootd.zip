@@ -1,19 +1,45 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: any) {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
-      <meta
-        name="viewport"
-        content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
-        http-equiv="Content-Security-Policy"
-      />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App: any) => (props: any) =>
+            sheet.collectStyles(<App {...props} />),
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <style />
+        </Head>
+        <body>
+          <Main />
+          <div id="modal-root" />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }

@@ -1,14 +1,20 @@
-/* eslint-disable @next/next/no-img-element */
 import { Body3, Button3 } from '@/components/UI';
 import S from './style';
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { CommentStateType } from '@/pages/ootd/[...OOTDNumber]';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Avatar from '@/public/images/Avatar.svg';
+import NextImage from '@/components/NextImage';
+import { UserApi } from '@/apis/domain/User/UserApi';
 
 interface PostingCommentWriteProps {
   comment: CommentStateType;
-  userImage: string | null;
   setComment: Dispatch<SetStateAction<CommentStateType>>;
   commentRef: MutableRefObject<null>;
   commentWriting: Boolean;
@@ -18,7 +24,6 @@ interface PostingCommentWriteProps {
 }
 export default function PostingCommentWrite({
   comment,
-  userImage,
   setComment,
   commentRef,
   commentWriting,
@@ -26,6 +31,19 @@ export default function PostingCommentWrite({
   registerComment,
   setCommentFinish,
 }: PostingCommentWriteProps) {
+  const { getProfile } = UserApi();
+
+  const [userImage, setUserImage] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    const data = await getProfile();
+    setUserImage(data.profileImage);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <S.Layout>
       {commentWriting && (
@@ -47,16 +65,22 @@ export default function PostingCommentWrite({
 
       <S.CommentWrite>
         <S.UserImage>
-          {userImage === null ? (
+          {userImage === '' || userImage === null ? (
             <Avatar className="avatar" />
           ) : (
-            <img src={userImage} alt="유저 프로필 이미지" />
+            <NextImage
+              fill={false}
+              width={32}
+              height={32}
+              src={userImage}
+              alt="유저 프로필 이미지"
+            />
           )}
         </S.UserImage>
         <S.Comment>
           <S.Text>
             <S.Input
-              line={Math.floor(comment.content.length / 21) + 2}
+              line={comment.content.split('\n').length}
               ref={commentRef}
               onChange={(e) => {
                 setComment({ ...comment, content: e.target.value });
@@ -66,9 +90,11 @@ export default function PostingCommentWrite({
               value={comment.content}
             />
           </S.Text>
-          <S.Upload>
-            <Button3 onClick={registerComment}>등록</Button3>
-          </S.Upload>
+          {comment.content.length > 0 && (
+            <S.Upload>
+              <Button3 onClick={registerComment}>등록</Button3>
+            </S.Upload>
+          )}
         </S.Comment>
       </S.CommentWrite>
     </S.Layout>

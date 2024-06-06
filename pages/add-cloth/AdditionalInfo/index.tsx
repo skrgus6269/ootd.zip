@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Body2, Body3, Headline1, Title1 } from '@/components/UI';
 import Input from '@/components/Input';
 import { Dispatch, SetStateAction } from 'react';
@@ -7,6 +6,7 @@ import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { BrandType } from '@/components/BrandList/Brand';
 import S from '@/pageStyle/add-cloth/AdditionalInfo/style';
+import NextImage from '@/components/NextImage';
 
 interface AdditionalInfo {
   clothName: string;
@@ -45,42 +45,51 @@ export default function AdditionalInfo({
 
   return (
     <S.Layout>
-      <S.BasicInfoFirst>
-        <Category />
-        <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
-        <Body2 className="name">{clothName}</Body2>
-        <img src={clothImage && clothImage![0].ootdImage} alt="" />
-        <hr />
-      </S.BasicInfoFirst>
-      <S.AdditionalInfo>
-        <S.Title>
-          <Title1 className="title">추가 정보</Title1>
-        </S.Title>
-        <S.Information>
-          <Input>
-            <Input.Label size="small" className="label">
-              구매시기
-            </Input.Label>
-            <Input.Text
-              size="big"
-              placeholder=""
-              border={true}
-              onChange={setClothBuyDate}
-              line="outline"
-            />
-          </Input>
-          <Input>
-            <Input.Label size="small" className="label">
-              메모
-            </Input.Label>
-            <Input.TextArea
-              input={clothMemo}
-              setInput={setClothMemo}
-              placeholder="메모를 입력해주세요"
-            />
-          </Input>
-        </S.Information>
-      </S.AdditionalInfo>
+      <S.Main>
+        <S.BasicInfoFirst>
+          <Category />
+          <Headline1>{clothBrand && clothBrand[0].name}</Headline1>
+          <Body2 className="name">{clothName}</Body2>
+          <NextImage
+            fill={false}
+            width={106}
+            height={106}
+            src={clothImage! && clothImage![0].ootdImage}
+            alt=""
+          />
+          <hr />
+        </S.BasicInfoFirst>
+        <S.AdditionalInfo>
+          <S.Title>
+            <Title1 className="title">추가 정보</Title1>
+          </S.Title>
+          <S.Information>
+            <Input>
+              <Input.Label size="small" className="label">
+                구매시기
+              </Input.Label>
+              <Input.Text
+                size="big"
+                placeholder=""
+                border={true}
+                onChange={setClothBuyDate}
+                line="outline"
+                state={true}
+              />
+            </Input>
+            <Input>
+              <Input.Label size="small" className="label">
+                메모
+              </Input.Label>
+              <Input.TextArea
+                input={clothMemo}
+                setInput={setClothMemo}
+                placeholder=""
+              />
+            </Input>
+          </S.Information>
+        </S.AdditionalInfo>
+      </S.Main>
       <NextButton
         state={true}
         onClick={onClickSubmitButton}

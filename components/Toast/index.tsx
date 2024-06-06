@@ -5,7 +5,8 @@ import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 interface ToastProps {
   text: string;
-  setState?: Dispatch<SetStateAction<Boolean>>;
+  state: Boolean;
+  setState: Dispatch<SetStateAction<Boolean>>;
   className?: string;
   actionText?: string;
   actionFunction?: () => void;
@@ -14,18 +15,16 @@ interface ToastProps {
 
 export default function Toast({
   text,
+  state,
   setState,
   className,
   actionText,
   actionFunction,
   isHelperText,
 }: ToastProps) {
-  const [isVisible, setIsVisible] = useState<Boolean>(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(false);
-      setState!(false);
+      setState(false);
     }, 3000);
 
     return () => {
@@ -34,7 +33,7 @@ export default function Toast({
   }, []);
 
   return (
-    <S.Layout className={className} state={isVisible}>
+    <S.Layout className={className} state={state}>
       {isHelperText && <AiOutlineExclamationCircle />}
       <Body3 className="text">{text}</Body3>
       {actionText && actionFunction && (

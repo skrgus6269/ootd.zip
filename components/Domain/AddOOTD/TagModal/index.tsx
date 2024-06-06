@@ -1,7 +1,6 @@
 import SearchBar from '@/components/SearchBar';
 import S from './style';
 import ClothInformation from '@/components/ClothInformation';
-import { ClothInformationProps } from '@/components/ClothInformation/type';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import TabView from '@/components/TabView';
 import { Body3, Body4 } from '@/components/UI';
@@ -17,6 +16,7 @@ import useEffectAfterMount from '@/hooks/useEffectAfterMount';
 import Toast from '@/components/Toast';
 import { useRouter } from 'next/router';
 import Alert from '@/components/Alert';
+import Background from '@/components/Background';
 
 export type ImageWithTag = {
   ootdId: number;
@@ -45,6 +45,17 @@ interface AddTagProps {
   componentWidth: number;
 }
 
+interface UserTagDataType {
+  id: number;
+  imageUrl: string;
+  name: string;
+  userName: string;
+  brand: { id: string; name: string };
+  category: { id: number; categoryName: string; parentCategoryName: string };
+  size: { id: number; name: string; lineNo: string };
+  memo: string;
+}
+
 export default function AddTag({
   setAddTag,
   addTag,
@@ -54,7 +65,7 @@ export default function AddTag({
   componentHeight,
   componentWidth,
 }: AddTagProps) {
-  const [searchResult, setSearchResult] = useState<UserClothDataType[] | null>(
+  const [searchResult, setSearchResult] = useState<UserTagDataType[] | null>(
     null
   );
   const categoryList = [
@@ -138,14 +149,16 @@ export default function AddTag({
   useEffectAfterMount(() => {
     setSearchResult(null);
     reset();
-  }, [clicked]);
+  }, [clicked, searchKeyword]);
 
   const fetchDataFunction = async (page: number, size: number) => {
     const data = await getUserClothList({
       page,
       size,
       userId: myId,
-      brandIds: clicked ? [clicked + 1] : undefined,
+      categoryIds: typeof clicked === 'number' ? [clicked + 1] : undefined,
+      searchText: searchKeyword,
+      isPrivate: true,
     });
 
     return data;
@@ -169,15 +182,15 @@ export default function AddTag({
 
   const onClickGoToMypageYesButton = () => {
     setStoredImage(imageAndTag);
-    router.push(`/mypage/${myId}`);
+    router.push(`/mypage/${myId}/cloth`);
   };
 
   return (
     <>
-      <Modal height="95" isOpen={addTag}>
-        <S.Background
+      <Modal height="96.5" isOpen={addTag}>
+        <Background
           onClick={() => setGoToMypageAlertState(false)}
-          addTag={goToMypageAlertState}
+          isOpen={goToMypageAlertState}
         />
         <S.Layout>
           <TabView>
@@ -199,7 +212,9 @@ export default function AddTag({
                       onClick={() => setNotOpenState(true)}
                       state={false}
                     >
-                      <Body4 state="emphasis">비공개</Body4>
+                      <Body4 className="hidden" state="emphasis">
+                        비공개
+                      </Body4>
                     </S.IsOpenSpan>
                     <S.Divider />
                     <S.Category>
@@ -253,6 +268,7 @@ export default function AddTag({
             <Toast
               className="toast"
               text="공개로 설정된 옷만 태그할 수 있어요."
+              state={notOpenState}
               setState={setNotOpenState}
               actionText="옷장으로 이동"
               actionFunction={() => setGoToMypageAlertState(true)}

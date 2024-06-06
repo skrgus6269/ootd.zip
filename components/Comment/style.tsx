@@ -17,8 +17,6 @@ const Layout = styled.div<LayoutProps>`
 const UserImage = styled.div`
   .userImage {
     margin-top: 6px;
-    width: 32px;
-    height: 32px;
     border-radius: 50%;
   }
 `;
@@ -41,16 +39,20 @@ const UserName = styled.div`
 const UserComment = styled.div`
   .taggedUser {
     color: ${(prpos) => prpos.theme.color.correct};
+    padding: 0 4px;
+    margin-right: 4px;
   }
-  display: flex;
+  white-space: pre-line;
   color: ${(props) => props.theme.color.grey_30};
   padding: 2px 0 16px 0;
+  p {
+    display: inline;
+  }
 `;
 const CommentCommunication = styled.div`
   display: flex;
   gap: 16px;
 `;
-
 const S = {
   Layout,
   UserImage,

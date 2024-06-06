@@ -7,21 +7,6 @@ const Layout = styled.div`
   gap: 16px;
 `;
 
-interface BackgroundState {
-  isOpen: Boolean;
-}
-
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 900;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-`;
-
 const SearchFilter = styled.div`
   display: flex;
   align-items: center;
@@ -98,7 +83,7 @@ const FilterSpan = styled.div<FilterSpanProps>`
 `;
 
 const ClothList = styled.div`
-  height: calc(100vh - 56px);
+  height: calc(100vh - 311px);
   overflow-y: scroll;
 `;
 
@@ -111,7 +96,6 @@ const S = {
   FilterSpan,
   Divider,
   Counter,
-  Background,
   ClothList,
 };
 

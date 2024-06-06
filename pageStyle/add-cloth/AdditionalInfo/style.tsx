@@ -4,14 +4,6 @@ const Layout = styled.div`
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 48px);
-  .nextButton {
-    background-color: white;
-    bottom: 25px;
-    flex-grow: 0;
-    position: fixed;
-    width: calc(100% - 40px);
-  }
 `;
 
 const Category = styled.div`
@@ -33,9 +25,6 @@ const BasicInfoFirst = styled.div`
     color: ${(props) => props.theme.color.grey_50};
   }
   img {
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
     margin-top: 20px;
   }
   hr {
@@ -52,7 +41,7 @@ const AdditionalInfo = styled.div`
   .title {
     padding: 21px 0px;
   }
-  padding-bottom: 60px;
+  padding-bottom: 90px;
 `;
 const Title = styled.div`
   margin-bottom: 16px;
@@ -66,6 +55,12 @@ const Information = styled.div`
   }
 `;
 
+const Main = styled.div`
+  height: calc(100vh - 116px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+`;
+
 const S = {
   Layout,
   Category,
@@ -73,6 +68,7 @@ const S = {
   AdditionalInfo,
   Title,
   Information,
+  Main,
 };
 
 export default S;

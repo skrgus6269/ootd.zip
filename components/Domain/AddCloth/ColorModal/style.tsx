@@ -15,9 +15,30 @@ const Layout = styled.div`
     bottom: 25px;
     width: calc(100% - 40px);
   }
+  hr {
+    position: relative;
+    left: -20px;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.color.grey_95};
+    margin: 0;
+    height: 0;
+    width: 120%;
+  }
 `;
 const Title = styled.div`
-  padding: 21px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .title {
+    padding: 22px 0;
+  }
+  .close {
+    position: absolute;
+    right: 0px;
+    width: 24px;
+    height: 24px;
+  }
 `;
 const Color = styled.div`
   height: 86px;
@@ -42,7 +63,7 @@ const ColorName = styled.div``;
 
 const ColorList = styled.div`
   overflow-y: scroll;
-  height: 46vh;
+  height: 51vh;
 `;
 
 const SelectedColorList = styled.div`
@@ -52,16 +73,14 @@ const SelectedColorList = styled.div`
   gap: 8px;
   overflow-x: scroll;
   flex-grow: 1;
-  margin-bottom: 70px;
-  position: absolute;
-  z-index: 999;
+  margin-bottom: 73px;
+  position: relative;
+  z-index: 10;
   background-color: white;
   bottom: 0;
 `;
 
 const SelectedColor = styled.div`
-  border: 1px solid ${(props) => props.theme.color.grey_00};
-  background-color: ${(props) => props.theme.color.grey_10};
   display: inline-flex;
   min-width: 68px;
   gap: 8px;
@@ -69,10 +88,11 @@ const SelectedColor = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border-radius: 17px;
   .selectedColor {
     padding: 8px 35px 8px 16px;
     color: ${(props) => props.theme.color.grey_100};
+    background-color: ${(props) => props.theme.color.grey_10};
+    border-radius: 17px;
   }
   svg {
     color: ${(props) => props.theme.color.grey_100};

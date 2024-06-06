@@ -1,12 +1,18 @@
 import { userService } from '@/apis/_service';
+import { useState } from 'react';
 
 export const MyPageApi = () => {
+  const [error, setError] = useState<any>();
   const getUserBrand = async (userId: number) => {
-    const { result } = await userService.getUserBrand(userId);
+    try {
+      const { result } = await userService.getUserBrand(userId);
 
-    return result;
+      return result;
+    } catch (err) {
+      setError(err);
+    }
+    if (error) throw error;
   };
-
   return {
     getUserBrand,
   } as const;

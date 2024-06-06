@@ -98,12 +98,34 @@ export default function ClothCategory({
   const onClickSmallCategory = (index: number) => {
     setsmallCategoryClickedIndex(index);
 
-    const newCategory = JSON.parse(JSON.stringify(categoryList));
+    const newCategory = JSON.parse(
+      JSON.stringify(categoryList)
+    ) as CategoryListType[];
+    if (type === 'one') {
+      const initialCategoryList = newCategory.map((item) => {
+        return {
+          ...item,
+          state: false,
+          detailCategories: item.detailCategories!.map((items) => {
+            return { ...items, state: false };
+          }),
+        };
+      });
+      initialCategoryList[bigCategoryClickedIndex].state = false;
+      initialCategoryList[bigCategoryClickedIndex].detailCategories![
+        index
+      ].state =
+        !initialCategoryList[bigCategoryClickedIndex].detailCategories![index]
+          .state;
 
+      setCategoryList(initialCategoryList);
+      return;
+    }
     newCategory[bigCategoryClickedIndex].state = false;
 
-    newCategory[bigCategoryClickedIndex].detailCategories[index].state =
-      !newCategory[bigCategoryClickedIndex].detailCategories[index].state;
+    newCategory[bigCategoryClickedIndex].detailCategories![index].state =
+      !newCategory[bigCategoryClickedIndex].detailCategories![index].state;
+
     setCategoryList(newCategory);
   };
 

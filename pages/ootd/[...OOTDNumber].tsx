@@ -15,6 +15,7 @@ import UserOtherOOTD from '@/components/Domain/OOTD/UserOtherOOTD';
 import Toast from '@/components/Toast';
 import AppBar from '@/components/Appbar';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import Background from '@/components/Background';
 
 export interface CommentStateType {
   ootdId: number;
@@ -90,6 +91,16 @@ const OOTD: ComponentWithLayout = () => {
   const [reRender, setReRender] = useState(0);
   const [getPostReRender, setGetPostReRender] = useState(0);
 
+  const onClickBackButton = () => {
+    if (router.query.OOTDNumber![1] === 'explore') {
+      router.push('/main/explore');
+    } else if (router.query.OOTDNumber![1] === 'curation') {
+      router.push('/main/curation');
+    } else {
+      router.back();
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
@@ -108,7 +119,6 @@ const OOTD: ComponentWithLayout = () => {
           content: '',
         });
       } catch (err) {
-        alert('없는 페이지입니다');
         // router.push('/main');
       }
     };
@@ -145,45 +155,92 @@ const OOTD: ComponentWithLayout = () => {
     if (!commentWriting) setComment({ ...comment, parentDepth: 0 });
   }, [commentWriting]);
 
+  const [declaration, setDeclaration] = useState<Boolean>(false);
+  const [receivedDeclaration, setReceivedDeclaration] =
+    useState<Boolean>(false);
+
+  const onClickBackground = () => {
+    if (declaration) setDeclaration(false);
+    if (receivedDeclaration) setReceivedDeclaration(false);
+  };
+
+  const [goBackAfterBlock, setGoBackAfterBlock] = useState<Boolean>(false); // 사용자 차단 이후 스낵바 이용하여 이동
+  const [blockStatus, setBlockStatus] = useState<Boolean>(false); // 사용자 차단 상태 값
+
+  useEffect(() => {
+    if (goBackAfterBlock) {
+      // 사용자 차단 이후 이전 페이지로 이동
+      if (router.query.OOTDNumber![1] === 'explore') {
+        router.push(`/main/explore?block=${blockStatus}`);
+      } else if (router.query.OOTDNumber![1] === 'curation') {
+        router.push(`/main/curation?block=${blockStatus}`);
+      } else if (router.query.OOTDNumber![1] === 'search') {
+        router.push(`/search?block=${blockStatus}`);
+      } else {
+        router.back();
+      }
+    }
+  }, [goBackAfterBlock]);
+
   return (
-    <S.Layout>
-      <AppBar
-        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
-        middleProps={<></>}
-        rightProps={<></>}
-      />
-      {data && (
-        <Posting
-          data={data}
-          commentRef={commentRef}
-          myPost={data.userId === Number(myId)}
-          setGetPostReRender={setGetPostReRender}
-          getPostReRender={getPostReRender}
+    <>
+      <S.Layout>
+        <Background
+          isOpen={declaration || receivedDeclaration}
+          onClick={onClickBackground}
         />
-      )}
-      <PostingComment
-        comment={comment}
-        setComment={setComment}
-        commentRef={commentRef}
-        setCommentWriting={setCommentWriting}
-        reRender={reRender}
-        setReRender={setReRender}
-      />
-      {data && <UserCloth userName={data.userName} userId={data.userId} />}
-      {data && <UserOtherOOTD userName={data.userName} userId={data.userId} />}
-      <SimilarOOTD />
-      <PostingCommentWrite
-        userImage={data && data.userImage}
-        setComment={setComment}
-        commentRef={commentRef}
-        comment={comment}
-        commentWriting={commentWriting}
-        setCommentWriting={setCommentWriting}
-        registerComment={registerComment}
-        setCommentFinish={setCommentFinish}
-      />
-      {commentFinish && <Toast text="댓글이 등록되었습니다." />}
-    </S.Layout>
+        <AppBar
+          leftProps={<AiOutlineArrowLeft onClick={onClickBackButton} />}
+          middleProps={<></>}
+          rightProps={<></>}
+        />
+        {data && (
+          <Posting
+            data={data}
+            commentRef={commentRef}
+            myPost={data.userId === Number(myId)}
+            setGetPostReRender={setGetPostReRender}
+            getPostReRender={getPostReRender}
+            setGoBackAfterBlock={setGoBackAfterBlock}
+            setBlockStatus={setBlockStatus}
+          />
+        )}
+        <PostingComment
+          declaration={declaration}
+          setDeclaration={setDeclaration}
+          receivedDeclaration={receivedDeclaration}
+          setReceivedDeclaration={setReceivedDeclaration}
+          setComment={setComment}
+          commentRef={commentRef}
+          setCommentWriting={setCommentWriting}
+          reRender={reRender}
+          setReRender={setReRender}
+          setGoBackAfterBlock={setGoBackAfterBlock}
+          setBlockStatus={setBlockStatus}
+        />
+        {data && <UserCloth userName={data.userName} userId={data.userId} />}
+        {data && (
+          <UserOtherOOTD userName={data.userName} userId={data.userId} />
+        )}
+        <SimilarOOTD />
+        <PostingCommentWrite
+          setComment={setComment}
+          commentRef={commentRef}
+          comment={comment}
+          commentWriting={commentWriting}
+          setCommentWriting={setCommentWriting}
+          registerComment={registerComment}
+          setCommentFinish={setCommentFinish}
+        />
+        {commentFinish && (
+          <Toast
+            text="댓글이 등록되었습니다."
+            setState={setCommentFinish}
+            state={commentFinish}
+          />
+        )}
+      </S.Layout>
+    </>
   );
 };
 

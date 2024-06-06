@@ -8,11 +8,15 @@ import { Body4, Button3 } from '@/components/UI';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '@/components/Button';
 import { BrandType } from '@/components/BrandList/Brand';
-import { FilterData } from '../ClosetCloth';
 import BrandList from '@/components/BrandList';
 import { CategoryListType } from '@/components/Domain/AddCloth/ClothCategoryModal';
 import { MyPageApi } from '@/apis/domain/MyPage/MyPageApi';
 import { useRouter } from 'next/router';
+import ClothApi from '@/apis/domain/Cloth/ClothApi';
+import {
+  GenderTypes,
+  SearchFilterData,
+} from '@/components/Domain/Search/SearchResult/ClosetCloth';
 
 interface FilterModalProps {
   isOpen: Boolean;
@@ -20,8 +24,10 @@ interface FilterModalProps {
   categoryInitital: CategoryListType[] | null;
   colorInitital: ColorListType | null;
   brandInitial: BrandType[] | null;
-  setFilter: Dispatch<SetStateAction<FilterData>>;
+  setFilter: Dispatch<SetStateAction<SearchFilterData>>;
   initialIndex: number;
+  page: 'mypage' | 'search';
+  gender?: GenderTypes;
 }
 
 export default function FilterModal({
@@ -32,6 +38,8 @@ export default function FilterModal({
   colorInitital,
   brandInitial,
   initialIndex,
+  page,
+  gender,
 }: FilterModalProps) {
   const [selectedColorList, setSelectedColorList] =
     useState<ColorListType | null>(null);
@@ -51,13 +59,19 @@ export default function FilterModal({
   const [brandList, setBrandList] = useState<BrandType[] | null>(null);
 
   const { getUserBrand } = MyPageApi();
+  const { getBrand } = ClothApi();
+
   const router = useRouter();
 
   const fetchDataFunction = async () => {
     if (!router.isReady) return;
-    const data = await getUserBrand(Number(router.query.UserId![0]));
-
-    setBrandList(data);
+    if (page === 'mypage') {
+      const data = await getUserBrand(Number(router.query.UserId![0]));
+      setBrandList(data);
+    } else {
+      const data = await getBrand('');
+      setBrandList(data);
+    }
   };
 
   useEffect(() => {
@@ -65,12 +79,23 @@ export default function FilterModal({
   }, []);
 
   const onClickSubmitButton = () => {
-    setFilter({
-      category: selectedCategory,
-      color: selectedColorList,
-      brand: selectedBrand,
-      isOpen: null,
-    });
+    if (page === 'mypage') {
+      setFilter({
+        category: selectedCategory,
+        color: selectedColorList,
+        brand: selectedBrand,
+        isOpen: null,
+      });
+    } else {
+      setFilter({
+        category: selectedCategory,
+        color: selectedColorList,
+        brand: selectedBrand,
+        isOpen: true,
+        gender: gender,
+      });
+    }
+
     setFilterModalIsOpen(false);
   };
 
@@ -78,6 +103,29 @@ export default function FilterModal({
     setSelectedBrand(null);
     setSelectedCategory(null);
     setSelectedColorList(null);
+    setCategoryList(
+      categoryList &&
+        categoryList?.map((item) => {
+          return {
+            ...item,
+            state: false,
+            detailCategories: item.detailCategories?.map((items) => {
+              return { ...items, state: false };
+            }),
+          };
+        })
+    );
+    setColorList(
+      colorList.map((item) => {
+        return { ...item, state: false };
+      })
+    );
+    setBrandList(
+      brandList &&
+        brandList.map((item) => {
+          return { ...item, state: false };
+        })
+    );
   };
 
   const onClickCloseCategoryButton = (
@@ -162,13 +210,15 @@ export default function FilterModal({
                     ? `총 ${brandList!.length}개의 브랜드`
                     : `총 0개의 브랜드`}
                 </Body4>
-                <BrandList
-                  many="many"
-                  brandList={brandList}
-                  setBrandList={setBrandList}
-                  brandInitial={brandInitial}
-                  setSelectedBrand={setSelectedBrand}
-                />
+                {brandList && (
+                  <BrandList
+                    many="many"
+                    brandList={brandList}
+                    setBrandList={setBrandList}
+                    brandInitial={brandInitial}
+                    setSelectedBrand={setSelectedBrand}
+                  />
+                )}
               </TabView.Tab>
             </TabView.Tabs>
           </div>
@@ -247,7 +297,7 @@ export default function FilterModal({
             size="big"
             onClick={onClickSubmitButton}
             color="grey_100"
-            backgroundColor="grey_90"
+            backgroundColor="grey_00"
             border={false}
           >
             <Button3>완료</Button3>

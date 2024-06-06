@@ -6,6 +6,14 @@ const Layout = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+
+  .title {
+    flex: 1 0 0;
+  }
+
+  .settingEmail {
+    color: ${(props) => props.theme.color.grey_70};
+  }
 `;
 
 const IconSpan = styled.span`

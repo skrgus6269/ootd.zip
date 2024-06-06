@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { ImageWithTag } from '@/components/Domain/AddOOTD/TagModal';
 import S from '@/pageStyle/edit-cloth/AdditionalInfo/style';
 import Input from '@/components/Input';
@@ -10,6 +9,7 @@ import {
   getReactNativeMessage,
   sendReactNativeMessage,
 } from '@/utils/reactNativeMessage';
+import NextImage from '@/components/NextImage';
 
 interface AdditionalInfo {
   clothImage: ImageWithTag | undefined;
@@ -49,10 +49,13 @@ export default function AdditionalInfo({
     <>
       <S.Layout>
         <S.ClothImage>
-          <img
+          <NextImage
             onClick={onClickImage}
-            src={clothImage && clothImage![0].ootdImage}
+            src={clothImage! && clothImage![0].ootdImage}
             alt=""
+            fill={false}
+            width={106}
+            height={106}
           />
           <WriteIcon className="writeIcon" />
         </S.ClothImage>
@@ -70,6 +73,7 @@ export default function AdditionalInfo({
                 border={true}
                 onChange={setClothBuyDate}
                 line="outline"
+                state={true}
               />
             </Input>
             <Input>
@@ -79,7 +83,7 @@ export default function AdditionalInfo({
               <Input.TextArea
                 input={clothMemo}
                 setInput={setClothMemo}
-                placeholder="메모를 입력해주세요"
+                placeholder=""
               />
             </Input>
           </S.Information>

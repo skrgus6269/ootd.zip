@@ -29,6 +29,12 @@ export default function Edit({
   const [profileImage, setProfileImage] = useState<string>(
     '/images/basicProfile.svg'
   );
+
+  const [originProfile, setOriginProfile] = useState<string>(
+    '/images/basicProfile.svg'
+  );
+
+  const [nickNameCheck, setNickNameCheck] = useState<Boolean>(true);
   const [nickName, setNickName] = useState<string>('닉네임');
   const [introduction, setIntroduction] = useState<string>('소개');
   const [height, setHeight] = useState<string>('160');
@@ -80,6 +86,7 @@ export default function Edit({
       setHeight(String(result.height));
       setWeight(String(result.weight));
       setProfileImage(result.profileImage);
+      setOriginProfile(result.profileImage); // 이미지 선택 도중 원본 이미지 복구를 위함
     };
 
     ferchData();
@@ -93,13 +100,14 @@ export default function Edit({
       height === '0' ||
       weight === '0' ||
       height === '' ||
-      weight === ''
+      weight === '' ||
+      !nickNameCheck
     ) {
       setPossible(false);
     } else {
       setPossible(true);
     }
-  }, [nickName, weight, height]);
+  }, [nickName, weight, height, nickNameCheck]);
 
   const onClickNextButton = async () => {
     if (possible) {
@@ -125,28 +133,39 @@ export default function Edit({
     }
   };
 
+  useEffect(() => {
+    if (profileImage === undefined) {
+      // 이미지 선택 취소 시 원본 프로필 이미지로 재수정
+      setProfileImage(originProfile);
+    }
+  }, [profileImage]);
+
   return (
     <>
       <S.Layout>
-        <EditProfile
-          imageURL={profileImage}
-          setImageURL={setProfileImage}
-          onClickImage={() => setOpenActionSheet(!openActionSheet)}
-        />
-        <EditMyInfo
-          nickName={nickName}
-          setNickName={setNickName}
-          introduction={introduction}
-          setIntroduction={setIntroduction}
-          height={height}
-          setHeight={setHeight}
-          weight={weight}
-          setWeight={setWeight}
-          open={open}
-          setOpen={setOpen}
-          possible={possible}
-          setPossible={setPossible}
-        />
+        <S.Main>
+          <EditProfile
+            imageURL={profileImage}
+            setImageURL={setProfileImage}
+            onClickImage={() => setOpenActionSheet(!openActionSheet)}
+          />
+          <EditMyInfo
+            nickNameCheck={nickNameCheck}
+            setNickNameCheck={setNickNameCheck}
+            nickName={nickName}
+            setNickName={setNickName}
+            introduction={introduction}
+            setIntroduction={setIntroduction}
+            height={height}
+            setHeight={setHeight}
+            weight={weight}
+            setWeight={setWeight}
+            open={open}
+            setOpen={setOpen}
+            possible={possible}
+            setPossible={setPossible}
+          />
+        </S.Main>
         <Button
           className="editMyPageButton"
           backgroundColor={possible ? 'grey_00' : 'grey_90'}

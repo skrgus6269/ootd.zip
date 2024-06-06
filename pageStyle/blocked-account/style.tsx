@@ -1,77 +1,48 @@
 import styled from 'styled-components';
 
-interface BackgroundState {
-  isOpen: Boolean;
-}
-
-const Background = styled.div<BackgroundState>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 900;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
+const WholeLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: calc(100vh - 245px);
 `;
 
 const Layout = styled.div`
-  padding: 0px 20px;
-`;
-
-const Breadcrumb = styled.div`
-  margin-top: 32px;
-  margin-left: 20px;
-  margin-bottom: 64px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
+  padding: 8px 20px;
+  align-items: center;
+  gap: 16px;
 
-interface TextProps {
-  state: Boolean;
-}
+  img,
+  .avatar {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
 
-const BreadcrumbText = styled.div<TextProps>`
-  display: flex;
-  gap: 4px;
-  color: ${(props) =>
-    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
-`;
+  .userName {
+    flex: 1 0 0;
+  }
 
-const SexContent = styled.div`
-  padding: 0px 20px;
-`;
-
-const StyleContent = styled.div`
-  margin-top: 68px;
-  padding: 0px 20px;
-`;
-
-interface ButtonProps {
-  state: Boolean;
-}
-
-const Button = styled.div<ButtonProps>`
-  margin: 0px 20px;
-  width: calc(100% - 40px);
-  position: relative;
-  top: 24px;
-  background-color: ${(props) =>
-    props.state ? props.theme.color.grey_00 : props.theme.color.grey_90};
-  padding: 14px 0px;
-  color: #fff;
-  text-align: center;
+  .deleteButton {
+    width: 70px;
+    height: 30px;
+    background-color: ${(props) => props.theme.color.grey_95};
+    color: ${(props) => props.theme.color.grey_00};
+    border-radius: 2px;
+    border: '1px solid black';
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
 `;
 
 const S = {
-  Background,
+  WholeLayout,
   Layout,
-  Breadcrumb,
-  BreadcrumbText,
-  SexContent,
-  StyleContent,
-  Button,
 };
 
 export default S;

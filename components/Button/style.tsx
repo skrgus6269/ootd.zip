@@ -17,6 +17,7 @@ const Buttons = styled.button<ButtonData>`
 const LargeButton = styled(Buttons)`
   display: ${(props) => (props.show ? 'block' : 'none')};
   width: 100%;
+  max-width: 385px;
   height: 48px;
   border-radius: 2px;
 `;

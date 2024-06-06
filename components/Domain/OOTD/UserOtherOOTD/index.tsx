@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Title1 } from '@/components/UI';
 import S from './style';
 import { useRouter } from 'next/router';
@@ -6,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import Carousel from '@/components/Carousel';
+import NextImage from '@/components/NextImage';
 
 interface UserOOTDProps {
   userId?: number;
@@ -43,14 +43,17 @@ export default function UserOtherOOTD({ userId, userName }: UserOOTDProps) {
             <Title1>{userName}님의 다른 OOTD</Title1>
           </S.Title>
           <S.OOTD>
-            <Carousel infinite={false} slidesToShow={2.1} dots={false}>
+            <Carousel infinite={false} slidesToShow={2.15} dots={false}>
               {data.map((item) => {
                 return (
-                  <img
+                  <NextImage
                     onClick={() => router.push(`/ootd/${item.id}`)}
                     key={item.id}
                     src={item.image}
                     alt="이 유저의 다른 ootd"
+                    fill={false}
+                    width={167}
+                    height={167}
                   />
                 );
               })}

@@ -12,6 +12,7 @@ const Layout = styled.div<ThemeProps>`
   gap: 8px;
   padding: 8px;
   height: 100%;
+  border-radius: 2px;
   background-color: ${(props) =>
     props.state === 'dark'
       ? 'rgba(3, 3, 3, 0.7)'
@@ -21,26 +22,31 @@ const Layout = styled.div<ThemeProps>`
       props.state === 'dark'
         ? props.theme.color.grey_80
         : props.theme.color.grey_30};
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 134px;
   }
-  h4 {
+  h2 {
     color: ${(props) => (props.state === 'dark' ? 'white' : 'black')};
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-`;
-
-const ItemImage = styled.div`
-  display: flex;
   img {
+    object-fit: cover;
     width: 32px;
     height: 32px;
-    object-fit: cover;
   }
-  align-items: center;
 `;
 
 const Information = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1px;
+  flex-grow: 1;
 `;
 
 const Close = styled.div<ThemeProps>`
@@ -52,7 +58,7 @@ const Close = styled.div<ThemeProps>`
   top: -10px;
   width: 24px;
   height: 24px;
-  z-index: 2;
+  z-index: 5;
   div {
     background-color: white;
     border-radius: 50%;
@@ -76,6 +82,6 @@ const Close = styled.div<ThemeProps>`
   }
 `;
 
-const S = { Layout, ItemImage, Information, Close };
+const S = { Layout, Information, Close };
 
 export default S;

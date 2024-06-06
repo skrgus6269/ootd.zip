@@ -8,34 +8,32 @@ import {
 import { useRouter } from 'next/router';
 import Profile from '@/components/Domain/MyPage/Profile';
 import Closet from '@/components/Domain/MyPage/Closet';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Toast from '@/components/Toast';
-import { userId } from '@/utils/recoil/atom';
-import { useRecoilValue } from 'recoil';
 import { UserApi } from '@/apis/domain/User/UserApi';
 import { UserProfileDataType } from '@/components/Domain/MyPage/Profile';
-import { PublicApi } from '@/apis/domain/Public/PublicApi';
 import OtherModal from '@/components/Domain/MyPage/OtherModal';
+import Background from '@/components/Background';
+import PublicApi from '@/apis/domain/Public/PublicApi';
+import { BlockApi } from '@/apis/domain/Block/BlockApi';
 
 export default function MyPage() {
   const router = useRouter();
 
-  const [showingId, setShowingId] = useState<number>(0);
-
-  const [queryState, setQueryState] = useState<string>('');
-  const localUserId = useRecoilValue(userId);
+  const [queryState, setQueryState] = useState<Boolean>(false);
 
   const [userProfileData, setUserProfileData] = useState<UserProfileDataType>({
-    userId: 1,
-    userImage:
+    userId: 0,
+    profileImage:
       'https://image.msscdn.net/images/style/list/l_3_2023080717404200000013917.jpg',
-    userName: '낙낙',
-    followerCount: 72,
-    followingCount: 132,
-    height: 177,
-    weight: 72,
+    userName: '',
+    followerCount: 0,
+    followingCount: 0,
+    height: 0,
+    weight: 0,
     isFollow: false,
-    description: '간계밥',
+    isMyProfile: false,
+    description: '',
     ootdCount: 0,
     clothesCount: 0,
   });
@@ -49,18 +47,17 @@ export default function MyPage() {
       try {
         const result = await getMypage(Number(router.query.UserId![0]));
         setUserProfileData(result);
-        setShowingId(Number(router.query.UserId![0]));
       } catch (err) {
         console.log(err);
       }
     };
 
     ferchData();
-  }, [router.isReady, router.query.userId]);
+  }, [router.isReady, router.query.UserId]);
 
   useEffect(() => {
-    if (router.query.state !== '') {
-      setQueryState(router.query.state as string);
+    if (router.query.state !== undefined) {
+      setQueryState(true);
     }
   }, []);
 
@@ -69,8 +66,26 @@ export default function MyPage() {
     if (blockOpen) setBlockOpen(false);
   };
 
+  const { postUserBlock } = BlockApi();
+
   const onClickYesButton = async () => {
-    console.log(11122);
+    const blockUser = await postUserBlock({ userId: userProfileData.userId });
+
+    if (blockUser) {
+      if (blockUser.divisionCode === 'UB003') {
+        if (router.query.UserId![1] === 'search') {
+          router.push(`/search?block=false`);
+        } else {
+          router.push(`/main/explore?block=false}`);
+        }
+      } else if (blockUser === '성공') {
+        if (router.query.UserId![1] === 'search') {
+          router.push(`/search?block=true`);
+        } else {
+          router.push(`/main/explore?block=true`);
+        }
+      }
+    }
   };
 
   const onClickNoButton = () => {
@@ -102,30 +117,36 @@ export default function MyPage() {
           }
           middleProps={<></>}
           rightProps={
-            localUserId === showingId ? (
+            userProfileData.isMyProfile ? (
               <AiOutlineSetting
                 className="setting"
                 onClick={() => router.push('/settings')}
               />
             ) : (
-              <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />
+              <>
+                <AiOutlineEllipsis onClick={() => setBlockOpen(true)} />
+              </>
             )
           }
         />
-        <S.Background isOpen={blockOpen} onClick={onClickBackground} />
+        <Background isOpen={blockOpen} onClick={onClickBackground} />
         <Profile
           data={userProfileData}
-          localUserId={localUserId}
-          showingId={showingId}
           onClickFollowButton={onClickFollowButton}
         />
         <Closet
-          showingId={showingId}
+          showingId={userProfileData.userId}
+          userName={userProfileData.userName}
           ootdCount={userProfileData.ootdCount}
           clothesCount={userProfileData.clothesCount}
+          isMyProfile={userProfileData.isMyProfile}
         />
-        {queryState === 'editSuccess' && (
-          <Toast text="프로필이 수정되었습니다." />
+        {queryState && (
+          <Toast
+            text="프로필이 수정되었습니다."
+            setState={setQueryState}
+            state={queryState}
+          />
         )}
 
         {blockOpen && (

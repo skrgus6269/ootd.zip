@@ -10,7 +10,7 @@ const Layout = styled.div`
 
 const ClothList = styled.div`
   overflow-y: scroll;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 202px);
 `;
 
 const TopButton = styled.div`
@@ -20,15 +20,15 @@ const TopButton = styled.div`
   flex-shrink: 0;
   width: 48px;
   height: 48px;
-  bottom: 60px;
+  bottom: 162px;
   right: 20px;
   position: fixed;
-  z-index: 9999;
+  z-index: 7;
 
   img {
     width: 48px;
     height: 48px;
-    z-index: 9999;
+    z-index: 7;
   }
 `;
 

@@ -96,6 +96,7 @@ export interface getClothListParams extends paginationType {
   brandIds?: number[];
   categoryIds?: number[];
   colorIds?: number[];
+  searchText?: string;
 }
 
 export interface getOOTDClothesParams extends paginationType {
@@ -105,10 +106,10 @@ export interface getAlarmParams extends paginationType {
   isRead: Boolean;
 }
 
-export interface getSearchUserParams {
-  name: string;
-  page: number;
-  size: number;
+export interface getSearchUserParams extends paginationType {
+  name?: string;
+  searchType?: 'USER' | 'FOLLOWING' | 'FOLLOWER';
+  userId?: number;
 }
 
 export interface getSearchOOTDParams {
@@ -120,4 +121,22 @@ export interface getSearchOOTDParams {
   sortCriteria: string;
   page: number;
   size: number;
+}
+
+export interface putStylePayload {
+  styleIds: number[];
+}
+
+export interface getUserTaggedClothListParams {
+  ootdId: number;
+  userId: number;
+}
+
+export interface getUserBlockListParams {
+  page: number;
+  size: number;
+}
+
+export interface postUserBlockPayload {
+  userId: number;
 }

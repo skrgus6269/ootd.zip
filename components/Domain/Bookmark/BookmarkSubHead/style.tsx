@@ -6,14 +6,15 @@ interface LayoutProps {
 
 const headLayout = styled.div<LayoutProps>`
   display: flex;
-  padding: 12px 0px;
+  padding: 12px 20px;
   justify-content: flex-end;
   align-items: center;
   position: sticky;
   top: 0;
   left: 0;
   background-color: ${(props) => props.theme.color.grey_100};
-  z-index: 1;
+  z-index: 7;
+  height: 44px;
 `;
 
 const Frame = styled.div`
@@ -31,6 +32,21 @@ const Wrap = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 14px;
+
+  .deleteButton {
+    padding: 0px;
+    color: ${(props) => props.theme.color.error};
+  }
+
+  .cancelButton {
+    padding: 0px;
+    color: ${(props) => props.theme.color.grey_50};
+  }
+
+  .editingButton {
+    padding: 0px;
+    color: ${(props) => props.theme.color.grey_00};
+  }
 `;
 
 const S = { headLayout, Frame, Wrap };

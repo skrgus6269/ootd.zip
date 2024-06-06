@@ -5,10 +5,13 @@ import { useRouter } from 'next/router';
 import { Button3, Title1 } from '@/components/UI';
 import { useEffect, useState } from 'react';
 import GenderInput from '@/components/Domain/SignUp/GenderInput';
-import StyleInput from '@/components/Domain/SignUp/StyleInput';
+import LikeInfoStyleInput from '@/components/Domain/Setting/LikeInfo';
 import { Style } from '../add-ootd';
+import { UserApi } from '@/apis/domain/User/UserApi';
+import { ComponentWithLayout } from '../sign-up';
+import { AppLayoutProps } from '@/AppLayout';
 
-export default function LikeInfo() {
+const LikeInfo: ComponentWithLayout = () => {
   const router = useRouter();
 
   const [gender, setGender] = useState<Boolean>(true);
@@ -18,8 +21,31 @@ export default function LikeInfo() {
   const [possible, setPossible] = useState<Boolean>(false);
 
   useEffect(() => {
-    setPossible(true);
-  }, []);
+    if (selectedStyle.length >= 3) setPossible(true);
+    else setPossible(false);
+  }, [selectedStyle]);
+
+  const { putStyle } = UserApi();
+
+  const onClickSubmitButton = async () => {
+    if (selectedStyle.length >= 3) {
+      const selectedIds = selectedStyle.map((item) => item.id);
+      const payload = {
+        styleIds: selectedIds,
+      };
+
+      const editStyleSuccess = await putStyle(payload);
+
+      if (editStyleSuccess) {
+        router.push({
+          pathname: `/settings`,
+          query: { state: 'likeInfoEditSuccess' },
+        });
+      } else {
+        alert('실패');
+      }
+    }
+  };
 
   return (
     <>
@@ -50,21 +76,25 @@ export default function LikeInfo() {
           </S.BreadcrumbText>
         </S.Breadcrumb>
 
-        <S.SexContent>
-          <GenderInput gender={gender} setGender={setGender} />
-        </S.SexContent>
-
         <S.StyleContent>
-          <StyleInput
+          <LikeInfoStyleInput
             selectedStyle={selectedStyle}
             setSelectedStyle={setSelectedStyle}
           />
         </S.StyleContent>
 
-        <S.Button state={possible}>
+        <S.Button state={possible} onClick={onClickSubmitButton}>
           <Button3>수정 완료</Button3>
         </S.Button>
       </S.Layout>
     </>
   );
-}
+};
+
+export default LikeInfo;
+
+LikeInfo.Layout = ({ children }: AppLayoutProps) => {
+  return <>{children}</>;
+};
+
+LikeInfo.Layout.displayName = 'LikeInfoLayout';

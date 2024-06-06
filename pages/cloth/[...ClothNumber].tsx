@@ -21,6 +21,8 @@ import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
 import DeclarationModal from '@/components/DeclarationModal';
 import ReceivedDeclarationModal from '@/components/ReceivedDeclarationModal';
+import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 export interface ClothDataType {
   id: number;
@@ -90,7 +92,7 @@ const Cloth = () => {
 
   const onClickYesButton = async () => {
     const result = await deleteCloth(Number(router.query.ClothNumber![0]));
-    if (result) router.push('/mypage');
+    if (result) router.replace(`/mypage/${localUserId}`);
   };
 
   const onClickNoButton = () => {
@@ -98,7 +100,6 @@ const Cloth = () => {
   };
 
   const delclationButton = () => {
-    console.log('신고');
     setDeclaration(true);
   };
 
@@ -140,19 +141,31 @@ const Cloth = () => {
     if (deleteOpen) setDeleteOpen(false);
   };
 
+  const onClickBackButton = () => {
+    if (router.asPath.includes('closet')) {
+      console.log('포함됨');
+      router.push(`/mypage/${data?.userId}/cloth`);
+      return;
+    }
+    router.back();
+  };
+  const [goBackAfterBlock, setGoBackAfterBlock] = useState<Boolean>(false); // 사용자 차단 이후 스낵바 이용하여 이동
+  const [blockStatus, setBlockStatus] = useState<Boolean>(false); // 사용자 차단 상태 값
+
   return (
     <>
       <AppBar
-        leftProps={<AiOutlineArrowLeft onClick={() => router.back()} />}
+        leftProps={<AiOutlineArrowLeft onClick={onClickBackButton} />}
         middleProps={<></>}
         rightProps={<AiOutlineEllipsis onClick={onClickAppbarButton} />}
       />
-      <S.Background
+      <Background
         isOpen={clickedRight || deleteOpen}
         onClick={onClickBackground}
       />
       {data && (
         <DetailClothHeader
+          state={localUserId === data?.userId ? true : false}
           isPublic={!data?.isPrivate}
           bigCategory={data?.category.parentCategoryName!}
           smallCategory={data?.category.categoryName!}
@@ -160,7 +173,9 @@ const Cloth = () => {
           clothByName={data?.name!}
         />
       )}
-      <S.Img>{data && <img src={data.imageUrl} />}</S.Img>
+      <S.Img>
+        {data && <NextImage fill={true} alt="옷 사진" src={data.imageUrl} />}
+      </S.Img>
       <DetailClothDiscription
         isLink={data?.purchaseStoreType === 'Link'}
         purchasing={data?.purchaseStore!}
@@ -192,6 +207,7 @@ const Cloth = () => {
       {declaration && (
         <DeclarationModal
           type="CLOTHES"
+          userName={data?.userName}
           ID={Number(router.query.ClothNumber![0])}
           declaration={declaration}
           setDeclaration={setDeclaration}
@@ -199,15 +215,24 @@ const Cloth = () => {
           setReportStatus={setReportStatus}
         />
       )}
-      {receivedDeclaration && (
+      {data && receivedDeclaration && (
         <ReceivedDeclarationModal
           type="게시글"
           reportStatus={reportStatus}
           receivedDeclaration={receivedDeclaration}
           setReceivedDeclaration={setReceivedDeclaration}
+          ID={Number(data.userId)}
+          setGoBackAfterBlock={setGoBackAfterBlock}
+          setBlockStatus={setBlockStatus}
         />
       )}
-      {URLState && <Toast text="URL이 클립보드에 복사되었습니다." />}
+      {URLState && (
+        <Toast
+          text="URL이 클립보드에 복사되었습니다."
+          setState={setURLState}
+          state={URLState}
+        />
+      )}
     </>
   );
 };

@@ -9,12 +9,6 @@ const Layout = styled.div<LayoutType>`
   width: 100%;
   gap: 4px;
   flex-wrap: wrap;
-  img {
-    width: calc(50% - 2px);
-    height: 173px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
   ${(props) =>
     props.type === 'row' &&
     `
@@ -23,6 +17,20 @@ const Layout = styled.div<LayoutType>`
   `}
 `;
 
-const S = { Layout };
+const Image = styled.div`
+  width: calc(50% - 2px);
+  height: 0;
+  padding-bottom: calc(50% - 2px);
+  position: relative;
+
+  .moreIcon {
+    position: absolute;
+    z-index: 4;
+    right: 8px;
+    bottom: 8px;
+  }
+`;
+
+const S = { Layout, Image };
 
 export default S;

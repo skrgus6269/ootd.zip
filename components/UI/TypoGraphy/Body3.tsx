@@ -7,7 +7,7 @@ interface Body3State {
 const Body3 = styled.p<Body3State>`
   font-weight: ${({ theme }) => theme.weight.regular}; //400
   font-size: ${({ theme }) => theme.fontSize.base}; //14px
-  line-height: ${({ theme }) => theme.lineHeight.md}; //18px
+  line-height: ${({ theme }) => theme.lineHeight.base}; //20px
   letter-spacing: ${({ theme }) => theme.spacing.default}; //0%
 
   ${(props) =>
@@ -19,11 +19,6 @@ const Body3 = styled.p<Body3State>`
     props.state === 'underline' &&
     `
       text-decoration: underline;
-  `}
-  ${(props) =>
-    props.state === 'center' &&
-    `
-      text-align: center;
   `}
 `;
 

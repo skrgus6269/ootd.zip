@@ -4,11 +4,12 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: scroll;
+  height: calc(100vh - 116px);
   .prevNextButton {
     width: 100%;
-    background-color: white;
     bottom: 0;
-    position: fixed;
+    position: absolute;
   }
 `;
 
@@ -24,11 +25,6 @@ const Category = styled.div`
 const ClothImage = styled.div`
   border-bottom: 8px solid ${(props) => props.theme.color.grey_95};
   padding: 24px 20px 56px 20px;
-  img {
-    width: 106px;
-    height: 106px;
-    object-fit: cover;
-  }
   .writeIcon {
     position: relative;
     width: 20px;

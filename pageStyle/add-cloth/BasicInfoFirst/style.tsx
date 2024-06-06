@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface BackgroundProps {
-  isOpen: Boolean;
-}
-
 const Layout = styled.div`
   height: 104vh;
   display: flex;
@@ -26,21 +22,13 @@ const ClothName = styled.div`
 const Category = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
   p {
     margin-bottom: 0 !important;
   }
-`;
-
-const Background = styled.div<BackgroundProps>`
-  background-color: ${(props) => props.theme.color.grey_00};
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  opacity: 0.3;
-  z-index: 2;
-  width: 100vw;
-  height: calc(100vh - 48px);
-  position: fixed;
-  top: 0;
 `;
 
 const ClothImage = styled.div`
@@ -81,7 +69,6 @@ const S = {
   BasicInfo,
   Title,
   Information,
-  Background,
 };
 
 export default S;

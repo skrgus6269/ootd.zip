@@ -5,6 +5,16 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: calc(100vh - 174px);
+  overflow-y: scroll;
+`;
+
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  flex: 1 0 0;
 `;
 
 const ProfileLayout = styled.div`
@@ -28,6 +38,7 @@ const NameText = styled.div`
 
 const S = {
   Layout,
+  Profile,
   ProfileLayout,
   NameText,
 };

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Input from '@/components/Input';
 import S from '@/pageStyle/add-ootd/WriteOOTD/style';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -13,6 +12,8 @@ import { OOTDApi } from '@/apis/domain/OOTD/OOTDApi';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userId } from '@/utils/recoil/atom';
+import NextImage from '@/components/NextImage';
+import Background from '@/components/Background';
 
 interface WriteOOTDProps {
   imageAndTag: ImageWithTag | undefined;
@@ -86,9 +87,9 @@ export default function WriteOOTD({
   };
   return (
     <>
-      <S.Background
+      <Background
         onClick={() => setStyleModalIsOpen(false)}
-        state={styleModalIsOpen}
+        isOpen={styleModalIsOpen}
       />
       <S.Layout>
         <Body4 className="selectedPhoto" state="emphasis">
@@ -97,7 +98,16 @@ export default function WriteOOTD({
         <S.OOTDImage>
           {imageAndTag &&
             imageAndTag.map((item, index) => {
-              return <img src={item.ootdImage} key={index} alt="" />;
+              return (
+                <NextImage
+                  fill={false}
+                  width={106}
+                  height={106}
+                  src={item.ootdImage}
+                  key={index}
+                  alt=""
+                />
+              );
             })}
         </S.OOTDImage>
         <S.ImageDivider />
