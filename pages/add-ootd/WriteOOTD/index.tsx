@@ -154,7 +154,7 @@ export default function WriteOOTD({
           state={complete}
           onClick={onClickSubmitButton}
         >
-          다음
+          작성 완료
         </NextButton>
       </S.Layout>
       {styleModalIsOpen && (
