@@ -3,7 +3,7 @@ import useEffectAfterMount from './useEffectAfterMount';
 
 interface useRememberScrollProps {
   key: string;
-  containerRef: MutableRefObject<any>;
+  containerRef?: MutableRefObject<any>;
   setList?: Dispatch<SetStateAction<any>>;
   list?: any;
 }
@@ -15,9 +15,10 @@ export default function useRememberScroll({
   list,
 }: useRememberScrollProps) {
   useEffect(() => {
+    if (!containerRef) return;
     const container = containerRef.current;
-    if (!container) return;
 
+    if (!container) return;
     const handleScroll = () => {
       const { scrollTop, scrollHeight } = container;
 
@@ -39,6 +40,7 @@ export default function useRememberScroll({
   }, []);
 
   useEffectAfterMount(() => {
+    if (!containerRef) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -51,4 +53,13 @@ export default function useRememberScroll({
       top: memoScroll,
     });
   }, [list]);
+
+  const reset = async () => {
+    sessionStorage.removeItem(`${key}-scroll`);
+    sessionStorage.removeItem(`${key}-component-height`);
+    sessionStorage.removeItem(`${key}-item`);
+    sessionStorage.removeItem(`${key}-page`);
+  };
+
+  return { reset };
 }
